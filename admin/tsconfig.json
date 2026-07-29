@@ -19,5 +19,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["ui/ts", "public/assets/scripts/surreal.js"]
+  "include": ["ui/ts", "public/static/assets/scripts/surreal.js"]
 }
