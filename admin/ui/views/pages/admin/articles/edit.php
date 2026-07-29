@@ -1,0 +1,81 @@
+<?php slot('layouts/admin-layout', [
+    'heading' => 'Article',
+    'title' => 'Article'
+]); ?>
+
+<?php $hive = \Base::instance(); ?>
+
+<div class="space-y-6">
+    <div class="admin-shell space-y-6">
+
+        <?= component('ui/subheading', [
+            'title'       => 'Edit an article',
+            'class'       => "[&>h3,&>p]:animate-none",
+        ]) ?>
+
+        <form action="<?= $hive->alias('admin_articles_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="put">
+            <?= csrf() ?>
+
+            <?= component('form/form-input', [
+                'name'  => 'title',
+                'label' => 'Article title',
+                'attrs' => [
+                    'type'     => 'text',
+                    'value'    => $article['title'],
+                    'required' => true,
+                ],
+            ]) ?>
+
+            <?= component('form/form-input', [
+                'name'  => 'created_at',
+                'label' => 'Date',
+                'attrs' => [
+                    'type'     => 'date',
+                    'value'    => $article['created_at'],
+                    'required' => true,
+                ],
+            ]) ?>
+
+            <?= component('form/form-file-input', [
+                'name'  => 'preview',
+                'label' => 'Image',
+                'value'    => [$article['image'] ?? null],
+                'can_delete'  => false,
+                'with_alt' => true,
+                'attrs' => [
+                    'required' => false,
+                    'multiple' => false,
+                ],
+            ]) ?>
+
+            <?= component('form/form-input', [
+                'name'  => 'url',
+                'label' => 'Article url',
+                'attrs' => [
+                    'type'     => 'text',
+                    'value'    => $article['url'],
+                    'required' => true,
+                ],
+            ]) ?>
+
+            <div class="flex justify-start gap-4.5">
+                <?= component(
+                    'ui/auth-button',
+                    ['slot' => 'Save', 'attrs' => ['type' => 'submit']]
+                ) ?>
+                <?= component(
+                    'ui/auth-button',
+                    [
+                        'slot' => 'Cancel',
+                        'href' => $hive->alias('admin_articles_index'),
+                        'variant' => 'secondary',
+                        'attrs' => ['type' => 'submit']
+                    ]
+                ) ?>
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php end_slot(); ?>

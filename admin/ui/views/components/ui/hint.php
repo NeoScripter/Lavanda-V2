@@ -1,0 +1,1 @@
+<div class="shadow-md transition-transform origin-bottom-left group-hover:scale-100 scale-0 absolute top-0 text-balance w-40 translate-x-1/2 animate-none! py-1 px-2 rounded-md -translate-y-1/2 right-0 bg-white"><?= $text ?? 'Refresh the page to see updates' ?></div>

@@ -1,0 +1,22 @@
+{
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "bcosca/fatfree-core": "dev-master as 3.9.99",
+        "bcosca/fatfree": "dev-master as 3.9.99",
+        "ikkez/f3-falsum": "^2.8",
+        "n0nag0n/simple-job-queue": "^1.2",
+        "ikkez/f3-validation-engine": "^1.7",
+        "ikkez/f3-flash": "^1.0",
+        "ikkez/f3-cortex": "^1.7",
+        "fakerphp/faker": "^1.24"
+    },
+    "autoload": {
+        "files": [
+            "app/Support/functions.php"
+        ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^13.2"
+    }
+}
