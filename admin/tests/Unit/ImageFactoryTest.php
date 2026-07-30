@@ -32,12 +32,16 @@ final class ImageFactoryTest extends TestCase
         }
     }
 
+    #[Test]
+    public function test_creates_image_and_persists_to_database(): void
+    {
+        $image = $this->factory->create(dir: 'test', imageable_id: 1, imageable_type: 'test');
 
-    // function test_image_factory_creates_an_image_and_stores_it_in_db()
-    // {
-    //     $image = $this->factory->create('example');
+        $this->assertNotEmpty($image->src);
 
-    //     $this->assertNotNull($image->src);
-    //     print_r($image->cast());
-    // }
+        $rows = $this->hive->DB->exec('SELECT src from images where id = ?', [$image->id]);
+
+        $this->assertNotEmpty($rows);
+        $this->assertEquals($image->src, $rows[0]['src']);
+    }
 }

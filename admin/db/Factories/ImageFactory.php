@@ -11,27 +11,35 @@ class ImageFactory
 {
     private string $template = APP_DIR . '/db/Fixtures/Image/placeholder.png';
 
-    public function create(string $dir)
+    public function create(string $dir, string $imageable_type, int $imageable_id)
     {
         $files = $this->get_template_variants();
 
-        $new_dir = \UPLOAD_DIR . "news-$name/";
+        $new_dir = \UPLOAD_DIR . "$dir/";
+
         if (!is_dir($new_dir)) {
             mkdir($new_dir, 0755, true);
         }
 
+        $this->copy_variants_to_new_directory($new_dir, $files);
+
         $image = new Image();
-        foreach (['image-mb.webp', 'image-mb2x.webp', 'image-mb3x.webp'] as $file) {
+        $image->src = ImageHandler::normalize_path($new_dir . 'placeholder.png');
+        $image->alt = 'placeholder';
+        $image->imageable_id = $imageable_id;
+        $image->imageable_type = $imageable_type;
+        $image->save();
+
+        return $image;
+    }
+
+    private function copy_variants_to_new_directory(string $new_dir, array $files)
+    {
+        foreach ($files as $file) {
             if (!copy($this->template, $new_dir . $file)) {
                 throw new \RuntimeException("Failed to copy $file to $new_dir");
             }
         }
-
-        $image->src = ImageHandler::normalize_path($new_dir . 'image');
-        $image->alt = 'placeholder';
-        $image->save();
-
-        return $image;
     }
 
     private function get_template_variants()
@@ -42,7 +50,7 @@ class ImageFactory
 
         $dir = dirname($this->template);
 
-        $files = scandir($dir);
+        $files = array_filter(scandir($dir), fn($file) => is_file($dir . '/' . $file));
 
         if (! $files) {
             throw new \RuntimeException("Directory $dir is empty");
