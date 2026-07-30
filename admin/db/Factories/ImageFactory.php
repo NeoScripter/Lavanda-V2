@@ -7,11 +7,11 @@ namespace Factories;
 use Http\Models\Image;
 use Support\ImageHandler;
 
-class ImageFactory
+class ImageFactory extends Factory
 {
     private string $template = APP_DIR . '/db/Fixtures/Image/placeholder.png';
 
-    public function create(string $dir, string $imageable_type, int $imageable_id)
+    public function create(string $dir, string $imageable_type, int $imageable_id, ?string $variant = 'image')
     {
         $files = $this->get_template_variants();
 
@@ -26,6 +26,7 @@ class ImageFactory
         $image = new Image();
         $image->src = ImageHandler::normalize_path($new_dir . 'placeholder.png');
         $image->alt = 'placeholder';
+        $image->variant = $variant;
         $image->imageable_id = $imageable_id;
         $image->imageable_type = $imageable_type;
         $image->save();

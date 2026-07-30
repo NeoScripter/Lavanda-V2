@@ -33,7 +33,7 @@ final class ImageFactoryTest extends TestCase
     }
 
     #[Test]
-    public function test_creates_image_and_persists_to_database(): void
+    public function creates_image_and_persists_to_database(): void
     {
         $image = $this->factory->create(dir: 'test', imageable_id: 1, imageable_type: 'test');
 

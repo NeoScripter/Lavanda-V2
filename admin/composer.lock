@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bcosca/fatfree.git",
-                "reference": "199052ea367873bace9c20a07efe1a1032674952"
+                "reference": "1036a7dc6438f1d5905c21493afbf69a7c85dc4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bcosca/fatfree/zipball/199052ea367873bace9c20a07efe1a1032674952",
-                "reference": "199052ea367873bace9c20a07efe1a1032674952",
+                "url": "https://api.github.com/repos/bcosca/fatfree/zipball/1036a7dc6438f1d5905c21493afbf69a7c85dc4e",
+                "reference": "1036a7dc6438f1d5905c21493afbf69a7c85dc4e",
                 "shasum": ""
             },
             "require": {
@@ -35,7 +35,7 @@
                 "issues": "https://github.com/bcosca/fatfree/issues",
                 "source": "https://github.com/bcosca/fatfree/tree/master"
             },
-            "time": "2025-12-02T00:49:32+00:00"
+            "time": "2026-07-21T23:56:33+00:00"
         },
         {
             "name": "bcosca/fatfree-core",
@@ -43,12 +43,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/f3-factory/fatfree-core.git",
-                "reference": "30cda0f92912251d745b2b2ad00ae012e64cca4f"
+                "reference": "fc299466eaa064cce0ec9ceca23a8c8c7b774888"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/f3-factory/fatfree-core/zipball/30cda0f92912251d745b2b2ad00ae012e64cca4f",
-                "reference": "30cda0f92912251d745b2b2ad00ae012e64cca4f",
+                "url": "https://api.github.com/repos/f3-factory/fatfree-core/zipball/fc299466eaa064cce0ec9ceca23a8c8c7b774888",
+                "reference": "fc299466eaa064cce0ec9ceca23a8c8c7b774888",
                 "shasum": ""
             },
             "require": {
@@ -81,7 +81,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-26T15:52:37+00:00"
+            "time": "2026-07-21T23:24:48+00:00"
         },
         {
             "name": "fakerphp/faker",
@@ -1170,16 +1170,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "13.2.5",
+            "version": "13.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2beef9f448c9e04914a273c89ff6d039f8b97bc8"
+                "reference": "5d2afe181339a56348ef9a80fa7eb806b7eae508"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2beef9f448c9e04914a273c89ff6d039f8b97bc8",
-                "reference": "2beef9f448c9e04914a273c89ff6d039f8b97bc8",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5d2afe181339a56348ef9a80fa7eb806b7eae508",
+                "reference": "5d2afe181339a56348ef9a80fa7eb806b7eae508",
                 "shasum": ""
             },
             "require": {
@@ -1250,7 +1250,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/13.2.5"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/13.2.6"
             },
             "funding": [
                 {
@@ -1258,7 +1258,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-07-25T06:59:14+00:00"
+            "time": "2026-07-28T14:00:09+00:00"
         },
         {
             "name": "sebastian/cli-parser",

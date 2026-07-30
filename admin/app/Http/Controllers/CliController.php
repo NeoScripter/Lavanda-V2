@@ -2,6 +2,7 @@
 
 namespace Http\Controllers;
 
+use Http\Models\Card;
 use Http\Models\User;
 use Http\Models\Image;
 
@@ -38,6 +39,7 @@ class CliController
     function migrate(\Base $hive)
     {
         User::setup();
+        Card::setup();
         Image::setup();
 
         echo "Migration completed.\n";
@@ -46,6 +48,7 @@ class CliController
     function drop(\Base $hive)
     {
         User::setdown();
+        Card::setdown();
         Image::setdown();
 
         delete_files_recursive(

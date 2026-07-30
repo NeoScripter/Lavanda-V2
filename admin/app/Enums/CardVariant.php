@@ -2,9 +2,9 @@
 
 namespace Enums;
 
-enum CardVariant: int
+enum CardVariant: string
 {
-    case TAROT = 1;
-    case METAPHORIC = 2;
-    case LENORMAND = 3;
+    case TAROT = 'tarot';
+    case METAPHORIC = 'metaphoric';
+    case LENORMAND = 'lenormand';
 }

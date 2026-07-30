@@ -8,15 +8,40 @@ use Enums\Locale;
 
 class Card extends Cortex
 {
+    function __construct()
+    {
+        parent::__construct();
+
+        // $this->beforeerase(function ($self) {
+        //     if ($self->front_image) {
+        //         $self->front_image->erase();
+        //     }
+        // });
+
+        $this->onget('front_image', function ($self) {
+            $img = new Image();
+            $img->load([
+                'imageable_type = ? AND imageable_id = ? AND variant = ?',
+                $self->variant,
+                $self->id,
+                'front'
+            ]);
+
+            if ($img->dry()) {
+                return null;
+            }
+
+            return $img;
+        });
+    }
+
     protected $fieldConf = [
         'name' => [
             'type' => Schema::DT_VARCHAR256,
             'nullable' => false,
         ],
         'html' => [
-            'type' => Schema::DT_VARCHAR128,
-            'index' => true,
-            'unique' => true,
+            'type' => Schema::DT_TEXT,
             'nullable' => false,
         ],
         'advice' => [
@@ -33,5 +58,6 @@ class Card extends Cortex
             'nullable' => false,
         ],
     ];
+
     protected $db = 'DB', $table = 'cards';
 }
