@@ -18,14 +18,22 @@ class Image extends Cortex
     }
 
     protected $fieldConf = [
+        'src' => [
+            'type' => Schema::DT_VARCHAR256,
+            'nullable' => false,
+        ],
+        'imageable_type' => [
+            'type' => Schema::DT_VARCHAR128,
+            'nullable' => false,
+        ],
+        'imageable_id' => [
+            'type' => Schema::DT_INT,
+            'nullable' => false,
+        ],
         'variant' => [
             'type' => Schema::DT_VARCHAR256,
             'nullable' => false,
             'default' => 'image',
-        ],
-        'src' => [
-            'type' => Schema::DT_VARCHAR256,
-            'nullable' => false,
         ],
         'alt' => [
             'type' => Schema::DT_TEXT,

@@ -2,12 +2,12 @@
 $id    = $id    ?? '';
 $name  = $name  ?? '';
 $email = $email ?? '';
+$hive = \Base::instance();
 ?>
 <div
     id="<?= $id ?>"
     class="bg-background border-muted divide-muted pointer-events-none absolute bottom-13 left-0 z-10 w-[max(100%,14rem)] origin-bottom-right scale-90 divide-y border opacity-0 shadow-sm transition-[opacity,scale] md:rounded-lg"
-    component-account-menu
->
+    component-account-menu>
     <ul class="divide-muted divide-y">
         <li class="flex items-center gap-3 px-3 py-2">
             <?= component('ui/monogram', ['first_name' => $name]) ?>
@@ -21,7 +21,7 @@ $email = $email ?? '';
             'label' => 'Settings',
         ]) ?>
         <?= component('ui/sidebar-delete-btn', [
-            'url'   => "/logout",
+            'url'   => $hive->alias('logout'),
             'label' => 'Log out',
         ]) ?>
     </ul>

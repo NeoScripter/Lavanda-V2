@@ -1,3 +1,3 @@
-<div class="<?= $class ?? '' ?>">
-    <img src="/admin/assets/favicon.svg" alt="SRI logo" class="size-full object-center object-contain">
+<div class="size-10 text-foreground <?= $class ?? '' ?>">
+    <?= svg('auth-logo') ?>
 </div>

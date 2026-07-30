@@ -26,7 +26,7 @@ class AuthSessionController extends Controller
     public function store(\Base $hive)
     {
         if (Auth::check()) {
-            $hive->reroute('@home');
+            $hive->reroute('/');
         }
 
         $request = $this->request(LoginRequest::class);
@@ -52,6 +52,6 @@ class AuthSessionController extends Controller
         check_csrf($hive->POST);
 
         Auth::clear();
-        $hive->reroute('@home');
+        $hive->reroute('/');
     }
 }

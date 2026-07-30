@@ -6,7 +6,7 @@
 
 <?php $hive = \Base::instance(); ?>
 
-<form action="/login" method="post" class="max-w-160 flex flex-col gap-6">
+<form action="<?= $hive->alias("login") ?>" method="post" class="max-w-160 flex flex-col gap-6">
     <?= csrf() ?>
 
     <?= component('form/form-input', [

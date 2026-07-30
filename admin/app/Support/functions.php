@@ -144,9 +144,12 @@ function serialize_attrs(array|null $attrs)
     return $attr_string;
 }
 
-function svg($name)
+function svg(string $name)
 {
-    $path = APP_DIR . "/public/assets/svgs/{$name}.svg";
+    if (str_ends_with($name, '.svg')) {
+        $name = trim($name, '.svg');
+    }
+    $path = APP_DIR . "/public/dist/assets/svgs/{$name}.svg";
 
     if (file_exists($path)) {
         include($path);

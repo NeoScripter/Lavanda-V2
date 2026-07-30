@@ -8,7 +8,7 @@ $user = \Base::instance()->get('SESSION.user');
         <header class="relative flex items-center select-none m-2 gap-4">
             <a href="/" class="absolute inset-0"></a>
             <div class="text-sidebar-primary-foreground flex size-10 shrink-0 items-center justify-center rounded-xs">
-                <?= view('components/ui/auth-logo') ?>
+                <?php view('components/ui/auth-logo') ;?>
             </div>
             <div class="ease overflow-x-clip font-medium whitespace-nowrap transition-[max-width] duration-300 max-w-64">
                 Admin Panel

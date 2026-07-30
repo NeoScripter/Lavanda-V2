@@ -10,6 +10,7 @@ export default defineConfig({
     build: {
         outDir: 'public/dist',
         manifest: true,
+        emptyOutDir: true,
         rollupOptions: {
             input: ['ui/ts/app.ts'],
         },
