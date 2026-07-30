@@ -11,7 +11,7 @@ abstract class TestCase extends BaseTestCase
     protected ?SQL $db = null;
     protected \Base $hive;
 
-    protected function set_up(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -24,14 +24,13 @@ abstract class TestCase extends BaseTestCase
         $this->run_migrations();
     }
 
-    protected function tear_down(): void
+    protected function tearDown(): void
     {
         parent::tearDown();
 
-        if ($this->db) {
-            $this->db->disconnect();
-            $this->db = null;
-        }
+        delete_files_recursive(
+            glob(UPLOAD_DIR . '/*')
+        );
     }
 
     private function setup_database(): void

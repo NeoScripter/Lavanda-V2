@@ -11,7 +11,7 @@ class ImageFactory
 {
     private string $template = APP_DIR . '/db/Fixtures/Image/placeholder.png';
 
-    public function create(string $name)
+    public function create(string $dir)
     {
         $files = $this->get_template_variants();
 

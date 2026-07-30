@@ -18,9 +18,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/",
-            "Factories\\": "db/Factories",
-            "Seeders\\": "db/Seeders"
+            "Tests\\": "tests/"
         }
     },
     "require-dev": {
