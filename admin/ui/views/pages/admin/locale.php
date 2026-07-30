@@ -6,12 +6,12 @@
 
 <div class="space-y-6">
     <?= component('ui/subheading', [
-        'title'       => 'Appearance settings',
-        'description' => "Update your account's theme",
+        'title'       => 'Language settings',
+        'description' => "Change your account's locale",
         'class'       => "[&>h3,&>p]:animate-none",
     ]) ?>
 
-    <?= component('ui/appearance-tabs') ?>
+    <?= component('ui/locale-tabs') ?>
 </div>
 
 <?php end_slot(); ?>

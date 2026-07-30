@@ -10,6 +10,7 @@ $nav_items = [
     ['title' => 'Profile',    'href' => '/admin/settings/profile'],
     ['title' => 'Password',   'href' => '/admin/settings/password'],
     ['title' => 'Appearance', 'href' => '/admin/settings/appearance'],
+    ['title' => 'Language', 'href' => '/admin/settings/locale'],
 ];
 ?>
 

@@ -15,10 +15,10 @@ class DashboardController
         }
     }
 
-    public function index()
+    public function index(\Base $hive)
     {
         view('pages/admin/dashboard', [
-            'title' => 'Dashboard',
+            'title' => $hive->get('Dashboard'),
         ]);
     }
 }
