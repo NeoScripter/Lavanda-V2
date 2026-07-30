@@ -40,7 +40,7 @@ export default defineConfig({
     plugins: [
         tailwindcss(),
         vitePluginKeep({
-            src: 'public/static', // Source directory to be copied
+            src: 'public/static',
             dest: 'public/dist',
         }),
     ],

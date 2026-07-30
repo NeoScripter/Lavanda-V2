@@ -4,42 +4,34 @@ namespace Http\Models;
 
 use DB\Cortex;
 use DB\SQL\Schema;
-use Enums\UserRole;
+use Enums\Locale;
 
-class User extends Cortex
+class Card extends Cortex
 {
     protected $fieldConf = [
         'name' => [
             'type' => Schema::DT_VARCHAR256,
             'nullable' => false,
         ],
-        'email' => [
+        'html' => [
             'type' => Schema::DT_VARCHAR128,
             'index' => true,
             'unique' => true,
             'nullable' => false,
         ],
-        'password' => [
+        'advice' => [
             'type' => Schema::DT_TEXT,
             'nullable' => false,
         ],
-        'gender' => [
+        'variant' => [
             'type' => Schema::DT_VARCHAR128,
-            'nullable' => true,
-        ],
-        'birthday' => [
-            'type' => Schema::DT_DATE,
-            'nullable' => true,
-        ],
-        'role' => [
-            'type' => Schema::DT_INT,
             'nullable' => false,
-            'default' => UserRole::USER->value,
+        ],
+        'locale' => [
+            'type' => Schema::DT_VARCHAR128,
+            'default' => Locale::ENGLISH->value,
+            'nullable' => false,
         ],
     ];
-    protected $db = 'DB', $table = 'users';
-
-    public function set_password(string $value) {
-        return password_hash($value, PASSWORD_DEFAULT);
-    }
+    protected $db = 'DB', $table = 'cards';
 }

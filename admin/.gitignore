@@ -26,6 +26,7 @@ db/database.sqlite
 storage/private/*
 !storage/private/mockups/
 !storage/private/mockups/**
+phpunit.xml
 
 # Editor directories and files
 .vscode/*

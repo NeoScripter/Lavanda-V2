@@ -16,6 +16,13 @@
             "app/Support/functions.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "Factories\\": "db/Factories",
+            "Seeders\\": "db/Seeders"
+        }
+    },
     "require-dev": {
         "phpunit/phpunit": "^13.2"
     }

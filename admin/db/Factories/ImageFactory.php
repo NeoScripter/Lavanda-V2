@@ -9,22 +9,20 @@ use Support\ImageHandler;
 
 class ImageFactory
 {
-    public static function create(string $name)
+    private string $template = APP_DIR . '/db/Fixtures/Image/placeholder.png';
+
+    public function create(string $name)
     {
-        $image_path =  APP_DIR . '/public/assets/imgs/shared/placeholder.webp';
+        $files = $this->get_template_variants();
 
-        if (!file_exists($image_path)) {
-            throw new \RuntimeException("Placeholder image not found: $image_path");
-        }
-
-        $new_dir = UPLOAD_DIR . "news-$name/";
+        $new_dir = \UPLOAD_DIR . "news-$name/";
         if (!is_dir($new_dir)) {
             mkdir($new_dir, 0755, true);
         }
 
         $image = new Image();
         foreach (['image-mb.webp', 'image-mb2x.webp', 'image-mb3x.webp'] as $file) {
-            if (!copy($image_path, $new_dir . $file)) {
+            if (!copy($this->template, $new_dir . $file)) {
                 throw new \RuntimeException("Failed to copy $file to $new_dir");
             }
         }
@@ -34,5 +32,22 @@ class ImageFactory
         $image->save();
 
         return $image;
+    }
+
+    private function get_template_variants()
+    {
+        if (!file_exists($this->template)) {
+            throw new \RuntimeException("Template image not found: $this->template");
+        }
+
+        $dir = dirname($this->template);
+
+        $files = scandir($dir);
+
+        if (! $files) {
+            throw new \RuntimeException("Directory $dir is empty");
+        }
+
+        return $files;
     }
 }
