@@ -12,11 +12,11 @@ class Card extends Cortex
     {
         parent::__construct();
 
-        // $this->beforeerase(function ($self) {
-        //     if ($self->front_image) {
-        //         $self->front_image->erase();
-        //     }
-        // });
+        $this->beforeerase(function ($self) {
+            if ($self->front_image) {
+                $self->front_image->erase();
+            }
+        });
 
         $this->onget('front_image', function ($self) {
             $img = new Image();

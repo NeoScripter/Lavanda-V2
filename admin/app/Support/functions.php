@@ -351,26 +351,14 @@ function normalize_image_input(array $input)
 
 function purge_files(string $src): void
 {
-    $src = str_replace(\Base::instance()->get('app_url'), APP_DIR . '/public/', $src);
+    $dir = dirname(str_replace(\Base::instance()->get('app_url'), APP_DIR . '/public/', $src));
 
-    $suffixes = ImageHandler::get_size_map(['mb' => 1, 'tb' => 10, 'dk' => 100]);
+    if (is_dir($dir)) {
+        $files = glob($dir . '/*');
 
-    foreach (array_flip($suffixes) as $suffix) {
-        foreach (['.webp', '.avif'] as $ext) {
-            $file = $src . $suffix . $ext;
-            if (file_exists($file)) {
-                unlink($file);
-            }
+        if (!empty($files)) {
+            delete_files_recursive($files);
         }
-    }
-
-    $png = $src . '.png';
-    if (file_exists($png)) {
-        unlink($png);
-    }
-
-    $dir = substr($src, 0, strrpos($src, '/'));
-    if (is_dir($dir) && count(scandir($dir)) === 2) {
         rmdir($dir);
     }
 }
@@ -526,4 +514,3 @@ function component_props(array $required, array $optional, array $props)
 
     return array_merge($optional, $props);
 }
-

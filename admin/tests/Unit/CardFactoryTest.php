@@ -32,7 +32,7 @@ final class CardFactoryTest extends TestCase
     }
 
     #[Test]
-    public function fetches_card_with_front_image(): void
+    public function fetching_card_also_fetches_its_front_image(): void
     {
         $card = $this->factory->create();
 
@@ -44,5 +44,22 @@ final class CardFactoryTest extends TestCase
 
         $this->assertTrue(! empty($image->src), "The card doesn't have a front image");
         $this->assertEquals($image->src, $rows[0]['src']);
+    }
+
+    #[Test]
+    public function deleting_card_also_deletes_its_front_image(): void
+    {
+        $card = $this->factory->create();
+        $image = $card->front_image;
+
+        $db = $this->hive->get('DB');
+
+        $card->erase();
+
+        $card_still_exists = $db->exec('SELECT 1 FROM cards WHERE id = ?', [$card->id]);
+        $image_still_exists = $db->exec('SELECT 1 FROM images WHERE id = ?', [$image->id]);
+
+        $this->assertEmpty($card_still_exists, 'Card should be deleted');
+        $this->assertEmpty($image_still_exists, 'Image should also be deleted');
     }
 }

@@ -44,4 +44,19 @@ final class ImageFactoryTest extends TestCase
         $this->assertNotEmpty($rows);
         $this->assertEquals($image->src, $rows[0]['src']);
     }
+
+    #[Test]
+    public function deleting_image_also_deletes_its_files(): void
+    {
+        $image = $this->factory->create(dir: 'test', imageable_id: 1, imageable_type: 'test');
+
+        $this->assertNotEmpty($image->src);
+
+        $dir = dirname($image->src);
+        $dir = str_replace($this->hive->get('app_url'), APP_DIR . '/public/', $dir);
+
+        $image->erase();
+
+        $this->assertDirectoryDoesNotExist($dir);
+    }
 }

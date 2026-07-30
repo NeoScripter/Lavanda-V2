@@ -15,7 +15,7 @@ class ImageFactory extends Factory
     {
         $files = $this->get_template_variants();
 
-        $new_dir = \UPLOAD_DIR . "$dir/";
+        $new_dir = \UPLOAD_DIR . "$dir/" . uniqid() . '/';
 
         if (!is_dir($new_dir)) {
             mkdir($new_dir, 0755, true);
