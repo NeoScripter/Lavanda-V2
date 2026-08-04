@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\Factories;
 
 use Factories\CardFactory;
 use PHPUnit\Framework\Attributes\Test;

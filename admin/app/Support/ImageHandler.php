@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Support;
 
-use Base;
 use Exception;
 use RuntimeException;
 use Imagick;
@@ -162,6 +161,7 @@ class ImageHandler
         }
     }
 
+    // format: ['mb' => 350, 'tb' => 600, 'dk' => 900],
     public static function get_size_map(array $base_widths)
     {
         $suffixes = [];
@@ -187,14 +187,12 @@ class ImageHandler
 
     public static function normalize_path(string $path)
     {
-        $path = str_replace('//', '/', $path);
-        $path = preg_replace('/\.[^.]+$/', '', $path);
-        $app_url = \Base::instance()->get('app_url');
+        $path_stem = preg_replace('/\.[^.]+$/', '', $path);
+        $app_url = \Base::instance()->get('app_url') . '/';
 
-        if (! str_ends_with($app_url, '/')) {
-            $app_url .= '/';
-        }
+        $norm_path = str_replace(APP_DIR . '/public/', $app_url, $path_stem);
+        $norm_path = preg_replace('#^(!https:)/+#', '/', $norm_path);
 
-        return str_replace(APP_DIR . '/public/', $app_url, $path);
+        return $norm_path;
     }
 }
