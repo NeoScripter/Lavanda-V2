@@ -42,7 +42,10 @@ class CliController
         Card::setup();
         Image::setup();
 
-        echo "Migration completed.\n";
+        if ($hive->app_env !== 'test') {
+            echo "Migration completed.\n";
+        }
+
     }
 
     function drop(\Base $hive)

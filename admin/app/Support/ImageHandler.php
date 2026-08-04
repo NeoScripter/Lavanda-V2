@@ -189,6 +189,12 @@ class ImageHandler
     {
         $path = str_replace('//', '/', $path);
         $path = preg_replace('/\.[^.]+$/', '', $path);
-        return str_replace(APP_DIR . '/public/', Base::instance()->get('app_url'), $path);
+        $app_url = \Base::instance()->get('app_url');
+
+        if (! str_ends_with($app_url, '/')) {
+            $app_url .= '/';
+        }
+
+        return str_replace(APP_DIR . '/public/', $app_url, $path);
     }
 }

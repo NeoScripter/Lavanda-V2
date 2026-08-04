@@ -1,0 +1,7 @@
+parameters:
+    paths:
+        - app/
+        - tests/
+        - factories/  # Make sure this directory is included
+    scanDirectories:
+        - factories/  # Or add it here
