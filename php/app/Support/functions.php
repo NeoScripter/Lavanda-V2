@@ -15,13 +15,6 @@ function vite_is_dev(): bool
 
 function vite_tags(string $entry = ''): string
 {
-    if (vite_is_dev()) {
-        return <<<HTML
-        <script type="module" src="http://localhost:5173/@vite/client"></script>
-        <script type="module" src="http://localhost:5173/{$entry}"></script>
-        HTML;
-    }
-
     $manifestPath = APP_DIR . '/public/dist/.vite/manifest.json';
     if (!file_exists($manifestPath)) {
         $manifestPath = APP_DIR . '/public/dist/manifest.json';
@@ -40,15 +33,15 @@ function vite_tags(string $entry = ''): string
     $chunk = $manifest[$entry];
     $tags = [];
 
-    $tags[] = "<script type='module' src='/admin/{$chunk['file']}'></script>";
+    $tags[] = "<script type='module' src='/admin/dist/{$chunk['file']}'></script>";
 
     foreach ($chunk['css'] ?? [] as $css) {
-        $tags[] = "<link rel='stylesheet' href='/admin/{$css}'>";
+        $tags[] = "<link rel='stylesheet' href='/admin/dist/{$css}'>";
     }
 
     foreach ($chunk['imports'] ?? [] as $importKey) {
         foreach ($manifest[$importKey]['css'] ?? [] as $css) {
-            $tags[] = "<link rel='stylesheet' href='/admin/{$css}'>";
+            $tags[] = "<link rel='stylesheet' href='/admin/dist/{$css}'>";
         }
     }
 

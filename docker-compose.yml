@@ -1,0 +1,67 @@
+services:
+  php:
+    build: ./php
+    networks:
+      - app-network
+    container_name: app-php
+    volumes:
+      - ./php:/var/www/html
+      - /var/www/html/node_modules
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+  preact:
+    build: ./preact
+    networks:
+      - app-network
+    container_name: app-preact
+    ports:
+      - "9002:9002"
+    volumes:
+      - ./preact:/app
+      - /app/node_modules
+
+  nginx:
+    build: ./nginx
+    networks:
+      - app-network
+    container_name: app-nginx
+    ports:
+      - "9001:80"
+    volumes_from:
+      - php
+
+  db:
+    image: postgres
+    container_name: app-db
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - app-network
+
+  redis:
+    image: redis
+    container_name: app-redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6380:6379"
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  app-network:
