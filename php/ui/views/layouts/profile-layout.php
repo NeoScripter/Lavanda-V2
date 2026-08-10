@@ -3,14 +3,14 @@
 <?php
 $slot = $slot ?? '';
 $heading = $heading ?? '';
-
-$path = \Base::instance()->PATH;
+$hive = \Base::instance();
+$path = $hive->PATH;
 
 $nav_items = [
-    ['title' => 'Profile',    'href' => '/admin/settings/profile'],
-    ['title' => 'Password',   'href' => '/admin/settings/password'],
-    ['title' => 'Appearance', 'href' => '/admin/settings/appearance'],
-    ['title' => 'Language', 'href' => '/admin/settings/locale'],
+    ['title' => $hive->get('admin.profile'), 'href' => '/admin/settings/profile'],
+    ['title' => $hive->get('admin.password'),   'href' => '/admin/settings/password'],
+    ['title' => $hive->get('admin.appearance'), 'href' => '/admin/settings/appearance'],
+    ['title' => $hive->get('admin.language'), 'href' => '/admin/settings/locale'],
 ];
 ?>
 

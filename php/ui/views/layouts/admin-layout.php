@@ -9,31 +9,31 @@
                 'label' => 'Dashboard',
                 'icon'  => 'layout-grid',
             ],
-            [
-                'url'   => '/admin/featured',
-                'label' => 'Featured Section',
-                'icon'  => 'feather',
-            ],
-            [
-                'url'   => '/admin/news',
-                'label' => 'Newsletters',
-                'icon'  => 'mails',
-            ],
-            [
-                'url'   => '/admin/articles',
-                'label' => 'News Articles',
-                'icon'  => 'newspaper',
-            ],
-            [
-                'url'   => '/admin/programs',
-                'label' => 'Programs',
-                'icon'  => 'earth',
-            ],
-            [
-                'url'   => '/admin/reports',
-                'label' => 'Reports',
-                'icon'  => 'file-stack',
-            ],
+            // [
+            //     'url'   => '/admin/featured',
+            //     'label' => 'Featured Section',
+            //     'icon'  => 'feather',
+            // ],
+            // [
+            //     'url'   => '/admin/news',
+            //     'label' => 'Newsletters',
+            //     'icon'  => 'mails',
+            // ],
+            // [
+            //     'url'   => '/admin/articles',
+            //     'label' => 'News Articles',
+            //     'icon'  => 'newspaper',
+            // ],
+            // [
+            //     'url'   => '/admin/programs',
+            //     'label' => 'Programs',
+            //     'icon'  => 'earth',
+            // ],
+            // [
+            //     'url'   => '/admin/reports',
+            //     'label' => 'Reports',
+            //     'icon'  => 'file-stack',
+            // ],
         ],
     ]) ?>
 

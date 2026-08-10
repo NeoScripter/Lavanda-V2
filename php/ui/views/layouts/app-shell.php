@@ -8,86 +8,34 @@
 
     <link
         rel="preload"
-        href="/admin/dist/assets/fonts/InstrumentSans-SemiBold.woff2"
+        href="/admin/dist/assets/fonts/UcCo3FwrK3iLTcviYwY.woff2"
         as="font"
         type="font/woff2"
         crossorigin />
     <link
         rel="preload"
-        href="/admin/dist/assets/fonts/InstrumentSans-Medium.woff2"
-        as="font"
-        type="font/woff2"
-        crossorigin />
-    <link
-        rel="preload"
-        href="/admin/dist/assets/fonts/InstrumentSans-Bold.woff2"
-        as="font"
-        type="font/woff2"
-        crossorigin />
-    <link
-        rel="preload"
-        href="/admin/dist/assets/fonts/InstrumentSans-Regular.woff2"
+        href="/admin/dist/assets/fonts/UcCo3FwrK3iLTcvmYwYL8g.woff2"
         as="font"
         type="font/woff2"
         crossorigin />
 
     <style>
         @font-face {
-            font-family: 'InstrumentSans';
+            font-family: 'Inter';
             font-style: normal;
-            font-weight: 400;
+            font-weight: 100 900;
             font-display: swap;
-            src: url('/admin/dist/assets/fonts/InstrumentSans-Regular.woff2') format('woff2');
-            unicode-range:
-                U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-                U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC,
-                U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            src: url('/admin/dist/assets/fonts/UcCo3FwrK3iLTcvmYwYL8g.woff2') format('woff2');
+            unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
         }
 
         @font-face {
-            font-family: 'InstrumentSans';
+            font-family: 'Inter';
             font-style: normal;
-            font-weight: 500;
+            font-weight: 100 900;
             font-display: swap;
-            src: url('/admin/dist/assets/fonts/InstrumentSans-Medium.woff2') format('woff2');
-            unicode-range:
-                U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-                U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC,
-                U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-        }
-
-        @font-face {
-            font-family: 'InstrumentSans';
-            font-style: normal;
-            font-weight: 500;
-            font-display: swap;
-            src: url('/admin/dist/assets/fonts/InstrumentSans-Medium.woff2') format('woff2');
-            unicode-range:
-                U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-        }
-
-        @font-face {
-            font-family: 'InstrumentSans';
-            font-style: normal;
-            font-weight: 600;
-            font-display: swap;
-            src: url('/admin/dist/assets/fonts/InstrumentSans-SemiBold.woff2') format('woff2');
-            unicode-range:
-                U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-                U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC,
-                U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-        }
-
-        @font-face {
-            font-family: 'InstrumentSans';
-            font-style: normal;
-            font-weight: 700;
-            font-display: swap;
-            src: url('/admin/dist/assets/fonts/InstrumentSans-Bold.woff2') format('woff2');
-            unicode-range:
-                U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-                U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC,
-                U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            src: url('/admin/dist/assets/fonts/UcCo3FwrK3iLTcviYwY.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
     </style>
 
