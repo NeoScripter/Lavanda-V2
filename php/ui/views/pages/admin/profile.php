@@ -1,12 +1,13 @@
+<?php $hive = \Base::instance(); ?>
 <?php slot('layouts/profile-layout', [
-    'heading' => 'Profile',
-    'title' => 'Profile',
+    'heading' => $hive->get('admin.profile'),
+    'title' => $hive->get('admin.profile'),
 ]); ?>
 
 <div class="space-y-6">
     <?= component('ui/subheading', [
-        'title'       => 'Profile information',
-        'description' => 'Update your name and email address',
+        'title'       => $hive->get('admin.profile_information'),
+        'description' => $hive->get('admin.update_your_name_and_email_address'),
         'class'       => "[&>h3,&>p]:animate-none",
     ]) ?>
 
@@ -15,7 +16,7 @@
 
         <?= component('form/form-input', [
             'name'  => 'name',
-            'label' => 'Full name',
+            'label' => $hive->get('admin.full_name'),
             'error' => $errors['name'] ?? '',
             'attrs' => [
                 'type'     => 'text',
@@ -25,7 +26,7 @@
 
         <?= component('form/form-input', [
             'name'  => 'email',
-            'label' => 'Email Address',
+            'label' => $hive->get('admin.email_address'),
             'error' => $errors['email'] ?? '',
             'attrs' => [
                 'type'     => 'email',
@@ -35,7 +36,7 @@
 
         <div class="flex justify-between gap-2.5">
             <?php slot('components/ui/auth-button', ['attrs' => ['type' => 'submit']]); ?>
-            Save
+            <?= $hive->get('admin.save') ?>
             <?php end_slot(); ?>
         </div>
     </form>

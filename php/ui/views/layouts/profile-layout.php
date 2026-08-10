@@ -16,8 +16,8 @@ $nav_items = [
 
 <div class="px-4 py-6">
     <?= component('ui/heading', [
-        'title'       => 'Profile',
-        'description' => 'Manage your profile and account settings',
+        'title'       => $hive->get('admin.profile'),
+        'description' => $hive->get('admin.manage_your_profile_and_account_settings'),
         'class'       => '[&>h2,&>p]:animate-none',
     ]) ?>
 

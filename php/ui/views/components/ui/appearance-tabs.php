@@ -1,22 +1,23 @@
 <?php
 $class = $class ?? '';
+$hive = \Base::instance();
 
 $final_class = trim('inline-flex gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800 ' . $class);
 
 $tabs = [
     [
         'value' => 'light',
-        'label' => 'Light',
+        'label' => $hive->get('admin.light'),
         'icon'  => 'sun',
     ],
     [
         'value' => 'dark',
-        'label' => 'Dark',
+        'label' => $hive->get('admin.dark'),
         'icon'  => 'moon',
     ],
     [
         'value' => 'system',
-        'label' => 'System',
+        'label' => $hive->get('admin.system'),
         'icon'  => 'monitor',
     ],
 ];

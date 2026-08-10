@@ -50,7 +50,7 @@
     </style>
 
     <?= vite_tags('ui/ts/app.ts') ?>
-    <title><?= "Admin Panel" . (isset($title) ? " - {$title}" : '') ?></title>
+    <title><?= (\Base::instance()->get("admin.admin_panel")) . (isset($title) ? " - {$title}" : '') ?></title>
 </head>
 
 <body class="overflow-x-clip font-sans">

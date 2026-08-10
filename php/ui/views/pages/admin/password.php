@@ -1,12 +1,13 @@
+<?php $hive = \Base::instance(); ?>
 <?php slot('layouts/profile-layout', [
-    'heading' => 'Password settings',
-    'title' => 'Password settings'
+    'heading' => $hive->get('admin.password_settings'),
+    'title' => $hive->get('admin.password_settings')
 ]); ?>
 
 <div class="space-y-6">
     <?= component('ui/subheading', [
-        'title'       => 'Update password',
-        'description' => 'Ensure your account is using a long, random password to stay secure',
+        'title'       => $hive->get('admin.update_password'),
+        'description' => $hive->get('admin.ensure_your_account_is_using_a_long_random_password_to_stay_secure'),
         'class'       => "[&>h3,&>p]:animate-none",
     ]) ?>
 
@@ -15,7 +16,7 @@
 
         <?= component('form/form-input', [
             'name'  => 'current_password',
-            'label' => 'Current password',
+            'label' => $hive->get('admin.current_password'),
             'error' => $errors['current_password'] ?? '',
             'attrs' => [
                 'type'     => 'password',
@@ -26,7 +27,7 @@
 
         <?= component('form/form-input', [
             'name'  => 'new_password',
-            'label' => 'New password',
+            'label' => $hive->get('admin.new_password'),
             'error' => $errors['new_password'] ?? '',
             'attrs' => [
                 'type'     => 'password',
@@ -37,7 +38,7 @@
 
         <?= component('form/form-input', [
             'name'  => 'password_confirmation',
-            'label' => 'Confirm password',
+            'label' => $hive->get('admin.confirm_password'),
             'error' => $errors['password_confirmation'] ?? '',
             'attrs' => [
                 'type'     => 'password',
@@ -48,7 +49,7 @@
 
         <div class="flex justify-between gap-2.5">
             <?php slot('components/ui/auth-button', ['attrs' => ['type' => 'submit']]); ?>
-            Save password
+            <?= $hive->get('admin.save_password') ?>
             <?php end_slot(); ?>
         </div>
     </form>

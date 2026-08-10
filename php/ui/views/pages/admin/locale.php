@@ -6,8 +6,8 @@
 
 <div class="space-y-6">
     <?= component('ui/subheading', [
-        'title'       => 'Language settings',
-        'description' => "Change your account's locale",
+        'title'       => $hive->get('admin.language_settings'),
+        'description' => $hive->get("admin.change_your_account_locale"),
         'class'       => "[&>h3,&>p]:animate-none",
     ]) ?>
 

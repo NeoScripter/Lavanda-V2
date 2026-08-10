@@ -7,12 +7,12 @@ $final_class = trim('inline-flex gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neu
 $tabs = [
     [
         'value' => 'ru',
-        'label' => 'Russian',
+        'label' => $hive->get('admin.russian'),
         'icon'  => 'ru',
     ],
     [
         'value' => 'en',
-        'label' => 'English',
+        'label' => $hive->get('admin.english'),
         'icon'  => 'en',
     ],
 ];

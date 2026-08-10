@@ -6,8 +6,8 @@
 
 <div class="space-y-6">
     <?= component('ui/subheading', [
-        'title'       => 'Appearance settings',
-        'description' => "Update your account's theme",
+        'title'       => $hive->get('admin.appearance_settings'),
+        'description' => $hive->get("admin.update_your_account_theme"),
         'class'       => "[&>h3,&>p]:animate-none",
     ]) ?>
 

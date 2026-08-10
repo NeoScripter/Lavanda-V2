@@ -1,6 +1,7 @@
 <?php
 $links = $links ?? [];
-$user = \Base::instance()->get('SESSION.user');
+$hive = \Base::instance();
+$user = $hive->get('SESSION.user');
 ?>
 <div id="admin-sidebar" class="md:bg-sidebar pointer-events-none md:pointer-events-auto fixed inset-0 z-120 md:static md:w-full md:shrink-0 transition-colors duration-500 ease-in-out md:self-stretch md:max-w-62">
     <aside class="bg-sidebar inset-y-0 left-0 flex min-h-full w-full max-w-72 flex-col -translate-x-full md:translate-x-0 transition-transform duration-500 ease-in-out px-3 py-2 md:fixed md:max-w-62">
@@ -11,13 +12,13 @@ $user = \Base::instance()->get('SESSION.user');
                 <?php view('components/ui/auth-logo') ;?>
             </div>
             <div class="ease overflow-x-clip font-medium whitespace-nowrap transition-[max-width] duration-300 max-w-64">
-                Admin Panel
+                <?= $hive->get('admin.admin_panel') ?>
             </div>
         </header>
 
         <div>
             <div class="text-sidebar-foreground/70 mx-2 pt-4 pb-1.5 text-xs">
-                Platform
+                <?= $hive->get('admin.platform') ?>
             </div>
             <ul class="text-sidebar-accent-foreground/70">
                 <?php foreach ($links as $link): ?>
