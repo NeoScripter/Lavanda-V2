@@ -1,12 +1,21 @@
-<?php $modal_id = uniqid('modal_'); ?>
 
-<div class='flex items-center gap-2'>
+<?php 
+$modal_id = uniqid('modal_');
+$hive = \Base::instance();
+extract(component_props(
+    required: ['delete_url', 'item_label'],
+    optional: ['edit_url' => null],
+    props: get_defined_vars(),
+));
+;?>
+
+<div class='flex flex-col gap-2'>
 
     <?php if (isset($edit_url)) : ?>
         <?= component('ui/auth-button', [
             'variant' => 'primary',
             'class'   => 'h-9 rounded-sm text-sm',
-            'slot' => 'Edit',
+            'slot' => $hive->get('admin.edit'),
             'href' => $edit_url,
         ]) ?>
     <?php endif; ?>
@@ -14,7 +23,7 @@
     <?= component('ui/auth-button', [
         'variant' => 'destructive',
         'class'   => 'rounded-sm',
-        'slot' => 'Delete',
+        'slot' => $hive->get('admin.delete'),
         'type' => 'submit',
         'attrs' => [
             'component-modal-show' => true,

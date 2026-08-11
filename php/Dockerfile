@@ -11,7 +11,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # node + pnpm
 RUN apk add --no-cache nodejs npm \
-    && npm install -g pnpm@9
+    && npm install -g pnpm@10
 
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-interaction --optimize-autoloader

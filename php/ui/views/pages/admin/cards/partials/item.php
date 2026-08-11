@@ -1,25 +1,23 @@
 <?php $hive = \Base::instance(); ?>
-<?php 
+<?php
 extract(component_props(
     required: ['card'],
     optional: [],
     props: get_defined_vars(),
 ));
-;?>
 
-<li class="grid max-w-140 gap-6 text-sm">
+$image = $card->front_image;; ?>
+
+<li class="grid gap-6 text-sm">
     <div class="flex flex-col gap-4">
 
-        <p class="text-xs w-fit border border-muted-foreground rounded-sm py-1 px-2">
-            <?= date_format(date_create($card->created_at), "j F Y") ?>
-        </p>
-        <?php if (isset($card->image)) : ?>
-            <div class="relative w-fit">
+        <?php if (isset($image)) : ?>
+            <div class="relative w-full">
                 <?= component('ui/image', [
                     'sizes'    => 'mb',
                     'avif'    => false,
-                    'path'     => $card->image->src,
-                    'prt_class' => 'w-50 aspect-5/4 shrink-0 rounded-xl',
+                    'path'     => $image->src,
+                    'prt_class' => 'w-full shrink-0 rounded-xl',
                 ]) ?>
                 <a href="<?= $hive->alias('admin_news_show', ['id' => $card->id]) ?>" class="absolute inset-0 size-full block"></a>
             </div>
@@ -28,16 +26,14 @@ extract(component_props(
         <?php endif; ?>
 
         <div>
-            <h3 class="mb-2 font-bold"><?= $card->title ?></h3>
-            <div class="text-sm">
-                <?= $card->summary ?>
-            </div>
+            <h3 class="mb-2 font-bold"><?= $card->name ?></h3>
         </div>
+
+        <?= component('ui/item-actions', [
+            'edit_url' => $hive->alias("admin_news_edit", ['id' => $card->id]),
+            'delete_url' => $hive->alias("admin_news_destroy", ['id' => $card->id]),
+            'item_label' => $hive->get('admin.card'),
+        ]) ?>
     </div>
 
-    <?= component('ui/item-actions', [
-        'edit_url' => $hive->alias("admin_news_edit", ['id' => $card->id]),
-        'delete_url' => $hive->alias("admin_news_destroy", ['id' => $card->id]),
-        'item_label' => 'Newsletter',
-    ]) ?>
 </li>

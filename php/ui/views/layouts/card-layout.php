@@ -1,18 +1,22 @@
-<?php slot('layouts/admin-layout', compact('heading', 'title')); ?>
+<?php
+
+use Enums\CardVariant;
+
+slot('layouts/admin-layout', compact('heading', 'title')); ?>
 
 <?php
 $hive = \Base::instance();
 $path = $hive->PATH;
 
 extract(component_props(
-    required: ['heading'],
+    required: ['heading', 'variant', 'locale'],
     optional: ['slot' => ''],
     props: get_defined_vars(),
 ));
 
 $nav_items = [
-    ['title' => $hive->get('admin.tarot'), 'href' => '/admin/cards?category=tarot'],
-    ['title' => $hive->get('admin.lenormand'),   'href' => '/admin/cards?category=lenormand'],
+    ['variant' => CardVariant::TAROT->value, 'title' => $hive->get('admin.tarot')],
+    ['variant' => CardVariant::LENORMAND->value, 'title' => $hive->get('admin.lenormand')],
 ];
 
 ?>
@@ -24,7 +28,7 @@ $nav_items = [
         'class'       => '[&>h2,&>p]:animate-none',
     ]) ?>
 
-    <div class="flex flex-col space-y-8 lg:flex-row lg:space-y-0 lg:space-x-12">
+    <div class="flex flex-col space-y-8 xl:flex-row lg:space-y-0 lg:space-x-12">
         <aside class="w-full max-w-xl lg:w-48">
             <nav class="flex flex-col space-y-1 space-x-0">
                 <?php foreach ($nav_items as $item): ?>
@@ -32,9 +36,9 @@ $nav_items = [
                         'size'    => 'sm',
                         'variant' => 'ghost',
                         'attrs'   => ['tabindex' => '-1'],
-                        'class'   => 'relative w-full justify-start' . ($path === $item['href'] ? ' bg-muted' : ''),
+                        'class'   => 'relative w-full justify-start' . ($variant === $item['variant'] ? ' bg-muted' : ''),
                     ]); ?>
-                    <a href="<?= $item['href'] ?>" class="absolute inset-0 z-10"></a>
+                    <a href="/admin/cards?variant=<?= $item['variant'] ?>&locale=<?= $locale ?>" class="absolute inset-0 z-10"></a>
                     <?= $item['title'] ?>
                     <?php end_slot(); ?>
                 <?php endforeach ?>
@@ -43,8 +47,8 @@ $nav_items = [
 
         <hr class="my-6 xl:hidden">
 
-        <div class="flex-1 md:max-w-2xl">
-            <section class="max-w-xl space-y-12">
+        <div class="flex-1">
+            <section>
                 <?= $slot ?>
             </section>
         </div>

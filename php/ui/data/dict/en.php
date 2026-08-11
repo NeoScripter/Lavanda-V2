@@ -46,5 +46,12 @@ return [
         'tarot' => 'Tarot',
         'lenormand' => 'Lenormand',
         'select_a_card_category' => 'Select a card category',
+        'delete_element' => 'Delete element',
+        'delete' => 'Delete',
+        'edit' => 'Edit',
+        'card' => 'card',
+        'are_you_sure_you_want_to_delete_this_element_this_action_cannot_be_undone' => 'Are you sure you want to delete this element? This action cannot be undone.',
+        'create_new' => 'Create New',
+        'here_you_can_manage_the_cards' => 'Here you can manage the cards',
     ]
 ];

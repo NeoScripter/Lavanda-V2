@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Admin;
 
+use Enums\CardVariant;
+use Enums\Locale;
 use Exception;
 use Support\Auth;
 use Http\Controller;
@@ -25,12 +27,22 @@ class CardController extends Controller
     {
         $page = $hive->GET['page'] ?? 1;
         $page = is_numeric($page) ? (int) $page : 1;
+        $variant = CardVariant::normalize($hive->GET['variant'] ?? '');
+        $locale = Locale::normalize($hive->GET['locale'] ?? '');
+
         $cards = new Card();
-        $cards = $cards->paginate($page - 1, 5, [], ['order' => 'created_at DESC']);
+        $cards = $cards->paginate(
+            $page - 1,
+            15,
+            ['locale=? AND variant=?', $locale, $variant],
+            ['order' => 'created_at DESC']
+        );
 
         view('pages/admin/cards/index', [
             'title' => 'All cards',
             'cards' => $cards,
+            'variant' => $variant,
+            'locale' => $locale,
         ]);
     }
 

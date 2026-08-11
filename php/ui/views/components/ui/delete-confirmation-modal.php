@@ -1,7 +1,12 @@
 <?php
 
-$item_name = $item_name ?? '';
-$class = $class ?? '';
+$hive = \Base::instance();
+
+extract(component_props(
+    required: ['modal_id', 'delete_url'],
+    optional: ['class' => ''],
+    props: get_defined_vars(),
+));
 
 $final_class = trim('grid gap-6 max-w-9/10  sm:max-w-100 lg:max-w-160 w-full' . $class);
 ?>
@@ -9,9 +14,9 @@ $final_class = trim('grid gap-6 max-w-9/10  sm:max-w-100 lg:max-w-160 w-full' . 
 
 <div class="<?= $final_class ?>">
     <div class="space-y-2">
-        <h2 class="text-2xl font-semibold">Delete <?= $item_name ?></h2>
+        <h2 class="text-2xl font-semibold"> <?= $hive->get('admin.delete_element') ?></h2>
         <p class="text-muted-foreground">
-            Are you sure you want to delete this <?= strtolower($item_name) ?>? This action cannot be undone.
+            <?= $hive->get('admin.are_you_sure_you_want_to_delete_this_element_this_action_cannot_be_undone') ?>
         </p>
     </div>
     <div class="flex items-center justify-end gap-4">

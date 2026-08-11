@@ -46,6 +46,13 @@ return [
         'tarot' => 'Таро',
         'lenormand' => 'Ленорманд',
         'select_a_card_category' => 'Выберите категорию карт',
+        'delete_element' => 'Удалить элемент',
+        'delete' => 'Удалить',
+        'edit' => 'Редактировать',
+        'card' => 'карта',
+        'are_you_sure_you_want_to_delete_this_element_this_action_cannot_be_undone' => 'Вы точно уверены что хотите удалить данный элемент? Его нельзя будет восстановить.',
+        'create_new' => 'Добавить новую',
+        'here_you_can_manage_the_cards' => 'Здесь вы можете редактировать карты',
 
     ]
 ];
