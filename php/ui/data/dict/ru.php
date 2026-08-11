@@ -41,6 +41,11 @@ return [
         'enter_your_email_and_password_below_to_log_in' => 'Введите емаил и пароль',
         'enter_your_password' => 'Введите пароль',
         'log_in' => 'Войти',
+        'cards' => 'Карты',
+        'user_successfully_updated' => 'Информация профиля успешно обновлена!',
+        'tarot' => 'Таро',
+        'lenormand' => 'Ленорманд',
+        'select_a_card_category' => 'Выберите категорию карт',
 
     ]
 ];

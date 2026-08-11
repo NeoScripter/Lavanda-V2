@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Seeders;
 
-use Factories\ReportFactory;
+use Enums\CardVariant;
+use Factories\CardFactory;
 use Seeders\Seeder;
 
 class CardSeeder extends Seeder
@@ -16,9 +17,14 @@ class CardSeeder extends Seeder
             return;
         }
 
+        $factory = new CardFactory();
+        for ($i = 0; $i < 10; $i++) {
+            $factory->create(['variant' => CardVariant::TAROT->value]);
+        }
 
-        foreach ($items as $item) {
-            ReportFactory::create($item);
+        $factory = new CardFactory();
+        for ($i = 0; $i < 10; $i++) {
+            $factory->create(['variant' => CardVariant::LENORMAND->value]);
         }
 
         echo "Cards seeded.\n";

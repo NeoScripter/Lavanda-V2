@@ -5,6 +5,7 @@ namespace Http\Controllers;
 use Http\Models\Card;
 use Http\Models\User;
 use Http\Models\Image;
+use Seeders\CardSeeder;
 
 const SCREEN_WIDTH = 152;
 const METHOD_WIDTH = 12;
@@ -63,10 +64,7 @@ class CliController
 
     function seed(\Base $hive)
     {
-        // NewsSeeder::run();
-        // ArticleSeeder::run();
-        // ProgramSeeder::run();
-        // ReportSeeder::run();
+        CardSeeder::run();
     }
 
     function fresh(\Base $hive)

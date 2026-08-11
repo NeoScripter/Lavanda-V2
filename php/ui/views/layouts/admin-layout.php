@@ -1,4 +1,4 @@
-<?php $hive = \Base::instance() ;?>
+<?php $hive = \Base::instance(); ?>
 <?php slot('layouts/app-shell', compact('title')); ?>
 
 <main
@@ -10,11 +10,11 @@
                 'label' => $hive->get('admin.dashboard'),
                 'icon'  => 'layout-grid',
             ],
-            // [
-            //     'url'   => '/admin/featured',
-            //     'label' => 'Featured Section',
-            //     'icon'  => 'feather',
-            // ],
+            [
+                'url'   => '/admin/cards',
+                'label' => $hive->get('admin.cards'),
+                'icon'  => 'playing-cards',
+            ],
             // [
             //     'url'   => '/admin/news',
             //     'label' => 'Newsletters',

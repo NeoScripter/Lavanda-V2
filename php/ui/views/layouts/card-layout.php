@@ -9,18 +9,18 @@ extract(component_props(
     optional: ['slot' => ''],
     props: get_defined_vars(),
 ));
+
 $nav_items = [
-    ['title' => $hive->get('admin.profile'), 'href' => '/admin/settings/profile'],
-    ['title' => $hive->get('admin.password'),   'href' => '/admin/settings/password'],
-    ['title' => $hive->get('admin.appearance'), 'href' => '/admin/settings/appearance'],
-    ['title' => $hive->get('admin.language'), 'href' => '/admin/settings/locale'],
+    ['title' => $hive->get('admin.tarot'), 'href' => '/admin/cards?category=tarot'],
+    ['title' => $hive->get('admin.lenormand'),   'href' => '/admin/cards?category=lenormand'],
 ];
+
 ?>
 
 <div class="px-4 py-6">
     <?= component('ui/heading', [
-        'title'       => $hive->get('admin.profile'),
-        'description' => $hive->get('admin.manage_your_profile_and_account_settings'),
+        'title'       => $hive->get('admin.cards'),
+        'description' => $hive->get('admin.select_a_card_category'),
         'class'       => '[&>h2,&>p]:animate-none',
     ]) ?>
 
@@ -45,7 +45,7 @@ $nav_items = [
 
         <div class="flex-1 md:max-w-2xl">
             <section class="max-w-xl space-y-12">
-                <?= $slot ?? '' ?>
+                <?= $slot ?>
             </section>
         </div>
     </div>

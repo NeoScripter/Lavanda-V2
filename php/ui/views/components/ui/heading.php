@@ -1,7 +1,9 @@
 <?php
-$title       = $title       ?? '';
-$description = $description ?? '';
-$class       = $class       ?? '';
+extract(component_props(
+    required: [],
+    optional: ['title' => '', 'class' => '', 'description' => ''],
+    props: get_defined_vars(),
+));
 
 $final_class = trim('mb-8 space-y-0.5 ' . $class);
 ?>

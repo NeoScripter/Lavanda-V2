@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Factories;
 
+use Enums\CardVariant;
 use Factories\CardFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -61,5 +62,15 @@ final class CardFactoryTest extends TestCase
 
         $this->assertEmpty($card_still_exists, 'Card should be deleted');
         $this->assertEmpty($image_still_exists, 'Image should also be deleted');
+    }
+
+    #[Test]
+    public function attributes_have_priority_over_default_values(): void
+    {
+        $attrs = ['name' => 'Test 1', 'variant' => CardVariant::TAROT->value];
+        $card = $this->factory->create($attrs);
+
+        $this->assertEquals($attrs['name'], $card->name);
+        $this->assertEquals($attrs['variant'], $card->variant);
     }
 }

@@ -19,14 +19,14 @@ class ProfileController extends Controller
         }
     }
 
-    public function index()
+    public function index(\Base $hive)
     {
         $user = Auth::user();
 
         set_values(['email' => $user['email'], 'name' => $user['name']]);
 
         view('pages/admin/profile', [
-            'title' => 'Profile',
+            'title' => $hive->get('admin.profile'),
         ]);
     }
 
@@ -44,7 +44,7 @@ class ProfileController extends Controller
 
         Auth::set_user($user->cast());
 
-        notify('User successfully updated!');
+        notify($hive->get('admin.user_successfully_updated'));
         $hive->reroute('@profile');
     }
 }

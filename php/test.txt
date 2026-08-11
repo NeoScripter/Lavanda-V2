@@ -1,0 +1,39 @@
+
+# Stage 1: Composer dependencies
+FROM composer:2 AS composer
+WORKDIR /app
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-interaction --optimize-autoloader
+
+# Stage 2: Node dependencies + build
+FROM node:26-alpine AS node
+WORKDIR /var/www/html
+COPY package.json pnpm-lock.yaml ./
+RUN npm install -g pnpm@9 && pnpm install
+COPY . .
+RUN pnpm run build
+
+# Stage 3: Final PHP image
+FROM php:8.5-fpm-alpine
+
+WORKDIR /var/www/html
+
+# Install PHP extensions
+ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN install-php-extensions gd pgsql pdo_pgsql
+
+# Copy Composer dependencies
+COPY --from=composer /app/vendor /var/www/html/vendor
+
+# Copy application code
+COPY . /var/www/html
+
+# Set permissions
+ARG UID=1000
+ARG GID=1001
+RUN deluser www-data 2>/dev/null; \
+    delgroup www-data 2>/dev/null; \
+    addgroup -g ${GID} www-data && \
+    adduser -D -H -u ${UID} -G www-data www-data
+
+CMD ["sh", "-c", "npm run build --watch & exec php-fpm"]

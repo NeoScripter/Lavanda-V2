@@ -57,6 +57,11 @@ class Card extends Cortex
             'default' => Locale::ENGLISH->value,
             'nullable' => false,
         ],
+        'created_at' => [
+            'type' => Schema::DT_DATE,
+            'nullable' => false,
+            'default' => Schema::DF_CURRENT_TIMESTAMP,
+        ],
     ];
 
     protected $db = 'DB', $table = 'cards';
