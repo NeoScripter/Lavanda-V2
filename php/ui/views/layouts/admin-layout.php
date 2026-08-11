@@ -1,3 +1,4 @@
+<?php $hive = \Base::instance() ;?>
 <?php slot('layouts/app-shell', compact('title')); ?>
 
 <main
@@ -6,7 +7,7 @@
         'links' => [
             [
                 'url'   => '/admin',
-                'label' => 'Dashboard',
+                'label' => $hive->get('admin.dashboard'),
                 'icon'  => 'layout-grid',
             ],
             // [

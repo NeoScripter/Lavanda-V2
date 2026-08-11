@@ -13,7 +13,9 @@ define('UPLOAD_DIR', APP_DIR . '/public/storage/uploads/');
 
 $hive->config(APP_DIR . '/config/env.ini');
 
-$hive->set('CACHE', "redis={$hive->get('redis_host')}:{$hive->get('redis_post')}");
+$redis_port = (int) $hive->get('redis_post');
+
+$hive->set('CACHE', "redis={$hive->get('redis_host')}:{$redis_port}");
 
 $session = new Session(function () {
     return true;

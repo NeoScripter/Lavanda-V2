@@ -31,5 +31,15 @@ return [
         'confirm_password' => 'Confirm password',
         'new_password' => 'New password',
         'save_password' => 'Save password',
+        'update_your_name_and_email_address' => 'Update your name and email address',
+        'email_address' => 'Email Address',
+        'save' => 'Save',
+        'full_name' => 'Full name',
+        'settings' => 'Settings',
+        'log_out' => 'Log out',
+        'log_in_to_your_account' => 'Log in to your account',
+        'enter_your_email_and_password_below_to_log_in' => 'Enter your email and password below to log in',
+        'enter_your_password' => 'Enter your password',
+        'log_in' => 'Log in',
     ]
 ];

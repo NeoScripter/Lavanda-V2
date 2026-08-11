@@ -17,8 +17,8 @@ abstract class TestCase extends BaseTestCase
 
         $this->hive = \Base::instance();
         $this->hive->set('app_env', 'test');
-        $this->hive->set('AUTOLOAD', APP_DIR . '/db/;');
-        $this->hive->run();
+        // $this->hive->set('AUTOLOAD', APP_DIR . '/db/;');
+        // $this->hive->run();
 
         $this->setup_database();
 

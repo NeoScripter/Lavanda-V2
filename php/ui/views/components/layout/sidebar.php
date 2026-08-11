@@ -3,7 +3,7 @@ $links = $links ?? [];
 $hive = \Base::instance();
 $user = $hive->get('SESSION.user');
 ?>
-<div id="admin-sidebar" class="md:bg-sidebar pointer-events-none md:pointer-events-auto fixed inset-0 z-120 md:static md:w-full md:shrink-0 transition-colors duration-500 ease-in-out md:self-stretch md:max-w-62">
+<div id="admin-sidebar" class="md:bg-sidebar pointer-events-none md:pointer-events-auto fixed inset-0 z-120 md:static md:w-full md:shrink-0 md:self-stretch md:max-w-62">
     <aside class="bg-sidebar inset-y-0 left-0 flex min-h-full w-full max-w-72 flex-col -translate-x-full md:translate-x-0 transition-transform duration-500 ease-in-out px-3 py-2 md:fixed md:max-w-62">
 
         <header class="relative flex items-center select-none m-2 gap-4">

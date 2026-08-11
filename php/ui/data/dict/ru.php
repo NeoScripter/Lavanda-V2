@@ -35,6 +35,12 @@ return [
         'email_address' => 'Электронная почта',
         'save' => 'Сохранить',
         'full_name' => 'Имя пользователя',
+        'settings' => 'Настройки',
+        'log_out' => 'Выйти',
+        'log_in_to_your_account' => 'Вход в личный кабинет',
+        'enter_your_email_and_password_below_to_log_in' => 'Введите емаил и пароль',
+        'enter_your_password' => 'Введите пароль',
+        'log_in' => 'Войти',
 
     ]
 ];

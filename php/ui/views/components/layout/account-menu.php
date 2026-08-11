@@ -18,11 +18,11 @@ $hive = \Base::instance();
         </li>
         <?= component('ui/sidebar-link', [
             'url'   => '/admin/settings/profile',
-            'label' => 'Settings',
+            'label' => $hive->get('admin.settings'),
         ]) ?>
         <?= component('ui/sidebar-delete-btn', [
             'url'   => $hive->alias('logout'),
-            'label' => 'Log out',
+            'label' => $hive->get('admin.log_out'),
         ]) ?>
     </ul>
 </div>
