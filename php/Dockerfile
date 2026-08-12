@@ -2,9 +2,14 @@ FROM php:8.5-fpm-alpine
 
 WORKDIR /var/www/html
 
+RUN apk add --no-cache fish
+RUN apk add --no-cache pgcli
 # extensions first — cached layer, rarely changes
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN install-php-extensions gd pgsql pdo_pgsql
+
+RUN printf '#!/bin/sh\nexec env PGPASSWORD="$DB_PASSWORD" pgcli -h db -U "$DB_USER" -d "$DB_NAME"\n' > /usr/local/bin/db \
+    && chmod +x /usr/local/bin/db
 
 # composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
