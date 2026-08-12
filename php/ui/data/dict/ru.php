@@ -62,5 +62,14 @@ return [
         "card_successfully_created" => "Карта успешно создана",
         "card_successfully_updated" => "Карта успешно обновлена",
         "card_successfully_deleted" => "Карта успешно удалена",
+        "create_a_card" => "Создать карту",
+        "card_name" => "Название карты",
+        "front_image" => "Передняя сторона",
+        "card_advice" => "Совет карты",
+        "card_meaning" => "Интерпретация карты",
+        "image_alternative_text" => "Текстовое описание фото",
+        "a_squirrel_is_sitting_on_a_tree" => "Белка сидит на дереве...",
+        "update_image_alt" => "Изменить описание фото",
+
     ]
 ];

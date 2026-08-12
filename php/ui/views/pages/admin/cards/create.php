@@ -11,7 +11,7 @@ $hive = \Base::instance(); ?>
     <div class="admin-shell space-y-6">
 
         <?= component('ui/subheading', [
-            'title'       => 'Create a card',
+            'title'       => $hive->get('admin.create_a_card'),
             'class'       => "[&>h3,&>p]:animate-none",
         ]) ?>
 
@@ -20,7 +20,7 @@ $hive = \Base::instance(); ?>
 
             <?= component('form/form-input', [
                 'name'  => 'name',
-                'label' => 'Card name',
+                'label' => $hive->get('admin.card_name'),
                 'attrs' => [
                     'type'     => 'text',
                     'required' => true,
@@ -29,7 +29,7 @@ $hive = \Base::instance(); ?>
 
             <?= component('form/form-file-input', [
                 'name'  => 'front_image',
-                'label' => 'Front image',
+                'label' => $hive->get('admin.front_image'),
                 'with_alt' => true,
                 'attrs' => [
                     'required' => true,
@@ -39,7 +39,7 @@ $hive = \Base::instance(); ?>
 
             <?= component('form/form-textarea', [
                 'name'  => 'advice',
-                'label' => 'Card advice',
+                'label' => $hive->get('admin.card_advice'),
                 'attrs' => [
                     'required' => true,
                 ],
@@ -47,7 +47,7 @@ $hive = \Base::instance(); ?>
 
             <?= component('form/form-wysiwyg', [
                 'name'  => 'html',
-                'label' => 'Card meaning',
+                'label' => $hive->get('admin.card_meaning'),
                 'attrs' => [
                     'required' => true,
                 ],

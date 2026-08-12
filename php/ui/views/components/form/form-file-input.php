@@ -1,16 +1,23 @@
 <?php
 
-$name = $name ?? '';
-$label = $label ?? '';
+extract(component_props(
+    required: [],
+    optional: [
+        'name' => '',
+        'label' => '',
+        'value' => [],
+        'class' => '',
+        'attrs' => [],
+        'with_alt' => false,
+        'can_delete' => true
+    ],
+    props: get_defined_vars(),
+));
+
 $error = \Flash::instance()->getKey("errors.{$name}") ?? '';
-$files = $value ?? [];
-$class = $class ?? '';
-$attrs = $attrs ?? [];
-$with_alt = $with_alt ?? false;
-$can_delete = $can_delete ?? true;
 $uid = uniqid('file_input_');
 
-$files = array_filter($files);
+$files = array_filter($value);
 
 $file_name = $name;
 if (! empty($file_name) && array_key_exists('multiple', $attrs) && $attrs['multiple'] === true) {
@@ -44,7 +51,9 @@ $hive = \Base::instance();
 
     <?php if ($with_alt) : ?>
         <fieldset class="mt-2">
-            <legend component-legend class="mb-2 hidden font-medium">Image alternative text</legend>
+            <legend component-legend class="mb-2 hidden font-medium">
+                <?= $hive->get('admin.image_alternative_text') ?>
+            </legend>
             <ol component-file-alts class="grid gap-2 list-decimal list-inside" data-alt-name="<?= "alt_{$name}[]" ?>">
             </ol>
         </fieldset>
@@ -52,7 +61,7 @@ $hive = \Base::instance();
         <template component-alt-template>
             <li class="[&>input]:max-w-[calc(100%-3ch)]">
                 <?= component('form/input', [
-                    'attrs' => ['placeholder' => 'A squirrel is sitting on a tree...'],
+                    'attrs' => ['placeholder' => $hive->get('admin.a_squirrel_is_sitting_on_a_tree')],
                     'class' => 'inline'
                 ]) ?>
             </li>
@@ -97,7 +106,6 @@ $hive = \Base::instance();
                                 <?= component('ui/delete-confirmation-modal', [
                                     'delete_url' => $hive->alias("admin_images_destroy", ['id' => $file->id]),
                                     'modal_id'   => $modal_id,
-                                    'item_name'   => 'Image',
                                     'class'   => 'rounded-sm',
                                 ]) ?>
 
@@ -114,7 +122,7 @@ $hive = \Base::instance();
                                 data-modal-id="<?= $alt_modal_id ?>"
                                 type="button"
                                 class="absolute bg-black/80 transition-opacity font-medium opacity-0 group-hover:opacity-100 p-1 inset-0 text-white">
-                                Update Image Alt
+                                <?= $hive->get("admin.update_image_alt") ?>
                             </button>
                         </div>
 
@@ -133,7 +141,7 @@ $hive = \Base::instance();
 
                             <?= component('form/form-textarea', [
                                 'name'  => 'alt',
-                                'label' => 'Image alt',
+                                'label' => $hive->get('admin.image_alternative_text'),
                                 'attrs' => [
                                     'type'     => 'text',
                                     'value'    => $file->alt,

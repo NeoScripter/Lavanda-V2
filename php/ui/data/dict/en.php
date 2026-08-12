@@ -63,6 +63,14 @@ return [
         "card_successfully_created" => "Card successfully created",
         "card_successfully_updated" => "Card successfully updated",
         "card_successfully_deleted" => "Card successfully deleted",
+        "create_a_card" => "Create a card",
+        "card_name" => "Card name",
+        "front_image" => "Front image",
+        "card_advice" => "Card advice",
+        "card_meaning" => "Card meaning",
+        "image_alternative_text" => "Image alternative text",
+        "a_squirrel_is_sitting_on_a_tree" => "A squirrel is sitting on a tree...",
+        "update_image_alt" => "Update Image Alt",
 
     ]
 ];
