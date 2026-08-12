@@ -1,5 +1,9 @@
 <?php
 
+use Enums\CardVariant;
+use Enums\Locale;
+use Enums\SessionKey;
+
 $hive = Base::instance();
 
 $hive->set('redis_port', (int) getenv('REDIS_PORT'));
@@ -13,6 +17,14 @@ $session = new Session(function () {
 
 if (! $hive->exists('SESSION.csrf')) {
     $hive->set('SESSION.csrf', $session->csrf());
+}
+
+if (! $hive->exists('SESSION.' . SessionKey::RESOURCE_LOCALE->value)) {
+    $hive->set('SESSION.' . SessionKey::RESOURCE_LOCALE->value, Locale::ENGLISH->value);
+}
+
+if (! $hive->exists('SESSION.' . SessionKey::CARD_VARIANT->value)) {
+    $hive->set('SESSION.' . SessionKey::CARD_VARIANT->value, CardVariant::TAROT->value);
 }
 
 if ($hive->exists('COOKIE.locale')) {

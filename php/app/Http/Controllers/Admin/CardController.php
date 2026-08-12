@@ -6,6 +6,7 @@ namespace Http\Controllers\Admin;
 
 use Enums\CardVariant;
 use Enums\Locale;
+use Enums\SessionKey;
 use Exception;
 use Support\Auth;
 use Http\Controller;
@@ -29,7 +30,9 @@ class CardController extends Controller
         $page = $hive->GET['page'] ?? 1;
         $page = is_numeric($page) ? (int) $page : 1;
         $variant = CardVariant::normalize($hive->GET['variant'] ?? '');
-        $locale = Locale::normalize($hive->GET['locale'] ?? '');
+        $locale = Locale::normalize($hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value) ?? '');
+
+        $hive->set('SESSION.' . SessionKey::CARD_VARIANT->value, $variant);
 
         $card = new FlipCard();
         $card = $card->paginate(
@@ -42,8 +45,6 @@ class CardController extends Controller
         view('pages/admin/cards/index', [
             'title' => 'All cards',
             'cards' => $card,
-            'variant' => $variant,
-            'locale' => $locale,
         ]);
     }
 

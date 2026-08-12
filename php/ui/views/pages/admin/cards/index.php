@@ -1,30 +1,32 @@
 <?php
 
 use Enums\Locale;
+use Enums\SessionKey;
 
 $hive = \Base::instance();
 
 extract(component_props(
-    required: ['variant', 'locale', 'cards'],
+    required: ['cards'],
     optional: [],
     props: get_defined_vars(),
 ));
+
+$locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 ?>
 
 <?php slot('layouts/card-layout', [
     'heading' => $hive->get('admin.profile'),
     'title' => $hive->get('admin.profile'),
-    'variant' => $variant,
-    'locale' => $locale,
 ]); ?>
 
 <div class="space-y-12 w-[calc(100%-1rem)]">
     <nav class='flex w-full items-start gap-6 justify-between'>
-        <form method="GET" action="/admin/cards" class='grid gap-2'>
-            <input type="hidden" name="variant" value="<?= $variant ?>" />
+        <form method="POST" action="<?= $hive->alias('resource_locale') ?>" class='grid gap-2'>
+            <?= csrf() ?>
+            <input type="hidden" name="_method" value="PUT" />
             <label for="locale-select"><?= $hive->get('admin.select_card_language') ?></label>
             <div>
-                <select onchange="this.form.submit()" name="locale" class="cursor-pointer w-full" id="locale-select">
+                <select onchange="this.form.submit()" name="<?= SessionKey::RESOURCE_LOCALE->value ?>" class="cursor-pointer w-full" id="locale-select">
                     <?php foreach (Locale::labels() as $value => $label) : ?>
                         <option <?= $value === $locale ? 'selected' : '' ?> value="<?= $value ?>"><?= $label ?></option>
                     <?php endforeach; ?>
@@ -35,7 +37,7 @@ extract(component_props(
             'variant' => 'primary',
             'class'   => 'h-9 rounded-sm text-sm',
             'slot' => $hive->get('admin.create_new'),
-            'href' => \Base::instance()->alias('admin_cards_create'),
+            'href' => $hive->alias('admin_cards_create'),
         ]) ?>
     </nav>
 

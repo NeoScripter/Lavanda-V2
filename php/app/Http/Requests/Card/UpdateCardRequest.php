@@ -2,6 +2,7 @@
 
 namespace Http\Requests\Card;
 
+use Enums\SessionKey;
 use Http\Request;
 
 class UpdateCardRequest extends Request
@@ -35,7 +36,10 @@ class UpdateCardRequest extends Request
 
     protected function prepare_data(): array
     {
-        return $this->data;
+        return array_merge($this->data, [
+            'locale' => $this->hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value),
+            'variant' => $this->hive->get('SESSION.' . SessionKey::CARD_VARIANT->value)
+        ]);
     }
 
     protected function on_failure(): void

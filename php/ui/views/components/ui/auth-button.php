@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Button Component
  *
@@ -11,11 +12,12 @@
  * @var mixed       $slot     Inner content (HTML string or text)
  */
 
-$variant = $variant ?? 'default';
-$size    = $size    ?? 'default';
-$href    = $href    ?? null;
-$class   = $class   ?? '';
-$attrs   = $attrs   ?? [];
+extract(component_props(
+    required: [],
+    optional: ['variant' => 'default', 'size' => 'default', 'href' => null, 'class' => '', 'attrs' => []],
+    props: get_defined_vars(),
+));
+
 
 $variant_classes = [
     'default'     => 'bg-primary text-primary-foreground shadow-xs hover:bg-primary/90',
@@ -34,11 +36,11 @@ $size_classes = [
 ];
 
 $base = 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium'
-      . ' transition-[color,box-shadow]'
-      . ' disabled:pointer-events-none disabled:opacity-50'
-      . " [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0"
-      . " outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
-      . ' aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive';
+    . ' transition-[color,box-shadow]'
+    . ' disabled:pointer-events-none disabled:opacity-50'
+    . " [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0"
+    . " outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+    . ' aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive';
 
 $final_class = trim(implode(' ', array_filter([
     $base,
@@ -54,6 +56,6 @@ if ($href) {
     $attr_string .= " href=\"$href\"";
 }
 ?>
-<<?= $tag ?> data-slot="button" class="<?= $final_class ?>"<?= $attr_string ?>>
+<<?= $tag ?> data-slot="button" class="<?= $final_class ?>" <?= $attr_string ?>>
     <?= $slot ?? '' ?>
 </<?= $tag ?>>

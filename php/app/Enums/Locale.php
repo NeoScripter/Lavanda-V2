@@ -19,7 +19,6 @@ enum Locale: string
         return in_array($input, self::values(), true) ? $input : self::ENGLISH->value;
     }
 
-
     public static function labels(): array
     {
         $labels = [];

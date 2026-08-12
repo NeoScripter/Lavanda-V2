@@ -1,6 +1,7 @@
 <?php
 
 use Enums\CardVariant;
+use Enums\SessionKey;
 
 slot('layouts/admin-layout', compact('heading', 'title')); ?>
 
@@ -9,10 +10,13 @@ $hive = \Base::instance();
 $path = $hive->PATH;
 
 extract(component_props(
-    required: ['heading', 'variant', 'locale'],
+    required: ['heading'],
     optional: ['slot' => ''],
     props: get_defined_vars(),
 ));
+
+$variant = $hive->get('SESSION.' . SessionKey::CARD_VARIANT->value);
+$locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 
 $nav_items = [
     ['variant' => CardVariant::TAROT->value, 'title' => $hive->get('admin.tarot')],
@@ -38,7 +42,7 @@ $nav_items = [
                         'attrs'   => ['tabindex' => '-1'],
                         'class'   => 'relative w-full justify-start' . ($variant === $item['variant'] ? ' bg-muted' : ''),
                     ]); ?>
-                    <a href="/admin/cards?variant=<?= $item['variant'] ?>&locale=<?= $locale ?>" class="absolute inset-0 z-10"></a>
+                    <a href="/admin/cards?variant=<?= $item['variant'] ?>" class="absolute inset-0 z-10"></a>
                     <?= $item['title'] ?>
                     <?php end_slot(); ?>
                 <?php endforeach ?>

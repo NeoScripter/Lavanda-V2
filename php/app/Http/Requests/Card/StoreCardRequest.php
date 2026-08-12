@@ -2,6 +2,7 @@
 
 namespace Http\Requests\Card;
 
+use Enums\SessionKey;
 use Http\Request;
 
 class StoreCardRequest extends Request
@@ -14,12 +15,12 @@ class StoreCardRequest extends Request
                 'validate' => 'required|max_len:130',
             ],
             'advice' => [
-                'filter'   => 'trim|trim_spaces|escape_tags',
+                'filter'   => 'trim|trim_spaces|strip_tags',
                 'validate' => 'required|max_len:1200',
             ],
             'html' => [
-                'filter'   => 'trim',
-                'validate' => 'required|max_len:42000|no_tags',
+                'filter'   => 'trim|strip_tags',
+                'validate' => 'required|max_len:42000',
             ],
             'variant' => [
                 'filter'   => 'trim',
@@ -35,7 +36,10 @@ class StoreCardRequest extends Request
 
     protected function prepare_data(): array
     {
-        return array_merge($this->data);
+        return array_merge($this->data, [
+            'locale' => $this->hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value),
+            'variant' => $this->hive->get('SESSION.' . SessionKey::CARD_VARIANT->value)
+        ]);
     }
 
     protected function on_failure(): void

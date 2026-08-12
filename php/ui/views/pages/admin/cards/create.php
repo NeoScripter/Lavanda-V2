@@ -1,8 +1,11 @@
-<?php slot('layouts/admin-layout', [
-    'heading' => 'Card',
-    'title' => 'Card'
+<?php
+
+$hive = \Base::instance(); ?>
+<?php slot('layouts/card-layout', [
+    'heading' => $hive->get('admin.profile'),
+    'title' => $hive->get('admin.profile'),
 ]); ?>
-<?php $hive = \Base::instance() ;?>
+
 
 <div class="space-y-6">
     <div class="admin-shell space-y-6">
@@ -16,27 +19,17 @@
             <?= csrf() ?>
 
             <?= component('form/form-input', [
-                'name'  => 'title',
-                'label' => 'Card title',
+                'name'  => 'name',
+                'label' => 'Card name',
                 'attrs' => [
                     'type'     => 'text',
                     'required' => true,
                 ],
             ]) ?>
 
-            <?= component('form/form-input', [
-                'name'  => 'created_at',
-                'label' => 'Date',
-                'attrs' => [
-                    'type'     => 'date',
-                    'value'    => date('Y-m-d'),
-                    'required' => true,
-                ],
-            ]) ?>
-
             <?= component('form/form-file-input', [
-                'name'  => 'preview',
-                'label' => 'Image',
+                'name'  => 'front_image',
+                'label' => 'Front image',
                 'with_alt' => true,
                 'attrs' => [
                     'required' => true,
@@ -45,29 +38,18 @@
             ]) ?>
 
             <?= component('form/form-textarea', [
-                'name'  => 'summary',
-                'label' => 'Card description',
+                'name'  => 'advice',
+                'label' => 'Card advice',
                 'attrs' => [
                     'required' => true,
                 ],
             ]) ?>
 
             <?= component('form/form-wysiwyg', [
-                'name'  => 'body',
-                'label' => 'Card content',
+                'name'  => 'html',
+                'label' => 'Card meaning',
                 'attrs' => [
                     'required' => true,
-                ],
-            ]) ?>
-
-            <?= component('form/form-file-input', [
-                'name'  => 'gallery',
-                'label' => 'Gallery Images',
-                'value'    => $article['gallery'] ?? [],
-                'with_alt' => true,
-                'attrs' => [
-                    'required' => false,
-                    'multiple' => true,
                 ],
             ]) ?>
 
