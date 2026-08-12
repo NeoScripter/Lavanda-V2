@@ -11,13 +11,17 @@ error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 $hive->config(APP_DIR . '/config/env.ini');
 $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
 
+$hive->set('db_name', getenv('DB_NAME'));
+$hive->set('db_host', getenv('DB_HOST'));
+$hive->set('db_password', getenv('DB_PASSWORD'));
+$hive->set('db_user', getenv('DB_USER'));
+
 require APP_DIR . '/config/database.php';
+require APP_DIR . '/config/queue.php';
 
-$pdo = $hive->get('DB')->pdo();
-
-$queue = new n0nag0n\Job_Queue('pgsql');
-$queue->addQueueConnection($pdo);
+$queue = $hive->get('JOB_QUEUE');
 $queue->watchPipeline('run_processes');
+
 
 while (true) {
     $job = $queue->getNextJobAndReserve();

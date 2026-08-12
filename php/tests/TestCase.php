@@ -17,10 +17,6 @@ abstract class TestCase extends BaseTestCase
 
         $this->hive = \Base::instance();
         $this->hive->set('app_env', 'test');
-        // $this->hive->set('AUTOLOAD', APP_DIR . '/db/;');
-        // $this->hive->run();
-
-        $this->setup_database();
 
         $this->run_migrations();
     }
@@ -29,16 +25,8 @@ abstract class TestCase extends BaseTestCase
     {
         parent::tearDown();
 
-        delete_files_recursive(
-            glob(UPLOAD_DIR . '/*')
-        );
-    }
-
-    private function setup_database(): void
-    {
-        $this->db = new \DB\SQL('sqlite::memory:');
-
-        $this->hive->set('DB', $this->db);
+        $hanlder = new CliController();
+        $hanlder->drop($this->hive);
     }
 
     private function run_migrations(): void

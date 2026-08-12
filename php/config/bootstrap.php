@@ -13,25 +13,7 @@ define('UPLOAD_DIR', APP_DIR . '/public/storage/uploads/');
 
 $hive->config(APP_DIR . '/config/env.ini');
 
-$redis_port = (int) $hive->get('redis_post');
-
-$hive->set('CACHE', "redis={$hive->get('redis_host')}:{$redis_port}");
-
-$session = new Session(function () {
-    return true;
-});
-
-if (! $hive->exists('SESSION.csrf')) {
-    $hive->set('SESSION.csrf', $session->csrf());
-}
-
-if ($hive->exists('COOKIE.locale')) {
-    $hive->set('LANGUAGE', $hive->COOKIE['locale']);
-}
-
-// dd($hive->get('LANGUAGE'));
-
-$hive->copy('SESSION.csrf', 'CSRF');
+require APP_DIR . '/config/session.php';
 
 $hive->config(APP_DIR . '/config/routes.ini');
 
@@ -39,13 +21,13 @@ $hive->set('DEBUG', $hive->get('app_debug') ? 3 : 0);
 $hive->set('LOCALES', APP_DIR . '/ui/data/dict/');
 
 require APP_DIR . '/config/exception_config.php';
+
+$hive->set('db_name', getenv('DB_NAME'));
+$hive->set('db_host', getenv('DB_HOST'));
+$hive->set('db_password', getenv('DB_PASSWORD'));
+$hive->set('db_user', getenv('DB_USER'));
+
 require APP_DIR . '/config/database.php';
-
-$queue = new n0nag0n\Job_Queue('pgsql');
-$queue->addQueueConnection($hive->get('DB')->pdo());
-$hive->set('JOB_QUEUE', $queue);
-
-$flash = \Flash::instance();
-$hive->set('FLASH', $flash);
+require APP_DIR . '/config/queue.php';
 
 $hive->run();

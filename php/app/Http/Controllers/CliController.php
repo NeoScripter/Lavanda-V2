@@ -56,10 +56,12 @@ class CliController
         Image::setdown();
 
         delete_files_recursive(
-            glob(APP_DIR . '/public/storage/uploads' . '/*')
+            glob(UPLOAD_DIR . '/*')
         );
 
-        echo "All tables deleted.\n";
+        if ($hive->app_env !== 'test') {
+            echo "All tables deleted.\n";
+        }
     }
 
     function seed(\Base $hive)

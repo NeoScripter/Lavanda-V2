@@ -16,3 +16,5 @@ $hive = Base::instance();
 $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
 $hive->config(APP_DIR . '/config/env.ini');
 $hive->config(APP_DIR . '/config/routes.ini');
+
+require APP_DIR . '/config/database.php';

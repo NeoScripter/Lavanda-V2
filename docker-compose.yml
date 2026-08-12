@@ -9,8 +9,11 @@ services:
       - /var/www/html/node_modules
     environment:
       DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_HOST: ${REDIS_HOST}
 
   preact:
     build: ./preact
