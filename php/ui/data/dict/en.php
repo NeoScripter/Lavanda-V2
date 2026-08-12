@@ -19,6 +19,8 @@ return [
         'manage_your_profile_and_account_settings' => 'Manage your profile and account settings',
         'russian' => 'Russian',
         'english' => 'English',
+        'serbian' => 'Serbian',
+        'german' => 'German',
         'update_your_account_theme' => "Update your account's theme",
         'appearance_settings' => 'Appearance settings',
         'system' => 'system',
@@ -55,5 +57,6 @@ return [
         'here_you_can_manage_the_cards' => 'Here you can manage the cards',
         "these_credentials_dont_match_our_records" => "These credentials don't match our records",
         "welcome" => "welcome",
+        "select_card_language" => "Select card language",
     ]
 ];

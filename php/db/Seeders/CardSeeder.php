@@ -21,7 +21,7 @@ class CardSeeder extends Seeder
 
             $factory = new CardFactory();
             for ($i = 0; $i < 10; $i++) {
-                $factory->create(compact($variant));
+                $factory->create(attrs: ['variant' => $variant]);
             }
         }
 

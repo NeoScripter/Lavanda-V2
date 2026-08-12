@@ -19,6 +19,8 @@ return [
         'manage_your_profile_and_account_settings' => 'Сменить настройки личного профиля пользователя',
         'russian' => 'Русский',
         'english' => 'Английский',
+        'serbian' => 'Сербский',
+        'german' => 'Немецкий',
         'update_your_account_theme' => "Сменить тему профиля",
         'appearance_settings' => 'Настройки темы',
         'system' => 'системная',
@@ -55,5 +57,6 @@ return [
         'here_you_can_manage_the_cards' => 'Здесь вы можете редактировать карты',
         "these_credentials_dont_match_our_records" => "Неправильные имя пользователя или пароль",
         "welcome" => "Добро пожаловать",
+        "select_card_language" => "Выберите язык карт",
     ]
 ];

@@ -1,4 +1,7 @@
 <?php
+
+use Enums\Locale;
+
 $hive = \Base::instance();
 
 extract(component_props(
@@ -16,26 +19,31 @@ extract(component_props(
 ]); ?>
 
 <div class="space-y-12 w-[calc(100%-1rem)]">
-    <div class='flex flex-col sm:flex-row gap-6 items-start justify-between'>
-        <?= component('ui/subheading', [
-            'class'       => "[&>h3,&>p]:animate-none",
+    <nav class='flex w-full items-start gap-6 justify-between'>
+        <form method="GET" action="/admin/cards" class='grid gap-2'>
+            <input type="hidden" name="variant" value="<?= $variant ?>" />
+            <label for="locale-select"><?= $hive->get('admin.select_card_language') ?></label>
+            <div>
+                <select onchange="this.form.submit()" name="locale" class="cursor-pointer w-full" id="locale-select">
+                    <?php foreach (Locale::labels() as $value => $label) : ?>
+                        <option <?= $value === $locale ? 'selected' : '' ?> value="<?= $value ?>"><?= $label ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </form>
+        <?= component('ui/auth-button', [
+            'variant' => 'primary',
+            'class'   => 'h-9 rounded-sm text-sm',
+            'slot' => $hive->get('admin.create_new'),
+            'href' => \Base::instance()->alias('admin_cards_create'),
         ]) ?>
-
-        <nav>
-            <?= component('ui/auth-button', [
-                'variant' => 'primary',
-                'class'   => 'h-9 rounded-sm text-sm',
-                'slot' => $hive->get('admin.create_new'),
-                'href' => \Base::instance()->alias('admin_cards_create'),
-            ]) ?>
-        </nav>
-    </div>
+    </nav>
 
     <?php if (! empty($cards['subset'])) : ?>
         <ul class="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-12">
             <?php foreach ($cards['subset'] as $card) : ?>
                 <?php view('pages/admin/cards/partials/item', [
-                    'card' => $card,
+                    'card' => $card->to_resource(),
                 ]); ?>
             <?php endforeach; ?>
         </ul>
