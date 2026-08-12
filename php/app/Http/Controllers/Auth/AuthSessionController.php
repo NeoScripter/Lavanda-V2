@@ -37,13 +37,13 @@ class AuthSessionController extends Controller
 
         if ($user->dry() || !password_verify($request->input('password'), $user->password)) {
             set_values(['email' => $hive->POST['email']]);
-            set_errors(['email' =>  "These credentials don't match our records"]);
+            set_errors(['email' =>  $hive->get("admin.these_credentials_dont_match_our_records")]);
             $hive->reroute('@login');
         }
 
         Auth::set_user($user->cast());
 
-        notify("Welcome, {$user->name}");
+        notify("{$hive->get("admin.welcome")}, {$user->name}");
         $hive->reroute('@dashboard');
     }
 

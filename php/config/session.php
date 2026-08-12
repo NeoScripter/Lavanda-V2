@@ -17,6 +17,8 @@ if (! $hive->exists('SESSION.csrf')) {
 
 if ($hive->exists('COOKIE.locale')) {
     $hive->set('LANGUAGE', $hive->COOKIE['locale']);
+} else {
+    $hive->set('LANGUAGE', 'ru');
 }
 
 $hive->copy('SESSION.csrf', 'CSRF');

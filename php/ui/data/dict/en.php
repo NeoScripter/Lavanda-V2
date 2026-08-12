@@ -53,5 +53,7 @@ return [
         'are_you_sure_you_want_to_delete_this_element_this_action_cannot_be_undone' => 'Are you sure you want to delete this element? This action cannot be undone.',
         'create_new' => 'Create New',
         'here_you_can_manage_the_cards' => 'Here you can manage the cards',
+        "these_credentials_dont_match_our_records" => "These credentials don't match our records",
+        "welcome" => "welcome",
     ]
 ];
