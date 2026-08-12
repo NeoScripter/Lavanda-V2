@@ -9,7 +9,6 @@
         <div>
             <?= component('ui/subheading', [
                 'title' => "Programs",
-                'class' => "[&>h3,&>p]:animate-none",
             ]) ?>
         </div>
 

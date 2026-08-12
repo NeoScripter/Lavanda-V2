@@ -8,7 +8,6 @@
 
         <?= component('ui/subheading', [
             'title'       => 'Create a newsletter',
-            'class'       => "[&>h3,&>p]:animate-none",
         ]) ?>
 
         <form action="<?= \Base::instance()->alias('admin_news_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">

@@ -10,7 +10,6 @@
 
         <?= component('ui/subheading', [
             'title'       => 'Newsletter',
-            'class'       => "[&>h3,&>p]:animate-none",
         ]) ?>
 
         <div class="space-y-6 max-w-160">

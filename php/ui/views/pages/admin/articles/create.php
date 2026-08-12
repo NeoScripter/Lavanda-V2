@@ -8,7 +8,6 @@
 
         <?= component('ui/subheading', [
             'title'       => 'Create an article',
-            'class'       => "[&>h3,&>p]:animate-none",
         ]) ?>
 
         <form action="<?= \Base::instance()->alias('admin_articles_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">

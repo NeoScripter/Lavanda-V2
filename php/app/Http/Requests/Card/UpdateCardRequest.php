@@ -24,7 +24,7 @@ class UpdateCardRequest extends Request
             ],
             'variant' => [
                 'filter'   => 'trim',
-                'validate' => 'required|string',
+                'validate' => 'required',
             ],
             'front_image' => [
                 'filter'   => 'file',

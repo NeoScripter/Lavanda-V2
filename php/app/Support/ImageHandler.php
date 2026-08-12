@@ -95,7 +95,7 @@ class ImageHandler
                 unlink($path);
             }
 
-            $cmd = sprintf('optipng -o1 -strip all %s 2>&1', escapeshellarg($png_path));
+            $cmd = sprintf('oxipng -o 3 --strip safe %s 2>&1', escapeshellarg($png_path));
 
             exec($cmd, output: $output, result_code: $code);
 

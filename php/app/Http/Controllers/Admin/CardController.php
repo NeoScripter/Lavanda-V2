@@ -48,7 +48,7 @@ class CardController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(\Base $hive)
     {
         view('pages/admin/cards/create');
     }
@@ -67,6 +67,7 @@ class CardController extends Controller
 
     public function show(\Base $hive)
     {
+
         $id = $hive->PARAMS['id'];
         $card = new FlipCard();
         $card->load(['id = ?', $id]);

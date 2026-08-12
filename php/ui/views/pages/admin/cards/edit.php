@@ -1,80 +1,63 @@
-<?php slot('layouts/admin-layout', [
-    'heading' => 'Newsletter',
-    'title' => 'Newsletter'
-]); ?>
+<?php
 
-<?php $hive = \Base::instance(); ?>
+extract(component_props(
+    required: ['card'],
+    optional: [],
+    props: get_defined_vars(),
+));
+
+$hive = \Base::instance();
+
+slot('layouts/card-layout', [
+    'heading' => $hive->get('admin.cards'),
+    'title' => $hive->get('admin.cards'),
+]); ?>
 
 <div class="space-y-6">
     <div class="admin-shell space-y-6">
 
-        <?= component('ui/subheading', [
-            'title'       => 'Edit a newsletter',
-            'class'       => "[&>h3,&>p]:animate-none",
-        ]) ?>
+        <?= component('ui/subheading', ['title' => $hive->get('admin.edit_a_card')]) ?>
 
-        <form action="<?= $hive->alias('admin_news_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+        <form action="<?= $hive->alias('admin_cards_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
             <input type="hidden" name="_method" value="put">
             <?= csrf() ?>
 
             <?= component('form/form-input', [
-                'name'  => 'title',
-                'label' => 'Newsletter title',
+                'name'  => 'name',
+                'label' => $hive->get('admin.card_name'),
                 'attrs' => [
                     'type'     => 'text',
-                    'value'    => $article['title'],
-                    'required' => true,
-                ],
-            ]) ?>
-
-            <?= component('form/form-input', [
-                'name'  => 'created_at',
-                'label' => 'Date',
-                'attrs' => [
-                    'type'     => 'date',
-                    'value'    => $article['created_at'],
+                    'value'    => $card['name'],
                     'required' => true,
                 ],
             ]) ?>
 
             <?= component('form/form-file-input', [
-                'name'  => 'preview',
-                'label' => 'Image',
-                'can_delete'  => false,
+                'name'  => 'front_image',
+                'label' => $hive->get('admin.front_image'),
                 'with_alt' => true,
-                'value'    => [$article['image'] ?? null],
+                'value'    => [$card['front_image'] ?? null],
                 'attrs' => [
-                    'required' => false,
+                    'required' => true,
                     'multiple' => false,
                 ],
             ]) ?>
 
             <?= component('form/form-textarea', [
-                'name'  => 'summary',
-                'label' => 'Newsletter description',
+                'name'  => 'advice',
+                'label' => $hive->get('admin.card_advice'),
                 'attrs' => [
                     'required' => true,
-                    'value'    => $article['summary'],
+                    'value'    => $card['advice'],
                 ],
             ]) ?>
 
             <?= component('form/form-wysiwyg', [
-                'name'  => 'body',
-                'label' => 'Newsletter content',
+                'name'  => 'html',
+                'label' => $hive->get('admin.card_meaning'),
                 'attrs' => [
                     'required' => true,
-                    'value'    => $article['body'],
-                ],
-            ]) ?>
-
-            <?= component('form/form-file-input', [
-                'name'  => 'gallery',
-                'label' => 'Gallery Images',
-                'value'    => $article['gallery'] ?? [],
-                'with_alt' => true,
-                'attrs' => [
-                    'required' => false,
-                    'multiple' => true,
+                    'value'    => $card['html'],
                 ],
             ]) ?>
 
@@ -86,8 +69,8 @@
                 <?= component(
                     'ui/auth-button',
                     [
-                        'slot' => 'Cancel',
-                        'href' => $hive->alias('admin_news_index'),
+                        'slot' => $hive->get('admin.cancel'),
+                        'href' => $hive->alias('admin_cards_index'),
                         'variant' => 'secondary',
                         'attrs' => ['type' => 'submit']
                     ]

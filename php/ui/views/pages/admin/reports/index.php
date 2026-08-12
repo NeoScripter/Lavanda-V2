@@ -8,7 +8,6 @@
         <div>
             <?= component('ui/subheading', [
                 'title' => "Reports",
-                'class' => "[&>h3,&>p]:animate-none",
             ]) ?>
             <nav class="mb-2 mt-4">
                 <?= component('ui/auth-button', [

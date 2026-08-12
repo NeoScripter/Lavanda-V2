@@ -8,7 +8,6 @@
     <?= component('ui/subheading', [
         'title'       => $hive->get('admin.language_settings'),
         'description' => $hive->get("admin.change_your_account_locale"),
-        'class'       => "[&>h3,&>p]:animate-none",
     ]) ?>
 
     <?= component('ui/locale-tabs') ?>

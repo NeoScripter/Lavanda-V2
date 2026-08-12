@@ -26,14 +26,13 @@ $nav_items = [
 ?>
 
 <div class="px-4 py-6">
-    <?= component('ui/heading', [
-        'title'       => $hive->get('admin.cards'),
-        'description' => $hive->get('admin.select_a_card_category'),
-        'class'       => '[&>h2,&>p]:animate-none',
-    ]) ?>
-
     <div class="flex flex-col space-y-8 xl:flex-row lg:space-y-0 lg:space-x-12">
         <aside class="w-full max-w-xl lg:w-48">
+            <?= component('ui/heading', [
+                'title'       => $hive->get('admin.cards'),
+                'description' => $hive->get('admin.select_a_card_category'),
+            ]) ?>
+
             <nav class="flex flex-col space-y-1 space-x-0">
                 <?php foreach ($nav_items as $item): ?>
                     <?php slot('components/ui/auth-button', [

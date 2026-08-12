@@ -8,7 +8,6 @@
     <?= component('ui/subheading', [
         'title'       => $hive->get('admin.update_password'),
         'description' => $hive->get('admin.ensure_your_account_is_using_a_long_random_password_to_stay_secure'),
-        'class'       => "[&>h3,&>p]:animate-none",
     ]) ?>
 
     <form action="<?= \Base::instance()->alias('password_update') ?>" method="post" class="space-y-6">

@@ -21,7 +21,6 @@ $nav_items = [
     <?= component('ui/heading', [
         'title'       => $hive->get('admin.profile'),
         'description' => $hive->get('admin.manage_your_profile_and_account_settings'),
-        'class'       => '[&>h2,&>p]:animate-none',
     ]) ?>
 
     <div class="flex flex-col space-y-8 lg:flex-row lg:space-y-0 lg:space-x-12">

@@ -1,46 +1,55 @@
-<?php slot('layouts/admin-layout', [
-    'heading' => 'Newsletter',
-    'title' => 'Newsletter'
-]); ?>
+<?php
+extract(component_props(
+    required: ['card'],
+    optional: [],
+    props: get_defined_vars(),
+));
+$hive = \Base::instance(); ?>
 
-<?php $hive = \Base::instance(); ?>
+<?php slot('layouts/card-layout', [
+    'heading' => $hive->get('admin.cards'),
+    'title' => $hive->get('admin.cards')
+]); ?>
 
 <div class="space-y-6">
     <div class="admin-shell space-y-6">
 
-        <?= component('ui/subheading', [
-            'title'       => 'Newsletter',
-            'class'       => "[&>h3,&>p]:animate-none",
-        ]) ?>
+        <?= component('ui/subheading', ['title' => $card['name']]) ?>
 
         <div class="space-y-6 max-w-160">
             <div>
-                <h3 class="mb-2 font-medium">Newsletter title</h3>
+                <h3 class="mb-2 font-medium">
+                    <?= $hive->get('admin.card_name') ?>
+                </h3>
                 <div>
-                    <?= $article['title'] ?>
+                    <?= $card['name'] ?>
                 </div>
             </div>
 
             <figure class="aspect-square rounded-sm overflow-clip max-w-48">
-                <img class="size-full object-cover object-center" src="<?= $article['image']['src'] .  "-mb.webp" ?>" alt="">
+                <img class="size-full object-cover object-center" src="<?= $card['front_image']['src'] .  "-mb.webp" ?>" alt="">
             </figure>
 
             <div>
-                <h3 class="mb-2 font-medium">Newsletter description</h3>
+                <h3 class="mb-2 font-medium">
+                    <?= $hive->get('admin.card_advice') ?>
+                </h3>
                 <div>
-                    <?= $article['summary'] ?>
+                    <?= $card['advice'] ?>
                 </div>
             </div>
 
             <div>
-                <h3 class="mb-2 font-medium">Newsletter content</h3>
+                <h3 class="mb-2 font-medium">
+                    <?= $hive->get('admin.card_meaning') ?>
+                </h3>
                 <div class="max-w-full prose">
-                    <?= html_entity_decode($article['body']) ?>
+                    <?= html_entity_decode($card['html']) ?>
                 </div>
             </div>
         </div>
 
-        <?= component('ui/gallery', ['gallery' => $article->gallery, 'class' => 'mb-6']) ?>
+        <?= component('ui/gallery', ['gallery' => $card->gallery, 'class' => 'mb-6']) ?>
     </div>
 </div>
 

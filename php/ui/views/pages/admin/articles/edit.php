@@ -10,7 +10,6 @@
 
         <?= component('ui/subheading', [
             'title'       => 'Edit an article',
-            'class'       => "[&>h3,&>p]:animate-none",
         ]) ?>
 
         <form action="<?= $hive->alias('admin_articles_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">

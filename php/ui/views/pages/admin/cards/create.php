@@ -1,19 +1,17 @@
 <?php
 
-$hive = \Base::instance(); ?>
-<?php slot('layouts/card-layout', [
-    'heading' => $hive->get('admin.profile'),
-    'title' => $hive->get('admin.profile'),
-]); ?>
+$hive = \Base::instance();
 
+slot('layouts/card-layout', [
+    'heading' => $hive->get('admin.cards'),
+    'title' => $hive->get('admin.cards'),
+]); 
+?>
 
 <div class="space-y-6">
     <div class="admin-shell space-y-6">
 
-        <?= component('ui/subheading', [
-            'title'       => $hive->get('admin.create_a_card'),
-            'class'       => "[&>h3,&>p]:animate-none",
-        ]) ?>
+        <?= component('ui/subheading', ['title' => $hive->get('admin.create_a_card')]) ?>
 
         <form action="<?= \Base::instance()->alias('admin_cards_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
             <?= csrf() ?>

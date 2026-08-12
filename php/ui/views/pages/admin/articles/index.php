@@ -9,7 +9,6 @@
         <div>
             <?= component('ui/subheading', [
                 'title' => "Articles",
-                'class'       => "[&>h3,&>p]:animate-none",
             ]) ?>
 
             <nav class="mb-2 mt-4">

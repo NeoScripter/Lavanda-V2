@@ -70,6 +70,8 @@ return [
         "image_alternative_text" => "Текстовое описание фото",
         "a_squirrel_is_sitting_on_a_tree" => "Белка сидит на дереве...",
         "update_image_alt" => "Изменить описание фото",
+        "edit_a_card" => "Редактировать карту",
+        "cancel" => "Отмена",
 
     ]
 ];

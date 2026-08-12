@@ -9,7 +9,6 @@
         <?= component('ui/subheading', [
             'title'       => 'Featured Section',
             'description' => 'Update the featured section on the home page',
-            'class'       => "[&>h3,&>p]:animate-none",
         ]) ?>
 
         <form action="<?= \Base::instance()->alias('featured_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">

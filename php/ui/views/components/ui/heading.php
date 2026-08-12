@@ -8,11 +8,11 @@ extract(component_props(
 $final_class = trim('mb-8 space-y-0.5 ' . $class);
 ?>
 <div class="<?= $final_class ?>">
-    <h2 class="motion-safe:animate-fade-in text-xl font-semibold tracking-tight hyphens-auto">
+    <h2 class="text-xl font-semibold tracking-tight hyphens-auto">
         <?= $title ?>
     </h2>
     <?php if ($description): ?>
-        <p class="text-muted-foreground motion-safe:animate-fade-in text-sm">
+        <p class="text-muted-foreground text-sm">
             <?= $description ?>
         </p>
     <?php endif ?>

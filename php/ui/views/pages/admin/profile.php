@@ -8,7 +8,6 @@
     <?= component('ui/subheading', [
         'title'       => $hive->get('admin.profile_information'),
         'description' => $hive->get('admin.update_your_name_and_email_address'),
-        'class'       => "[&>h3,&>p]:animate-none",
     ]) ?>
 
     <form action="<?= \Base::instance()->alias('profile_update') ?>" method="post" class="space-y-6">

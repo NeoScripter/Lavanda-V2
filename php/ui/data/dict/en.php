@@ -71,6 +71,8 @@ return [
         "image_alternative_text" => "Image alternative text",
         "a_squirrel_is_sitting_on_a_tree" => "A squirrel is sitting on a tree...",
         "update_image_alt" => "Update Image Alt",
+        "edit_a_card" => "Edit a card",
+        "cancel" => "Cancel",
 
     ]
 ];
