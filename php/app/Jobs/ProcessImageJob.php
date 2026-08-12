@@ -14,9 +14,9 @@ class ProcessImageJob extends Job
     public function handle(array $payload): void
     {
         $missing = array_diff([
-            'parent_id',
-            'parent_class',
-            'field',
+            'imageable_id',
+            'imageable_type',
+            'variant',
             'sizes',
             'files',
         ], array_keys($payload));
@@ -26,55 +26,35 @@ class ProcessImageJob extends Job
         }
 
 
-        $parent_id      = $payload['parent_id'];
-        $parent_class   = $payload['parent_class'];
-        $field         = $payload['field'];
-        $sizes         = $payload['sizes'];
-        $files         = $payload['files'];
-        $qnt           = $payload['qnt'] ?? null;
-
-        if (!class_exists($parent_class)) {
-            throw new InvalidArgumentException("Parent class does not exist: {$parent_class}");
-        }
+        $imageable_id = $payload['imageable_id'];
+        $imageable_type = $payload['imageable_type'];
+        $variant = $payload['variant'];
+        $sizes = $payload['sizes'];
+        $files = $payload['files'];
+        $qnt = $payload['qnt'] ?? null;
 
         $optimized = optimize_files(sizes: $sizes, files: $files, qnt: $qnt);
 
+        if ($qnt === 1) {
+            $optimized = array_slice($optimized, 0, 1);
+        }
+
         if (empty($optimized)) {
-            throw new RuntimeException("optimize_files() returned no files for {$parent_class} #{$parent_id}, field '{$field}'");
-        }
-
-        $parent = new $parent_class();
-        $parent->load(['id = ?', $parent_id]);
-
-        if ($parent->dry()) {
-            throw new RuntimeException("Could not load {$parent_class} #{$parent_id}");
-        }
-
-        if ($qnt === 1 && isset($parent->{$field}) && is_object($parent->{$field})) {
-            $parent->{$field}->erase();
-            $parent->{$field} = null;
+            throw new RuntimeException("optimize_files() returned no files for {$imageable_type} #{$imageable_id}");
         }
 
         try {
-            if ($qnt === 1) {
+            foreach ($optimized as $file) {
                 $img = new Image();
-                $img->copyFrom($optimized[0]);
+                $img->copyFrom([
+                    ...$file,
+                    ...compact('imageable_id', 'imageable_type', 'variant')
+                ]);
+
                 $img->save();
-                $parent->{$field} = $img;
-            } else {
-                $ids = [];
-                foreach ($optimized as $file) {
-                    $img = new Image();
-                    $img->copyFrom($file);
-                    $img->save();
-                    $ids[] = $img->id;
-                }
-                $parent->{$field} = $ids;
             }
-            $parent->save();
         } catch (Exception $e) {
-            $logger = new \Log(APP_DIR . '/storage/logs/worker.log');
-            $logger->write("Failed processing image: {$e->getMessage()}");
+            echo ("Failed processing image: {$e->getMessage()}");
         }
 
         echo 'Image processed successfully!' . PHP_EOL;

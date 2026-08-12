@@ -47,8 +47,7 @@ while (true) {
         (new $jobClass())->handle($envelope['payload']);
         $queue->deleteJob($job);
     } catch (\Throwable $e) {
-        $logger = new \Log('./storage/logs/worker.log');
-        $logger->write("Job {$job['id']} failed: {$e->getMessage()}");
+        echo ("Job {$job['id']} failed: {$e->getMessage()}");
         $queue->buryJob($job);
     }
 }

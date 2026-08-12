@@ -82,6 +82,7 @@ class CardController extends Controller
     {
         $request = $this->request(StoreCardRequest::class);
         $request->validate();
+        $variant = $request->input('variant');
 
         $card = new Card();
         $card->copyFrom($request->all());
@@ -89,9 +90,9 @@ class CardController extends Controller
 
         if (! $card->dry() && $request->input('front_image')) {
             ProcessImageJob::dispatch([
-                'parent_id'      => $card->id,
-                'parent_class'   => Card::class,
-                'field'          => 'front_image',
+                'imageable_id'      => $card->id,
+                'imageable_type'   => $variant,
+                'variant'          => 'front',
                 'sizes'          => ['mb' => 150, 'tb' => 250, 'dk' => 300],
                 'files'          => $request->input('front_image'),
                 'qnt'            => 1,
@@ -100,7 +101,8 @@ class CardController extends Controller
 
         notify("{$hive->get('admin.card_successfully_created')}! \n
             {$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}");
-        $hive->reroute('@admin_cards_index');
+
+        $hive->reroute('@admin_cards_index' . '?' . http_build_query(['variant' => $variant]));
     }
 
     public function update(\Base $hive)
@@ -124,9 +126,9 @@ class CardController extends Controller
         if (! $card->dry() && $request->input('front_image')) {
             $with_images = true;
             ProcessImageJob::dispatch([
-                'parent_id'      => $card->id,
-                'parent_class'   => Card::class,
-                'field'          => 'front_image',
+                'imageable_id'      => $card->id,
+                'imageable_type'   => $request->input('variant'),
+                'variant'          => 'front',
                 'sizes'          => ['mb' => 150, 'tb' => 250, 'dk' => 300],
                 'files'          => $request->input('front_image'),
                 'qnt'            => 1,
@@ -140,6 +142,7 @@ class CardController extends Controller
         }
 
         notify($message);
+
         $hive->reroute("@admin_cards_edit(@id=$id)");
     }
 

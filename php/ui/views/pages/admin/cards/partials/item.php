@@ -28,8 +28,8 @@ extract(component_props(
         </div>
 
         <?= component('ui/item-actions', [
-            'edit_url' => $hive->alias("admin_news_edit", ['id' => $card['id']]),
-            'delete_url' => $hive->alias("admin_news_destroy", ['id' => $card['id']]),
+            'edit_url' => $hive->alias("admin_cards_edit", ['id' => $card['id']]),
+            'delete_url' => $hive->alias("admin_cards_destroy", ['id' => $card['id']]),
             'item_label' => $hive->get('admin.card'),
         ]) ?>
     </div>
