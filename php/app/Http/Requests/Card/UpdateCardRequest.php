@@ -9,50 +9,41 @@ class UpdateCardRequest extends Request
     public function rules(): array
     {
         return [
-            'title' => [
+            'name' => [
                 'filter'   => 'trim|escape_tags',
-                'validate' => 'required|max_len:230',
+                'validate' => 'required|max_len:130',
             ],
-            'summary' => [
+            'advice' => [
                 'filter'   => 'trim|trim_spaces|escape_tags',
-                'validate' => 'required|max_len:4500',
+                'validate' => 'required|max_len:1200',
             ],
-            'body' => [
+            'html' => [
                 'filter'   => 'trim',
                 'validate' => 'required|max_len:42000|no_tags',
             ],
-            'created_at' => [
-                'validate' => 'required|date',
+            'variant' => [
+                'filter'   => 'trim',
+                'validate' => 'required|string',
             ],
-            // 'alt' => [
-            //     'filter'   => 'trim',
-            //     'validate' => 'required|max_len:250',
-            // ],
-            'preview' => [
+            'front_image' => [
                 'filter'   => 'file',
                 'validate' => 'image:webp,jpg,jpeg,png|max_size:8800',
-                'post_filter'   => 'file:cards',
-            ],
-            'gallery' => [
-                'filter'   => 'file',
-                'validate' => 'image:webp,jpg,jpeg,png|max_size:8800',
-                'post_filter'   => 'file:cards',
+                'post_filter'   => 'file:card-' . $this->input('variant'),
             ],
         ];
     }
 
     protected function prepare_data(): array
     {
-        return array_merge($this->data, ['alt' => 'example']);
+        return $this->data;
     }
 
     protected function on_failure(): void
     {
         set_values([
-            'title'    => $this->hive->POST['title'] ?? '',
-            'summary' => $this->hive->POST['summary'] ?? '',
-            'body'     => $this->hive->POST['body'] ?? '',
-            'created_at'     => $this->hive->POST['created_at'] ?? '',
+            'name'    => $this->hive->POST['name'] ?? '',
+            'advice' => $this->hive->POST['advice'] ?? '',
+            'html'     => $this->hive->POST['html'] ?? '',
         ]);
 
         $this->hive->reroute('@admin_cards_edit');

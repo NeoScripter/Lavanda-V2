@@ -58,5 +58,9 @@ return [
         "these_credentials_dont_match_our_records" => "Неправильные имя пользователя или пароль",
         "welcome" => "Добро пожаловать",
         "select_card_language" => "Выберите язык карт",
+        "please_wait_for_1-2_minutes_in_order_to_see_updated_image_files" => "Фото буду обработаны в течение 1-2 минут",
+        "card_successfully_created" => "Карта успешно создана",
+        "card_successfully_updated" => "Карта успешно обновлена",
+        "card_successfully_deleted" => "Карта успешно удалена",
     ]
 ];

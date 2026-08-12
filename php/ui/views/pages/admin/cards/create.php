@@ -1,22 +1,23 @@
 <?php slot('layouts/admin-layout', [
-    'heading' => 'Newsletter',
-    'title' => 'Newsletter'
+    'heading' => 'Card',
+    'title' => 'Card'
 ]); ?>
+<?php $hive = \Base::instance() ;?>
 
 <div class="space-y-6">
     <div class="admin-shell space-y-6">
 
         <?= component('ui/subheading', [
-            'title'       => 'Create a newsletter',
+            'title'       => 'Create a card',
             'class'       => "[&>h3,&>p]:animate-none",
         ]) ?>
 
-        <form action="<?= \Base::instance()->alias('admin_news_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+        <form action="<?= \Base::instance()->alias('admin_cards_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
             <?= csrf() ?>
 
             <?= component('form/form-input', [
                 'name'  => 'title',
-                'label' => 'Newsletter title',
+                'label' => 'Card title',
                 'attrs' => [
                     'type'     => 'text',
                     'required' => true,
@@ -45,7 +46,7 @@
 
             <?= component('form/form-textarea', [
                 'name'  => 'summary',
-                'label' => 'Newsletter description',
+                'label' => 'Card description',
                 'attrs' => [
                     'required' => true,
                 ],
@@ -53,7 +54,7 @@
 
             <?= component('form/form-wysiwyg', [
                 'name'  => 'body',
-                'label' => 'Newsletter content',
+                'label' => 'Card content',
                 'attrs' => [
                     'required' => true,
                 ],
@@ -72,7 +73,7 @@
 
             <div class="flex justify-between gap-2.5">
                 <?php slot('components/ui/auth-button', ['attrs' => ['type' => 'submit']]); ?>
-                Save
+                <?= $hive->get('admin.save') ?>
                 <?php end_slot(); ?>
             </div>
         </form>

@@ -31,8 +31,8 @@ class CardController extends Controller
         $variant = CardVariant::normalize($hive->GET['variant'] ?? '');
         $locale = Locale::normalize($hive->GET['locale'] ?? '');
 
-        $cards = new FlipCard();
-        $cards = $cards->paginate(
+        $card = new FlipCard();
+        $card = $card->paginate(
             $page - 1,
             15,
             ['locale=? AND variant=?', $locale, $variant],
@@ -41,7 +41,7 @@ class CardController extends Controller
 
         view('pages/admin/cards/index', [
             'title' => 'All cards',
-            'cards' => $cards,
+            'cards' => $card,
             'variant' => $variant,
             'locale' => $locale,
         ]);
@@ -55,24 +55,24 @@ class CardController extends Controller
     public function edit(\Base $hive)
     {
         $id = $hive->PARAMS['id'];
-        $article = new Card();
-        $article->load(['id = ?', $id]);
+        $card = new FlipCard();
+        $card->load(['id = ?', $id]);
 
         view('pages/admin/cards/edit', [
-            'title' => $article->title,
-            'article' => $article,
+            'title' => $card['name'],
+            'card' => $card,
         ]);
     }
 
     public function show(\Base $hive)
     {
         $id = $hive->PARAMS['id'];
-        $article = new Card();
-        $article->load(['id = ?', $id]);
+        $card = new FlipCard();
+        $card->load(['id = ?', $id]);
 
         view('pages/admin/cards/show', [
-            'title' => $article->title,
-            'article' => $article,
+            'title' => $card->title,
+            'card' => $card,
         ]);
     }
 
@@ -81,34 +81,23 @@ class CardController extends Controller
         $request = $this->request(StoreCardRequest::class);
         $request->validate();
 
-        $cards = new Card();
-        $data = $request->all();
-        unset($data['preview'], $data['gallery']);
-        $cards->copyFrom($data);
-        $cards->save();
+        $card = new Card();
+        $card->copyFrom($request->all());
+        $card->save();
 
-        if (! $cards->dry() && $request->input('preview')) {
+        if (! $card->dry() && $request->input('front_image')) {
             ProcessImageJob::dispatch([
-                'parent_id'      => $cards->id,
+                'parent_id'      => $card->id,
                 'parent_class'   => Card::class,
-                'field'          => 'image',
-                'sizes'          => ['mb' => 350, 'tb' => 600],
-                'files'          => $request->input('preview'),
+                'field'          => 'front_image',
+                'sizes'          => ['mb' => 150, 'tb' => 250, 'dk' => 300],
+                'files'          => $request->input('front_image'),
                 'qnt'            => 1,
             ]);
         }
 
-        if (! $cards->dry() && $request->input('gallery')) {
-            ProcessImageJob::dispatch([
-                'parent_id'      => $cards->id,
-                'parent_class'   => Card::class,
-                'field'          => 'gallery',
-                'sizes'          => ['mb' => 350, 'dk' => 1000],
-                'files'          => $request->input('gallery'),
-            ]);
-        }
-
-        notify("Card successfully created! \nPlease wait for 2-10 minutes in order to see updated image files");
+        notify("{$hive->get('admin.card_successfully_created')}! \n
+            {$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}");
         $hive->reroute('@admin_cards_index');
     }
 
@@ -118,46 +107,34 @@ class CardController extends Controller
         $request = $this->request(UpdateCardRequest::class);
         $request->validate();
 
-        $cards = new Card();
-        $cards->load(['id = ?', $id]);
+        $card = new Card();
+        $card->load(['id = ?', $id]);
 
-        if ($cards->dry()) {
+        if ($card->dry()) {
             throw new Exception('Card not found');
         }
 
-        $data = $request->all();
-        unset($data['preview'], $data['gallery']);
-        $cards->copyFrom($data);
-        $cards->save();
+        $card->copyFrom($request->all());
+        $card->save();
         $with_images = false;
 
-        if (! $cards->dry() && $request->input('preview')) {
+
+        if (! $card->dry() && $request->input('front_image')) {
             $with_images = true;
             ProcessImageJob::dispatch([
-                'parent_id'      => $cards->id,
+                'parent_id'      => $card->id,
                 'parent_class'   => Card::class,
-                'field'          => 'image',
-                'sizes'          => ['mb' => 350, 'tb' => 600],
-                'files'          => $request->input('preview'),
+                'field'          => 'front_image',
+                'sizes'          => ['mb' => 150, 'tb' => 250, 'dk' => 300],
+                'files'          => $request->input('front_image'),
                 'qnt'            => 1,
             ]);
         }
 
-        if (! $cards->dry() && $request->input('gallery')) {
-            $with_images = true;
-            ProcessImageJob::dispatch([
-                'parent_id'      => $cards->id,
-                'parent_class'   => Card::class,
-                'field'          => 'gallery',
-                'sizes'          => ['mb' => 350, 'dk' => 1000],
-                'files'          => $request->input('gallery'),
-            ]);
-        }
-
-        $message = 'Card successfully updated!';
+        $message = "{$hive->get('admin.card_successfully_updated')}!";
 
         if ($with_images) {
-            $message .= "\nPlease wait for 2-10 minutes in order to see updated image files";
+            $message .= "\n{$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}";
         }
 
         notify($message);
@@ -167,11 +144,11 @@ class CardController extends Controller
     public function destroy(\Base $hive)
     {
         $id = $hive->PARAMS['id'];
-        $cards = new Card();
-        $cards->load(['id = ?', $id]);
-        $cards->erase();
+        $card = new Card();
+        $card->load(['id = ?', $id]);
+        $card->erase();
 
-        notify('Card successfully deleted!');
+        notify($hive->get('admin.card_successfully_deleted'));
         $hive->reroute("@admin_cards_index");
     }
 }
