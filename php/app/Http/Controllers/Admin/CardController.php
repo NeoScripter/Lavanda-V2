@@ -10,6 +10,7 @@ use Exception;
 use Support\Auth;
 use Http\Controller;
 use Http\Models\Card;
+use Http\Models\FlipCard;
 use Http\Requests\Card\StoreCardRequest;
 use Http\Requests\Card\UpdateCardRequest;
 use Jobs\ProcessImageJob;
@@ -30,7 +31,7 @@ class CardController extends Controller
         $variant = CardVariant::normalize($hive->GET['variant'] ?? '');
         $locale = Locale::normalize($hive->GET['locale'] ?? '');
 
-        $cards = new Card();
+        $cards = new FlipCard();
         $cards = $cards->paginate(
             $page - 1,
             15,

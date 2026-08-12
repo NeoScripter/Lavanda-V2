@@ -7,9 +7,8 @@ enum CardVariant: string
     case TAROT = 'tarot';
     case METAPHORIC = 'metaphoric';
     case LENORMAND = 'lenormand';
-    case TEST = 'test';
 
-    public static function values()
+    public static function values(): array
     {
         return array_column(self::cases(), 'value');
     }

@@ -12,4 +12,21 @@ class FlipCard extends Mapper
 
         parent::__construct($db, 'flip_cards');
     }
+
+    function to_resource(): array
+    {
+        return [
+            ...$this->cast(),
+            'front_image' => [
+                'id' => $this->front_id,
+                'src' => $this->front_src,
+                'alt' => $this->front_alt,
+            ],
+            'back_image' => [
+                'id' => $this->back_id,
+                'src' => $this->back_src,
+                'alt' => $this->back_alt,
+            ]
+        ];
+    }
 }

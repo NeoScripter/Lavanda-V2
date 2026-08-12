@@ -17,14 +17,12 @@ class CardSeeder extends Seeder
             return;
         }
 
-        $factory = new CardFactory();
-        for ($i = 0; $i < 10; $i++) {
-            $factory->create(['variant' => CardVariant::TAROT->value]);
-        }
+        foreach (CardVariant::values() as $variant) {
 
-        $factory = new CardFactory();
-        for ($i = 0; $i < 10; $i++) {
-            $factory->create(['variant' => CardVariant::LENORMAND->value]);
+            $factory = new CardFactory();
+            for ($i = 0; $i < 10; $i++) {
+                $factory->create(compact($variant));
+            }
         }
 
         echo "Cards seeded.\n";

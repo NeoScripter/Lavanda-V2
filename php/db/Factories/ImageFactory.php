@@ -9,7 +9,10 @@ use Support\ImageHandler;
 
 class ImageFactory extends Factory
 {
-    private string $template = APP_DIR . '/db/Fixtures/Image/placeholder.png';
+    public function __construct(public ?string $template = '', ?string $variant = 'front')
+    {
+        $this->template = APP_DIR . "/db/Fixtures/Image/{$variant}/placeholder.png";
+    }
 
     public function create(string $dir, string $imageable_type, int $imageable_id, ?string $variant = 'image')
     {

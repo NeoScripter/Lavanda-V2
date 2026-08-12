@@ -9,7 +9,7 @@ use Http\Models\Card;
 
 class CardFactory extends Factory
 {
-    public function create(?array $attrs = [])
+    public function create(?array $attrs = [], ?bool $with_back = false)
     {
         $card = new Card();
 
@@ -21,6 +21,10 @@ class CardFactory extends Factory
         $card->save();
 
         (new ImageFactory)->create(dir: 'test', imageable_type: $card->variant, imageable_id: $card->id, variant: 'front');
+
+        if ($with_back) {
+            (new ImageFactory(variant: 'back'))->create(dir: 'test', imageable_type: $card->variant, imageable_id: 1, variant: 'back');
+        }
 
         return $card;
     }
