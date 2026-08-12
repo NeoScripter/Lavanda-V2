@@ -32,6 +32,6 @@ abstract class TestCase extends BaseTestCase
     private function run_migrations(): void
     {
         $hanlder = new CliController();
-        $hanlder->migrate($this->hive);
+        $hanlder->fresh($this->hive);
     }
 }
