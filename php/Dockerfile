@@ -46,6 +46,10 @@ CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
  
 FROM base AS final
 COPY --from=vite /app/public/dist /var/www/html/public/dist
+RUN apk add --no-cache nodejs npm \
+    && npm install -g pnpm@10
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store pnpm install
+RUN pnpm run build
 COPY config/supervisord.conf /etc/supervisor/supervisord.conf
 COPY config/www-prod.conf /usr/local/etc/php-fpm.d/www.conf
 COPY config/php-prod.ini "$PHP_INI_DIR/conf.d/php.ini"
