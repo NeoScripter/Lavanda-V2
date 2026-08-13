@@ -61,7 +61,7 @@ class CardController extends Controller
 
         view('pages/admin/cards/edit', [
             'title' => $card['name'],
-            'card' => $card,
+            'card' => $card->to_resource(),
         ]);
     }
 

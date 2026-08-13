@@ -58,4 +58,5 @@ final class ImageHanlderTest extends TestCase
 
         $this->assertEquals($target_path, $normalized_path);
     }
+    // Deletes the old image after processing a new one
 }

@@ -84,7 +84,7 @@ $hive = \Base::instance();
 
         <ul class="grid gap-2 grid-cols-[repeat(auto-fill,minmax(12rem,1fr))]">
             <?php foreach ($files as $file) : ?>
-                <?php if ($file instanceof \Http\Models\Image) : ?>
+                <?php if (isset($file['src'])) : ?>
 
                     <?php $modal_id = uniqid('modal_'); ?>
 
@@ -100,11 +100,11 @@ $hive = \Base::instance();
                                 </button>
                             <?php endif; ?>
 
-                            <img class="size-full rounded-sm object-cover object-center" src="<?= $file->src .  "-mb.webp" ?>" alt="" />
+                            <img class="size-full rounded-sm object-cover object-center" src="<?= $file['src'] .  "-mb.webp" ?>" alt="" />
 
                             <?php if ($can_delete) : ?>
                                 <?= component('ui/delete-confirmation-modal', [
-                                    'delete_url' => $hive->alias("admin_images_destroy", ['id' => $file->id]),
+                                    'delete_url' => $hive->alias("admin_images_destroy", ['id' => $file['id']]),
                                     'modal_id'   => $modal_id,
                                     'class'   => 'rounded-sm',
                                 ]) ?>
@@ -116,7 +116,7 @@ $hive = \Base::instance();
 
                         <div class='my-2 relative group px-3 p-1 border border-input shadow-xs truncate rounded-sm overflow-clip'>
 
-                            <?= $file->alt ?>
+                            <?= $file['alt'] ?>
                             <button
                                 component-modal-show
                                 data-modal-id="<?= $alt_modal_id ?>"
@@ -133,7 +133,7 @@ $hive = \Base::instance();
 
                         <?php slot('components/layout/modal', ['modal_id' => $alt_modal_id]); ?>
 
-                        <form action="<?= $hive->alias('admin_images_update', ['id' => $file->id]) ?>"
+                        <form action="<?= $hive->alias('admin_images_update', ['id' => $file['id']]) ?>"
                             method="post"
                             class="space-y-6 w-120">
                             <input type="hidden" name="_method" value="put">
@@ -144,7 +144,7 @@ $hive = \Base::instance();
                                 'label' => $hive->get('admin.image_alternative_text'),
                                 'attrs' => [
                                     'type'     => 'text',
-                                    'value'    => $file->alt,
+                                    'value'    => $file['alt'],
                                     'required' => true,
                                 ],
                             ]) ?>
