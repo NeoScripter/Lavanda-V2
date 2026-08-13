@@ -33,15 +33,15 @@ function vite_tags(string $entry = ''): string
     $chunk = $manifest[$entry];
     $tags = [];
 
-    $tags[] = "<script type='module' src='/admin/dist/{$chunk['file']}'></script>";
+    $tags[] = "<script type='module' src='/dist/{$chunk['file']}'></script>";
 
     foreach ($chunk['css'] ?? [] as $css) {
-        $tags[] = "<link rel='stylesheet' href='/admin/dist/{$css}'>";
+        $tags[] = "<link rel='stylesheet' href='/dist/{$css}'>";
     }
 
     foreach ($chunk['imports'] ?? [] as $importKey) {
         foreach ($manifest[$importKey]['css'] ?? [] as $css) {
-            $tags[] = "<link rel='stylesheet' href='/admin/dist/{$css}'>";
+            $tags[] = "<link rel='stylesheet' href='/dist/{$css}'>";
         }
     }
 

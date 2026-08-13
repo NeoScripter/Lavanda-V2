@@ -1,0 +1,49 @@
+/*!
+* FilePond v5.0.0-beta.57
+* Copyright (c) 2017-2026 Pqina B.V.
+* Released under the MIT License
+* https://filepond.com
+*/
+import { get as t } from "../../../../vendor/svelte/src/internal/client/runtime.js";
+import { pop as j, push as q } from "../../../../vendor/svelte/src/internal/client/context.js";
+import { first_child as A, sibling as a, child as u } from "../../../../vendor/svelte/src/internal/client/dom/operations.js";
+import { user_effect as F, template_effect as G } from "../../../../vendor/svelte/src/internal/client/reactivity/effects.js";
+import { user_derived as e } from "../../../../vendor/svelte/src/internal/client/reactivity/deriveds.js";
+import { set_text as H } from "../../../../vendor/svelte/src/internal/client/render.js";
+import { snippet as J } from "../../../../vendor/svelte/src/internal/client/dom/blocks/snippet.js";
+import { from_html as K, append as L } from "../../../../vendor/svelte/src/internal/client/dom/template.js";
+import { set_attribute as h } from "../../../../vendor/svelte/src/internal/client/dom/elements/attributes.js";
+import { set_class as M } from "../../../../vendor/svelte/src/internal/client/dom/elements/class.js";
+import { set_style as N } from "../../../../vendor/svelte/src/internal/client/dom/elements/style.js";
+import { bind_this as O } from "../../../../vendor/svelte/src/internal/client/dom/elements/bindings/this.js";
+import { prop as p, spread_props as _ } from "../../../../vendor/svelte/src/internal/client/reactivity/props.js";
+import { clsx as Q } from "../../../../vendor/svelte/src/internal/shared/attributes.js";
+import "../../../components/ElementPane/index.js";
+import { getEntryContext as U } from "../../contexts/entryContext.js";
+import { getSpringElementTreeContext as V } from "../../contexts/springElementTreeContext.js";
+import { toSpaceSeparatedString as W } from "../../../common/string.js";
+import { updateDataset as X } from "../../../../utils/dom.js";
+import x from "../../../components/ElementPane/index-svelte.js";
+var Y = K('<fieldset><legend class="implicit"> </legend> <!></fieldset> <!> <!>', 1);
+function xt(y, r) {
+  q(r, !0);
+  const S = p(r, "part", 3, void 0), v = p(r, "class", 3, void 0), k = p(r, "legendId", 3, void 0);
+  let i;
+  F(() => {
+    X(i, r.dataset);
+  });
+  const C = e(v), z = e(() => W("entry", t(C))), f = V(), n = e(() => f.currentSize), m = e(() => f.targetSize), b = U(), E = e(() => b.current.name), d = e(() => t(n) && t(m)), w = e(() => t(d) ? t(m).width - t(n).width : 0), I = e(() => t(d) ? t(m).height - t(n).height : 0), B = e(() => `0px ${t(w)}px ${t(I)}px 0px`);
+  var l = Y(), o = A(l);
+  let c;
+  var s = u(o), D = u(s), P = a(s, 2);
+  J(P, () => r.children), O(o, (T) => i = T, () => i);
+  var g = a(o, 2);
+  x(g, _({ class: "entry-back" }, () => t(n)));
+  var R = a(g, 2);
+  x(R, _({ class: "entry-front" }, () => t(n))), G(() => {
+    M(o, 1, Q(t(z))), h(o, "part", S()), c = N(o, "", c, { "--mask": t(B) }), h(s, "id", k()), H(D, t(E));
+  }), L(y, l), j();
+}
+export {
+  xt as default
+};

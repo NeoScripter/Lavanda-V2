@@ -16,7 +16,7 @@ final class ImageHanlderTest extends TestCase
     {
         $app_url = 'https://example.com';
         $relative_path = 'images/models/example';
-        $source_path = APP_DIR . '/public/' . $relative_path;
+        $source_path = APP_DIR . '/' . $relative_path;
 
         $this->hive->set('app_url', $app_url);
 
@@ -32,7 +32,7 @@ final class ImageHanlderTest extends TestCase
     {
         $app_url = 'https://example.com/';
         $relative_path = '/images/models/example';
-        $source_path = APP_DIR . '/public/' . $relative_path;
+        $source_path = APP_DIR . '/' . $relative_path;
 
         $this->hive->set('app_url', $app_url);
 
@@ -48,7 +48,7 @@ final class ImageHanlderTest extends TestCase
     {
         $app_url = 'https://example.com/';
         $relative_path = 'images/models/example';
-        $source_path = APP_DIR . '/public/' . $relative_path;
+        $source_path = APP_DIR . '/' . $relative_path;
 
         $this->hive->set('app_url', $app_url);
 

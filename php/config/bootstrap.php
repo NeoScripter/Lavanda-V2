@@ -9,7 +9,7 @@ $hive = Base::instance();
 $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
 $hive->set('UI', APP_DIR . '/ui/views/');
 $hive->set('LOGS', APP_DIR . '/storage/logs/');
-define('UPLOAD_DIR', APP_DIR . '/public/storage/uploads/');
+define('UPLOAD_DIR', APP_DIR . '/storage/public/uploads/');
 
 $hive->config(APP_DIR . '/config/env.ini');
 

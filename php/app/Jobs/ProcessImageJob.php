@@ -25,7 +25,6 @@ class ProcessImageJob extends Job
             throw new InvalidArgumentException('Missing required payload keys: ' . implode(', ', $missing));
         }
 
-
         $imageable_id = $payload['imageable_id'];
         $imageable_type = $payload['imageable_type'];
         $variant = $payload['variant'];

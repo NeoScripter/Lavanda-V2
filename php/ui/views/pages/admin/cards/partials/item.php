@@ -17,7 +17,7 @@ extract(component_props(
                     'path'     => $card['front_image']['src'],
                     'prt_class' => 'w-full shrink-0 rounded-xl',
                 ]) ?>
-                <a href="<?= $hive->alias('admin_news_show', ['id' => $card['id']]) ?>" class="absolute inset-0 size-full block"></a>
+                <a href="<?= $hive->alias('admin_cards_show', ['id' => $card['id']]) ?>" class="absolute inset-0 size-full block"></a>
             </div>
         <?php else : ?>
             <?= component('ui/image-skeleton') ?>

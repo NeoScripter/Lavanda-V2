@@ -1,0 +1,86 @@
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    networks:
+      - app-network
+    container_name: app-nginx
+    ports:
+      - "127.0.0.1:9001:80"
+    volumes:
+      - storage_data:/var/www/html/storage/public:ro
+      - dist_data:/var/www/html/public/dist:ro
+    depends_on:
+      php:
+        condition: service_started
+
+  php:
+    build: 
+      context: ./php
+      target: final
+    networks:
+      - app-network
+    container_name: app-php
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+    volumes:
+      - storage_data:/var/www/html/storage/public
+      - dist_data:/var/www/html/public/dist
+    healthcheck:
+      test: ["CMD", "php-fpm", "-t"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  preact:
+    build: ./preact
+    networks:
+      - app-network
+    container_name: app-preact
+    ports:
+      - "127.0.0.1:9002:9002"
+    volumes:
+      - ./preact:/app
+      - /app/node_modules
+
+  db:
+    image: postgres
+    container_name: app-db
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis
+    container_name: app-redis
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+  redis_data:
+  storage_data:
+  dist_data:
+
+networks:
+  app-network:

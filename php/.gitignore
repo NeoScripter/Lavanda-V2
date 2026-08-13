@@ -12,20 +12,16 @@ vendor
 dist
 dist-ssr
 *.local
-/storage/*.key
 /vendor
-public/storage/*
 public/tmp/*
 storage/private/*
+storage/logs/*
 .env
-public/storage
 config/config.ini
 config/env.ini
 **/env.ini
 db/database.sqlite
 storage/private/*
-!storage/private/mockups/
-!storage/private/mockups/**
 phpunit.xml
 
 # Editor directories and files

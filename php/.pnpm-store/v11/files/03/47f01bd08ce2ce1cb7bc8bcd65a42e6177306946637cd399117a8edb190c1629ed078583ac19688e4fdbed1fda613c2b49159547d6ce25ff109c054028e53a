@@ -1,0 +1,99 @@
+/*!
+* FilePond v5.0.0-beta.57
+* Copyright (c) 2017-2026 Pqina B.V.
+* Released under the MIT License
+* https://filepond.com
+*/
+import { boundsCreate as w, boundsUpdate as C, boundsEqual as I, boundsUpdateWithBounds as R } from "../../utils/bounds.js";
+import { noop as y } from "../../utils/placeholder.js";
+import { getSuspensionObserver as A } from "../common/dom.js";
+const O = 100, b = /* @__PURE__ */ new Map();
+let c = null;
+function B() {
+  function e() {
+    return !document.hidden;
+  }
+  c = {
+    visible: e()
+  };
+  function t() {
+    c && (c.visible = e()), e() ? m() : g();
+  }
+  document.addEventListener("visibilitychange", t), t();
+}
+let v;
+function E() {
+  v = A(), v.on("suspend", (e) => {
+    for (const t of u)
+      e.contains(t) && h.add(t);
+  });
+}
+let r = null;
+function M() {
+  const e = {
+    // viewport
+    root: null,
+    // we're interested in elements near the viewport
+    // rootMargin: `0px 0px 0px 0px`,
+    rootMargin: `${O}px 0px 0px ${O}px`,
+    // if one pixel is visible we detect it
+    threshold: 1
+  }, t = new IntersectionObserver((o) => {
+    o.forEach((n) => {
+      const s = n.boundingClientRect, i = n.target;
+      if (f.has(i) && !n.isIntersecting && s.x === 0 && s.y === 0 && s.width === 0 && s.height === 0)
+        return;
+      f.set(i, n.isIntersecting);
+      const d = Array.from(f.values()).some(Boolean);
+      r && (r.visible = d), d ? m() : g(), !a.has(i) && (x(i, s.top, s.right, s.bottom, s.left), u.push(i), d && m());
+    });
+  }, e);
+  r = {
+    unobserve: (o) => {
+      t.unobserve(o);
+    },
+    observe: (o) => {
+      t.observe(o);
+    },
+    visible: !1
+  };
+}
+const p = w(), a = /* @__PURE__ */ new Map(), f = /* @__PURE__ */ new Map(), h = /* @__PURE__ */ new Set(), x = (e, t, o, n, s) => {
+  if (!b.has(e) || h.has(e))
+    return;
+  a.has(e) || a.set(e, w());
+  const i = a.get(e);
+  if (C(p, t, o, n, s), !I(i, p))
+    return R(i, p), b.get(e)(i), i;
+}, S = (e) => {
+  const t = e.getBoundingClientRect();
+  x(e, t.top, t.right, t.bottom, t.left);
+}, u = [];
+let l = null;
+function V() {
+  u.forEach(S), l = requestAnimationFrame(V);
+}
+function m() {
+  !c?.visible || !r?.visible || l === null && (l = requestAnimationFrame(V));
+}
+function g() {
+  l !== null && (cancelAnimationFrame(l), l = null);
+}
+function k(e = {}) {
+  const { disabled: t, onmeasure: o = y } = e;
+  return (n) => {
+    if (t)
+      return () => {
+      };
+    r || M(), c || B(), v || E(), b.set(n, o), r?.observe(n);
+    function s() {
+      const i = u.indexOf(n);
+      i >= 0 && u.splice(i, 1), r?.unobserve(n), h.delete(n), f.delete(n), a.delete(n), b.delete(n), u.length || g();
+    }
+    return s;
+  };
+}
+export {
+  O as VIEWPORT_MARGIN,
+  k as measurable
+};

@@ -1,0 +1,48 @@
+/*!
+* FilePond v5.0.0-beta.57
+* Copyright (c) 2017-2026 Pqina B.V.
+* Released under the MIT License
+* https://filepond.com
+*/
+import { boundsOutsideBounds as g } from "../../utils/bounds.js";
+import { pubsub as b } from "../../utils/pubsub.js";
+function M(t, e, n) {
+  const { cacheClientRectangles: r = 250, searchBounds: i } = n;
+  let a, l = Number.MAX_SAFE_INTEGER;
+  if (t.length === 1)
+    return t[0];
+  let f = Date.now();
+  for (const c of t) {
+    let s;
+    const u = p.get(c);
+    if (u && f - u.ts < r ? s = u.clientRect : s = c.getBoundingClientRect(), i && g(s, i)) {
+      p.set(c, { clientRect: s, ts: f });
+      continue;
+    }
+    const h = d(s, e);
+    h < l && (l = h, a = c);
+  }
+  return a;
+}
+const p = /* @__PURE__ */ new WeakMap();
+function d(t, e) {
+  const n = Math.max(t.x - e.x, 0, e.x - (t.x + t.width)), r = Math.max(t.y - e.y, 0, e.y - (t.y + t.height));
+  return Math.hypot(n, r);
+}
+function x() {
+  const { on: t, pub: e } = b();
+  return {
+    on: t,
+    suspend(n) {
+      n.setAttribute("suspend", ""), e("suspend", n);
+    }
+  };
+}
+let o;
+function C() {
+  return o || (o = x()), o;
+}
+export {
+  M as getClosestElement,
+  C as getSuspensionObserver
+};

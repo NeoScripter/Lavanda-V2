@@ -1,0 +1,314 @@
+/*!
+* FilePond v5.0.0-beta.57
+* Copyright (c) 2017-2026 Pqina B.V.
+* Released under the MIT License
+* https://filepond.com
+*/
+import { get as o, untrack as G } from "../../../vendor/svelte/src/internal/client/runtime.js";
+import { noop as _ } from "../../../vendor/svelte/src/internal/shared/utils.js";
+import { push as xt, pop as vt } from "../../../vendor/svelte/src/internal/client/context.js";
+import { first_child as y } from "../../../vendor/svelte/src/internal/client/dom/operations.js";
+import { template_effect as bt } from "../../../vendor/svelte/src/internal/client/reactivity/effects.js";
+import { proxy as _t } from "../../../vendor/svelte/src/internal/client/proxy.js";
+import { user_derived as d } from "../../../vendor/svelte/src/internal/client/reactivity/deriveds.js";
+import { set_text as Nt } from "../../../vendor/svelte/src/internal/client/render.js";
+import { comment as k, append as S, text as Rt } from "../../../vendor/svelte/src/internal/client/dom/template.js";
+import { if_block as V } from "../../../vendor/svelte/src/internal/client/dom/blocks/if.js";
+import { each as Ct } from "../../../vendor/svelte/src/internal/client/dom/blocks/each.js";
+import { component as St } from "../../../vendor/svelte/src/internal/client/dom/blocks/svelte-component.js";
+import { element as et } from "../../../vendor/svelte/src/internal/client/dom/blocks/svelte-element.js";
+import { attribute_effect as rt } from "../../../vendor/svelte/src/internal/client/dom/elements/attributes.js";
+import { transition as Ot } from "../../../vendor/svelte/src/internal/client/dom/elements/transitions.js";
+import { bind_this as ot } from "../../../vendor/svelte/src/internal/client/dom/elements/bindings/this.js";
+import { prop as H, spread_props as yt } from "../../../vendor/svelte/src/internal/client/reactivity/props.js";
+import { isSwitchNode as I, isComponentNode as kt, isElementNode as wt, isTemplateNode as jt } from "../../common/nodeTree.js";
+import { isString as J, isFunction as B } from "../../../utils/test.js";
+import { withResources as nt, stringReplaceVariables as Pt } from "../../common/string.js";
+import { getAppContext as Tt } from "../../FilePondEntryList/contexts/appContext.js";
+import { passthrough as Q, noop as st } from "../../../utils/placeholder.js";
+import { Spring as Wt } from "../../../vendor/svelte/src/motion/spring.js";
+import { arrayWrap as F } from "../../../utils/array.js";
+import { getSuspensionObserver as At } from "../../common/dom.js";
+function it(ut, u) {
+  xt(u, !0);
+  const U = (e, r = _, t = _, n = _, c = _, O = _, f = _, h = _, x = _, p = _) => {
+    var j = k(), l = y(j);
+    {
+      var P = (i) => {
+        var s = k(), v = y(s);
+        {
+          const N = (b, g = _) => {
+            {
+              let R = d(() => p() ? [p()] : f()), C = d(() => W()(p() ? g() : { ...h(), ...g() })), M = d(() => p() ? {} : w());
+              it(b, {
+                get nodes() {
+                  return o(R);
+                },
+                get context() {
+                  return o(C);
+                },
+                get routes() {
+                  return o(M);
+                },
+                get sharedContext() {
+                  return u.sharedContext;
+                },
+                get beforeSetProps() {
+                  return W();
+                },
+                get beforeRenderNode() {
+                  return A();
+                }
+              });
+            }
+          };
+          let T = d(() => ({
+            context: h(),
+            routes: w(),
+            sharedContext: u.sharedContext,
+            beforeSetProps: W(),
+            beforeRenderNode: A()
+          }));
+          St(v, c, (b, g) => {
+            ot(
+              g(b, yt(O, x, {
+                get nodeContext() {
+                  return o(T);
+                },
+                children: N,
+                $$slots: { default: !0 }
+              })),
+              function(R) {
+                L[r()] = R;
+              },
+              st
+            );
+          });
+        }
+        S(i, s);
+      }, a = (i) => {
+        var s = k(), v = y(s);
+        et(v, t, !1, (N, T) => {
+          ot(
+            N,
+            function(C) {
+              L[r()] = C;
+            },
+            st
+          ), rt(N, () => ({ ...n(), ...x() }));
+          var b = k(), g = y(b);
+          {
+            var R = (C) => {
+              it(C, {
+                get nodes() {
+                  return f();
+                },
+                get context() {
+                  return h();
+                },
+                get routes() {
+                  return w();
+                },
+                get sharedContext() {
+                  return u.sharedContext;
+                },
+                get beforeSetProps() {
+                  return W();
+                },
+                get beforeRenderNode() {
+                  return A();
+                }
+              });
+            };
+            V(g, (C) => {
+              f() && C(R);
+            });
+          }
+          S(T, b);
+        }), S(i, s);
+      }, m = (i) => {
+        var s = Rt();
+        bt(() => Nt(s, f())), S(i, s);
+      };
+      V(l, (i) => {
+        c() ? i(P) : t() ? i(a, 1) : f() && i(m, 2);
+      });
+    }
+    S(e, j);
+  };
+  let w = H(u, "routes", 19, () => ({})), W = H(u, "beforeSetProps", 3, Q), A = H(u, "beforeRenderNode", 3, Q);
+  const L = {}, q = d(Tt), z = d(() => o(q).resources), X = d(() => o(q).propResourceMap), ct = d(() => o(q).enableAnimations), E = _t({}), Y = d(() => E ? Object.entries(E).reduce(
+    (e, [r, { spring: t, transform: n }]) => (e[r] = n(t.current), e),
+    {}
+  ) : null), K = d(() => o(Y) === null ? u.context : { ...u.context, ...o(Y) });
+  function D(e, r) {
+    return e && B(e) ? e(r, u.sharedContext) : e;
+  }
+  function Z(e, r, t) {
+    if (!e)
+      return;
+    const n = D(e, r);
+    return nt(n, o(X), t);
+  }
+  function at(e, r, t) {
+    let { label: n } = nt({ label: e }, o(X), t);
+    if (n.includes("{{")) {
+      const c = r ? D(r, { ...o(K) }) : o(K);
+      return Pt(n, c, t.locale);
+    }
+    return n;
+  }
+  function ft(e, r) {
+    return B(e.if.test) && e.if.test(r) ? F(e.if.then) : e.elseif && B(e.elseif.test) && e.elseif.test(r) ? F(e.elseif.then) : jt(e.else) ? F(e.else) : [];
+  }
+  function $(e, r) {
+    let t = [];
+    for (const n of ft(e, r))
+      I(n) ? t.push(...$(n, r)) : t.push(n);
+    return t;
+  }
+  const mt = d(() => {
+    const e = [];
+    for (const t of F(u.nodes))
+      if (t) {
+        if (I(t)) {
+          const n = $(t, u.context);
+          e.push(...n);
+          continue;
+        }
+        if (J(t)) {
+          e.push(t);
+          continue;
+        }
+        e.push(t);
+      }
+    function r(t, n) {
+      return `${t ?? n}`;
+    }
+    return e.map((t, n) => {
+      if (J(t))
+        return { key: n, children: t };
+      if (!I(t) && B(t.spring)) {
+        const a = Object.entries(t.spring(u.context));
+        G(() => {
+          a.forEach(([m, { value: i, config: s, transform: v = Q }]) => {
+            E[m] ? E[m].spring.set(i, { instant: !o(ct) }) : E[m] = { transform: v, spring: new Wt(i, s) };
+          });
+        });
+      }
+      const {
+        key: c,
+        routes: O,
+        children: f,
+        transition: h,
+        context: x
+      } = t;
+      O && G(() => {
+        Object.assign(w(), Object.entries(O).reduce(
+          (a, [m, i]) => {
+            const [s, v] = m.split(":"), [N, T] = i.split(".");
+            return a[N] = {}, a[s] = {
+              [`on${v}`]: (...b) => {
+                a[N].getRoot()[T]?.(...b);
+              }
+            }, a;
+          },
+          {}
+        ));
+      });
+      let p = {};
+      G(() => {
+        c && w()?.[c] && (Object.assign(w()[c], {
+          getRoot() {
+            return L[c];
+          }
+        }), p = { ...w()[c] });
+      });
+      const j = x ? D(x, o(K)) : o(K), l = { ...o(K), ...j }, P = J(f) ? at(f, l, o(z)) : f;
+      if (kt(t)) {
+        const { component: a, item: m, props: i } = t;
+        return A()(
+          {
+            key: r(c, n),
+            component: a,
+            props: W()(Z(i, l, o(z))),
+            item: m,
+            children: P,
+            context: l,
+            transition: h,
+            routes: p
+          },
+          u.context,
+          u.sharedContext
+        );
+      }
+      if (wt(t)) {
+        const { attrs: a, tag: m } = t;
+        return A()(
+          {
+            key: r(c, n),
+            tag: m,
+            attrs: Z(a, l, o(z)),
+            children: P,
+            context: l,
+            transition: h,
+            routes: p
+          },
+          u.context,
+          u.sharedContext
+        );
+      }
+    }).filter(Boolean);
+  }), pt = At();
+  var tt = k(), lt = y(tt);
+  Ct(
+    lt,
+    17,
+    () => o(mt),
+    ({
+      key: e,
+      tag: r,
+      attrs: t,
+      component: n,
+      props: c,
+      children: O,
+      context: f,
+      routes: h,
+      item: x,
+      transition: p
+    }) => e,
+    (e, r) => {
+      let t = () => o(r).key, n = () => o(r).tag, c = () => o(r).attrs, O = () => o(r).component, f = () => o(r).props, h = () => o(r).children, x = () => o(r).context, p = () => o(r).routes, j = () => o(r).item, l = () => o(r).transition;
+      var P = k(), a = y(P);
+      {
+        var m = (s) => {
+          var v = k(), N = y(v);
+          {
+            var T = (g) => {
+              var R = k(), C = y(R);
+              et(C, () => "div", !1, (M, dt) => {
+                var gt = (ht) => {
+                  pt.suspend(ht.currentTarget);
+                };
+                rt(M, () => ({ onoutrostart: gt })), Ot(3, M, () => l().fn, l), U(dt, t, n, c, O, f, h, x, p, j);
+              }), S(g, R);
+            }, b = d(() => l()?.when(x()));
+            V(N, (g) => {
+              o(b) && g(T);
+            });
+          }
+          S(s, v);
+        }, i = (s) => {
+          U(s, t, n, c, O, f, h, x, p, j);
+        };
+        V(a, (s) => {
+          l() ? s(m) : s(i, -1);
+        });
+      }
+      S(e, P);
+    }
+  ), S(ut, tt), vt();
+}
+export {
+  it as default
+};

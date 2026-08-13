@@ -1,0 +1,7 @@
+import type { Plugin } from 'vite';
+interface KeepPluginOptions {
+    src: string;
+    dest: string;
+}
+export default function vitePluginKeep(options: KeepPluginOptions): Plugin;
+export {};

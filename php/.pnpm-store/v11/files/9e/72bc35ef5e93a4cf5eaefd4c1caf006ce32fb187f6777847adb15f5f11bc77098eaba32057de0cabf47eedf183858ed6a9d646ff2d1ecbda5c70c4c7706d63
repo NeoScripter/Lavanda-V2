@@ -1,0 +1,15 @@
+export interface FileInputStoreOptions {
+    /** An HTML Element or a QueryString selector */
+    element?: HTMLInputElement | string;
+    /** Event to fire when value of file input is changed, defaults to "fileschange" */
+    valueChangeEvent?: string;
+}
+export declare const FileInputStore: import("./common/createExtension.js").Extension;
+declare module '../index.js' {
+    interface FilePondElement {
+        FileInputStore: FileInputStoreOptions;
+    }
+    interface DefineFilePondOptions {
+        FileInputStore?: FileInputStoreOptions;
+    }
+}
