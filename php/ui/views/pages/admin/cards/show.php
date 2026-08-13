@@ -48,8 +48,6 @@ $hive = \Base::instance(); ?>
                 </div>
             </div>
         </div>
-
-        <?= component('ui/gallery', ['gallery' => $card->gallery, 'class' => 'mb-6']) ?>
     </div>
 </div>
 

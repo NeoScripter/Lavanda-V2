@@ -73,8 +73,8 @@ class CardController extends Controller
         $card->load(['id = ?', $id]);
 
         view('pages/admin/cards/show', [
-            'title' => $card->title,
-            'card' => $card,
+            'title' => $card->name,
+            'card' => $card->to_resource(),
         ]);
     }
 
