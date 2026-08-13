@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 .phpunit.cache/
 .pnpm-store/
+tmp/*
 
 node_modules
 vendor

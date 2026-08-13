@@ -7,15 +7,12 @@ services:
     container_name: app-nginx
     ports:
       - "127.0.0.1:9001:80"
-    volumes:
-      - storage_data:/var/www/html/storage/public:ro
-      - ./php/public/dist:/var/www/html/public/dist:ro
     depends_on:
       php:
         condition: service_started
 
   php:
-    build: 
+    build:
       context: ./php
     networks:
       - app-network
@@ -27,9 +24,6 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       REDIS_PORT: ${REDIS_PORT}
       REDIS_HOST: ${REDIS_HOST}
-    volumes:
-      - storage_data:/var/www/html/storage/public
-      - ./php/public/dist:/var/www/html/public/dist
 
   preact:
     build:
@@ -37,11 +31,6 @@ services:
     networks:
       - app-network
     container_name: app-preact
-    ports:
-      - "127.0.0.1:9002:9002"
-    volumes:
-      - ./preact:/app
-      - /app/node_modules
 
   db:
     image: postgres
