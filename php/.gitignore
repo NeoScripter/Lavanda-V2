@@ -12,8 +12,6 @@ tmp/*
 
 node_modules
 vendor
-dist
-dist-ssr
 *.local
 /vendor
 public/tmp/*
