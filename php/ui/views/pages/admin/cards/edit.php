@@ -38,7 +38,6 @@ slot('layouts/card-layout', [
                 'with_alt' => true,
                 'value'    => [$card['front_image'] ?? null],
                 'attrs' => [
-                    'required' => true,
                     'multiple' => false,
                 ],
             ]) ?>

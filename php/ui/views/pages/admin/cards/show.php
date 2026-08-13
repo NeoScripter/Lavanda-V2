@@ -38,11 +38,11 @@ $hive = \Base::instance(); ?>
             </div>
 
             <div>
-                <h3 class="mb-2 font-medium">
+                <h3 class="my-15 font-medium">
                     <?= $hive->get('admin.card_meaning') ?>
                 </h3>
-                <div class="max-w-full prose">
-                    <?= html_entity_decode($card['html']) ?>
+                <div class="max-w-full prose prose-sm">
+                    <?= \Markdown::instance()->convert($card['html']); ?>
                 </div>
             </div>
         </div>

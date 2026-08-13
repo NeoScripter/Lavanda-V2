@@ -16,7 +16,7 @@ class CardFactory extends Factory
         $card->name = $attrs['name'] ?? $this->faker->word();
         $card->advice = $attrs['advice'] ??  $this->faker->sentence();
 
-        $card->html = $attrs['html'] ?? \Markdown::instance()->convert(file_get_contents(APP_DIR . '/db/Fixtures/Card/html.md'));
+        $card->html = $attrs['html'] ?? file_get_contents(APP_DIR . '/db/Fixtures/Card/html.md');
         $card->variant = $attrs['variant'] ?? CardVariant::METAPHORIC->value;
         $card->save();
 

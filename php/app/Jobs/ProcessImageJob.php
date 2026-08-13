@@ -52,6 +52,12 @@ class ProcessImageJob extends Job
 
                 $img->save();
             }
+
+            // \Base::instance()->get('DB')->exec(
+            //     'DELETE FROM images WHERE imageable_type = ? AND imageable_id = ? AND variant = ?',
+            //     [$imageable_type, $imageable_id, $variant]
+            // );
+
         } catch (Exception $e) {
             echo ("Failed processing image: {$e->getMessage()}");
         }

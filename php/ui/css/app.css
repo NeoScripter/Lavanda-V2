@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+@source "../views/**/*.php";
 
 @custom-variant dark (&:is(.dark *));
 

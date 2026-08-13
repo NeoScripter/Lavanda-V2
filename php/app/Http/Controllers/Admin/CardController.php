@@ -108,7 +108,6 @@ class CardController extends Controller
     public function update(\Base $hive)
     {
         // TODO: remove the old image if present
-        // TODO: deal with markdown
         $id = $hive->PARAMS['id'];
         $request = $this->request(UpdateCardRequest::class);
         $request->validate();
