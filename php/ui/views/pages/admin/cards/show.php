@@ -5,7 +5,6 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 $hive = \Base::instance(); ?>
-
 <?php slot('layouts/card-layout', [
     'heading' => $hive->get('admin.cards'),
     'title' => $hive->get('admin.cards')
@@ -13,7 +12,6 @@ $hive = \Base::instance(); ?>
 
 <div class="space-y-6">
     <div class="admin-shell space-y-6">
-
         <?= component('ui/subheading', ['title' => $card['name']]) ?>
 
         <div class="space-y-6 max-w-160">

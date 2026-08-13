@@ -17,6 +17,11 @@ require APP_DIR . '/config/session.php';
 
 $hive->config(APP_DIR . '/config/routes.ini');
 
+if (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https') {
+    $_SERVER['HTTPS'] = 'on';
+}
+$hive->set('SCHEME', ($_SERVER['HTTPS'] ?? 'off') !== 'off' ? 'https' : 'http');
+
 $hive->set('DEBUG', $hive->get('app_debug') ? 3 : 0);
 $hive->set('LOCALES', APP_DIR . '/ui/data/dict/');
 
