@@ -18,7 +18,7 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 COPY package.json pnpm-lock.yaml ./
 RUN --mount=type=cache,target=/root/.local/share/pnpm/store pnpm install
 COPY . .
-RUN pnpm run build && cp public/dist/.vite/manifest.json public/dist/manifest.json
+RUN pnpm run build
 
 FROM php:8.5-fpm-alpine AS base
 WORKDIR /var/www/html
@@ -45,10 +45,10 @@ COPY --from=dev-deps app/vendor/ /var/www/html/vendor
 CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
  
 FROM base AS final
+COPY --from=vite /app/public/dist /var/www/html/public/dist
 COPY config/supervisord.conf /etc/supervisor/supervisord.conf
 COPY config/www-prod.conf /usr/local/etc/php-fpm.d/www.conf
 COPY config/php-prod.ini "$PHP_INI_DIR/conf.d/php.ini"
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY --from=prod-deps app/vendor/ /var/www/html/vendor
-COPY --from=vite --chown=www-data:www-data /app/public/dist /var/www/html/public/dist
 CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
