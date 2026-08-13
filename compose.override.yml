@@ -4,22 +4,16 @@ services:
       target: development
     volumes:
       - ./php:/var/www/html
-      - storage_data:/var/www/html/storage/public:ro
-      - ./php/public/dist:/var/www/html/public/dist:ro
 
   php:
     build:
       target: development
     volumes:
       - ./php:/var/www/html
-      - storage_data:/var/www/html/storage/public
-      - ./php/public/dist:/var/www/html/public/dist
 
   preact:
     build:
       target: development
-    ports:
-      - "127.0.0.1:9002:9002"
     volumes:
       - ./preact:/app
       - /app/node_modules
