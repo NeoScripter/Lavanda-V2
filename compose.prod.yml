@@ -1,0 +1,17 @@
+services:
+  nginx:
+    build:
+      target: final
+
+  php:
+    build:
+      target: final
+    healthcheck:
+      test: ["CMD", "php-fpm", "-t"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  preact:
+    build:
+      target: final

@@ -2,7 +2,6 @@ services:
   nginx:
     build:
       context: ./nginx
-      dockerfile: Dockerfile
     networks:
       - app-network
     container_name: app-nginx
@@ -10,7 +9,7 @@ services:
       - "127.0.0.1:9001:80"
     volumes:
       - storage_data:/var/www/html/storage/public:ro
-      - dist_data:/var/www/html/public/dist:ro
+      - ./php/public/dist:/var/www/html/public/dist:ro
     depends_on:
       php:
         condition: service_started
@@ -18,7 +17,6 @@ services:
   php:
     build: 
       context: ./php
-      target: final
     networks:
       - app-network
     container_name: app-php
@@ -31,15 +29,11 @@ services:
       REDIS_HOST: ${REDIS_HOST}
     volumes:
       - storage_data:/var/www/html/storage/public
-      - dist_data:/var/www/html/public/dist
-    healthcheck:
-      test: ["CMD", "php-fpm", "-t"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
+      - ./php/public/dist:/var/www/html/public/dist
 
   preact:
-    build: ./preact
+    build:
+      context: ./preact
     networks:
       - app-network
     container_name: app-preact
@@ -80,7 +74,6 @@ volumes:
   postgres_data:
   redis_data:
   storage_data:
-  dist_data:
 
 networks:
   app-network:

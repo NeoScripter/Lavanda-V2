@@ -142,7 +142,7 @@ function svg(string $name)
     if (str_ends_with($name, '.svg')) {
         $name = trim($name, '.svg');
     }
-    $path = APP_DIR . "/public/dist/assets/svgs/{$name}.svg";
+    $path = APP_DIR . "/storage/public/assets/svgs/{$name}.svg";
 
     if (file_exists($path)) {
         include($path);
