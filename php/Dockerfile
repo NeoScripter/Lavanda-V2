@@ -18,7 +18,7 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 COPY package.json pnpm-lock.yaml ./
 RUN --mount=type=cache,target=/root/.local/share/pnpm/store pnpm install
 COPY . .
-RUN pnpm run build
+RUN pnpm run build && cp public/dist/.vite/manifest.json public/dist/manifest.json
 
 FROM php:8.5-fpm-alpine AS base
 WORKDIR /var/www/html
