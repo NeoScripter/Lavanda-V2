@@ -24,6 +24,10 @@ services:
       DB_HOST: ${DB_HOST}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
+      DB_PORT: ${DB_PORT}
+      APP_ENV: ${APP_ENV}
+      APP_DEBUG: ${APP_DEBUG}
+      PHP_APP_URL: ${PHP_APP_URL}
       REDIS_PORT: ${REDIS_PORT}
       REDIS_HOST: ${REDIS_HOST}
     volumes:
