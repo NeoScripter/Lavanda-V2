@@ -15,7 +15,7 @@ if (!is_dir(UPLOAD_DIR)) {
 $hive = Base::instance();
 
 $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
-$hive->config(APP_DIR . '/config/env.ini');
+require APP_DIR . '/config/globals.php';
 $hive->config(APP_DIR . '/config/routes.ini');
 
 $hive->set('db_name', "test_db");

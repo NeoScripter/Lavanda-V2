@@ -9,7 +9,7 @@ define('WEBROOT', APP_DIR . '/public/');
 
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
-$hive->config(APP_DIR . '/config/env.ini');
+require APP_DIR . '/config/globals.php';
 $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
 
 $hive->set('db_name', getenv('DB_NAME'));

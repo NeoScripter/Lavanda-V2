@@ -12,10 +12,7 @@ $hive->set('LOGS', APP_DIR . '/storage/logs/');
 define('UPLOAD_DIR', APP_DIR . '/public/storage/uploads/');
 define('WEBROOT', APP_DIR . '/public/');
 
-
-
-$hive->config(APP_DIR . '/config/env.ini');
-
+require APP_DIR . '/config/globals.php';
 require APP_DIR . '/config/session.php';
 
 $hive->config(APP_DIR . '/config/routes.ini');
