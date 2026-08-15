@@ -188,11 +188,10 @@ class ImageHandler
     public static function normalize_path(string $path)
     {
         $path_stem = preg_replace('/\.[^.]+$/', '', $path);
-        $app_url = \Base::instance()->get('app_url') . '/';
+        $app_url = rtrim(\Base::instance()->get('app_url'), '/') . '/';
 
-        $norm_path = str_replace(APP_DIR . '/', $app_url, $path_stem);
-        $norm_path = preg_replace('#^(!https:)/+#', '/', $norm_path);
-        $norm_path = preg_replace('#^(!http:)/+#', '/', $norm_path);
+        $norm_path = str_replace(WEBROOT, $app_url, $path_stem);
+        $norm_path = preg_replace('#(?<!:)//+#', '/', $norm_path);
 
         return $norm_path;
     }

@@ -1,14 +1,12 @@
 services:
-  nginx:
+  proxy:
     build:
-      context: ./nginx
+      context: ./proxy
     networks:
       - app-network
-    container_name: app-nginx
+    container_name: app-proxy
     ports:
-      - "127.0.0.1:9001:80"
-    volumes:
-      - storage_data:/var/www/html/storage/public:ro
+      - "127.0.0.1:9001:9001"
     depends_on:
       php:
         condition: service_started
@@ -18,6 +16,8 @@ services:
       context: ./php
     networks:
       - app-network
+    ports:
+      - "127.0.0.1:9000:9000"
     container_name: app-php
     environment:
       DB_NAME: ${DB_NAME}
@@ -28,18 +28,24 @@ services:
       REDIS_HOST: ${REDIS_HOST}
     volumes:
       - storage_data:/var/www/html/storage/public
+    develop:
+      watch:
+        - action: rebuild
+          path: ./php
+          target: /var/www/html
+          initial_sync: true
+          ignore:
+            - node_modules/
+            - vendor/
 
-  preact:
+  web:
     build:
-      context: ./preact
+      context: ./web
     networks:
       - app-network
-    container_name: app-preact
+    container_name: app-web
     ports:
       - "127.0.0.1:9002:9002"
-    volumes:
-      - ./preact:/app
-      - /app/node_modules
 
   db:
     image: postgres

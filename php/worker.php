@@ -5,6 +5,7 @@ require __DIR__ . '/vendor/autoload.php';
 $hive = Base::instance();
 
 define('APP_DIR', __DIR__);
+define('WEBROOT', APP_DIR . '/public/');
 
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 

@@ -33,15 +33,15 @@ function vite_tags(string $entry = ''): string
     $chunk = $manifest[$entry];
     $tags = [];
 
-    $tags[] = "<script type='module' src='/dist/{$chunk['file']}'></script>";
+    $tags[] = "<script type='module' src='/admin/dist/{$chunk['file']}'></script>";
 
     foreach ($chunk['css'] ?? [] as $css) {
-        $tags[] = "<link rel='stylesheet' href='/dist/{$css}'>";
+        $tags[] = "<link rel='stylesheet' href='/admin/dist/{$css}'>";
     }
 
     foreach ($chunk['imports'] ?? [] as $importKey) {
         foreach ($manifest[$importKey]['css'] ?? [] as $css) {
-            $tags[] = "<link rel='stylesheet' href='/dist/{$css}'>";
+            $tags[] = "<link rel='stylesheet' href='/admin/dist/{$css}'>";
         }
     }
 
@@ -142,7 +142,7 @@ function svg(string $name)
     if (str_ends_with($name, '.svg')) {
         $name = trim($name, '.svg');
     }
-    $path = APP_DIR . "/storage/public/assets/svgs/{$name}.svg";
+    $path = APP_DIR . "/public/assets/svgs/{$name}.svg";
 
     if (file_exists($path)) {
         include($path);
@@ -344,7 +344,7 @@ function normalize_image_input(array $input)
 
 function purge_files(string $src): void
 {
-    $dir = dirname(str_replace(\Base::instance()->get('app_url'), APP_DIR . '/public/', $src));
+    $dir = dirname(str_replace(\Base::instance()->get('app_url'), WEBROOT, $src));
 
     if (is_dir($dir)) {
         $files = glob($dir . '/*');
@@ -358,7 +358,7 @@ function purge_files(string $src): void
 
 function purge_file(string $src): void
 {
-    $src = str_replace(\Base::instance()->get('app_url'), APP_DIR . '/public/', $src);
+    $src = str_replace(\Base::instance()->get('app_url'), WEBROOT, $src);
     if (file_exists($src)) {
         unlink($src);
     }

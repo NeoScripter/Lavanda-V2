@@ -55,7 +55,7 @@ final class ImageFactoryTest extends TestCase
         $this->assertNotEmpty($image->src);
 
         $dir = dirname($image->src);
-        $dir = str_replace($this->hive->get('app_url'), APP_DIR . '/public/', $dir);
+        $dir = str_replace($this->hive->get('app_url'), WEBROOT, $dir);
 
         $image->erase();
 

@@ -9,7 +9,10 @@ $hive = Base::instance();
 $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
 $hive->set('UI', APP_DIR . '/ui/views/');
 $hive->set('LOGS', APP_DIR . '/storage/logs/');
-define('UPLOAD_DIR', APP_DIR . '/storage/public/uploads/');
+define('UPLOAD_DIR', APP_DIR . '/public/storage/uploads/');
+define('WEBROOT', APP_DIR . '/public/');
+
+
 
 $hive->config(APP_DIR . '/config/env.ini');
 
@@ -17,10 +20,10 @@ require APP_DIR . '/config/session.php';
 
 $hive->config(APP_DIR . '/config/routes.ini');
 
-// if (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https') {
-//     $_SERVER['HTTPS'] = 'on';
-// }
-// $hive->set('SCHEME', ($_SERVER['HTTPS'] ?? 'off') !== 'off' ? 'https' : 'http');
+if (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https') {
+    $_SERVER['HTTPS'] = 'on';
+}
+$hive->set('SCHEME', ($_SERVER['HTTPS'] ?? 'off') !== 'off' ? 'https' : 'http');
 
 $hive->set('DEBUG', $hive->get('app_debug') ? 3 : 0);
 $hive->set('LOCALES', APP_DIR . '/ui/data/dict/');

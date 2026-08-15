@@ -16,7 +16,7 @@ final class ImageHanlderTest extends TestCase
     {
         $app_url = 'https://example.com';
         $relative_path = 'images/models/example';
-        $source_path = APP_DIR . '/' . $relative_path;
+        $source_path = WEBROOT . $relative_path;
 
         $this->hive->set('app_url', $app_url);
 
@@ -32,7 +32,7 @@ final class ImageHanlderTest extends TestCase
     {
         $app_url = 'https://example.com/';
         $relative_path = '/images/models/example';
-        $source_path = APP_DIR . '/' . $relative_path;
+        $source_path = WEBROOT . $relative_path;
 
         $this->hive->set('app_url', $app_url);
 
@@ -46,9 +46,9 @@ final class ImageHanlderTest extends TestCase
     #[Test]
     public function removes_double_slashes_from_path(): void
     {
-        $app_url = 'https://example.com/';
-        $relative_path = 'images/models/example';
-        $source_path = APP_DIR . '/' . $relative_path;
+        $app_url = 'https://example.com////';
+        $relative_path = 'images/models/example///';
+        $source_path = WEBROOT . $relative_path;
 
         $this->hive->set('app_url', $app_url);
 
@@ -58,5 +58,4 @@ final class ImageHanlderTest extends TestCase
 
         $this->assertEquals($target_path, $normalized_path);
     }
-    // Deletes the old image after processing a new one
 }
