@@ -2,6 +2,7 @@ services:
   proxy:
     build:
       context: ./proxy
+      target: ${APP_ENV}
     networks:
       - app-network
     container_name: app-proxy
@@ -14,6 +15,7 @@ services:
   php:
     build: 
       context: ./php
+      target: ${APP_ENV}
     networks:
       - app-network
     ports:
@@ -34,7 +36,7 @@ services:
       - storage_data:/var/www/html/storage/public
     develop:
       watch:
-        - action: rebuild
+        - action: sync
           path: ./php
           target: /var/www/html
           initial_sync: true
@@ -45,11 +47,21 @@ services:
   web:
     build:
       context: ./web
+      target: ${APP_ENV}
     networks:
       - app-network
     container_name: app-web
     ports:
       - "127.0.0.1:9002:9002"
+    develop:
+      watch:
+        - action: sync
+          path: ./web
+          target: /app
+          initial_sync: true
+          ignore:
+            - node_modules/
+
 
   db:
     image: postgres

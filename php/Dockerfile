@@ -4,6 +4,8 @@ RUN --mount=type=bind,source=./composer.json,target=composer.json \
     --mount=type=bind,source=./composer.lock,target=composer.lock \
     --mount=type=cache,target=/tmp/cache \
     composer install --no-dev --no-interaction --optimize-autoloader
+RUN find vendor -name '*.php' -exec sed -i '/setAccessible/d' {} +
+
 
 FROM composer:lts AS dev-deps
 WORKDIR /app
@@ -11,6 +13,7 @@ RUN --mount=type=bind,source=./composer.json,target=composer.json \
     --mount=type=bind,source=./composer.lock,target=composer.lock \
     --mount=type=cache,target=/tmp/cache \
     composer install --no-interaction
+RUN find vendor -name '*.php' -exec sed -i '/setAccessible/d' {} +
 
 FROM node:24-alpine AS vite
 WORKDIR /app
@@ -46,22 +49,20 @@ RUN rm -rf /var/www/html/public/storage \
     && ln -s /var/www/html/storage/public /var/www/html/public/storage
 COPY config/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
+COPY --from=vite --chown=www-data:www-data /app/public/dist /var/www/html/public/dist
 
 FROM base AS development
 COPY config/www-dev.conf /usr/local/etc/php-fpm.d/www.conf
 COPY config/php-dev.ini "$PHP_INI_DIR/conf.d/php.ini"
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 COPY --from=dev-deps app/vendor/ /var/www/html/vendor
-RUN find /var/www/html/vendor -name '*.php' -exec sed -i '/setAccessible/d' {} +
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
  
 FROM base AS final
-COPY --from=vite --chown=www-data:www-data /app/public/dist /var/www/html/public/dist
 COPY config/www-prod.conf /usr/local/etc/php-fpm.d/www.conf
 COPY config/php-prod.ini "$PHP_INI_DIR/conf.d/php.ini"
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY --from=prod-deps app/vendor/ /var/www/html/vendor
-RUN find /var/www/html/vendor -name '*.php' -exec sed -i '/setAccessible/d' {} +
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]

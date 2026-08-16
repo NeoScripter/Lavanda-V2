@@ -9,10 +9,13 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "preact": "^10.29.3"
+        "preact": "^10.29.3",
+        "@tailwindcss/vite": "^4.3.0"
     },
     "devDependencies": {
         "@preact/preset-vite": "^2.10.5",
+        "@tailwindcss/typography": "^0.5.19",
+        "tailwindcss-content-visibility": "^1.0.2",
         "@types/node": "^24.13.2",
         "typescript": "~6.0.2",
         "vite": "^8.1.1"
