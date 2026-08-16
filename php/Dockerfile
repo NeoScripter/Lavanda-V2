@@ -52,6 +52,7 @@ COPY config/www-dev.conf /usr/local/etc/php-fpm.d/www.conf
 COPY config/php-dev.ini "$PHP_INI_DIR/conf.d/php.ini"
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 COPY --from=dev-deps app/vendor/ /var/www/html/vendor
+RUN find /var/www/html/vendor -name '*.php' -exec sed -i '/setAccessible/d' {} +
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
  
@@ -61,5 +62,6 @@ COPY config/www-prod.conf /usr/local/etc/php-fpm.d/www.conf
 COPY config/php-prod.ini "$PHP_INI_DIR/conf.d/php.ini"
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY --from=prod-deps app/vendor/ /var/www/html/vendor
+RUN find /var/www/html/vendor -name '*.php' -exec sed -i '/setAccessible/d' {} +
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]

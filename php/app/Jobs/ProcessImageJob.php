@@ -43,6 +43,13 @@ class ProcessImageJob extends Job
         }
 
         try {
+            $old_imgs = new Image();
+            $old_imgs->find(['imageable_type = ? AND imageable_id = ? AND variant = ?', $imageable_type, $imageable_id, $variant]);
+
+            foreach ($old_imgs as $img) {
+                $img->erase();
+            }
+
             foreach ($optimized as $file) {
                 $img = new Image();
                 $img->copyFrom([
@@ -52,14 +59,6 @@ class ProcessImageJob extends Job
 
                 $img->save();
             }
-
-            // $old_imgs = new Image();
-            // $old_imgs->find(['imageable_type=?']);
-            // \Base::instance()->get('DB')->exec(
-            //     'DELETE FROM images WHERE imageable_type = ? AND imageable_id = ? AND variant = ?',
-            //     [$imageable_type, $imageable_id, $variant]
-            // );
-
         } catch (Exception $e) {
             echo ("Failed processing image: {$e->getMessage()}");
         }
