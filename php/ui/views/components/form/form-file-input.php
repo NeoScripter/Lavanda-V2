@@ -114,9 +114,10 @@ $hive = \Base::instance();
 
                         <?php $alt_modal_id = uniqid('alt_modal_'); ?>
 
-                        <div class='my-2 relative group px-3 p-1 border border-input shadow-xs truncate rounded-sm overflow-clip'>
+                        <div class='my-2 relative min-h-[2em] group px-3 p-1 border border-input shadow-xs truncate rounded-sm overflow-clip'>
 
-                            <?= $file['alt'] ?>
+                            <?= $file->alt !== '' ? $file->alt : 'Enter image alt...' ?>
+
                             <button
                                 component-modal-show
                                 data-modal-id="<?= $alt_modal_id ?>"
