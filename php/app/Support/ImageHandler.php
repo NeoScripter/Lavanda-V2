@@ -45,7 +45,7 @@ class ImageHandler
 
         $this->locked = false;
 
-        return $this->normalize_path($dest);
+        return extract_relative_path($dest);
     }
 
     public function resize_all(array $sizes, string $dest)
@@ -183,16 +183,5 @@ class ImageHandler
         $suffixes['-mb-tiny'] = 30;
 
         return $suffixes;
-    }
-
-    public static function normalize_path(string $path)
-    {
-        $path_stem = preg_replace('/\.[^.]+$/', '', $path);
-        $app_url = rtrim(\Base::instance()->get('app_url'), '/') . '/';
-
-        $norm_path = str_replace(WEBROOT, $app_url, $path_stem);
-        $norm_path = preg_replace('#(?<!:)//+#', '/', $norm_path);
-
-        return $norm_path;
     }
 }

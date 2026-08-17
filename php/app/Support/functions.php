@@ -507,3 +507,22 @@ function component_props(array $required, array $optional, array $props)
 
     return array_merge($optional, $props);
 }
+
+function remove_file_extention(string $path)
+{
+    return preg_replace('/\.[^.]+$/', '', $path);
+}
+
+function remove_extra_slashes(string $path)
+{
+    return preg_replace('#(?<!:)//+#', '/', $path);
+}
+
+function extract_relative_path(string $path)
+{
+    $path_stem = remove_file_extention($path);
+
+    $norm_path = str_replace(WEBROOT, '', $path_stem);
+
+    return remove_extra_slashes($norm_path);
+}
