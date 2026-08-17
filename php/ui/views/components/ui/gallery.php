@@ -11,8 +11,8 @@
 
                 <li class="relative group shrink-0">
                     <?= component('ui/image', [
-                        'path' => $img->src,
-                        'alt' => $img->alt,
+                        'path' => $img['src'],
+                        'alt' => $img['alt'],
                         'sizes' => 'mb',
                         'prt_class' => 'rounded-xl h-30 sm:h-40 md:h-50',
                     ]) ?>

@@ -116,7 +116,7 @@ $hive = \Base::instance();
 
                         <div class='my-2 relative min-h-[2em] group px-3 p-1 border border-input shadow-xs truncate rounded-sm overflow-clip'>
 
-                            <?= $file->alt !== '' ? $file->alt : 'Enter image alt...' ?>
+                            <?= $file['alt'] !== '' ? $file['alt'] : 'Enter image alt...' ?>
 
                             <button
                                 component-modal-show
