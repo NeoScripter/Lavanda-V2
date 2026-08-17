@@ -201,8 +201,22 @@ class Validator
             }
         }
 
+        /* final format: 
+        [ 
+            [0]=> [
+                ["name"]=> "pexels-arts-1187079.jpg"
+                ["full_path"]=>  "pexels-arts-1187079.jpg"
+                ["type"]=>  "image/jpeg"
+                ["tmp_name"]=>  "/tmp/php66jvia74apf70cbGcLH"
+                ["error"]=> int(0)
+                ["size"]=> int(1634184)
+                ["alt"]=>  ""
+            ]
+        ]
+        */
         return $files;
     }
+
 
     // ── Post Filters ──────────────────────────────────────────────────────────
 
@@ -240,7 +254,7 @@ class Validator
             $tmp_path = $file['tmp_name'];
 
             $dest = UPLOAD_DIR . "/{$upload_dir}/";
-            $dest = str_replace('//', '/', $dest);
+            $dest = remove_extra_slashes($dest);
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
             $new_name = sha1_file($tmp_path) . '.' . $ext;
 

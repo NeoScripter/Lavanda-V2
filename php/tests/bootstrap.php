@@ -19,7 +19,7 @@ require APP_DIR . '/config/globals.php';
 $hive->config(APP_DIR . '/config/routes.ini');
 
 
-$hive->set('app_env', 'development');
+$hive->set('app_env', 'test');
 $hive->set('app_debug', true);
 $hive->set('app_url', 'http://localhost:9001/admin/');
 

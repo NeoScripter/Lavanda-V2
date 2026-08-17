@@ -363,7 +363,7 @@ function purge_file(string $src): void
         unlink($src);
     }
 
-    $dir = substr($src, 0, strrpos($src, '/'));
+    $dir = get_parent_dir($src);
     if (is_dir($dir) && count(scandir($dir)) === 2) {
         rmdir($dir);
     }
@@ -518,11 +518,32 @@ function remove_extra_slashes(string $path)
     return preg_replace('#(?<!:)//+#', '/', $path);
 }
 
-function extract_relative_path(string $path)
+function to_public_url(string $path)
 {
     $path_stem = remove_file_extention($path);
 
-    $norm_path = str_replace(WEBROOT, '', $path_stem);
+    $app_url = rtrim(\Base::instance()->get('app_url'), '/') . '/';
+
+    $norm_path = str_replace(WEBROOT, $app_url, $path_stem);
 
     return remove_extra_slashes($norm_path);
+}
+
+function get_parent_dir(string $path)
+{
+    return substr($path, 0, strrpos($path, '/'));
+}
+
+function read_dir_files(string $path)
+{
+    $all = scandir($path);
+
+    $files = [];
+    foreach ($all as $candidate) {
+        if (! is_dir($candidate)) {
+            $files[] = $candidate;
+        }
+    }
+
+    return $files;
 }

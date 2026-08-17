@@ -45,7 +45,7 @@ class ImageHandler
 
         $this->locked = false;
 
-        return extract_relative_path($dest);
+        return to_public_url($dest);
     }
 
     public function resize_all(array $sizes, string $dest)
@@ -161,7 +161,8 @@ class ImageHandler
         }
     }
 
-    // format: ['mb' => 350, 'tb' => 600, 'dk' => 900],
+    // format: ['mb' => 50, 'tb' => 100, 'dk' => 200],
+    // output: ['-mb' => 150, '-mb2x' => 100, '-mb3x' => 50, '-tb' => 300, '-tb2x' => 200, '-tb3x' => 100, '-dk' => 600, '-dk2x' => 400, '-dk3x' => 200, '-mb-tiny' => 30]
     public static function get_size_map(array $base_widths)
     {
         $suffixes = [];

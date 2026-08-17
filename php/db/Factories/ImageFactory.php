@@ -27,7 +27,7 @@ class ImageFactory extends Factory
         $this->copy_variants_to_new_directory($new_dir, $files);
 
         $image = new Image();
-        $image->src = extract_relative_path($new_dir . 'placeholder.png');
+        $image->src = to_public_url($new_dir . 'placeholder.png');
         $image->alt = 'placeholder';
         $image->variant = $variant;
         $image->imageable_id = $imageable_id;
