@@ -19,7 +19,7 @@ require APP_DIR . '/config/globals.php';
 $hive->config(APP_DIR . '/config/routes.ini');
 
 $hive->set('db_name', getenv('TEST_DB_NAME'));
-$hive->set('db_port', getenv('TEST_DB_PORT'));
+$hive->set('db_port', (int) getenv('TEST_DB_PORT'));
 $hive->set('db_host', getenv('TEST_DB_HOST'));
 $hive->set('db_password', getenv('TEST_DB_PASSWORD'));
 $hive->set('db_user', getenv('TEST_DB_USER'));
