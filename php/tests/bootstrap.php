@@ -18,9 +18,10 @@ $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
 require APP_DIR . '/config/globals.php';
 $hive->config(APP_DIR . '/config/routes.ini');
 
-$hive->set('db_name', "test_db");
-$hive->set('db_host', "5432");
-$hive->set('db_password', "password");
-$hive->set('db_user', "ilya");
+$hive->set('db_name', getenv('TEST_DB_NAME'));
+$hive->set('db_port', getenv('TEST_DB_PORT'));
+$hive->set('db_host', getenv('TEST_DB_HOST'));
+$hive->set('db_password', getenv('TEST_DB_PASSWORD'));
+$hive->set('db_user', getenv('TEST_DB_USER'));
 
 require APP_DIR . '/config/database.php';

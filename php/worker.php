@@ -12,12 +12,6 @@ error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 require APP_DIR . '/config/globals.php';
 $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
 
-$hive->set('db_name', getenv('DB_NAME'));
-$hive->set('db_host', getenv('DB_HOST'));
-$hive->set('db_port', getenv('DB_PORT'));
-$hive->set('db_password', getenv('DB_PASSWORD'));
-$hive->set('db_user', getenv('DB_USER'));
-
 require APP_DIR . '/config/database.php';
 require APP_DIR . '/config/queue.php';
 
