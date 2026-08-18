@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Http\Controllers\Admin;
+namespace Http\Controllers\Admin\Profile;
 
 use Http\Controller;
 use Http\Models\User;
@@ -35,14 +35,14 @@ class UpdatePasswordController extends Controller
         $user->load(['email=?', $current_user['email']]);
 
         if ($user->dry() || !password_verify($hive->POST['current_password'], $user->password)) {
-            set_errors(['current_password' =>  "Please enter the correct current password"]);
+            set_errors(['current_password' =>  $hive->get("admin.please_enter_the_correct_current_password")]);
             $hive->reroute('@password');
         }
 
         $user->copyFrom(['password' => $request->input('new_password')]);
         $user->save();
 
-        notify("Password updated successfully!");
+        notify($hive->get("admin.password_updated_successfully"));
         $hive->reroute('@password');
     }
 }

@@ -28,6 +28,8 @@ return [
         'dark' => 'темная',
         'password_settings' => 'Настройки пароля',
         'update_password' => 'Изменить пароль',
+        "password_updated_successfully" => "Пароль успешно изменен!",
+        "please_enter_the_correct_current_password" => "Пожалуйста введите правильный пароль",
         'ensure_your_account_is_using_a_long_random_password_to_stay_secure' => 'Используйте надежный пароль дабы предотвратить взлом вашего аккаунта',
         'current_password' => 'Текущий пароль',
         'confirm_password' => 'Повторите пароль',

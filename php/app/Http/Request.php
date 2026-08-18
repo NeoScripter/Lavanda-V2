@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Http;
 
+use Enums\AppEnv;
 use Support\Validator;
 
 abstract class Request
@@ -30,7 +31,7 @@ abstract class Request
      */
     public function validate(): bool
     {
-        if ($this->hive->get('app_env') !== 'test') {
+        if (! AppEnv::is(AppEnv::TESTING)) {
             check_csrf($this->hive->POST);
         }
 

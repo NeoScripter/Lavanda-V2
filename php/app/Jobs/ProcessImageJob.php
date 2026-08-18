@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Jobs;
 
+use Enums\AppEnv;
 use Exception;
 use Http\Models\Image;
 use InvalidArgumentException;
@@ -62,9 +63,13 @@ class ProcessImageJob extends Job
                 $img->save();
             }
         } catch (Exception $e) {
-            echo ("Failed processing image: {$e->getMessage()}");
+            if (AppEnv::is(AppEnv::TESTING)) {
+                echo ("Failed processing image: {$e->getMessage()}");
+            }
         }
 
-        echo 'Image processed successfully!' . PHP_EOL;
+        if (AppEnv::is(AppEnv::TESTING)) {
+            echo 'Image processed successfully!' . PHP_EOL;
+        }
     }
 }

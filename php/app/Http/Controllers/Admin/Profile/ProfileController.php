@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Http\Controllers\Admin;
+namespace Http\Controllers\Admin\Profile;
 
 use Http\Controller;
 use Http\Models\User;

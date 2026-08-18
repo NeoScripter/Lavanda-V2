@@ -29,6 +29,8 @@ return [
         'password_settings' => 'Password settings',
         'update_password' => 'Update password',
         'ensure_your_account_is_using_a_long_random_password_to_stay_secure' => 'Ensure your account is using a long, random password to stay secure',
+        "password_updated_successfully" => "Password updated successfully!",
+        "please_enter_the_correct_current_password" => "Please enter the correct current password",
         'current_password' => 'Current password',
         'confirm_password' => 'Confirm password',
         'new_password' => 'New password',
