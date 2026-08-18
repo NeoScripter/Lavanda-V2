@@ -59,6 +59,7 @@ return [
         "welcome" => "Добро пожаловать",
         "select_card_language" => "Выберите язык карт",
         "please_wait_for_1-2_minutes_in_order_to_see_updated_image_files" => "Фото буду обработаны в течение 1-2 минут",
+        "image_successfully_updated" => "Фото успешно обновлено",
         "card_successfully_created" => "Карта успешно создана",
         "card_successfully_updated" => "Карта успешно обновлена",
         "card_successfully_deleted" => "Карта успешно удалена",
@@ -72,6 +73,7 @@ return [
         "update_image_alt" => "Изменить описание фото",
         "edit_a_card" => "Редактировать карту",
         "cancel" => "Отмена",
-
+        "flipside" => "Рубашка",
+        "current_files" => "Текущие файлы",
     ]
 ];

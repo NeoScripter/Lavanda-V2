@@ -199,8 +199,8 @@ class CliController
     {
         $dir = $hive->app_env === 'test' ? 'test' : 'models/cards';
 
-        foreach (CardVariant::values() as $variant) {
-            (new ImageFactory($variant = 'back'))->create(dir: $dir, imageable_type: $variant, imageable_id: 1, variant: 'back');
+        foreach (CardVariant::values() as $card_variant) {
+            (new ImageFactory(variant: 'back'))->create(dir: $dir, imageable_type: $card_variant, imageable_id: 1, variant: 'back');
         }
     }
 }

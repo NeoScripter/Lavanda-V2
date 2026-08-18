@@ -13,6 +13,14 @@ class UpdateImageRequest extends Request
                 'filter' => 'trim|escape_tags',
                 'validate' => 'required|max_len:300',
             ],
+            'src' => [
+                'filter'   => 'file',
+                'validate' => 'image:webp,jpg,jpeg,png|max_size:8800',
+                'post_filter'   => 'file:image',
+            ],
+            'sizes' => [
+                'validate' => 'required|array'
+            ]
         ];
     }
 

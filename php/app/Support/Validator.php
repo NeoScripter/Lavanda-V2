@@ -364,6 +364,28 @@ class Validator
         return null;
     }
 
+    protected function validate_in(mixed $value, string $field, array $_, string ...$allowed): ?string
+    {
+        $is_valid = in_array($value, $allowed);
+
+        if (! $is_valid) {
+            return $this->label($field) . ' must be one of ' . implode(', ', $allowed);
+        }
+
+        return null;
+    }
+
+    protected function validate_array(mixed $value, string $field, array $data): ?string
+    {
+        $is_valid = is_array($value);
+
+        if (! $is_valid) {
+            return $this->label($field) . ' must be an array.';
+        }
+
+        return null;
+    }
+
     protected function validate_boolean(mixed $value, string $field, array $data): ?string
     {
         $accepted_boolean_values = [true, false, 0, 1, '0', '1'];

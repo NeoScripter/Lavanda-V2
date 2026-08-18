@@ -42,9 +42,21 @@ class CardController extends Controller
             ['order' => 'created_at DESC']
         );
 
+        $flipside = null;
+
+        if (! empty($card['subset'])) {
+            $item = $card['subset'][0];
+            $flipside = [
+                'id' => $item->back_id,
+                'src' => $item->back_src,
+                'alt' => $item->back_alt,
+            ];
+        }
+
         view('pages/admin/cards/index', [
             'title' => 'All cards',
             'cards' => $card,
+            'flipside' => $flipside,
         ]);
     }
 

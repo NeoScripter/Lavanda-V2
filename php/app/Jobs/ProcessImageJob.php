@@ -46,8 +46,10 @@ class ProcessImageJob extends Job
             $stale_imgs = new Image();
             $stale_imgs = $stale_imgs->find(['imageable_type = ? AND imageable_id = ? AND variant = ?', $imageable_type, $imageable_id, $variant]);
 
-            foreach ($stale_imgs as $img) {
-                $img->erase();
+            if (! empty($stale_imgs)) {
+                foreach ($stale_imgs as $img) {
+                    $img->erase();
+                }
             }
 
             foreach ($optimized as $file) {

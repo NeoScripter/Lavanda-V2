@@ -58,7 +58,7 @@ return [
         "these_credentials_dont_match_our_records" => "These credentials don't match our records",
         "welcome" => "welcome",
         "select_card_language" => "Select card language",
-        "Card successfully created!" => "Card successfully created!",
+        "image_successfully_updated" => "Image successfully created!",
         "please_wait_for_1-2_minutes_in_order_to_see_updated_image_files" => "Please wait for 1-2 minutes in order to see updated image files",
         "card_successfully_created" => "Card successfully created",
         "card_successfully_updated" => "Card successfully updated",
@@ -73,6 +73,7 @@ return [
         "update_image_alt" => "Update Image Alt",
         "edit_a_card" => "Edit a card",
         "cancel" => "Cancel",
-
+        "flipside" => "Flip Side",
+        "current_files" => "Current Files",
     ]
 ];

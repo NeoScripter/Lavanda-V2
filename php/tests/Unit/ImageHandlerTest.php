@@ -6,7 +6,6 @@ namespace Tests\Unit;
 
 use Factories\CardFactory;
 use Factories\ImageFactory;
-use Http\Controllers\Admin\CardController;
 use Jobs\ProcessImageJob;
 use PHPUnit\Framework\Attributes\Test;
 use Support\ImageHandler;

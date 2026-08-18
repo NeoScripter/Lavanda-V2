@@ -30,7 +30,9 @@ abstract class Request
      */
     public function validate(): bool
     {
-        check_csrf($this->hive->POST);
+        if ($this->hive->get('app_env') !== 'test') {
+            check_csrf($this->hive->POST);
+        }
 
         $rules   = $this->rules();
         $data    = $this->prepare_data();

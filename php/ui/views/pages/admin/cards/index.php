@@ -5,7 +5,7 @@ use Enums\SessionKey;
 $hive = \Base::instance();
 
 extract(component_props(
-    required: ['cards'],
+    required: ['cards', 'flipside'],
     optional: [],
     props: get_defined_vars(),
 ));
@@ -32,6 +32,9 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 
     <?php if (! empty($cards['subset'])) : ?>
         <ul class="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-12">
+
+            <?php view('pages/admin/cards/partials/flipside', compact('flipside')); ?>
+
             <?php foreach ($cards['subset'] as $card) : ?>
                 <?php view('pages/admin/cards/partials/item', [
                     'card' => $card->to_resource(),

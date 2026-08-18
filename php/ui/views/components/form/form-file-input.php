@@ -77,7 +77,7 @@ $hive = \Base::instance();
     <?php if (! empty($files)) : ?>
         <?php if ($label): ?>
             <?= component('form/label', [
-                'slot'  => 'Current Files',
+                'slot'  => $hive->get('admin.current_files'),
                 'class' => 'mt-2'
             ]) ?>
         <?php endif ?>
