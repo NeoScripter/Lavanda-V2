@@ -43,10 +43,10 @@ class ProcessImageJob extends Job
         }
 
         try {
-            $old_imgs = new Image();
-            $old_imgs->find(['imageable_type = ? AND imageable_id = ? AND variant = ?', $imageable_type, $imageable_id, $variant]);
+            $stale_imgs = new Image();
+            $stale_imgs = $stale_imgs->find(['imageable_type = ? AND imageable_id = ? AND variant = ?', $imageable_type, $imageable_id, $variant]);
 
-            foreach ($old_imgs as $img) {
+            foreach ($stale_imgs as $img) {
                 $img->erase();
             }
 

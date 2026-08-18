@@ -26,6 +26,39 @@ final class ImageHandlerTest extends TestCase
         $this->assertEquals(expected: $target, actual: $result);
     }
 
+
+    #[Test]
+    public function removes_stale_morph_image_on_update(): void
+    {
+        $path = (new ImageFactory(variant: 'front'))->template;
+        $subdir = UPLOAD_DIR . 'image_job_queue_test/';
+        $new_path = $subdir . 'copy.png';
+
+        if (!is_dir($subdir)) {
+            mkdir($subdir, 0777, true);
+        }
+        copy($path, $new_path);
+
+        $files = [['src' => $new_path, 'alt' => '']];
+
+        $sizes = ['mb' => 2];
+        $card = (new CardFactory())->create();
+
+        $payload = [
+            'imageable_id' => $card->id,
+            'imageable_type' => $card->variant,
+            'variant' => 'front',
+            'sizes' => $sizes,
+            'files' => $files,
+        ];
+
+        (new ProcessImageJob)->handle($payload);
+
+        $db = $this->hive->get("DB");
+        $res = $db->exec("SELECT count(*) FROM images WHERE imageable_id = ? AND imageable_type = ? AND variant = ?", [$card->id, $card->variant, 'front']);
+        $this->assertEquals(1, $res[0]['count'], 'The stale image was not erased');
+    }
+
     #[Test]
     public function job_processes_and_optimizes_image(): void
     {
