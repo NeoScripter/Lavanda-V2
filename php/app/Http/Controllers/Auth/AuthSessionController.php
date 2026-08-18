@@ -6,7 +6,7 @@ namespace Http\Controllers\Auth;
 
 use Http\Controller;
 use Http\Models\User;
-use Http\Requests\LoginRequest;
+use Http\Requests\Profile\LoginRequest;
 use Support\Auth;
 
 class AuthSessionController extends Controller

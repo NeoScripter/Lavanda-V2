@@ -1,42 +1,38 @@
 <?php
 
-namespace Http\Requests\News;
+namespace Http\Requests\Profile;
 
 use Http\Request;
 
-class UpdateNewsRequest extends Request
+class UpdateFeaturedRequest extends Request
 {
     public function rules(): array
     {
         return [
             'title' => [
                 'filter'   => 'trim|escape_tags',
-                'validate' => 'required|max_len:230',
+                'validate' => 'required|min_len:10|max_len:200',
             ],
-            'summary' => [
-                'filter'   => 'trim|trim_spaces|escape_tags',
-                'validate' => 'required|max_len:4500',
+            'subtitle' => [
+                'filter'   => 'trim|escape_tags',
+                'validate' => 'required|min_len:10|max_len:500',
             ],
             'body' => [
                 'filter'   => 'trim',
-                'validate' => 'required|max_len:42000|no_tags',
+                'validate' => 'required|min_len:10|max_len:2000|no_tags',
             ],
-            'created_at' => [
-                'validate' => 'required|date',
+            'shown' => [
+                'filter'   => 'boolean',
+                'validate' => 'required|boolean',
             ],
             // 'alt' => [
             //     'filter'   => 'trim',
             //     'validate' => 'required|max_len:250',
             // ],
-            'preview' => [
+            'image' => [
                 'filter'   => 'file',
                 'validate' => 'image:webp,jpg,jpeg,png|max_size:8800',
-                'post_filter'   => 'file:news',
-            ],
-            'gallery' => [
-                'filter'   => 'file',
-                'validate' => 'image:webp,jpg,jpeg,png|max_size:8800',
-                'post_filter'   => 'file:news',
+                'post_filter'   => 'file:featured',
             ],
         ];
     }
@@ -50,11 +46,11 @@ class UpdateNewsRequest extends Request
     {
         set_values([
             'title'    => $this->hive->POST['title'] ?? '',
-            'summary' => $this->hive->POST['summary'] ?? '',
+            'subtitle' => $this->hive->POST['subtitle'] ?? '',
             'body'     => $this->hive->POST['body'] ?? '',
-            'created_at'     => $this->hive->POST['created_at'] ?? '',
+            'shown'    => (bool) ($this->hive->POST['shown'] ?? false),
         ]);
 
-        $this->hive->reroute('@admin_news_edit');
+        $this->hive->reroute('@featured');
     }
 }

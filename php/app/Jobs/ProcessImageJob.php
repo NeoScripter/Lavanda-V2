@@ -63,12 +63,12 @@ class ProcessImageJob extends Job
                 $img->save();
             }
         } catch (Exception $e) {
-            if (AppEnv::is(AppEnv::TESTING)) {
+            if (! AppEnv::is(AppEnv::TESTING)) {
                 echo ("Failed processing image: {$e->getMessage()}");
             }
         }
 
-        if (AppEnv::is(AppEnv::TESTING)) {
+        if (! AppEnv::is(AppEnv::TESTING)) {
             echo 'Image processed successfully!' . PHP_EOL;
         }
     }

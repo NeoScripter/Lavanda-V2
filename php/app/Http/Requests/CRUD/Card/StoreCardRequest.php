@@ -1,11 +1,11 @@
 <?php
 
-namespace Http\Requests\Card;
+namespace Http\Requests\CRUD\Card;
 
 use Enums\SessionKey;
 use Http\Request;
 
-class UpdateCardRequest extends Request
+class StoreCardRequest extends Request
 {
     public function rules(): array
     {
@@ -15,12 +15,12 @@ class UpdateCardRequest extends Request
                 'validate' => 'required|max_len:130',
             ],
             'advice' => [
-                'filter'   => 'trim|trim_spaces|escape_tags',
+                'filter'   => 'trim|trim_spaces|strip_tags',
                 'validate' => 'required|max_len:1200',
             ],
             'html' => [
-                'filter'   => 'trim',
-                'validate' => 'required|max_len:42000|no_tags',
+                'filter'   => 'trim|strip_tags',
+                'validate' => 'required|max_len:42000',
             ],
             'variant' => [
                 'filter'   => 'trim',
@@ -28,7 +28,7 @@ class UpdateCardRequest extends Request
             ],
             'front_image' => [
                 'filter'   => 'file',
-                'validate' => 'image:webp,jpg,jpeg,png|max_size:8800',
+                'validate' => 'required|image:webp,jpg,jpeg,png|max_size:8800',
                 'post_filter'   => 'file:card-' . $this->input('variant'),
             ],
         ];
@@ -50,6 +50,6 @@ class UpdateCardRequest extends Request
             'html'     => $this->hive->POST['html'] ?? '',
         ]);
 
-        $this->hive->reroute('@admin_cards_edit');
+        $this->hive->reroute('@admin_cards_create');
     }
 }

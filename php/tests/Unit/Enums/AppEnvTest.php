@@ -15,8 +15,8 @@ final class AppEnvTest extends TestCase
     {
         \Base::instance()->set('app_env', AppEnv::TESTING->value);
 
-        $this->assertTrue(AppEnv::check(AppEnv::TESTING));
-        $this->assertFalse(AppEnv::check(AppEnv::DEVELOPMENT));
-        $this->assertFalse(AppEnv::check(AppEnv::PRODUCTION));
+        $this->assertTrue(AppEnv::is(AppEnv::TESTING));
+        $this->assertFalse(AppEnv::is(AppEnv::DEVELOPMENT));
+        $this->assertFalse(AppEnv::is(AppEnv::PRODUCTION));
     }
 }

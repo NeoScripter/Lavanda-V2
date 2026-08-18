@@ -6,7 +6,7 @@ namespace Http\Controllers\Admin\Profile;
 
 use Http\Controller;
 use Http\Models\User;
-use Http\Requests\UpdateProfileRequest;
+use Http\Requests\Profile\UpdateProfileRequest;
 use Support\Auth;
 
 class ProfileController extends Controller

@@ -8,8 +8,8 @@ use Exception;
 use Support\Auth;
 use Http\Controller;
 use Http\Models\Article;
-use Http\Requests\Article\StoreArticleRequest;
-use Http\Requests\Article\UpdateArticleRequest;
+use Http\Requests\CRUD\Article\StoreArticleRequest;
+use Http\Requests\CRUD\Article\UpdateArticleRequest;
 use Jobs\ProcessImageJob;
 
 class ArticleController extends Controller

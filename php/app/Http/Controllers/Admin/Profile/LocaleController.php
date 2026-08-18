@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Http\Controllers\Admin\Profile;
 
 use Http\Controller;
-use Http\Requests\UpdateLocaleRequest;
+use Http\Requests\Profile\UpdateLocaleRequest;
 use Support\Auth;
 
 class LocaleController extends Controller

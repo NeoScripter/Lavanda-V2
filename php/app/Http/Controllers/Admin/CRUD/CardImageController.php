@@ -6,7 +6,7 @@ namespace Http\Controllers\Admin\CRUD;
 
 use Http\Controller;
 use Http\Models\Image;
-use Http\Requests\Card\UpdateImageRequest;
+use Http\Requests\CRUD\Card\UpdateImageRequest;
 use Jobs\ProcessImageJob;
 use Support\Auth;
 

@@ -6,7 +6,7 @@ namespace Http\Controllers\Admin\Profile;
 
 use Http\Controller;
 use Http\Models\User;
-use Http\Requests\UpdatePasswordRequest;
+use Http\Requests\Profile\UpdatePasswordRequest;
 use Support\Auth;
 
 class UpdatePasswordController extends Controller
