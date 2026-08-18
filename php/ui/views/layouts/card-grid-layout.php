@@ -18,10 +18,10 @@ extract(component_props(
 $variant = $hive->get('SESSION.' . SessionKey::CARD_VARIANT->value);
 $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 
-$nav_items = [
-    ['variant' => CardVariant::TAROT->value, 'title' => $hive->get('admin.tarot')],
-    ['variant' => CardVariant::LENORMAND->value, 'title' => $hive->get('admin.lenormand')],
-]; ?>
+$nav_items = array_map(
+    fn($value) => ['variant' => $value, 'title' => $hive->get("admin.{$value}")],
+    CardVariant::values()
+); ?>
 
 <div class="px-4 py-6">
     <div class="flex flex-col space-y-8 xl:flex-row lg:space-y-0 lg:space-x-12">

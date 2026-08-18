@@ -13,7 +13,7 @@ extract(component_props(
 $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 ?>
 
-<?php slot('layouts/card-layout', [
+<?php slot('layouts/card-grid-layout', [
     'heading' => $hive->get('admin.cards'),
     'title' => $hive->get('admin.cards')
 ]); ?>
@@ -43,6 +43,8 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
         </ul>
 
         <?= component('ui/pagination', ['page' => $cards]) ?>
+    <?php else: ?>
+        <p><?= $hive->get('admin.there_are_no_cards_here_yet') ?></p>
     <?php endif; ?>
 </div>
 

@@ -8,7 +8,7 @@ extract(component_props(
 
 $hive = \Base::instance();
 
-slot('layouts/card-layout', [
+slot('layouts/card-grid-layout', [
     'heading' => $hive->get('admin.cards'),
     'title' => $hive->get('admin.cards'),
 ]); ?>
