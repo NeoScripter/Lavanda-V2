@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Requests\Profile;
+namespace Http\Requests\CRUD;
 
 use Http\Request;
 

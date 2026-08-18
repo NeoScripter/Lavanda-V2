@@ -5,21 +5,16 @@ declare(strict_types=1);
 namespace Http\Controllers\Admin\CRUD;
 
 use Exception;
-use Support\Auth;
 use Http\Controller;
 use Http\Models\Article;
 use Http\Requests\CRUD\Article\StoreArticleRequest;
 use Http\Requests\CRUD\Article\UpdateArticleRequest;
 use Jobs\ProcessImageJob;
+use Traits\RequiresAuth;
 
 class ArticleController extends Controller
 {
-    public function beforeroute(\Base $hive)
-    {
-        if (! Auth::check()) {
-            $hive->reroute('@login');
-        }
-    }
+    use RequiresAuth;
 
     public function index(\Base $hive)
     {

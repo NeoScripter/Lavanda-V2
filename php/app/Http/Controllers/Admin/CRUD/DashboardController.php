@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Admin\CRUD;
 
-use Support\Auth;
+use Http\Controller;
+use Traits\RequiresAuth;
 
-class DashboardController
+class DashboardController extends Controller
 {
-    public function beforeroute(\Base $hive)
-    {
-        if (! Auth::check()) {
-            $hive->reroute('@login');
-        }
-    }
+    use RequiresAuth;
 
     public function index(\Base $hive)
     {

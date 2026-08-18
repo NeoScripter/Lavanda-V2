@@ -4,6 +4,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+$_SERVER['SERVER_NAME'] = 'localhost';
+$_SERVER['REQUEST_URI'] = '/';
+$_SERVER['REQUEST_METHOD'] = 'GET';
+
 define('APP_DIR', dirname(__DIR__));
 define('UPLOAD_DIR', APP_DIR . '/public/storage/test_uploads/');
 define('WEBROOT', APP_DIR . '/public/');

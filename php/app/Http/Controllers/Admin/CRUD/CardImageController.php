@@ -8,17 +8,11 @@ use Http\Controller;
 use Http\Models\Image;
 use Http\Requests\CRUD\Card\UpdateImageRequest;
 use Jobs\ProcessImageJob;
-use Support\Auth;
+use Traits\RequiresAuth;
 
 class CardImageController extends Controller
 {
-    public function beforeroute(\Base $hive)
-    {
-        if (! Auth::check()) {
-            $hive->reroute('@login');
-            exit;
-        }
-    }
+    use RequiresAuth;
 
     public function update(\Base $hive)
     {

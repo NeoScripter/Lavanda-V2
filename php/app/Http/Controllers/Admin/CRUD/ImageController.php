@@ -7,17 +7,11 @@ namespace Http\Controllers\Admin\CRUD;
 use Http\Controller;
 use Http\Models\Image;
 use Http\Requests\CRUD\UpdateImageRequest;
-use Support\Auth;
+use Traits\RequiresAuth;
 
 class ImageController extends Controller
 {
-    public function beforeroute(\Base $hive)
-    {
-        if (! Auth::check()) {
-            $hive->reroute('@login');
-            exit;
-        }
-    }
+    use RequiresAuth;
 
     public function update(\Base $hive)
     {

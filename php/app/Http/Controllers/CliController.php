@@ -2,6 +2,7 @@
 
 namespace Http\Controllers;
 
+use Enums\AppEnv;
 use Enums\CardVariant;
 use Enums\DBView;
 use Factories\ImageFactory;
@@ -34,7 +35,7 @@ class CliController
                     };
 
                     $prefix = str_pad($method, METHOD_WIDTH) . ' ';
-                    $suffix = trim($name) !== '' ? " {$name} > {$new_handler}" : " {$new_handler}";
+                    $suffix = trim((string) $name) !== '' ? " {$name} > {$new_handler}" : " {$new_handler}";
                     $url = str_pad($url . ' ', SCREEN_WIDTH - METHOD_WIDTH - strlen($suffix), '.');
                     echo cli_color($prefix, $color) . $url . $suffix . "\n";
                 }
@@ -121,9 +122,20 @@ class CliController
         $password = $hive->get('GET.password');
 
         if (empty($name) || empty($email) || strlen($password) < 8) {
-            cli_echo("❌ Usage: php index.php create_user --name=John --email=john@example.com --password=mypassword123", 'error');
-            cli_echo("   Password must be at least 8 characters", 'error');
-            exit(1);
+            if (! AppEnv::is(AppEnv::TESTING)) {
+                cli_echo("❌ Usage: php index.php create_user --name=John --email=john@example.com --password=mypassword123", 'error');
+                cli_echo("   Password must be at least 8 characters", 'error');
+            }
+            return false;
+        }
+
+        $row = $hive->get('DB')->exec('SELECT count(email) FROM users WHERE email = ?', [$email]);
+
+        if (! empty($row[0]['count'])) {
+            if (! AppEnv::is(AppEnv::TESTING)) {
+                cli_echo("❌ User with this email already exists");
+            }
+            return false;
         }
 
         try {
@@ -131,13 +143,18 @@ class CliController
             $user->copyFrom(compact('name', 'email', 'password'));
             $user->save();
 
-            cli_echo("User created successfully!");
-            cli_echo("   ID: {$user->id}");
-            cli_echo("   Name: $name");
-            cli_echo("   Email: $email");
+            if (! AppEnv::is(AppEnv::TESTING)) {
+                cli_echo("User created successfully!");
+                cli_echo("   ID: {$user->id}");
+                cli_echo("   Name: $name");
+                cli_echo("   Email: $email");
+            }
+            return true;
         } catch (\Exception $e) {
-            cli_echo("❌ Failed: {$e->getMessage()}", 'error');
-            exit(1);
+            if (! AppEnv::is(AppEnv::TESTING)) {
+                cli_echo("❌ Failed: {$e->getMessage()}", 'error');
+            }
+            return false;
         }
     }
 

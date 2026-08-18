@@ -8,15 +8,11 @@ use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\UpdatePasswordRequest;
 use Support\Auth;
+use Traits\RequiresAuth;
 
 class UpdatePasswordController extends Controller
 {
-    public function beforeroute(\Base $hive)
-    {
-        if (! Auth::check()) {
-            $hive->reroute('@login');
-        }
-    }
+    use RequiresAuth;
 
     public function index()
     {

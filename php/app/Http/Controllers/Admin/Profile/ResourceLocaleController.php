@@ -7,16 +7,11 @@ namespace Http\Controllers\Admin\Profile;
 use Enums\Locale;
 use Enums\SessionKey;
 use Http\Controller;
-use Support\Auth;
+use Traits\RequiresAuth;
 
 class ResourceLocaleController extends Controller
 {
-    public function beforeroute(\Base $hive)
-    {
-        if (! Auth::check()) {
-            $hive->reroute('@login');
-        }
-    }
+    use RequiresAuth;
 
     public function update(\Base $hive)
     {

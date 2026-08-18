@@ -13,7 +13,7 @@ class FAQFactory extends Factory
         $faq = new FAQ();
 
         $faq->question = $attrs['name'] ?? $this->faker->sentence();
-        $faq->answer = $attrs['advice'] ??  $this->faker->sentences(3);
+        $faq->answer = $attrs['advice'] ??  $this->faker->sentences(3, true);
 
         $faq->save();
 

@@ -8,16 +8,11 @@ use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\UpdateProfileRequest;
 use Support\Auth;
+use Traits\RequiresAuth;
 
 class ProfileController extends Controller
 {
-    public function beforeroute(\Base $hive)
-    {
-        if (! Auth::check()) {
-            $hive->reroute('@login');
-            exit;
-        }
-    }
+    use RequiresAuth;
 
     public function index(\Base $hive)
     {

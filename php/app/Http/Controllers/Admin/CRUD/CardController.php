@@ -8,22 +8,17 @@ use Enums\CardVariant;
 use Enums\Locale;
 use Enums\SessionKey;
 use Exception;
-use Support\Auth;
 use Http\Controller;
 use Http\Models\Card;
 use Http\Models\FlipCard;
 use Http\Requests\CRUD\Card\StoreCardRequest;
 use Http\Requests\CRUD\Card\UpdateCardRequest;
 use Jobs\ProcessImageJob;
+use Traits\RequiresAuth;
 
 class CardController extends Controller
 {
-    public function beforeroute(\Base $hive)
-    {
-        if (! Auth::check()) {
-            $hive->reroute('@login');
-        }
-    }
+    use RequiresAuth;
 
     public function index(\Base $hive)
     {

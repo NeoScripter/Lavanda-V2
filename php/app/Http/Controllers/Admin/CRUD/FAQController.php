@@ -8,22 +8,17 @@ use Enums\FAQVariant;
 use Enums\Locale;
 use Enums\SessionKey;
 use Exception;
-use Support\Auth;
 use Http\Controller;
 use Http\Models\FAQ;
 use Http\Models\FlipFAQ;
 use Http\Requests\CRUD\FAQ\StoreFAQRequest;
 use Http\Requests\CRUD\FAQ\UpdateFAQRequest;
 use Jobs\ProcessImageJob;
+use Traits\RequiresAuth;
 
 class FAQController extends Controller
 {
-    public function beforeroute(\Base $hive)
-    {
-        if (! Auth::check()) {
-            $hive->reroute('@login');
-        }
-    }
+    use RequiresAuth;
 
     public function index(\Base $hive)
     {

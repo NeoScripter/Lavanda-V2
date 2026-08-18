@@ -6,16 +6,11 @@ namespace Http\Controllers\Admin\Profile;
 
 use Http\Controller;
 use Http\Requests\Profile\UpdateLocaleRequest;
-use Support\Auth;
+use Traits\RequiresAuth;
 
 class LocaleController extends Controller
 {
-    public function beforeroute(\Base $hive)
-    {
-        if (! Auth::check()) {
-            $hive->reroute('@login');
-        }
-    }
+    use RequiresAuth;
 
     public function index()
     {
