@@ -8,7 +8,11 @@ $hive = \Base::instance(); ?>
 <?php slot('layouts/card-layout', [
     'heading' => $hive->get('admin.cards'),
     'title' => $hive->get('admin.cards')
-]); ?>
+]);
+
+$src = $card['front_image']['src'] ?? to_public_url(WEBROOT . '/assets/images/cards/empty/empty');
+$alt = $card['front_image']['alt'] ?? '';
+?>
 
 <div class="space-y-6">
     <div class="admin-shell space-y-6">
@@ -24,8 +28,8 @@ $hive = \Base::instance(); ?>
                 </div>
             </div>
 
-            <figure class="aspect-square rounded-sm overflow-clip max-w-48">
-                <img class="size-full object-cover object-center" src="<?= $card['front_image']['src'] .  "-mb.webp" ?>" alt="">
+            <figure class="rounded-sm overflow-clip max-w-48 border border-border shadow-md aspect-2/3">
+                <img class="size-full object-cover object-center" src="<?= $src . "-tb.webp" ?>" alt="<?= $alt ?>">
             </figure>
 
             <div>
