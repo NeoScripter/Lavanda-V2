@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Factories;
 
 use Enums\CardVariant;
+use Enums\ImageableType;
 use Http\Models\Card;
 
 class CardFactory extends Factory
@@ -20,10 +21,12 @@ class CardFactory extends Factory
         $card->variant = $attrs['variant'] ?? CardVariant::METAPHORIC->value;
         $card->save();
 
-        (new ImageFactory)->create(dir: 'test', imageable_type: $card->variant, imageable_id: $card->id, variant: 'front');
+        $imageable_type = ImageableType::from($card->variant);
+
+        (new ImageFactory)->create(dir: 'test', imageable_type: $imageable_type->value, imageable_id: $card->id, variant: 'front');
 
         if ($with_back) {
-            (new ImageFactory(variant: 'back'))->create(dir: 'test', imageable_type: $card->variant, imageable_id: 1, variant: 'back');
+            (new ImageFactory(variant: 'back'))->create(dir: 'test', imageable_type: $imageable_type->value, imageable_id: 1, variant: 'back');
         }
 
         return $card;

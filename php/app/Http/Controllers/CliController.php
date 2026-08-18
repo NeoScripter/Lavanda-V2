@@ -6,9 +6,11 @@ use Enums\CardVariant;
 use Enums\DBView;
 use Factories\ImageFactory;
 use Http\Models\Card;
+use Http\Models\FAQ;
 use Http\Models\User;
 use Http\Models\Image;
 use Seeders\CardSeeder;
+use Seeders\FAQSeeder;
 
 const SCREEN_WIDTH = 152;
 const METHOD_WIDTH = 12;
@@ -45,6 +47,7 @@ class CliController
         User::setup();
         Card::setup();
         Image::setup();
+        FAQ::setup();
 
         $this->create_db_views($hive);
 
@@ -62,6 +65,7 @@ class CliController
         User::setdown();
         Card::setdown();
         Image::setdown();
+        FAQ::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
@@ -75,6 +79,7 @@ class CliController
     function seed(\Base $hive)
     {
         CardSeeder::run();
+        FAQSeeder::run();
     }
 
     function fresh(\Base $hive)
