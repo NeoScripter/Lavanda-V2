@@ -7,7 +7,6 @@ namespace Http\Controllers\Admin;
 use Http\Controller;
 use Http\Models\Image;
 use Http\Requests\UpdateImageRequest;
-use Jobs\ProcessImageJob;
 use Support\Auth;
 
 class ImageController extends Controller
@@ -29,27 +28,11 @@ class ImageController extends Controller
         $img = new Image();
         $img->load(['id = ?', $id]);
 
-        if ($img->dry()) {
-            notify('Could not find an image with the provided id');
-            $referrer = $hive->HEADERS['Referer'] ?? '/';
-            $hive->reroute($referrer);
+        if (!$img->dry()) {
+            $img->alt = $request->input('alt');
+            $img->save();
+            notify($hive->get('admin.image_successfully_updated!'));
         }
-
-        $img->alt = $request->input('alt');
-        $img->save();
-
-        if ($request->input('src')) {
-            ProcessImageJob::dispatch([
-                'imageable_id'      => $img->imageable_id,
-                'imageable_type'   => $img->imageable_type,
-                'variant'          => $img->variant,
-                'sizes'          => ['mb' => 150, 'tb' => 250, 'dk' => 300],
-                'files'          => $request->input('src'),
-                'qnt'            => 1,
-            ]);
-        }
-
-        notify($hive->get('admin.image_successfully_updated'));
 
         $referrer = $hive->HEADERS['Referer'] ?? '/';
         $hive->reroute($referrer);

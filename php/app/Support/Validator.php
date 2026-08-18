@@ -111,62 +111,62 @@ class Validator
 
     // ── Filters ───────────────────────────────────────────────────────────────
     //
-    protected function filter_trim_spaces(mixed $value, string $field, array $data): mixed
+    protected function filter_trim_spaces(mixed $value): mixed
     {
         return is_string($value) ? preg_replace('/\s+/', ' ', $value) : $value;
     }
 
-    protected function filter_trim(mixed $value, string $field, array $data): mixed
+    protected function filter_trim(mixed $value): mixed
     {
         return is_string($value) ? trim($value) : $value;
     }
 
-    protected function filter_capitalize(mixed $value, string $field, array $data): mixed
+    protected function filter_capitalize(mixed $value): mixed
     {
         return is_string($value) ? ucwords(strtolower($value)) : $value;
     }
 
-    protected function filter_uppercase(mixed $value, string $field, array $data): mixed
+    protected function filter_uppercase(mixed $value): mixed
     {
         return is_string($value) ? strtoupper($value) : $value;
     }
 
-    protected function filter_lowercase(mixed $value, string $field, array $data): mixed
+    protected function filter_lowercase(mixed $value): mixed
     {
         return is_string($value) ? strtolower($value) : $value;
     }
 
-    protected function filter_boolean(mixed $value, string $field, array $data): bool
+    protected function filter_boolean(mixed $value): bool
     {
         return filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
-    protected function filter_int(mixed $value, string $field, array $data): int
+    protected function filter_int(mixed $value): int
     {
         return (int) $value;
     }
 
-    protected function filter_float(mixed $value, string $field, array $data): float
+    protected function filter_float(mixed $value): float
     {
         return (float) $value;
     }
 
-    protected function filter_strip_tags(mixed $value, string $field, array $data): mixed
+    protected function filter_strip_tags(mixed $value): mixed
     {
         return is_string($value) ? strip_tags($value) : $value;
     }
 
-    protected function filter_escape_tags(mixed $value, string $field, array $data): mixed
+    protected function filter_escape_tags(mixed $value): mixed
     {
         return is_string($value) ? htmlspecialchars($value) : $value;
     }
 
-    protected function filter_sanitize_email(mixed $value, string $field, array $data): mixed
+    protected function filter_sanitize_email(mixed $value): mixed
     {
         return is_string($value) ? filter_var($value, FILTER_SANITIZE_EMAIL) : $value;
     }
 
-    protected function filter_slug(mixed $value, string $field, array $data): mixed
+    protected function filter_slug(mixed $value): mixed
     {
         return is_string($value)
             ? strtolower(preg_replace('/[^a-z0-9]+/i', '-', trim($value)))
@@ -220,27 +220,27 @@ class Validator
 
     // ── Post Filters ──────────────────────────────────────────────────────────
 
-    protected function post_filter_trim(mixed $value, string $field, array $data): mixed
+    protected function post_filter_trim(mixed $value): mixed
     {
         return is_string($value) ? trim($value) : $value;
     }
 
-    protected function post_filter_uppercase(mixed $value, string $field, array $data): mixed
+    protected function post_filter_uppercase(mixed $value): mixed
     {
         return is_string($value) ? strtoupper($value) : $value;
     }
 
-    protected function post_filter_lowercase(mixed $value, string $field, array $data): mixed
+    protected function post_filter_lowercase(mixed $value): mixed
     {
         return is_string($value) ? strtolower($value) : $value;
     }
 
-    protected function post_filter_truncate(mixed $value, string $field, array $data, string $length = '100'): mixed
+    protected function post_filter_truncate(mixed $value, string $_, array $__, string $length = '100'): mixed
     {
         return is_string($value) ? substr($value, 0, (int) $length) : $value;
     }
 
-    protected function post_filter_file(mixed $files, string $field, array $data, string $dir): mixed
+    protected function post_filter_file(mixed $files, string $_, array $__, string $dir): mixed
     {
         if (! is_array($files)) {
             return $files;
@@ -526,7 +526,7 @@ class Validator
         return null;
     }
 
-    protected function validate_max_size(mixed $files, string $field, array $data, string $max_kb): ?string
+    protected function validate_max_size(mixed $files, string $field, array $_, string $max_kb): ?string
     {
         if (empty($files)) {
             return null;
@@ -556,7 +556,7 @@ class Validator
         return null;
     }
 
-    protected function validate_file(mixed $files, string $field, array $data, string ...$allowed_exts): ?string
+    protected function validate_file(mixed $files, string $field, array $_, string ...$allowed_exts): ?string
     {
         if (empty($files)) {
             return null;
@@ -611,7 +611,7 @@ class Validator
         return null;
     }
 
-    protected function validate_image(mixed $files, string $field, array $data, string ...$allowed_types): ?string
+    protected function validate_image(mixed $files, string $field, array $_, string ...$allowed_types): ?string
     {
         if (empty($files)) {
             return null;

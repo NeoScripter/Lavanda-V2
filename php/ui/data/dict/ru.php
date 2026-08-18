@@ -73,7 +73,7 @@ return [
         "update_image_alt" => "Изменить описание фото",
         "edit_a_card" => "Редактировать карту",
         "cancel" => "Отмена",
-        "flipside" => "Рубашка",
+        "backside" => "Рубашка карты",
         "current_files" => "Текущие файлы",
     ]
 ];

@@ -42,11 +42,11 @@ class CardController extends Controller
             ['order' => 'created_at DESC']
         );
 
-        $flipside = null;
+        $backside = null;
 
         if (! empty($card['subset'])) {
             $item = $card['subset'][0];
-            $flipside = [
+            $backside = [
                 'id' => $item->back_id,
                 'src' => $item->back_src,
                 'alt' => $item->back_alt,
@@ -56,7 +56,7 @@ class CardController extends Controller
         view('pages/admin/cards/index', [
             'title' => 'All cards',
             'cards' => $card,
-            'flipside' => $flipside,
+            'backside' => $backside,
         ]);
     }
 
@@ -119,7 +119,6 @@ class CardController extends Controller
 
     public function update(\Base $hive)
     {
-        // TODO: remove the old image if present
         $id = $hive->PARAMS['id'];
         $request = $this->request(UpdateCardRequest::class);
         $request->validate();

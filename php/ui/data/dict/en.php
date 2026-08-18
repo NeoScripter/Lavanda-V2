@@ -73,7 +73,7 @@ return [
         "update_image_alt" => "Update Image Alt",
         "edit_a_card" => "Edit a card",
         "cancel" => "Cancel",
-        "flipside" => "Flip Side",
+        "backside" => "Card Backside",
         "current_files" => "Current Files",
     ]
 ];

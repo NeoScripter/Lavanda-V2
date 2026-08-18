@@ -1,7 +1,7 @@
 <?php $hive = \Base::instance(); ?>
 <?php
 extract(component_props(
-    required: ['flipside'],
+    required: ['backside'],
     optional: [],
     props: get_defined_vars(),
 ));
@@ -9,7 +9,7 @@ extract(component_props(
 $flipside_modal_id = uniqid('flipside_modal_');
 ?>
 
-<?php if (! empty($flipside)) : ?>
+<?php if (! empty($backside)) : ?>
 
     <li class="grid gap-6 text-sm">
         <div class="flex flex-col gap-4">
@@ -18,14 +18,14 @@ $flipside_modal_id = uniqid('flipside_modal_');
                 <?= component('ui/image', [
                     'sizes'    => 'mb',
                     'avif'    => false,
-                    'path'     => $flipside['src'],
+                    'path'     => $backside['src'],
                     'prt_class' => 'w-full shrink-0 rounded-xl aspect-2/3',
                 ]) ?>
 
             </div>
 
             <div>
-                <h3 class="mb-2 font-bold"><?= $hive->get('admin.flipside') ?></h3>
+                <h3 class="mb-2 font-bold"><?= $hive->get('admin.backside') ?></h3>
             </div>
 
             <div class='flex flex-col justify-start gap-2'>
@@ -39,28 +39,26 @@ $flipside_modal_id = uniqid('flipside_modal_');
                         'data-modal-id' => $flipside_modal_id,
                     ]
                 ]) ?>
-
-
             </div>
 
             <?php slot('components/layout/modal', ['modal_id' => $flipside_modal_id]); ?>
 
-            <form action="<?= $hive->alias('admin_images_update', ['id' => $flipside['id']]) ?>"
+            <form action="<?= $hive->alias('admin_card_images_update', ['id' => $backside['id']]) ?>"
                 method="post"
-                class="space-y-6 w-120">
+                class="space-y-6 w-120"
+                enctype="multipart/form-data">
                 <input type="hidden" name="_method" value="put">
                 <?= csrf() ?>
 
                 <?= component('form/form-file-input', [
-                    'name'  => 'back_image',
-                    'label' => $hive->get('admin.flipside'),
+                    'name'  => 'src',
+                    'label' => $hive->get('admin.backside'),
                     'can_delete' => false,
-                    'value'    => [$flipside],
+                    'value'    => [$backside],
                     'attrs' => [
                         'multiple' => false,
                     ],
                 ]) ?>
-
 
                 <div class="flex justify-start gap-3.5">
                     <?= component(

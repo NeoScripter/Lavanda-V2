@@ -38,7 +38,6 @@ class ImageHandler
 
         $this->locked = true;
 
-        // $dest = $this->move_uploaded_image($filename, $tmp_path, $upload_dir);
         $dest = $this->compress($src);
 
         $this->resize_all($sizes, $dest);
@@ -57,27 +56,6 @@ class ImageHandler
             $this->to_webp($path);
             $this->to_avif($path, true);
         }
-    }
-
-
-    public function move_uploaded_image(string $filename, string $tmp_path, string $upload_dir)
-    {
-        $dest = UPLOAD_DIR . "/{$upload_dir}/";
-        $dest = str_replace('//', '/', $dest);
-        $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $new_name = sha1_file($tmp_path) . '.' . $ext;
-
-        if (!is_dir($dest)) {
-            mkdir($dest, 0755, true);
-        }
-
-        $dest = $dest . $new_name;
-
-        if (!move_uploaded_file($tmp_path, $dest)) {
-            throw new RuntimeException('Failed to move uploaded image');
-        }
-
-        return $dest;
     }
 
     public function compress(string $path)
