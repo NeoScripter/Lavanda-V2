@@ -8,6 +8,7 @@ use Enums\CardVariant;
 use Factories\CardFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
+use ValueError;
 
 final class CardFactoryTest extends TestCase
 {
@@ -57,5 +58,12 @@ final class CardFactoryTest extends TestCase
 
         $this->assertEquals($attrs['name'], $card->name);
         $this->assertEquals($attrs['variant'], $card->variant);
+    }
+
+    #[Test]
+    public function throws_when_imageable_type_is_invalid(): void
+    {
+        $this->expectException(ValueError::class);
+        $this->factory->create(attrs: ['variant' => 'invalid']);
     }
 }
