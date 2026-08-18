@@ -15,11 +15,11 @@
                 'label' => $hive->get('admin.cards'),
                 'icon'  => 'playing-cards',
             ],
-            // [
-            //     'url'   => '/admin/news',
-            //     'label' => 'Newsletters',
-            //     'icon'  => 'mails',
-            // ],
+            [
+                'url'   => '/admin/faqs',
+                'label' => 'FAQs',
+                'icon'  => 'mails',
+            ],
             // [
             //     'url'   => '/admin/articles',
             //     'label' => 'News Articles',

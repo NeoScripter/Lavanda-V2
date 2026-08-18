@@ -80,5 +80,9 @@ return [
         "cancel" => "Cancel",
         "backside" => "Card Backside",
         "current_files" => "Current Files",
+        "faq_successfully_created" => "FAQ successfully created",
+        "faq_successfully_updated" => "FAQ successfully updated",
+        "faq_successfully_deleted" => "FAQ successfully deleted",
+
     ]
 ];

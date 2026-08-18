@@ -1,30 +1,30 @@
 <?php
 extract(component_props(
-    required: ['card'],
+    required: ['faq'],
     optional: [],
     props: get_defined_vars(),
 ));
 $hive = \Base::instance(); ?>
-<?php slot('layouts/card-layout', [
-    'heading' => $hive->get('admin.cards'),
-    'title' => $hive->get('admin.cards')
+<?php slot('layouts/faq-layout', [
+    'heading' => $hive->get('admin.faqs'),
+    'title' => $hive->get('admin.faqs')
 ]);
 
-$src = $card['front_image']['src'] ?? to_public_url(WEBROOT . '/assets/images/cards/empty/empty');
-$alt = $card['front_image']['alt'] ?? '';
+$src = $faq['front_image']['src'] ?? to_public_url(WEBROOT . '/assets/images/faqs/empty/empty');
+$alt = $faq['front_image']['alt'] ?? '';
 ?>
 
 <div class="space-y-6">
     <div class="admin-shell space-y-6">
-        <?= component('ui/subheading', ['title' => $card['name']]) ?>
+        <?= component('ui/subheading', ['title' => $faq['name']]) ?>
 
         <div class="space-y-6 max-w-160">
             <div>
                 <h3 class="mb-2 font-medium">
-                    <?= $hive->get('admin.card_name') ?>
+                    <?= $hive->get('admin.faq_name') ?>
                 </h3>
                 <div>
-                    <?= $card['name'] ?>
+                    <?= $faq['name'] ?>
                 </div>
             </div>
 
@@ -34,10 +34,10 @@ $alt = $card['front_image']['alt'] ?? '';
 
             <div>
                 <h3 class="mb-2 font-medium">
-                    <?= $hive->get('admin.card_advice') ?>
+                    <?= $hive->get('admin.faq_advice') ?>
                 </h3>
                 <div>
-                    <?= $card['advice'] ?>
+                    <?= $faq['advice'] ?>
                 </div>
             </div>
 
@@ -46,7 +46,7 @@ $alt = $card['front_image']['alt'] ?? '';
                     <?= $hive->get('admin.card_meaning') ?>
                 </h3>
                 <div class="max-w-full prose prose-sm">
-                    <?= \Markdown::instance()->convert($card['html']); ?>
+                    <?= \Markdown::instance()->convert($faq['html']); ?>
                 </div>
             </div>
         </div>

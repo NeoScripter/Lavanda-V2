@@ -80,5 +80,8 @@ return [
         "cancel" => "Отмена",
         "backside" => "Рубашка карты",
         "current_files" => "Текущие файлы",
+        "faq_successfully_created" => "FAQ успешно создано!",
+        "faq_successfully_updated" => "FAQ успешно обновлено!",
+        "faq_successfully_deleted" => "FAQ успешно удалено!",
     ]
 ];

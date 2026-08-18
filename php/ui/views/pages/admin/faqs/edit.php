@@ -1,62 +1,43 @@
 <?php
 
 extract(component_props(
-    required: ['card'],
+    required: ['faq'],
     optional: [],
     props: get_defined_vars(),
 ));
 
 $hive = \Base::instance();
 
-slot('layouts/card-grid-layout', [
-    'heading' => $hive->get('admin.cards'),
-    'title' => $hive->get('admin.cards'),
+slot('layouts/faq-grid-layout', [
+    'heading' => $hive->get('admin.faqs'),
+    'title' => $hive->get('admin.faqs'),
 ]); ?>
 
 <div class="space-y-6">
     <div class="admin-shell space-y-6">
 
-        <?= component('ui/subheading', ['title' => $hive->get('admin.edit_a_card')]) ?>
+        <?= component('ui/subheading', ['title' => $hive->get('admin.edit_a_faq')]) ?>
 
-        <form action="<?= $hive->alias('admin_cards_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+        <form action="<?= $hive->alias('admin_faqs_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
             <input type="hidden" name="_method" value="put">
             <?= csrf() ?>
 
             <?= component('form/form-input', [
                 'name'  => 'name',
-                'label' => $hive->get('admin.card_name'),
+                'label' => $hive->get('admin.faq_name'),
                 'attrs' => [
                     'type'     => 'text',
-                    'value'    => $card['name'],
+                    'value'    => $faq['name'],
                     'required' => true,
-                ],
-            ]) ?>
-
-            <?= component('form/form-file-input', [
-                'name'  => 'front_image',
-                'label' => $hive->get('admin.front_image'),
-                'with_alt' => true,
-                'value'    => [$card['front_image'] ?? null],
-                'attrs' => [
-                    'multiple' => false,
                 ],
             ]) ?>
 
             <?= component('form/form-textarea', [
                 'name'  => 'advice',
-                'label' => $hive->get('admin.card_advice'),
+                'label' => $hive->get('admin.faq_advice'),
                 'attrs' => [
                     'required' => true,
-                    'value'    => $card['advice'],
-                ],
-            ]) ?>
-
-            <?= component('form/form-wysiwyg', [
-                'name'  => 'html',
-                'label' => $hive->get('admin.card_meaning'),
-                'attrs' => [
-                    'required' => true,
-                    'value'    => $card['html'],
+                    'value'    => $faq['advice'],
                 ],
             ]) ?>
 
@@ -69,7 +50,7 @@ slot('layouts/card-grid-layout', [
                     'ui/auth-button',
                     [
                         'slot' => $hive->get('admin.cancel'),
-                        'href' => $hive->alias('admin_cards_index'),
+                        'href' => $hive->alias('admin_faqs_index'),
                         'variant' => 'secondary',
                         'attrs' => ['type' => 'submit']
                     ]

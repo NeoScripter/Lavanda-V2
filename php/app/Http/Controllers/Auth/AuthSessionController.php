@@ -8,12 +8,9 @@ use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\LoginRequest;
 use Support\Auth;
-use Traits\RequiresAuth;
 
 class AuthSessionController extends Controller
 {
-    use RequiresAuth;
-
     public function index(\Base $hive)
     {
         if (Auth::check()) {
