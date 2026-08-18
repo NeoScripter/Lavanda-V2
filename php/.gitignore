@@ -24,6 +24,7 @@ config/env.ini
 db/database.sqlite
 storage/private/*
 phpunit.xml
+.phpunit.cache/
 
 # Editor directories and files
 .vscode/*
