@@ -35,7 +35,7 @@
                         class="size-12 hidden md:block absolute left-0 my-auto -translate-x-full inset-y-0 rotate-180 text-white">
                         <?= svg('chevron-right') ?>
                     </button>
-                    <figure class="w-[80vw] h-[80vh] animate-expand closes-on-click">
+                    <figure class="w-[80dvw] h-[70dvh] animate-expand closes-on-click">
                         <img
                             component-image
                             src="<?= $img->src . '-dk.webp' ?>"
