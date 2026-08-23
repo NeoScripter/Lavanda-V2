@@ -5,13 +5,13 @@ namespace Http\Models;
 use DB\SQL\Mapper;
 use Enums\DBView;
 
-class FlipCard extends Mapper
+class RuneAsset extends Mapper
 {
     function __construct()
     {
         $db = \Base::instance()->get("DB");
 
-        parent::__construct($db, DBView::FLIPCARD->value);
+        parent::__construct($db, DBView::RUNE_ASSET->value);
     }
 
     function to_resource(): array

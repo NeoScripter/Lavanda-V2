@@ -196,10 +196,10 @@ class CliController
     {
         $db = $hive->get("DB");
 
-        $view = DBView::FLIPCARD->value;
+        $card_view = DBView::FLIPCARD->value;
 
         $db->exec(
-            "CREATE VIEW {$view} AS
+            "CREATE VIEW {$card_view} AS
             SELECT
                 c.id, c.name, c.html, c.advice, c.variant, c.locale, c.created_at,
                 front.id as front_id, front.imageable_type as front_imageable_type, front.imageable_id as front_imageable_id, front.variant as front_variant, front.src as front_src, front.alt as front_alt,
@@ -208,13 +208,30 @@ class CliController
             LEFT JOIN images front ON front.imageable_id = c.id AND front.imageable_type = c.variant AND front.variant = 'front'
             LEFT JOIN images back ON back.imageable_type = c.variant AND back.variant = 'back';"
         );
+
+        $rune_view = DBView::RUNE_ASSET->value;
+
+        $db->exec(
+            "CREATE VIEW {$rune_view} AS
+            SELECT
+                c.id, c.name, c.html, c.advice, c.variant, c.locale, c.created_at,
+                front.id as front_id, front.imageable_type as front_imageable_type, front.imageable_id as front_imageable_id, front.variant as front_variant, front.src as front_src, front.alt as front_alt,
+                back.id as back_id, back.imageable_type as back_imageable_type, back.imageable_id as back_imageable_id, back.variant as back_variant, back.src as back_src, back.alt as back_alt
+            FROM cards c
+            LEFT JOIN images front ON front.imageable_id = c.id AND front.imageable_type = c.variant AND front.variant = 'front'
+            LEFT JOIN images back ON back.imageable_id = c.id AND back.imageable_type = c.variant AND back.variant = 'back';"
+        );
     }
 
     private function delete_db_views(\Base $hive)
     {
         $db = $hive->get("DB");
-        $view = DBView::FLIPCARD->value;
-        $db->exec("DROP VIEW IF EXISTS {$view} CASCADE");
+
+        $card_view = DBView::FLIPCARD->value;
+        $db->exec("DROP VIEW IF EXISTS {$card_view} CASCADE");
+
+        $rune_view = DBView::RUNE_ASSET->value;
+        $db->exec("DROP VIEW IF EXISTS {$rune_view} CASCADE");
     }
 
     private function create_card_backs(\Base $hive)

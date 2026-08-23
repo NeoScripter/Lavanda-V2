@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Factories;
 
 use Http\Models\Image;
-use Support\ImageHandler;
 
 class ImageFactory extends Factory
 {
