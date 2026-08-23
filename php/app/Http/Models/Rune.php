@@ -4,6 +4,7 @@ namespace Http\Models;
 
 use DB\Cortex;
 use DB\SQL\Schema;
+use Enums\ImageableType;
 use Enums\Locale;
 
 class Rune extends Cortex
@@ -19,13 +20,16 @@ class Rune extends Cortex
             if ($self->back_image) {
                 $self->back_image->erase();
             }
+            foreach ($self->themes as $theme) {
+                $theme->erase();
+            }
         });
 
         $this->onget('front_image', function ($self) {
             $img = new Image();
             $img->load([
                 'imageable_type = ? AND imageable_id = ? AND variant = ?',
-                $self->variant,
+                ImageableType::RUNE->value,
                 $self->id,
                 'front'
             ]);
@@ -41,7 +45,7 @@ class Rune extends Cortex
             $img = new Image();
             $img->load([
                 'imageable_type = ? AND imageable_id = ? AND variant = ?',
-                $self->variant,
+                ImageableType::RUNE->value,
                 $self->id,
                 'back'
             ]);
@@ -63,7 +67,7 @@ class Rune extends Cortex
             'type' => Schema::DT_TEXT,
             'nullable' => false,
         ],
-        'theme' => [
+        'themes' => [
             'has-many' => ['\Http\Models\RuneTheme', 'rune']
         ],
         'locale' => [

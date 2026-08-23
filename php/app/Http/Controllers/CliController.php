@@ -5,11 +5,14 @@ namespace Http\Controllers;
 use Enums\AppEnv;
 use Enums\CardVariant;
 use Enums\DBView;
+use Enums\ImageableType;
 use Factories\ImageFactory;
 use Http\Models\Card;
 use Http\Models\FAQ;
 use Http\Models\User;
 use Http\Models\Image;
+use Http\Models\Rune;
+use Http\Models\RuneTheme;
 use Seeders\CardSeeder;
 use Seeders\FAQSeeder;
 
@@ -49,6 +52,8 @@ class CliController
         Card::setup();
         Image::setup();
         FAQ::setup();
+        Rune::setup();
+        RuneTheme::setup();
 
         $this->create_db_views($hive);
 
@@ -67,6 +72,8 @@ class CliController
         Card::setdown();
         Image::setdown();
         FAQ::setdown();
+        Rune::setdown();
+        RuneTheme::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
@@ -199,7 +206,7 @@ class CliController
         $card_view = DBView::FLIPCARD->value;
 
         $db->exec(
-            "CREATE VIEW {$card_view} AS
+            "CREATE OR REPLACE VIEW {$card_view} AS
             SELECT
                 c.id, c.name, c.html, c.advice, c.variant, c.locale, c.created_at,
                 front.id as front_id, front.imageable_type as front_imageable_type, front.imageable_id as front_imageable_id, front.variant as front_variant, front.src as front_src, front.alt as front_alt,
@@ -210,16 +217,17 @@ class CliController
         );
 
         $rune_view = DBView::RUNE_ASSET->value;
+        $rune_imageable_type = ImageableType::RUNE->value;
 
         $db->exec(
-            "CREATE VIEW {$rune_view} AS
+            "CREATE OR REPLACE VIEW {$rune_view} AS
             SELECT
-                c.id, c.name, c.html, c.advice, c.variant, c.locale, c.created_at,
+                r.id, r.name, r.advice, r.locale, r.created_at,
                 front.id as front_id, front.imageable_type as front_imageable_type, front.imageable_id as front_imageable_id, front.variant as front_variant, front.src as front_src, front.alt as front_alt,
                 back.id as back_id, back.imageable_type as back_imageable_type, back.imageable_id as back_imageable_id, back.variant as back_variant, back.src as back_src, back.alt as back_alt
-            FROM cards c
-            LEFT JOIN images front ON front.imageable_id = c.id AND front.imageable_type = c.variant AND front.variant = 'front'
-            LEFT JOIN images back ON back.imageable_id = c.id AND back.imageable_type = c.variant AND back.variant = 'back';"
+            FROM runes r
+            LEFT JOIN images front ON front.imageable_id = r.id AND front.imageable_type = '{$rune_imageable_type}' AND front.variant = 'front'
+            LEFT JOIN images back ON back.imageable_id = r.id AND back.imageable_type = '{$rune_imageable_type}' AND back.variant = 'back';"
         );
     }
 

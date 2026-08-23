@@ -18,6 +18,7 @@ class RuneFactory extends Factory
         $rune->name = $attrs['name'] ?? $this->faker->word();
         $rune->advice = $attrs['advice'] ??  $this->faker->sentence();
         $html = $attrs['html'] ?? file_get_contents(APP_DIR . '/db/Fixtures/Rune/html.md');
+        $rune->save();
 
         foreach (RuneThemeEnum::values() as $name) {
             $theme = new RuneTheme();
@@ -27,7 +28,6 @@ class RuneFactory extends Factory
             $theme->save();
         }
 
-        $rune->save();
 
         $imageable_type = ImageableType::RUNE->value;
 

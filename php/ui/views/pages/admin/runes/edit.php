@@ -1,17 +1,24 @@
 <?php
 
+extract(component_props(
+    required: ['card'],
+    optional: [],
+    props: get_defined_vars(),
+));
+
 $hive = \Base::instance();
 
 slot('layouts/card-grid-layout', [
     'heading' => $hive->get('admin.cards'),
     'title' => $hive->get('admin.cards'),
-]);
-?>
+]); ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', ['title' => $hive->get('admin.create_a_card')]) ?>
 
-    <form action="<?= \Base::instance()->alias('admin_cards_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+    <?= component('ui/subheading', ['title' => $hive->get('admin.edit_a_card')]) ?>
+
+    <form action="<?= $hive->alias('admin_cards_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+        <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
         <?= component('form/form-input', [
@@ -19,6 +26,7 @@ slot('layouts/card-grid-layout', [
             'label' => $hive->get('admin.card_name'),
             'attrs' => [
                 'type'     => 'text',
+                'value'    => $card['name'],
                 'required' => true,
             ],
         ]) ?>
@@ -27,8 +35,8 @@ slot('layouts/card-grid-layout', [
             'name'  => 'front_image',
             'label' => $hive->get('admin.front_image'),
             'with_alt' => true,
+            'value'    => [$card['front_image'] ?? null],
             'attrs' => [
-                'required' => true,
                 'multiple' => false,
             ],
         ]) ?>
@@ -38,6 +46,7 @@ slot('layouts/card-grid-layout', [
             'label' => $hive->get('admin.card_advice'),
             'attrs' => [
                 'required' => true,
+                'value'    => $card['advice'],
             ],
         ]) ?>
 
@@ -46,14 +55,27 @@ slot('layouts/card-grid-layout', [
             'label' => $hive->get('admin.card_meaning'),
             'attrs' => [
                 'required' => true,
+                'value'    => $card['html'],
             ],
         ]) ?>
 
-        <div class="flex justify-between gap-2.5">
-            <?= component('ui/auth-button', [
-                'slot' => $hive->get('admin.save'),
-                'attrs' => ['type' => 'submit']
-            ]) ?>
+        <div class="flex justify-start gap-4.5">
+            <?= component(
+                'ui/auth-button',
+                [
+                    'slot' => $hive->get('admin.save'),
+                    'attrs' => ['type' => 'submit']
+                ]
+            ) ?>
+            <?= component(
+                'ui/auth-button',
+                [
+                    'slot' => $hive->get('admin.cancel'),
+                    'href' => $hive->alias('admin_cards_index'),
+                    'variant' => 'secondary',
+                    'attrs' => ['type' => 'submit']
+                ]
+            ) ?>
         </div>
     </form>
 </div>

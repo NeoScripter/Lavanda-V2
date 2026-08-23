@@ -9,8 +9,6 @@ slot('layouts/item-layout', [
 ?>
 
 <div class="space-y-6">
-    <div class="admin-shell space-y-6">
-
         <?= component('ui/subheading', ['title' => $hive->get('admin.create_faq')]) ?>
 
         <form action="<?= \Base::instance()->alias('admin_faqs_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
@@ -48,7 +46,6 @@ slot('layouts/item-layout', [
 
             </div>
         </form>
-    </div>
 </div>
 
 <?php end_slot(); ?>

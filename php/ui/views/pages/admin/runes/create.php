@@ -2,21 +2,21 @@
 
 $hive = \Base::instance();
 
-slot('layouts/card-grid-layout', [
-    'heading' => $hive->get('admin.cards'),
-    'title' => $hive->get('admin.cards'),
+slot('layouts/item-layout', [
+    'heading' => $hive->get('admin.runes'),
+    'title' => $hive->get('admin.runes'),
 ]);
 ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', ['title' => $hive->get('admin.create_a_card')]) ?>
+    <?= component('ui/subheading', ['title' => $hive->get('admin.create_a_rune')]) ?>
 
-    <form action="<?= \Base::instance()->alias('admin_cards_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+    <form action="<?= \Base::instance()->alias('admin_runes_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <?= csrf() ?>
 
         <?= component('form/form-input', [
             'name'  => 'name',
-            'label' => $hive->get('admin.card_name'),
+            'label' => $hive->get('admin.rune_name'),
             'attrs' => [
                 'type'     => 'text',
                 'required' => true,
@@ -33,17 +33,19 @@ slot('layouts/card-grid-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-textarea', [
-            'name'  => 'advice',
-            'label' => $hive->get('admin.card_advice'),
+        <?= component('form/form-file-input', [
+            'name'  => 'back_image',
+            'label' => $hive->get('admin.back_image'),
+            'with_alt' => true,
             'attrs' => [
                 'required' => true,
+                'multiple' => false,
             ],
         ]) ?>
 
-        <?= component('form/form-wysiwyg', [
-            'name'  => 'html',
-            'label' => $hive->get('admin.card_meaning'),
+        <?= component('form/form-textarea', [
+            'name'  => 'advice',
+            'label' => $hive->get('admin.rune_advice'),
             'attrs' => [
                 'required' => true,
             ],
