@@ -28,7 +28,6 @@ class RuneFactory extends Factory
             $theme->save();
         }
 
-
         $imageable_type = ImageableType::RUNE->value;
 
         (new ImageFactory)->create(dir: 'test', imageable_type: $imageable_type, imageable_id: $rune->id, variant: 'front');

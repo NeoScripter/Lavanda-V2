@@ -7,7 +7,7 @@ enum CardVariant: string
     case TAROT = 'tarot';
     case METAPHORIC = 'metaphoric';
     case LENORMAND = 'lenormand';
-    case MIND_GAME = 'mind_game';
+    case MIND_GAMES = 'mind_games';
     case BONUS = 'bonus';
 
     public static function values(): array

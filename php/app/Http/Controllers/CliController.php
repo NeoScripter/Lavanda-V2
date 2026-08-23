@@ -15,6 +15,7 @@ use Http\Models\Rune;
 use Http\Models\RuneTheme;
 use Seeders\CardSeeder;
 use Seeders\FAQSeeder;
+use Seeders\RuneSeeder;
 
 const SCREEN_WIDTH = 152;
 const METHOD_WIDTH = 12;
@@ -88,6 +89,7 @@ class CliController
     {
         CardSeeder::run();
         FAQSeeder::run();
+        RuneSeeder::run();
     }
 
     function fresh(\Base $hive)

@@ -6,11 +6,13 @@ namespace Http\Controllers\Admin\CRUD;
 
 use Enums\ImageableType;
 use Enums\Locale;
+use Enums\RuneTheme as RuneThemeEnum;
 use Enums\SessionKey;
 use Exception;
 use Http\Controller;
 use Http\Models\Rune;
 use Http\Models\RuneAsset;
+use Http\Models\RuneTheme;
 use Http\Requests\CRUD\Rune\StoreRuneRequest;
 use Http\Requests\CRUD\Rune\UpdateRuneRequest;
 use Jobs\ProcessImageJob;
@@ -31,7 +33,7 @@ class RuneController extends Controller
         $rune = $rune->paginate(
             $page - 1,
             15,
-            ['locale=? AND variant=?', $locale],
+            ['locale=?', $locale],
             ['order' => 'created_at DESC']
         );
 
@@ -112,6 +114,14 @@ class RuneController extends Controller
             ]);
         }
 
+        foreach (RuneThemeEnum::values() as $name) {
+            $theme = new RuneTheme();
+            $theme->name = $name;
+            $theme->html = 'Placeholder';
+            $theme->rune = $rune;
+            $theme->save();
+        }
+
         notify("{$hive->get('admin.rune_successfully_created')}! \n
             {$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}");
 
@@ -142,7 +152,7 @@ class RuneController extends Controller
                 'imageable_id'      => $rune->id,
                 'imageable_type'   => ImageableType::RUNE->value,
                 'variant'          => 'front',
-                'sizes'          => ['mb' => 150, 'tb' => 250, 'dk' => 300],
+                'sizes'          => ['mb' => 120, 'tb' => 200],
                 'files'          => $request->input('front_image'),
                 'qnt'            => 1,
             ]);

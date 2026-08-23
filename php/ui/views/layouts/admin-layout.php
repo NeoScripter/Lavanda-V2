@@ -26,6 +26,11 @@ extract(component_props(
                 'label' => 'FAQs',
                 'icon'  => 'faq',
             ],
+            [
+                'url'   => '/admin/runes',
+                'label' => $hive->get('admin.runes'),
+                'icon'  => 'rune',
+            ],
             // [
             //     'url'   => '/admin/articles',
             //     'label' => 'News Articles',

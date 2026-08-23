@@ -23,6 +23,14 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
+        <?= component('form/form-textarea', [
+            'name'  => 'advice',
+            'label' => $hive->get('admin.rune_advice'),
+            'attrs' => [
+                'required' => true,
+            ],
+        ]) ?>
+
         <?= component('form/form-file-input', [
             'name'  => 'front_image',
             'label' => $hive->get('admin.front_image'),
@@ -43,19 +51,19 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-textarea', [
-            'name'  => 'advice',
-            'label' => $hive->get('admin.rune_advice'),
-            'attrs' => [
-                'required' => true,
-            ],
-        ]) ?>
-
-        <div class="flex justify-between gap-2.5">
+        <div class="flex gap-4.5">
             <?= component('ui/auth-button', [
                 'slot' => $hive->get('admin.save'),
                 'attrs' => ['type' => 'submit']
             ]) ?>
+
+            <?= component('ui/auth-button', [
+                'slot' => $hive->get('admin.cancel'),
+                'href' => $hive->alias('admin_runes_index'),
+                'variant' => 'secondary',
+                'attrs' => ['type' => 'submit']
+            ]) ?>
+
         </div>
     </form>
 </div>

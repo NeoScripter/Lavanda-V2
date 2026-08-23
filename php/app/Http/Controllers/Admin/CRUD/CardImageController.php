@@ -43,7 +43,8 @@ class CardImageController extends Controller
             ]);
         }
 
-        notify($hive->get('admin.image_successfully_updated'));
+        notify("{$hive->get('admin.card_successfully_created')}! \n
+            {$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}");
 
         $referrer = $hive->HEADERS['Referer'] ?? '/';
         $hive->reroute($referrer);
