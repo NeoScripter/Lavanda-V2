@@ -13,7 +13,7 @@ extract(component_props(
 $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 ?>
 
-<?php slot('layouts/card-grid-layout', [
+<?php slot('layouts/item-layout', [
     'heading' => $hive->get('admin.faqs'),
     'title' => $hive->get('admin.faqs')
 ]); ?>
@@ -31,7 +31,7 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
     </nav>
 
     <?php if (! empty($faqs)) : ?>
-        <ul class="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-12">
+        <ul class="grid gap-12 max-w-lg">
 
             <?php foreach ($faqs as $faq) : ?>
                 <?php view('pages/admin/faqs/partials/item', [

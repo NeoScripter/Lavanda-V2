@@ -61,7 +61,7 @@ return [
         'here_you_can_manage_the_cards' => 'Здесь вы можете редактировать карты',
         "these_credentials_dont_match_our_records" => "Неправильные имя пользователя или пароль",
         "welcome" => "Добро пожаловать",
-        "select_card_language" => "Выберите язык карт",
+        "select_language" => "Выберите язык",
         "please_wait_for_1-2_minutes_in_order_to_see_updated_image_files" => "Фото буду обработаны в течение 1-2 минут",
         "image_successfully_updated" => "Фото успешно обновлено",
         "card_successfully_created" => "Карта успешно создана",

@@ -61,7 +61,7 @@ return [
         'here_you_can_manage_the_cards' => 'Here you can manage the cards',
         "these_credentials_dont_match_our_records" => "These credentials don't match our records",
         "welcome" => "welcome",
-        "select_card_language" => "Select card language",
+        "select_language" => "Select language",
         "image_successfully_updated" => "Image successfully created!",
         "please_wait_for_1-2_minutes_in_order_to_see_updated_image_files" => "Please wait for 1-2 minutes in order to see updated image files",
         "card_successfully_created" => "Card successfully created",

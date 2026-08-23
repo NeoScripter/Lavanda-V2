@@ -18,7 +18,7 @@
             [
                 'url'   => '/admin/faqs',
                 'label' => 'FAQs',
-                'icon'  => 'mails',
+                'icon'  => 'faq',
             ],
             // [
             //     'url'   => '/admin/articles',
