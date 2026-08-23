@@ -1,4 +1,10 @@
-<?php $hive = \Base::instance(); ?>
+<?php $hive = \Base::instance();
+
+extract(component_props(
+    required: ['title', 'heading', 'slot'],
+    optional: [],
+    props: get_defined_vars()
+));?>
 <?php slot('layouts/app-shell', compact('title')); ?>
 
 <main
@@ -47,7 +53,7 @@
                 class="rounded-sm md:pointer-events-none">
                 <?= svg('panel-left-icon') ?>
             </button>
-            <span><?= $heading ?? '' ?></span>
+            <span><?= $heading ?></span>
         </header>
         <?= $slot ?? '' ?>
     </div>

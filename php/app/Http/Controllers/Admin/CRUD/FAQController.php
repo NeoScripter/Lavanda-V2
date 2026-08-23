@@ -50,19 +50,6 @@ class FAQController extends Controller
         ]);
     }
 
-    public function show(\Base $hive)
-    {
-
-        $id = $hive->PARAMS['id'];
-        $faq = new FAQ();
-        $faq->load(['id = ?', $id]);
-
-        view('pages/admin/faqs/show', [
-            'title' => $faq->name,
-            'faq' => $faq,
-        ]);
-    }
-
     public function store(\Base $hive)
     {
         $request = $this->request(StoreFAQRequest::class);
@@ -72,8 +59,7 @@ class FAQController extends Controller
         $faq->copyFrom($request->all());
         $faq->save();
 
-        notify("{$hive->get('admin.faq_successfully_created')}! \n
-            {$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}");
+        notify($hive->get('admin.faq_successfully_created'));
 
         $hive->reroute('@admin_faqs_index');
     }
@@ -94,9 +80,7 @@ class FAQController extends Controller
         $faq->copyFrom($request->all());
         $faq->save();
 
-        $message = "{$hive->get('admin.faq_successfully_updated')}!";
-
-        notify($message);
+        notify($hive->get('admin.faq_successfully_updated'));
 
         $hive->reroute("@admin_faqs_edit(@id=$id)");
     }

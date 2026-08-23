@@ -52,9 +52,10 @@ slot('layouts/card-grid-layout', [
             ]) ?>
 
             <div class="flex justify-between gap-2.5">
-                <?php slot('components/ui/auth-button', ['attrs' => ['type' => 'submit']]); ?>
-                <?= $hive->get('admin.save') ?>
-                <?php end_slot(); ?>
+                <?= component('ui/auth-button', [
+                    'slot' => $hive->get('admin.save'),
+                    'attrs' => ['type' => 'submit']
+                ]) ?>
             </div>
         </form>
     </div>

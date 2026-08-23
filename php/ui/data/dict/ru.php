@@ -83,5 +83,10 @@ return [
         "faq_successfully_created" => "FAQ успешно создано!",
         "faq_successfully_updated" => "FAQ успешно обновлено!",
         "faq_successfully_deleted" => "FAQ успешно удалено!",
+        "question" => "Вопрос",
+        "answer" => "Ответ",
+        "faqs" => "FAQs",
+        "edit_faq" => "Редактировать FAQ",
+        "create_faq" => "Создать FAQ",
     ]
 ];

@@ -83,6 +83,10 @@ return [
         "faq_successfully_created" => "FAQ successfully created",
         "faq_successfully_updated" => "FAQ successfully updated",
         "faq_successfully_deleted" => "FAQ successfully deleted",
-
+        "question" => "Question",
+        "answer" => "Ответ",
+        "faqs" => "FAQs",
+        "edit_faq" => "Edit FAQ",
+        "create_faq" => "Create FAQ",
     ]
 ];

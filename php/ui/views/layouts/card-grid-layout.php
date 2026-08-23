@@ -3,14 +3,11 @@
 use Enums\CardVariant;
 use Enums\SessionKey;
 
-slot('layouts/admin-layout', compact('heading', 'title')); ?>
-
-<?php
 $hive = \Base::instance();
 $path = $hive->PATH;
 
 extract(component_props(
-    required: ['heading'],
+    required: ['heading', 'title'],
     optional: ['slot' => ''],
     props: get_defined_vars(),
 ));
@@ -21,7 +18,10 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 $nav_items = array_map(
     fn($value) => ['variant' => $value, 'title' => $hive->get("admin.{$value}")],
     CardVariant::values()
-); ?>
+);
+
+slot('layouts/admin-layout', compact('heading', 'title')); ?>
+
 
 <div class="px-4 py-6">
     <div class="flex flex-col space-y-8 xl:flex-row lg:space-y-0 lg:space-x-12">
