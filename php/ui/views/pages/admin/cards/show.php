@@ -5,7 +5,7 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 $hive = \Base::instance(); ?>
-<?php slot('layouts/card-layout', [
+<?php slot('layouts/card-grid-layout', [
     'heading' => $hive->get('admin.cards'),
     'title' => $hive->get('admin.cards')
 ]);
