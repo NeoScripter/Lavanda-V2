@@ -9,12 +9,14 @@ use Enums\ImageableType;
 use Factories\ImageFactory;
 use Http\Models\Card;
 use Http\Models\FAQ;
+use Http\Models\Iching;
 use Http\Models\User;
 use Http\Models\Image;
 use Http\Models\Rune;
 use Http\Models\RuneTheme;
 use Seeders\CardSeeder;
 use Seeders\FAQSeeder;
+use Seeders\IchingSeeder;
 use Seeders\RuneSeeder;
 
 const SCREEN_WIDTH = 152;
@@ -55,6 +57,7 @@ class CliController
         FAQ::setup();
         Rune::setup();
         RuneTheme::setup();
+        Iching::setup();
 
         $this->create_db_views($hive);
 
@@ -75,6 +78,7 @@ class CliController
         FAQ::setdown();
         Rune::setdown();
         RuneTheme::setdown();
+        Iching::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
@@ -90,6 +94,7 @@ class CliController
         CardSeeder::run();
         FAQSeeder::run();
         RuneSeeder::run();
+        IchingSeeder::run();
     }
 
     function fresh(\Base $hive)

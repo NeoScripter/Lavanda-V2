@@ -31,21 +31,11 @@ extract(component_props(
                 'label' => $hive->get('admin.runes'),
                 'icon'  => 'rune',
             ],
-            // [
-            //     'url'   => '/admin/articles',
-            //     'label' => 'News Articles',
-            //     'icon'  => 'newspaper',
-            // ],
-            // [
-            //     'url'   => '/admin/programs',
-            //     'label' => 'Programs',
-            //     'icon'  => 'earth',
-            // ],
-            // [
-            //     'url'   => '/admin/reports',
-            //     'label' => 'Reports',
-            //     'icon'  => 'file-stack',
-            // ],
+            [
+                'url'   => '/admin/ichings',
+                'label' => $hive->get('admin.iching'),
+                'icon'  => 'iching',
+            ],
         ],
     ]) ?>
 
