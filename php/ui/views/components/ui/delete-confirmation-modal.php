@@ -28,7 +28,7 @@ $final_class = trim('grid gap-6 max-w-9/10  sm:max-w-100 lg:max-w-160 w-full' . 
                 'variant' => 'destructive',
                 'size'    => 'lg',
                 'class'   => 'w-fit text-base',
-                'slot'   => 'Delete',
+                'slot'   => $hive->get('admin.delete'),
                 'attrs'   => ['type' => 'submit'],
             ]) ?>
         </form>
@@ -37,7 +37,7 @@ $final_class = trim('grid gap-6 max-w-9/10  sm:max-w-100 lg:max-w-160 w-full' . 
             'variant' => 'default',
             'size'    => 'lg',
             'class'   => 'w-fit text-base',
-            'slot' => 'Cancel',
+            'slot' => $hive->get('admin.cancel'),
             'attrs'   => [
                 'type'    => 'button',
                 'component-modal-dismiss' => true
