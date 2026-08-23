@@ -24,7 +24,7 @@ class ImageHandler
         foreach ($files as $file) {
             $src = $this->process_one($file['src'], $sizes);
 
-            $result[] = ['src' => $src, 'alt' => $file['alt']];
+            $result[] = ['src' => $src, 'alt' => $file['alt'] ?? ''];
         }
 
         return $result;
