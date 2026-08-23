@@ -21,22 +21,26 @@ final class AdminControllerTest extends TestCase
 
     public static function routes(): array
     {
-        $hive = \Base::instance();
+        $blacklisted = ['admin/login', 'admin/logout'];
+        $whitelisted = ['admin'];
 
-        $routes = [];
+        $all_routes = get_flat_routes();
 
-        foreach ($hive->get('ROUTES') as $url => $methods) {
+        $protected_routes = [];
 
-            if (str_contains($url, 'login') || ! str_contains($url, 'admin') || str_contains($url, 'logout')) {
+        foreach ($all_routes as $route) {
+            $path = $route['url'];
+
+            $is_blacklisted = array_any($blacklisted, fn($blacklist) => str_contains($path, $blacklist));
+            $is_whitelisted = array_all($whitelisted, fn($prefix) => str_contains($path, $prefix));
+
+            if ($is_blacklisted || !$is_whitelisted) {
                 continue;
             }
-            foreach ($methods as $route) {
-                foreach ($route as $method => $_) {
-                    $routes[] = [$method, $url];
-                }
-            }
+
+            $protected_routes[] = [$route['method'], $route['url']];
         }
 
-        return $routes;
+        return $protected_routes;
     }
 }

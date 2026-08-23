@@ -547,3 +547,22 @@ function read_dir_files(string $path)
 
     return $files;
 }
+
+function get_flat_routes()
+{
+    $routes = [];
+    $raw = \Base::instance()->get('ROUTES');
+
+    foreach ($raw as $url => $methods) {
+        foreach ($methods as $route) {
+            foreach ($route as $method => $_) {
+                $routes[] = [
+                    'url' => $url,
+                    'method' => $method
+                ];
+            }
+        }
+    }
+
+    return $routes;
+}
