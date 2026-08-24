@@ -13,7 +13,6 @@ use Http\Models\PracticeItem;
 use Http\Models\PracticeItemAsset;
 use Http\Requests\CRUD\PracticeItem\StorePracticeItemRequest;
 use Http\Requests\CRUD\PracticeItem\UpdatePracticeItemRequest;
-use Jobs\ProcessImageJob;
 use Traits\RequiresAuth;
 
 class PracticeItemController extends Controller
@@ -42,7 +41,7 @@ class PracticeItemController extends Controller
         ]);
     }
 
-    public function create(\Base $hive)
+    public function create()
     {
         view('pages/admin/practice_items/create');
     }

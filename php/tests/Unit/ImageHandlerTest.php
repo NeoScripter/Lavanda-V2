@@ -51,7 +51,7 @@ final class ImageHandlerTest extends TestCase
     #[Test]
     public function job_processes_and_optimizes_image(): void
     {
-        $path = (new ImageFactory(variant: 'front'))->template;
+        $path = (new ImageFactory(variant: 'front_image'))->template;
         $subdir = UPLOAD_DIR . 'image_job_queue_test/';
         $new_path = $subdir . 'copy.png';
 

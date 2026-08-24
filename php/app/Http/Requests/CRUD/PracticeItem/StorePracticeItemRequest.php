@@ -1,11 +1,11 @@
 <?php
 
-namespace Http\Requests\CRUD\Card;
+namespace Http\Requests\CRUD\PracticeItem;
 
 use Enums\SessionKey;
 use Http\Request;
 
-class StoreCardRequest extends Request
+class StorePracticeItemRequest extends Request
 {
     public function rules(): array
     {

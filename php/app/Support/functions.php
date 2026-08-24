@@ -3,7 +3,6 @@
 use DB\Cortex;
 use Http\Models\Image;
 use Jobs\ProcessImageJob;
-use Support\ImageHandler;
 
 define('VITE_DEV_SERVER', 'http://localhost:5173');
 
@@ -233,7 +232,7 @@ function get_latest_id(string $table): int
     return $res[0]['max_id'] ?? 1;
 }
 
-function dd(...$vars)
+function dd(mixed ...$vars)
 {
     foreach ($vars as $v) {
         echo "<pre>";
@@ -250,29 +249,6 @@ function add_markdown_field(array &$data, string $from, string $to)
     }
 
     $data[$to] = \Markdown::instance()->convert($data[$from]);
-}
-
-
-function get_db_table_names()
-{
-    $files = glob(APP_DIR . '/db/migrations/*');
-    sort($files);
-
-    return array_filter(
-        array_map(
-            function ($file) {
-                $filename = basename($file);
-
-                if (preg_match('/create_([a-z_]+)_table/', $filename, $matches)) {
-                    return $matches[1];
-                }
-
-                return '';
-            },
-            $files
-        ),
-        'strlen'
-    );
 }
 
 
@@ -371,77 +347,7 @@ function purge_file(string $src): void
     }
 }
 
-function set_morph($self, $value)
-{
-    $current = array_map(fn($img) => $img->id, $self->gallery ?? []) ?? [];
-
-    if (is_null($value) || empty($value)) {
-        return $current ?? [];
-    }
-
-    if (is_array($value)) {
-        $ids = is_int($value[0]) ? $value : array_map(fn($img) => $img->id, $value);
-        return [...$current, ...$ids];
-    }
-
-    if (is_int($value)) {
-        return [...$current, $value];
-    }
-
-    if (!empty($value->id)) {
-        return [...$current, $value->id];
-    }
-
-    return $current;
-}
-
-function get_morph_many($self, $ids, $relation)
-{
-    if (empty($ids) || ! is_array($ids)) {
-        return [];
-    }
-
-    $imgs = new Image();
-    $imgs = $imgs->find(['id IN ?', $ids]);
-    $db_table = $self->getTable();
-    $hive = \Base::instance();
-
-    if (empty($imgs)) {
-        $hive->DB->exec("UPDATE $db_table SET $relation = NULL WHERE id = ?", [$self->id]);
-        return [];
-    }
-
-    $new_ids = [];
-    foreach ($imgs as $img) {
-        $new_ids[] = $img->id;
-    }
-
-    if (count($ids) !== count($new_ids)) {
-        $hive->DB->exec("UPDATE $db_table SET $relation = ? WHERE id = ?", [json_encode($new_ids), $self->id]);
-    }
-
-    return [...$imgs];
-}
-
-function get_morph_one($self, $id, $relation)
-{
-    if (! $id) {
-        return null;
-    }
-
-    $img = new Image();
-    $img->load(['id = ?', $id]);
-
-    if ($img->dry()) {
-        $db_table = $self->getTable();
-        \Base::instance()->DB->exec("UPDATE $db_table SET $relation = NULL WHERE id = ?", [$self->id]);
-        return null;
-    }
-
-    return $img;
-}
-
-function convert_to_plural($word)
+function convert_to_plural(string $word)
 {
     $word = strtolower($word);
 
@@ -459,12 +365,12 @@ function convert_to_plural($word)
     return $word . 's';
 }
 
-function convert_to_snake_case($word)
+function convert_to_snake_case(string $word)
 {
     return strtolower(preg_replace('/(?<!^)(?=[A-Z])/', '_', $word));
 }
 
-function convert_to_kebab_case($word)
+function convert_to_kebab_case(string $word)
 {
     return strtolower(preg_replace('/(?<!^)(?=[A-Z])/', '-', $word));
 }

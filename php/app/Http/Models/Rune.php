@@ -31,7 +31,7 @@ class Rune extends Cortex
                 'imageable_type = ? AND imageable_id = ? AND variant = ?',
                 ImageableType::RUNE->value,
                 $self->id,
-                'front'
+                'front_image'
             ]);
 
             if ($img->dry()) {
@@ -47,7 +47,7 @@ class Rune extends Cortex
                 'imageable_type = ? AND imageable_id = ? AND variant = ?',
                 ImageableType::RUNE->value,
                 $self->id,
-                'back'
+                'back_image'
             ]);
 
             if ($img->dry()) {

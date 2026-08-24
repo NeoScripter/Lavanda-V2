@@ -24,7 +24,7 @@ class Card extends Cortex
                 'imageable_type = ? AND imageable_id = ? AND variant = ?',
                 $self->variant,
                 $self->id,
-                'front'
+                'front_image'
             ]);
 
             if ($img->dry()) {

@@ -37,14 +37,14 @@ final class CardFactoryTest extends TestCase
     public function deleting_card_also_deletes_its_front_image(): void
     {
         $card = $this->factory->create();
-        $image = $card->front_image;
+        $image_id = $card->front_image->id;
 
         $db = $this->hive->get('DB');
 
         $card->erase();
 
         $card_still_exists = $db->exec('SELECT 1 FROM cards WHERE id = ?', [$card->id]);
-        $image_still_exists = $db->exec('SELECT 1 FROM images WHERE id = ?', [$image->id]);
+        $image_still_exists = $db->exec('SELECT 1 FROM images WHERE id = ?', [$image_id]);
 
         $this->assertEmpty($card_still_exists, 'Card should be deleted');
         $this->assertEmpty($image_still_exists, 'Image should also be deleted');
