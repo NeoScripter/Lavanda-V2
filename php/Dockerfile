@@ -5,6 +5,7 @@ RUN --mount=type=bind,source=./composer.json,target=composer.json \
     --mount=type=cache,target=/tmp/cache \
     composer install --no-dev --no-interaction --optimize-autoloader
 RUN find vendor -name '*.php' -exec sed -i '/setAccessible/d' {} +
+RUN grep -rl "E_USER_ERROR" vendor/ | xargs -I{} sh -c 'php -r '\''$f=$argv[1]; $c=file_get_contents($f); $c=preg_replace("/trigger_error\((.*?),\s*E_USER_ERROR\s*\);/s", "throw new \\\\Error($1);", $c); file_put_contents($f,$c);'\'' {}'
 
 
 FROM composer:lts AS dev-deps
@@ -14,6 +15,7 @@ RUN --mount=type=bind,source=./composer.json,target=composer.json \
     --mount=type=cache,target=/tmp/cache \
     composer install --no-interaction
 RUN find vendor -name '*.php' -exec sed -i '/setAccessible/d' {} +
+RUN grep -rl "E_USER_ERROR" vendor/ | xargs -I{} sh -c 'php -r '\''$f=$argv[1]; $c=file_get_contents($f); $c=preg_replace("/trigger_error\((.*?),\s*E_USER_ERROR\s*\);/s", "throw new \\\\Error($1);", $c); file_put_contents($f,$c);'\'' {}'
 
 FROM node:24-alpine AS vite
 WORKDIR /app
