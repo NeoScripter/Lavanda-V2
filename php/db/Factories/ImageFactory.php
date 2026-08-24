@@ -8,7 +8,7 @@ use Http\Models\Image;
 
 class ImageFactory extends Factory
 {
-    public function __construct(public ?string $template = '', ?string $variant = 'front')
+    public function __construct(public ?string $template = '', ?string $variant = 'front_image')
     {
         $this->template = APP_DIR . "/db/Fixtures/Image/{$variant}/placeholder.png";
     }

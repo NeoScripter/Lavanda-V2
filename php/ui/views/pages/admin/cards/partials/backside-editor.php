@@ -43,7 +43,7 @@ $flipside_modal_id = uniqid('flipside_modal_');
 
             <?php slot('components/layout/modal', ['modal_id' => $flipside_modal_id]); ?>
 
-            <form action="<?= $hive->alias('admin_card_images_update', ['id' => $backside['id']]) ?>"
+            <form action="<?= $hive->alias('admin_images_update', ['id' => $backside['id']]) ?>"
                 method="post"
                 class="space-y-6 w-120"
                 enctype="multipart/form-data">

@@ -20,6 +20,8 @@ class PracticeItemController extends Controller
 {
     use RequiresAuth;
 
+    private $image_sizes = ['mb' => 450, 'tb' => 600, 'dk' => 750];
+
     public function index(\Base $hive)
     {
         $page = $hive->GET['page'] ?? 1;
@@ -79,21 +81,19 @@ class PracticeItemController extends Controller
         $item->copyFrom($request->all());
         $item->save();
 
-        if (! $item->dry() && $request->input('image')) {
-            ProcessImageJob::dispatch([
-                'imageable_id'      => $item->id,
-                'imageable_type'   => ImageableType::PRACTICE_ITEM->value,
-                'variant'          => 'image',
-                'sizes'          => ['mb' => 450, 'tb' => 600, 'dk' => 750],
-                'files'          => $request->input('image'),
-                'qnt'            => 1,
-            ]);
+        if (! $item->dry() && !empty($request->input('image'))) {
+            attach_image_to_model(
+                model: $item,
+                imageable_type: ImageableType::PRACTICE_ITEM->value,
+                variant: 'image',
+                file: $request->input('image')[0],
+                sizes: $this->image_sizes
+            );
         }
 
-        notify("{$hive->get('admin.item_successfully_created')}! \n
-            {$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}");
+        notify($hive->get('admin.item_successfully_created'));
 
-        $hive->reroute('@admin_practice_items_index' . '?' . http_build_query(['variant' => $variant]));
+        $hive->reroute('@admin_practice_items_index');
     }
 
     public function update(\Base $hive)
@@ -111,28 +111,18 @@ class PracticeItemController extends Controller
 
         $item->copyFrom($request->all());
         $item->save();
-        $with_images = false;
 
-
-        if (! $item->dry() && $request->input('image')) {
-            $with_images = true;
-            ProcessImageJob::dispatch([
-                'imageable_id'      => $item->id,
-                'imageable_type'   => ImageableType::PRACTICE_ITEM->value,
-                'variant'          => 'image',
-                'sizes'          => ['mb' => 450, 'tb' => 600, 'dk' => 750],
-                'files'          => $request->input('image'),
-                'qnt'            => 1,
-            ]);
+        if (!empty($request->input('image'))) {
+            attach_image_to_model(
+                model: $item,
+                imageable_type: ImageableType::PRACTICE_ITEM->value,
+                variant: 'image',
+                file: $request->input('image')[0],
+                sizes: $this->image_sizes
+            );
         }
 
-        $message = "{$hive->get('admin.item_successfully_updated')}!";
-
-        if ($with_images) {
-            $message .= "\n{$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}";
-        }
-
-        notify($message);
+        notify($hive->get('admin.item_successfully_updated'));
 
         $hive->reroute("@admin_practice_items_edit(@id=$id)");
     }

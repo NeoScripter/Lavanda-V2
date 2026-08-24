@@ -23,10 +23,20 @@ class CardFactory extends Factory
 
         $imageable_type = ImageableType::from($card->variant);
 
-        (new ImageFactory)->create(dir: 'test', imageable_type: $imageable_type->value, imageable_id: $card->id, variant: 'front');
+        (new ImageFactory)->create(
+            dir: 'test',
+            imageable_type: $imageable_type->value,
+            imageable_id: $card->id,
+            variant: 'front_image'
+        );
 
         if ($with_back) {
-            (new ImageFactory(variant: 'back'))->create(dir: 'test', imageable_type: $imageable_type->value, imageable_id: 1, variant: 'back');
+            (new ImageFactory(variant: 'back_image'))->create(
+                dir: 'test',
+                imageable_type: $imageable_type->value,
+                imageable_id: 1,
+                variant: 'back_image'
+            );
         }
 
         return $card;

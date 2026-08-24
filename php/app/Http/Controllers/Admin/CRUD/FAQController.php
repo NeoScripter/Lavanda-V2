@@ -33,7 +33,7 @@ class FAQController extends Controller
         ]);
     }
 
-    public function create(\Base $hive)
+    public function create()
     {
         view('pages/admin/faqs/create');
     }

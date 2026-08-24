@@ -224,8 +224,8 @@ class CliController
                 front.id as front_id, front.imageable_type as front_imageable_type, front.imageable_id as front_imageable_id, front.variant as front_variant, front.src as front_src, front.alt as front_alt,
                 back.id as back_id, back.imageable_type as back_imageable_type, back.variant as back_variant, back.src as back_src, back.alt as back_alt
             FROM cards c
-            LEFT JOIN images front ON front.imageable_id = c.id AND front.imageable_type = c.variant AND front.variant = 'front'
-            LEFT JOIN images back ON back.imageable_type = c.variant AND back.variant = 'back';"
+            LEFT JOIN images front ON front.imageable_id = c.id AND front.imageable_type = c.variant AND front.variant = 'front_image'
+            LEFT JOIN images back ON back.imageable_type = c.variant AND back.variant = 'back_image';"
         );
 
         $rune_view = DBView::RUNE_ASSET->value;
@@ -238,8 +238,8 @@ class CliController
                 front.id as front_id, front.imageable_type as front_imageable_type, front.imageable_id as front_imageable_id, front.variant as front_variant, front.src as front_src, front.alt as front_alt,
                 back.id as back_id, back.imageable_type as back_imageable_type, back.imageable_id as back_imageable_id, back.variant as back_variant, back.src as back_src, back.alt as back_alt
             FROM runes r
-            LEFT JOIN images front ON front.imageable_id = r.id AND front.imageable_type = '{$imageable_type}' AND front.variant = 'front'
-            LEFT JOIN images back ON back.imageable_id = r.id AND back.imageable_type = '{$imageable_type}' AND back.variant = 'back';"
+            LEFT JOIN images front ON front.imageable_id = r.id AND front.imageable_type = '{$imageable_type}' AND front.variant = 'front_image'
+            LEFT JOIN images back ON back.imageable_id = r.id AND back.imageable_type = '{$imageable_type}' AND back.variant = 'back_image';"
         );
 
         $practice_item_view = DBView::PRACTICE_ITEM_ASSET->value;
@@ -274,7 +274,12 @@ class CliController
         $dir = $hive->app_env === 'test' ? 'test' : 'models/cards';
 
         foreach (CardVariant::values() as $card_variant) {
-            (new ImageFactory(variant: 'back'))->create(dir: $dir, imageable_type: $card_variant, imageable_id: 1, variant: 'back');
+            (new ImageFactory(variant: 'back_image'))->create(
+                dir: $dir,
+                imageable_type: $card_variant,
+                imageable_id: 1,
+                variant: 'back_image'
+            );
         }
     }
 }

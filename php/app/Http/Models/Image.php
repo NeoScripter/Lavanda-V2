@@ -40,5 +40,6 @@ class Image extends Cortex
             'nullable' => false,
         ]
     ];
+
     protected $db = 'DB', $table = 'images';
 }

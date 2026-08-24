@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use Enums\ImageableType;
 use Factories\CardFactory;
 use Factories\ImageFactory;
+use Http\Models\Image;
 use Jobs\ProcessImageJob;
 use PHPUnit\Framework\Attributes\Test;
 use Support\ImageHandler;
@@ -26,37 +28,25 @@ final class ImageHandlerTest extends TestCase
     }
 
 
-    #[Test]
-    public function removes_stale_morph_image_on_update(): void
-    {
-        $path = (new ImageFactory(variant: 'front'))->template;
-        $subdir = UPLOAD_DIR . 'image_job_queue_test/';
-        $new_path = $subdir . 'copy.png';
-
-        if (!is_dir($subdir)) {
-            mkdir($subdir, 0777, true);
-        }
-        copy($path, $new_path);
-
-        $files = [['src' => $new_path, 'alt' => '']];
-
-        $sizes = ['mb' => 2];
-        $card = (new CardFactory())->create();
-
-        $payload = [
-            'imageable_id' => $card->id,
-            'imageable_type' => $card->variant,
-            'variant' => 'front',
-            'sizes' => $sizes,
-            'files' => $files,
-        ];
-
-        (new ProcessImageJob)->handle($payload);
-
-        $db = $this->hive->get("DB");
-        $res = $db->exec("SELECT count(*) FROM images WHERE imageable_id = ? AND imageable_type = ? AND variant = ?", [$card->id, $card->variant, 'front']);
-        $this->assertEquals(1, $res[0]['count'], 'The stale image was not erased');
-    }
+    // #[Test]
+    // public function creates_image_with_fallback_src(): void
+    // {
+    //     $data = [
+    //         'imageable_id' => 10000,
+    //         'imageable_type' => ImageableType::RUNE->value,
+    //         'alt' => '',
+    //     ];
+    //
+    //     $image = new Image();
+    //
+    //     $image->copyfrom($data);
+    //     $image->save();
+    //     $image_id = $image->id;
+    //     $image->reset();
+    //     $image->load(['id=?', $image_id]);
+    //
+    //     $this->assertNotNull($image->src);
+    // }
 
     #[Test]
     public function job_processes_and_optimizes_image(): void
@@ -70,19 +60,20 @@ final class ImageHandlerTest extends TestCase
         }
         copy($path, $new_path);
 
-        $files = [['src' => $new_path, 'alt' => '']];
+        $file = $new_path;
 
         $sizes = ['mb' => 2, 'tb' => 4, 'dk' => 6];
         $card = (new CardFactory())->create();
-        $card->front_image->erase();
-        $id = $card->id;
+
+        $image = $card->front_image;
+        $image_id = $image->id;
+
+        $card_id = $card->id;
 
         $payload = [
-            'imageable_id' => $card->id,
-            'imageable_type' => $card->variant,
-            'variant' => 'front',
+            'image_id' => $image_id,
             'sizes' => $sizes,
-            'files' => $files,
+            'file' => $file,
         ];
 
         (new ProcessImageJob)->handle($payload);
@@ -108,7 +99,7 @@ final class ImageHandlerTest extends TestCase
         }
 
         $card->reset();
-        $card->load(['id=?', $id]);
+        $card->load(['id=?', $card_id]);
         $updated_image = $card->front_image;
 
         $this->assertNotNull(actual: $updated_image['src']);

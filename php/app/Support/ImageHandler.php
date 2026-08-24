@@ -17,20 +17,12 @@ class ImageHandler
         return new self();
     }
 
-    public function process(array $files, array $sizes)
+    public function process(string $src, array $sizes): string
     {
-        $result = [];
-
-        foreach ($files as $file) {
-            $src = $this->process_one($file['src'], $sizes);
-
-            $result[] = ['src' => $src, 'alt' => $file['alt'] ?? ''];
-        }
-
-        return $result;
+        return $this->process_one($src, $sizes);
     }
 
-    private function process_one(string $src, array $sizes)
+    private function process_one(string $src, array $sizes): string
     {
         if ($this->locked) {
             throw new Exception('The image handler is locked, finish processing the current batch first');

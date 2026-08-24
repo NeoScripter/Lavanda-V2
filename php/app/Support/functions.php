@@ -1,6 +1,8 @@
 <?php
 
+use DB\Cortex;
 use Http\Models\Image;
+use Jobs\ProcessImageJob;
 use Support\ImageHandler;
 
 define('VITE_DEV_SERVER', 'http://localhost:5173');
@@ -369,26 +371,6 @@ function purge_file(string $src): void
     }
 }
 
-function optimize_files(array $files, array $sizes, ?int $qnt = null): array
-{
-    if (empty($files) || empty($sizes)) {
-        throw new Exception('Files are empty');
-    }
-
-    if (is_int($qnt)) {
-        $files = array_slice($files, 0, $qnt);
-    }
-
-    $records = ImageHandler::make()
-        ->process(files: $files, sizes: $sizes);
-
-    if (empty($records)) {
-        throw new Exception('No images were generated');
-    }
-
-    return $records;
-}
-
 function set_morph($self, $value)
 {
     $current = array_map(fn($img) => $img->id, $self->gallery ?? []) ?? [];
@@ -548,6 +530,36 @@ function read_dir_files(string $path)
     return $files;
 }
 
+function read_existing_variant_sizes(string $path)
+{
+    $current_path = remove_extra_slashes(
+        str_replace(
+            \Base::instance()->get('app_url'),
+            WEBROOT . '/',
+            $path
+        )
+    );
+    $parent_dir = get_parent_dir($current_path);
+    $files = read_dir_files($parent_dir);
+
+    $target_sizes = ['-mb.webp' => 'mb', '-tb.webp' => 'tb', '-dk.webp' => 'dk'];
+    $sizes = [];
+
+    foreach ($target_sizes as $suffix => $ext) {
+        $matched_file = array_find(
+            $files,
+            fn($file) => str_contains($file, $suffix)
+        );
+
+        if ($matched_file) {
+            [$width,] = getimagesize($parent_dir . '/' . $matched_file);
+            $sizes[$ext] = $width;
+        }
+    }
+
+    return $sizes;
+}
+
 function get_flat_routes()
 {
     $routes = [];
@@ -565,4 +577,47 @@ function get_flat_routes()
     }
 
     return $routes;
+}
+
+function set_no_image_placeholder()
+{
+    $fallback = APP_DIR . "/db/Fixtures/Image/no-image/";
+
+    $subdir = \UPLOAD_DIR . '/' . uniqid() . '/';
+
+    $files = array_filter(scandir($fallback), fn($file) => is_file($fallback . $file));
+
+    if (!is_dir($subdir)) {
+        mkdir($subdir, 0777, true);
+    }
+
+    foreach ($files as $file) {
+        copy($fallback . $file, $subdir . $file);
+    }
+
+    return to_public_url($subdir . 'no-image.png');
+}
+
+function attach_image_to_model(Cortex $model, string $imageable_type, string $variant, array $file, array $sizes): void
+{
+    $image = $model->{$variant} ?? new Image();
+
+    if (empty($image->src)) {
+        $image->copyfrom([
+            'src' => set_no_image_placeholder(),
+            'variant' => $variant,
+            'imageable_id' => $model->id,
+            'imageable_type' => $imageable_type,
+            'alt' => $file['alt'] ?? ''
+        ]);
+        $image->save();
+    }
+
+    notify(\Base::instance()->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files'));
+
+    ProcessImageJob::dispatch([
+        'image_id' => $image->id,
+        'sizes' => $sizes,
+        'file' => $file['src']
+    ]);
 }

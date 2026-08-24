@@ -15,12 +15,13 @@ use Http\Models\RuneAsset;
 use Http\Models\RuneTheme;
 use Http\Requests\CRUD\Rune\StoreRuneRequest;
 use Http\Requests\CRUD\Rune\UpdateRuneRequest;
-use Jobs\ProcessImageJob;
 use Traits\RequiresAuth;
 
 class RuneController extends Controller
 {
     use RequiresAuth;
+
+    private $image_sizes = ['mb' => 120, 'tb' => 200];
 
     public function index(\Base $hive)
     {
@@ -43,7 +44,7 @@ class RuneController extends Controller
         ]);
     }
 
-    public function create(\Base $hive)
+    public function create()
     {
         view('pages/admin/runes/create');
     }
@@ -92,26 +93,24 @@ class RuneController extends Controller
         $rune->copyFrom($request->all());
         $rune->save();
 
-        if (! $rune->dry() && $request->input('front_image')) {
-            ProcessImageJob::dispatch([
-                'imageable_id'      => $rune->id,
-                'imageable_type'   => ImageableType::RUNE->value,
-                'variant'          => 'front',
-                'sizes'          => ['mb' => 120, 'tb' => 200],
-                'files'          => $request->input('front_image'),
-                'qnt'            => 1,
-            ]);
+        if (! $rune->dry() && !empty($request->input('front_image'))) {
+            attach_image_to_model(
+                model: $rune,
+                imageable_type: ImageableType::RUNE->value,
+                variant: 'front_image',
+                file: $request->input('front_image')[0],
+                sizes: $this->image_sizes
+            );
         }
 
-        if (! $rune->dry() && $request->input('back_image')) {
-            ProcessImageJob::dispatch([
-                'imageable_id'      => $rune->id,
-                'imageable_type'   => ImageableType::RUNE->value,
-                'variant'          => 'back',
-                'sizes'          => ['mb' => 120, 'tb' => 200],
-                'files'          => $request->input('back_image'),
-                'qnt'            => 1,
-            ]);
+        if (! $rune->dry() && !empty($request->input('back_image'))) {
+            attach_image_to_model(
+                model: $rune,
+                imageable_type: ImageableType::RUNE->value,
+                variant: 'back_image',
+                file: $request->input('back_image')[0],
+                sizes: $this->image_sizes
+            );
         }
 
         foreach (RuneThemeEnum::values() as $name) {
@@ -122,8 +121,7 @@ class RuneController extends Controller
             $theme->save();
         }
 
-        notify("{$hive->get('admin.rune_successfully_created')}! \n
-            {$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}");
+        notify($hive->get('admin.rune_successfully_created'));
 
         $hive->reroute('@admin_runes_index' . '?' . http_build_query(['variant' => $variant]));
     }
@@ -143,39 +141,28 @@ class RuneController extends Controller
 
         $rune->copyFrom($request->all());
         $rune->save();
-        $with_images = false;
 
-
-        if (! $rune->dry() && $request->input('front_image')) {
-            $with_images = true;
-            ProcessImageJob::dispatch([
-                'imageable_id'      => $rune->id,
-                'imageable_type'   => ImageableType::RUNE->value,
-                'variant'          => 'front',
-                'sizes'          => ['mb' => 120, 'tb' => 200],
-                'files'          => $request->input('front_image'),
-                'qnt'            => 1,
-            ]);
+        if (!empty($request->input('front_image'))) {
+            attach_image_to_model(
+                model: $rune,
+                imageable_type: ImageableType::RUNE->value,
+                variant: 'front_image',
+                file: $request->input('front_image')[0],
+                sizes: $this->image_sizes
+            );
         }
 
-        if (! $rune->dry() && $request->input('back_image')) {
-            ProcessImageJob::dispatch([
-                'imageable_id'      => $rune->id,
-                'imageable_type'   => ImageableType::RUNE->value,
-                'variant'          => 'back',
-                'sizes'          => ['mb' => 120, 'tb' => 200],
-                'files'          => $request->input('back_image'),
-                'qnt'            => 1,
-            ]);
+        if (!empty($request->input('back_image'))) {
+            attach_image_to_model(
+                model: $rune,
+                imageable_type: ImageableType::RUNE->value,
+                variant: 'back_image',
+                file: $request->input('back_image')[0],
+                sizes: $this->image_sizes
+            );
         }
 
-        $message = "{$hive->get('admin.rune_successfully_updated')}!";
-
-        if ($with_images) {
-            $message .= "\n{$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}";
-        }
-
-        notify($message);
+        notify($hive->get('admin.rune_successfully_updated'));
 
         $hive->reroute("@admin_runes_edit(@id=$id)");
     }

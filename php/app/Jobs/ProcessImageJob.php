@@ -7,62 +7,34 @@ namespace Jobs;
 use Enums\AppEnv;
 use Exception;
 use Http\Models\Image;
-use InvalidArgumentException;
 use RuntimeException;
+use Support\ImageHandler;
 
 class ProcessImageJob extends Job
 {
     public function handle(array $payload): void
     {
-        $missing = array_diff([
-            'imageable_id',
-            'imageable_type',
-            'variant',
-            'sizes',
-            'files',
-        ], array_keys($payload));
-
-        if (! empty($missing)) {
-            throw new InvalidArgumentException('Missing required payload keys: ' . implode(', ', $missing));
-        }
-
-        $imageable_id = $payload['imageable_id'];
-        $imageable_type = $payload['imageable_type'];
-        $variant = $payload['variant'];
+        $image_id = $payload['image_id'];
+        $file = $payload['file'];
         $sizes = $payload['sizes'];
-        $files = $payload['files'];
-        $qnt = $payload['qnt'] ?? null;
 
-        $optimized = optimize_files(sizes: $sizes, files: $files, qnt: $qnt);
-
-        if ($qnt === 1) {
-            $optimized = array_slice($optimized, 0, 1);
-        }
-
-        if (empty($optimized)) {
-            throw new RuntimeException("optimize_files() returned no files for {$imageable_type} #{$imageable_id}");
-        }
+        $src = ImageHandler::make()
+            ->process(src: $file, sizes: $sizes);
 
         try {
-            // TODO: add limit to the image processing
-            $stale_imgs = new Image();
-            $stale_imgs = $stale_imgs->find(['imageable_type = ? AND imageable_id = ? AND variant = ?', $imageable_type, $imageable_id, $variant]);
+            $db = \Base::instance()->get('DB');
 
-            if (! empty($stale_imgs)) {
-                foreach ($stale_imgs as $img) {
-                    $img->erase();
-                }
+            $prev = $db->exec('SELECT src FROM images WHERE id = ?', [$image_id]);
+
+            if (empty($prev)) {
+                throw new RuntimeException("Could not find the image with id: {$image_id}");
             }
 
-            foreach ($optimized as $file) {
-                $img = new Image();
-                $img->copyFrom([
-                    ...$file,
-                    ...compact('imageable_id', 'imageable_type', 'variant')
-                ]);
+            $prev_src = $prev[0]['src'];
 
-                $img->save();
-            }
+            $db->exec('UPDATE images SET src = ? WHERE id = ?', [$src, $image_id]);
+
+            purge_files($prev_src);
         } catch (Exception $e) {
             if (! AppEnv::is(AppEnv::TESTING)) {
                 echo ("Failed processing image: {$e->getMessage()}");

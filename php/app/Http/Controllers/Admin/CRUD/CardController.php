@@ -13,12 +13,13 @@ use Http\Models\Card;
 use Http\Models\FlipCard;
 use Http\Requests\CRUD\Card\StoreCardRequest;
 use Http\Requests\CRUD\Card\UpdateCardRequest;
-use Jobs\ProcessImageJob;
 use Traits\RequiresAuth;
 
 class CardController extends Controller
 {
     use RequiresAuth;
+
+    private $image_sizes = ['mb' => 150, 'tb' => 250, 'dk' => 300];
 
     public function index(\Base $hive)
     {
@@ -55,7 +56,7 @@ class CardController extends Controller
         ]);
     }
 
-    public function create(\Base $hive)
+    public function create()
     {
         view('pages/admin/cards/create');
     }
@@ -74,7 +75,6 @@ class CardController extends Controller
 
     public function show(\Base $hive)
     {
-
         $id = $hive->PARAMS['id'];
         $card = new FlipCard();
         $card->load(['id = ?', $id]);
@@ -95,19 +95,17 @@ class CardController extends Controller
         $card->copyFrom($request->all());
         $card->save();
 
-        if (! $card->dry() && $request->input('front_image')) {
-            ProcessImageJob::dispatch([
-                'imageable_id'      => $card->id,
-                'imageable_type'   => $variant,
-                'variant'          => 'front',
-                'sizes'          => ['mb' => 150, 'tb' => 250, 'dk' => 300],
-                'files'          => $request->input('front_image'),
-                'qnt'            => 1,
-            ]);
+        if (! $card->dry() && !empty($request->input('front_image'))) {
+            attach_image_to_model(
+                model: $card,
+                imageable_type: $card->variant,
+                variant: 'front_image',
+                file: $request->input('front_image')[0],
+                sizes: $this->image_sizes
+            );
         }
 
-        notify("{$hive->get('admin.card_successfully_created')}! \n
-            {$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}");
+        notify("{$hive->get('admin.card_successfully_created')}!");
 
         $hive->reroute('@admin_cards_index' . '?' . http_build_query(['variant' => $variant]));
     }
@@ -127,28 +125,18 @@ class CardController extends Controller
 
         $card->copyFrom($request->all());
         $card->save();
-        $with_images = false;
 
-
-        if (! $card->dry() && $request->input('front_image')) {
-            $with_images = true;
-            ProcessImageJob::dispatch([
-                'imageable_id'      => $card->id,
-                'imageable_type'   => $request->input('variant'),
-                'variant'          => 'front',
-                'sizes'          => ['mb' => 150, 'tb' => 250, 'dk' => 300],
-                'files'          => $request->input('front_image'),
-                'qnt'            => 1,
-            ]);
+        if (!empty($request->input('front_image'))) {
+            attach_image_to_model(
+                model: $card,
+                imageable_type: $card->variant,
+                variant: 'front_image',
+                file: $request->input('front_image')[0],
+                sizes: $this->image_sizes
+            );
         }
 
-        $message = "{$hive->get('admin.card_successfully_updated')}!";
-
-        if ($with_images) {
-            $message .= "\n{$hive->get('admin.please_wait_for_1-2_minutes_in_order_to_see_updated_image_files')}";
-        }
-
-        notify($message);
+        notify($hive->get('admin.card_successfully_updated'));
 
         $hive->reroute("@admin_cards_edit(@id=$id)");
     }

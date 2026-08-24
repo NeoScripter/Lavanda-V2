@@ -29,7 +29,7 @@ class UpdateCardRequest extends Request
             'front_image' => [
                 'filter'   => 'file',
                 'validate' => 'image:webp,jpg,jpeg,png|max_size:8800',
-                'post_filter'   => 'file:card-' . $this->input('variant'),
+                'post_filter'   => 'file:card',
             ],
         ];
     }

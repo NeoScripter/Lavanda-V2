@@ -7,6 +7,7 @@ namespace Http\Controllers\Admin\CRUD;
 use Http\Controller;
 use Http\Models\Image;
 use Http\Requests\CRUD\UpdateImageRequest;
+use Jobs\ProcessImageJob;
 use Traits\RequiresAuth;
 
 class ImageController extends Controller
@@ -25,7 +26,19 @@ class ImageController extends Controller
         if (!$img->dry()) {
             $img->alt = $request->input('alt');
             $img->save();
-            notify($hive->get('admin.image_successfully_updated!'));
+
+            $raw_file = $request->input('src');
+
+            if (! empty($raw_file)) {
+                $sizes = read_existing_variant_sizes($img->src);
+
+                ProcessImageJob::dispatch([
+                    'image_id' => $img->id,
+                    'sizes' => $sizes,
+                    'file' => $raw_file[0]['src']
+                ]);
+            }
+            notify($hive->get('admin.image_successfully_updated'));
         }
 
         $referrer = $hive->HEADERS['Referer'] ?? '/';

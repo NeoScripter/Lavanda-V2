@@ -277,6 +277,14 @@ class Validator
             $moved[] = $image;
         }
 
+        /* final format: 
+        [ 
+            [0]=> [
+                ["src"]=> "directory/pexels-arts-1187079.jpg"
+                ["alt"]=>  ""
+            ]
+        ]
+        */
         return $moved;
     }
 

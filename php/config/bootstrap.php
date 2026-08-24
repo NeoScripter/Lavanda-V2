@@ -21,7 +21,7 @@ $hive->config(APP_DIR . '/config/routes.ini');
 $hive->set('DEBUG',  3);
 $hive->set('LOCALES', APP_DIR . '/ui/data/dict/');
 
-// require APP_DIR . '/config/exception_config.php';
+require APP_DIR . '/config/exception_config.php';
 
 require APP_DIR . '/config/database.php';
 require APP_DIR . '/config/queue.php';
