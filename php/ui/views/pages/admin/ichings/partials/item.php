@@ -15,7 +15,7 @@ extract(component_props(
 ));
 ?>
 
-<li class="space-y-6 relative text-sm">
+<li class="space-y-6 relative text-sm transition-transform hover:scale-105">
     <a
         href="<?= $hive->alias('admin_ichings_edit', ['id' => $iching->id]) ?>"
         class='absolute inset-0'>
@@ -24,7 +24,7 @@ extract(component_props(
     <div class='flex items-center rounded-md justify-around flex-col p-3 bg-accent-foreground size-20'>
         <?php for ($i = 6; $i > 0; $i--) : ?>
             <?php $is_split = ($mask_map[$i] & $iching->bitmask) === 0; ?>
-            <div class="flex overflow-hidden w-full items-center justify-center <?= $is_split ? 'gap-4' : '' ?>">
+            <div class="flex overflow-hidden w-full text-background items-center justify-center <?= $is_split ? 'gap-4' : '' ?>">
                 <?= svg('iching-line') ?>
                 <?= svg('iching-line') ?>
             </div>

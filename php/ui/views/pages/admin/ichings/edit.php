@@ -15,7 +15,7 @@ slot('layouts/item-layout', [
 
 <div class="space-y-6 max-w-160">
     <div class="flex items-center justify-between gap-4">
-        <?= component('ui/subheading', ['title' => $hive->get('admin.edit_iching')]) ?>
+        <?= component('ui/subheading', ['title' => $hive->get('admin.edit_iching') . ' ' . $iching->number]) ?>
     </div>
     <form action="<?= $hive->alias('admin_ichings_update') ?>" method="post" class="space-y-6" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">

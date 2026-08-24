@@ -12,6 +12,7 @@ enum ImageableType: string
     case BONUS = 'bonus';
     case PRACTICE = 'practice';
     case ARTICLE = 'article';
+    case PRACTICE_ITEM = 'practice_item';
 
     public static function values(): array
     {

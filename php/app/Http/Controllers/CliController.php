@@ -12,11 +12,13 @@ use Http\Models\FAQ;
 use Http\Models\Iching;
 use Http\Models\User;
 use Http\Models\Image;
+use Http\Models\PracticeItem;
 use Http\Models\Rune;
 use Http\Models\RuneTheme;
 use Seeders\CardSeeder;
 use Seeders\FAQSeeder;
 use Seeders\IchingSeeder;
+use Seeders\PracticeItemSeeder;
 use Seeders\RuneSeeder;
 
 const SCREEN_WIDTH = 152;
@@ -58,6 +60,7 @@ class CliController
         Rune::setup();
         RuneTheme::setup();
         Iching::setup();
+        PracticeItem::setup();
 
         $this->create_db_views($hive);
 
@@ -79,6 +82,7 @@ class CliController
         Rune::setdown();
         RuneTheme::setdown();
         Iching::setdown();
+        PracticeItem::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
@@ -95,6 +99,7 @@ class CliController
         FAQSeeder::run();
         RuneSeeder::run();
         IchingSeeder::run();
+        PracticeItemSeeder::run();
     }
 
     function fresh(\Base $hive)
@@ -224,7 +229,7 @@ class CliController
         );
 
         $rune_view = DBView::RUNE_ASSET->value;
-        $rune_imageable_type = ImageableType::RUNE->value;
+        $imageable_type = ImageableType::RUNE->value;
 
         $db->exec(
             "CREATE OR REPLACE VIEW {$rune_view} AS
@@ -233,8 +238,20 @@ class CliController
                 front.id as front_id, front.imageable_type as front_imageable_type, front.imageable_id as front_imageable_id, front.variant as front_variant, front.src as front_src, front.alt as front_alt,
                 back.id as back_id, back.imageable_type as back_imageable_type, back.imageable_id as back_imageable_id, back.variant as back_variant, back.src as back_src, back.alt as back_alt
             FROM runes r
-            LEFT JOIN images front ON front.imageable_id = r.id AND front.imageable_type = '{$rune_imageable_type}' AND front.variant = 'front'
-            LEFT JOIN images back ON back.imageable_id = r.id AND back.imageable_type = '{$rune_imageable_type}' AND back.variant = 'back';"
+            LEFT JOIN images front ON front.imageable_id = r.id AND front.imageable_type = '{$imageable_type}' AND front.variant = 'front'
+            LEFT JOIN images back ON back.imageable_id = r.id AND back.imageable_type = '{$imageable_type}' AND back.variant = 'back';"
+        );
+
+        $practice_item_view = DBView::PRACTICE_ITEM_ASSET->value;
+        $imageable_type = ImageableType::PRACTICE_ITEM->value;
+
+        $db->exec(
+            "CREATE OR REPLACE VIEW {$practice_item_view} AS
+            SELECT
+                item.id, item.title, item.description, item.file_src, item.faqs, item.locale, item.created_at,
+                image.id as image_id, image.imageable_type as image_imageable_type, image.imageable_id as image_imageable_id, image.variant as image_variant, image.src as image_src, image.alt as image_alt
+            FROM practice_items item
+            LEFT JOIN images image ON image.imageable_id = item.id AND image.imageable_type = '{$imageable_type}' AND image.variant = 'image';"
         );
     }
 
@@ -247,6 +264,9 @@ class CliController
 
         $rune_view = DBView::RUNE_ASSET->value;
         $db->exec("DROP VIEW IF EXISTS {$rune_view} CASCADE");
+
+        $practice_item_view = DBView::PRACTICE_ITEM_ASSET->value;
+        $db->exec("DROP VIEW IF EXISTS {$practice_item_view} CASCADE");
     }
 
     private function create_card_backs(\Base $hive)

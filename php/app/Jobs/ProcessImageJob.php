@@ -44,6 +44,7 @@ class ProcessImageJob extends Job
         }
 
         try {
+            // TODO: add limit to the image processing
             $stale_imgs = new Image();
             $stale_imgs = $stale_imgs->find(['imageable_type = ? AND imageable_id = ? AND variant = ?', $imageable_type, $imageable_id, $variant]);
 
