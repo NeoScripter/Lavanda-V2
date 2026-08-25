@@ -39,7 +39,7 @@ $required = isset($attrs['required']) && $attrs['required'] === true;
                         'class' => 'mt-1 mb-3',
                         'attrs' => [
                             'name' => "{$name}[0][question]",
-                            'required' => $required,
+                            'required' => true,
                             'component-accordion-question' => true,
                         ]
                     ]) ?>
@@ -51,7 +51,7 @@ $required = isset($attrs['required']) && $attrs['required'] === true;
                         'class' => 'mt-1',
                         'attrs' => [
                             'name' => "{$name}[0][answer]",
-                            'required' => $required,
+                            'required' => true,
                             'component-accordion-answer' => true,
                         ]
                     ]) ?>
@@ -66,7 +66,7 @@ $required = isset($attrs['required']) && $attrs['required'] === true;
                             'class' => 'mt-1 mb-3',
                             'attrs' => [
                                 'value' => $faq['question'],
-                                'required' => $required,
+                                'required' => true,
                                 'name' => "{$name}[{$idx}][question]",
                                 'component-accordion-question' => true,
                             ]
@@ -79,7 +79,7 @@ $required = isset($attrs['required']) && $attrs['required'] === true;
                             'class' => 'mt-1',
                             'slot' => $faq['answer'],
                             'attrs' => [
-                                'required' => $required,
+                                'required' => true,
                                 'name' => "{$name}[{$idx}][answer]",
                                 'component-accordion-answer' => true,
                             ]
@@ -106,7 +106,7 @@ $required = isset($attrs['required']) && $attrs['required'] === true;
         ]) ?>
 
         <?= component('ui/auth-button', [
-            'class' => "mt-1 w-fit " . (empty($value) || count($value) === 1) ? 'hidden!' : '',
+            'class' => "mt-1 w-fit " . ((empty($value) || count($value) === 1) ? 'hidden!' : ''),
             'slot' => $hive->get('admin.delete'),
             'variant' => 'destructive',
             'size' => 'sm',

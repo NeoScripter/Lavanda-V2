@@ -91,10 +91,14 @@ class PracticeItem extends Cortex
         return $decoded;
     }
 
-    public function set_faqs(?array $value): ?string
+    public function set_faqs(array|string|null $value): ?string
     {
         if (empty($value)) {
             return null;
+        }
+
+        if (is_string($value)) {
+            return $value;
         }
 
         foreach ($value as $item) {

@@ -57,7 +57,7 @@ $hive = \Base::instance();
             ]) ?>
         <?php endif ?>
 
-        <ul class="grid gap-2 grid-cols-[repeat(auto-fill,minmax(12rem,1fr))]">
+        <ul class="grid gap-2 <?= is_string($files[0]) ? '' : 'grid-cols-[repeat(auto-fill,minmax(12rem,1fr))]' ?>">
             <?php foreach ($files as $file) : ?>
                 <?php if (isset($file['src'])) : ?>
 

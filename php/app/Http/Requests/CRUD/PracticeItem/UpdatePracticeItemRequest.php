@@ -16,7 +16,11 @@ class UpdatePracticeItemRequest extends Request
             ],
             'description' => [
                 'filter'   => 'trim|trim_spaces|strip_tags',
-                'validate' => 'required|max_len:1200',
+                'validate' => 'required|max_len:2200',
+            ],
+            'faqs' => [
+                'validate' => 'max_len:5200',
+                'post_filter'   => 'json',
             ],
             'file_src' => [
                 'filter'   => 'file',
@@ -41,9 +45,9 @@ class UpdatePracticeItemRequest extends Request
     protected function on_failure(): void
     {
         set_values([
-            'name'    => $this->hive->POST['name'] ?? '',
-            'advice' => $this->hive->POST['advice'] ?? '',
-            'html'     => $this->hive->POST['html'] ?? '',
+            'title' => $this->hive->POST['title'] ?? '',
+            'description' => $this->hive->POST['description'] ?? '',
+            'faqs' => $this->hive->POST['faqs'] ?? '',
         ]);
 
         $this->hive->reroute('@admin_cards_edit');

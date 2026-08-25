@@ -14,8 +14,8 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 ?>
 
 <?php slot('layouts/item-layout', [
-    'heading' => $hive->get('admin.items'),
-    'title' => $hive->get('admin.items')
+    'heading' => $hive->get('admin.practice'),
+    'title' => $hive->get('admin.practice')
 ]); ?>
 
 <div class="space-y-12 w-[calc(100%-1rem)]">

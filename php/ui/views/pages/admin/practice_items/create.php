@@ -3,8 +3,8 @@
 $hive = \Base::instance();
 
 slot('layouts/item-layout', [
-    'heading' => $hive->get('admin.items'),
-    'title' => $hive->get('admin.items'),
+    'heading' => $hive->get('admin.practice'),
+    'title' => $hive->get('admin.practice'),
 ]);
 ?>
 

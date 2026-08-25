@@ -10,8 +10,8 @@ extract(component_props(
 $hive = \Base::instance();
 
 slot('layouts/item-layout', [
-    'heading' => $hive->get('admin.items'),
-    'title' => $hive->get('admin.items'),
+    'heading' => $hive->get('admin.practice'),
+    'title' => $hive->get('admin.practice'),
 ]); ?>
 
 <div class="space-y-6">
@@ -47,7 +47,6 @@ slot('layouts/item-layout', [
             'with_alt' => true,
             'value'    => [$item['image'] ?? null],
             'attrs' => [
-                'required' => true,
                 'multiple' => false,
             ],
         ]) ?>
@@ -56,7 +55,7 @@ slot('layouts/item-layout', [
             'name'  => 'file_src',
             'label' => $hive->get('admin.file'),
             'value'    => [$item['file_src'] ?? null],
-            'with_alt' => true,
+            'with_alt' => false,
             'attrs' => [
                 'multiple' => false,
             ],
@@ -71,10 +70,7 @@ slot('layouts/item-layout', [
         <div class="flex justify-start gap-4.5">
             <?= component(
                 'ui/auth-button',
-                [
-                    'slot' => $hive->get('admin.save'),
-                    'attrs' => ['type' => 'submit']
-                ]
+                ['slot' => $hive->get('admin.save'), 'attrs' => ['type' => 'submit']]
             ) ?>
             <?= component(
                 'ui/auth-button',

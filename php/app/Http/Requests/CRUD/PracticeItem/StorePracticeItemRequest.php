@@ -18,6 +18,10 @@ class StorePracticeItemRequest extends Request
                 'filter'   => 'trim|trim_spaces|strip_tags',
                 'validate' => 'required|max_len:1200',
             ],
+            'faqs' => [
+                'validate' => 'required|max_len:5200',
+                'post_filter'   => 'json',
+            ],
             'file_src' => [
                 'filter'   => 'file',
                 'validate' => 'required|max_size:8800|file:pdf,docx,doc,jpg,jpeg,png,webp',
@@ -41,8 +45,9 @@ class StorePracticeItemRequest extends Request
     protected function on_failure(): void
     {
         set_values([
-            'title'    => $this->hive->POST['title'] ?? '',
+            'title' => $this->hive->POST['title'] ?? '',
             'description' => $this->hive->POST['description'] ?? '',
+            'faqs' => $this->hive->POST['faqs'] ?? '',
         ]);
 
         $this->hive->reroute('@admin_practice_items_create');

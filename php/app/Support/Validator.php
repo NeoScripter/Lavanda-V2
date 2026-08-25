@@ -225,6 +225,11 @@ class Validator
         return is_string($value) ? trim($value) : $value;
     }
 
+    protected function post_filter_json(mixed $value): mixed
+    {
+        return is_string($value) ? json_encode($value) : $value;
+    }
+
     protected function post_filter_uppercase(mixed $value): mixed
     {
         return is_string($value) ? strtoupper($value) : $value;
