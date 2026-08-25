@@ -39,7 +39,10 @@ slot('layouts/admin-layout', compact('heading', 'title')); ?>
                         'attrs'   => ['tabindex' => '-1'],
                         'class'   => 'relative w-full justify-start' . ($variant === $item['variant'] ? ' bg-muted' : ''),
                     ]); ?>
-                    <a href="/admin/cards?variant=<?= $item['variant'] ?>" class="absolute inset-0 z-10"></a>
+
+                    <a href="<?= $hive->alias('admin_cards_index', [], ['variant' => $item['variant']]) ?>"
+                        class="absolute inset-0 z-10"></a>
+
                     <?= $item['title'] ?>
                     <?php end_slot(); ?>
                 <?php endforeach ?>

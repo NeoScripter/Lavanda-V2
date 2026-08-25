@@ -1,5 +1,7 @@
 <?php
 
+use Enums\CardVariant;
+
 extract(component_props(
     required: ['card'],
     optional: [],
@@ -71,7 +73,7 @@ slot('layouts/card-grid-layout', [
                 'ui/auth-button',
                 [
                     'slot' => $hive->get('admin.cancel'),
-                    'href' => $hive->alias('admin_cards_index'),
+                    'href' => $hive->alias('admin_cards_index', [], ['variant' => $card['variant']]),
                     'variant' => 'secondary',
                     'attrs' => ['type' => 'submit']
                 ]

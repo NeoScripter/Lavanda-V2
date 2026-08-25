@@ -88,6 +88,7 @@ return [
         "there_are_no_ichings_here_yet" => "There are no iching cards here yet...",
         "front_image" => "Front image",
         "back_image" => "Back image",
+        "image" => "Image",
         "card_advice" => "Card advice",
         "card_meaning" => "Card meaning",
         "rune_advice" => "Rune advice",
@@ -116,6 +117,12 @@ return [
         "subsections" => "Subsections",
         "iching" => "Inching",
         "edit_iching" => "Edit Iching",
+        "edit_item" => "Edit Item",
+        "create_item" => "Create Item",
+        "delete_item" => "Delete Item",
         "description" => "Description",
+        "practice" => "Practice",
+        "item_description" => "Item description",
+        "add" => "Add",
     ]
 ];

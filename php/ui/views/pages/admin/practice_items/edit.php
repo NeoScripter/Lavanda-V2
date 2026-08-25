@@ -1,32 +1,32 @@
 <?php
 
 extract(component_props(
-    required: ['card'],
+    required: ['item'],
     optional: [],
     props: get_defined_vars(),
 ));
 
 $hive = \Base::instance();
 
-slot('layouts/card-grid-layout', [
-    'heading' => $hive->get('admin.cards'),
-    'title' => $hive->get('admin.cards'),
+slot('layouts/item-grid-layout', [
+    'heading' => $hive->get('admin.items'),
+    'title' => $hive->get('admin.items'),
 ]); ?>
 
 <div class="space-y-6">
 
-    <?= component('ui/subheading', ['title' => $hive->get('admin.edit_a_card')]) ?>
+    <?= component('ui/subheading', ['title' => $hive->get('admin.edit_item')]) ?>
 
-    <form action="<?= $hive->alias('admin_cards_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+    <form action="<?= $hive->alias('admin_items_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
         <?= component('form/form-input', [
             'name'  => 'name',
-            'label' => $hive->get('admin.card_name'),
+            'label' => $hive->get('admin.item_name'),
             'attrs' => [
                 'type'     => 'text',
-                'value'    => $card['name'],
+                'value'    => $item['name'],
                 'required' => true,
             ],
         ]) ?>
@@ -35,7 +35,7 @@ slot('layouts/card-grid-layout', [
             'name'  => 'front_image',
             'label' => $hive->get('admin.front_image'),
             'with_alt' => true,
-            'value'    => [$card['front_image'] ?? null],
+            'value'    => [$item['front_image'] ?? null],
             'attrs' => [
                 'multiple' => false,
             ],
@@ -43,19 +43,19 @@ slot('layouts/card-grid-layout', [
 
         <?= component('form/form-textarea', [
             'name'  => 'advice',
-            'label' => $hive->get('admin.card_advice'),
+            'label' => $hive->get('admin.item_advice'),
             'attrs' => [
                 'required' => true,
-                'value'    => $card['advice'],
+                'value'    => $item['advice'],
             ],
         ]) ?>
 
         <?= component('form/form-wysiwyg', [
             'name'  => 'html',
-            'label' => $hive->get('admin.card_meaning'),
+            'label' => $hive->get('admin.item_meaning'),
             'attrs' => [
                 'required' => true,
-                'value'    => $card['html'],
+                'value'    => $item['html'],
             ],
         ]) ?>
 
@@ -71,7 +71,7 @@ slot('layouts/card-grid-layout', [
                 'ui/auth-button',
                 [
                     'slot' => $hive->get('admin.cancel'),
-                    'href' => $hive->alias('admin_cards_index'),
+                    'href' => $hive->alias('admin_practice_items_index'),
                     'variant' => 'secondary',
                     'attrs' => ['type' => 'submit']
                 ]

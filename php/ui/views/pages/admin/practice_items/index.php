@@ -5,7 +5,7 @@ use Enums\SessionKey;
 $hive = \Base::instance();
 
 extract(component_props(
-    required: ['cards', 'backside'],
+    required: ['items'],
     optional: [],
     props: get_defined_vars(),
 ));
@@ -13,9 +13,9 @@ extract(component_props(
 $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 ?>
 
-<?php slot('layouts/card-grid-layout', [
-    'heading' => $hive->get('admin.cards'),
-    'title' => $hive->get('admin.cards')
+<?php slot('layouts/item-layout', [
+    'heading' => $hive->get('admin.items'),
+    'title' => $hive->get('admin.items')
 ]); ?>
 
 <div class="space-y-12 w-[calc(100%-1rem)]">
@@ -24,27 +24,25 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
             'variant' => 'primary',
             'class'   => 'h-9 rounded-sm text-sm sm:order-2',
             'slot' => $hive->get('admin.create_new'),
-            'href' => $hive->alias('admin_cards_create'),
+            'href' => $hive->alias('admin_practice_items_create'),
         ]) ?>
 
         <?= component('ui/resource-locale-picker') ?>
     </nav>
 
-    <?php if (! empty($cards['subset'])) : ?>
-        <ul class="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-12">
+    <?php if (! empty($items['subset'])) : ?>
+        <ul class="grid gap-12">
 
-            <?php view('pages/admin/cards/partials/backside-editor', compact('backside')); ?>
-
-            <?php foreach ($cards['subset'] as $card) : ?>
-                <?php view('pages/admin/cards/partials/item', [
-                    'card' => $card->to_resource(),
+            <?php foreach ($items['subset'] as $item) : ?>
+                <?php view('pages/admin/practice_items/partials/item', [
+                    'item' => $item->to_resource(),
                 ]); ?>
             <?php endforeach; ?>
         </ul>
 
-        <?= component('ui/pagination', ['page' => $cards]) ?>
+        <?= component('ui/pagination', ['page' => $items]) ?>
     <?php else: ?>
-        <p class='-mt-3'><?= $hive->get('admin.there_are_no_cards_here_yet') ?></p>
+        <p class='-mt-3'><?= $hive->get('admin.there_are_no_items_here_yet') ?></p>
     <?php endif; ?>
 </div>
 

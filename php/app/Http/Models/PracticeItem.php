@@ -43,6 +43,7 @@ class PracticeItem extends Cortex
         ],
         'file_src' => [
             'type' => Schema::DT_VARCHAR256,
+            'nullable' => false,
         ],
         'description' => [
             'type' => Schema::DT_TEXT,

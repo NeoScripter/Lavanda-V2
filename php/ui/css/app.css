@@ -480,3 +480,15 @@ h5 {
 [component-file-grid] li:hover:before {
     opacity: 1;
 }
+
+[component-form-accordion-list] {
+    counter-reset: accordion-counter;
+}
+[component-form-accordion-list] > li {
+    counter-increment: accordion-counter;
+}
+
+[component-form-accordion-list] > li > label::before {
+    content: counter(accordion-counter) ".";
+}
+

@@ -11,6 +11,8 @@ import initSidebar from './modules/sidebar';
 import theme from './modules/theme';
 import initToasts from './modules/toasts';
 import initWysiwygs from './modules/wysiwygs';
+import initAccordionFormInputs from './modules/accordionFormInputs';
+
 
 class AppUI {
     constructor() {
@@ -31,6 +33,7 @@ class AppUI {
             initPasswordInputButtons,
             initWysiwygs,
             initDraggableReports,
+            initAccordionFormInputs,
         ];
 
         for (const handler of handlers) {

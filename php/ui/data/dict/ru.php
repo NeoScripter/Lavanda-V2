@@ -88,6 +88,7 @@ return [
         "there_are_no_ichings_here_yet" => "Здесь пока нет ни одного Ицзин...",
         "front_image" => "Передняя сторона",
         "back_image" => "Задняя сторона",
+        "image" => "Фото",
         "card_advice" => "Совет карты",
         "card_meaning" => "Интерпретация карты",
         "rune_advice" => "Совет руны",
@@ -116,6 +117,12 @@ return [
         "subsections" => "Подразделы",
         "iching" => "Ицзин",
         "edit_iching" => "Редактировать Ицзин",
+        "edit_item" => "Редактировать элемент",
+        "create_item" => "Добавить элемент",
+        "delete_item" => "Удалить элемент",
         "description" => "Описание",
+        "practice" => "Практика",
+        "item_description" => "Описание элемента",
+        "add" => "Добавить",
     ]
 ];

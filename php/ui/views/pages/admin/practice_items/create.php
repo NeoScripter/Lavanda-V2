@@ -3,29 +3,37 @@
 $hive = \Base::instance();
 
 slot('layouts/item-layout', [
-    'heading' => $hive->get('admin.cards'),
-    'title' => $hive->get('admin.cards'),
+    'heading' => $hive->get('admin.items'),
+    'title' => $hive->get('admin.items'),
 ]);
 ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', ['title' => $hive->get('admin.create_a_card')]) ?>
+    <?= component('ui/subheading', ['title' => $hive->get('admin.create_item')]) ?>
 
-    <form action="<?= \Base::instance()->alias('admin_cards_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+    <form action="<?= \Base::instance()->alias('admin_practice_items_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <?= csrf() ?>
 
         <?= component('form/form-input', [
-            'name'  => 'name',
-            'label' => $hive->get('admin.card_name'),
+            'name'  => 'title',
+            'label' => $hive->get('admin.item_name'),
             'attrs' => [
                 'type'     => 'text',
                 'required' => true,
             ],
         ]) ?>
 
+        <?= component('form/form-textarea', [
+            'name'  => 'description',
+            'label' => $hive->get('admin.item_description'),
+            'attrs' => [
+                'required' => true,
+            ],
+        ]) ?>
+
         <?= component('form/form-file-input', [
-            'name'  => 'front_image',
-            'label' => $hive->get('admin.front_image'),
+            'name'  => 'image',
+            'label' => $hive->get('admin.image'),
             'with_alt' => true,
             'attrs' => [
                 'required' => true,
@@ -33,20 +41,19 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-textarea', [
-            'name'  => 'advice',
-            'label' => $hive->get('admin.card_advice'),
+        <?= component('form/form-file-input', [
+            'name'  => 'file_src',
+            'label' => $hive->get('admin.file'),
+            'with_alt' => true,
             'attrs' => [
-                'required' => true,
+                'multiple' => false,
             ],
         ]) ?>
 
-        <?= component('form/form-wysiwyg', [
-            'name'  => 'html',
-            'label' => $hive->get('admin.card_meaning'),
-            'attrs' => [
-                'required' => true,
-            ],
+
+        <?= component('form/form-accordion', [
+            'name'  => 'faqs',
+            'label' => $hive->get('admin.faqs'),
         ]) ?>
 
         <div class="flex justify-between gap-2.5">

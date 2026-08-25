@@ -1,10 +1,14 @@
-<?php $hive = \Base::instance();
+<?php
+
+use Enums\CardVariant;
+
+ $hive = \Base::instance();
 
 extract(component_props(
     required: ['title', 'heading', 'slot'],
     optional: [],
     props: get_defined_vars()
-));?>
+)); ?>
 <?php slot('layouts/app-shell', compact('title')); ?>
 
 <main
@@ -17,7 +21,7 @@ extract(component_props(
                 'icon'  => 'layout-grid',
             ],
             [
-                'url'   => '/admin/cards',
+                'url'   => $hive->alias('admin_cards_index', [], ['variant' => CardVariant::TAROT->value]),
                 'label' => $hive->get('admin.cards'),
                 'icon'  => 'playing-cards',
             ],
@@ -35,6 +39,11 @@ extract(component_props(
                 'url'   => '/admin/ichings',
                 'label' => $hive->get('admin.iching'),
                 'icon'  => 'iching',
+            ],
+            [
+                'url'   => $hive->alias('admin_practice_items_index'),
+                'label' => $hive->get('admin.practice'),
+                'icon'  => 'practice',
             ],
         ],
     ]) ?>
