@@ -22,7 +22,7 @@ class StorePracticeItemRequest extends Request
                 'validate' => 'required|max_len:5200',
                 'post_filter'   => 'json',
             ],
-            'file_src' => [
+            'file' => [
                 'filter'   => 'file',
                 'validate' => 'required|max_size:8800|file:pdf,docx,doc,jpg,jpeg,png,webp',
                 'post_filter'   => 'file:practice_item',

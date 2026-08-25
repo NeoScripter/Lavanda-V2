@@ -13,7 +13,7 @@ class CardSeeder extends Seeder
     public static function run()
     {
         if (self::is_seeded(db_table: 'cards')) {
-            echo 'The cards are already seeded';
+            echo "The cards are already seeded\n";
             return;
         }
 

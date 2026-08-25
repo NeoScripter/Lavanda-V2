@@ -22,7 +22,7 @@ class UpdatePracticeItemRequest extends Request
                 'validate' => 'max_len:5200',
                 'post_filter'   => 'json',
             ],
-            'file_src' => [
+            'file' => [
                 'filter'   => 'file',
                 'validate' => 'max_size:8800|file:pdf,docx,doc,jpg,jpeg,png,webp',
                 'post_filter'   => 'file:practice_item',
@@ -50,6 +50,6 @@ class UpdatePracticeItemRequest extends Request
             'faqs' => $this->hive->POST['faqs'] ?? '',
         ]);
 
-        $this->hive->reroute('@admin_cards_edit');
+        $this->hive->reroute('@admin_practice_items_edit');
     }
 }

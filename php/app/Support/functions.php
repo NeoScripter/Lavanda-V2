@@ -406,13 +406,20 @@ function remove_extra_slashes(string $path)
     return preg_replace('#(?<!:)//+#', '/', $path);
 }
 
-function to_public_url(string $path)
+function extract_file_name(string $path)
 {
-    $path_stem = remove_file_extention($path);
+    return substr($path, strrpos($path, '/') + 1);
+}
+
+function to_public_url(string $path, ?bool $strip_extension = true)
+{
+    if ($strip_extension) {
+        $path = remove_file_extention($path);
+    }
 
     $app_url = rtrim(\Base::instance()->get('app_url'), '/') . '/';
 
-    $norm_path = str_replace(WEBROOT, $app_url, $path_stem);
+    $norm_path = str_replace(WEBROOT, $app_url, $path);
 
     return remove_extra_slashes($norm_path);
 }

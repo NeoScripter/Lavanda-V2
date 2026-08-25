@@ -12,7 +12,7 @@ class RuneSeeder extends Seeder
     public static function run()
     {
         if (self::is_seeded(db_table: 'runes')) {
-            echo 'The runes are already seeded';
+            echo "The runes are already seeded\n";
             return;
         }
 

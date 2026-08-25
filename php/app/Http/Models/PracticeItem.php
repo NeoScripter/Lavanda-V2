@@ -17,6 +17,9 @@ class PracticeItem extends Cortex
             if ($self->image) {
                 $self->image->erase();
             }
+            if ($self->file) {
+                purge_file($self->file);
+            }
         });
 
         $this->onget('image', function ($self) {
@@ -41,7 +44,7 @@ class PracticeItem extends Cortex
             'type' => Schema::DT_VARCHAR256,
             'nullable' => false,
         ],
-        'file_src' => [
+        'file' => [
             'type' => Schema::DT_VARCHAR256,
             'nullable' => false,
         ],

@@ -12,7 +12,7 @@ class FAQSeeder extends Seeder
     public static function run()
     {
         if (self::is_seeded(db_table: 'faqs')) {
-            echo 'The faqs are already seeded';
+            echo "The faqs are already seeded\n";
             return;
         }
 

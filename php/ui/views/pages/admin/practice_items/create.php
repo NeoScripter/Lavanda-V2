@@ -42,7 +42,7 @@ slot('layouts/item-layout', [
         ]) ?>
 
         <?= component('form/form-file-input', [
-            'name'  => 'file_src',
+            'name'  => 'file',
             'label' => $hive->get('admin.file'),
             'with_alt' => true,
             'attrs' => [

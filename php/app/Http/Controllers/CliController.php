@@ -7,6 +7,7 @@ use Enums\CardVariant;
 use Enums\DBView;
 use Enums\ImageableType;
 use Factories\ImageFactory;
+use Http\Models\AudioMessage;
 use Http\Models\Card;
 use Http\Models\FAQ;
 use Http\Models\Iching;
@@ -15,6 +16,7 @@ use Http\Models\Image;
 use Http\Models\PracticeItem;
 use Http\Models\Rune;
 use Http\Models\RuneTheme;
+use Seeders\AudioMessageSeeder;
 use Seeders\CardSeeder;
 use Seeders\FAQSeeder;
 use Seeders\IchingSeeder;
@@ -61,6 +63,7 @@ class CliController
         RuneTheme::setup();
         Iching::setup();
         PracticeItem::setup();
+        AudioMessage::setup();
 
         $this->create_db_views($hive);
 
@@ -83,6 +86,7 @@ class CliController
         RuneTheme::setdown();
         Iching::setdown();
         PracticeItem::setdown();
+        AudioMessage::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
@@ -93,13 +97,14 @@ class CliController
         }
     }
 
-    function seed(\Base $hive)
+    function seed()
     {
         CardSeeder::run();
         FAQSeeder::run();
         RuneSeeder::run();
         IchingSeeder::run();
         PracticeItemSeeder::run();
+        AudioMessageSeeder::run();
     }
 
     function fresh(\Base $hive)
@@ -248,7 +253,7 @@ class CliController
         $db->exec(
             "CREATE OR REPLACE VIEW {$practice_item_view} AS
             SELECT
-                item.id, item.title, item.description, item.file_src, item.faqs, item.locale, item.created_at,
+                item.id, item.title, item.description, item.file, item.faqs, item.locale, item.created_at,
                 image.id as image_id, image.imageable_type as image_imageable_type, image.imageable_id as image_imageable_id, image.variant as image_variant, image.src as image_src, image.alt as image_alt
             FROM practice_items item
             LEFT JOIN images image ON image.imageable_id = item.id AND image.imageable_type = '{$imageable_type}' AND image.variant = 'image';"

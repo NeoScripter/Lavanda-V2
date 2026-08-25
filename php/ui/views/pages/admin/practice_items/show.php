@@ -38,8 +38,8 @@ $hive = \Base::instance(); ?>
         <div>
             <h3 class="mb-2 font-medium"> <?= $hive->get('admin.file') ?> </h3>
             <?= component('ui/file-link', [
-                'label' => $item['file_src'],
-                'url' => $item['file_src']
+                'label' => $item['file'],
+                'url' => $item['file']
             ]) ?>
         </div>
 

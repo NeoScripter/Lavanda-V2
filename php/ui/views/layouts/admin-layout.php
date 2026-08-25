@@ -16,7 +16,7 @@ extract(component_props(
     <?= component('layout/sidebar', [
         'links' => [
             [
-                'url'   => '/admin',
+                'url'   => $hive->alias('dashboard'),
                 'label' => $hive->get('admin.dashboard'),
                 'icon'  => 'layout-grid',
             ],
@@ -26,17 +26,17 @@ extract(component_props(
                 'icon'  => 'playing-cards',
             ],
             [
-                'url'   => '/admin/faqs',
+                'url'   => $hive->alias('admin_faqs_index'),
                 'label' => 'FAQs',
                 'icon'  => 'faq',
             ],
             [
-                'url'   => '/admin/runes',
+                'url'   => $hive->alias('admin_runes_index'),
                 'label' => $hive->get('admin.runes'),
                 'icon'  => 'rune',
             ],
             [
-                'url'   => '/admin/ichings',
+                'url'   => $hive->alias('admin_ichings_index'),
                 'label' => $hive->get('admin.iching'),
                 'icon'  => 'iching',
             ],
@@ -44,6 +44,11 @@ extract(component_props(
                 'url'   => $hive->alias('admin_practice_items_index'),
                 'label' => $hive->get('admin.practice'),
                 'icon'  => 'practice',
+            ],
+            [
+                'url'   => $hive->alias('admin_audio_messages_index'),
+                'label' => $hive->get('admin.audios'),
+                'icon'  => 'audio',
             ],
         ],
     ]) ?>

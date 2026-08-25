@@ -92,15 +92,16 @@ $hive = \Base::instance();
                         <?php endif; ?>
                     </li>
                 <?php elseif (is_string($file)): ?>
+                    <?php $is_audio = str_ends_with($file, 'mp3'); ?>
                     <div class="mt-2">
                         <a
                             href="<?= $file ?>"
                             target="_blank"
                             class="font-medium inline-flex items-center transition-colors hover:text-muted-foreground">
                             <span class="mr-1.5 inline-block [&>svg]:size-5">
-                                <?php include(APP_DIR . '/public/assets/svgs/download-file.svg'); ?>
+                                <?php $is_audio ? svg('music') : svg('download-file'); ?>
                             </span>
-                            <?= substr($file, strrpos($file, '/') + 1) ?>
+                            <?= extract_file_name($file) ?>
                         </a>
                     </div>
                 <?php endif; ?>

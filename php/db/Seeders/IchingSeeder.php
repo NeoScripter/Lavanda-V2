@@ -13,7 +13,7 @@ class IchingSeeder extends Seeder
     public static function run()
     {
         if (self::is_seeded(db_table: 'ichings')) {
-            echo 'The ichings are already seeded';
+            echo "The ichings are already seeded\n";
             return;
         }
 
