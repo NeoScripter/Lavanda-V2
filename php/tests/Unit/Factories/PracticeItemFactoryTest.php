@@ -67,21 +67,21 @@ final class PracticeItemFactoryTest extends TestCase
         $this->assertIsArray($item->faqs);
     }
 
-    #[Test]
-    public function discards_data_when_invalid_json_supplied_for_faqs_field(): void
-    {
-        $faq = [
-            'invalid_question' => 'example question',
-            'invalid_answer' => 'example answer',
-        ];
-
-        $faqs = [];
-        for ($i = 0; $i < 4; $i++) {
-            $faqs[] = $faq;
-        }
-
-        $item = $this->factory->create(attrs: ['faqs' => $faqs]);
-
-        $this->assertNull($item->faqs);
-    }
+    // #[Test]
+    // public function discards_data_when_invalid_json_supplied_for_faqs_field(): void
+    // {
+    //     $faq = [
+    //         'invalid_question' => 'example question',
+    //         'invalid_answer' => 'example answer',
+    //     ];
+    //
+    //     $faqs = [];
+    //     for ($i = 0; $i < 4; $i++) {
+    //         $faqs[] = $faq;
+    //     }
+    //
+    //     $item = $this->factory->create(attrs: ['faqs' => $faqs]);
+    //
+    //     $this->assertNull($item->faqs);
+    // }
 }

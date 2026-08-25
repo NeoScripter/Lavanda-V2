@@ -77,8 +77,8 @@ $required = isset($attrs['required']) && $attrs['required'] === true;
                         <?= $hive->get('admin.answer') ?>
                         <?= component('form/textarea', [
                             'class' => 'mt-1',
+                            'slot' => $faq['answer'],
                             'attrs' => [
-                                'value' => $faq['answer'],
                                 'required' => $required,
                                 'name' => "{$name}[{$idx}][answer]",
                                 'component-accordion-answer' => true,

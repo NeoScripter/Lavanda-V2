@@ -123,6 +123,8 @@ return [
         "description" => "Description",
         "practice" => "Practice",
         "item_description" => "Item description",
+        "item_name" => "Item name",
         "add" => "Add",
+        "file" => "File",
     ]
 ];

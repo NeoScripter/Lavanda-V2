@@ -6,9 +6,10 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 
+
 $hive = \Base::instance();
 
-slot('layouts/item-grid-layout', [
+slot('layouts/item-layout', [
     'heading' => $hive->get('admin.items'),
     'title' => $hive->get('admin.items'),
 ]); ?>
@@ -17,46 +18,54 @@ slot('layouts/item-grid-layout', [
 
     <?= component('ui/subheading', ['title' => $hive->get('admin.edit_item')]) ?>
 
-    <form action="<?= $hive->alias('admin_items_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+    <form action="<?= $hive->alias('admin_practice_items_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
         <?= component('form/form-input', [
-            'name'  => 'name',
+            'name'  => 'title',
             'label' => $hive->get('admin.item_name'),
             'attrs' => [
                 'type'     => 'text',
-                'value'    => $item['name'],
+                'value'     => $item['title'],
+                'required' => true,
+            ],
+        ]) ?>
+
+        <?= component('form/form-textarea', [
+            'name'  => 'description',
+            'label' => $hive->get('admin.item_description'),
+            'attrs' => [
+                'value'     => $item['description'],
                 'required' => true,
             ],
         ]) ?>
 
         <?= component('form/form-file-input', [
-            'name'  => 'front_image',
-            'label' => $hive->get('admin.front_image'),
+            'name'  => 'image',
+            'label' => $hive->get('admin.image'),
             'with_alt' => true,
-            'value'    => [$item['front_image'] ?? null],
+            'value'    => [$item['image'] ?? null],
+            'attrs' => [
+                'required' => true,
+                'multiple' => false,
+            ],
+        ]) ?>
+
+        <?= component('form/form-file-input', [
+            'name'  => 'file_src',
+            'label' => $hive->get('admin.file'),
+            'value'    => [$item['file_src'] ?? null],
+            'with_alt' => true,
             'attrs' => [
                 'multiple' => false,
             ],
         ]) ?>
 
-        <?= component('form/form-textarea', [
-            'name'  => 'advice',
-            'label' => $hive->get('admin.item_advice'),
-            'attrs' => [
-                'required' => true,
-                'value'    => $item['advice'],
-            ],
-        ]) ?>
-
-        <?= component('form/form-wysiwyg', [
-            'name'  => 'html',
-            'label' => $hive->get('admin.item_meaning'),
-            'attrs' => [
-                'required' => true,
-                'value'    => $item['html'],
-            ],
+        <?= component('form/form-accordion', [
+            'name'  => 'faqs',
+            'value'    => $item['faqs'] ?? [],
+            'label' => $hive->get('admin.faqs'),
         ]) ?>
 
         <div class="flex justify-start gap-4.5">

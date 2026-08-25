@@ -123,6 +123,8 @@ return [
         "description" => "Описание",
         "practice" => "Практика",
         "item_description" => "Описание элемента",
+        "item_name" => "Название элемента",
         "add" => "Добавить",
+        "file" => "Файл",
     ]
 ];

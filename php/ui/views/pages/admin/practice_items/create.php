@@ -50,7 +50,6 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-
         <?= component('form/form-accordion', [
             'name'  => 'faqs',
             'label' => $hive->get('admin.faqs'),

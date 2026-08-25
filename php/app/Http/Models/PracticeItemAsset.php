@@ -18,6 +18,7 @@ class PracticeItemAsset extends Mapper
     {
         return [
             ...$this->cast(),
+            'faqs' => json_decode($this->faqs, true),
             'image' => [
                 'id' => $this->image_id,
                 'src' => $this->image_src,
