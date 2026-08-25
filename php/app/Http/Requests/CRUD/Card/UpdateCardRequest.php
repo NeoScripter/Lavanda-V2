@@ -18,7 +18,7 @@ class UpdateCardRequest extends Request
                 'filter'   => 'trim|trim_spaces|escape_tags',
                 'validate' => 'required|max_len:1200',
             ],
-            'html' => [
+            'description' => [
                 'filter'   => 'trim',
                 'validate' => 'required|max_len:42000|no_tags',
             ],
@@ -47,7 +47,7 @@ class UpdateCardRequest extends Request
         set_values([
             'name'    => $this->hive->POST['name'] ?? '',
             'advice' => $this->hive->POST['advice'] ?? '',
-            'html'     => $this->hive->POST['html'] ?? '',
+            'description'     => $this->hive->POST['description'] ?? '',
         ]);
 
         $this->hive->reroute('@admin_cards_edit');

@@ -42,7 +42,7 @@ slot('layouts/card-grid-layout', [
         ]) ?>
 
         <?= component('form/form-wysiwyg', [
-            'name'  => 'html',
+            'name'  => 'description',
             'label' => $hive->get('admin.card_meaning'),
             'attrs' => [
                 'required' => true,

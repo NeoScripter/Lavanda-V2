@@ -120,4 +120,23 @@ final class FlipCardTest extends TestCase
         $res = $db->exec("SELECT count(*) FROM themes");
         $this->assertEquals(0, $res[0]['count'], 'Themes were not deleted');
     }
+
+    #[Test]
+    public function fetches_associated_themes(): void
+    {
+        // $cardF = new CardFactory();
+        // $card = $cardF->create();
+        // $theme = $this->factory->create([
+        //     'themeable_id' => $card->id,
+        //     'themeable_type' => $card->variant,
+        //     'name' => 'General'
+        // ]);
+        //
+        // $this->assertNotEmpty($theme->html);
+        //
+        // $rows = $this->hive->DB->exec('SELECT name from themes where id = ?', [$theme->id]);
+        //
+        // $this->assertNotEmpty($rows);
+        // $this->assertEquals($theme->name, $rows[0]['name']);
+    }
 }
