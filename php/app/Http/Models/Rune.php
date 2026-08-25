@@ -6,6 +6,7 @@ use DB\Cortex;
 use DB\SQL\Schema;
 use Enums\ImageableType;
 use Enums\Locale;
+use Enums\ThemeableType;
 
 class Rune extends Cortex
 {
@@ -23,7 +24,42 @@ class Rune extends Cortex
             foreach ($self->themes as $theme) {
                 $theme->erase();
             }
+
+            $db = \Base::instance()->get('DB');
+
+            $db->exec(
+                "DELETE FROM themes WHERE themeable_type = ? AND themeable_id = ?",
+                [ThemeableType::RUNE->value, $self->id]
+            );
         });
+
+        $this->afterinsert(function ($self) {
+            $db = \Base::instance()->get('DB');
+
+            $res = $db->exec(
+                "SELECT EXISTS ( SELECT 1 FROM themes WHERE themeable_type = ? AND themeable_id = ?) AS exists",
+                [ThemeableType::RUNE->value, $self->id]
+            );
+
+            $theme_name = match ($self->locale) {
+                Locale::GERMAN->value => 'Allgemein',
+                Locale::RUSSIAN->value => 'Общая',
+                Locale::SERBIAN->value => 'Opšte',
+                default => 'General'
+            };
+
+            if (empty($res[0]['exists'])) {
+                $theme = new Theme();
+                $theme->copyfrom([
+                    'themeable_id' => $self->id,
+                    'themeable_type' => ThemeableType::RUNE->value,
+                    'name' => $theme_name,
+                    'html' => 'placeholder',
+                ]);
+                $theme->save();
+            }
+        });
+
 
         $this->onget('front_image', function ($self) {
             $img = new Image();

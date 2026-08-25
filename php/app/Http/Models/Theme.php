@@ -12,7 +12,7 @@ class Theme extends Cortex
     {
         parent::__construct();
 
-        $this->beforeinsert(function ($self) {
+        $this->beforesave(function ($self) {
             $db = \Base::instance()->get('DB');
 
             $res = $db->exec(

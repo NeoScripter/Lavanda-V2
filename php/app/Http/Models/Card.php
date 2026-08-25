@@ -16,6 +16,40 @@ class Card extends Cortex
             if ($self->front_image) {
                 $self->front_image->erase();
             }
+
+            $db = \Base::instance()->get('DB');
+
+            $db->exec(
+                "DELETE FROM themes WHERE themeable_type = ? AND themeable_id = ?",
+                [$self->variant, $self->id]
+            );
+        });
+
+        $this->afterinsert(function ($self) {
+            $db = \Base::instance()->get('DB');
+
+            $res = $db->exec(
+                "SELECT EXISTS ( SELECT 1 FROM themes WHERE themeable_type = ? AND themeable_id = ?) AS exists",
+                [$self->variant, $self->id]
+            );
+
+            $theme_name = match ($self->locale) {
+                Locale::GERMAN->value => 'Allgemein',
+                Locale::RUSSIAN->value => 'Общая',
+                Locale::SERBIAN->value => 'Opšte',
+                default => 'General'
+            };
+
+            if (empty($res[0]['exists'])) {
+                $theme = new Theme();
+                $theme->copyfrom([
+                    'themeable_id' => $self->id,
+                    'themeable_type' => $self->variant,
+                    'name' => $theme_name,
+                    'html' => 'placeholder',
+                ]);
+                $theme->save();
+            }
         });
 
         $this->onget('front_image', function ($self) {

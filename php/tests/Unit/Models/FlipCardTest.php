@@ -6,7 +6,9 @@ namespace Tests\Unit\Models;
 
 use Enums\CardVariant;
 use Enums\DBView;
+use Enums\Locale;
 use Factories\CardFactory;
+use Factories\RuneFactory;
 use Http\Models\FlipCard;
 use Http\Models\Image;
 use PHPUnit\Framework\Attributes\Test;
@@ -71,5 +73,51 @@ final class FlipCardTest extends TestCase
 
         $this->assertTrue($front_image->dry());
         $this->assertNotTrue($back_image->dry());
+    }
+
+    #[Test]
+    public function creates_general_theme_by_default(): void
+    {
+        $cardF = new CardFactory();
+        $locale = Locale::ENGLISH->value;
+
+        foreach (CardVariant::values() as $card_variant) {
+            $cardF->create(['variant' => $card_variant, 'locale' => $locale]);
+        }
+
+        $db = $this->hive->get('DB');
+
+        $variant_num = count(CardVariant::values());
+
+        $res = $db->exec("SELECT count(*) FROM themes");
+        $this->assertEquals($variant_num, $res[0]['count'], 'Themes were not created');
+
+        $row = $db->exec("SELECT name FROM themes");
+        $this->assertContainsEquals('General', $row[0], "Themes don't have the right names");
+    }
+
+    #[Test]
+    public function cascades_themes_on_delete(): void
+    {
+        $cardF = new CardFactory();
+
+        $cards = [];
+        foreach (CardVariant::values() as $card_variant) {
+            $cards[] = $cardF->create(['variant' => $card_variant]);
+        }
+
+        $db = $this->hive->get('DB');
+
+        $variant_num = count(CardVariant::values());
+
+        $res = $db->exec("SELECT count(*) FROM themes");
+        $this->assertEquals($variant_num, $res[0]['count'], 'Themes were not created');
+
+        foreach ($cards as $card) {
+            $card->erase();
+        }
+
+        $res = $db->exec("SELECT count(*) FROM themes");
+        $this->assertEquals(0, $res[0]['count'], 'Themes were not deleted');
     }
 }
