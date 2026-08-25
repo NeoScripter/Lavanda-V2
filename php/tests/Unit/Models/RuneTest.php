@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Unit\Models;
 
 use Enums\Locale;
+use Enums\ThemeableType;
 use Factories\RuneFactory;
+use Factories\ThemeFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -50,5 +52,28 @@ final class RuneTest extends TestCase
 
         $res = $db->exec("SELECT count(*) FROM themes");
         $this->assertEquals(0, $res[0]['count'], 'Themes were not deleted');
+    }
+
+    #[Test]
+    public function fetches_associated_themes(): void
+    {
+        $runeF = new RuneFactory();
+        $rune = $runeF->create();
+
+        $themeF = new ThemeFactory();
+        $names = ['Love', 'Career'];
+
+        foreach ($names as $name) {
+            $themeF->create([
+                'themeable_id' => $rune->id,
+                'themeable_type' => ThemeableType::RUNE->value,
+                'name' => $name,
+            ]);
+        }
+
+        $themes = $rune->themes;
+
+        $this->assertNotNull($themes);
+        $this->assertCount(3, $themes);
     }
 }

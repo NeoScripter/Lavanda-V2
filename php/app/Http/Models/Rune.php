@@ -92,6 +92,16 @@ class Rune extends Cortex
 
             return $img;
         });
+
+        $this->onget('themes', function ($self) {
+            $themes = new Theme();
+
+            return $themes->find([
+                'themeable_type = ? AND themeable_id = ?',
+                ThemeableType::RUNE->value,
+                $self->id,
+            ], ['order' => 'name']);
+        });
     }
 
     protected $fieldConf = [
