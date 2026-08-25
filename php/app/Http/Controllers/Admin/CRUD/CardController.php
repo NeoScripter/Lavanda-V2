@@ -11,6 +11,7 @@ use Exception;
 use Http\Controller;
 use Http\Models\Card;
 use Http\Models\FlipCard;
+use Http\Models\Theme;
 use Http\Requests\CRUD\Card\StoreCardRequest;
 use Http\Requests\CRUD\Card\UpdateCardRequest;
 use Traits\RequiresAuth;
@@ -104,6 +105,25 @@ class CardController extends Controller
                 sizes: $this->image_sizes
             );
         }
+
+        $locale = Locale::normalize($hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value) ?? '');
+
+        $theme_name = match ($locale) {
+            Locale::ENGLISH->value => 'General',
+            Locale::GERMAN->value => 'Allgemein',
+            Locale::RUSSIAN->value => 'Общая',
+            Locale::SERBIAN->value => 'Opšte',
+        };
+
+        $theme = new Theme();
+        $theme->copyfrom([
+            'themeable_id' => $card->id,
+            'themeable_type' => $card->variant,
+            'name' => $theme_name,
+        ]);
+
+        $theme->html = $attrs['html'] ?? file_get_contents(APP_DIR . '/db/Fixtures/Card/html.md');
+        $theme->save();
 
         notify("{$hive->get('admin.card_successfully_created')}!");
 

@@ -57,7 +57,7 @@ slot('layouts/card-grid-layout', [
             'label' => $hive->get('admin.card_meaning'),
             'attrs' => [
                 'required' => true,
-                'value'    => $card['html'],
+                'value'    => $card['description'],
             ],
         ]) ?>
 

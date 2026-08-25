@@ -45,7 +45,7 @@ $alt = $card['front_image']['alt'] ?? '';
                 <?= $hive->get('admin.card_meaning') ?>
             </h3>
             <div class="max-w-full prose prose-sm">
-                <?= \Markdown::instance()->convert($card['html']); ?>
+                <?= \Markdown::instance()->convert($card['description']); ?>
             </div>
         </div>
     </div>

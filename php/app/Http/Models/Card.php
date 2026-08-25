@@ -40,7 +40,7 @@ class Card extends Cortex
             'type' => Schema::DT_VARCHAR256,
             'nullable' => false,
         ],
-        'html' => [
+        'description' => [
             'type' => Schema::DT_TEXT,
             'nullable' => false,
         ],

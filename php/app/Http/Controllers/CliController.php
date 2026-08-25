@@ -16,6 +16,7 @@ use Http\Models\Image;
 use Http\Models\PracticeItem;
 use Http\Models\Rune;
 use Http\Models\RuneTheme;
+use Http\Models\Theme;
 use Seeders\AudioMessageSeeder;
 use Seeders\CardSeeder;
 use Seeders\FAQSeeder;
@@ -56,6 +57,7 @@ class CliController
     function migrate(\Base $hive)
     {
         User::setup();
+        Theme::setup();
         Card::setup();
         Image::setup();
         FAQ::setup();
@@ -69,6 +71,8 @@ class CliController
 
         $this->create_card_backs($hive);
 
+        $this->create_compound_indexes($hive);
+
         if ($hive->app_env !== 'test') {
             echo "Migration completed.\n";
         }
@@ -79,6 +83,7 @@ class CliController
         $this->delete_db_views($hive);
 
         User::setdown();
+        Theme::setdown();
         Card::setdown();
         Image::setdown();
         FAQ::setdown();
@@ -91,6 +96,8 @@ class CliController
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
         );
+
+        $this->delete_compound_indexes($hive);
 
         if ($hive->app_env !== 'test') {
             echo "All tables deleted.\n";
@@ -225,7 +232,7 @@ class CliController
         $db->exec(
             "CREATE OR REPLACE VIEW {$card_view} AS
             SELECT
-                c.id, c.name, c.html, c.advice, c.variant, c.locale, c.created_at,
+                c.id, c.name, c.description, c.advice, c.variant, c.locale, c.created_at,
                 front.id as front_id, front.imageable_type as front_imageable_type, front.imageable_id as front_imageable_id, front.variant as front_variant, front.src as front_src, front.alt as front_alt,
                 back.id as back_id, back.imageable_type as back_imageable_type, back.variant as back_variant, back.src as back_src, back.alt as back_alt
             FROM cards c
@@ -286,5 +293,17 @@ class CliController
                 variant: 'back_image'
             );
         }
+    }
+
+    private function create_compound_indexes(\Base $hive)
+    {
+        $db = $hive->get("DB");
+        $db->exec('CREATE UNIQUE INDEX idx_theme_parent_name ON themes (themeable_type, themeable_id, name)');
+    }
+
+    private function delete_compound_indexes(\Base $hive)
+    {
+        $db = $hive->get("DB");
+        $db->exec('DROP INDEX IF EXISTS idx_theme_parent_name;');
     }
 }
