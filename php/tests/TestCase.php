@@ -20,7 +20,7 @@ abstract class TestCase extends BaseTestCase
         $this->hive = \Base::instance();
         $this->db = $this->hive->get('DB');
 
-        if (!$this->isMigrated()) {
+        if (!$this->is_migrated()) {
             $this->run_migrations();
         }
 
@@ -33,6 +33,10 @@ abstract class TestCase extends BaseTestCase
         $this->db->rollback();
         parent::tearDown();
 
+        delete_files_recursive(
+            glob(UPLOAD_DIR . '/*')
+        );
+
         // $hanlder = new CliController();
         // $hanlder->drop($this->hive);
     }
@@ -43,7 +47,13 @@ abstract class TestCase extends BaseTestCase
         $hanlder->fresh($this->hive);
     }
 
-    private function isMigrated(): bool
+    public static function tearDownAfterClass(): void
+    {
+        $handler = new CliController();
+        $handler->drop(\Base::instance());
+    }
+
+    private function is_migrated(): bool
     {
         $tables = $this->db->exec("SELECT to_regclass('public.runes')");
 
