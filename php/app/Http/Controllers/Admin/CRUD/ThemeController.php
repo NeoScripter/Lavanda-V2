@@ -34,6 +34,7 @@ class ThemeController extends Controller
             'themes' => get_unique_themes_by_type($themeable_type, $model_id),
             'model' => $model,
             'model_id' => $model_id,
+            'layout' => $model === 'cards' ? 'card-grid-layout' : 'admin-layout',
         ]);
     }
 
@@ -50,6 +51,7 @@ class ThemeController extends Controller
             'model' => $model,
             'name' => $hive->GET['name'] ?? '',
             'model_id' => $model_id,
+            'layout' => $model === 'cards' ? 'card-grid-layout' : 'admin-layout',
         ]);
     }
 
@@ -75,10 +77,7 @@ class ThemeController extends Controller
         notify($hive->get('admin.theme_successfully_created'));
 
         $hive->reroute(
-            $hive->alias(
-                'admin_themes_edit',
-                ['theme_id' => $theme->id, 'model_id' => $model_id, 'model' => $model]
-            )
+            $hive->alias("admin_{$model}_edit", ['id' => $model_id])
         );
     }
 
@@ -101,6 +100,23 @@ class ThemeController extends Controller
         notify($hive->get('admin.theme_successfully_updated'));
 
         $hive->reroute("@admin_themes_edit(@theme_id=$id)");
+    }
+
+    public function destroy(\Base $hive)
+    {
+        $model_id = $hive->PARAMS['model_id'];
+        $model = $hive->PARAMS['model'];
+        
+        $theme_id = $hive->PARAMS['theme_id'];
+        $theme = new Theme();
+        $theme->load(['id = ?', $theme_id]);
+        $theme->erase();
+
+        notify($hive->get('admin.theme_successfully_deleted'));
+
+        $hive->reroute(
+            $hive->alias("admin_{$model}_edit", ['id' => $model_id])
+        );
     }
 
     private function resolve_themeable_type(string $model, string|int $model_id)

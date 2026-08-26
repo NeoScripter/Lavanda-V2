@@ -88,6 +88,7 @@ return [
         "create_a_card" => "Create a card",
         "create_a_rune" => "Create a rune",
         "card_name" => "Card name",
+        "card_description" => "Card description",
         "theme_name" => "Theme name",
         "rune_name" => "Rune name",
         "add_new" => "Add new",

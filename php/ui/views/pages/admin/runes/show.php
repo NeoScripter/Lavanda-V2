@@ -1,7 +1,5 @@
 <?php
 
-use Enums\RuneTheme;
-
 extract(component_props(
     required: ['rune', 'themes'],
     optional: [],

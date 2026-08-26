@@ -87,6 +87,7 @@ return [
         "theme_successfully_deleted" => "Тема успешно удалена!",
         "create_a_card" => "Создать карту",
         "card_name" => "Название карты",
+        "card_description" => "Описание карты",
         "theme_name" => "Название темы",
         "create_a_rune" => "Создать руну",
         "rune_name" => "Название руны",

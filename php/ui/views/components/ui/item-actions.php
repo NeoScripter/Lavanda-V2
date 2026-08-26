@@ -1,13 +1,11 @@
-
-<?php 
+<?php
 $modal_id = uniqid('modal_');
 $hive = \Base::instance();
 extract(component_props(
     required: ['delete_url', 'item_label'],
     optional: ['edit_url' => null],
     props: get_defined_vars(),
-));
-;?>
+));; ?>
 
 <div class='flex flex-col gap-2'>
 
@@ -24,10 +22,10 @@ extract(component_props(
         'variant' => 'destructive',
         'class'   => 'rounded-sm',
         'slot' => $hive->get('admin.delete'),
-        'type' => 'submit',
         'attrs' => [
             'component-modal-show' => true,
-            'data-modal-id' => $modal_id
+            'data-modal-id' => $modal_id,
+            'type' => 'button',
         ]
     ]) ?>
 

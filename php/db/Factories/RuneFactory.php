@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Factories;
 
 use Enums\ImageableType;
-use Enums\RuneTheme as RuneThemeEnum;
 use Http\Models\Rune;
-use Http\Models\RuneTheme;
 
 class RuneFactory extends Factory
 {
@@ -17,16 +15,7 @@ class RuneFactory extends Factory
 
         $rune->name = $attrs['name'] ?? $this->faker->word();
         $rune->advice = $attrs['advice'] ??  $this->faker->sentence();
-        $html = $attrs['html'] ?? file_get_contents(APP_DIR . '/db/Fixtures/Rune/html.md');
         $rune->save();
-
-        foreach (RuneThemeEnum::values() as $name) {
-            $theme = new RuneTheme();
-            $theme->name = $name;
-            $theme->html = $name . "\n\n" . $html;
-            $theme->rune = $rune;
-            $theme->save();
-        }
 
         $imageable_type = ImageableType::RUNE->value;
 

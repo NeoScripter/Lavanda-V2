@@ -6,14 +6,12 @@ namespace Http\Controllers\Admin\CRUD;
 
 use Enums\ImageableType;
 use Enums\Locale;
-use Enums\RuneTheme as RuneThemeEnum;
 use Enums\SessionKey;
 use Enums\ThemeableType;
 use Exception;
 use Http\Controller;
 use Http\Models\Rune;
 use Http\Models\RuneAsset;
-use Http\Models\RuneTheme;
 use Http\Requests\CRUD\Rune\StoreRuneRequest;
 use Http\Requests\CRUD\Rune\UpdateRuneRequest;
 use Traits\RequiresAuth;
@@ -108,14 +106,6 @@ class RuneController extends Controller
                 file: $request->input('back_image')[0],
                 sizes: $this->image_sizes
             );
-        }
-
-        foreach (RuneThemeEnum::values() as $name) {
-            $theme = new RuneTheme();
-            $theme->name = $name;
-            $theme->html = 'Placeholder';
-            $theme->rune = $rune;
-            $theme->save();
         }
 
         notify($hive->get('admin.rune_successfully_created'));

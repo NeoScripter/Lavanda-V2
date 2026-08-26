@@ -1,9 +1,7 @@
 <?php
 
-use Enums\CardVariant;
-
 extract(component_props(
-    required: ['card'],
+    required: ['card', 'themes'],
     optional: [],
     props: get_defined_vars(),
 ));
@@ -13,6 +11,11 @@ $hive = \Base::instance();
 slot('layouts/card-grid-layout', [
     'heading' => $hive->get('admin.cards'),
     'title' => $hive->get('admin.cards'),
+]);
+slot('layouts/theme-layout', [
+    'model' => 'cards',
+    'model_id' => $card['id'],
+    'themes' => $themes
 ]); ?>
 
 <div class="space-y-6">
@@ -52,9 +55,9 @@ slot('layouts/card-grid-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-wysiwyg', [
+        <?= component('form/form-textarea', [
             'name'  => 'description',
-            'label' => $hive->get('admin.card_meaning'),
+            'label' => $hive->get('admin.card_description'),
             'attrs' => [
                 'required' => true,
                 'value'    => $card['description'],
@@ -82,4 +85,5 @@ slot('layouts/card-grid-layout', [
     </form>
 </div>
 
+<?php end_slot(); ?>
 <?php end_slot(); ?>

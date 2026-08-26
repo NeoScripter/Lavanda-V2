@@ -2,7 +2,7 @@
 
 use Enums\CardVariant;
 
- $hive = \Base::instance();
+$hive = \Base::instance();
 
 extract(component_props(
     required: ['title', 'heading', 'slot'],
@@ -21,7 +21,7 @@ extract(component_props(
                 'icon'  => 'layout-grid',
             ],
             [
-                'url'   => $hive->alias('admin_cards_index', [], ['variant' => CardVariant::TAROT->value]),
+                'url'   => $hive->alias('admin_cards_index', []),
                 'label' => $hive->get('admin.cards'),
                 'icon'  => 'playing-cards',
             ],
@@ -64,7 +64,9 @@ extract(component_props(
             </button>
             <span><?= $heading ?></span>
         </header>
-        <?= $slot ?? '' ?>
+        <div class='px-4 py-6'>
+            <?= $slot ?? '' ?>
+        </div>
     </div>
 </main>
 

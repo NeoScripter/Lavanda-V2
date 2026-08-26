@@ -41,9 +41,9 @@ slot('layouts/card-grid-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-wysiwyg', [
+        <?= component('form/form-textarea', [
             'name'  => 'description',
-            'label' => $hive->get('admin.card_meaning'),
+            'label' => $hive->get('admin.card_description'),
             'attrs' => [
                 'required' => true,
             ],

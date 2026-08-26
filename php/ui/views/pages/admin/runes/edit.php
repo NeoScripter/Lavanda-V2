@@ -2,15 +2,17 @@
 
 extract(component_props(
     required: ['rune', 'themes'],
-    optional: [],
+    optional: ['heading' => '', 'title' => ''],
     props: get_defined_vars(),
 ));
 
 $hive = \Base::instance();
 
-slot('layouts/theme-layout', [
+slot('layouts/admin-layout', [
     'heading' => $hive->get('admin.runes'),
     'title' => $hive->get('admin.runes'),
+]);
+slot('layouts/theme-layout', [
     'model' => 'runes',
     'model_id' => $rune['id'],
     'themes' => $themes
@@ -86,4 +88,5 @@ slot('layouts/theme-layout', [
     </form>
 </div>
 
+<?php end_slot(); ?>
 <?php end_slot(); ?>

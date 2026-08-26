@@ -23,39 +23,37 @@ $nav_items = array_map(
 slot('layouts/admin-layout', compact('heading', 'title')); ?>
 
 
-<div class="px-4 py-6">
-    <div class="flex flex-col space-y-8 xl:flex-row lg:space-y-0 lg:space-x-12">
-        <aside class="w-full max-w-xl lg:w-48">
-            <?= component('ui/heading', [
-                'title'       => $hive->get('admin.cards'),
-                'description' => $hive->get('admin.select_a_card_category'),
-            ]) ?>
+<div class="flex flex-col space-y-8 xl:flex-row lg:space-y-0 lg:space-x-12">
+    <aside class="w-full max-w-xl lg:w-48">
+        <?= component('ui/heading', [
+            'title'       => $hive->get('admin.cards'),
+            'description' => $hive->get('admin.select_a_card_category'),
+        ]) ?>
 
-            <nav class="flex flex-col space-y-1 space-x-0">
-                <?php foreach ($nav_items as $item): ?>
-                    <?php slot('components/ui/auth-button', [
-                        'size'    => 'sm',
-                        'variant' => 'ghost',
-                        'attrs'   => ['tabindex' => '-1'],
-                        'class'   => 'relative w-full justify-start' . ($variant === $item['variant'] ? ' bg-muted' : ''),
-                    ]); ?>
+        <nav class="flex flex-col space-y-1 space-x-0">
+            <?php foreach ($nav_items as $item): ?>
+                <?php slot('components/ui/auth-button', [
+                    'size'    => 'sm',
+                    'variant' => 'ghost',
+                    'attrs'   => ['tabindex' => '-1'],
+                    'class'   => 'relative w-full justify-start' . ($variant === $item['variant'] ? ' bg-muted' : ''),
+                ]); ?>
 
-                    <a href="<?= $hive->alias('admin_cards_index', [], ['variant' => $item['variant']]) ?>"
-                        class="absolute inset-0 z-10"></a>
+                <a href="<?= $hive->alias('admin_cards_index', [], ['variant' => $item['variant']]) ?>"
+                    class="absolute inset-0 z-10"></a>
 
-                    <?= $item['title'] ?>
-                    <?php end_slot(); ?>
-                <?php endforeach ?>
-            </nav>
-        </aside>
+                <?= $item['title'] ?>
+                <?php end_slot(); ?>
+            <?php endforeach ?>
+        </nav>
+    </aside>
 
-        <hr class="my-6 xl:hidden">
+    <hr class="my-6 xl:hidden">
 
-        <div class="flex-1">
-            <section>
-                <?= $slot ?>
-            </section>
-        </div>
+    <div class="flex-1">
+        <section>
+            <?= $slot ?>
+        </section>
     </div>
 </div>
 

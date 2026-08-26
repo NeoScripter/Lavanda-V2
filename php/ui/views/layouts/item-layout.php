@@ -8,10 +8,8 @@ extract(component_props(
 slot('layouts/admin-layout', compact('heading', 'title'));
 ?>
 
-<div class="px-6 py-6">
-    <section>
-        <?= $slot ?>
-    </section>
-</div>
+<section>
+    <?= $slot ?>
+</section>
 
 <?php end_slot(); ?>

@@ -15,7 +15,6 @@ use Http\Models\User;
 use Http\Models\Image;
 use Http\Models\PracticeItem;
 use Http\Models\Rune;
-use Http\Models\RuneTheme;
 use Http\Models\Theme;
 use Seeders\AudioMessageSeeder;
 use Seeders\CardSeeder;
@@ -62,7 +61,6 @@ class CliController
         Image::setup();
         FAQ::setup();
         Rune::setup();
-        RuneTheme::setup();
         Iching::setup();
         PracticeItem::setup();
         AudioMessage::setup();
@@ -88,7 +86,6 @@ class CliController
         Image::setdown();
         FAQ::setdown();
         Rune::setdown();
-        RuneTheme::setdown();
         Iching::setdown();
         PracticeItem::setdown();
         AudioMessage::setdown();

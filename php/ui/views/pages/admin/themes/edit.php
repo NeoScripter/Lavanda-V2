@@ -2,17 +2,20 @@
 
 extract(component_props(
     required: ['model', 'model_id', 'theme', 'themes'],
-    optional: [],
+    optional: ['layout' => 'admin-layout'],
     props: get_defined_vars(),
 ));
 
 $hive = \Base::instance();
 
 $title = $hive->get('admin.edit') . ' ' . $hive->get('admin.theme') . ' "' . $theme->name . '"';
+$valid_count = count(array_filter($themes, fn($theme) => isset($theme['theme_id'])));
 
+slot("layouts/{$layout}", [
+    'heading' => $hive->get("admin.{$model}"),
+    'title' => $hive->get("admin.{$model}"),
+]);
 slot('layouts/theme-layout', [
-    'heading' => $hive->get('admin.runes'),
-    'title' => $hive->get('admin.runes'),
     'model' => $model,
     'model_id' => $model_id,
     'themes' => $themes
@@ -43,8 +46,17 @@ slot('layouts/theme-layout', [
                     'attrs' => ['type' => 'submit']
                 ]
             ) ?>
+            <?php if ($valid_count > 1) : ?>
+                <?= component('ui/item-actions', [
+                    'delete_url' => $hive->alias("admin_themes_destroy", ['id' => $theme->id]),
+                    'item_label' => $hive->get('admin.card'),
+                ]) ?>
+            <?php endif; ?>
         </div>
     </form>
+
+
 </div>
 
+<?php end_slot(); ?>
 <?php end_slot(); ?>

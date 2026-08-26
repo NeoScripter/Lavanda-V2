@@ -7,6 +7,7 @@ namespace Http\Controllers\Admin\CRUD;
 use Enums\CardVariant;
 use Enums\Locale;
 use Enums\SessionKey;
+use Enums\ThemeableType;
 use Exception;
 use Http\Controller;
 use Http\Models\Card;
@@ -71,6 +72,7 @@ class CardController extends Controller
         view('pages/admin/cards/edit', [
             'title' => $card['name'],
             'card' => $card->to_resource(),
+            'themes' => get_unique_themes_by_type(ThemeableType::from($card->variant), $id),
         ]);
     }
 

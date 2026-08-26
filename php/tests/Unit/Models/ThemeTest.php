@@ -39,29 +39,6 @@ final class ThemeTest extends TestCase
     }
 
     #[Test]
-    public function rejects_duplicate_theme_for_parent_on_update(): void
-    {
-        $cardF = new CardFactory();
-        $card = $cardF->create();
-
-        $this->expectException(InvalidArgumentException::class);
-
-        $themes = [];
-        for ($i = 0; $i < 2; $i++) {
-            $themes[] = $this->factory->create([
-                'themeable_id' => $card->id,
-                'themeable_type' => $card->variant,
-                'name' => "General{$i}"
-            ]);
-        }
-
-        foreach ($themes as $theme) {
-            $theme->name = 'General';
-            $theme->save();
-        }
-    }
-
-    #[Test]
     public function enforces_unique_theme_per_parent_in_database(): void
     {
         $cardF = new CardFactory();
