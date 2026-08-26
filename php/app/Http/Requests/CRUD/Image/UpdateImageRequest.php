@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Requests\CRUD;
+namespace Http\Requests\CRUD\Image;
 
 use Http\Request;
 
