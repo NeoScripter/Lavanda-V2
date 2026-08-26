@@ -18,22 +18,36 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         $this->hive = \Base::instance();
+        $this->db = $this->hive->get('DB');
 
-        $this->run_migrations();
+        if (!$this->isMigrated()) {
+            $this->run_migrations();
+        }
+
+        $this->db->begin();
+        // $this->run_migrations();
     }
 
     protected function tearDown(): void
     {
+        $this->db->rollback();
         parent::tearDown();
 
-        $hanlder = new CliController();
-        $hanlder->drop($this->hive);
+        // $hanlder = new CliController();
+        // $hanlder->drop($this->hive);
     }
 
     private function run_migrations(): void
     {
         $hanlder = new CliController();
         $hanlder->fresh($this->hive);
+    }
+
+    private function isMigrated(): bool
+    {
+        $tables = $this->db->exec("SELECT to_regclass('public.runes')");
+
+        return !empty($tables[0]['to_regclass']);
     }
 
     protected function request(string $method, string $uri): ResponseInterface

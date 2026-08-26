@@ -113,9 +113,6 @@ class Rune extends Cortex
             'type' => Schema::DT_TEXT,
             'nullable' => false,
         ],
-        'themes' => [
-            'has-many' => ['\Http\Models\RuneTheme', 'rune']
-        ],
         'locale' => [
             'type' => Schema::DT_VARCHAR128,
             'default' => Locale::ENGLISH->value,

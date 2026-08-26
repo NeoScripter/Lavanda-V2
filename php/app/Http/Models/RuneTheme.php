@@ -17,9 +17,6 @@ class RuneTheme extends Cortex
             'type' => Schema::DT_TEXT,
             'nullable' => false,
         ],
-        'rune' => [
-            'belongs-to-one' => '\Http\Models\Rune',
-        ],
     ];
 
     protected $db = 'DB', $table = 'rune_themes';

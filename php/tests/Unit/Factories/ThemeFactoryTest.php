@@ -27,7 +27,7 @@ final class ThemeFactoryTest extends TestCase
         $theme = $this->factory->create([
             'themeable_id' => $card->id,
             'themeable_type' => $card->variant,
-            'name' => 'General'
+            'name' => 'Love'
         ]);
 
         $this->assertNotEmpty($theme->html);
