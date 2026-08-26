@@ -8,6 +8,7 @@ use Enums\ImageableType;
 use Enums\Locale;
 use Enums\RuneTheme as RuneThemeEnum;
 use Enums\SessionKey;
+use Enums\ThemeableType;
 use Exception;
 use Http\Controller;
 use Http\Models\Rune;
@@ -52,17 +53,13 @@ class RuneController extends Controller
     public function edit(\Base $hive)
     {
         $id = $hive->PARAMS['id'];
-        $rune = new Rune();
-        $rune->load(['id = ?', $id]);
-        $themes = $rune->themes;
-
         $rune = new RuneAsset();
         $rune->load(['id = ?', $id]);
 
         view('pages/admin/runes/edit', [
             'title' => $rune['name'],
             'rune' => $rune->to_resource(),
-            'themes' => $themes,
+            'themes' => get_unique_themes_by_type(ThemeableType::RUNE, $id),
         ]);
     }
 

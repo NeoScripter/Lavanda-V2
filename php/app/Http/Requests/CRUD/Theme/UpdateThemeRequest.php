@@ -1,10 +1,10 @@
 <?php
 
-namespace Http\Requests\CRUD\RuneTheme;
+namespace Http\Requests\CRUD\Theme;
 
 use Http\Request;
 
-class UpdateRuneThemeRequest extends Request
+class UpdateThemeRequest extends Request
 {
     public function rules(): array
     {
@@ -22,6 +22,7 @@ class UpdateRuneThemeRequest extends Request
             'html' => $this->hive->POST['html'] ?? '',
         ]);
 
-        $this->hive->reroute('@admin_rune_theme_edit');
+        $referrer = $this->hive->HEADERS['Referer'] ?? '/';
+        $this->hive->reroute($referrer);
     }
 }

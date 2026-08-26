@@ -8,16 +8,17 @@ extract(component_props(
 
 $hive = \Base::instance();
 
-slot('layouts/rune-grid-layout', [
+slot('layouts/theme-layout', [
     'heading' => $hive->get('admin.runes'),
     'title' => $hive->get('admin.runes'),
-    'rune' => $rune,
+    'model' => 'runes',
+    'model_id' => $rune['id'],
     'themes' => $themes
 ]); ?>
 
 <div class="space-y-6">
 
-    <?= component('ui/subheading', ['title' => $hive->get('admin.edit_a_rune')]) ?>
+    <?= component('ui/subheading', ['title' => $hive->get('admin.edit_rune')]) ?>
 
     <form action="<?= $hive->alias('admin_runes_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">

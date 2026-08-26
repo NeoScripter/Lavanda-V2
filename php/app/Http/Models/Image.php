@@ -38,7 +38,12 @@ class Image extends Cortex
         'alt' => [
             'type' => Schema::DT_TEXT,
             'nullable' => false,
-        ]
+        ],
+        'created_at' => [
+            'type' => Schema::DT_DATE,
+            'nullable' => false,
+            'default' => Schema::DF_CURRENT_TIMESTAMP,
+        ],
     ];
 
     protected $db = 'DB', $table = 'images';

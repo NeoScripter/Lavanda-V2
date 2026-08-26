@@ -12,7 +12,7 @@ class Theme extends Cortex
     {
         parent::__construct();
 
-        $this->beforesave(function ($self) {
+        $this->beforeinsert(function ($self) {
             $db = \Base::instance()->get('DB');
 
             $res = $db->exec(
@@ -43,6 +43,11 @@ class Theme extends Cortex
         'html' => [
             'type' => Schema::DT_TEXT,
             'nullable' => false,
+        ],
+        'created_at' => [
+            'type' => Schema::DT_DATE,
+            'nullable' => false,
+            'default' => Schema::DF_CURRENT_TIMESTAMP,
         ],
     ];
 

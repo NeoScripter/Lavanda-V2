@@ -1,21 +1,20 @@
 <?php
 
-use Enums\RuneTheme;
-
 extract(component_props(
-    required: ['rune', 'theme', 'themes'],
+    required: ['model', 'model_id', 'theme', 'themes'],
     optional: [],
     props: get_defined_vars(),
 ));
 
 $hive = \Base::instance();
 
-$title = $hive->get('admin.edit') . ' ' . $hive->get('admin.category') . ' "' . RuneTheme::from($theme->name)->label() . '"';
+$title = $hive->get('admin.edit') . ' ' . $hive->get('admin.theme') . ' "' . $theme->name . '"';
 
-slot('layouts/rune-grid-layout', [
+slot('layouts/theme-layout', [
     'heading' => $hive->get('admin.runes'),
     'title' => $hive->get('admin.runes'),
-    'rune' => $rune,
+    'model' => $model,
+    'model_id' => $model_id,
     'themes' => $themes
 ]); ?>
 
@@ -23,13 +22,13 @@ slot('layouts/rune-grid-layout', [
 
     <?= component('ui/subheading', ['title' => $title]) ?>
 
-    <form action="<?= $hive->alias('admin_rune_themes_update', ['theme_id' => $theme->id]) ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+    <form action="<?= $hive->alias('admin_themes_update', ['theme_id' => $theme->id]) ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
         <?= component('form/form-wysiwyg', [
             'name'  => 'html',
-            'label' => $hive->get('admin.rune_meaning'),
+            'label' => $hive->get('admin.meaning'),
             'attrs' => [
                 'required' => true,
                 'value'    => $theme->html,

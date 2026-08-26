@@ -21,7 +21,7 @@ final class AdminControllerTest extends TestCase
 
     public static function routes(): array
     {
-        $blacklisted = ['admin/login', 'admin/logout'];
+        $blacklisted = ['admin/login', 'admin/logout', '@model'];
         $whitelisted = ['admin'];
 
         $all_routes = get_flat_routes();

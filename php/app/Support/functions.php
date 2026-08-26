@@ -1,6 +1,7 @@
 <?php
 
 use DB\Cortex;
+use Enums\ThemeableType;
 use Http\Models\Image;
 use Jobs\ProcessImageJob;
 
@@ -533,4 +534,23 @@ function attach_image_to_model(Cortex $model, string $imageable_type, string $va
         'sizes' => $sizes,
         'file' => $file['src']
     ]);
+}
+
+function get_unique_themes_by_type(ThemeableType $themeable_type, string|int $themeable_id)
+{
+    $db = \Base::instance()->get('DB');
+
+    $themes = $db->exec(
+        "SELECT
+            t1.name,
+            MAX(CASE WHEN t1.themeable_id = ? THEN t1.themeable_id ELSE NULL END) AS model_id,
+            MAX(CASE WHEN t1.themeable_id = ? THEN t1.id ELSE NULL END) AS theme_id
+        FROM themes t1
+        WHERE t1.themeable_type = ?
+        GROUP BY t1.name
+        ORDER BY t1.name",
+        [$themeable_id, $themeable_id, $themeable_type->value]
+    );
+
+    return array_map(fn($theme) => array_filter($theme), $themes);
 }
