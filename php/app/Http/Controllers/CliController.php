@@ -8,6 +8,7 @@ use Enums\DBView;
 use Enums\ImageableType;
 use Factories\ImageFactory;
 use Http\Models\Affirmation;
+use Http\Models\Article;
 use Http\Models\AudioMessage;
 use Http\Models\Card;
 use Http\Models\FAQ;
@@ -18,6 +19,7 @@ use Http\Models\PracticeItem;
 use Http\Models\Rune;
 use Http\Models\Theme;
 use Seeders\AffirmationSeeder;
+use Seeders\ArticleSeeder;
 use Seeders\AudioMessageSeeder;
 use Seeders\CardSeeder;
 use Seeders\FAQSeeder;
@@ -67,6 +69,7 @@ class CliController
         PracticeItem::setup();
         AudioMessage::setup();
         Affirmation::setup();
+        Article::setup();
 
         $this->create_db_views($hive);
 
@@ -93,6 +96,7 @@ class CliController
         PracticeItem::setdown();
         AudioMessage::setdown();
         Affirmation::setdown();
+        Article::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
@@ -114,6 +118,7 @@ class CliController
         PracticeItemSeeder::run();
         AudioMessageSeeder::run();
         AffirmationSeeder::run();
+        ArticleSeeder::run();
     }
 
     function fresh(\Base $hive)
@@ -267,6 +272,18 @@ class CliController
             FROM practice_items item
             LEFT JOIN images image ON image.imageable_id = item.id AND image.imageable_type = '{$imageable_type}' AND image.variant = 'image';"
         );
+
+        $article_view = DBView::ARTICLE_PREVIEW->value;
+        $imageable_type = ImageableType::ARTICLE->value;
+
+        $db->exec(
+            "CREATE OR REPLACE VIEW {$article_view} AS
+            SELECT
+                a.id, a.description, a.locale, a.created_at,
+                image.id as preview_id, image.imageable_type as preview_imageable_type, image.imageable_id as preview_imageable_id, image.variant as preview_variant, image.src as preview_src, image.alt as preview_alt
+            FROM articles a
+            LEFT JOIN images image ON image.imageable_id = a.id AND image.imageable_type = '{$imageable_type}' AND image.variant = 'preview';"
+        );
     }
 
     private function delete_db_views(\Base $hive)
@@ -281,6 +298,9 @@ class CliController
 
         $practice_item_view = DBView::PRACTICE_ITEM_ASSET->value;
         $db->exec("DROP VIEW IF EXISTS {$practice_item_view} CASCADE");
+
+        $article_view = DBView::ARTICLE_PREVIEW->value;
+        $db->exec("DROP VIEW IF EXISTS {$article_view} CASCADE");
     }
 
     private function create_card_backs(\Base $hive)

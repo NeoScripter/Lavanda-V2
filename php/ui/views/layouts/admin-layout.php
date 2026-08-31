@@ -55,6 +55,11 @@ extract(component_props(
                 'label' => $hive->get('admin.affirmations'),
                 'icon'  => 'quote',
             ],
+            [
+                'url'   => $hive->alias('admin_articles_index'),
+                'label' => $hive->get('admin.useful_resources'),
+                'icon'  => 'newspaper',
+            ],
         ],
     ]) ?>
 
