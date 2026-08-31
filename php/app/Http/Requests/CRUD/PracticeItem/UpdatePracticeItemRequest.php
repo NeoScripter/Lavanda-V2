@@ -14,6 +14,10 @@ class UpdatePracticeItemRequest extends Request
                 'filter'   => 'trim|escape_tags',
                 'validate' => 'required|max_len:230',
             ],
+            'abstract' => [
+                'filter'   => 'trim|trim_spaces|strip_tags',
+                'validate' => 'max_len:2200',
+            ],
             'description' => [
                 'filter'   => 'trim|trim_spaces|strip_tags',
                 'validate' => 'required|max_len:2200',

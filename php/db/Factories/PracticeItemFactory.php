@@ -15,6 +15,7 @@ class PracticeItemFactory extends Factory
 
         $item->title = $attrs['title'] ?? $this->faker->words(4, true);
         $item->description = $attrs['description'] ??  $this->faker->sentence();
+        $item->abstract = $attrs['abstract'] ??  $this->faker->sentence();
         $item->file = $attrs['file'] ?? $this->faker->url();
 
         $faqs = $attrs['faqs'] ?? [];

@@ -14,9 +14,13 @@ class StorePracticeItemRequest extends Request
                 'filter'   => 'trim|escape_tags',
                 'validate' => 'required|max_len:230',
             ],
+            'abstract' => [
+                'filter'   => 'trim|trim_spaces|strip_tags',
+                'validate' => 'required|max_len:2200',
+            ],
             'description' => [
                 'filter'   => 'trim|trim_spaces|strip_tags',
-                'validate' => 'required|max_len:1200',
+                'validate' => 'required|max_len:2200',
             ],
             'faqs' => [
                 'validate' => 'required|max_len:5200',
