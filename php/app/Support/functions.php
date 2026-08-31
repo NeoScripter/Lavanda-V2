@@ -1,6 +1,7 @@
 <?php
 
 use DB\Cortex;
+use Enums\Locale;
 use Enums\ThemeableType;
 use Http\Models\Image;
 use Jobs\ProcessImageJob;
@@ -553,4 +554,12 @@ function get_unique_themes_by_type(ThemeableType $themeable_type, string|int $th
     );
 
     return array_map(fn($theme) => array_filter($theme), $themes);
+}
+
+function get_unique_affirmation_topics(Locale $locale)
+{
+    $hive = \Base::instance();
+    $rows = $hive->get('DB')->exec("SELECT DISTINCT topic FROM affirmations WHERE locale = ? ORDER BY topic", [$locale->value]) ?? [];
+
+    return array_map(fn($row) => $row['topic'], $rows);
 }

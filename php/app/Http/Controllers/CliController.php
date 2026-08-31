@@ -300,7 +300,12 @@ class CliController
     private function create_compound_indexes(\Base $hive)
     {
         $db = $hive->get("DB");
-        $db->exec('CREATE UNIQUE INDEX idx_theme_parent_name ON themes (themeable_type, themeable_id, name)');
+
+        $exists = $db->exec("SELECT 1 FROM pg_indexes WHERE indexname = 'idx_theme_parent_name'");
+
+        if (!$exists) {
+            $db->exec('CREATE UNIQUE INDEX idx_theme_parent_name ON themes (themeable_type, themeable_id, name)');
+        }
     }
 
     private function delete_compound_indexes(\Base $hive)

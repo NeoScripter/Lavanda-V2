@@ -50,6 +50,11 @@ extract(component_props(
                 'label' => $hive->get('admin.audios'),
                 'icon'  => 'audio',
             ],
+            [
+                'url'   => $hive->alias('admin_affirmations_index'),
+                'label' => $hive->get('admin.affirmations'),
+                'icon'  => 'quote',
+            ],
         ],
     ]) ?>
 

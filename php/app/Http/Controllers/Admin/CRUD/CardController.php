@@ -12,7 +12,6 @@ use Exception;
 use Http\Controller;
 use Http\Models\Card;
 use Http\Models\FlipCard;
-use Http\Models\Theme;
 use Http\Requests\CRUD\Card\StoreCardRequest;
 use Http\Requests\CRUD\Card\UpdateCardRequest;
 use Traits\RequiresAuth;

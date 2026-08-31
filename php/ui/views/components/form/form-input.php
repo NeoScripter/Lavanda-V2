@@ -1,11 +1,13 @@
 <?php
 
-$name = $name ?? '';
-$label = $label ?? '';
+extract(component_props(
+    required: ['name'],
+    optional: ['name' => '', 'label' => '', 'class' => '', 'attrs' => [], 'options' => []],
+    props: get_defined_vars(),
+));
+
 $error = \Flash::instance()->getKey("errors.{$name}") ?? '';
 $value = $attrs['value'] ?? \Flash::instance()->getKey("values.{$name}") ?? '';
-$class = $class ?? '';
-$attrs = $attrs ?? [];
 $uid = uniqid('input_');
 
 $attrs = array_merge(
@@ -14,6 +16,7 @@ $attrs = array_merge(
     ['value' => $value],
     ['name' => $name],
     ['id' => $uid],
+    !empty($options) ? ['list' => $uid . '_list'] : [],
 );
 $required = isset($attrs['required']) && $attrs['required'] === true;
 $is_pwd = isset($attrs['type']) && $attrs['type'] === 'password';
@@ -31,6 +34,16 @@ $is_pwd = isset($attrs['type']) && $attrs['type'] === 'password';
         'class' => $class,
         'attrs' => $attrs,
     ]) ?>
+
+    <?php if (isset($attrs['list']) && !empty($options)) : ?>
+        <datalist id="<?= $uid ?>_list">
+            <?php foreach ($options as $option) : ?>
+                <option value="<?= $option ?>">
+                    <?= $option ?>
+                </option>
+            <?php endforeach; ?>
+        </datalist>
+    <?php endif; ?>
 
     <?= component('form/input-error', ['message' => $error]) ?>
 </div>
