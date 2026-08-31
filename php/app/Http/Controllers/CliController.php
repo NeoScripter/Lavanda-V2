@@ -7,6 +7,7 @@ use Enums\CardVariant;
 use Enums\DBView;
 use Enums\ImageableType;
 use Factories\ImageFactory;
+use Http\Models\Affirmation;
 use Http\Models\AudioMessage;
 use Http\Models\Card;
 use Http\Models\FAQ;
@@ -16,6 +17,7 @@ use Http\Models\Image;
 use Http\Models\PracticeItem;
 use Http\Models\Rune;
 use Http\Models\Theme;
+use Seeders\AffirmationSeeder;
 use Seeders\AudioMessageSeeder;
 use Seeders\CardSeeder;
 use Seeders\FAQSeeder;
@@ -64,6 +66,7 @@ class CliController
         Iching::setup();
         PracticeItem::setup();
         AudioMessage::setup();
+        Affirmation::setup();
 
         $this->create_db_views($hive);
 
@@ -89,6 +92,7 @@ class CliController
         Iching::setdown();
         PracticeItem::setdown();
         AudioMessage::setdown();
+        Affirmation::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
@@ -109,6 +113,7 @@ class CliController
         IchingSeeder::run();
         PracticeItemSeeder::run();
         AudioMessageSeeder::run();
+        AffirmationSeeder::run();
     }
 
     function fresh(\Base $hive)

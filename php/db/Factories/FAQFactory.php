@@ -8,7 +8,7 @@ use Http\Models\FAQ;
 
 class FAQFactory extends Factory
 {
-    public function create()
+    public function create(?array $attrs = [])
     {
         $faq = new FAQ();
 

@@ -19,7 +19,7 @@ final class FAQFactoryTest extends TestCase
     }
 
     #[Test]
-    public function creates_card_and_persists_to_database(): void
+    public function creates_faq_and_persists_to_database(): void
     {
         $faq = $this->factory->create();
 
