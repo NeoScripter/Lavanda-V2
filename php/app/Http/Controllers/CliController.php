@@ -27,6 +27,7 @@ use Seeders\FAQSeeder;
 use Seeders\IchingSeeder;
 use Seeders\PracticeItemSeeder;
 use Seeders\RuneSeeder;
+use Seeders\StoneSeeder;
 
 const SCREEN_WIDTH = 152;
 const METHOD_WIDTH = 12;
@@ -122,6 +123,7 @@ class CliController
         AudioMessageSeeder::run();
         AffirmationSeeder::run();
         ArticleSeeder::run();
+        StoneSeeder::run();
     }
 
     function fresh(\Base $hive)
