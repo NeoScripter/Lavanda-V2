@@ -19,8 +19,14 @@ class RuneFactory extends Factory
 
         $imageable_type = ImageableType::RUNE->value;
 
-        (new ImageFactory)->create(dir: 'test', imageable_type: $imageable_type, imageable_id: $rune->id, variant: 'front_image');
-        (new ImageFactory(variant: 'back_image'))->create(dir: 'test', imageable_type: $imageable_type, imageable_id: $rune->id, variant: 'back_image');
+        (new ImageFactory)->create(
+            attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $rune->id, 'variant' => 'front_image'],
+            src_dir: APP_DIR . '/db/Fixtures/Image/front_image/',
+        );
+        (new ImageFactory)->create(
+            attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $rune->id, 'variant' => 'back_image'],
+            src_dir: APP_DIR . '/db/Fixtures/Image/back_image/',
+        );
 
         return $rune;
     }

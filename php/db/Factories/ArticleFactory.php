@@ -17,20 +17,15 @@ class ArticleFactory extends Factory
         $article->html = $attrs['html'] ?? file_get_contents(APP_DIR . '/db/Fixtures/Card/html.md');
         $article->save();
 
-        $imageable_type = ImageableType::ARTICLE;
+        $imageable_type = ImageableType::ARTICLE->value;
 
         (new ImageFactory)->create(
-            dir: 'article',
-            imageable_type: $imageable_type->value,
-            imageable_id: $article->id,
-            variant: 'preview'
+            attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $article->id, 'variant' => 'preview'],
+            src_dir: APP_DIR . '/db/Fixtures/Image/front_image/',
         );
-
         (new ImageFactory)->create(
-            dir: 'article',
-            imageable_type: $imageable_type->value,
-            imageable_id: $article->id,
-            variant: 'image'
+            attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $article->id, 'variant' => 'image'],
+            src_dir: APP_DIR . '/db/Fixtures/Image/front_image/',
         );
 
         return $article;

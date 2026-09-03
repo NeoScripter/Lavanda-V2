@@ -37,7 +37,10 @@ class PracticeItemFactory extends Factory
 
         $imageable_type = ImageableType::PRACTICE_ITEM->value;
 
-        (new ImageFactory)->create(dir: 'test', imageable_type: $imageable_type, imageable_id: $item->id, variant: 'image');
+        (new ImageFactory)->create(
+            attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $item->id, 'variant' => 'image'],
+            src_dir: APP_DIR . '/db/Fixtures/Image/front_image/',
+        );
 
         return $item;
     }

@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use Enums\ImageableType;
 use Factories\CardFactory;
 use Factories\ImageFactory;
-use Http\Models\Image;
 use Jobs\ProcessImageJob;
 use PHPUnit\Framework\Attributes\Test;
 use Support\ImageHandler;
@@ -51,7 +49,7 @@ final class ImageHandlerTest extends TestCase
     #[Test]
     public function job_processes_and_optimizes_image(): void
     {
-        $path = (new ImageFactory(variant: 'front_image'))->template;
+        $path = APP_DIR . '/db/Fixtures/Image/front_image/placeholder.png';
         $subdir = UPLOAD_DIR . 'image_job_queue_test/';
         $new_path = $subdir . 'copy.png';
 
