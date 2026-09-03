@@ -60,6 +60,11 @@ extract(component_props(
                 'label' => $hive->get('admin.useful_resources'),
                 'icon'  => 'newspaper',
             ],
+            [
+                'url'   => $hive->alias('admin_stones_index'),
+                'label' => $hive->get('admin.stones'),
+                'icon'  => 'stones',
+            ],
         ],
     ]) ?>
 
