@@ -21,7 +21,7 @@ class CardFactory extends Factory
         $card->variant = $attrs['variant'] ?? CardVariant::METAPHORIC->value;
         $card->save();
 
-        $imageable_type = ImageableType::from($card->variant);
+        $imageable_type = ImageableType::from($card->variant)->value;
 
         (new ImageFactory)->create(
             attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $card->id, 'variant' => 'front_image'],

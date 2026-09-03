@@ -46,7 +46,7 @@ final class HelpersTest extends TestCase
         $expected = [
             ['name' => 'Apple'],
             ['name' => 'Career'],
-            ['name' => 'General', 'model_id' => $one_theme_card->id, 'theme_id' => $one_theme_id],
+            ['name' => 'Общая', 'model_id' => $one_theme_card->id, 'theme_id' => $one_theme_id],
         ];
 
         $this->assertArraysAreEqual(expected: $expected, actual: $unique_themes);

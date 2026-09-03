@@ -33,7 +33,7 @@ final class ThemeTest extends TestCase
             $this->factory->create([
                 'themeable_id' => $card->id,
                 'themeable_type' => $card->variant,
-                'name' => 'General'
+                'name' => 'Общая'
             ]);
         }
     }
@@ -50,7 +50,7 @@ final class ThemeTest extends TestCase
         for ($i = 0; $i < 2; $i++) {
             $db->exec(
                 'INSERT INTO themes (themeable_id, themeable_type, name, html) VALUES (?, ?, ?, ?)',
-                [$card->id, $card->variant, 'General', 'placeholde']
+                [$card->id, $card->variant, 'Общая', 'placeholder']
             );
         }
     }

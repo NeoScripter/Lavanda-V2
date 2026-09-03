@@ -23,7 +23,7 @@ final class RuneTest extends TestCase
     public function creates_general_theme_by_default(): void
     {
         $runeF = new RuneFactory();
-        $locale = Locale::ENGLISH->value;
+        $locale = Locale::RUSSIAN->value;
 
         $runeF->create(['locale' => $locale]);
 
@@ -33,7 +33,7 @@ final class RuneTest extends TestCase
         $this->assertEquals(1, $res[0]['count'], 'Themes were not created');
 
         $row = $db->exec("SELECT name FROM themes");
-        $this->assertContainsEquals('General', $row[0], "Themes don't have the right names");
+        $this->assertContainsEquals('Общая', $row[0], "Themes don't have the right names");
     }
 
     #[Test]

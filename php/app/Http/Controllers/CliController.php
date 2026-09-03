@@ -75,7 +75,7 @@ class CliController
 
         $this->create_db_views($hive);
 
-        // $this->create_card_backs($hive);
+        $this->create_card_backs($hive);
 
         $this->create_compound_indexes($hive);
 
@@ -323,19 +323,15 @@ class CliController
         $db->exec("DROP VIEW IF EXISTS {$stone_view} CASCADE");
     }
 
-    // private function create_card_backs(\Base $hive)
-    // {
-    //     $dir = $hive->app_env === 'test' ? 'test' : 'models/cards';
-    //
-    //     foreach (CardVariant::values() as $card_variant) {
-    //         (new ImageFactory(variant: 'back_image'))->create(
-    //             dir: $dir,
-    //             imageable_type: $card_variant,
-    //             imageable_id: 1,
-    //             variant: 'back_image'
-    //         );
-    //     }
-    // }
+    private function create_card_backs(\Base $hive)
+    {
+        foreach (CardVariant::values() as $card_variant) {
+            (new ImageFactory)->create(
+                attrs: ['imageable_type' => $card_variant, 'imageable_id' => 1, 'variant' => 'back_image'],
+                src_dir: APP_DIR . '/db/Fixtures/Image/back_image/',
+            );
+        }
+    }
 
     private function create_compound_indexes(\Base $hive)
     {
