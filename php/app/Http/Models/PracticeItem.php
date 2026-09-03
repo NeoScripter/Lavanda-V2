@@ -61,7 +61,7 @@ class PracticeItem extends Cortex
         ],
         'locale' => [
             'type' => Schema::DT_VARCHAR128,
-            'default' => Locale::ENGLISH->value,
+            'default' => Locale::RUSSIAN->value,
             'nullable' => false,
         ],
         'created_at' => [

@@ -284,6 +284,20 @@ class CliController
             FROM articles a
             LEFT JOIN images image ON image.imageable_id = a.id AND image.imageable_type = '{$imageable_type}' AND image.variant = 'preview';"
         );
+
+        $stone_view = DBView::STONE_ASSET->value;
+        $imageable_type = ImageableType::STONE->value;
+
+        $db->exec(
+            "CREATE OR REPLACE VIEW {$stone_view} AS
+            SELECT
+                stone.id, stone.name, stone.html, stone.locale, stone.created_at,
+                preview.id as preview_id, preview.imageable_type as preview_imageable_type, preview.imageable_id as preview_imageable_id, preview.variant as preview_variant, preview.src as preview_src, preview.alt as preview_alt,
+                image.id as image_id, image.imageable_type as image_imageable_type, image.imageable_id as image_imageable_id, image.variant as image_variant, image.src as image_src, image.alt as image_alt
+            FROM runes r
+            LEFT JOIN images preview ON preview.imageable_id = stone.id AND preview.imageable_type = '{$imageable_type}' AND preview.variant = 'preview'
+            LEFT JOIN images image ON image.imageable_id = stone.id AND image.imageable_type = '{$imageable_type}' AND image.variant = 'image';"
+        );
     }
 
     private function delete_db_views(\Base $hive)
@@ -301,6 +315,9 @@ class CliController
 
         $article_view = DBView::ARTICLE_PREVIEW->value;
         $db->exec("DROP VIEW IF EXISTS {$article_view} CASCADE");
+
+        $stone_view = DBView::STONE_ASSET->value;
+        $db->exec("DROP VIEW IF EXISTS {$stone_view} CASCADE");
     }
 
     private function create_card_backs(\Base $hive)
