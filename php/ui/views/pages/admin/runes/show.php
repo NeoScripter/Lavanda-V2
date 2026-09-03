@@ -35,7 +35,7 @@ $back_img_alt = $rune['back_image']['alt'] ?? '';
             <h3 class="mb-2 font-medium">
                 <?= $hive->get('admin.rune_images') ?>
             </h3>
-            <div class="flex items-center gap-4">
+            <div class="flex flex-wrap items-center gap-4">
                 <figure class="rounded-sm overflow-clip max-w-48 border border-border shadow-md aspect-2/3">
                     <img class="size-full object-cover object-center" src="<?= $front_img_src . "-tb.webp" ?>" alt="<?= $front_img_alt ?>">
                 </figure>
