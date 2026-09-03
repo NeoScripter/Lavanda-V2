@@ -6,6 +6,7 @@ enum DBView: string
 {
     case FLIPCARD = 'flip_cards';
     case RUNE_ASSET = 'rune_assets';
+    case STONE_ASSET = 'stone_assets';
     case PRACTICE_ITEM_ASSET = 'practice_item_asset';
     case ARTICLE_PREVIEW = 'article_preview';
 

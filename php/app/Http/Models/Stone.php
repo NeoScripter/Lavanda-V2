@@ -14,22 +14,22 @@ class Stone extends Cortex
         parent::__construct();
 
         $this->beforeerase(function ($self) {
-            if ($self->front_image) {
-                $self->front_image->erase();
+            if ($self->preview) {
+                $self->preview->erase();
             }
-            if ($self->back_image) {
-                $self->back_image->erase();
+            if ($self->image) {
+                $self->image->erase();
             }
         });
 
 
-        $this->onget('front_image', function ($self) {
+        $this->onget('preview', function ($self) {
             $img = new Image();
             $img->load([
                 'imageable_type = ? AND imageable_id = ? AND variant = ?',
-                ImageableType::RUNE->value,
+                ImageableType::STONE->value,
                 $self->id,
-                'front_image'
+                'preview'
             ]);
 
             if ($img->dry()) {
@@ -39,13 +39,13 @@ class Stone extends Cortex
             return $img;
         });
 
-        $this->onget('back_image', function ($self) {
+        $this->onget('image', function ($self) {
             $img = new Image();
             $img->load([
                 'imageable_type = ? AND imageable_id = ? AND variant = ?',
-                ImageableType::RUNE->value,
+                ImageableType::STONE->value,
                 $self->id,
-                'back_image'
+                'image'
             ]);
 
             if ($img->dry()) {
@@ -67,7 +67,7 @@ class Stone extends Cortex
         ],
         'locale' => [
             'type' => Schema::DT_VARCHAR128,
-            'default' => Locale::ENGLISH->value,
+            'default' => Locale::RUSSIAN->value,
             'nullable' => false,
         ],
         'created_at' => [
