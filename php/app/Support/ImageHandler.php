@@ -36,7 +36,7 @@ class ImageHandler
 
         $this->locked = false;
 
-        return to_public_url($dest);
+        return to_public_url(remove_file_extention($dest));
     }
 
     public function resize_all(array $sizes, string $dest)

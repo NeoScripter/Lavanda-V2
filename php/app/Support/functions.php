@@ -413,12 +413,8 @@ function extract_file_name(string $path)
     return substr($path, strrpos($path, '/') + 1);
 }
 
-function to_public_url(string $path, ?bool $strip_extension = true)
+function to_public_url(string $path)
 {
-    if ($strip_extension) {
-        $path = remove_file_extention($path);
-    }
-
     $app_url = rtrim(\Base::instance()->get('app_url'), '/') . '/';
 
     $norm_path = str_replace(WEBROOT, $app_url, $path);
@@ -519,7 +515,7 @@ function set_no_image_placeholder()
         copy($fallback . $file, $subdir . $file);
     }
 
-    return to_public_url($subdir . 'no-image.png');
+    return to_public_url($subdir . 'no-image');
 }
 
 function attach_image_to_model(Cortex $model, string $imageable_type, string $variant, array $file, array $sizes): void

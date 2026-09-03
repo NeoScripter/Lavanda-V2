@@ -56,7 +56,7 @@ class ImageFactory extends Factory
         $raw_file = array_values($raw_matches)[0];
 
         $image = new Image();
-        $image->src = to_public_url($new_dir . $raw_file);
+        $image->src = to_public_url(remove_file_extention($new_dir . $raw_file));
         $image->alt = $attrs['alt'] ?? 'image';
         $image->variant = $variant;
         $image->imageable_id = $img_id;
