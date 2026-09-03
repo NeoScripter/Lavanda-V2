@@ -6,26 +6,34 @@ export default function initSidebar() {
 
     if (!sidebar) return;
 
+    const aside = qs<HTMLDivElement>('aside', 'silent', sidebar);
+
+    if (!aside) return;
+
+    const handleResize = () => {
+        if (window.matchMedia('(min-width:48rem)').matches) {
+            hide();
+        }
+    };
+
+    const resizeObserver = new ResizeObserver(handleResize);
+
+    resizeObserver.observe(document.documentElement);
+
     const hide = () => {
         sidebar.classList.add('pointer-events-none');
         sidebar.classList.remove('bg-black/75');
 
-        const aside = qs('aside', sidebar);
-
-        if (!aside) return;
-
         aside.classList.add('-translate-x-full');
+        document.documentElement.style.overflowY = 'auto';
     };
 
     const show = () => {
         sidebar.classList.remove('pointer-events-none');
         sidebar.classList.add('bg-black/75');
 
-        const aside = qs('aside', sidebar);
-
-        if (!aside) return;
-
         aside.classList.remove('-translate-x-full');
+        document.documentElement.style.overflowY = 'hidden';
     };
 
     sidebar.addEventListener('click', (e) => {
