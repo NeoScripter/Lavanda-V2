@@ -17,6 +17,7 @@ use Http\Models\User;
 use Http\Models\Image;
 use Http\Models\PracticeItem;
 use Http\Models\Rune;
+use Http\Models\Stone;
 use Http\Models\Theme;
 use Seeders\AffirmationSeeder;
 use Seeders\ArticleSeeder;
@@ -70,10 +71,11 @@ class CliController
         AudioMessage::setup();
         Affirmation::setup();
         Article::setup();
+        Stone::setup();
 
         $this->create_db_views($hive);
 
-        $this->create_card_backs($hive);
+        // $this->create_card_backs($hive);
 
         $this->create_compound_indexes($hive);
 
@@ -97,6 +99,7 @@ class CliController
         AudioMessage::setdown();
         Affirmation::setdown();
         Article::setdown();
+        Stone::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
@@ -294,7 +297,7 @@ class CliController
                 stone.id, stone.name, stone.html, stone.locale, stone.created_at,
                 preview.id as preview_id, preview.imageable_type as preview_imageable_type, preview.imageable_id as preview_imageable_id, preview.variant as preview_variant, preview.src as preview_src, preview.alt as preview_alt,
                 image.id as image_id, image.imageable_type as image_imageable_type, image.imageable_id as image_imageable_id, image.variant as image_variant, image.src as image_src, image.alt as image_alt
-            FROM runes r
+            FROM stones stone
             LEFT JOIN images preview ON preview.imageable_id = stone.id AND preview.imageable_type = '{$imageable_type}' AND preview.variant = 'preview'
             LEFT JOIN images image ON image.imageable_id = stone.id AND image.imageable_type = '{$imageable_type}' AND image.variant = 'image';"
         );
@@ -320,19 +323,19 @@ class CliController
         $db->exec("DROP VIEW IF EXISTS {$stone_view} CASCADE");
     }
 
-    private function create_card_backs(\Base $hive)
-    {
-        $dir = $hive->app_env === 'test' ? 'test' : 'models/cards';
-
-        foreach (CardVariant::values() as $card_variant) {
-            (new ImageFactory(variant: 'back_image'))->create(
-                dir: $dir,
-                imageable_type: $card_variant,
-                imageable_id: 1,
-                variant: 'back_image'
-            );
-        }
-    }
+    // private function create_card_backs(\Base $hive)
+    // {
+    //     $dir = $hive->app_env === 'test' ? 'test' : 'models/cards';
+    //
+    //     foreach (CardVariant::values() as $card_variant) {
+    //         (new ImageFactory(variant: 'back_image'))->create(
+    //             dir: $dir,
+    //             imageable_type: $card_variant,
+    //             imageable_id: 1,
+    //             variant: 'back_image'
+    //         );
+    //     }
+    // }
 
     private function create_compound_indexes(\Base $hive)
     {
