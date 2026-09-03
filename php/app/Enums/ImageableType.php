@@ -9,6 +9,7 @@ enum ImageableType: string
     case LENORMAND = 'lenormand';
     case MIND_GAMES = 'mind_games';
     case RUNE = 'rune';
+    case STONE = 'stone';
     case BONUS = 'bonus';
     case PRACTICE = 'practice';
     case ARTICLE = 'article';
