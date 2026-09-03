@@ -25,7 +25,7 @@ slot('layouts/item-layout', [
             'name'  => 'preview',
             'label' => $hive->get('admin.preview'),
             'with_alt' => true,
-            'value'    => [$article['preview'] ?? null],
+            'value'    => [$article['preview']],
             'attrs' => [
                 'multiple' => false,
             ],
@@ -44,7 +44,7 @@ slot('layouts/item-layout', [
             'name'  => 'image',
             'label' => $hive->get('admin.image'),
             'with_alt' => true,
-            'value'    => [$article['image'] ?? null],
+            'value'    => [$article['image']],
             'attrs' => [
                 'multiple' => false,
             ],
