@@ -413,6 +413,17 @@ function extract_file_name(string $path)
     return substr($path, strrpos($path, '/') + 1);
 }
 
+function read_or_throw(string $path, string $message): string
+{
+    $content = file_get_contents($path);
+
+    if ($content === false) {
+        throw new InvalidArgumentException($message);
+    }
+
+    return $content;
+}
+
 function to_public_url(string $path)
 {
     $app_url = rtrim(\Base::instance()->get('app_url'), '/') . '/';
