@@ -82,7 +82,6 @@ class RuneController extends Controller
     {
         $request = $this->request(StoreRuneRequest::class);
         $request->validate();
-        $variant = $request->input('variant');
 
         $rune = new Rune();
         $rune->copyFrom($request->all());
@@ -110,7 +109,7 @@ class RuneController extends Controller
 
         notify($hive->get('admin.rune_successfully_created'));
 
-        $hive->reroute('@admin_runes_index' . '?' . http_build_query(['variant' => $variant]));
+        $hive->reroute('@admin_runes_index');
     }
 
     public function update(\Base $hive)
