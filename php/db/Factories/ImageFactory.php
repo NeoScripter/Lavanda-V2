@@ -61,6 +61,11 @@ class ImageFactory extends Factory
         $image->variant = $variant;
         $image->imageable_id = $img_id;
         $image->imageable_type = $img_type;
+
+        if (isset($attrs['locale'])) {
+            $image->locale = $attrs['locale'];
+        }
+
         $image->save();
 
         return $image;
