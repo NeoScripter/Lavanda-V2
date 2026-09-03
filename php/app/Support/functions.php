@@ -426,6 +426,15 @@ function to_public_url(string $path, ?bool $strip_extension = true)
     return remove_extra_slashes($norm_path);
 }
 
+function to_absolute_path(string $path)
+{
+    $app_url = rtrim(\Base::instance()->get('app_url'), '/') . '/';
+
+    $norm_path = str_replace($app_url, WEBROOT, $path);
+
+    return remove_extra_slashes($norm_path);
+}
+
 function get_parent_dir(string $path)
 {
     return substr($path, 0, strrpos($path, '/'));

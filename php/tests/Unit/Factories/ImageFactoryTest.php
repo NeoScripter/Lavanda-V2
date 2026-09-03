@@ -4,24 +4,40 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Factories;
 
+use Enums\ImageableType;
 use Factories\ImageFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 final class ImageFactoryTest extends TestCase
 {
-    private ?ImageFactory $factory = null;
+    private ImageFactory $factory;
+    private string $src_dir;
+    private array $attrs;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->factory = new ImageFactory();
+        $this->src_dir = APP_DIR . '/db/Fixtures/Image/front_image/';
+        $this->attrs = [
+            'imageable_type' => ImageableType::ARTICLE->value,
+            'imageable_id' => 1,
+            'variant' => 'image',
+        ];
     }
 
     #[Test]
     public function returns_all_expected_template_variants(): void
     {
-        $files = (fn() => $this->get_template_variants())->call($this->factory);
+        $image = $this->factory->create(attrs: $this->attrs, src_dir: $this->src_dir);
+        $this->assertNotEmpty($image->src);
+
+        $files = read_dir_files(
+            get_parent_dir(
+                to_absolute_path($image->src)
+            )
+        );
 
         $this->assertNotEmpty($files);
 
@@ -35,9 +51,8 @@ final class ImageFactoryTest extends TestCase
     #[Test]
     public function creates_image_and_persists_to_database(): void
     {
-        $image = $this->factory->create(dir: 'test', imageable_id: 1, imageable_type: 'test');
+        $image = $this->factory->create(attrs: $this->attrs, src_dir: $this->src_dir);
 
-        // $this->assertEmpty($image);
         $this->assertNotEmpty($image->src);
 
         $rows = $this->hive->DB->exec('SELECT src from images where id = ?', [$image->id]);
@@ -49,12 +64,13 @@ final class ImageFactoryTest extends TestCase
     #[Test]
     public function deleting_image_also_deletes_its_files(): void
     {
-        $image = $this->factory->create(dir: 'test', imageable_id: 1, imageable_type: 'test');
+        $image = $this->factory->create(attrs: $this->attrs, src_dir: $this->src_dir);
 
         $this->assertNotEmpty($image->src);
 
-        $dir = dirname($image->src);
-        $dir = str_replace($this->hive->get('app_url'), WEBROOT, $dir);
+        $dir = get_parent_dir(
+            to_absolute_path($image->src)
+        );
 
         $image->erase();
 

@@ -42,7 +42,7 @@ class ImageFactory extends Factory
         }
 
         foreach ($files as $file) {
-            if (!copy($src_dir . '/' . $file, $new_dir . $file)) {
+            if (!copy($src_dir . '/' . $file, $new_dir . '/' . $file)) {
                 throw new RuntimeException("Failed to copy $file to $new_dir");
             }
         }
@@ -53,7 +53,7 @@ class ImageFactory extends Factory
             throw new RuntimeException("The original files don't contain png, jpg, or jpeg variant");
         }
 
-        $raw_file = reset($raw_matches)[0];
+        $raw_file = array_values($raw_matches)[0];
 
         $image = new Image();
         $image->src = to_public_url($new_dir . $raw_file);
