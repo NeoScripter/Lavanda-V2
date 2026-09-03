@@ -3,7 +3,7 @@
         <p>
             <?= $message['text'] ?>
         </p>
-        <button class="bg-red-500 shrink-0 translate-x-2 transition-[bg-color,scale] hover:scale-105 hover:bg-red-400 text-white flex items-center justify-center rounded-sm size-6 p-px relative">
+        <button class="hover:bg-destructive/90 bg-destructive shrink-0 translate-x-2 transition-[bg-color,scale] hover:scale-105 text-white flex items-center justify-center rounded-sm size-6 p-px relative">
             <span class="absolute m-auto inset-0 size-9"></span>
             <?= svg('x') ?>
         </button>

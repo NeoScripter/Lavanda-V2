@@ -22,7 +22,7 @@ extract(component_props(
     <button
         component-modal-show
         data-modal-id="<?= $modal_id ?>"
-        class="size-8 rounded-sm transition-opacity border border-red-500 hover:opacity-80 flex items-center justify-center bg-red-500">
+        class="size-8 rounded-sm transition-colors border border-destructive hover:bg-destructive/90 bg-destructive flex items-center justify-center">
         <span class="size-2/3 text-white flex items-center justify-center">
             <?= svg('trash') ?>
         </span>

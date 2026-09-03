@@ -70,7 +70,7 @@ $hive = \Base::instance();
                                     component-modal-show
                                     data-modal-id="<?= $modal_id ?>"
                                     type="button"
-                                    class="absolute rounded-sm transition-colors hover:bg-red-500 size-7 p-1 bg-red-400 top-0 right-0 text-white">
+                                    class="absolute rounded-sm transition-colors size-7 p-1 hover:bg-destructive/90 bg-destructive top-0 right-0 text-white">
                                     <?= svg('x') ?>
                                 </button>
                             <?php endif; ?>
