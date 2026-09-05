@@ -37,7 +37,7 @@ class AudioMessageSeeder extends Seeder
 
             $factory->create(
                 attrs: compact('description'),
-                file: $seed_dir . 'file.mp3',
+                file: $seed_dir . 'audio.mp3',
             );
         }
 
