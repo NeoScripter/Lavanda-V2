@@ -7,12 +7,12 @@ extract(component_props(
 ));
 ?>
 
-<li class="grid gap-6 text-sm">
+<li class="grid gap-6 text-sm transition-shadow hover:shadow-md p-4 max-w-100 relative">
     <div class="flex flex-col gap-4">
 
+        <a href="<?= $hive->alias('admin_audio_messages_show', ['id' => $audio['_id']]) ?>"
+            class="absolute inset-0 size-full block"></a>
         <div class="relative">
-            <a href="<?= $hive->alias('admin_audio_messages_show', ['id' => $audio['_id']]) ?>"
-                class="absolute inset-0 size-full block"></a>
 
             <p><?= $audio['description'] ?></p>
         </div>
@@ -21,6 +21,7 @@ extract(component_props(
             'edit_url' => $hive->alias("admin_audio_messages_edit", ['id' => $audio['_id']]),
             'delete_url' => $hive->alias("admin_audio_messages_destroy", ['id' => $audio['_id']]),
             'item_label' => $hive->get('admin.audio'),
+            'class' => 'isolate'
         ]) ?>
     </div>
 

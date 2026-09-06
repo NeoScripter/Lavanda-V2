@@ -3,11 +3,11 @@ $modal_id = uniqid('modal_');
 $hive = \Base::instance();
 extract(component_props(
     required: ['delete_url', 'item_label'],
-    optional: ['edit_url' => null],
+    optional: ['edit_url' => null, 'class' => ''],
     props: get_defined_vars(),
 ));; ?>
 
-<div class='flex items-start gap-2'>
+<div class='flex items-start gap-2 <?= $class ?>'>
 
     <?php if (! empty($edit_url)) : ?>
         <a

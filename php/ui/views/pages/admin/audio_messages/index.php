@@ -18,7 +18,7 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
     'title' => $hive->get('admin.audios')
 ]); ?>
 
-<div class="space-y-12 w-[calc(100%-1rem)]">
+<div class="space-y-8 w-[calc(100%-1rem)]">
     <nav class='flex flex-wrap w-full items-start gap-10 justify-between'>
         <?= component('ui/auth-button', [
             'variant' => 'primary',
@@ -31,7 +31,7 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
     </nav>
 
     <?php if (! empty($audios['subset'])) : ?>
-        <ul class="grid gap-12">
+        <ul class="grid gap-4">
 
             <?php foreach ($audios['subset'] as $audio) : ?>
                 <?php view('pages/admin/audio_messages/partials/item', [

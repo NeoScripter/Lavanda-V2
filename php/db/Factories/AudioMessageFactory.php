@@ -30,7 +30,7 @@ class AudioMessageFactory extends Factory
         }
 
         $audio = new AudioMessage();
-        $audio->file = to_public_url(remove_file_extention($to));
+        $audio->file = to_public_url($to);
         $audio->description = $attrs['description'];
         $audio->save();
 
