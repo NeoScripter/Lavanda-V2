@@ -36,7 +36,7 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-textarea', [
+        <?= component('form/form-wysiwyg', [
             'name'  => 'answer',
             'label' => $hive->get('admin.answer'),
             'attrs' => [
