@@ -10,7 +10,7 @@ extract(component_props(
 <li class="grid gap-6 text-sm">
     <div class="flex flex-col gap-3">
         <div>
-            <h3 class="mb-2 font-bold"><?= $affirmation->quote ?></h3>
+            <h3 class="mb-2"><?= $affirmation->quote ?></h3>
         </div>
         <?= component('ui/item-actions-mini', [
             'edit_url' => $hive->alias("admin_affirmations_edit", ['id' => $affirmation->id]),
