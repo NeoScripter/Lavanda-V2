@@ -14,7 +14,7 @@ class ArticleFactory extends Factory
         $article = new Article();
 
         $article->description = $attrs['description'] ?? $this->faker->sentences(20, true);
-        $article->html = $attrs['html'] ?? file_get_contents(APP_DIR . '/db/Fixtures/Card/html.md');
+        $article->html = $attrs['html'] ?? 'example';
         $article->save();
 
         $imageable_type = ImageableType::ARTICLE->value;

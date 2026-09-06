@@ -36,7 +36,7 @@ class CardSeeder extends Seeder
 
             $fixtures = array_filter(
                 scandir($source . '/' . $variant),
-                fn($dir) => $dir !== '..' && $dir !== '.' && is_dir($source . '/' . $dir)
+                fn($dir) => $dir !== '..' && $dir !== '.' && is_dir($source . '/' . $variant . '/' . $dir)
             );
 
             if (empty($fixtures)) {
@@ -46,13 +46,19 @@ class CardSeeder extends Seeder
             foreach ($fixtures as $fixture) {
                 $seed_dir = remove_extra_slashes($source . '/' . $variant . '/' . $fixture . '/');
 
-                $name = read_or_throw($seed_dir . 'name.txt', "Couldn't extract card name from the file");
-                $advice = read_or_throw($seed_dir . 'advice.txt', "Couldn't extract card advice from the file");
-                $html = read_or_throw($seed_dir . 'theme.md', "Couldn't extract card theme from the file");
+                if ($variant === CardVariant::MIND_GAMES->value) {
+                    $name = 'Название карты';
+                    $advice = 'Совет карты';
+                    $html = 'Содержание карты';
+                } else {
+                    $name = read_or_throw($seed_dir . 'name.txt', "Couldn't extract card name from the file");
+                    $advice = read_or_throw($seed_dir . 'advice.txt', "Couldn't extract card advice from the file");
+                    $html = read_or_throw($seed_dir . 'theme.md', "Couldn't extract card theme from the file");
+                }
                 $description = 'Описание карты';
 
                 $card = $factory->create(
-                    attrs: compact('name', 'advice', 'description'),
+                    attrs: compact('name', 'advice', 'description', 'variant'),
                     img_src: $seed_dir . 'front_image/',
                 );
 
