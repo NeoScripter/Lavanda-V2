@@ -24,7 +24,7 @@ $hive = \Base::instance(); ?>
             </div>
         </div>
 
-        <figure class="rounded-sm overflow-clip max-w-48 border border-border shadow-md aspect-2/3">
+        <figure class="rounded-sm overflow-clip max-w-108 border border-border shadow-md aspect-2/3">
             <img class="size-full object-cover object-center"
                 src="<?= $item['image']['src'] . "-tb.webp" ?>"
                 alt="<?= $item['image']['alt'] ?>">
@@ -38,7 +38,7 @@ $hive = \Base::instance(); ?>
         <div>
             <h3 class="mb-2 font-medium"> <?= $hive->get('admin.file') ?> </h3>
             <?= component('ui/file-link', [
-                'label' => $item['file'],
+                'label' => extract_file_name($item['file']),
                 'url' => $item['file']
             ]) ?>
         </div>
