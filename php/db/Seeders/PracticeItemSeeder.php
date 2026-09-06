@@ -36,11 +36,11 @@ class PracticeItemSeeder extends Seeder
             $title = read_or_throw($seed_dir . 'title.txt', "Couldn't extract item title from the file");
             $abstract = read_or_throw($seed_dir . 'abstract.txt', "Couldn't extract item abstract from the file");
             $description = read_or_throw($seed_dir . 'description.txt', "Couldn't extract item description from the file");
-            $faqs = read_or_throw($seed_dir . 'faqs.txt', "Couldn't extract item faqs from the file");
+            $faqs = read_or_throw($seed_dir . 'faqs.md', "Couldn't extract item faqs from the file");
 
             $factory->create(
                 attrs: compact('description', 'faqs', 'abstract', 'title'),
-                file: $seed_dir . 'item.mp3',
+                file: $seed_dir . 'file/file.jpg',
                 img_src: $seed_dir . 'image'
             );
         }

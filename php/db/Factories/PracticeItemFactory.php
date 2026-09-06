@@ -11,8 +11,8 @@ class PracticeItemFactory extends Factory
 {
     public function create(array $attrs, string $img_src, string $file)
     {
-        if (! isset($attrs['asbtract'])) {
-            throw new \RuntimeException("Asbtract is not provided");
+        if (! isset($attrs['abstract'])) {
+            throw new \RuntimeException("Abstract is not provided");
         }
         if (! isset($attrs['description'])) {
             throw new \RuntimeException("Description is not provided");
@@ -39,7 +39,7 @@ class PracticeItemFactory extends Factory
             throw new \RuntimeException("Failed to copy $file to $to");
         }
 
-        $contents = file_get_contents($attrs['faqs']);
+        $contents = $attrs['faqs'];
 
         $chunks = array_map(
             fn($chunk) => trim($chunk),
