@@ -92,6 +92,9 @@ return [
         "article_successfully_created" => "Article successfully created!",
         "article_successfully_updated" => "Article successfully updated!",
         "article_successfully_deleted" => "Article successfully deleted!",
+        "set_successfully_created" => "Set successfully created!",
+        "set_successfully_updated" => "Set successfully updated!",
+        "set_successfully_deleted" => "Set successfully deleted!",
         "create_a_card" => "Create a card",
         "create_a_rune" => "Create a rune",
         "card_name" => "Card name",
@@ -184,5 +187,8 @@ return [
         "stone_preview" => "Stone preview",
         "stone_image" => "Stone image",
         "article_name" => "Article name",
+        "create_set" => "Create set",
+        "delete_set" => "Delete set",
+        "edit_set" => "Edit set",
     ]
 ];

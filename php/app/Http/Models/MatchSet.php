@@ -5,27 +5,9 @@ namespace Http\Models;
 use DB\Cortex;
 use DB\SQL\Schema;
 use Enums\Locale;
-use InvalidArgumentException;
 
 class MatchSet extends Cortex
 {
-    function __construct()
-    {
-        parent::__construct();
-
-        $this->beforeinsert(function ($self) {
-            $db = \Base::instance()->get('DB');
-
-            $res = $db->exec(
-                "SELECT EXISTS ( SELECT 1 FROM themes WHERE matcheable_type = ? AND matcheable_id = ?) AS exists",
-                [$self->matcheable_type, $self->matcheable_id]
-            );
-
-            if ($res[0]['exists']) {
-                throw new InvalidArgumentException('MatchSet already exists for this element');
-            }
-        });
-    }
 
     protected $fieldConf = [
         'matcheable_type' => [
@@ -57,5 +39,5 @@ class MatchSet extends Cortex
         ],
     ];
 
-    protected $db = 'DB', $table = 'themes';
+    protected $db = 'DB', $table = 'match_sets';
 }

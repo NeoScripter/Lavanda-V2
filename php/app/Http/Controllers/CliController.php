@@ -74,7 +74,7 @@ class CliController
         Affirmation::setup();
         Article::setup();
         Stone::setup();
-        // MatchSet::setup();
+        MatchSet::setup();
 
         $this->create_db_views($hive);
 
@@ -103,7 +103,7 @@ class CliController
         Affirmation::setdown();
         Article::setdown();
         Stone::setdown();
-        // MatchSet::setdown();
+        MatchSet::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
@@ -306,6 +306,17 @@ class CliController
             LEFT JOIN images preview ON preview.imageable_id = stone.id AND preview.imageable_type = '{$imageable_type}' AND preview.variant = 'preview'
             LEFT JOIN images image ON image.imageable_id = stone.id AND image.imageable_type = '{$imageable_type}' AND image.variant = 'image';"
         );
+
+        $match_set_view = DBView::MATCH_SET_IMAGES->value;
+
+        $db->exec(
+            "CREATE OR REPLACE VIEW {$match_set_view} AS
+            SELECT
+                set.id as set_id, set.matcheable_id, set.matcheable_type,
+                image.id as image_id, image.imageable_type as image_imageable_type, image.imageable_id as image_imageable_id, image.variant as image_variant, image.src as image_src, image.alt as image_alt
+            FROM match_sets set
+            LEFT JOIN images image ON image.imageable_id = ANY(STRING_TO_ARRAY(set.matcheable_id, '|')) AND image.imageable_type = set.matcheable_type;"
+        );
     }
 
     private function delete_db_views(\Base $hive)
@@ -326,6 +337,9 @@ class CliController
 
         $stone_view = DBView::STONE_ASSET->value;
         $db->exec("DROP VIEW IF EXISTS {$stone_view} CASCADE");
+
+        $match_set_view = DBView::MATCH_SET_IMAGES->value;
+        $db->exec("DROP VIEW IF EXISTS {$match_set_view} CASCADE");
     }
 
     private function create_card_backs(\Base $hive)

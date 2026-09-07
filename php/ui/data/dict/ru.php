@@ -92,6 +92,9 @@ return [
         "article_successfully_created" => "Статья успешно создана!",
         "article_successfully_updated" => "Статья успешно обновлена!",
         "article_successfully_deleted" => "Статья успешно удалена!",
+        "set_successfully_created" => "Комбинация успешно создана!",
+        "set_successfully_updated" => "Комбинация успешно обновлена!",
+        "set_successfully_deleted" => "Комбинация успешно удалена!",
         "create_a_card" => "Создать карту",
         "card_name" => "Название карты",
         "card_description" => "Описание карты",
@@ -184,5 +187,8 @@ return [
         "stone_preview" => "Второстепенное фото камня",
         "stone_image" => "Главное фото камня",
         "article_name" => "Название статьи",
+        "create_set" => "Создать комбинацию",
+        "delete_set" => "Удалить комбинацию",
+        "edit_set" => "Редактировать комбинацию",
     ]
 ];
