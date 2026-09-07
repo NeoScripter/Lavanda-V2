@@ -24,6 +24,10 @@ class ArticleFactory extends Factory
             attrs: array_merge($img_attrs, ['variant' => 'preview']),
             src_dir: $img_src
         );
+        (new ImageFactory)->create(
+            attrs: array_merge($img_attrs, ['variant' => 'image']),
+            src_dir: APP_DIR . '/public/assets/images/shared/empty/'
+        );
 
         return $article;
     }
