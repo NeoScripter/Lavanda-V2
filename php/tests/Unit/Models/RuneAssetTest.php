@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 final class RuneAssetTest extends TestCase
 {
-    private ?RuneFactory $factory = null;
+    private RuneFactory $factory;
 
     protected function setUp(): void
     {

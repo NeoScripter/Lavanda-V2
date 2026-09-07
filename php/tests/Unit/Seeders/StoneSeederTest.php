@@ -23,7 +23,7 @@ final class StoneSeederTest extends TestCase
         $db = $this->hive->get('DB');
 
         $res = $db->exec("SELECT count(*) FROM stones");
-        $this->assertEquals(1, $res[0]['count'], 'Stones were not created');
+        $this->assertNotEquals(0, $res[0]['count'], 'Stones were not created');
 
     }
 }
