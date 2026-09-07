@@ -21,7 +21,7 @@ slot('layouts/item-layout', [
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
-        <?= component('form/form-textarea', [
+        <?= component('form/form-wysiwyg', [
             'name'  => 'description',
             'label' => $hive->get('admin.description'),
             'attrs' => [
