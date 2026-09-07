@@ -10,12 +10,6 @@ $hive = \Base::instance(); ?>
     'heading' => $hive->get('admin.runes'),
     'title' => $hive->get('admin.runes')
 ]);
-
-$fallback = to_public_url(WEBROOT . '/assets/images/shared/empty/empty');
-$front_img_src = $rune['front_image']['src'] ?? $fallback;
-$front_img_alt = $rune['front_image']['alt'] ?? '';
-$back_img_src = $rune['back_image']['src'] ?? $fallback;
-$back_img_alt = $rune['back_image']['alt'] ?? '';
 ?>
 
 <div class="space-y-6">
@@ -37,10 +31,14 @@ $back_img_alt = $rune['back_image']['alt'] ?? '';
             </h3>
             <div class="flex flex-wrap items-center gap-4">
                 <figure class="rounded-sm overflow-clip max-w-68 aspect-2/3">
-                    <img class="size-full object-contain object-center" src="<?= $front_img_src . "-tb.webp" ?>" alt="<?= $front_img_alt ?>">
+                    <img class="size-full object-contain object-center"
+                        src="<?= $rune['front_image']['src'] . "-tb.webp" ?>"
+                        alt="<?= $rune['front_image']['alt'] ?>">
                 </figure>
                 <figure class="rounded-sm overflow-clip max-w-68 aspect-2/3">
-                    <img class="size-full object-contain object-center" src="<?= $back_img_src . "-tb.webp" ?>" alt="<?= $back_img_alt ?>">
+                    <img class="size-full object-contain object-center"
+                        src="<?= $rune['back_image']['src'] . "-tb.webp" ?>"
+                        alt="<?= $rune['back_image']['alt'] ?>">
                 </figure>
             </div>
         </div>

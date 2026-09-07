@@ -9,9 +9,6 @@ $hive = \Base::instance(); ?>
     'heading' => $hive->get('admin.cards'),
     'title' => $hive->get('admin.cards')
 ]);
-
-$src = $card['front_image']['src'] ?? to_public_url(WEBROOT . '/assets/images/shared/empty/empty');
-$alt = $card['front_image']['alt'] ?? '';
 ?>
 
 <div class="space-y-6">
@@ -28,7 +25,9 @@ $alt = $card['front_image']['alt'] ?? '';
         </div>
 
         <figure class="rounded-sm overflow-clip max-w-48 border border-border shadow-md aspect-2/3">
-            <img class="size-full object-cover object-center" src="<?= $src . "-tb.webp" ?>" alt="<?= $alt ?>">
+            <img class="size-full object-contain object-center"
+                src="<?= $card['front_image']['src'] . "-tb.webp" ?>"
+                alt="<?= $card['front_image']['alt'] ?>">
         </figure>
 
         <div>
@@ -40,14 +39,16 @@ $alt = $card['front_image']['alt'] ?? '';
             </div>
         </div>
 
-        <div>
-            <h3 class="my-15 font-medium">
-                <?= $hive->get('admin.card_meaning') ?>
-            </h3>
-            <div class="max-w-full prose prose-sm">
-                <?= \Markdown::instance()->convert($card['description']); ?>
+        <?php if (! empty($card['description'])) : ?>
+            <div>
+                <h3 class="my-15 font-medium">
+                    <?= $hive->get('admin.card_meaning') ?>
+                </h3>
+                <div class="max-w-full prose prose-sm">
+                    <?= \Markdown::instance()->convert($card['description']); ?>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
     </div>
 </div>
 

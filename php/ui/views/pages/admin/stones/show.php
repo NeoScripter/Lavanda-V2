@@ -35,7 +35,7 @@ $hive = \Base::instance(); ?>
             <figure class="rounded-sm overflow-clip max-w-48">
                 <img class="size-full object-contain object-center"
                     src="<?= $stone['image']['src'] . "-tb.webp" ?>"
-                    alt="<?= $stone['image']['src'] ?>">
+                    alt="<?= $stone['image']['alt'] ?>">
             </figure>
         </div>
 
