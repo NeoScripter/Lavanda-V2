@@ -9,23 +9,20 @@ use Http\Models\Article;
 
 class ArticleFactory extends Factory
 {
-    public function create(?array $attrs = [])
+    public function create(array $attrs, string $img_src)
     {
         $article = new Article();
-
-        $article->description = $attrs['description'] ?? $this->faker->sentences(20, true);
-        $article->html = $attrs['html'] ?? 'example';
+        $article->copyfrom($attrs);
         $article->save();
 
-        $imageable_type = ImageableType::ARTICLE->value;
+        $img_attrs = [
+            'imageable_type' => ImageableType::ARTICLE->value,
+            'imageable_id' => $article->id,
+        ];
 
         (new ImageFactory)->create(
-            attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $article->id, 'variant' => 'preview'],
-            src_dir: APP_DIR . '/db/Fixtures/Image/front_image/',
-        );
-        (new ImageFactory)->create(
-            attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $article->id, 'variant' => 'image'],
-            src_dir: APP_DIR . '/db/Fixtures/Image/front_image/',
+            attrs: array_merge($img_attrs, ['variant' => 'preview']),
+            src_dir: $img_src
         );
 
         return $article;

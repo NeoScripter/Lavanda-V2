@@ -57,6 +57,10 @@ class Article extends Cortex
     }
 
     protected $fieldConf = [
+        'name' => [
+            'type' => Schema::DT_VARCHAR256,
+            'nullable' => false,
+        ],
         'description' => [
             'type' => Schema::DT_TEXT,
             'nullable' => false,
