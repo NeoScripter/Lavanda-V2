@@ -183,5 +183,6 @@ return [
         "stone_images" => "Фото камня",
         "stone_preview" => "Второстепенное фото камня",
         "stone_image" => "Главное фото камня",
+        "article_name" => "Название статьи",
     ]
 ];

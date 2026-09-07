@@ -183,5 +183,6 @@ return [
         "stone_images" => "Stone images",
         "stone_preview" => "Stone preview",
         "stone_image" => "Stone image",
+        "article_name" => "Article name",
     ]
 ];

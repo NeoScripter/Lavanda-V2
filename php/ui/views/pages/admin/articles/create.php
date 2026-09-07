@@ -14,6 +14,14 @@ slot('layouts/item-layout', [
     <form action="<?= \Base::instance()->alias('admin_articles_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <?= csrf() ?>
 
+        <?= component('form/form-input', [
+            'name'  => 'name',
+            'label' => $hive->get('admin.article_name'),
+            'attrs' => [
+                'required' => true,
+            ],
+        ]) ?>
+
         <?= component('form/form-file-input', [
             'name'  => 'preview',
             'label' => $hive->get('admin.preview'),

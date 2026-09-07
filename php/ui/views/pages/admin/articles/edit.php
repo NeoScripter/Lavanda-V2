@@ -21,6 +21,15 @@ slot('layouts/item-layout', [
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
+        <?= component('form/form-input', [
+            'name'  => 'name',
+            'label' => $hive->get('admin.article_name'),
+            'attrs' => [
+                'required' => true,
+                'value'    => $article['name'],
+            ],
+        ]) ?>
+
         <?= component('form/form-file-input', [
             'name'  => 'preview',
             'label' => $hive->get('admin.preview'),

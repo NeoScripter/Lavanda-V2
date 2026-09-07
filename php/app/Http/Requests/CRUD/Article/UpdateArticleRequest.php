@@ -10,6 +10,10 @@ class UpdateArticleRequest extends Request
     public function rules(): array
     {
         return [
+            'name' => [
+                'filter'   => 'trim|trim_spaces',
+                'validate' => 'required|max_len:250',
+            ],
             'description' => [
                 'filter'   => 'trim|trim_spaces|escape_tags',
                 'validate' => 'required|max_len:1200',

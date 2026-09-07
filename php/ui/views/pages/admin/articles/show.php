@@ -17,6 +17,18 @@ $hive = \Base::instance(); ?>
     <?= component('ui/subheading', ['title' => $hive->get('admin.article')]) ?>
 
     <div class="space-y-6 max-w-160">
+        <div>
+            <h3 class="mb-2 font-medium">
+                <?= $hive->get('admin.article_name') ?>
+            </h3>
+            <div>
+                <?= $article['name'] ?>
+            </div>
+        </div>
+
+        <h3 class="mb-2 font-medium">
+            <?= $hive->get('admin.preview') ?>
+        </h3>
         <figure class="rounded-sm overflow-clip max-w-80 aspect-3/2">
             <img class="size-full object-cover object-center"
                 src="<?= $article?->preview?->src . "-tb.webp" ?>"
