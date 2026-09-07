@@ -1,4 +1,11 @@
 <?php
+
+extract(component_props(
+    required: ['total', 'current_page', 'to'],
+    optional: ['class' => ''],
+    props: get_defined_vars(),
+));
+
 $is_active = $current_page === $to;
 $is_leftmost = $to === 0;
 $is_rightmost = $to === $total + 1;
@@ -14,7 +21,7 @@ if ($is_rightmost) $to = $current_page + 1;
 // $hive = \Base::instance();
 // $url = $hive->PATH . '?' . http_build_query(['page' => $to]);
 $hive = \Base::instance();
-$url = $hive->alias($hive->ALIAS, $hive->PARAMS, ['page' => $to]);
+$url = $hive->alias($hive->ALIAS, $hive->PARAMS, [...$hive->GET, 'page' => $to]);
 
 $class = implode(' ', array_filter([
     'relative hidden size-10 items-center justify-center rounded-sm text-xl font-medium ring-1 transition duration-200 ease-in ring-inset sm:inline-flex sm:size-10',
