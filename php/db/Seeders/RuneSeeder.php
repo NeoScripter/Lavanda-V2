@@ -39,14 +39,14 @@ class RuneSeeder extends Seeder
             $advice = read_or_throw($seed_dir . 'advice.txt', "Couldn't extract rune advice from the file");
 
             $rune = $factory->create(
-                attrs: compact('name', 'advice', 'description', 'variant'),
+                attrs: compact('name', 'advice'),
                 front_img_src: $seed_dir . 'front_image/',
                 back_img_src: $seed_dir . 'back_image/',
             );
 
             $theme_fixtures = array_filter(
-                scandir($seed_dir . 'themes'),
-                fn($dir) => $dir !== '..' && $dir !== '.' && is_dir($dir)
+                scandir($seed_dir . 'themes/'),
+                fn($dir) => $dir !== '..' && $dir !== '.' && is_dir($seed_dir . 'themes/' . $dir)
             );
 
             if (empty($theme_fixtures)) {
@@ -56,7 +56,7 @@ class RuneSeeder extends Seeder
             $rune->themes[0]->erase();
 
             foreach ($theme_fixtures as $theme_fixture) {
-                $theme_dir = remove_extra_slashes($seed_dir . '/' . $theme_fixture . '/');
+                $theme_dir = remove_extra_slashes($seed_dir . '/themes/' . $theme_fixture . '/');
 
                 $name = read_or_throw($theme_dir . 'name.txt', "Couldn't extract theme name from the file");
                 $html = read_or_throw($theme_dir . 'html.md', "Couldn't extract theme html from the file");
