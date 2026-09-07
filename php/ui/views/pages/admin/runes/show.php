@@ -66,7 +66,7 @@ $back_img_alt = $rune['back_image']['alt'] ?? '';
                             <h4 class="mb-6 font-medium">
                                 <?= $theme->name ?>
                             </h4>
-                            <div class="max-w-full prose prose-sm">
+                            <div class="max-w-full prose prose-sm text-foreground">
                                 <?= \Markdown::instance()->convert($theme->html); ?>
                             </div>
                         </div>
