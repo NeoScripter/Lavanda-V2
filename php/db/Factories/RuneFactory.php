@@ -9,23 +9,24 @@ use Http\Models\Rune;
 
 class RuneFactory extends Factory
 {
-    public function create(?array $attrs = [])
+    public function create(array $attrs, string $front_img_src, string $back_img_src)
     {
         $rune = new Rune();
-
-        $rune->name = $attrs['name'] ?? $this->faker->word();
-        $rune->advice = $attrs['advice'] ??  $this->faker->sentence();
+        $rune->copyfrom($attrs);
         $rune->save();
 
-        $imageable_type = ImageableType::RUNE->value;
+        $img_attrs = [
+            'imageable_type' => ImageableType::RUNE->value,
+            'imageable_id' => $rune->id,
+        ];
 
         (new ImageFactory)->create(
-            attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $rune->id, 'variant' => 'front_image'],
-            src_dir: APP_DIR . '/db/Fixtures/Image/front_image/',
+            attrs: array_merge($img_attrs, ['variant' => 'front_image']),
+            src_dir: $front_img_src
         );
         (new ImageFactory)->create(
-            attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $rune->id, 'variant' => 'back_image'],
-            src_dir: APP_DIR . '/db/Fixtures/Image/back_image/',
+            attrs: array_merge($img_attrs, ['variant' => 'back_image']),
+            src_dir: $back_img_src
         );
 
         return $rune;
