@@ -24,7 +24,7 @@ $hive = \Base::instance(); ?>
             </div>
         </div>
 
-        <figure class="rounded-sm overflow-clip max-w-48 border border-border shadow-md aspect-2/3">
+        <figure class="rounded-sm overflow-clip max-w-48 aspect-2/3">
             <img class="size-full object-contain object-center"
                 src="<?= $card['front_image']['src'] . "-tb.webp" ?>"
                 alt="<?= $card['front_image']['alt'] ?>">

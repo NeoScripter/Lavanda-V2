@@ -17,7 +17,7 @@ $hive = \Base::instance(); ?>
     <?= component('ui/subheading', ['title' => $hive->get('admin.article')]) ?>
 
     <div class="space-y-6 max-w-160">
-        <figure class="rounded-sm overflow-clip max-w-80 border border-border shadow-md aspect-3/2">
+        <figure class="rounded-sm overflow-clip max-w-80 aspect-3/2">
             <img class="size-full object-cover object-center"
                 src="<?= $article?->preview?->src . "-tb.webp" ?>"
                 alt="<?= $article?->preview?->alt ?>">
@@ -32,7 +32,7 @@ $hive = \Base::instance(); ?>
             </div>
         </div>
 
-        <figure class="rounded-sm overflow-clip max-w-200 border border-border shadow-md aspect-3/2">
+        <figure class="rounded-sm overflow-clip max-w-200 aspect-3/2">
             <img class="size-full object-cover object-center"
                 src="<?= $article?->image?->src . "-dk.webp" ?>"
                 alt="<?= $article?->image?->alt ?>">
