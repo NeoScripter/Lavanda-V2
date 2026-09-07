@@ -4,6 +4,7 @@ namespace Http\Models;
 
 use DB\Cortex;
 use DB\SQL\Schema;
+use Enums\Locale;
 use InvalidArgumentException;
 
 class MatchSet extends Cortex
@@ -16,27 +17,33 @@ class MatchSet extends Cortex
             $db = \Base::instance()->get('DB');
 
             $res = $db->exec(
-                "SELECT EXISTS ( SELECT 1 FROM themes WHERE matcheable_type = ? AND matcheable_id = ? AND name = ?) AS exists",
-                [$self->matcheable_type, $self->matcheable_id, $self->name]
+                "SELECT EXISTS ( SELECT 1 FROM themes WHERE matcheable_type = ? AND matcheable_id = ?) AS exists",
+                [$self->matcheable_type, $self->matcheable_id]
             );
 
             if ($res[0]['exists']) {
-                throw new InvalidArgumentException('MatchSet already exists for this parent');
+                throw new InvalidArgumentException('MatchSet already exists for this element');
             }
         });
     }
 
     protected $fieldConf = [
-        'advice' => [
-            'type' => Schema::DT_TEXT,
-            'nullable' => false,
-        ],
         'matcheable_type' => [
             'type' => Schema::DT_VARCHAR128,
             'nullable' => false,
         ],
         'matcheable_id' => [
+            'type' => Schema::DT_VARCHAR256,
+            'index' => true,
+            'nullable' => false,
+        ],
+        'locale' => [
             'type' => Schema::DT_VARCHAR128,
+            'default' => Locale::RUSSIAN->value,
+            'nullable' => false,
+        ],
+        'advice' => [
+            'type' => Schema::DT_TEXT,
             'nullable' => false,
         ],
         'html' => [

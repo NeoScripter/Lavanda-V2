@@ -15,6 +15,7 @@ use Http\Models\FAQ;
 use Http\Models\Iching;
 use Http\Models\User;
 use Http\Models\Image;
+use Http\Models\MatchSet;
 use Http\Models\PracticeItem;
 use Http\Models\Rune;
 use Http\Models\Stone;
@@ -73,6 +74,7 @@ class CliController
         Affirmation::setup();
         Article::setup();
         Stone::setup();
+        MatchSet::setup();
 
         $this->create_db_views($hive);
 
@@ -101,6 +103,7 @@ class CliController
         Affirmation::setdown();
         Article::setdown();
         Stone::setdown();
+        MatchSet::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
