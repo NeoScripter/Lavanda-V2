@@ -17,7 +17,8 @@ $src = $rune['front_image']['src'] ?? to_public_url(WEBROOT . '/assets/images/sh
                 'sizes'    => 'mb',
                 'avif'    => false,
                 'path'     => $src,
-                'prt_class' => 'w-full shrink-0 rounded-xl aspect-2/3',
+                'prt_class' => 'w-full shrink-0 rounded-xl aspect-2/3 !bg-contain',
+                'img_class' => 'object-contain!',
             ]) ?>
             <a href="<?= $hive->alias('admin_runes_show', ['id' => $rune['id']]) ?>" class="absolute inset-0 size-full block"></a>
         </div>

@@ -75,7 +75,8 @@ $hive = \Base::instance();
                                 </button>
                             <?php endif; ?>
 
-                            <img class="size-full rounded-sm object-cover object-center" src="<?= $file['src'] .  "-mb.webp" ?>" alt="" />
+                            <img class="size-full rounded-sm object-contain object-center"
+                                src="<?= $file['src'] .  "-mb.webp" ?>" alt="" />
 
                             <?php if ($can_delete) : ?>
                                 <?= component('ui/delete-confirmation-modal', [

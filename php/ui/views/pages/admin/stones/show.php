@@ -32,7 +32,7 @@ $hive = \Base::instance(); ?>
             <h3 class="mb-2 font-medium">
                 <?= $hive->get('admin.stone_image') ?>
             </h3>
-            <figure class="rounded-sm overflow-clip max-w-48 border border-border shadow-md aspect-2/3">
+            <figure class="rounded-sm overflow-clip max-w-48">
                 <img class="size-full object-contain object-center"
                     src="<?= $stone['image']['src'] . "-tb.webp" ?>"
                     alt="<?= $stone['image']['src'] ?>">
@@ -43,7 +43,7 @@ $hive = \Base::instance(); ?>
             <h3 class="mb-2 font-medium">
                 <?= $hive->get('admin.stone_preview') ?>
             </h3>
-            <figure class="rounded-sm overflow-clip max-w-48 border border-border shadow-md aspect-2/3">
+            <figure class="rounded-sm overflow-clip max-w-48">
                 <img class="size-full object-contain object-center"
                     src="<?= $stone['preview']['src'] . "-mb.webp" ?>"
                     alt="<?= $stone['preview']['alt'] ?>">
