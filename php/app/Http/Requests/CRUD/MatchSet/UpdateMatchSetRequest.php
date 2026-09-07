@@ -10,7 +10,7 @@ class UpdateMatchSetRequest extends Request
     public function rules(): array
     {
         return [
-            'items' => [
+            'ids' => [
                 'filter'   => 'trim',
             ],
             'advice' => [
@@ -20,6 +20,14 @@ class UpdateMatchSetRequest extends Request
             'html' => [
                 'filter'   => 'trim',
                 'validate' => 'required|max_len:42000|no_tags',
+            ],
+            'matcheable_type' => [
+                'filter'   => 'trim',
+                'validate' => 'required',
+            ],
+            'matcheable_id' => [
+                'filter'   => 'trim|min_len:1',
+                'validate' => 'required',
             ],
         ];
     }

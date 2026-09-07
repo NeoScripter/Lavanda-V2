@@ -10,7 +10,7 @@ class StoreMatchSetRequest extends Request
     public function rules(): array
     {
         return [
-            'items' => [
+            'ids' => [
                 'filter'   => 'trim',
             ],
             'advice' => [
@@ -21,6 +21,14 @@ class StoreMatchSetRequest extends Request
                 'filter'   => 'trim',
                 'validate' => 'required|max_len:42000|no_tags',
             ],
+            'matcheable_type' => [
+                'filter'   => 'trim',
+                'validate' => 'required',
+            ],
+            'matcheable_id' => [
+                'filter'   => 'trim|min_len:1',
+                'validate' => 'required',
+            ],
         ];
     }
 
@@ -28,7 +36,7 @@ class StoreMatchSetRequest extends Request
     {
         return array_merge($this->data, [
             'locale' => $this->hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value),
-            'matcheable_type' => $this->hive->get('SESSION.' . SessionKey::MATCHEABLE_TYPE->value)
+            'matcheable_type' => $this->hive->get('SESSION.' . SessionKey::MATCHEABLE_TYPE->value),
         ]);
     }
 
@@ -39,6 +47,6 @@ class StoreMatchSetRequest extends Request
             'advice' => $this->hive->POST['advice'] ?? '',
         ]);
 
-        $this->hive->reroute('@admin_match_sets_create');
+        $this->hive->reroute('@admin_match_sets_index');
     }
 }

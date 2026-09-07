@@ -9,6 +9,7 @@ use Enums\MatcheableType;
 use Enums\SessionKey;
 use Exception;
 use Http\Controller;
+use Http\Models\Image;
 use Http\Models\MatchSet;
 use Http\Models\MatchSetImage;
 use Http\Requests\CRUD\MatchSet\StoreMatchSetRequest;
@@ -19,20 +20,29 @@ class MatchSetController extends Controller
 {
     use RequiresAuth;
 
+    private string $mt_type;
+    private string $locale;
+
+    public function __construct()
+    {
+        $hive = \Base::instance();
+
+        $this->mt_type = MatcheableType::normalize($hive->GET['matcheable_type'] ?? $hive->get('SESSION.' . SessionKey::MATCHEABLE_TYPE->value));
+        $this->locale = Locale::normalize($hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value) ?? '');
+    }
+
     public function index(\Base $hive)
     {
         $page = $hive->GET['page'] ?? 1;
         $page = is_numeric($page) ? (int) $page : 1;
-        $mt_type = MatcheableType::normalize($hive->GET['matcheable_type'] ?? '');
-        $locale = Locale::normalize($hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value) ?? '');
 
-        $hive->set('SESSION.' . SessionKey::MATCHEABLE_TYPE->value, $mt_type);
+        $hive->set('SESSION.' . SessionKey::MATCHEABLE_TYPE->value, $this->mt_type);
 
         $match_sets = new MatchSetImage();
         $match_sets = $match_sets->paginate(
             $page - 1,
             15,
-            ['locale=? AND matcheable_type=?', $locale, $mt_type],
+            ['locale=? AND matcheable_type=?', $this->locale, $this->mt_type],
             ['order' => 'created_at DESC']
         );
 
@@ -44,11 +54,29 @@ class MatchSetController extends Controller
 
     public function create()
     {
-        view('pages/admin/match_sets/create');
+        $img_variant = match ($this->mt_type) {
+            MatcheableType::RUNE->value => 'front_image',
+            MatcheableType::STONE->value => 'preview',
+            default => 'front_image'
+        };
+
+        $images = new Image();
+        $images = $images->find(['imageable_type = ? AND variant = ?', $this->mt_type, $img_variant]);
+
+        view('pages/admin/match_sets/create', compact('images'));
     }
 
     public function edit(\Base $hive)
     {
+        $img_variant = match ($this->mt_type) {
+            MatcheableType::RUNE->value => 'front_image',
+            MatcheableType::STONE->value => 'preview',
+            default => 'front_image'
+        };
+
+        $images = new Image();
+        $images = $images->find(['imageable_type = ? AND variant = ?', $this->mt_type, $img_variant]);
+
         $id = $hive->PARAMS['id'];
         $set = new MatchSetImage();
         $set->load(['id = ?', $id]);
@@ -56,6 +84,7 @@ class MatchSetController extends Controller
         view('pages/admin/match_sets/edit', [
             'title' => 'Match Set',
             'set' => $set,
+            'images' => $images,
         ]);
     }
 
@@ -78,6 +107,7 @@ class MatchSetController extends Controller
         $mt_type = $request->input('matcheable_type');
 
         $set = new MatchSet();
+        dd($request->all());
         $set->copyFrom($request->all());
         $set->save();
 
