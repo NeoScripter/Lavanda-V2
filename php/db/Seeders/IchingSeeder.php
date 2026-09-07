@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Seeders;
 
-use Enums\Locale;
 use Factories\IchingFactory;
+use InvalidArgumentException;
 use Seeders\Seeder;
 
 class IchingSeeder extends Seeder
@@ -17,15 +17,27 @@ class IchingSeeder extends Seeder
             return;
         }
 
-        $data = [['111111', 1], ['111001', 25], ['111010', 6], ['111100', 33], ['111000', 12], ['111110', 44], ['111101', 13], ['111011', 10], ['001111', 34], ['001001', 51], ['001010', 40], ['001100', 62], ['001000', 16], ['001110', 32], ['001101', 55], ['001011', 54], ['010111', 5], ['010001', 3], ['010010', 29], ['010100', 39], ['010000', 8], ['010110', 48], ['010101', 63], ['010011', 60], ['100111', 26], ['100001', 27], ['100010', 4], ['100100', 52], ['100000', 23], ['100110', 18], ['100101', 22], ['100011', 41], ['000111', 11], ['000001', 24], ['000010', 7], ['000100', 15], ['000000', 2], ['000110', 46], ['000101', 36], ['000011', 19], ['110111', 9], ['110001', 42], ['110010', 59], ['110100', 53], ['110000', 20], ['110110', 57], ['110101', 37], ['110011', 61], ['101111', 14], ['101001', 21], ['101010', 64], ['101100', 56], ['101000', 35], ['101110', 50], ['101101', 30], ['101011', 38], ['011111', 43], ['011001', 17], ['011010', 47], ['011100', 31], ['011000', 45], ['011110', 28], ['011101', 49], ['011011', 58],]; // pint ignore/line
+        $source = APP_DIR . '/db/Fixtures/Iching/';
+
+        $fixtures = array_filter(
+            scandir($source),
+            fn($dir) => $dir !== '..' && $dir !== '.' && is_dir($source . '/' . $dir)
+        );
+
+        if (empty($fixtures)) {
+            throw new InvalidArgumentException("Fixtures for ichings are not created");
+        }
 
         $factory = new IchingFactory();
 
-        foreach (Locale::values() as $locale) {
-            foreach ($data as [$binary, $number]) {
-                $bitmask = bindec($binary);
-                $factory->create(attrs: compact('number', 'bitmask', 'locale'));
-            }
+        foreach ($fixtures as $fixture) {
+            $seed_dir = remove_extra_slashes($source . '/' . $fixture . '/');
+
+            $bitmask = read_or_throw($seed_dir . 'bitmask.txt', "Couldn't extract iching bitmask from the file");
+            $number = read_or_throw($seed_dir . 'number.txt', "Couldn't extract iching number from the file");
+            $description = read_or_throw($seed_dir . 'description.md', "Couldn't extract iching description from the file");
+
+            $factory->create(attrs: compact('bitmask', 'number', 'description'));
         }
 
         echo "Ichings seeded.\n";

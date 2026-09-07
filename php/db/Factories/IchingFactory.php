@@ -8,14 +8,14 @@ use Http\Models\Iching;
 
 class IchingFactory extends Factory
 {
-    public function create(?array $attrs = [])
+
+    public function create(array $attrs)
     {
         $iching = new Iching();
 
-        $iching->description = $attrs['description'] ?? $this->faker->sentences(25, true);
-        $iching->number = $attrs['number'];
-        $iching->bitmask = $attrs['bitmask'];
-
+        $iching->number = (int) $attrs['number'];
+        $iching->bitmask = (int) $attrs['bitmask'];
+        $iching->description = $attrs['description'];
         $iching->save();
 
         return $iching;
