@@ -30,7 +30,7 @@ final class StoneFactoryTest extends TestCase
     #[Test]
     public function creates_stone_and_persists_to_database(): void
     {
-        $stone = $this->factory->create(
+        $stone = $this->factory->seed(
             attrs: $this->attrs,
             preview_src: $this->preview_src,
             image_src: $this->image_src

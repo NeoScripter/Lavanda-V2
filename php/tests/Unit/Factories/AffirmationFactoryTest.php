@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 final class AffirmationFactoryTest extends TestCase
 {
-    private ?AffirmationFactory $factory = null;
+    private AffirmationFactory $factory;
 
     protected function setUp(): void
     {

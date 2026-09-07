@@ -74,7 +74,7 @@ class CliController
         Affirmation::setup();
         Article::setup();
         Stone::setup();
-        MatchSet::setup();
+        // MatchSet::setup();
 
         $this->create_db_views($hive);
 
@@ -103,7 +103,7 @@ class CliController
         Affirmation::setdown();
         Article::setdown();
         Stone::setdown();
-        MatchSet::setdown();
+        // MatchSet::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')

@@ -36,7 +36,7 @@ class FAQSeeder extends Seeder
             $question = read_or_throw($seed_dir . 'question.txt', "Couldn't extract faq question from the file");
             $answer = read_or_throw($seed_dir . 'answer.md', "Couldn't extract faq answer from the file");
 
-            $factory->create(attrs: compact('question', 'answer'));
+            $factory->seed(attrs: compact('question', 'answer'));
         }
 
         echo "FAQs seeded.\n";

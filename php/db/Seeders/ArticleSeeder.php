@@ -37,7 +37,7 @@ class ArticleSeeder extends Seeder
             $description = read_or_throw($seed_dir . 'description.txt', "Couldn't extract article description from the file");
             $html = read_or_throw($seed_dir . 'html.md', "Couldn't extract article html from the file");
 
-            $factory->create(
+            $factory->seed(
                 attrs: compact('name', 'description', 'html'),
                 img_src: $seed_dir . 'image/',
             );

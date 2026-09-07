@@ -35,7 +35,7 @@ class AudioMessageSeeder extends Seeder
 
             $description = read_or_throw($seed_dir . 'description.txt', "Couldn't extract audio description from the file");
 
-            $factory->create(
+            $factory->seed(
                 attrs: compact('description'),
                 file: $seed_dir . 'audio.mp3',
             );

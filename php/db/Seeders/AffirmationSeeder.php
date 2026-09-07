@@ -37,7 +37,7 @@ class AffirmationSeeder extends Seeder
             $topic = read_or_throw($seed_dir . 'topic.txt', "Couldn't extract affirmation topic from the file");
             $quote = read_or_throw($seed_dir . 'quote.txt', "Couldn't extract affirmation quote from the file");
 
-            $factory->create(attrs: compact('topic', 'quote'));
+            $factory->seed(attrs: compact('topic', 'quote'));
         }
 
         echo "Affirmations seeded.\n";

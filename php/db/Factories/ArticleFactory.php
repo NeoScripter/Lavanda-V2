@@ -9,7 +9,29 @@ use Http\Models\Article;
 
 class ArticleFactory extends Factory
 {
-    public function create(array $attrs, string $img_src)
+    public function create(?array $attrs = [])
+    {
+        $article = new Article();
+
+        $article->description = $attrs['description'] ?? $this->faker->sentences(20, true);
+        $article->html = $attrs['html'] ?? 'example';
+        $article->save();
+
+        $imageable_type = ImageableType::ARTICLE->value;
+
+        (new ImageFactory)->create(
+            attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $article->id, 'variant' => 'preview'],
+            src_dir: APP_DIR . '/db/Fixtures/Image/front_image/',
+        );
+        (new ImageFactory)->create(
+            attrs: ['imageable_type' => $imageable_type, 'imageable_id' => $article->id, 'variant' => 'image'],
+            src_dir: APP_DIR . '/db/Fixtures/Image/front_image/',
+        );
+
+        return $article;
+    }
+
+    public function seed(array $attrs, string $img_src)
     {
         $article = new Article();
         $article->copyfrom($attrs);

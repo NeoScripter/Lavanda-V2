@@ -57,7 +57,7 @@ class CardSeeder extends Seeder
                 }
                 $description = 'Описание карты';
 
-                $card = $factory->create(
+                $card = $factory->seed(
                     attrs: compact('name', 'advice', 'description', 'variant'),
                     img_src: $seed_dir . 'front_image/',
                 );

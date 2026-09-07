@@ -36,7 +36,7 @@ class StoneSeeder extends Seeder
             $name = read_or_throw($seed_dir . 'name.txt', "Couldn't extract stone name from the file");
             $html = read_or_throw($seed_dir . 'html.md', "Couldn't extract stone html from the file");
 
-            $factory->create(
+            $factory->seed(
                 attrs: compact('name', 'html'),
                 preview_src: $seed_dir . 'preview/',
                 image_src: $seed_dir . 'image/'

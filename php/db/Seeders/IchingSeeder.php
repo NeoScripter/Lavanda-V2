@@ -37,7 +37,7 @@ class IchingSeeder extends Seeder
             $number = read_or_throw($seed_dir . 'number.txt', "Couldn't extract iching number from the file");
             $description = read_or_throw($seed_dir . 'description.md', "Couldn't extract iching description from the file");
 
-            $factory->create(attrs: compact('bitmask', 'number', 'description'));
+            $factory->seed(attrs: compact('bitmask', 'number', 'description'));
         }
 
         echo "Ichings seeded.\n";

@@ -12,7 +12,7 @@ class ThemeFactory extends Factory
     {
         $theme = new Theme();
         $theme->copyfrom($attrs);
-        $theme->html = $attrs['html'] ?? file_get_contents(APP_DIR . '/db/Fixtures/Card/html.md');
+        $theme->html = $attrs['html'] ?? $this->faker->sentences(20, true);
         $theme->save();
 
         return $theme;
