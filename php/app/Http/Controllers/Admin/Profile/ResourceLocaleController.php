@@ -19,7 +19,7 @@ class ResourceLocaleController extends Controller
 
         $hive->set(
             'SESSION.'. SessionKey::RESOURCE_LOCALE->value,
-            Locale::normalize($hive->POST[SessionKey::RESOURCE_LOCALE->value] ?? 'en')
+            Locale::normalize($hive->POST[SessionKey::RESOURCE_LOCALE->value] ?? Locale::RUSSIAN->value)
         );
 
         $referrer = $hive->HEADERS['Referer'] ?? '/';
