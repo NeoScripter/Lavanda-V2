@@ -1,7 +1,5 @@
 <?php
 
-use Enums\CardVariant;
-
 $hive = \Base::instance();
 
 extract(component_props(
@@ -64,6 +62,11 @@ extract(component_props(
                 'url'   => $hive->alias('admin_stones_index'),
                 'label' => $hive->get('admin.stones'),
                 'icon'  => 'stones',
+            ],
+            [
+                'url'   => $hive->alias('admin_match_sets_index'),
+                'label' => $hive->get('admin.match_sets'),
+                'icon'  => 'combine',
             ],
         ],
     ]) ?>

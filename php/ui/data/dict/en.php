@@ -187,8 +187,13 @@ return [
         "stone_preview" => "Stone preview",
         "stone_image" => "Stone image",
         "article_name" => "Article name",
-        "create_set" => "Create set",
-        "delete_set" => "Delete set",
-        "edit_set" => "Edit set",
+        "create_match_set" => "Create match set",
+        "delete_match_set" => "Delete match set",
+        "edit_match_set" => "Edit match set",
+        "match_set_meaning" => "Match set meaning",
+        "match_set_advice" => "Match set advice",
+        "select_match_set_category" => "Select match set category",
+        "match_sets" => "Match sets",
+        "there_are_no_match_sets_here_yet" => "There are no match sets here yet...",
     ]
 ];

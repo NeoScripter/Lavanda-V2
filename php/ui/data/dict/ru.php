@@ -187,8 +187,13 @@ return [
         "stone_preview" => "Второстепенное фото камня",
         "stone_image" => "Главное фото камня",
         "article_name" => "Название статьи",
-        "create_set" => "Создать комбинацию",
-        "delete_set" => "Удалить комбинацию",
-        "edit_set" => "Редактировать комбинацию",
+        "create_match_set" => "Создать комбинацию",
+        "delete_match_set" => "Удалить комбинацию",
+        "edit_match_set" => "Редактировать комбинацию",
+        "match_set_meaning" => "Толкование комбинации",
+        "match_set_advice" => "Совет комбинации",
+        "select_match_set_category" => "Выберите категорию комбинаций",
+        "match_sets" => "Комбинации",
+        "there_are_no_match_sets_here_yet" => "Пока не добавлено ни одной комбинации...",
     ]
 ];

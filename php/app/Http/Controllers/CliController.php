@@ -312,10 +312,10 @@ class CliController
         $db->exec(
             "CREATE OR REPLACE VIEW {$match_set_view} AS
             SELECT
-                set.id as set_id, set.matcheable_id, set.matcheable_type,
+                set.id as set_id, set.matcheable_id, set.matcheable_type, set.locale, set.created_at,
                 image.id as image_id, image.imageable_type as image_imageable_type, image.imageable_id as image_imageable_id, image.variant as image_variant, image.src as image_src, image.alt as image_alt
             FROM match_sets set
-            LEFT JOIN images image ON image.imageable_id = ANY(STRING_TO_ARRAY(set.matcheable_id, '|')) AND image.imageable_type = set.matcheable_type;"
+            LEFT JOIN images image ON image.imageable_id = ANY(STRING_TO_ARRAY(set.matcheable_id, '|')::int[]) AND image.imageable_type = set.matcheable_type;"
         );
     }
 

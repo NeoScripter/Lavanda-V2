@@ -38,7 +38,7 @@ class RuneSeeder extends Seeder
             $name = read_or_throw($seed_dir . 'name.txt', "Couldn't extract rune name from the file");
             $advice = read_or_throw($seed_dir . 'advice.txt', "Couldn't extract rune advice from the file");
 
-            $rune = $factory->store(
+            $rune = $factory->seed(
                 attrs: compact('name', 'advice'),
                 front_img_src: $seed_dir . 'front_image/',
                 back_img_src: $seed_dir . 'back_image/',

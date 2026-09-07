@@ -28,8 +28,8 @@ class MatchSetController extends Controller
 
         $hive->set('SESSION.' . SessionKey::MATCHEABLE_TYPE->value, $mt_type);
 
-        $sets = new MatchSetImage();
-        $sets = $sets->paginate(
+        $match_sets = new MatchSetImage();
+        $match_sets = $match_sets->paginate(
             $page - 1,
             15,
             ['locale=? AND matcheable_type=?', $locale, $mt_type],
@@ -38,7 +38,7 @@ class MatchSetController extends Controller
 
         view('pages/admin/match_sets/index', [
             'title' => 'All sets',
-            'sets' => $sets,
+            'match_sets' => $match_sets,
         ]);
     }
 
