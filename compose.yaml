@@ -6,6 +6,7 @@ services:
     networks:
       - app-network
     container_name: app-proxy
+    restart: always
     ports:
       - "127.0.0.1:9001:9001"
     depends_on:
@@ -21,6 +22,7 @@ services:
     ports:
       - "127.0.0.1:9000:9000"
     container_name: app-php
+    restart: always
     env_file:
       - .env
     volumes:
@@ -43,6 +45,7 @@ services:
     networks:
       - app-network
     container_name: app-web
+    restart: always
     ports:
       - "127.0.0.1:9002:9002"
     develop:
@@ -77,6 +80,7 @@ services:
   redis:
     image: redis
     container_name: app-redis
+    restart: always
     volumes:
       - redis_data:/data
     networks:
