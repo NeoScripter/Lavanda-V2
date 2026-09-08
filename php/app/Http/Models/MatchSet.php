@@ -17,7 +17,6 @@ class MatchSet extends Cortex
             'type' => Schema::DT_VARCHAR256,
             'index' => true,
             'nullable' => false,
-            'default' => '',
         ],
         'locale' => [
             'type' => Schema::DT_VARCHAR128,

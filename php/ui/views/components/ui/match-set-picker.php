@@ -6,7 +6,7 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 
-$error = \Flash::instance()->getKey("errors.ids") ?? '';
+$error = \Flash::instance()->getKey("errors.matcheable_id") ?? '';
 
 $selected_ids = explode('|', $matcheable_id);
 $selected_imgs = array_filter(
@@ -20,7 +20,7 @@ $selected_imgs = array_filter(
         <?= $hive->get('admin.select_items_for_the_set') ?>
     </h3>
 
-    <input name="ids" type='hidden' value="<?= $matcheable_id ?>" />
+    <input name="matcheable_id" type='hidden' value="<?= $matcheable_id ?>" />
 
     <template component-selected-img-template>
         <li data-imgbl-id=""
@@ -48,7 +48,7 @@ $selected_imgs = array_filter(
 
                 <?php foreach ($images as $img) : ?>
 
-                    <li data-imgbl-id="<?= $img->imageable_id ?>"
+                    <li data-imgbl-id="<?= $img['imageable_id'] ?>"
                         class='relative transition-transform hover:scale-150 hover:z-1 group'>
 
                         <figure class='aspect-2/3 w-full'>
@@ -71,7 +71,7 @@ $selected_imgs = array_filter(
                 class='grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-2 has-[li]:mt-8'>
                 <?php foreach ($selected_imgs as $selected_img) : ?>
 
-                    <li data-imgbl-id="<?= $selected_img->imageable_id ?>"
+                    <li data-imgbl-id="<?= $selected_img['imageable_id'] ?>"
                         class='relative group'>
 
                         <figure class='aspect-2/3 w-full'>
@@ -91,5 +91,8 @@ $selected_imgs = array_filter(
         </div>
     <?php endif; ?>
 
-    <?= component('form/input-error', ['message' => $error]) ?>
+    <?= component('form/input-error', [
+        'message' => $error,
+        'class' => 'mt-2'
+    ]) ?>
 </div>

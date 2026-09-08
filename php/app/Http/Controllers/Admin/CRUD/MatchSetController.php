@@ -79,12 +79,12 @@ class MatchSetController extends Controller
         $images = $images->find(['imageable_type = ? AND variant = ?', $this->mt_type, $img_variant]);
 
         $id = $hive->PARAMS['id'];
-        $set = new MatchSetImage();
+        $set = new MatchSet();
         $set->load(['id = ?', $id]);
 
         view('pages/admin/match_sets/edit', [
             'title' => 'Match Set',
-            'set' => $set,
+            'match_set' => $set,
             'images' => $images,
         ]);
     }
@@ -97,7 +97,7 @@ class MatchSetController extends Controller
 
         view('pages/admin/match_sets/show', [
             'title' => 'Match Set',
-            'set' => $set,
+            'match_set' => $set->to_resource(),
         ]);
     }
 
@@ -108,7 +108,6 @@ class MatchSetController extends Controller
         $mt_type = $request->input('matcheable_type');
 
         $set = new MatchSet();
-        dd($request->all());
         $set->copyFrom($request->all());
         $set->save();
 

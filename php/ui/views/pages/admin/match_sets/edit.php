@@ -1,7 +1,7 @@
 <?php
 
 extract(component_props(
-    required: ['match_set'],
+    required: ['match_set', 'images'],
     optional: [],
     props: get_defined_vars(),
 ));
@@ -20,6 +20,11 @@ slot('layouts/match-set-layout', [
     <form action="<?= $hive->alias('admin_match_sets_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
+
+        <?= component('ui/match-set-picker', [
+            'images' => $images,
+            'matcheable_id' => $match_set['matcheable_id']
+        ]) ?>
 
         <?= component('form/form-textarea', [
             'name'  => 'advice',

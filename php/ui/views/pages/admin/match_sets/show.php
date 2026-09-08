@@ -5,30 +5,30 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 $hive = \Base::instance(); ?>
-<?php slot('layouts/match-sets-layout', [
+<?php slot('layouts/match-set-layout', [
     'heading' => $hive->get('admin.match_sets'),
     'title' => $hive->get('admin.match_sets')
 ]);
 ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', ['title' => $match_set['name']]) ?>
+    <?= component('ui/subheading', ['title' => $hive->get('admin.match_set')]) ?>
 
-    <div class="space-y-6 max-w-160">
-        <div>
-            <h3 class="mb-2 font-medium">
-                <?= $hive->get('admin.match_set_name') ?>
-            </h3>
-            <div>
-                <?= $match_set['name'] ?>
-            </div>
-        </div>
+    <div class="space-y-6 max-w-260">
 
-        <figure class="rounded-sm overflow-clip max-w-48 aspect-2/3">
-            <img class="size-full object-contain object-center"
-                src="<?= $match_set['front_image']['src'] . "-tb.webp" ?>"
-                alt="<?= $match_set['front_image']['alt'] ?>">
-        </figure>
+        <ul class='grid gap-2 grid-cols-[repeat(auto-fill,minmax(10rem,1fr))]'>
+            <?php foreach ($match_set['images'] as $img) : ?>
+                <li class="relative w-full">
+                    <?= component('ui/image', [
+                        'sizes'    => 'mb',
+                        'avif'    => false,
+                        'path'     => $img['src'],
+                        'prt_class' => 'w-full shrink-0 rounded-xl aspect-2/3 bg-contain!',
+                        'image_class' => 'object-contain!',
+                    ]) ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
 
         <div>
             <h3 class="mb-2 font-medium">
@@ -45,7 +45,7 @@ $hive = \Base::instance(); ?>
                     <?= $hive->get('admin.match_set_meaning') ?>
                 </h3>
                 <div class="max-w-full prose prose-sm">
-                    <?= \Markdown::instance()->convert($match_set['description']); ?>
+                    <?= \Markdown::instance()->convert($match_set['html']); ?>
                 </div>
             </div>
         <?php endif; ?>

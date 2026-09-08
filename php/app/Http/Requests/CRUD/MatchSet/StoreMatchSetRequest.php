@@ -10,8 +10,9 @@ class StoreMatchSetRequest extends Request
     public function rules(): array
     {
         return [
-            'ids' => [
-                'filter'   => 'trim',
+            'matcheable_id' => [
+                'filter' => 'trim',
+                'validate' => 'required|min_len:1',
             ],
             'advice' => [
                 'filter'   => 'trim|trim_spaces|strip_tags',
@@ -23,10 +24,6 @@ class StoreMatchSetRequest extends Request
             ],
             'matcheable_type' => [
                 'filter'   => 'trim',
-                'validate' => 'required',
-            ],
-            'matcheable_id' => [
-                'filter'   => 'trim|min_len:1',
                 'validate' => 'required',
             ],
         ];
@@ -47,6 +44,6 @@ class StoreMatchSetRequest extends Request
             'advice' => $this->hive->POST['advice'] ?? '',
         ]);
 
-        $this->hive->reroute('@admin_match_sets_index');
+        $this->hive->reroute('@admin_match_sets_create');
     }
 }

@@ -6,7 +6,7 @@ export default function initMatchSetPickers() {
 
     for (const setPicker of setPickers) {
         const input = qs<HTMLInputElement>(
-            'input[name="ids"]',
+            'input[name="matcheable_id"]',
             'error',
             setPicker
         );

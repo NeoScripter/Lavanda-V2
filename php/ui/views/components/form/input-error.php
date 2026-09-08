@@ -1,8 +1,10 @@
 <?php
 
-$message = $message ?? '';
-$class   = $class   ?? '';
-$attrs   = $attrs   ?? [];
+extract(component_props(
+    required: [],
+    optional: ['message' => '', 'class' => '', 'attrs' => []],
+    props: get_defined_vars(),
+));
 
 if (!$message) return;
 

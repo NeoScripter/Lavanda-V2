@@ -10,14 +10,20 @@ extract(component_props(
 <li class="grid gap-6 text-sm">
     <div class="flex flex-col gap-4">
 
-        <div class="relative w-full">
-            <?= component('ui/image', [
-                'sizes'    => 'mb',
-                'avif'    => false,
-                'path'     => $src,
-                'prt_class' => 'w-full shrink-0 rounded-xl aspect-2/3 bg-contain!',
-                'image_class' => 'object-contain!',
-            ]) ?>
+        <div class='relative'>
+            <ul>
+                <?php foreach ($match_set['images'] as $img) : ?>
+                    <div class="relative w-full">
+                        <?= component('ui/image', [
+                            'sizes'    => 'mb',
+                            'avif'    => false,
+                            'path'     => $img['src'],
+                            'prt_class' => 'w-full shrink-0 rounded-xl aspect-2/3 bg-contain!',
+                            'image_class' => 'object-contain!',
+                        ]) ?>
+                    </div>
+                <?php endforeach; ?>
+            </ul>
             <a href="<?= $hive->alias('admin_match_sets_show', ['id' => $match_set['id']]) ?>" class="absolute inset-0 size-full block"></a>
         </div>
 
