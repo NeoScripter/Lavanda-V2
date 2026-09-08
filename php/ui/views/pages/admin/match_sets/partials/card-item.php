@@ -11,23 +11,25 @@ extract(component_props(
     <div class="flex flex-col gap-4">
 
         <div class='relative'>
-            <ul>
+            <h4 class='font-medium mb-2'><?= $hive->get('admin.match_set') ?></h4>
+
+            <ul class='grid grid-cols-[repeat(auto-fill,2rem)] xs:grid-cols-[repeat(auto-fill,4rem)]'>
                 <?php foreach ($match_set['images'] as $img) : ?>
-                    <div class="relative w-full">
+                    <li class="relative w-40">
                         <?= component('ui/image', [
                             'sizes'    => 'mb',
                             'avif'    => false,
                             'path'     => $img['src'],
                             'prt_class' => 'w-full shrink-0 rounded-xl aspect-2/3 bg-contain!',
-                            'image_class' => 'object-contain!',
+                            'img_class' => 'object-contain!',
                         ]) ?>
-                    </div>
+                    </li>
                 <?php endforeach; ?>
             </ul>
             <a href="<?= $hive->alias('admin_match_sets_show', ['id' => $match_set['id']]) ?>" class="absolute inset-0 size-full block"></a>
         </div>
 
-        <?= component('ui/item-actions', [
+        <?= component('ui/item-actions-mini', [
             'edit_url' => $hive->alias("admin_match_sets_edit", ['id' => $match_set['id']]),
             'delete_url' => $hive->alias("admin_match_sets_destroy", ['id' => $match_set['id']]),
             'item_label' => $hive->get('admin.match_set'),

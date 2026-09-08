@@ -1,5 +1,6 @@
 <?php
 
+use Enums\MatcheableType;
 use Enums\SessionKey;
 
 $hive = \Base::instance();
@@ -9,6 +10,15 @@ extract(component_props(
     optional: [],
     props: get_defined_vars(),
 ));
+
+$mt_type = MatcheableType::normalize($hive->GET['matcheable_type'] ??
+    $hive->get('SESSION.' . SessionKey::MATCHEABLE_TYPE->value) ?? '');
+
+$item_view = match ($mt_type) {
+    MatcheableType::RUNE->value => 'stone-item',
+    MatcheableType::STONE->value => 'stone-item',
+    default => 'card-item'
+};
 
 $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 ?>
@@ -31,9 +41,10 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
     </nav>
 
     <?php if (! empty($match_sets['subset'])) : ?>
-        <ul class="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-12">
+        <ul component-form-match-set-list
+            class="grid gap-12">
             <?php foreach ($match_sets['subset'] as $match_set) : ?>
-                <?php view('pages/admin/match_sets/partials/item', [
+                <?php view("pages/admin/match_sets/partials/$item_view", [
                     'match_set' => $match_set->to_resource(),
                 ]); ?>
             <?php endforeach; ?>

@@ -17,7 +17,7 @@ slot('layouts/match-set-layout', [
 
     <?= component('ui/subheading', ['title' => $hive->get('admin.edit_match_set')]) ?>
 
-    <form action="<?= $hive->alias('admin_match_sets_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
+    <form action="<?= $hive->alias('admin_match_sets_update') ?>" method="post" class="space-y-6 max-w-260" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 

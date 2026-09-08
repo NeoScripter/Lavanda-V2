@@ -44,7 +44,7 @@ $selected_imgs = array_filter(
     <?php else : ?>
         <div>
             <ul component-available-sets
-                class='grid grid-cols-[repeat(auto-fill,minmax(2rem,1fr))] gap-2'>
+                class='grid grid-cols-[repeat(auto-fill,minmax(3rem,1fr))] gap-2'>
 
                 <?php foreach ($images as $img) : ?>
 

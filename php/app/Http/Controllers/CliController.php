@@ -311,7 +311,7 @@ class CliController
 
         $db->exec(
             "CREATE OR REPLACE VIEW {$match_set_view} AS
-            SELECT set.id, set.matcheable_id, set.advice, set.matcheable_type, set.locale, set.created_at,
+            SELECT set.id, set.matcheable_id, set.advice, set.html, set.matcheable_type, set.locale, set.created_at,
             COALESCE(
                 json_agg(
                     json_build_object(
@@ -326,7 +326,7 @@ class CliController
             ) as images
             FROM match_sets set
             LEFT JOIN images image ON image.imageable_id = ANY(STRING_TO_ARRAY(set.matcheable_id, '|')::int[]) AND image.imageable_type = set.matcheable_type
-            GROUP BY set.id, set.advice, set.matcheable_id, set.matcheable_type, set.locale, set.created_at;"
+            GROUP BY set.id, set.advice, set.html, set.matcheable_id, set.matcheable_type, set.locale, set.created_at;"
         );
     }
 

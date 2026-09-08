@@ -492,3 +492,14 @@ h5 {
     content: counter(accordion-counter) ".";
 }
 
+[component-form-match-set-list] {
+    counter-reset: match-set-counter;
+}
+[component-form-match-set-list] > li {
+    counter-increment: match-set-counter;
+}
+
+[component-form-match-set-list] > li h4::after {
+    content: " " counter(match-set-counter);
+}
+

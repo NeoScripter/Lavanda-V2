@@ -194,6 +194,7 @@ return [
         "match_set_advice" => "Совет комбинации",
         "select_match_set_category" => "Выберите категорию комбинаций",
         "match_sets" => "Комбинации",
+        "match_set" => "Комбинация",
         "there_are_no_match_sets_here_yet" => "Пока не добавлено ни одной комбинации...",
         "select_items_for_the_set" => "Выберите элементы для комбинации",
     ]

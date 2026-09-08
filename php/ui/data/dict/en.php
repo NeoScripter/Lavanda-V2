@@ -194,6 +194,7 @@ return [
         "match_set_advice" => "Match set advice",
         "select_match_set_category" => "Select match set category",
         "match_sets" => "Match sets",
+        "match_set" => "Match set",
         "there_are_no_match_sets_here_yet" => "There are no match sets here yet...",
         "select_items_for_the_set" => "Select items for the set",
     ]

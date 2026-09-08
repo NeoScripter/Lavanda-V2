@@ -24,7 +24,7 @@ $hive = \Base::instance(); ?>
                         'avif'    => false,
                         'path'     => $img['src'],
                         'prt_class' => 'w-full shrink-0 rounded-xl aspect-2/3 bg-contain!',
-                        'image_class' => 'object-contain!',
+                        'img_class' => 'object-contain!',
                     ]) ?>
                 </li>
             <?php endforeach; ?>
@@ -39,7 +39,7 @@ $hive = \Base::instance(); ?>
             </div>
         </div>
 
-        <?php if (! empty($match_set['description'])) : ?>
+        <?php if (! empty($match_set['html'])) : ?>
             <div>
                 <h3 class="my-15 font-medium">
                     <?= $hive->get('admin.match_set_meaning') ?>
