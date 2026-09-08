@@ -12,6 +12,7 @@ import theme from './modules/theme';
 import initToasts from './modules/toasts';
 import initWysiwygs from './modules/wysiwygs';
 import initAccordionFormInputs from './modules/accordionFormInputs';
+import initMatchSetPickers from './modules/match_sets';
 
 
 class AppUI {
@@ -34,6 +35,7 @@ class AppUI {
             initWysiwygs,
             initDraggableReports,
             initAccordionFormInputs,
+            initMatchSetPickers
         ];
 
         for (const handler of handlers) {

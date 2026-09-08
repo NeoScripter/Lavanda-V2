@@ -6,7 +6,6 @@ export default function initAdaptiveImages() {
     adaptiveImgs.forEach((container) => {
         const img = qs<HTMLImageElement>('img', 'silent', container);
 
-        console.log(img?.complete)
         if (!img) {
             return;
         }

@@ -195,5 +195,6 @@ return [
         "select_match_set_category" => "Выберите категорию комбинаций",
         "match_sets" => "Комбинации",
         "there_are_no_match_sets_here_yet" => "Пока не добавлено ни одной комбинации...",
+        "select_items_for_the_set" => "Выберите элементы для комбинации",
     ]
 ];
