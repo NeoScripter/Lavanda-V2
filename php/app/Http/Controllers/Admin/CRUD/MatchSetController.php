@@ -27,7 +27,8 @@ class MatchSetController extends Controller
     {
         $hive = \Base::instance();
 
-        $this->mt_type = MatcheableType::normalize($hive->GET['matcheable_type'] ?? $hive->get('SESSION.' . SessionKey::MATCHEABLE_TYPE->value));
+        $this->mt_type = MatcheableType::normalize($hive->GET['matcheable_type'] ??
+            $hive->get('SESSION.' . SessionKey::MATCHEABLE_TYPE->value) ?? '');
         $this->locale = Locale::normalize($hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value) ?? '');
     }
 
