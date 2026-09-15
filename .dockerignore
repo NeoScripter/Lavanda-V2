@@ -1,0 +1,17 @@
+vendor/
+.git
+.gitignore
+.env
+.env.*
+*.log
+node_modules
+node_modules/
+README.md
+public/storage/
+public/dist/
+bootstrap/cache/
+*.tar
+*.sql
+*.sqlite
+*.dump
+backups/

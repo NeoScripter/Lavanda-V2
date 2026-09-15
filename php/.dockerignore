@@ -1,8 +1,0 @@
-vendor/
-.git
-.gitignore
-.env
-.env.*
-*.log
-node_modules
-README.md

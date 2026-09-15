@@ -1,26 +1,12 @@
 services:
-  proxy:
-    build:
-      context: ./proxy
-      target: ${APP_ENV}
-    networks:
-      - app-network
-    container_name: app-proxy
-    restart: always
-    ports:
-      - "127.0.0.1:9001:9001"
-    depends_on:
-      php:
-        condition: service_started
-
   php:
     build: 
-      context: ./php
+      context: .
       target: ${APP_ENV}
     networks:
       - app-network
     ports:
-      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
     container_name: app-php
     restart: always
     env_file:
@@ -30,33 +16,14 @@ services:
     develop:
       watch:
         - action: sync
-          path: ./php
+          path: .
           target: /var/www/html
           initial_sync: true
           ignore:
             - node_modules/
             - vendor/
+            - storage/
             - .git/
-
-  web:
-    build:
-      context: ./web
-      target: ${APP_ENV}
-    networks:
-      - app-network
-    container_name: app-web
-    restart: always
-    ports:
-      - "127.0.0.1:9002:9002"
-    develop:
-      watch:
-        - action: sync
-          path: ./web
-          target: /app
-          initial_sync: true
-          ignore:
-            - node_modules/
-
 
   db:
     image: postgres
