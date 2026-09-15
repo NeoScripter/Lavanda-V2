@@ -6,6 +6,7 @@ namespace Seeders;
 
 use Enums\CardVariant;
 use Factories\CardFactory;
+use Factories\ImageFactory;
 use InvalidArgumentException;
 use Seeders\Seeder;
 
@@ -67,6 +68,14 @@ class CardSeeder extends Seeder
                 $theme->save();
             }
         }
+
+        foreach (CardVariant::values() as $card_variant) {
+            (new ImageFactory)->create(
+                attrs: ['imageable_type' => $card_variant, 'imageable_id' => 1, 'variant' => 'back_image'],
+                src_dir: APP_DIR . '/db/Fixtures/Image/back_image/',
+            );
+        }
+
         echo "Cards seeded.\n";
     }
 }

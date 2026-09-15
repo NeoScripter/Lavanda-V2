@@ -6,6 +6,7 @@ use Enums\AppEnv;
 use Enums\CardVariant;
 use Enums\DBView;
 use Enums\ImageableType;
+use Exception;
 use Factories\ImageFactory;
 use Http\Models\Affirmation;
 use Http\Models\Article;
@@ -79,10 +80,7 @@ class CliController
         MatchSet::setup();
         Legal::setup();
 
-        $this->create_db_views($hive);
-
-        $this->create_card_backs($hive);
-
+        $this->create_db_views();
         $this->create_compound_indexes($hive);
 
         if ($hive->app_env !== 'test') {
@@ -92,7 +90,7 @@ class CliController
 
     function drop(\Base $hive)
     {
-        $this->delete_db_views($hive);
+        $this->delete_db_views();
 
         User::setdown();
         Theme::setdown();
@@ -243,128 +241,29 @@ class CliController
         }
     }
 
-    private function create_db_views(\Base $hive)
+    private function create_db_views()
     {
-        $db = $hive->get("DB");
+        $db = \Base::instance()->get("DB");
+        $path = APP_DIR . "/db/Views/";
 
-        $card_view = DBView::FLIPCARD->value;
+        foreach (DBView::values() as $view) {
 
-        $db->exec(
-            "CREATE OR REPLACE VIEW {$card_view} AS
-            SELECT
-                c.id, c.name, c.description, c.advice, c.variant, c.locale, c.created_at,
-                front.id as front_id, front.imageable_type as front_imageable_type, front.imageable_id as front_imageable_id, front.variant as front_variant, front.src as front_src, front.alt as front_alt,
-                back.id as back_id, back.imageable_type as back_imageable_type, back.variant as back_variant, back.src as back_src, back.alt as back_alt
-            FROM cards c
-            LEFT JOIN images front ON front.imageable_id = c.id AND front.imageable_type = c.variant AND front.variant = 'front_image'
-            LEFT JOIN images back ON back.imageable_type = c.variant AND back.variant = 'back_image';"
-        );
+            $sql = file_get_contents($path . $view);
 
-        $rune_view = DBView::RUNE_ASSET->value;
-        $imageable_type = ImageableType::RUNE->value;
+            if ($sql === false) {
+                throw new Exception("Db view for  $view not found");
+            }
 
-        $db->exec(
-            "CREATE OR REPLACE VIEW {$rune_view} AS
-            SELECT
-                r.id, r.name, r.advice, r.locale, r.created_at,
-                front.id as front_id, front.imageable_type as front_imageable_type, front.imageable_id as front_imageable_id, front.variant as front_variant, front.src as front_src, front.alt as front_alt,
-                back.id as back_id, back.imageable_type as back_imageable_type, back.imageable_id as back_imageable_id, back.variant as back_variant, back.src as back_src, back.alt as back_alt
-            FROM runes r
-            LEFT JOIN images front ON front.imageable_id = r.id AND front.imageable_type = '{$imageable_type}' AND front.variant = 'front_image'
-            LEFT JOIN images back ON back.imageable_id = r.id AND back.imageable_type = '{$imageable_type}' AND back.variant = 'back_image';"
-        );
-
-        $practice_item_view = DBView::PRACTICE_ITEM_ASSET->value;
-        $imageable_type = ImageableType::PRACTICE_ITEM->value;
-
-        $db->exec(
-            "CREATE OR REPLACE VIEW {$practice_item_view} AS
-            SELECT
-                item.id, item.title, item.description, item.file, item.faqs, item.locale, item.created_at,
-                image.id as image_id, image.imageable_type as image_imageable_type, image.imageable_id as image_imageable_id, image.variant as image_variant, image.src as image_src, image.alt as image_alt
-            FROM practice_items item
-            LEFT JOIN images image ON image.imageable_id = item.id AND image.imageable_type = '{$imageable_type}' AND image.variant = 'image';"
-        );
-
-        $article_view = DBView::ARTICLE_PREVIEW->value;
-        $imageable_type = ImageableType::ARTICLE->value;
-
-        $db->exec(
-            "CREATE OR REPLACE VIEW {$article_view} AS
-            SELECT
-                a.id, a.description, a.locale, a.created_at,
-                image.id as preview_id, image.imageable_type as preview_imageable_type, image.imageable_id as preview_imageable_id, image.variant as preview_variant, image.src as preview_src, image.alt as preview_alt
-            FROM articles a
-            LEFT JOIN images image ON image.imageable_id = a.id AND image.imageable_type = '{$imageable_type}' AND image.variant = 'preview';"
-        );
-
-        $stone_view = DBView::STONE_ASSET->value;
-        $imageable_type = ImageableType::STONE->value;
-
-        $db->exec(
-            "CREATE OR REPLACE VIEW {$stone_view} AS
-            SELECT
-                stone.id, stone.name, stone.html, stone.locale, stone.created_at,
-                preview.id as preview_id, preview.imageable_type as preview_imageable_type, preview.imageable_id as preview_imageable_id, preview.variant as preview_variant, preview.src as preview_src, preview.alt as preview_alt,
-                image.id as image_id, image.imageable_type as image_imageable_type, image.imageable_id as image_imageable_id, image.variant as image_variant, image.src as image_src, image.alt as image_alt
-            FROM stones stone
-            LEFT JOIN images preview ON preview.imageable_id = stone.id AND preview.imageable_type = '{$imageable_type}' AND preview.variant = 'preview'
-            LEFT JOIN images image ON image.imageable_id = stone.id AND image.imageable_type = '{$imageable_type}' AND image.variant = 'image';"
-        );
-
-        $match_set_view = DBView::MATCH_SET_IMAGES->value;
-
-        $db->exec(
-            "CREATE OR REPLACE VIEW {$match_set_view} AS
-            SELECT set.id, set.matcheable_id, set.advice, set.html, set.matcheable_type, set.locale, set.created_at,
-            COALESCE(
-                json_agg(
-                    json_build_object(
-                        'id', image.id,
-                        'imageable_type', image.imageable_type,
-                        'imageable_id', image.imageable_id,
-                        'variant', image.variant,
-                        'src', image.src,
-                        'alt', image.alt
-                    )
-                ) FILTER (WHERE image.id IS NOT NULL AND (image.variant = 'front_image' OR image.variant = 'preview')), '[]'
-            ) as images
-            FROM match_sets set
-            LEFT JOIN images image ON image.imageable_id = ANY(STRING_TO_ARRAY(set.matcheable_id, '|')::int[]) AND image.imageable_type = set.matcheable_type
-            GROUP BY set.id, set.advice, set.html, set.matcheable_id, set.matcheable_type, set.locale, set.created_at;"
-        );
+            $db->exec($sql);
+        }
     }
 
-    private function delete_db_views(\Base $hive)
+    private function delete_db_views()
     {
-        $db = $hive->get("DB");
+        $db = \Base::instance()->get("DB");
 
-        $card_view = DBView::FLIPCARD->value;
-        $db->exec("DROP VIEW IF EXISTS {$card_view} CASCADE");
-
-        $rune_view = DBView::RUNE_ASSET->value;
-        $db->exec("DROP VIEW IF EXISTS {$rune_view} CASCADE");
-
-        $practice_item_view = DBView::PRACTICE_ITEM_ASSET->value;
-        $db->exec("DROP VIEW IF EXISTS {$practice_item_view} CASCADE");
-
-        $article_view = DBView::ARTICLE_PREVIEW->value;
-        $db->exec("DROP VIEW IF EXISTS {$article_view} CASCADE");
-
-        $stone_view = DBView::STONE_ASSET->value;
-        $db->exec("DROP VIEW IF EXISTS {$stone_view} CASCADE");
-
-        $match_set_view = DBView::MATCH_SET_IMAGES->value;
-        $db->exec("DROP VIEW IF EXISTS {$match_set_view} CASCADE");
-    }
-
-    private function create_card_backs(\Base $hive)
-    {
-        foreach (CardVariant::values() as $card_variant) {
-            (new ImageFactory)->create(
-                attrs: ['imageable_type' => $card_variant, 'imageable_id' => 1, 'variant' => 'back_image'],
-                src_dir: APP_DIR . '/db/Fixtures/Image/back_image/',
-            );
+        foreach (DBView::values() as $view) {
+            $db->exec("DROP VIEW IF EXISTS {$view} CASCADE");
         }
     }
 
