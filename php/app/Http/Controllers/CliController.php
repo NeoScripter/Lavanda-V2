@@ -142,22 +142,16 @@ class CliController
 
     function create_user(\Base $hive)
     {
-        $name = $hive->get('GET.name');
-        $email = $hive->get('GET.email');
-        $password = $hive->get('GET.password');
+        $name = query_user('User name:');
+        $email = query_user('User email:');
+        $password = query_user('User password:');
 
-        if (empty($name) || empty($email) || strlen($password) < 8) {
-            if (! AppEnv::is(AppEnv::TESTING)) {
-                cli_echo("❌ Usage: php index.php create_user --name=John --email=john@example.com --password=mypassword123", 'error');
-                cli_echo("   Password must be at least 8 characters", 'error');
-            }
-            return false;
-        }
+        $is_test = AppEnv::is(AppEnv::TESTING);
 
         $row = $hive->get('DB')->exec('SELECT count(email) FROM users WHERE email = ?', [$email]);
 
         if (! empty($row[0]['count'])) {
-            if (! AppEnv::is(AppEnv::TESTING)) {
+            if (! $is_test) {
                 cli_echo("❌ User with this email already exists");
             }
             return false;
@@ -168,47 +162,32 @@ class CliController
             $user->copyFrom(compact('name', 'email', 'password'));
             $user->save();
 
-            if (! AppEnv::is(AppEnv::TESTING)) {
+            if (! $is_test) {
                 cli_echo("User created successfully!");
-                cli_echo("   ID: {$user->id}");
                 cli_echo("   Name: $name");
                 cli_echo("   Email: $email");
             }
             return true;
         } catch (\Exception $e) {
-            if (! AppEnv::is(AppEnv::TESTING)) {
+            if (! $is_test) {
                 cli_echo("❌ Failed: {$e->getMessage()}", 'error');
             }
             return false;
         }
     }
 
-    function update_password(\Base $hive)
+    function update_password()
     {
-        $email = $hive->get('GET.email');
-        $new_password = $hive->get('GET.password');
-
-        if (empty($email) || strlen($new_password) < 8) {
-            cli_echo("❌ Usage: php index.php reset_password --email=john@example.com --password=mypassword123", 'error');
-            cli_echo("   Password must be at least 8 characters", 'error');
-            exit(1);
-        }
-
-        $hash = password_hash($new_password, PASSWORD_DEFAULT);
-
-        if ($hash === false) {
-            cli_echo("❌ Failed to hash password", 'error');
-            exit(1);
-        }
+        $email = query_user('User email:');
+        $new_password = query_user('New password:');
 
         try {
             $user = new User();
             $user->load(['email=?', $email]);
-            $user->copyFrom(['password' => $hash]);
+            $user->password = $new_password;
             $user->save();
 
             cli_echo("Password updated successfully!");
-            cli_echo("   ID: {$user->id}");
             cli_echo("   Name: $user->name");
             cli_echo("   Email: $email");
         } catch (\Exception $e) {

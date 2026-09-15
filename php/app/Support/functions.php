@@ -580,3 +580,15 @@ function get_unique_affirmation_topics(Locale $locale)
     return array_map(fn($row) => $row['topic'], $rows);
 }
 
+function query_user(string $question): string
+{
+    if (PHP_SAPI !== 'cli') {
+        throw new \RuntimeException('query_user requires CLI SAPI');
+    }
+
+    do {
+        $answer = readline($question . ' ');
+    } while ($answer === false || trim($answer) === '');
+
+    return trim($answer);
+}
