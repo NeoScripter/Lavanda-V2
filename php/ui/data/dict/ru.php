@@ -109,6 +109,7 @@ return [
         "there_are_no_items_here_yet" => "Здесь пока нет ни одного элемента...",
         "there_are_no_affirmations_here_yet" => "Здесь пока нет ни одной аффирмации...",
         "there_are_no_articles_here_yet" => "Здесь пока нет ни одной статьи...",
+        "there_are_no_legals_here_yet" => "Здесь пока нет ни одного документа...",
         "front_image" => "Передняя сторона",
         "back_image" => "Задняя сторона",
         "image" => "Фото",
@@ -125,6 +126,7 @@ return [
         "edit_affirmation" => "Редактировать аффирмацию",
         "create_affirmation" => "Создать аффирмацию",
         "edit_article" => "Редактировать статью",
+        "edit_legal" => "Редактировать документ",
         "create_article" => "Создать статью",
         "cancel" => "Отмена",
         "backside" => "Рубашка карты",
@@ -197,5 +199,11 @@ return [
         "match_set" => "Комбинация",
         "there_are_no_match_sets_here_yet" => "Пока не добавлено ни одной комбинации...",
         "select_items_for_the_set" => "Выберите элементы для комбинации",
+        "user_agreement" => "Согласие на обработку персональных данных",
+        "privacy_policy" => "Пользовательское соглашение",
+        "legal_successfully_updated" => "Документ успешно обновлен!",
+        "legals" => "Соглашения",
+        "legal" => "Соглашение",
+        "content" => "Содержание",
     ]
 ];

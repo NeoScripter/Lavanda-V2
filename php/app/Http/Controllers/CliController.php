@@ -15,6 +15,7 @@ use Http\Models\FAQ;
 use Http\Models\Iching;
 use Http\Models\User;
 use Http\Models\Image;
+use Http\Models\Legal;
 use Http\Models\MatchSet;
 use Http\Models\PracticeItem;
 use Http\Models\Rune;
@@ -26,6 +27,7 @@ use Seeders\AudioMessageSeeder;
 use Seeders\CardSeeder;
 use Seeders\FAQSeeder;
 use Seeders\IchingSeeder;
+use Seeders\LegalSeeder;
 use Seeders\PracticeItemSeeder;
 use Seeders\RuneSeeder;
 use Seeders\StoneSeeder;
@@ -75,6 +77,7 @@ class CliController
         Article::setup();
         Stone::setup();
         MatchSet::setup();
+        Legal::setup();
 
         $this->create_db_views($hive);
 
@@ -104,6 +107,7 @@ class CliController
         Article::setdown();
         Stone::setdown();
         MatchSet::setdown();
+        Legal::setdown();
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
@@ -127,6 +131,7 @@ class CliController
         AffirmationSeeder::run();
         ArticleSeeder::run();
         StoneSeeder::run();
+        LegalSeeder::run();
     }
 
     function fresh(\Base $hive)

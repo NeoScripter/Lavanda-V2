@@ -68,6 +68,11 @@ extract(component_props(
                 'label' => $hive->get('admin.match_sets'),
                 'icon'  => 'combine',
             ],
+            [
+                'url'   => $hive->alias('admin_legals_index'),
+                'label' => $hive->get('admin.legals'),
+                'icon'  => 'book-text',
+            ],
         ],
     ]) ?>
 
