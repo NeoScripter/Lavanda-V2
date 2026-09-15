@@ -579,3 +579,4 @@ function get_unique_affirmation_topics(Locale $locale)
 
     return array_map(fn($row) => $row['topic'], $rows);
 }
+

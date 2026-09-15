@@ -33,14 +33,19 @@ use Seeders\PracticeItemSeeder;
 use Seeders\RuneSeeder;
 use Seeders\StoneSeeder;
 
-const SCREEN_WIDTH = 152;
-const METHOD_WIDTH = 12;
-
 class CliController
 {
+    private $db_models = [User::class, Theme::class, Card::class, Image::class, FAQ::class, Rune::class, Iching::class, PracticeItem::class, AudioMessage::class, Affirmation::class, Article::class, Stone::class, MatchSet::class, Legal::class];
+
+    private $db_seeders = [CardSeeder::class, FAQSeeder::class, RuneSeeder::class, IchingSeeder::class, PracticeItemSeeder::class, AudioMessageSeeder::class, AffirmationSeeder::class, ArticleSeeder::class, StoneSeeder::class, LegalSeeder::class];
+
+
     function routes(\Base $hive)
     {
         $routes = $hive->get('ROUTES');
+
+        $screen_width = 152;
+        $method_width = 12;
 
         foreach ($routes as $url => $methods) {
             foreach ($methods as $route) {
@@ -54,9 +59,9 @@ class CliController
                         default => 'warning',
                     };
 
-                    $prefix = str_pad($method, METHOD_WIDTH) . ' ';
+                    $prefix = str_pad($method, $method_width) . ' ';
                     $suffix = trim((string) $name) !== '' ? " {$name} > {$new_handler}" : " {$new_handler}";
-                    $url = str_pad($url . ' ', SCREEN_WIDTH - METHOD_WIDTH - strlen($suffix), '.');
+                    $url = str_pad($url . ' ', $screen_width - $method_width - strlen($suffix), '.');
                     echo cli_color($prefix, $color) . $url . $suffix . "\n";
                 }
             }
@@ -65,20 +70,9 @@ class CliController
 
     function migrate(\Base $hive)
     {
-        User::setup();
-        Theme::setup();
-        Card::setup();
-        Image::setup();
-        FAQ::setup();
-        Rune::setup();
-        Iching::setup();
-        PracticeItem::setup();
-        AudioMessage::setup();
-        Affirmation::setup();
-        Article::setup();
-        Stone::setup();
-        MatchSet::setup();
-        Legal::setup();
+        foreach ($this->db_models as $model) {
+            $model::setup();
+        }
 
         $this->create_db_views();
         $this->create_compound_indexes($hive);
@@ -92,20 +86,9 @@ class CliController
     {
         $this->delete_db_views();
 
-        User::setdown();
-        Theme::setdown();
-        Card::setdown();
-        Image::setdown();
-        FAQ::setdown();
-        Rune::setdown();
-        Iching::setdown();
-        PracticeItem::setdown();
-        AudioMessage::setdown();
-        Affirmation::setdown();
-        Article::setdown();
-        Stone::setdown();
-        MatchSet::setdown();
-        Legal::setdown();
+        foreach ($this->db_models as $model) {
+            $model::setdown();
+        }
 
         delete_files_recursive(
             glob(UPLOAD_DIR . '/*')
@@ -120,16 +103,9 @@ class CliController
 
     function seed()
     {
-        CardSeeder::run();
-        FAQSeeder::run();
-        RuneSeeder::run();
-        IchingSeeder::run();
-        PracticeItemSeeder::run();
-        AudioMessageSeeder::run();
-        AffirmationSeeder::run();
-        ArticleSeeder::run();
-        StoneSeeder::run();
-        LegalSeeder::run();
+        foreach ($this->db_seeders as $seeder) {
+            $seeder::run();
+        }
     }
 
     function fresh(\Base $hive)
