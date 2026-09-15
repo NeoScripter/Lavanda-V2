@@ -8,16 +8,16 @@ extract(component_props(
 
 $hive = \Base::instance();
 
-slot('layouts/item-layout', [
+slot('layouts/admin/item-layout', [
     'heading' => $hive->get('admin.faqs'),
     'title' => $hive->get('admin.faqs'),
 ]); ?>
 
 <div class="space-y-6 max-w-160">
     <div class="flex items-center justify-between gap-4">
-        <?= component('ui/subheading', ['title' => $hive->get('admin.edit_faq')]) ?>
+        <?= component('admin/ui/subheading', ['title' => $hive->get('admin.edit_faq')]) ?>
 
-        <?= component('ui/item-actions-mini', [
+        <?= component('admin/ui/item-actions-mini', [
             'delete_url' => $hive->alias("admin_faqs_destroy", ['id' => $faq->id]),
             'item_label' => $hive->get('admin.faq'),
         ]) ?>
@@ -26,7 +26,7 @@ slot('layouts/item-layout', [
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
-        <?= component('form/form-input', [
+        <?= component('admin/form/form-input', [
             'name'  => 'question',
             'label' => $hive->get('admin.question'),
             'attrs' => [
@@ -36,7 +36,7 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-wysiwyg', [
+        <?= component('admin/form/form-wysiwyg', [
             'name'  => 'answer',
             'label' => $hive->get('admin.answer'),
             'attrs' => [

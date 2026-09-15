@@ -16,7 +16,7 @@ extract(component_props(
             <ul class='grid grid-cols-[repeat(auto-fill,minmax(6rem,1fr))]'>
                 <?php foreach ($match_set['images'] as $img) : ?>
                     <li class="relative w-full">
-                        <?= component('ui/image', [
+                        <?= component('admin/ui/image', [
                             'sizes'    => 'mb',
                             'avif'    => false,
                             'path'     => $img['src'],
@@ -29,7 +29,7 @@ extract(component_props(
             <a href="<?= $hive->alias('admin_match_sets_show', ['id' => $match_set['id']]) ?>" class="absolute inset-0 size-full block"></a>
         </div>
 
-        <?= component('ui/item-actions-mini', [
+        <?= component('admin/ui/item-actions-mini', [
             'edit_url' => $hive->alias("admin_match_sets_edit", ['id' => $match_set['id']]),
             'delete_url' => $hive->alias("admin_match_sets_destroy", ['id' => $match_set['id']]),
             'item_label' => $hive->get('admin.match_set'),

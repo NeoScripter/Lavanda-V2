@@ -13,7 +13,7 @@ $src = $article['preview']['src'] ?? to_public_url(WEBROOT . '/assets/images/sha
     <div class="flex flex-col gap-4">
 
         <div class="relative w-full">
-            <?= component('ui/image', [
+            <?= component('admin/ui/image', [
                 'sizes'    => 'mb',
                 'avif'    => false,
                 'path'     => $src,
@@ -24,7 +24,7 @@ $src = $article['preview']['src'] ?? to_public_url(WEBROOT . '/assets/images/sha
 
         <p class="mb-2"><?= substr($article['description'], 0, 120) . '...' ?></p>
 
-        <?= component('ui/item-actions', [
+        <?= component('admin/ui/item-actions', [
             'edit_url' => $hive->alias("admin_articles_edit", ['id' => $article['id']]),
             'delete_url' => $hive->alias("admin_articles_destroy", ['id' => $article['id']]),
             'item_label' => $hive->get('admin.article'),

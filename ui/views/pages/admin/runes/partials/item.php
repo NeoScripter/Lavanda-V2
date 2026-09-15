@@ -13,7 +13,7 @@ $src = $rune['front_image']['src'] ?? to_public_url(WEBROOT . '/assets/images/sh
     <div class="flex flex-col gap-4">
 
         <div class="relative w-full">
-            <?= component('ui/image', [
+            <?= component('admin/ui/image', [
                 'sizes'    => 'mb',
                 'avif'    => false,
                 'path'     => $src,
@@ -27,7 +27,7 @@ $src = $rune['front_image']['src'] ?? to_public_url(WEBROOT . '/assets/images/sh
             <h3 class="mb-2 font-bold"><?= $rune['name'] ?></h3>
         </div>
 
-        <?= component('ui/item-actions', [
+        <?= component('admin/ui/item-actions', [
             'edit_url' => $hive->alias("admin_runes_edit", ['id' => $rune['id']]),
             'delete_url' => $hive->alias("admin_runes_destroy", ['id' => $rune['id']]),
             'item_label' => $hive->get('admin.rune'),

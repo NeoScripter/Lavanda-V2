@@ -8,11 +8,11 @@ extract(component_props(
 
 $hive = \Base::instance();
 
-slot('layouts/card-grid-layout', [
+slot('layouts/admin/card-grid-layout', [
     'heading' => $hive->get('admin.cards'),
     'title' => $hive->get('admin.cards'),
 ]);
-slot('layouts/theme-layout', [
+slot('layouts/admin/theme-layout', [
     'model' => 'cards',
     'model_id' => $card['id'],
     'themes' => $themes
@@ -20,13 +20,13 @@ slot('layouts/theme-layout', [
 
 <div class="space-y-6">
 
-    <?= component('ui/subheading', ['title' => $hive->get('admin.edit_a_card')]) ?>
+    <?= component('admin/ui/subheading', ['title' => $hive->get('admin.edit_a_card')]) ?>
 
     <form action="<?= $hive->alias('admin_cards_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
-        <?= component('form/form-input', [
+        <?= component('admin/form/form-input', [
             'name'  => 'name',
             'label' => $hive->get('admin.card_name'),
             'attrs' => [
@@ -36,7 +36,7 @@ slot('layouts/theme-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-file-input', [
+        <?= component('admin/form/form-file-input', [
             'name'  => 'front_image',
             'label' => $hive->get('admin.front_image'),
             'with_alt' => true,
@@ -46,7 +46,7 @@ slot('layouts/theme-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-textarea', [
+        <?= component('admin/form/form-textarea', [
             'name'  => 'advice',
             'label' => $hive->get('admin.card_advice'),
             'attrs' => [
@@ -55,7 +55,7 @@ slot('layouts/theme-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-textarea', [
+        <?= component('admin/form/form-textarea', [
             'name'  => 'description',
             'label' => $hive->get('admin.card_description'),
             'attrs' => [

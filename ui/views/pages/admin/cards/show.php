@@ -5,14 +5,14 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 $hive = \Base::instance(); ?>
-<?php slot('layouts/card-grid-layout', [
+<?php slot('layouts/admin/card-grid-layout', [
     'heading' => $hive->get('admin.cards'),
     'title' => $hive->get('admin.cards')
 ]);
 ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', ['title' => $card['name']]) ?>
+    <?= component('admin/ui/subheading', ['title' => $card['name']]) ?>
 
     <div class="space-y-6 max-w-160">
         <div>

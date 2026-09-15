@@ -5,14 +5,14 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 $hive = \Base::instance(); ?>
-<?php slot('layouts/item-layout', [
+<?php slot('layouts/admin/item-layout', [
     'heading' => $hive->get('admin.audios'),
     'title' => $hive->get('admin.audios')
 ]);
 ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', ['title' => $hive->get('admin.audio_file')]) ?>
+    <?= component('admin/ui/subheading', ['title' => $hive->get('admin.audio_file')]) ?>
 
     <div class="space-y-6 max-w-160">
         <div>
@@ -22,7 +22,7 @@ $hive = \Base::instance(); ?>
 
         <div>
             <h3 class="mb-2 font-medium"> <?= $hive->get('admin.file') ?> </h3>
-            <?= component('ui/file-link', [
+            <?= component('admin/ui/file-link', [
                 'label' => extract_file_name($audio['file']),
                 'url' => $audio['file']
             ]) ?>

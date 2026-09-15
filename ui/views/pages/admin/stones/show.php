@@ -8,7 +8,7 @@ extract(component_props(
 
 $hive = \Base::instance(); ?>
 
-<?php slot('layouts/item-layout', [
+<?php slot('layouts/admin/item-layout', [
     'heading' => $hive->get('admin.stones'),
     'title' => $hive->get('admin.stones')
 ]);
@@ -16,7 +16,7 @@ $hive = \Base::instance(); ?>
 ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', ['title' => $stone['name']]) ?>
+    <?= component('admin/ui/subheading', ['title' => $stone['name']]) ?>
 
     <div class="space-y-10">
         <div>

@@ -8,20 +8,20 @@ extract(component_props(
 
 $hive = \Base::instance();
 
-slot('layouts/item-layout', [
+slot('layouts/admin/item-layout', [
     'heading' => $hive->get('admin.iching'),
     'title' => $hive->get('admin.iching'),
 ]); ?>
 
 <div class="space-y-6 max-w-160">
     <div class="flex items-center justify-between gap-4">
-        <?= component('ui/subheading', ['title' => $hive->get('admin.edit_iching') . ' ' . $iching->number]) ?>
+        <?= component('admin/ui/subheading', ['title' => $hive->get('admin.edit_iching') . ' ' . $iching->number]) ?>
     </div>
     <form action="<?= $hive->alias('admin_ichings_update') ?>" method="post" class="space-y-6" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
-        <?= component('form/form-wysiwyg', [
+        <?= component('admin/form/form-wysiwyg', [
             'name'  => 'description',
             'label' => $hive->get('admin.description'),
             'attrs' => [

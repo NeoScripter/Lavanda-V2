@@ -1,5 +1,5 @@
 <?php $hive = \Base::instance(); ?>
-<?php slot('layouts/admin-layout', [
+<?php slot('layouts/admin/app-layout', [
     'heading' => $hive->get('admin.dashboard'),
     'title' => $hive->get('admin.dashboard')
 ]); ?>

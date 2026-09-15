@@ -8,20 +8,20 @@ extract(component_props(
 
 $hive = \Base::instance();
 
-slot('layouts/item-layout', [
+slot('layouts/admin/item-layout', [
     'heading' => $hive->get('admin.articles'),
     'title' => $hive->get('admin.articles'),
 ]);?>
 
 <div class="space-y-6">
 
-    <?= component('ui/subheading', ['title' => $hive->get('admin.edit_article')]) ?>
+    <?= component('admin/ui/subheading', ['title' => $hive->get('admin.edit_article')]) ?>
 
     <form action="<?= $hive->alias('admin_articles_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
-        <?= component('form/form-input', [
+        <?= component('admin/form/form-input', [
             'name'  => 'name',
             'label' => $hive->get('admin.article_name'),
             'attrs' => [
@@ -30,7 +30,7 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-file-input', [
+        <?= component('admin/form/form-file-input', [
             'name'  => 'preview',
             'label' => $hive->get('admin.preview'),
             'with_alt' => true,
@@ -40,7 +40,7 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-textarea', [
+        <?= component('admin/form/form-textarea', [
             'name'  => 'description',
             'label' => $hive->get('admin.description'),
             'attrs' => [
@@ -49,7 +49,7 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-file-input', [
+        <?= component('admin/form/form-file-input', [
             'name'  => 'image',
             'label' => $hive->get('admin.image'),
             'with_alt' => true,
@@ -59,7 +59,7 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-wysiwyg', [
+        <?= component('admin/form/form-wysiwyg', [
             'name'  => 'html',
             'label' => $hive->get('admin.content'),
             'attrs' => [

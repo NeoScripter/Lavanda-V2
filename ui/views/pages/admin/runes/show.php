@@ -6,14 +6,14 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 $hive = \Base::instance(); ?>
-<?php slot('layouts/item-layout', [
+<?php slot('layouts/admin/item-layout', [
     'heading' => $hive->get('admin.runes'),
     'title' => $hive->get('admin.runes')
 ]);
 ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', ['title' => $rune['name']]) ?>
+    <?= component('admin/ui/subheading', ['title' => $rune['name']]) ?>
 
     <div class="space-y-10">
         <div>

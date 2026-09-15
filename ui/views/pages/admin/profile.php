@@ -1,11 +1,11 @@
 <?php $hive = \Base::instance(); ?>
-<?php slot('layouts/profile-layout', [
+<?php slot('layouts/admin/profile-layout', [
     'heading' => $hive->get('admin.profile'),
     'title' => $hive->get('admin.profile'),
 ]); ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', [
+    <?= component('admin/ui/subheading', [
         'title'       => $hive->get('admin.profile_information'),
         'description' => $hive->get('admin.update_your_name_and_email_address'),
     ]) ?>
@@ -13,7 +13,7 @@
     <form action="<?= \Base::instance()->alias('profile_update') ?>" method="post" class="space-y-6">
         <?= csrf() ?>
 
-        <?= component('form/form-input', [
+        <?= component('admin/form/form-input', [
             'name'  => 'name',
             'label' => $hive->get('admin.full_name'),
             'error' => $errors['name'] ?? '',
@@ -23,7 +23,7 @@
             ],
         ]) ?>
 
-        <?= component('form/form-input', [
+        <?= component('admin/form/form-input', [
             'name'  => 'email',
             'label' => $hive->get('admin.email_address'),
             'error' => $errors['email'] ?? '',

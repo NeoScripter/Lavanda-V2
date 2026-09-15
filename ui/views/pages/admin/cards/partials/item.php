@@ -13,7 +13,7 @@ $src = $card['front_image']['src'] ?? to_public_url(WEBROOT . '/assets/images/sh
     <div class="flex flex-col gap-4">
 
         <div class="relative w-full">
-            <?= component('ui/image', [
+            <?= component('admin/ui/image', [
                 'sizes'    => 'mb',
                 'avif'    => false,
                 'path'     => $src,
@@ -26,7 +26,7 @@ $src = $card['front_image']['src'] ?? to_public_url(WEBROOT . '/assets/images/sh
             <h3 class="mb-2 font-bold"><?= $card['name'] ?></h3>
         </div>
 
-        <?= component('ui/item-actions', [
+        <?= component('admin/ui/item-actions', [
             'edit_url' => $hive->alias("admin_cards_edit", ['id' => $card['id']]),
             'delete_url' => $hive->alias("admin_cards_destroy", ['id' => $card['id']]),
             'item_label' => $hive->get('admin.card'),

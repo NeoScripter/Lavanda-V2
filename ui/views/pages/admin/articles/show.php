@@ -8,13 +8,13 @@ extract(component_props(
 
 $hive = \Base::instance(); ?>
 
-<?php slot('layouts/item-layout', [
+<?php slot('layouts/admin/item-layout', [
     'heading' => $hive->get('admin.articles'),
     'title' => $hive->get('admin.articles')
 ]); ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', ['title' => $hive->get('admin.article')]) ?>
+    <?= component('admin/ui/subheading', ['title' => $hive->get('admin.article')]) ?>
 
     <div class="space-y-6 max-w-160">
         <div>

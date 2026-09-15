@@ -12,7 +12,7 @@ extract(component_props(
         <div>
             <h3 class="mb-2"><?= $affirmation->quote ?></h3>
         </div>
-        <?= component('ui/item-actions-mini', [
+        <?= component('admin/ui/item-actions-mini', [
             'edit_url' => $hive->alias("admin_affirmations_edit", ['id' => $affirmation->id]),
             'delete_url' => $hive->alias("admin_affirmations_destroy", ['id' => $affirmation->id]),
             'item_label' => $hive->get('admin.affirmation'),

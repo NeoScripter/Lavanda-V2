@@ -8,11 +8,11 @@ extract(component_props(
 
 $hive = \Base::instance();
 
-slot('layouts/admin-layout', [
+slot('layouts/admin/app-layout', [
     'heading' => $hive->get('admin.runes'),
     'title' => $hive->get('admin.runes'),
 ]);
-slot('layouts/theme-layout', [
+slot('layouts/admin/theme-layout', [
     'model' => 'runes',
     'model_id' => $rune['id'],
     'themes' => $themes
@@ -20,13 +20,13 @@ slot('layouts/theme-layout', [
 
 <div class="space-y-6">
 
-    <?= component('ui/subheading', ['title' => $hive->get('admin.edit_rune')]) ?>
+    <?= component('admin/ui/subheading', ['title' => $hive->get('admin.edit_rune')]) ?>
 
     <form action="<?= $hive->alias('admin_runes_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
-        <?= component('form/form-input', [
+        <?= component('admin/form/form-input', [
             'name'  => 'name',
             'label' => $hive->get('admin.rune_name'),
             'attrs' => [
@@ -36,7 +36,7 @@ slot('layouts/theme-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-textarea', [
+        <?= component('admin/form/form-textarea', [
             'name'  => 'advice',
             'label' => $hive->get('admin.rune_advice'),
             'attrs' => [
@@ -45,7 +45,7 @@ slot('layouts/theme-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-file-input', [
+        <?= component('admin/form/form-file-input', [
             'name'  => 'front_image',
             'label' => $hive->get('admin.front_image'),
             'with_alt' => true,
@@ -56,7 +56,7 @@ slot('layouts/theme-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-file-input', [
+        <?= component('admin/form/form-file-input', [
             'name'  => 'back_image',
             'label' => $hive->get('admin.back_image'),
             'with_alt' => true,

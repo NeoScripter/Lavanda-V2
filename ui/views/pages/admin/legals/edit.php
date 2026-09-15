@@ -8,20 +8,20 @@ extract(component_props(
 
 $hive = \Base::instance();
 
-slot('layouts/item-layout', [
+slot('layouts/admin/item-layout', [
     'heading' => $hive->get('admin.legals'),
     'title' => $hive->get('admin.legals'),
 ]);?>
 
 <div class="space-y-6">
 
-    <?= component('ui/subheading', ['title' => $hive->get('admin.edit_legal')]) ?>
+    <?= component('admin/ui/subheading', ['title' => $hive->get('admin.edit_legal')]) ?>
 
     <form action="<?= $hive->alias('admin_legals_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
-        <?= component('form/form-wysiwyg', [
+        <?= component('admin/form/form-wysiwyg', [
             'name'  => 'html',
             'label' => $hive->get('admin.content'),
             'attrs' => [

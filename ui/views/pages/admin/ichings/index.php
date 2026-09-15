@@ -13,14 +13,14 @@ extract(component_props(
 $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 ?>
 
-<?php slot('layouts/item-layout', [
+<?php slot('layouts/admin/item-layout', [
     'heading' => $hive->get('admin.iching'),
     'title' => $hive->get('admin.iching')
 ]); ?>
 
 <div class="space-y-12 w-[calc(100%-1rem)]">
     <nav class='flex flex-wrap w-full items-start gap-10 justify-between'>
-        <?= component('ui/resource-locale-picker') ?>
+        <?= component('admin/ui/resource-locale-picker') ?>
     </nav>
 
     <?php if (! empty($ichings)) : ?>

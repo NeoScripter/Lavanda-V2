@@ -11,7 +11,7 @@ extract(component_props(
     <div class="flex flex-col gap-4">
 
         <div class="relative w-full">
-            <?= component('ui/image', [
+            <?= component('admin/ui/image', [
                 'sizes'    => 'mb',
                 'avif'    => false,
                 'path'     => $stone['preview']['src'],
@@ -25,7 +25,7 @@ extract(component_props(
             <h3 class="mb-2 font-bold"><?= $stone['name'] ?></h3>
         </div>
 
-        <?= component('ui/item-actions', [
+        <?= component('admin/ui/item-actions', [
             'edit_url' => $hive->alias("admin_stones_edit", ['id' => $stone['id']]),
             'delete_url' => $hive->alias("admin_stones_destroy", ['id' => $stone['id']]),
             'item_label' => $hive->get('admin.stone'),

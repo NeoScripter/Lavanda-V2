@@ -2,7 +2,7 @@
 
 extract(component_props(
     required: ['model', 'model_id', 'themes'],
-    optional: ['name' => '', 'layout' => 'admin-layout'],
+    optional: ['name' => '', 'layout' => 'admin/app-layout'],
     props: get_defined_vars(),
 ));
 
@@ -12,7 +12,7 @@ slot("layouts/{$layout}", [
     'heading' => $hive->get("admin.{$model}"),
     'title' => $hive->get("admin.{$model}"),
 ]);
-slot('layouts/theme-layout', [
+slot('layouts/admin/theme-layout', [
     'model' => $model,
     'model_id' => $model_id,
     'themes' => $themes
@@ -20,12 +20,12 @@ slot('layouts/theme-layout', [
 
 <div class="space-y-6">
 
-    <?= component('ui/subheading', ['title' => $hive->get('admin.create_theme')]) ?>
+    <?= component('admin/ui/subheading', ['title' => $hive->get('admin.create_theme')]) ?>
 
     <form action="<?= $hive->alias('admin_themes_store') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <?= csrf() ?>
 
-        <?= component('form/form-input', [
+        <?= component('admin/form/form-input', [
             'name'  => 'name',
             'label' => $hive->get('admin.theme_name'),
             'attrs' => [
@@ -35,7 +35,7 @@ slot('layouts/theme-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-wysiwyg', [
+        <?= component('admin/form/form-wysiwyg', [
             'name'  => 'html',
             'label' => $hive->get('admin.meaning'),
             'attrs' => [

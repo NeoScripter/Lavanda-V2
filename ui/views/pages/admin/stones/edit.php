@@ -8,7 +8,7 @@ extract(component_props(
 
 $hive = \Base::instance();
 
-slot('layouts/item-layout', [
+slot('layouts/admin/item-layout', [
     'model' => 'stones',
     'model_id' => $stone['id'],
     'heading' => $heading,
@@ -17,13 +17,13 @@ slot('layouts/item-layout', [
 
 <div class="space-y-6">
 
-    <?= component('ui/subheading', ['title' => $heading]) ?>
+    <?= component('admin/ui/subheading', ['title' => $heading]) ?>
 
     <form action="<?= $hive->alias('admin_stones_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
-        <?= component('form/form-input', [
+        <?= component('admin/form/form-input', [
             'name'  => 'name',
             'label' => $hive->get('admin.stone_name'),
             'attrs' => [
@@ -33,7 +33,7 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-wysiwyg', [
+        <?= component('admin/form/form-wysiwyg', [
             'name'  => 'html',
             'label' => $hive->get('admin.stone_meaning'),
             'attrs' => [
@@ -42,7 +42,7 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-file-input', [
+        <?= component('admin/form/form-file-input', [
             'name'  => 'image',
             'label' => $hive->get('admin.stone_image'),
             'with_alt' => true,
@@ -53,7 +53,7 @@ slot('layouts/item-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-file-input', [
+        <?= component('admin/form/form-file-input', [
             'name'  => 'preview',
             'label' => $hive->get('admin.stone_preview'),
             'with_alt' => true,

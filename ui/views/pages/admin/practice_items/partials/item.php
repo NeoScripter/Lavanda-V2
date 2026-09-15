@@ -17,7 +17,7 @@ extract(component_props(
             <p><?= $item['description'] ?></p>
         </div>
 
-        <?= component('ui/item-actions-mini', [
+        <?= component('admin/ui/item-actions-mini', [
             'edit_url' => $hive->alias("admin_practice_items_edit", ['id' => $item['id']]),
             'delete_url' => $hive->alias("admin_practice_items_destroy", ['id' => $item['id']]),
             'item_label' => $hive->get('admin.item'),

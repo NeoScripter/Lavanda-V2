@@ -15,7 +15,7 @@ $flipside_modal_id = uniqid('flipside_modal_');
         <div class="flex flex-col gap-4">
 
             <div class="relative w-full">
-                <?= component('ui/image', [
+                <?= component('admin/ui/image', [
                     'sizes'    => 'mb',
                     'avif'    => false,
                     'path'     => $backside['src'],
@@ -30,7 +30,7 @@ $flipside_modal_id = uniqid('flipside_modal_');
 
             <div class='flex flex-col justify-start gap-2'>
 
-                <?= component('ui/auth-button', [
+                <?= component('admin/ui/auth-button', [
                     'variant' => 'primary',
                     'class'   => 'h-9 rounded-sm text-sm',
                     'slot' => $hive->get('admin.edit'),
@@ -50,7 +50,7 @@ $flipside_modal_id = uniqid('flipside_modal_');
                 <input type="hidden" name="_method" value="put">
                 <?= csrf() ?>
 
-                <?= component('form/form-file-input', [
+                <?= component('admin/form/form-file-input', [
                     'name'  => 'src',
                     'label' => $hive->get('admin.backside'),
                     'can_delete' => false,

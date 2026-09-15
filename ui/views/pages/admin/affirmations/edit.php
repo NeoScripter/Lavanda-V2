@@ -14,7 +14,7 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 
-slot('layouts/affirmation-layout', [
+slot('layouts/admin/affirmation-layout', [
     'heading' => $hive->get('admin.affirmations'),
     'title' => $hive->get('admin.affirmations'),
     'topics' => $topics
@@ -23,9 +23,9 @@ slot('layouts/affirmation-layout', [
 
 <div class="space-y-6 max-w-160">
     <div class="flex items-center justify-between gap-4">
-        <?= component('ui/subheading', ['title' => $hive->get('admin.edit_affirmation')]) ?>
+        <?= component('admin/ui/subheading', ['title' => $hive->get('admin.edit_affirmation')]) ?>
 
-        <?= component('ui/item-actions-mini', [
+        <?= component('admin/ui/item-actions-mini', [
             'delete_url' => $hive->alias("admin_affirmations_destroy", ['id' => $affirmation->id]),
             'item_label' => $hive->get('admin.affirmation'),
         ]) ?>
@@ -34,7 +34,7 @@ slot('layouts/affirmation-layout', [
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
-        <?= component('form/form-input', [
+        <?= component('admin/form/form-input', [
             'name'  => 'topic',
             'label' => $hive->get('admin.affirmation_category'),
             'options' => $topics,
@@ -45,7 +45,7 @@ slot('layouts/affirmation-layout', [
             ],
         ]) ?>
 
-        <?= component('form/form-textarea', [
+        <?= component('admin/form/form-textarea', [
             'name'  => 'quote',
             'label' => $hive->get('admin.quote'),
             'attrs' => [

@@ -5,21 +5,21 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 $hive = \Base::instance(); ?>
-<?php slot('layouts/match-set-layout', [
+<?php slot('layouts/admin/match-set-layout', [
     'heading' => $hive->get('admin.match_sets'),
     'title' => $hive->get('admin.match_sets')
 ]);
 ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', ['title' => $hive->get('admin.match_set')]) ?>
+    <?= component('admin/ui/subheading', ['title' => $hive->get('admin.match_set')]) ?>
 
     <div class="space-y-6 max-w-260">
 
         <ul class='grid gap-2 grid-cols-[repeat(auto-fill,minmax(10rem,1fr))]'>
             <?php foreach ($match_set['images'] as $img) : ?>
                 <li class="relative w-full">
-                    <?= component('ui/image', [
+                    <?= component('admin/ui/image', [
                         'sizes'    => 'mb',
                         'avif'    => false,
                         'path'     => $img['src'],

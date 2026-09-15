@@ -10,7 +10,7 @@ export default defineConfig({
         manifest: true,
         emptyOutDir: true,
         rollupOptions: {
-            input: ['ui/ts/app.ts'],
+            input: ['ui/ts/web.ts', 'ui/ts/admin.ts'],
         },
         copyPublicDir: false,
     },

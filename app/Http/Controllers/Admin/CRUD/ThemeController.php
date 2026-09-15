@@ -34,7 +34,7 @@ class ThemeController extends Controller
             'themes' => get_unique_themes_by_type($themeable_type, $model_id),
             'model' => $model,
             'model_id' => $model_id,
-            'layout' => $model === 'cards' ? 'card-grid-layout' : 'admin-layout',
+            'layout' => $model === 'cards' ? 'admin/card-grid-layout' : 'admin/app-layout',
         ]);
     }
 
@@ -51,7 +51,7 @@ class ThemeController extends Controller
             'model' => $model,
             'name' => $hive->GET['name'] ?? '',
             'model_id' => $model_id,
-            'layout' => $model === 'cards' ? 'card-grid-layout' : 'admin-layout',
+            'layout' => $model === 'cards' ? 'admin/card-grid-layout' : 'admin/app-layout',
         ]);
     }
 

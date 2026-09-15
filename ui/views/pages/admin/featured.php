@@ -1,11 +1,11 @@
-<?php slot('layouts/admin-layout', [
+<?php slot('layouts/admin/app-layout', [
     'heading' => 'Featured',
     'title' => 'Featured'
 ]); ?>
 
 <div class="space-y-6">
 
-    <?= component('ui/subheading', [
+    <?= component('admin/ui/subheading', [
         'title'       => 'Featured Section',
         'description' => 'Update the featured section on the home page',
     ]) ?>
@@ -13,7 +13,7 @@
     <form action="<?= \Base::instance()->alias('featured_update') ?>" method="post" class="space-y-6 max-w-160" enctype="multipart/form-data">
         <?= csrf() ?>
 
-        <?= component('form/form-input', [
+        <?= component('admin/form/form-input', [
             'name'  => 'title',
             'label' => 'Section title',
             'attrs' => [
@@ -23,7 +23,7 @@
             ],
         ]) ?>
 
-        <?= component('form/form-file-input', [
+        <?= component('admin/form/form-file-input', [
             'name'  => 'image',
             'label' => 'Preview Image',
             'value'    => [$feat['image'] ?? null],
@@ -34,7 +34,7 @@
             ],
         ]) ?>
 
-        <?= component('form/form-textarea', [
+        <?= component('admin/form/form-textarea', [
             'name'  => 'subtitle',
             'label' => 'Section subtitle',
             'attrs' => [
@@ -43,7 +43,7 @@
             ],
         ]) ?>
 
-        <?= component('form/checkbox', [
+        <?= component('admin/form/checkbox', [
             'label' => 'Show on the page',
             'name'  => 'shown',
             'attrs' => [
@@ -51,7 +51,7 @@
             ],
         ]) ?>
 
-        <?= component('form/form-wysiwyg', [
+        <?= component('admin/form/form-wysiwyg', [
             'name'  => 'body',
             'label' => 'Section content',
             'attrs' => [

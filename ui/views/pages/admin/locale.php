@@ -1,16 +1,16 @@
 <?php $hive = \Base::instance(); ?>
-<?php slot('layouts/profile-layout', [
+<?php slot('layouts/admin/profile-layout', [
     'heading' => $hive->get('admin.appearance'),
     'title' => $hive->get('admin.appearance')
 ]); ?>
 
 <div class="space-y-6">
-    <?= component('ui/subheading', [
+    <?= component('admin/ui/subheading', [
         'title'       => $hive->get('admin.language_settings'),
         'description' => $hive->get("admin.change_your_account_locale"),
     ]) ?>
 
-    <?= component('ui/locale-tabs') ?>
+    <?= component('admin/ui/locale-tabs') ?>
 </div>
 
 <?php end_slot(); ?>

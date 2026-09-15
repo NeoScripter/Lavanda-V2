@@ -13,21 +13,21 @@ extract(component_props(
 $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 ?>
 
-<?php slot('layouts/item-layout', [
+<?php slot('layouts/admin/item-layout', [
     'heading' => $hive->get('admin.articles'),
     'title' => $hive->get('admin.articles')
 ]); ?>
 
 <div class="space-y-12 w-[calc(100%-1rem)]">
     <nav class='flex flex-wrap w-full items-start gap-10 justify-between'>
-        <?= component('ui/auth-button', [
+        <?= component('admin/ui/auth-button', [
             'variant' => 'primary',
             'class'   => 'h-9 rounded-sm text-sm sm:order-2',
             'slot' => $hive->get('admin.create_new'),
             'href' => $hive->alias('admin_articles_create'),
         ]) ?>
 
-        <?= component('ui/resource-locale-picker') ?>
+        <?= component('admin/ui/resource-locale-picker') ?>
     </nav>
 
     <?php if (! empty($articles['subset'])) : ?>
@@ -40,7 +40,7 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
             <?php endforeach; ?>
         </ul>
 
-        <?= component('ui/pagination', ['page' => $articles]) ?>
+        <?= component('admin/ui/pagination', ['page' => $articles]) ?>
     <?php else: ?>
         <p class='-mt-3'><?= $hive->get('admin.there_are_no_articles_here_yet') ?></p>
     <?php endif; ?>
