@@ -6,9 +6,8 @@
 
 @theme {
     --font-sans:
-        'Inter', ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+        'Montserrat', 'Verdana', 'Tahoma', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji';
 
     /* --breakpoint-xs: 500px; */
     /* --breakpoint-sm: 640px; */
