@@ -14,6 +14,7 @@ node_modules
 vendor
 *.local
 /vendor
+public/dist/*
 public/tmp/*
 storage/private/*
 storage/logs/*
@@ -26,13 +27,3 @@ storage/private/*
 phpunit.xml
 .phpunit.cache/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?

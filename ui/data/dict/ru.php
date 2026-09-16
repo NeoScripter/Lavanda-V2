@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'web' => [
+        'lavanda' => 'Лаванда',
+
+    ],
     'auth' => [
         'login' => 'Вход',
 

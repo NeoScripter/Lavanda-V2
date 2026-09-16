@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en" class="overflow-x-clip">
-<?php $app_url = \Base::instance()->get('app_url'); ?>
+<?php $hive = \Base::instance(); ?>
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="<?= '/assets/svgs/auth-logo.svg' ?>" type="image/svg">
+    <link rel="icon" href="<?= '/assets/favicon.svg' ?>" type="image/svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="preload" href="/assets/fonts/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2" as="font" type="font/woff2" crossorigin />
@@ -30,19 +30,8 @@
         }
     </style>
 
-
-    <style>
-        html {
-            background-color: oklch(1 0 0);
-        }
-
-        html.dark {
-            background-color: oklch(0.2435 0 0);
-        }
-    </style>
-
     <?= vite_tags('ui/ts/web.ts') ?>
-    <title>Lavanda</title>
+    <title><?= ($hive->get("web.lavanda")) . (isset($title) ? " - {$title}" : '') ?></title>
 </head>
 
 <body class="overflow-x-clip font-sans">
