@@ -31,40 +31,48 @@
     --shadow-primary: 0 3px 12px #0000003b, 0 3px 12px #00000029;
     --shadow-accent: 0 6px 12px #0000003b, 0 10px 40px #00000030;
 
-
-    --bg-golden: 90deg,#b9a65b,#e5d3ab 49.25%,#bdaa61 95.67%;
+    --bg-golden: 90deg, #b9a65b, #e5d3ab 49.25%, #bdaa61 95.67%;
 }
 
 @layer base {
-    h1, h2 {
+    h1,
+    h2 {
         @apply text-3xl md:text-4xl lg:text-5xl uppercase font-extrabold text-primary;
     }
     h3 {
         @apply text-2xl md:text-4xl lg:text-5xl text-primary font-bold;
     }
-    p, li {
+    p,
+    li {
         @apply md:text-lg lg:text-xl;
     }
 }
 
-
-.full-bleed-parent {
-    --padding: 0.75rem;
+:root {
+    --padding-outer-sm: 0rem;
+    --padding-outer-lg: 0.75rem;
+    --padding-gap: 4.125rem;
 
     @media (min-width: 48rem) {
-        --padding: 2.25rem;
+        --padding-outer-lg: 2.25rem;
+        --padding-gap: 6.25rem;
     }
     @media (min-width: 64rem) {
-        --padding: 2.5rem;
+        --padding-outer-lg: 2.25rem;
+        --padding-outer-sm: 1.5rem;
+        --padding-gap: 7.5rem;
     }
     @media (min-width: 80rem) {
-        --padding: 10.5rem;
+        --padding-outer-lg: 2.25rem;
+        --padding-outer-sm: 2.125rem;
     }
+}
 
+.full-bleed-parent {
     display: grid;
     align-items: start;
     align-content: start;
-    grid-template-columns: var(--padding) 1fr var(--padding);
+    grid-template-columns: var(--padding-outer-lg) 1fr var(--padding-outer-lg);
 
     > * {
         grid-column: 2;

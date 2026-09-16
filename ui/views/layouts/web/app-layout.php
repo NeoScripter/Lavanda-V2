@@ -9,10 +9,16 @@ extract(component_props(
 )); ?>
 <?php slot('layouts/web/app-shell', compact('title')); ?>
 
-<main
-    class='full-bleed-parent gap-16.5 sm:gap-25 lg:gap-35'>
+<div class='space-y-(--padding-gap) pt-(--padding-outer-sm)'>
+    <header class="fixed top-0 inset-x-0">
+        this is header
+    </header>
+    <main
+        class='full-bleed-parent gap-(--padding-gap)'>
 
-    <?= $slot ?? '' ?>
-</main>
+        <?= $slot ?? '' ?>
+
+    </main>
+</div>
 
 <?php end_slot(); ?>
