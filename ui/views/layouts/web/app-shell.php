@@ -35,13 +35,15 @@
 </head>
 
 <body class="overflow-x-clip font-sans">
-    <div id="app" class="min-h-screen isolate">
-        <?= $slot ?? '' ?>
+    <div class='relative max-w-480 mx-auto'>
+        <div id="app" class="min-h-screen isolate">
+            <?= $slot ?? '' ?>
+        </div>
+
+        <?= component('web/ui/toast') ?>
+
+        <div id="modals"></div>
     </div>
-
-    <?= component('web/ui/toast') ?>
-
-    <div id="modals"></div>
 </body>
 
 </html>
