@@ -14,7 +14,6 @@ node_modules
 vendor
 *.local
 /vendor
-public/dist/*
 public/tmp/*
 storage/private/*
 storage/logs/*

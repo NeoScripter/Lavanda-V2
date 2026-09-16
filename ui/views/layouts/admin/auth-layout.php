@@ -9,7 +9,7 @@
                     class="flex flex-col items-center gap-2 font-medium">
                     <div class="flex w-15 items-center justify-center rounded-md">
                         <?= component(
-                            'ui/auth-logo',
+                            'admin/ui/auth-logo',
                             ['class' => "w-15 fill-current text-(--foreground) dark:text-white"]
                         ) ?>
                     </div>

@@ -62,11 +62,11 @@ $flipside_modal_id = uniqid('flipside_modal_');
 
                 <div class="flex justify-start gap-3.5">
                     <?= component(
-                        'ui/auth-button',
+                        'admin/ui/auth-button',
                         ['slot' => $hive->get('admin.save'), 'attrs' => ['type' => 'submit']]
                     ) ?>
                     <?= component(
-                        'ui/auth-button',
+                        'admin/ui/auth-button',
                         [
                             'slot' => $hive->get('admin.cancel'),
                             'variant' => 'secondary',

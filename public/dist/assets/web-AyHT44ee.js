@@ -1,0 +1,1 @@
+import"./match_sets-BDt4pATM.js";var e=class{ui;constructor(){this.ui=null}init(){try{this.ui=new AppUI,console.log(`App ialized successfully`)}catch(e){console.error(`Failed to ialize app:`,e)}}},t;document.addEventListener(`DOMContentLoaded`,()=>{t=new e,t.init()}),window.addEventListener(`load`,()=>{t||(t=new e,t.init())});

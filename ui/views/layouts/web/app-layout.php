@@ -10,7 +10,7 @@ extract(component_props(
 <?php slot('layouts/web/app-shell', compact('title')); ?>
 
 <main
-    class=''>
+    class='full-bleed-parent'>
 
     <?= $slot ?? '' ?>
 </main>

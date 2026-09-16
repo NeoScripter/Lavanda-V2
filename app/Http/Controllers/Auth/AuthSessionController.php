@@ -17,7 +17,7 @@ class AuthSessionController extends Controller
             $hive->reroute('@home');
         }
 
-        view('pages/auth/login', [
+        view('pages/admin/login', [
             'heading' => 'Login',
             'title' => 'Login',
         ]);

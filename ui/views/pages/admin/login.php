@@ -31,9 +31,10 @@
     ]) ?>
 
     <div class="flex justify-between gap-2.5">
-        <?php slot('components/ui/auth-button', ['attrs' => ['type' => 'submit']]); ?>
-        <?= $hive->get('admin.log_in') ?>
-        <?php end_slot(); ?>
+        <?= component(
+            'admin/ui/auth-button',
+            ['attrs' => ['type' => 'submit'], 'slot' => $hive->get('admin.log_in')]
+        ) ?>
     </div>
 
 </form>

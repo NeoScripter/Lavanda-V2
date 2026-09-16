@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
-@source "../views/**/*.php";
+
+@source "../views/components/web/**/*.php";
+@source "../views/layouts/web/**/*.php";
+@source "../views/pages/web/**/*.php";
 
 @theme {
     --font-sans:

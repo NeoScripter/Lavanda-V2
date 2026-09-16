@@ -22,20 +22,10 @@ class WebUI {
 
     private bindEvents(): void {
         const handlers = [
-            theme,
-            filePond,
             initModals,
             initToasts,
             initCheckboxes,
-            initSidebar,
             initAdaptiveImages,
-            initAccountMenu,
-            initScrollToInputError,
-            initPasswordInputButtons,
-            initWysiwygs,
-            initDraggableReports,
-            initAccordionFormInputs,
-            initMatchSetPickers
         ];
 
         for (const handler of handlers) {

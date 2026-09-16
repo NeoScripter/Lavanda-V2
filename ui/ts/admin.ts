@@ -33,7 +33,6 @@ class AdminUI {
             initScrollToInputError,
             initPasswordInputButtons,
             initWysiwygs,
-            initDraggableReports,
             initAccordionFormInputs,
             initMatchSetPickers
         ];

@@ -30,7 +30,7 @@ $is_pwd = isset($attrs['type']) && $attrs['type'] === 'password';
         ]) ?>
     <?php endif ?>
 
-    <?= component($is_pwd ? 'form/password-input' : 'form/input', [
+    <?= component($is_pwd ? 'admin/form/password-input' : 'admin/form/input', [
         'class' => $class,
         'attrs' => $attrs,
     ]) ?>
