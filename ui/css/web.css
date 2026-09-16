@@ -35,6 +35,19 @@
     --bg-golden: 90deg,#b9a65b,#e5d3ab 49.25%,#bdaa61 95.67%;
 }
 
+@layer base {
+    h1, h2 {
+        @apply text-3xl md:text-4xl lg:text-5xl uppercase font-extrabold text-primary;
+    }
+    h3 {
+        @apply text-2xl md:text-4xl lg:text-5xl text-primary font-bold;
+    }
+    p, li {
+        @apply md:text-lg lg:text-xl;
+    }
+}
+
+
 .full-bleed-parent {
     --padding: 0.75rem;
 
