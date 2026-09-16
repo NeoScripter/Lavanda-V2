@@ -1,5 +1,4 @@
-import { DURATION, EVENTS } from '../constants';
-import { gid, qs, qsa } from '../utils';
+import { qs, qsa } from '../utils';
 
 export default function initMatchSetPickers() {
     const setPickers = qsa<HTMLDivElement>('[component-match-set-picker]');

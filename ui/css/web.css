@@ -27,6 +27,12 @@
     --color-primary-muted: oklch(0.6 0.066 307);
     --color-background: oklch(0.9 0.022 286);
     --color-foreground: oklch(0.42 0 90);
+
+    --shadow-primary: 0 3px 12px #0000003b, 0 3px 12px #00000029;
+    --shadow-accent: 0 6px 12px #0000003b, 0 10px 40px #00000030;
+
+
+    --bg-golden: 90deg,#b9a65b,#e5d3ab 49.25%,#bdaa61 95.67%;
 }
 
 .full-bleed-parent {

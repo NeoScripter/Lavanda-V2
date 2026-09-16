@@ -1,19 +1,8 @@
 import '../css/web.css';
-import initAccountMenu from './modules/accountMenu';
 import initAdaptiveImages from './modules/adaptiveImages';
 import initCheckboxes from './modules/checkboxes';
-import initDraggableReports from './modules/draggableReports';
-import filePond from './modules/filePond';
-import initScrollToInputError from './modules/inputErrors';
 import initModals from './modules/modals';
-import initPasswordInputButtons from './modules/passwordInputButtons';
-import initSidebar from './modules/sidebar';
-import theme from './modules/theme';
 import initToasts from './modules/toasts';
-import initWysiwygs from './modules/wysiwygs';
-import initAccordionFormInputs from './modules/accordionFormInputs';
-import initMatchSetPickers from './modules/match_sets';
-
 
 class WebUI {
     constructor() {
@@ -46,7 +35,7 @@ class App {
 
     init() {
         try {
-            this.ui = new AppUI();
+            this.ui = new WebUI();
             console.log('App ialized successfully');
         } catch (error) {
             console.error('Failed to ialize app:', error);

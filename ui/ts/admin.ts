@@ -2,7 +2,6 @@ import '../css/admin.css';
 import initAccountMenu from './modules/accountMenu';
 import initAdaptiveImages from './modules/adaptiveImages';
 import initCheckboxes from './modules/checkboxes';
-import initDraggableReports from './modules/draggableReports';
 import filePond from './modules/filePond';
 import initScrollToInputError from './modules/inputErrors';
 import initModals from './modules/modals';
