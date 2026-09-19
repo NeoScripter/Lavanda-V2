@@ -20,7 +20,7 @@ if (! $hive->exists('SESSION.csrf')) {
 }
 
 if (! $hive->exists('SESSION.' . SessionKey::RESOURCE_LOCALE->value)) {
-    $hive->set('SESSION.' . SessionKey::RESOURCE_LOCALE->value, Locale::ENGLISH->value);
+    $hive->set('SESSION.' . SessionKey::RESOURCE_LOCALE->value, Locale::RUSSIAN->value);
 }
 
 if (! $hive->exists('SESSION.' . SessionKey::CARD_VARIANT->value)) {

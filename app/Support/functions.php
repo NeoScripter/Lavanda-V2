@@ -599,3 +599,23 @@ function query_user(string $question): string
 //
 //     return $names;
 // }
+
+function get_user_locale()
+{
+    $raw = \Base::instance()->get('LANGUAGE');
+    $default = Locale::RUSSIAN->value;
+
+    if (empty($raw)) {
+        return $default;
+    }
+
+    $primary = str_contains($raw, ',')
+        ? explode(',', $raw)[0]
+        : $raw;
+
+    if (! in_array($primary, Locale::values(), true)) {
+        return $default;
+    }
+
+    return $primary;
+}

@@ -16,9 +16,8 @@ enum Locale: string
 
     public static function normalize(string $input): string
     {
-        return in_array($input, self::values(), true) ? $input : self::ENGLISH->value;
+        return in_array($input, self::values(), true) ? $input : self::RUSSIAN->value;
     }
-
 
     public static function labels(): array
     {

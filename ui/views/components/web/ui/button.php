@@ -14,13 +14,13 @@ $variant_classes = [
 ];
 
 $size_classes = [
-    'sm'    => "py-3 px-4 has-[>svg]:pr-6 text-sm",
-    'md'    => "py-3.5 px-5 has-[>svg]:pr-7.5 text-base",
-    'lg'    => "py-4 px-6 has-[>svg]:pr-8.5 text-lg",
+    'sm'    => "px-[1em] has-[>svg]:pr-6 text-sm lg:text-base",
+    'md'    => "has-[>svg]:pr-7.5 text-base lg:text-lg",
+    'lg'    => "has-[>svg]:pr-8.5 text-lg lg:text-xl",
     'icon'  => 'size-9 rounded-lg',
 ];
 
-$base = 'flex items-center justify-center cursor-pointer gap-[0.5em] whitespace-nowrap rounded-full leading-[100%] transition-[color,background-color,box-shadow,scale] shadow-primary hover:shadow-accent'
+$base = 'flex items-center px-[1.5em] py-[0.9em] justify-center cursor-pointer gap-[0.5em] whitespace-nowrap rounded-full leading-[100%] transition-[color,background-color,box-shadow,scale] shadow-primary hover:shadow-accent'
     . ' disabled:pointer-events-none disabled:opacity-50 disabled:cursor-default'
     . " [&_svg]:pointer-events-none [&_svg]:size-[1.25em] [&_svg]:shrink-0";
 

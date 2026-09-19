@@ -4,12 +4,22 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Web;
 
+use Enums\CardVariant;
 use Http\Controller;
+use Http\Models\FlipCard;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        view('pages/web/home');
+        $locale = get_user_locale();
+
+        $cards = new FlipCard();
+        $cards = $cards->find(
+            ['locale=? AND variant=?', $locale, CardVariant::BONUS->value],
+            ['order' => 'created_at DESC']
+        );
+
+        view('pages/web/home', compact('cards'));
     }
 }

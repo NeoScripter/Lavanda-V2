@@ -1,9 +1,18 @@
-<?php $hive = \Base::instance(); ?>
+<?php $hive = \Base::instance();
+
+extract(component_props(
+    required: ['cards'],
+    optional: [],
+    props: get_defined_vars(),
+)); ?>
+
 <?php slot('layouts/web/app-layout', [
     'title' => 'Главная',
 ]); ?>
 
-<?php slot('components/web/layout/hero'); ?>
+<?php slot('components/web/layout/hero', [
+    'class' => "bg-[url('/assets/images/pages/home/hero/hero-bg.webp')] bg-cover bg-center"
+]); ?>
 <section class='space-y-8 md:space-y-12'>
     <h1 class='mb-2'>Ответ ближе, чем кажется</h1>
 
@@ -12,7 +21,7 @@
         <p class='sm:hidden md:block'><?= $hive->get('web.Проходят_столетия_но_то_что_действительно_важно_человеку_остаётся_неизменным') ?></p>
     </div>
 
-    <div class='lg:flex'>
+    <div class='lg:flex lg:gap-10'>
 
         <div class='text-balance hidden sm:block md:hidden max-w-2/3 mb-6'>
             <p><?= $hive->get('web.Любовь_Выбор_Страх_Надежда') ?></p>
@@ -22,7 +31,9 @@
         <div class='relative isolate lg:basis-1/2'>
             <ul class='space-y-2 mb-20 2xl:mb-50'>
                 <?php foreach (explode('|', $hive->get('web.Что_я_чувствую|Что_я_на_самом_деле_хочу|Куда_двигаться_дальше|Какое_решение_будет_правильным|Какими_могут_быть_наши_отношения|Когда_придет_время')) as $qtn) : ?>
-                    <li class='bg-white px-4 py-2 rounded-full rounded-br-none shadow-accent w-fit'><?= $qtn . '?' ?></li>
+                    <li class='bg-white px-[1em] py-[0.5em] rounded-full rounded-br-none shadow-accent w-fit'>
+                        <?= $qtn . '?' ?>
+                    </li>
                 <?php endforeach; ?>
             </ul>
 
@@ -35,22 +46,38 @@
             ]) ?>
 
         </div>
-        <article class='lg:basis-1/2'>
+        <article class='lg:basis-1/2 space-y-6'>
             <header class='text-center text-balance'>
                 <h2 class='text-2xl md:text-3xl! lg:text-4xl!'>Попробуйте одну карту</h2>
                 <p>Авторская колода "Почему вы сегодня здесь"</p>
             </header>
 
-            <div class='h-60 w-100  border border-red-400'>
 
-            </div>
+            <?php slot('components/web/layout/card-deck', ['count' => count($cards)]); ?>
 
-            <div class='flex flex-col items-center justify-center gap-4 md:flex-row'>
+            <?php foreach ($cards as $card) : ?>
+
+                <?php $flipcard = $card->to_resource(); ?>
+
+                <li class="relative">
+                    <?= component('admin/ui/image', [
+                        'sizes'    => 'mb',
+                        'avif'    => false,
+                        'path'     => $flipcard['back_image']['src'],
+                        'prt_class' => 'w-full shrink-0 rounded-xl aspect-2/3 bg-contain!',
+                        'img_class' => 'object-contain!',
+                    ]) ?>
+                </li>
+            <?php endforeach; ?>
+
+            <?php end_slot(); ?>
+
+            <div class='flex flex-col items-center justify-center gap-4 md:flex-row lg:gap-6 text-center'>
                 <div>
                     <?= component('web/ui/button', [
                         'variant' => 'primary',
                         'slot' => 'Открыть карту',
-                        'class' => 'mx-auto',
+                        'class' => 'mx-auto mb-1',
                     ]) ?>
                     <small>Бесплатно. Без регистрации</small>
                 </div>
@@ -58,7 +85,7 @@
                     <?= component('web/ui/button', [
                         'variant' => 'accent',
                         'slot' => 'Следующий раздел',
-                        'class' => 'mx-auto',
+                        'class' => 'mx-auto mb-1',
                     ]) ?>
                     <small>Позвольте Lavanda вести вас</small>
                 </div>
