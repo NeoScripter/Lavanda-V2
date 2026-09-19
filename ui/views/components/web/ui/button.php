@@ -14,9 +14,9 @@ $variant_classes = [
 ];
 
 $size_classes = [
-    'sm'    => "py-2 px-4 has-[>svg]:pr-6 text-sm",
-    'md'    => "py-2.5 px-5 has-[>svg]:pr-7.5 text-base",
-    'lg'    => "py-3 px-6 has-[>svg]:pr-8.5 text-lg",
+    'sm'    => "py-3 px-4 has-[>svg]:pr-6 text-sm",
+    'md'    => "py-3.5 px-5 has-[>svg]:pr-7.5 text-base",
+    'lg'    => "py-4 px-6 has-[>svg]:pr-8.5 text-lg",
     'icon'  => 'size-9 rounded-lg',
 ];
 

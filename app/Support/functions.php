@@ -592,3 +592,10 @@ function query_user(string $question): string
 
     return trim($answer);
 }
+
+// function merge_tw_classes(string $current_class, string $new_class)
+// {
+//     $names = preg_split('/\s+/', $new_class);
+//
+//     return $names;
+// }

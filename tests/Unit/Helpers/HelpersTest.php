@@ -51,4 +51,5 @@ final class HelpersTest extends TestCase
 
         $this->assertArraysAreEqual(expected: $expected, actual: $unique_themes);
     }
+
 }
