@@ -16,4 +16,7 @@ extract(component_props(
 <!-- How It Works -->
 <?= partial('web/home/how-it-works', compact('cards')) ?>
 
+<!-- What Is Now -->
+<?= partial('web/home/what-is-now') ?>
+
 <?php end_slot(); ?>
