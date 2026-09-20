@@ -26,7 +26,7 @@ $nav_items = [
     <aside class="w-full max-w-xl lg:w-48">
         <nav class="flex flex-col space-y-1 space-x-0">
             <?php foreach ($nav_items as $item): ?>
-                <?php slot('components/ui/auth-button', [
+                <?php slot('components/admin/ui/auth-button', [
                     'size'    => 'sm',
                     'variant' => 'ghost',
                     'attrs'   => ['tabindex' => '-1'],

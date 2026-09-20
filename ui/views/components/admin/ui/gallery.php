@@ -25,7 +25,7 @@
                     </button>
                 </li>
 
-                <?php slot('components/layout/modal', ['modal_id' => $modal_id]); ?>
+                <?php slot('components/admin/layout/modal', ['modal_id' => $modal_id]); ?>
 
                 <div
                     component-gallery-modal

@@ -27,7 +27,7 @@ slot('layouts/admin/app-layout', compact('heading', 'title')); ?>
             <?php if (!empty($topics)) : ?>
 
                 <?php foreach ($topics as $topic): ?>
-                    <?php slot('components/ui/auth-button', [
+                    <?php slot('components/admin/ui/auth-button', [
                         'size'    => 'sm',
                         'variant' => 'ghost',
                         'attrs'   => ['tabindex' => '-1'],

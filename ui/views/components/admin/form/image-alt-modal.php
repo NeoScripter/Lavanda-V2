@@ -29,7 +29,7 @@ $hive = \Base::instance();
     ['message' => \Flash::instance()->getKey("errors.alt")]
 ) ?>
 
-<?php slot('components/layout/modal', ['modal_id' => $alt_modal_id]); ?>
+<?php slot('components/admin/layout/modal', ['modal_id' => $alt_modal_id]); ?>
 
 <form action="<?= $hive->alias('admin_images_update', ['id' => $file['id']]) ?>"
     method="post"

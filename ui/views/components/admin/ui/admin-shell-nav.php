@@ -3,7 +3,7 @@
 $href = $href ?? '';
 ?>
 <nav class="mb-2">
-    <?php slot('components/ui/auth-button', [
+    <?php slot('components/admin/ui/auth-button', [
         'href'    => $href,
         'variant' => 'default',
         'class'   => 'h-9 rounded-sm text-sm'

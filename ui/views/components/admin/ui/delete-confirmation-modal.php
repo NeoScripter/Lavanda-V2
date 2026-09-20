@@ -10,7 +10,7 @@ extract(component_props(
 
 $final_class = trim('grid gap-6 max-w-9/10  sm:max-w-100 lg:max-w-160 w-full' . $class);
 ?>
-<?php slot('components/layout/modal', ['modal_id' => $modal_id]); ?>
+<?php slot('components/admin/layout/modal', ['modal_id' => $modal_id]); ?>
 
 <div class="<?= $final_class ?>">
     <div class="space-y-2">
