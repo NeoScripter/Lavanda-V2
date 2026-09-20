@@ -27,7 +27,7 @@
     --color-primary-muted: oklch(0.6 0.066 307);
     --color-background: oklch(0.9 0.022 286);
     --color-foreground: oklch(0.42 0 90);
-    --rounded-primary: calc(sign(100cqi - 100%)*2rem);
+    --rounded-primary: calc(sign(100cqi - 100%) * 2rem);
 
     --shadow-primary: 0 3px 12px #0000003b, 0 3px 12px #00000029;
     --shadow-accent: 0 6px 12px #0000003b, 0 10px 40px #00000030;
@@ -50,8 +50,9 @@
         @apply text-primary text-balance text-center;
     }
     p,
-    li {
-        @apply md:text-lg lg:text-xl;
+    li,
+    a {
+        @apply md:text-lg xl:text-xl;
     }
 }
 
@@ -151,7 +152,6 @@ h4 {
     width: 100%;
 }
 
-
 .rounded-primary {
-       border-radius: calc(sign(100cqi - 100%)*1.25rem);
+    border-radius: calc(sign(100cqi - 100%) * 1.25rem);
 }

@@ -99,6 +99,11 @@ function component(string $path, array $props = []): string
     return View::instance()->render("/components/{$path}.php", "text/html", $props);
 }
 
+function partial(string $path, array $props = []): string
+{
+    return View::instance()->render("/partials/{$path}.php", "text/html", $props);
+}
+
 function slot(string $path, array $props = []): void
 {
     \Base::instance()->push(
