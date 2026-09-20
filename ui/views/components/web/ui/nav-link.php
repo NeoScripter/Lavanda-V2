@@ -6,14 +6,14 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 
-$base_class = 'flex items-center justify-center isolate relative';
+$base_class = 'flex items-center justify-center isolate relative xl:text-base';
 $uid = uniqid('popover_');
 ?>
-<li>
+<li class='<?= $class ?>'>
     <?php if (isset($url)) : ?>
         <a
             href="<?= $url ?>"
-            class="<?= $base_class ?> <?= $class ?? '' ?> <?= $url === \Base::instance()->PATH ? 'text-nav-background font-semibold md:before:absolute md:before:-inset-x-2 md:before:-inset-y-0.5 md:before:bg-gray-50 md:before:rounded-sm md:before:-z-1' : 'hover:underline underline-offset-4' ?>">
+            class="<?= $base_class ?> <?= $url === \Base::instance()->PATH ? 'font-semibold md:before:absolute md:before:-inset-x-2 md:before:-inset-y-0.5 md:before:bg-gray-50 md:before:rounded-sm md:before:-z-1' : 'hover:underline underline-offset-4' ?>">
             <?= $label ?>
         </a>
     <?php else : ?>

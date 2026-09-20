@@ -2,6 +2,7 @@ import '../css/web.css';
 import initAdaptiveImages from './modules/adaptiveImages';
 import initCheckboxes from './modules/checkboxes';
 import initModals from './modules/modals';
+import initNavMenu from './modules/navMenu';
 import initToasts from './modules/toasts';
 
 class WebUI {
@@ -13,6 +14,7 @@ class WebUI {
         const handlers = [
             initModals,
             initToasts,
+            initNavMenu,
             initCheckboxes,
             initAdaptiveImages,
         ];
