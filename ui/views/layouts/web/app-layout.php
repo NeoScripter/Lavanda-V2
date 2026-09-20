@@ -10,14 +10,15 @@ extract(component_props(
 <?php slot('layouts/web/app-shell', compact('title')); ?>
 
 <div class='space-y-(--padding-gap) pt-(--padding-outer-sm) <?= $class ?>'>
+    <?= partial('web/shared/header') ?>
+
     <main
         class='full-bleed-parent gap-y-(--padding-gap)'>
 
         <?= $slot ?? '' ?>
     </main>
-    <?= partial('web/shared/footer') ?>
 
-    <?= partial('web/shared/header') ?>
+    <?= partial('web/shared/footer') ?>
 </div>
 
 <?php end_slot(); ?>

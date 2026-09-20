@@ -1,4 +1,4 @@
-<header class="fixed top-4.5 sm:top-8 xl:top-13 inset-x-(--padding-outer-lg) bg-white rounded-4xl sm:bg-transparent">
+<header class="fixed top-4.5 z-10 sm:top-8 xl:top-13 inset-x-(--padding-outer-lg) bg-white rounded-4xl sm:bg-transparent">
     <div class='flex items-center justify-between gap-2 bg-linear-(--bg-primary-pale) sm:bg-none p-4 rounded-full'>
         <figure class='w-31.5 sm:w-52'>
             <img src="/assets/svgs/logo-lg-purple.svg" />
