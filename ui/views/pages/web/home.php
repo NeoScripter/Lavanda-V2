@@ -31,7 +31,7 @@ extract(component_props(
         <div class='relative isolate lg:basis-1/2'>
             <ul class='space-y-2 mb-20 2xl:mb-50'>
                 <?php foreach (explode('|', $hive->get('web.Что_я_чувствую|Что_я_на_самом_деле_хочу|Куда_двигаться_дальше|Какое_решение_будет_правильным|Какими_могут_быть_наши_отношения|Когда_придет_время')) as $qtn) : ?>
-                    <li class='bg-white px-[1em] py-[0.5em] rounded-full rounded-br-none shadow-accent w-fit'>
+                    <li class='bg-white px-[1em] py-[0.5em] rounded-full rounded-br-none shadow-accent w-fit lg:text-lg'>
                         <?= $qtn . '?' ?>
                     </li>
                 <?php endforeach; ?>
