@@ -1,0 +1,12 @@
+--- ../src/DeepCopy/Filter/SetNullFilter.php
++++ ../src/DeepCopy/Filter/SetNullFilter.php
+@@ -18,9 +18,6 @@
+     {
+         $reflectionProperty = ReflectionHelper::getProperty($object, $property);
+ 
+-        if (PHP_VERSION_ID < 80100) {
+-            $reflectionProperty->setAccessible(true);
+-        }
+         $reflectionProperty->setValue($object, null);
+     }
+ }
