@@ -15,6 +15,7 @@ vendor
 *.local
 /vendor
 public/tmp/*
+public/dist/*
 public/storage/*
 storage/private/*
 storage/logs/*
