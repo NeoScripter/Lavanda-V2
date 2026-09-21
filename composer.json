@@ -1,16 +1,15 @@
 {
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
-        "bcosca/fatfree-core": "dev-master as 3.9.99",
-        "bcosca/fatfree": "dev-master as 3.9.99",
+        "bcosca/fatfree-core": "3.9.3",
+        "bcosca/fatfree": "3.9.3",
         "ikkez/f3-falsum": "^2.8",
         "n0nag0n/simple-job-queue": "^1.2",
         "ikkez/f3-validation-engine": "^1.7",
         "ikkez/f3-flash": "^1.0",
         "ikkez/f3-cortex": "^1.7",
         "fakerphp/faker": "^1.24",
-        "guzzlehttp/guzzle": "^7.0"
+        "guzzlehttp/guzzle": "^7.0",
+        "cweagans/composer-patches": "~2.0"
     },
     "autoload": {
         "files": [
@@ -23,6 +22,25 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^13.2"
+        "phpunit/phpunit": "^13.2",
+        "symplify/vendor-patches": "^12.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "cweagans/composer-patches": true
+        }
+    },
+    "extra": {
+        "patches": {
+            "ikkez/f3-cortex": [
+                "patches/ikkez-f3-cortex-lib-db-cortex-php.patch"
+            ],
+            "myclabs/deep-copy": [
+                "patches/myclabs-deep-copy-src-deepcopy-filter-replacefilter-php.patch",
+                "patches/myclabs-deep-copy-src-deepcopy-filter-setnullfilter-php.patch",
+                "patches/myclabs-deep-copy-src-deepcopy-filter-doctrine-doctrineemptycollectionfilter-php.patch",
+                "patches/myclabs-deep-copy-src-deepcopy-matcher-propertytypematcher-php.patch"
+            ]
+        }
     }
 }

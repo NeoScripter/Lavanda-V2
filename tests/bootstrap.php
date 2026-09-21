@@ -26,7 +26,7 @@ $hive->config(APP_DIR . '/config/routes.ini');
 
 $hive->set('app_env', 'test');
 $hive->set('app_debug', true);
-$hive->set('app_url', 'http://localhost:9001/admin/');
+$hive->set('app_url', 'http://localhost:9001/');
 
 $hive->set('db_name', "test_db");
 $hive->set('db_host', "localhost");

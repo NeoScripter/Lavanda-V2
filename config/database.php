@@ -10,4 +10,5 @@ $db = new SQL(
     "{$hive->get('db_password')}"
 );
 
+
 $hive->set('DB', $db);
