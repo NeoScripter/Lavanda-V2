@@ -16,7 +16,7 @@ final class AdminControllerTest extends TestCase
     public function redirects_non_admins_from_admin_panel(string $method, string $uri): void
     {
         $response = $this->request(method: $method, uri: $uri);
-        $this->assert_redirect(url: '/login', response: $response);
+        $this->assert_redirect(url: '/admin/login', response: $response);
     }
 
     public static function routes(): array

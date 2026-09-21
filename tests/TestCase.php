@@ -63,7 +63,7 @@ abstract class TestCase extends BaseTestCase
     protected function request(string $method, string $uri): ResponseInterface
     {
         $client = new Client([
-            'base_uri' => $this->hive->get('app_url'),
+            'base_uri' => getenv('APP_URL'),
             'http_errors' => false,
             'allow_redirects' => false,
         ]);
@@ -73,7 +73,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function assert_redirect(string $url, ResponseInterface $response): void
     {
-        $absolute_path = rtrim($this->hive->get('app_url'), '/') . $url;
+        $absolute_path = rtrim(getenv('APP_URL'), '/') . $url;
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertEquals($absolute_path, $response->getHeaderLine('Location'));
     }

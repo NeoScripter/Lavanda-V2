@@ -74,7 +74,7 @@ class CliController
         $this->create_db_views();
         $this->create_compound_indexes($hive);
 
-        if ($hive->app_env !== 'test') {
+        if (getenv('APP_ENV') !== 'test') {
             echo "Migration completed.\n";
         }
     }
@@ -93,7 +93,7 @@ class CliController
 
         $this->delete_compound_indexes($hive);
 
-        if ($hive->app_env !== 'test') {
+        if (getenv('APP_ENV') !== 'test') {
             echo "All tables deleted.\n";
         }
     }

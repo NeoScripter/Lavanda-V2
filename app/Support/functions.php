@@ -329,7 +329,7 @@ function normalize_image_input(array $input)
 
 function purge_files(string $src): void
 {
-    $dir = dirname(str_replace(\Base::instance()->get('app_url'), WEBROOT, $src));
+    $dir = dirname(str_replace(getenv('APP_URL'), WEBROOT, $src));
 
     if (is_dir($dir)) {
         $files = glob($dir . '/*');
@@ -343,7 +343,7 @@ function purge_files(string $src): void
 
 function purge_file(string $src): void
 {
-    $src = str_replace(\Base::instance()->get('app_url'), WEBROOT, $src);
+    $src = str_replace(getenv('APP_URL'), WEBROOT, $src);
     if (file_exists($src)) {
         unlink($src);
     }
@@ -431,7 +431,7 @@ function read_or_throw(string $path, string $message): string
 
 function to_public_url(string $path)
 {
-    $app_url = rtrim(\Base::instance()->get('app_url'), '/') . '/';
+    $app_url = rtrim(getenv('APP_URL'), '/') . '/';
 
     $norm_path = str_replace(WEBROOT, $app_url, $path);
 
@@ -440,7 +440,7 @@ function to_public_url(string $path)
 
 function to_absolute_path(string $path)
 {
-    $app_url = rtrim(\Base::instance()->get('app_url'), '/') . '/';
+    $app_url = rtrim(getenv('APP_URL'), '/') . '/';
 
     $norm_path = str_replace($app_url, WEBROOT, $path);
 
@@ -470,7 +470,7 @@ function read_existing_variant_sizes(string $path)
 {
     $current_path = remove_extra_slashes(
         str_replace(
-            \Base::instance()->get('app_url'),
+            getenv('APP_URL'),
             WEBROOT . '/',
             $path
         )
@@ -623,4 +623,18 @@ function get_user_locale()
     }
 
     return $primary;
+}
+
+function load_env_vars()
+{
+    foreach (
+        array_filter(
+            explode(
+                "\n",
+                file_get_contents(APP_DIR . '/.env')
+            )
+        ) as $line
+    ) {
+        putenv($line);
+    }
 }

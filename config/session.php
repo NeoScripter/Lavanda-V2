@@ -6,10 +6,9 @@ use Enums\SessionKey;
 
 $hive = Base::instance();
 
-$hive->set('redis_port', (int) getenv('REDIS_PORT'));
-$hive->set('redis_host', getenv('REDIS_HOST'));
-
-$hive->set('CACHE', "redis={$hive->get('redis_host')}:{$hive->get('redis_port')}");
+$rd_host = getenv('REDIS_HOST');
+$rd_port = (int) getenv('REDIS_POST');
+$hive->set('CACHE', "redis={$rd_host}:{$rd_port}");
 
 $session = new Session(function () {
     return true;

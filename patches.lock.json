@@ -1,4 +1,59 @@
 {
-    "_hash": "6142bfcb78f54dfbf5247ae5e463f25bdb8fff1890806e2e45aa81a59c211653",
-    "patches": []
+    "_hash": "b2347f58493be85ba22e5892554be40677f71499c34567d8921e01c2dcd39163",
+    "patches": {
+        "ikkez/f3-cortex": [
+            {
+                "package": "ikkez/f3-cortex",
+                "description": "0",
+                "url": "patches/ikkez-f3-cortex-lib-db-cortex-php.patch",
+                "sha256": "9a4ea787431598e60bd1cb6450b1813c45c6f061a30450c1525cc057807fc7a6",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "myclabs/deep-copy": [
+            {
+                "package": "myclabs/deep-copy",
+                "description": "0",
+                "url": "patches/myclabs-deep-copy-src-deepcopy-filter-replacefilter-php.patch",
+                "sha256": "fe86e5f11486164ff70ceba21c53a2e7c944491c9074f2b88f6c4daff9871a30",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "myclabs/deep-copy",
+                "description": "1",
+                "url": "patches/myclabs-deep-copy-src-deepcopy-filter-setnullfilter-php.patch",
+                "sha256": "885cee7c4c093c4aa021a867bb92cdf4cc7fa848639046183e9be9103771189a",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "myclabs/deep-copy",
+                "description": "2",
+                "url": "patches/myclabs-deep-copy-src-deepcopy-filter-doctrine-doctrineemptycollectionfilter-php.patch",
+                "sha256": "73f748400f503c0caa2a907f9f9957a1b2808e7979a53350dd2608089daac193",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "myclabs/deep-copy",
+                "description": "3",
+                "url": "patches/myclabs-deep-copy-src-deepcopy-matcher-propertytypematcher-php.patch",
+                "sha256": "67e4099804270045d3882cc79240d9393b93362fef37d7f275631aed83714c42",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ]
+    }
 }

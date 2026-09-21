@@ -1,17 +1,17 @@
 <?php
 
+use DB\SQL;
+use Enums\AppEnv;
+
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
-$_SERVER['SERVER_NAME'] = 'localhost';
-$_SERVER['REQUEST_URI'] = '/';
-$_SERVER['REQUEST_METHOD'] = 'GET';
-
 define('APP_DIR', dirname(__DIR__));
 define('UPLOAD_DIR', APP_DIR . '/public/storage/test_uploads/');
 define('WEBROOT', APP_DIR . '/public/');
+
+load_env_vars();
 
 if (!is_dir(UPLOAD_DIR)) {
     mkdir(UPLOAD_DIR, 0777, true);
@@ -20,18 +20,20 @@ if (!is_dir(UPLOAD_DIR)) {
 $hive = Base::instance();
 
 $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
-require APP_DIR . '/config/globals.php';
 $hive->config(APP_DIR . '/config/routes.ini');
 
+putenv('APP_ENV='. AppEnv::TESTING->value);
 
-$hive->set('app_env', 'test');
-$hive->set('app_debug', true);
-$hive->set('app_url', 'http://localhost:9001/');
+$db_host = getenv('TEST_DB_HOST');
+$db_name = getenv('TEST_DB_NAME');
+$db_user = getenv('TEST_DB_USER');
+$db_pw = getenv('TEST_DB_PASSWORD');
+$db_port = getenv('TEST_DB_PORT');
 
-$hive->set('db_name', "test_db");
-$hive->set('db_host', "localhost");
-$hive->set('db_post', "5432");
-$hive->set('db_password', "password");
-$hive->set('db_user', "ilya");
+$db = new SQL(
+    "pgsql:host={$db_host};port={$db_port};dbname={$db_name}",
+    "{$db_user}",
+    "{$db_pw}"
+);
 
-require APP_DIR . '/config/database.php';
+$hive->set('DB', $db);

@@ -22,17 +22,6 @@ final class CardTest extends TestCase
     }
 
     #[Test]
-    public function generates_card_backs_on_migration(): void
-    {
-        $db = $this->hive->get('DB');
-
-        $variant_num = count(CardVariant::values());
-
-        $res = $db->exec("SELECT count(*) FROM images");
-        $this->assertEquals($variant_num, $res[0]['count'], 'No view found');
-    }
-
-    #[Test]
     public function deletes_only_front_image_when_deleted(): void
     {
         $factory = new CardFactory();

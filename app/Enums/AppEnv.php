@@ -15,7 +15,7 @@ enum AppEnv: string
 
     public static function is(self $case): bool
     {
-        $env = \Base::instance()->get('app_env');
+        $env = getenv('APP_ENV');
         return self::from($env) === $case;
     }
 }

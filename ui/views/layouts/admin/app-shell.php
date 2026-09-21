@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" class="overflow-x-clip <?= (\Base::instance()->COOKIE['theme'] ?? '') === 'dark' ? 'dark' : ''  ?>">
-<?php $app_url = \Base::instance()->get('app_url'); ?>
+<?php $app_url = getenv('APP_URL'); ?>
 
 <head>
     <meta charset="UTF-8" />
