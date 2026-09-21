@@ -4,7 +4,7 @@ namespace Enums;
 
 enum AppEnv: string
 {
-    case PRODUCTION = 'final';
+    case PRODUCTION = 'production';
     case DEVELOPMENT = 'development';
     case TESTING = 'test';
 
