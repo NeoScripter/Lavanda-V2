@@ -14,12 +14,6 @@ class ArticleController extends Controller
     {
         $locale = get_user_locale();
 
-        $cards = new FlipCard();
-        $cards = $cards->find(
-            ['locale=? AND variant=?', $locale, CardVariant::BONUS->value],
-            ['order' => 'created_at DESC']
-        );
-
         view('pages/web/articles');
     }
 }

@@ -1,4 +1,5 @@
 <?php
+$hive = \Base::instance();
 $nav_links = [
     ['url' => '/', 'label' => 'Главная'],
     [
@@ -16,7 +17,12 @@ $nav_links = [
     ['url' => '/faqs', 'label' => 'Мне грустно'],
     ['url' => '/memberships', 'label' => 'Бонус игра'],
     ['url' => '/reports', 'label' => 'Расслабиться'],
-    ['url' => '/volunteers', 'label' => 'Прочее'],
+    [
+        'label' => 'Прочее',
+        'nav_links' => [
+            ['url' => $hive->alias('articles'), 'label' => 'Полезные ресурсы'],
+        ]
+    ],
 ]; ?>
 
 <nav
