@@ -6,7 +6,7 @@ $nav_links = [
         'label' => 'Решение',
         'nav_links' => [
             ['url' => '/education', 'label' => 'Общая информация'],
-            ['url' => '/healthcare', 'label' => 'Практика'],
+            ['url' => '/practice', 'label' => 'Практика'],
             ['url' => '/economic-development', 'label' => 'Спросить у рун'],
             ['url' => '/sustainable-environment', 'label' => 'Спросить у карт'],
             ['url' => '/social-mobilization', 'label' => 'Книга перемен'],

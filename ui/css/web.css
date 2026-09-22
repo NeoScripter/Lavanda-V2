@@ -78,10 +78,12 @@ h4 {
     --spacing-y: 4.125rem;
     --pt-lg: 8.75rem;
 
+    @media (min-width: 40rem) {
+        --pt-lg: 16.5rem;
+    }
     @media (min-width: 48rem) {
         --px-lg: 2.25rem;
         --spacing-y: 6.25rem;
-        --pt-lg: 16.5rem;
     }
     @media (min-width: 64rem) {
         --px-lg: 2.25rem;
@@ -98,6 +100,7 @@ h4 {
     }
 }
 
+/* pt-35 sm:pt-66 lg:pt-56 xl:pt-42 */
 .full-bleed-parent {
     display: grid;
     align-items: start;
