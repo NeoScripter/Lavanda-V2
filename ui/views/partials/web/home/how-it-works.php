@@ -5,7 +5,7 @@
     <ul class='grid gap-15 lg:gap-22 lg:grid-cols-2 xl:grid-cols-3 place-content-center mt-15 text-balance text-center'>
 
         <?php slot(
-            'components/web/ui/how-it-works-card',
+            'components/web/ui/hiw-card',
             ['idx' => 1]
         ); ?>
         <div>
@@ -24,7 +24,7 @@
         <?php end_slot(); ?>
 
         <?php slot(
-            'components/web/ui/how-it-works-card',
+            'components/web/ui/hiw-card',
             ['idx' => 2]
         ); ?>
         <div>
@@ -37,7 +37,7 @@
         <?php end_slot(); ?>
 
         <?php slot(
-            'components/web/ui/how-it-works-card',
+            'components/web/ui/hiw-card',
             [
                 'class' => 'lg:col-span-2 xl:col-span-1',
                 'idx' => 3
