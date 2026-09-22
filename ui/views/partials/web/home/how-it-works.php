@@ -1,6 +1,6 @@
 <section>
     <h2>Как это устроено</h2>
-    <p class='text-center text-balance'>Мы собрали способы, с помощью которых на протяжении тысячелетий искали ответы, принимали важные решения, просили совета и пытались заглянуть в будущее.</p>
+    <p class='text-center text-balance max-w-200 mx-auto'>Мы собрали способы, с помощью которых на протяжении тысячелетий искали ответы, принимали важные решения, просили совета и пытались заглянуть в будущее.</p>
 
     <ul class='grid gap-15 lg:gap-22 lg:grid-cols-2 xl:grid-cols-3 place-content-center mt-15 text-balance text-center'>
 
