@@ -22,6 +22,7 @@ extract(component_props(
         'size' => 'sm',
         'variant' => 'outline',
         'slot' => 'Перейти',
+        'href' => \Base::instance()->alias('articles_show', ['id' => $article['id']]),
         'class' => 'mt-auto font-semibold'
     ]) ?>
 </li>

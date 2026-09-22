@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Http\Controllers\Web;
 
 use Http\Controller;
+use Http\Models\Article;
 use Http\Models\ArticlePreview;
 
 class ArticleController extends Controller
@@ -24,5 +25,16 @@ class ArticleController extends Controller
         );
 
         view('pages/web/articles', compact('articles'));
+    }
+
+    public function show(\Base $hive)
+    {
+        $id = $hive->PARAMS['id'];
+
+        $locale = get_user_locale();
+        $article = new Article();
+        $article->load(['id=? AND locale=?', $id, $locale]);
+
+        view('pages/web/article', compact('article'));
     }
 }

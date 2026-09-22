@@ -17,7 +17,7 @@ extract(component_props(
 <!-- Articles -->
 <section>
     <?php if (! empty($articles['subset'])) : ?>
-        <ul class="grid [--sq-size:17.875rem] grid-cols-[repeat(auto-fill,min(100%,var(--sq-size)))] xl:[--sq-size:19rem] justify-center gap-8">
+        <ul class="grid [--sq-size:17.875rem] grid-cols-[repeat(auto-fill,min(100%,var(--sq-size)))] xl:grid-cols-4 justify-center gap-8">
 
             <?php foreach ($articles['subset'] as $article) : ?>
                 <?= component('web/ui/article-card', [
