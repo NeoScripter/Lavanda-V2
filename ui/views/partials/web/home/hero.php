@@ -38,7 +38,7 @@ extract(component_props(
                 'sizes'    => 'mb|tb',
                 'alt' => 'Stairs',
                 'path'     => '/assets/images/pages/home/hero/hero-fg',
-                'prt_class' => 'aspect-square h-4/3 absolute! inset-y-0 sm:h-5/4 -top-10 sm:-top-5 -right-1/5 md:-right-5 bg-contain! -z-1 lg:right-auto lg:-left-1/3 xl:-left-1/5 lg:h-160 lg:-top-1/4 lg:opacity-80 xl:h-180 2xl:h-200',
+                'prt_class' => 'aspect-square h-4/3 absolute! inset-y-0 sm:h-5/4 -top-10 sm:-top-5 -right-1/5 md:-right-5 bg-contain! -z-1 lg:right-auto lg:-left-1/3 xl:-left-1/5 2xl:-left-1/10 lg:h-160 lg:-top-1/4 lg:opacity-80 xl:h-180 2xl:h-200',
                 'img_class' => 'size-full object-contain!',
             ]) ?>
 

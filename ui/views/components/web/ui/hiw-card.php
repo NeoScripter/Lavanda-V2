@@ -16,7 +16,7 @@ extract(component_props(
         'img_class' => 'size-full object-contain!',
     ]) ?>
 
-    <article class='shadow-accent px-[1.5em] pb-10 pt-[calc(1.25rem+(var(--sq-size)/5))] h-fit rounded-2xl mx-auto lg:[&_p]:text-lg [&>div]:space-y-[1em] max-w-110 lg:max-w-auto lg:[&_h3]:text-3xl'>
+    <article class='shadow-accent px-[1.5em] pb-10 pt-[calc(1.25rem+(var(--sq-size)/5))] h-fit rounded-2xl mx-auto [&>div]:space-y-[1em] max-w-110 lg:max-w-auto lg:[&_h3]:text-3xl'>
         <?= $slot ?>
     </article>
 
