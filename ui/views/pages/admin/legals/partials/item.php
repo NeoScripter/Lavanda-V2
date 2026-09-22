@@ -16,7 +16,7 @@ extract(component_props(
 
         <h3 class="mb-2"><?= LegalSlug::from($legal['slug'])->getLabel() ?></h3>
 
-        <p><?= substr($legal['html'], 0, 320) . '...' ?></p>
+        <p><?= mb_substr($legal['html'], 0, 320) . '...' ?></p>
         <a href="<?= $hive->alias("admin_legals_edit", ['id' => $legal['id']]) ?>"
             class="absolute inset-0">
         </a>

@@ -9,7 +9,7 @@ use Http\Models\ArticlePreview;
 
 class ArticleController extends Controller
 {
-    public function index()
+    public function index(\Base $hive)
     {
         $page = $hive->GET['page'] ?? 1;
         $page = is_numeric($page) ? (int) $page : 1;

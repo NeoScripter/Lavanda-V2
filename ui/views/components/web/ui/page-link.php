@@ -1,0 +1,43 @@
+<?php
+
+extract(component_props(
+    required: ['total', 'current_page', 'to'],
+    optional: ['class' => ''],
+    props: get_defined_vars(),
+));
+
+$is_active = $current_page === $to;
+$is_leftmost = $to === 0;
+$is_rightmost = $to === $total + 1;
+$is_edge = $is_rightmost || $is_leftmost;
+$is_regular = !$is_active && !$is_edge;
+$is_disabled =
+    ($is_leftmost && $current_page === 1) ||
+    ($is_rightmost && $current_page === $total);
+
+if ($is_leftmost) $to = $current_page - 1;
+if ($is_rightmost) $to = $current_page + 1;
+
+// $hive = \Base::instance();
+// $url = $hive->PATH . '?' . http_build_query(['page' => $to]);
+$hive = \Base::instance();
+$url = $hive->alias($hive->ALIAS, $hive->PARAMS, [...$hive->GET, 'page' => $to]);
+
+$class = implode(' ', array_filter([
+    'relative hidden text-primary size-14 items-center justify-center rounded-sm text-xl sm:text-base font-medium transition duration-200 ease-in sm:inline-flex sm:size-8',
+    $is_active   ? 'bg-white' : '',
+    $is_regular  ? 'text-foreground ring-inherit hover:scale-110' : '',
+    $is_disabled ? 'pointer-forbidden pointer-events-none opacity-50' : '',
+    $is_edge     ? 'inline-flex bg-white sm:bg-transparent' : '',
+    $class ?? '',
+]));
+?>
+<a href="<?= $url ?>" class="<?= $class ?>">
+    <?php if ($is_edge): ?>
+        <span class="text-primary size-12 <?= $is_leftmost ? 'rotate-180' : '' ?>">
+            <?= svg('chevron-right') ?>
+        </span>
+    <?php else: ?>
+        <?= $to ?>
+    <?php endif ?>
+</a>

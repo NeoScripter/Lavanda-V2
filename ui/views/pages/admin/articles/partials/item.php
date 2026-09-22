@@ -22,7 +22,7 @@ $src = $article['preview']['src'] ?? to_public_url(WEBROOT . '/assets/images/sha
             <a href="<?= $hive->alias('admin_articles_show', ['id' => $article['id']]) ?>" class="absolute inset-0 size-full block"></a>
         </div>
 
-        <p class="mb-2"><?= substr($article['description'], 0, 120) . '...' ?></p>
+        <p class="mb-2"><?= mb_substr($article['description'], 0, 120) . '...' ?></p>
 
         <?= component('admin/ui/item-actions', [
             'edit_url' => $hive->alias("admin_articles_edit", ['id' => $article['id']]),
