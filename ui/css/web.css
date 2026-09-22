@@ -53,7 +53,7 @@
     p,
     li,
     a {
-        @apply md:text-lg xl:text-xl;
+        @apply md:text-lg xl:text-xl leading-[160%];
     }
 }
 
