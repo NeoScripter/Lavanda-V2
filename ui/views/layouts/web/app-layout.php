@@ -9,11 +9,11 @@ extract(component_props(
 )); ?>
 <?php slot('layouts/web/app-shell', compact('title')); ?>
 
-<div class="space-y-(--padding-gap) pt-(--padding-outer-sm) bg-no-repeat <?= $class ?>">
+<div class="space-y-(--spacing-y) pt-(--px-sm) bg-no-repeat <?= $class ?>">
     <?= partial('web/shared/header') ?>
 
     <main
-        class='full-bleed-parent gap-y-(--padding-gap)'>
+        class='full-bleed-parent gap-y-(--spacing-y)'>
 
         <?= $slot ?? '' ?>
     </main>

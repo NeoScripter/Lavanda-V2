@@ -73,22 +73,28 @@ h4 {
 }
 
 :root {
-    --padding-outer-sm: 0rem;
-    --padding-outer-lg: 0.75rem;
-    --padding-gap: 4.125rem;
+    --px-sm: 0rem;
+    --px-lg: 0.75rem;
+    --spacing-y: 4.125rem;
+    --pt-lg: 8.75rem;
 
     @media (min-width: 48rem) {
-        --padding-outer-lg: 2.25rem;
-        --padding-gap: 6.25rem;
+        --px-lg: 2.25rem;
+        --spacing-y: 6.25rem;
+        --pt-lg: 16.5rem;
     }
     @media (min-width: 64rem) {
-        --padding-outer-lg: 2.25rem;
-        --padding-outer-sm: 1.5rem;
-        --padding-gap: 7.5rem;
+        --px-lg: 2.25rem;
+        --px-sm: 1.5rem;
+        --spacing-y: 7.5rem;
+        --pt-lg: 14rem;
+    }
+    @media (min-width: 80rem) {
+        --pt-lg: 10.5rem;
     }
     @media (min-width: 96rem) {
-        --padding-outer-lg: 11.125rem;
-        --padding-outer-sm: 2.125rem;
+        --px-lg: 11.125rem;
+        --px-sm: 2.125rem;
     }
 }
 
@@ -96,7 +102,7 @@ h4 {
     display: grid;
     align-items: start;
     align-content: start;
-    grid-template-columns: var(--padding-outer-lg) 1fr var(--padding-outer-lg);
+    grid-template-columns: var(--px-lg) 1fr var(--px-lg);
 
     > * {
         grid-column: 2;

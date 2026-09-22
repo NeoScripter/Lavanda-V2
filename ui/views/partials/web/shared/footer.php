@@ -1,5 +1,5 @@
 <footer>
-    <nav class='bg-white shadow-accent rounded-3xl translate-y-12 px-8 lg:px-10 lg:py-12 py-10 mx-auto text-balance max-w-[min(calc(100%-var(--padding-outer-lg)*2),25rem)] lg:max-w-4/5'>
+    <nav class='bg-white shadow-accent rounded-3xl translate-y-12 px-8 lg:px-10 lg:py-12 py-10 mx-auto text-balance max-w-[min(calc(100%-var(--px-lg)*2),25rem)] lg:max-w-4/5'>
         <ol class='grid gap-8 lg:grid-cols-4 lg:gap-14 xl:[&_li,p]:text-lg '>
             <li>
                 <a href="" class='font-semibold text-[1.25em] text-primary'>О ресурсе</a>
@@ -23,7 +23,7 @@
             </li>
         </ol>
     </nav>
-    <div class='px-(--padding-outer-lg) text-white bg-primary py-18 sm:py-20 lg:pt-24 rounded-t-2xl'>
+    <div class='px-(--px-lg) text-white bg-primary py-18 sm:py-20 lg:pt-24 rounded-t-2xl'>
         <div class='text-center sm:text-left space-y-[1.25em] lg:space-y-0 sm:pl-6'>
             <figure class='mx-auto w-45 sm:ml-0'>
                 <img src="/assets/svgs/logo-lg-white.svg" class="size-full object-contain object-center" />

@@ -12,7 +12,7 @@ $last_page    = $page['count'];
 ?>
 <?php if ($last_page !== 1) : ?>
 
-    <div class="flex items-center sm:bg-white/50 sm:rounded-full sm:w-fit justify-center sm:justify-start mt-(--padding-gap) mx-auto sm:px-4 sm:py-2 <?= $class ?>">
+    <div class="flex items-center sm:bg-white/50 sm:rounded-full sm:w-fit justify-center sm:justify-start mt-(--spacing-y) mx-auto sm:px-4 sm:py-2 <?= $class ?>">
         <nav
             aria-label="Pagination"
             class="isolate flex items-center gap-12 sm:gap-2 w-fit">
