@@ -7,16 +7,16 @@ extract(component_props(
     props: get_defined_vars(),
 )); ?>
 
-<li class='grid-rows-[min(18rem,80vw)_1fr] grid xl:text-lg <?= $class ?>'>
+<li class='[--sq-size:min(90vw,20rem)] mt-[calc(var(--sq-size)/-5)] <?= $class ?>'>
     <?= component('shared/ui/image', [
         'sizes'    => 'mb',
         'alt' => 'Stairs',
         'path'     => "/assets/images/pages/home/how_it_works/how_it_works_$idx",
-        'prt_class' => 'mx-auto size-[min(90vw,21.5rem)] xs:size-[min(90vw,22rem)] ',
+        'prt_class' => 'mx-auto size-(--sq-size) -translate-y-[calc(var(--sq-size)/-5)] bg-contain!',
         'img_class' => 'size-full object-contain!',
     ]) ?>
 
-    <article class='shadow-accent px-[1.5em] pb-10 pt-[min(5rem,16vw)] h-fit rounded-2xl mx-auto xl:[&_p]:text-lg [&>div]:space-y-[1em] max-w-110 lg:max-w-auto lg:[&_h3]:text-3xl'>
+    <article class='shadow-accent px-[1.5em] pb-10 pt-[calc(1.25rem+(var(--sq-size)/5))] h-fit rounded-2xl mx-auto lg:[&_p]:text-lg [&>div]:space-y-[1em] max-w-110 lg:max-w-auto lg:[&_h3]:text-3xl'>
         <?= $slot ?>
     </article>
 

@@ -61,9 +61,9 @@ html:has(#nav-popup[open]) {
     overflow: hidden;
 }
 
-section {
-    content-visibility: auto;
-}
+/* section { */
+/*     content-visibility: auto; */
+/* } */
 
 h1,
 h2,
@@ -86,8 +86,8 @@ h4 {
         --padding-outer-sm: 1.5rem;
         --padding-gap: 7.5rem;
     }
-    @media (min-width: 80rem) {
-        --padding-outer-lg: 2.25rem;
+    @media (min-width: 96rem) {
+        --padding-outer-lg: 11.125rem;
         --padding-outer-sm: 2.125rem;
     }
 }
