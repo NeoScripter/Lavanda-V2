@@ -21,5 +21,18 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           script_stop: true
           script: |
-            cd www/lab2 && \
+            set -e
+            cd www/lab2 || exit 1
+
+            echo "Pulling latest code..."
             git pull origin main
+
+            echo "Installing dependencies..."
+            composer install --no-dev --optimize-autoloader --classmap-authoritative
+
+            echo "Installing frontend dependencies..."
+            pnpm install
+            pnpm run build
+
+            echo "Reloading PHP-FPM..."
+            sudo service php8.5-fpm reload
