@@ -11,7 +11,7 @@ extract(component_props(
     <div class="flex flex-col gap-4">
 
         <div class="relative w-full">
-            <?= component('admin/ui/image', [
+            <?= component('shared/ui/image', [
                 'sizes'    => 'mb',
                 'avif'    => false,
                 'path'     => $stone['preview']['src'],

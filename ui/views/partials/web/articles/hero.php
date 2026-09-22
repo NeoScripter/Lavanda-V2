@@ -16,7 +16,7 @@
 
         </div>
 
-        <?= component('admin/ui/image', [
+        <?= component('shared/ui/image', [
             'sizes'    => 'mb|tb',
             'alt' => 'some white drawing',
             'path'     => '/assets/images/pages/articles/hero-fg',
@@ -27,7 +27,7 @@
     </div>
     <?php end_slot(); ?>
 
-    <?= component('admin/ui/image', [
+    <?= component('shared/ui/image', [
         'sizes'    => 'mb|tb',
         'alt' => 'some white drawing',
         'path'     => '/assets/images/pages/articles/hero-fg',

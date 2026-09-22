@@ -16,7 +16,7 @@ $classes = ['left-[5%] top-[30%]', 'left-[10%] top-[42.5%]', 'left-[12%] top-[55
 
     <div style="background-image: url(<?= $img_bg ?>)"
         class="bg-cover relative flex items-center justify-center aspect-5/6 bg-center">
-        <?= component('admin/ui/image', [
+        <?= component('shared/ui/image', [
             'sizes'    => 'mb',
             'alt' => 'Stairs',
             'path'     => $img_fg,

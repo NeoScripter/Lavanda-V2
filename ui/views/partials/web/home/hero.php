@@ -34,7 +34,7 @@ extract(component_props(
                 <?php endforeach; ?>
             </ul>
 
-            <?= component('admin/ui/image', [
+            <?= component('shared/ui/image', [
                 'sizes'    => 'mb|tb',
                 'alt' => 'Stairs',
                 'path'     => '/assets/images/pages/home/hero/hero-fg',
@@ -57,7 +57,7 @@ extract(component_props(
                 <?php $flipcard = $card->to_resource(); ?>
 
                 <li class="relative">
-                    <?= component('admin/ui/image', [
+                    <?= component('shared/ui/image', [
                         'sizes'    => 'mb',
                         'avif'    => false,
                         'path'     => $flipcard['back_image']['src'],

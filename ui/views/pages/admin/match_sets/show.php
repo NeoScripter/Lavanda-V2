@@ -19,7 +19,7 @@ $hive = \Base::instance(); ?>
         <ul class='grid gap-2 grid-cols-[repeat(auto-fill,minmax(10rem,1fr))]'>
             <?php foreach ($match_set['images'] as $img) : ?>
                 <li class="relative w-full">
-                    <?= component('admin/ui/image', [
+                    <?= component('shared/ui/image', [
                         'sizes'    => 'mb',
                         'avif'    => false,
                         'path'     => $img['src'],

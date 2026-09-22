@@ -16,7 +16,7 @@ extract(component_props(
             <ul class='grid grid-cols-[repeat(auto-fill,2rem)] xs:grid-cols-[repeat(auto-fill,4rem)]'>
                 <?php foreach ($match_set['images'] as $img) : ?>
                     <li class="relative w-40">
-                        <?= component('admin/ui/image', [
+                        <?= component('shared/ui/image', [
                             'sizes'    => 'mb',
                             'avif'    => false,
                             'path'     => $img['src'],

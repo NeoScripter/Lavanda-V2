@@ -10,7 +10,7 @@
                 <?php $modal_id = uniqid('gallery_modal_'); ?>
 
                 <li class="relative group shrink-0">
-                    <?= component('admin/ui/image', [
+                    <?= component('shared/ui/image', [
                         'path' => $img['src'],
                         'alt' => $img['alt'],
                         'sizes' => 'mb',

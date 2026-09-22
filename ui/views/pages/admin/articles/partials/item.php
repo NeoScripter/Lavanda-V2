@@ -13,7 +13,7 @@ $src = $article['preview']['src'] ?? to_public_url(WEBROOT . '/assets/images/sha
     <div class="flex flex-col gap-4">
 
         <div class="relative w-full">
-            <?= component('admin/ui/image', [
+            <?= component('shared/ui/image', [
                 'sizes'    => 'mb',
                 'avif'    => false,
                 'path'     => $src,

@@ -5,7 +5,7 @@
     <a href="/"
         aria-label="Go to homepage"
         class="block size-15 md:size-25 xl:size-30 shrink-0 md:-translate-x-1/4">
-        <?= component('admin/ui/image', [
+        <?= component('shared/ui/image', [
             'sizes'    => 'mb',
             'alt' => 'SRI logo',
             'path'     => '/assets/imgs/shared/logo/logo',

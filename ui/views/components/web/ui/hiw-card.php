@@ -8,7 +8,7 @@ extract(component_props(
 )); ?>
 
 <li class='grid-rows-[min(18rem,80vw)_1fr] grid xl:text-lg <?= $class ?>'>
-    <?= component('admin/ui/image', [
+    <?= component('shared/ui/image', [
         'sizes'    => 'mb',
         'alt' => 'Stairs',
         'path'     => "/assets/images/pages/home/how_it_works/how_it_works_$idx",
