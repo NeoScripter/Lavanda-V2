@@ -24,16 +24,18 @@ extract(component_props(
         'sizes'    => 'mb|tb|dk',
         'alt' => 'Composition',
         'path'     => '/assets/images/pages/practice/hero-fg',
-        'prt_class' => 'w-full aspect-square absolute! inset-0 m-auto md:w-9/10 lg:w-4/5 bg-contain!',
+        'prt_class' => 'w-full aspect-square absolute! inset-0 m-auto md:w-9/10 translate-y-1/8 sm:translate-y-0 lg:w-4/5 bg-contain!',
         'img_class' => 'size-full object-contain!',
     ]) ?>
 
 </section>
 
+<span></span>
+
 <!-- items -->
 <section>
     <?php if (! empty($items)) : ?>
-        <ul class="grid [--sq-size:17.875rem] relative grid-cols-[repeat(auto-fill,min(100%,var(--sq-size)))] xl:grid-cols-4 justify-center gap-8">
+        <ul class="grid [--sq-size:20.6rem] md:[--sq-size:25.6rem] relative grid-cols-[repeat(auto-fill,min(100%,var(--sq-size)))] justify-center gap-8 md:gap-10">
 
             <?php foreach ($items as $item) : ?>
                 <?= component('web/ui/practice-item-card', compact('item')) ?>
