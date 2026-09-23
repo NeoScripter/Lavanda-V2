@@ -33,10 +33,10 @@ extract(component_props(
 <!-- items -->
 <section>
     <?php if (! empty($items)) : ?>
-        <ul class="grid [--sq-size:17.875rem] grid-cols-[repeat(auto-fill,min(100%,var(--sq-size)))] xl:grid-cols-4 justify-center gap-8">
+        <ul class="grid [--sq-size:17.875rem] relative grid-cols-[repeat(auto-fill,min(100%,var(--sq-size)))] xl:grid-cols-4 justify-center gap-8">
 
             <?php foreach ($items as $item) : ?>
-                <?php $item['title']; ?>
+                <?= component('web/ui/practice-item-card', compact('item')) ?>
             <?php endforeach; ?>
         </ul>
 
