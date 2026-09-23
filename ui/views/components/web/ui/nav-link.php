@@ -6,22 +6,21 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 
-$base_class = 'flex items-center justify-center isolate relative xl:text-base';
+$base_class = 'flex items-center justify-center isolate relative xl:text-base hover:text-primary focus-visible:text-primary transition-colors';
 $uid = uniqid('popover_');
 ?>
 <li class='<?= $class ?>'>
     <?php if (isset($url)) : ?>
         <a
             href="<?= $url ?>"
-            class="<?= $base_class ?> <?= $url === \Base::instance()->PATH ? 'font-semibold md:before:absolute md:before:-inset-x-2 md:before:-inset-y-0.5 md:before:bg-gray-50 md:before:rounded-sm md:before:-z-1' : 'hover:underline underline-offset-4' ?>">
+            class="<?= $base_class ?> <?= $url === \Base::instance()->PATH ? 'font-semibold md:before:absolute md:before:-inset-x-2 md:before:-inset-y-0.5 md:before:bg-gray-50 md:before:rounded-sm md:before:-z-1' : '' ?>">
             <?= $label ?>
         </a>
     <?php else : ?>
         <button
             popovertarget="<?= $uid ?>"
-            class="<?= $base_class ?> group flex relative items-center mx-auto w-fit"
+            class="<?= $base_class ?> hover:text-primary focus-visible:text-primary transition-colors cursor-pointer flex relative items-center mx-auto w-fit"
             style="anchor-name: --nav;">
-            <span class="absolute popover-underscore inline-block h-0.5 rounded-sm transition-[width] ease-in-out duration-350 group-hover:w-full w-1/2 bg-current bottom-0 translate-y-[200%] left-0"></span>
             <span><?= $label ?></span>
         </button>
 

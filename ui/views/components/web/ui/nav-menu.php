@@ -5,18 +5,18 @@ $nav_links = [
     [
         'label' => 'Решение',
         'nav_links' => [
-            ['url' => '/education', 'label' => 'Общая информация'],
+            // ['url' => '/education', 'label' => 'Общая информация'],
             ['url' => '/practice', 'label' => 'Практика'],
-            ['url' => '/economic-development', 'label' => 'Спросить у рун'],
-            ['url' => '/sustainable-environment', 'label' => 'Спросить у карт'],
-            ['url' => '/social-mobilization', 'label' => 'Книга перемен'],
-            ['url' => '/disaster-relief', 'label' => 'Игры разума'],
+            // ['url' => '/economic-development', 'label' => 'Спросить у рун'],
+            // ['url' => '/sustainable-environment', 'label' => 'Спросить у карт'],
+            // ['url' => '/social-mobilization', 'label' => 'Книга перемен'],
+            // ['url' => '/disaster-relief', 'label' => 'Игры разума'],
         ]
     ],
-    ['url' => '/history', 'label' => 'Настрой'],
-    ['url' => '/faqs', 'label' => 'Мне грустно'],
-    ['url' => '/memberships', 'label' => 'Бонус игра'],
-    ['url' => '/reports', 'label' => 'Расслабиться'],
+    // ['url' => '/history', 'label' => 'Настрой'],
+    // ['url' => '/faqs', 'label' => 'Мне грустно'],
+    // ['url' => '/memberships', 'label' => 'Бонус игра'],
+    // ['url' => '/reports', 'label' => 'Расслабиться'],
     [
         'label' => 'Прочее',
         'nav_links' => [
