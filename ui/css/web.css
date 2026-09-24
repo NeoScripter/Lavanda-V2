@@ -26,6 +26,7 @@
     --color-primary: oklch(0.47 0.098 295);
     --color-primary-muted: oklch(0.6 0.066 307);
     --color-background: oklch(0.9 0.022 286);
+    --color-background-muted: oklch(0.92 0.017 290);
     --color-foreground: oklch(0.42 0 90);
     --rounded-primary: calc(sign(100cqi - 100%) * 2rem);
 
@@ -245,4 +246,14 @@ html:has([popover]:popover-open) .popover-underscore {
             position-area: bottom span-right;
         }
     }
+}
+
+details > summary {
+    list-style: none;
+}
+details > summary::-webkit-details-marker {
+    display: none;
+}
+details > summary::marker {
+    display: none;
 }
