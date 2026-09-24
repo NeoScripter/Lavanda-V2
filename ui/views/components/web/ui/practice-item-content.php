@@ -11,7 +11,7 @@
             'prt_class' => '!bg-contain lg:order-1 shrink-0 lg:max-w-1/2 xl:w-full',
             'img_class' => 'size-full object-contain!',
         ]) ?>
-        <div class='space-y-6 lg:space-y-8'>
+        <div class='space-y-6 lg:space-y-8 lg:mb-12 xl:mb-0'>
             <h3 component-pic-title class='sm:text-left'></h3>
             <p component-pic-description class='text-center text-balance sm:text-left'></p>
 

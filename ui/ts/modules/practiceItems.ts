@@ -14,7 +14,8 @@ export default function initPracticeItems() {
     const grid = qs<HTMLUListElement>('[component-practice-grid]', 'silent');
 
     const items = qsa<HTMLLIElement>('[data-practice-item-id]');
-    let prevItem: Element | null = null;
+    const cache = new Map();
+    let prevItemId: string | null = null;
 
     if (!grid) return;
 
@@ -40,15 +41,33 @@ export default function initPracticeItems() {
             } catch (error) {
                 console.error(error);
             }
-            const itemElement = createItemElement(data);
+            let itemElement;
+
+            if (prevItemId == id) {
+                cache.get(id).remove();
+                prevItemId = null;
+                return;
+            }
+
+            if (cache.has(id)) {
+                itemElement = cache.get(id);
+            } else {
+                itemElement = createItemElement(data);
+            }
 
             if (!itemElement) return;
 
-            if (prevItem != null) {
-                prevItem.remove();
+            if (prevItemId != null) {
+                cache.get(prevItemId).remove();
             }
-            prevItem = item.insertAdjacentElement('afterend', itemElement);
-            initAdaptiveImages();
+            prevItemId = id;
+
+            const newItem = item.insertAdjacentElement('afterend', itemElement);
+
+            if (!cache.has(id)) {
+                initAdaptiveImages();
+                cache.set(id, newItem);
+            }
         });
     }
 
@@ -62,6 +81,21 @@ export default function initPracticeItems() {
 
         const clone = document.importNode(template.content, true);
         const wrapper = qs<HTMLLIElement>('[component-pic]', 'error', clone);
+
+        const imgSrc = wrapper.getAttribute('data-img-src');
+        const imgAlt = wrapper.getAttribute('data-img-alt');
+
+        if (!imgSrc) {
+            throw new Error(
+                'Image source attribute is absent on the list item of the practice item template'
+            );
+        }
+        wrapper.innerHTML = wrapper.innerHTML.replaceAll(imgSrc, item.img_src);
+
+        if (imgAlt && item.img_alt) {
+            wrapper.innerHTML = wrapper.innerHTML.replace(imgAlt, item.img_alt);
+        }
+
         const title = qs<HTMLHeadingElement>(
             '[component-pic-title]',
             'error',
@@ -77,20 +111,6 @@ export default function initPracticeItems() {
             'error',
             wrapper
         );
-
-        const imgSrc = wrapper.getAttribute('data-img-src');
-        const imgAlt = wrapper.getAttribute('data-img-alt');
-
-        if (!imgSrc) {
-            throw new Error(
-                'Image source attribute is absent on the list item of the practice item template'
-            );
-        }
-        wrapper.innerHTML = wrapper.innerHTML.replaceAll(imgSrc, item.img_src);
-
-        if (imgAlt && item.img_alt) {
-            wrapper.innerHTML = wrapper.innerHTML.replace(imgAlt, item.img_alt);
-        }
 
         title.innerText = item.title;
         description.innerText = item.description;
@@ -118,6 +138,7 @@ export default function initPracticeItems() {
                 summary.textContent = faq.question;
                 p.textContent = faq.answer;
                 details.append(summary, p);
+                details.setAttribute('name', 'faqs');
                 faqWrapper.appendChild(details);
             }
         } else {
