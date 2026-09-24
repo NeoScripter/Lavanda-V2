@@ -40,16 +40,10 @@ extract(component_props(
         <ul component-practice-grid
             class="grid [--sq-size:min(100%,20.6rem)] md:[--sq-size:25.6rem] relative grid-cols-[repeat(auto-fill,var(--sq-size))] justify-center gap-8 md:gap-10">
 
-            <?php foreach (array_slice($items, 0, 2) as $item) : ?>
+            <?php foreach ($items as $item) : ?>
                 <?= component('web/ui/practice-item-card', compact('item')) ?>
             <?php endforeach; ?>
 
-
-            <?php if (count($items) > 2) : ?>
-                <?php foreach (array_slice($items, 2) as $item) : ?>
-                    <?= component('web/ui/practice-item-card', compact('item')) ?>
-                <?php endforeach; ?>
-            <?php endif; ?>
         </ul>
     <?php else: ?>
         <p class='-mt-3'><?= $hive->get('admin.there_are_no_items_here_yet') ?></p>

@@ -10,16 +10,26 @@ type ItemType = {
     faqs: string | null;
 };
 
+
+// TODO: 1 Refactor this mess
+// TODO: 2 Add animation
+// TODO: 3 Add slide active state
+// TODO: 4 Add resize observer logic
+
 export default function initPracticeItems() {
     const grid = qs<HTMLUListElement>('[component-practice-grid]', 'silent');
 
     const items = qsa<HTMLLIElement>('[data-practice-item-id]');
     const cache = new Map();
     let prevItemId: string | null = null;
+    // <= 931 = 1
+    // <= 1664 = 2
+    // > 1664 = 3
 
     if (!grid) return;
 
-    for (const item of items) {
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
         const id = item.getAttribute('data-practice-item-id');
         const button = qs<HTMLButtonElement>(
             '[component-pic-button]',
@@ -62,7 +72,59 @@ export default function initPracticeItems() {
             }
             prevItemId = id;
 
-            const newItem = item.insertAdjacentElement('afterend', itemElement);
+            const windowWidth = window.innerWidth;
+
+            // <= 931 = 1
+            // <= 1664 = 2
+            // > 1664 = 3
+            let newItem;
+            if (windowWidth > 1664) {
+                let idx = i;
+
+                while ((idx + 1) % 3 !== 0) {
+                    idx++;
+                }
+                idx = Math.min(items.length - 1, idx);
+                newItem = items[idx].insertAdjacentElement(
+                    'afterend',
+                    itemElement
+                );
+            } else if (windowWidth > 1535) {
+                let idx = i;
+
+                while ((idx + 1) % 2 !== 0) {
+                    idx++;
+                }
+                idx = Math.min(items.length - 1, idx);
+                newItem = items[idx].insertAdjacentElement(
+                    'afterend',
+                    itemElement
+                );
+            } else if (windowWidth > 1380) {
+                let idx = i;
+
+                while ((idx + 1) % 3 !== 0) {
+                    idx++;
+                }
+                idx = Math.min(items.length - 1, idx);
+                newItem = items[idx].insertAdjacentElement(
+                    'afterend',
+                    itemElement
+                );
+            } else if (windowWidth > 931) {
+                let idx = i;
+
+                while ((idx + 1) % 2 !== 0) {
+                    idx++;
+                }
+                idx = Math.min(items.length - 1, idx);
+                newItem = items[idx].insertAdjacentElement(
+                    'afterend',
+                    itemElement
+                );
+            } else {
+                newItem = item.insertAdjacentElement('afterend', itemElement);
+            }
 
             if (!cache.has(id)) {
                 initAdaptiveImages();

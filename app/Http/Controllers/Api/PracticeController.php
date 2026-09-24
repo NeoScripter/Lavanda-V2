@@ -9,7 +9,7 @@ use Http\Models\PracticeItemAsset;
 
 class PracticeController extends Controller
 {
-    public function show(\Base $hive)
+    public function __invoke(\Base $hive)
     {
         $locale = get_user_locale();
 
