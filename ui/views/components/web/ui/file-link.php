@@ -9,6 +9,7 @@ $is_audio = str_ends_with($url, 'mp3');
 ?>
 
 <a
+    component-file-link
     href="<?= $url ?>"
     target="_blank"
     class="font-medium block border border-foreground w-fit pl-[0.75em] pr-[1.25em] py-[0.25em] focus-visible:bg-primary-muted hover:bg-primary-muted rounded-sm transition-colors focus-visible:text-white hover:text-white <?= $class ?>">

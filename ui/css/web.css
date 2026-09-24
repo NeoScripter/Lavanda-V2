@@ -257,3 +257,18 @@ details > summary::-webkit-details-marker {
 details > summary::marker {
     display: none;
 }
+
+li[component-pic] div[component-pic-faqs] details {
+    border-bottom: 1px solid oklch(70.7% 0.022 261.325);
+    padding-block: 1em;
+    padding-inline: 0.5em;
+}
+
+li[component-pic] div[component-pic-faqs] summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+li[component-pic] div[component-pic-faqs] p {
+    padding-block: 1em;
+}
