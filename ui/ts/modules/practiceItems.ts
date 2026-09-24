@@ -44,6 +44,12 @@ export default function initPracticeItems() {
         button.addEventListener('click', async () => {
             const url = `/api/practice_items/${id}`;
 
+            if (prevItemId == id) {
+                cache.get(id).remove();
+                prevItemId = null;
+                return;
+            }
+
             let data;
             try {
                 const response = await fetch(url);
@@ -53,11 +59,6 @@ export default function initPracticeItems() {
             }
             let itemElement;
 
-            if (prevItemId == id) {
-                cache.get(id).remove();
-                prevItemId = null;
-                return;
-            }
 
             if (cache.has(id)) {
                 itemElement = cache.get(id);
