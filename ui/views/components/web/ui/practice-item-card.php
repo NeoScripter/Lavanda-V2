@@ -14,5 +14,5 @@ $idx = rand(1, 6);
     style="background-image: url(<?= "/assets/images/shared/card-bg/card-bg-$idx.webp" ?>)">
 
     <h2 class='text-xl mt-auto text-left md:text-2xl font-bold isolate uppercase'><?= $item['title'] ?></h2>
-    <p class='lg:text-lg isolate'><?= mb_substr($item['description'], 0, 80) . (strlen($item['description']) > 80 ? '...' : '') ?></p>
+    <p class='lg:text-lg isolate'><?= mb_substr($item['description'], 0, 53) . (strlen($item['description']) > 53 ? '...' : '') ?></p>
 </li>
