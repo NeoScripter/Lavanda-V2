@@ -32,6 +32,15 @@ export function qsa<T extends Element>(
     return elements;
 }
 
+export function createElements(list: string[]): HTMLElement[] {
+    const elements = [];
+
+    for (const element of list) {
+        elements.push(document.createElement(element));
+    }
+
+    return elements;
+}
 export function qs<T extends Element>(
     selector: string,
     behavior: 'silent',

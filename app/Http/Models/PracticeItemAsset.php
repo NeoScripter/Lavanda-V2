@@ -29,4 +29,16 @@ class PracticeItemAsset extends Mapper
             ]
         ];
     }
+
+    function to_item(): array
+    {
+        return [
+            'title' => $this->title,
+            'description' => $this->description,
+            'file' => $this->file,
+            'faqs' => html_entity_decode($this->faqs),
+            'img_alt' => $this->image_alt,
+            'img_src' => $this->image_src,
+        ];
+    }
 }
