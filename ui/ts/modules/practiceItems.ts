@@ -18,21 +18,17 @@ type Entry = {
 
 // TODO: 2 Add animation
 // TODO: 3 Add slide active state
-// TODO: 4 Add resize observer logic
-// TODO: 5 Add loading state for fetch
 
 export default async function initPracticeItems() {
     const grid = qs<HTMLUListElement>('[component-practice-grid]', 'silent');
 
     const items = qsa<HTMLLIElement>('[data-practice-item-id]');
-    // <= 931 = 1
-    // <= 1664 = 2
-    // > 1664 = 3
 
     if (!grid) return;
 
     const payload = await fetchAllItems();
     const entries: Entry[] = [];
+    let prevColNum = calculateColumnNum();
 
     for (const entry of payload) {
         entries.push({
@@ -42,40 +38,60 @@ export default async function initPracticeItems() {
         });
     }
 
-    function getInsertPosition(idx: number) {
-        const windowWidth = window.innerWidth;
-        if (windowWidth > 1664) {
-            while ((idx + 1) % 3 !== 0) {
-                idx++;
-            }
-        } else if (windowWidth > 1535) {
-            while ((idx + 1) % 2 !== 0) {
-                idx++;
-            }
-        } else if (windowWidth > 1380) {
-            while ((idx + 1) % 3 !== 0) {
-                idx++;
-            }
-        } else if (windowWidth > 931) {
-            while ((idx + 1) % 2 !== 0) {
-                idx++;
-            }
+    function calculateColumnNum() {
+        if (!grid || items.length === 0) return;
+
+        const styles = window.getComputedStyle(grid, null);
+        const paddingLeft = styles
+            .getPropertyValue('padding-left')
+            .replace(/\D+/, '');
+        const paddingRight = styles
+            .getPropertyValue('padding-right')
+            .replace(/\D+/, '');
+        const gap = styles.getPropertyValue('gap').replace(/\D+/, '');
+        const width = styles.getPropertyValue('width').replace(/\D+/, '');
+        const availableWidth =
+            Number(width) - (Number(paddingLeft) + Number(paddingRight));
+
+        const itemWidth = items[0].clientWidth;
+        const canFitNoGap = Math.floor(availableWidth / itemWidth);
+        const takenByGaps = (canFitNoGap - 1) * Number(gap);
+        return Math.floor((availableWidth - takenByGaps) / itemWidth);
+    }
+
+    function handleScreenResize() {
+        const currentColumnNum = calculateColumnNum();
+        if (prevColNum === currentColumnNum) return;
+
+        prevColNum = currentColumnNum;
+        syncState();
+    }
+
+    const resizeObserver = new ResizeObserver(handleScreenResize);
+    resizeObserver.observe(grid);
+
+    function getInsertPosition(idx: number, columns: number) {
+        while ((idx + 1) % columns !== 0) {
+            idx++;
         }
         return Math.min(items.length - 1, idx);
     }
 
-    function syncState(currentIdx: number) {
-        const currentActiveItem = entries.find((e) => e.isActive === true);
+    function syncState() {
+        const currentIdx = entries.findIndex((e) => e.isActive === true);
+        const columnNum = calculateColumnNum();
 
         qs<HTMLLIElement>('[component-pic]', 'silent')?.remove();
 
-        if (currentActiveItem == null) return;
+        if (currentIdx === -1 || columnNum == null) return;
+
+        const currentActiveItem = entries[currentIdx];
 
         const itemElement = generateItemHTML(currentActiveItem.item);
 
         if (itemElement == null) return;
 
-        const insertPosition = getInsertPosition(currentIdx);
+        const insertPosition = getInsertPosition(currentIdx, columnNum);
         items[insertPosition].insertAdjacentElement('afterend', itemElement);
         initAdaptiveImages();
     }
@@ -104,6 +120,7 @@ export default async function initPracticeItems() {
             item.isActive = true;
         }
     }
+
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
         const id = item.getAttribute('data-practice-item-id');
@@ -119,7 +136,7 @@ export default async function initPracticeItems() {
 
         button.addEventListener('click', async () => {
             updateState(Number(id));
-            syncState(i);
+            syncState();
         });
     }
 
