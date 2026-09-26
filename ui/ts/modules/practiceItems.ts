@@ -1,4 +1,4 @@
-import { createElements, qs, qsa } from '../utils';
+import { createElements, qs, wait, qsa } from '../utils';
 import initAdaptiveImages from './adaptiveImages';
 
 type ItemType = {
@@ -15,9 +15,6 @@ type Entry = {
     isActive: boolean;
     item: ItemType;
 };
-
-// TODO: 2 Add animation
-// TODO: 3 Add slide active state
 
 export default async function initPracticeItems() {
     const grid = qs<HTMLUListElement>('[component-practice-grid]', 'silent');
@@ -77,11 +74,22 @@ export default async function initPracticeItems() {
         return Math.min(items.length - 1, idx);
     }
 
-    function syncState() {
+
+    async function syncState() {
         const currentIdx = entries.findIndex((e) => e.isActive === true);
         const columnNum = calculateColumnNum();
 
-        qs<HTMLLIElement>('[component-pic]', 'silent')?.remove();
+        const visibleItem = qs<HTMLLIElement>('[component-pic]', 'silent');
+
+        if (visibleItem) {
+            visibleItem.classList.remove('open');
+            await wait(500);
+            visibleItem.remove();
+        }
+
+        const duplicates = qsa<HTMLLIElement>('[component-pic]');
+
+        duplicates.forEach(item => item.remove());
 
         if (currentIdx === -1 || columnNum == null) return;
 
@@ -92,7 +100,18 @@ export default async function initPracticeItems() {
         if (itemElement == null) return;
 
         const insertPosition = getInsertPosition(currentIdx, columnNum);
-        items[insertPosition].insertAdjacentElement('afterend', itemElement);
+        const newItem = items[insertPosition].insertAdjacentElement(
+            'afterend',
+            itemElement
+        );
+
+        if (newItem) {
+            await wait(100);
+            newItem.classList.add('open');
+            await wait(500);
+            newItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
         initAdaptiveImages();
     }
 
@@ -209,13 +228,15 @@ export default async function initPracticeItems() {
         if (item.faqs) {
             const faqs = JSON.parse(item.faqs);
 
-            for (const faq of faqs) {
+            for (let j = 0; j < faqs.length; j++) {
+                const faq =faqs[j];
+
                 const [details, summary, p] = createElements([
                     'details',
                     'summary',
                     'p',
                 ]);
-                summary.textContent = faq.question;
+                summary.textContent = `${j+1}. ${faq.question}`;
                 p.textContent = faq.answer;
                 details.append(summary, p);
                 details.setAttribute('name', 'faqs');

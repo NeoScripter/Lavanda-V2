@@ -272,3 +272,20 @@ li[component-pic] div[component-pic-faqs] summary {
 li[component-pic] div[component-pic-faqs] p {
     padding-block: 1em;
 }
+
+li[component-pic] {
+    grid-template-rows: 0;
+    padding-block: 0px;
+    transition:
+        grid-template-rows 500ms ease-in,
+        padding 500ms ease-in;
+}
+li[component-pic].open {
+    grid-template-rows: 1fr;
+
+    @apply py-7 sm:py-10 lg:py-12 2xl:py-13;
+
+    transition:
+        grid-template-rows 500ms ease-out,
+        padding 500ms ease-out;
+}
