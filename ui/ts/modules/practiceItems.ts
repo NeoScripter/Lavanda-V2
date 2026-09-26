@@ -225,6 +225,7 @@ export default async function initPracticeItems() {
             'error',
             wrapper
         );
+
         if (item.faqs) {
             const faqs = JSON.parse(item.faqs);
 

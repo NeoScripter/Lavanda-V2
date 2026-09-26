@@ -1,6 +1,7 @@
 import '../css/web.css';
 import initAdaptiveImages from './modules/adaptiveImages';
 import initCheckboxes from './modules/checkboxes';
+import initHeader from './modules/header';
 import initModals from './modules/modals';
 import initNavMenu from './modules/navMenu';
 import initPracticeItems from './modules/practiceItems';
@@ -19,6 +20,7 @@ class WebUI {
             initCheckboxes,
             initAdaptiveImages,
             initPracticeItems,
+            initHeader,
         ];
 
         for (const handler of handlers) {
