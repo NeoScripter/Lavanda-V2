@@ -10,24 +10,100 @@ type ItemType = {
     faqs: string | null;
 };
 
+type Entry = {
+    id: number;
+    isActive: boolean;
+    item: ItemType;
+};
 
-// TODO: 1 Refactor this mess
 // TODO: 2 Add animation
 // TODO: 3 Add slide active state
 // TODO: 4 Add resize observer logic
+// TODO: 5 Add loading state for fetch
 
-export default function initPracticeItems() {
+export default async function initPracticeItems() {
     const grid = qs<HTMLUListElement>('[component-practice-grid]', 'silent');
 
     const items = qsa<HTMLLIElement>('[data-practice-item-id]');
-    const cache = new Map();
-    let prevItemId: string | null = null;
     // <= 931 = 1
     // <= 1664 = 2
     // > 1664 = 3
 
     if (!grid) return;
 
+    const payload = await fetchAllItems();
+    const entries: Entry[] = [];
+
+    for (const entry of payload) {
+        entries.push({
+            id: entry.id,
+            isActive: false,
+            item: entry,
+        });
+    }
+
+    function getInsertPosition(idx: number) {
+        const windowWidth = window.innerWidth;
+        if (windowWidth > 1664) {
+            while ((idx + 1) % 3 !== 0) {
+                idx++;
+            }
+        } else if (windowWidth > 1535) {
+            while ((idx + 1) % 2 !== 0) {
+                idx++;
+            }
+        } else if (windowWidth > 1380) {
+            while ((idx + 1) % 3 !== 0) {
+                idx++;
+            }
+        } else if (windowWidth > 931) {
+            while ((idx + 1) % 2 !== 0) {
+                idx++;
+            }
+        }
+        return Math.min(items.length - 1, idx);
+    }
+
+    function syncState(currentIdx: number) {
+        const currentActiveItem = entries.find((e) => e.isActive === true);
+
+        qs<HTMLLIElement>('[component-pic]', 'silent')?.remove();
+
+        if (currentActiveItem == null) return;
+
+        const itemElement = generateItemHTML(currentActiveItem.item);
+
+        if (itemElement == null) return;
+
+        const insertPosition = getInsertPosition(currentIdx);
+        items[insertPosition].insertAdjacentElement('afterend', itemElement);
+        initAdaptiveImages();
+    }
+
+    function updateState(id: number) {
+        const currentActiveItem = entries.find((e) => e.isActive === true);
+
+        if (currentActiveItem == null) {
+            const item = entries.find((e) => e.id === id);
+
+            if (item) {
+                item.isActive = true;
+            }
+            return;
+        }
+
+        currentActiveItem.isActive = false;
+
+        if (currentActiveItem.id === id) {
+            return;
+        }
+
+        const item = entries.find((e) => e.id === id);
+
+        if (item) {
+            item.isActive = true;
+        }
+    }
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
         const id = item.getAttribute('data-practice-item-id');
@@ -42,99 +118,23 @@ export default function initPracticeItems() {
         }
 
         button.addEventListener('click', async () => {
-            const url = `/api/practice_items/${id}`;
-
-            if (prevItemId == id) {
-                cache.get(id).remove();
-                prevItemId = null;
-                return;
-            }
-
-            let data;
-            try {
-                const response = await fetch(url);
-                data = await response.json();
-            } catch (error) {
-                console.error(error);
-            }
-            let itemElement;
-
-
-            if (cache.has(id)) {
-                itemElement = cache.get(id);
-            } else {
-                itemElement = createItemElement(data);
-            }
-
-            if (!itemElement) return;
-
-            if (prevItemId != null) {
-                cache.get(prevItemId).remove();
-            }
-            prevItemId = id;
-
-            const windowWidth = window.innerWidth;
-
-            // <= 931 = 1
-            // <= 1664 = 2
-            // > 1664 = 3
-            let newItem;
-            if (windowWidth > 1664) {
-                let idx = i;
-
-                while ((idx + 1) % 3 !== 0) {
-                    idx++;
-                }
-                idx = Math.min(items.length - 1, idx);
-                newItem = items[idx].insertAdjacentElement(
-                    'afterend',
-                    itemElement
-                );
-            } else if (windowWidth > 1535) {
-                let idx = i;
-
-                while ((idx + 1) % 2 !== 0) {
-                    idx++;
-                }
-                idx = Math.min(items.length - 1, idx);
-                newItem = items[idx].insertAdjacentElement(
-                    'afterend',
-                    itemElement
-                );
-            } else if (windowWidth > 1380) {
-                let idx = i;
-
-                while ((idx + 1) % 3 !== 0) {
-                    idx++;
-                }
-                idx = Math.min(items.length - 1, idx);
-                newItem = items[idx].insertAdjacentElement(
-                    'afterend',
-                    itemElement
-                );
-            } else if (windowWidth > 931) {
-                let idx = i;
-
-                while ((idx + 1) % 2 !== 0) {
-                    idx++;
-                }
-                idx = Math.min(items.length - 1, idx);
-                newItem = items[idx].insertAdjacentElement(
-                    'afterend',
-                    itemElement
-                );
-            } else {
-                newItem = item.insertAdjacentElement('afterend', itemElement);
-            }
-
-            if (!cache.has(id)) {
-                initAdaptiveImages();
-                cache.set(id, newItem);
-            }
+            updateState(Number(id));
+            syncState(i);
         });
     }
 
-    function createItemElement(item: ItemType) {
+    async function fetchAllItems() {
+        const url = `/api/practice_items`;
+
+        try {
+            const response = await fetch(url);
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function generateItemHTML(item: ItemType) {
         const template = qs<HTMLTemplateElement>(
             '[component-pic-template]',
             'silent'

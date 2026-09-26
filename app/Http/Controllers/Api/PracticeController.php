@@ -13,16 +13,22 @@ class PracticeController extends Controller
     {
         $locale = get_user_locale();
 
-        $item = new PracticeItemAsset();
-        $item = $item->load(
-            ['locale=? AND id=?', $locale, $hive->get('PARAMS.id')],
+        $items = new PracticeItemAsset();
+        $items = $items->find(
+            ['locale=?', $locale],
         );
 
-        if (! $item) {
-            send_json(['message' =>  "Item not found"], 404);
-            $hive->error(404, "Item not found");
+        if (! $items) {
+            send_json(['message' =>  "Items not found"], 404);
+            $hive->error(404, "Items not found");
         }
 
-        send_json($item->to_item());
+        $payload = [];
+
+        foreach ($items as $item) {
+            $payload[] = $item->to_item();
+        }
+
+        send_json($payload);
     }
 }

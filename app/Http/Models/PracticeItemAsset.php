@@ -33,6 +33,7 @@ class PracticeItemAsset extends Mapper
     function to_item(): array
     {
         return [
+            'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
             'file' => $this->file,
