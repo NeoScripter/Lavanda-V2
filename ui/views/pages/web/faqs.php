@@ -15,8 +15,8 @@ extract(component_props(
 
     <div class='space-y-3 md:space-y-4'>
         <?php foreach ($faqs as $faq) : ?>
-            <details name="faqs" class='bg-white px-[1.5em] py-[1em] rounded-2xl group'>
-                <summary class='flex justify-between gap-4'>
+            <details name="faqs" class='bg-white px-[1.5em] py-[1em] rounded-2xl group relative'>
+                <summary class='flex justify-between gap-4 before:absolute before:inset-0 before:cursor-pointer'>
                     <span>
                         <?= $faq->question ?>
                     </span>
