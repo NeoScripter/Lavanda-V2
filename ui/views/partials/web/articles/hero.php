@@ -2,7 +2,7 @@
     <?php slot('components/web/layout/hero', [
         'class' => "bg-white"
     ]); ?>
-    <div class='lg:flex lg:items-start lg:gap-23.25'>
+    <div class='lg:flex lg:items-start lg:gap-23.25 mb-[calc(var(--sq-size)/8)] lg:mb-0'>
         <div class='space-y-8 md:space-y-12'>
             <h1 class='mb-2 text-left'>Полезные ресурсы</h1>
 

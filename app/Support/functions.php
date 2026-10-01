@@ -644,7 +644,7 @@ function cc(string $base, string $merged = '')
     if (empty(trim($merged))) {
         return $base;
     }
-    $tw_classes = ['pb-', 'pt-', 'px-', 'pl-', 'pr-', 'py-', 'm-', 'mx-', 'mt-', 'ml-', 'mr-', 'mb-', 'my-', 'bg-cover', 'bg-contain', 'bg-no-repeat'];
+    $tw_classes = ['pb-', 'pt-', 'px-', 'pl-', 'pr-', 'py-', 'm-', 'mx-', 'mt-', 'ml-', 'mr-', 'mb-', 'my-', 'object-'];
     $media_qrs = ['xs', 'sm', 'lg', 'xl', '2xl'];
     $prefixes = [];
 

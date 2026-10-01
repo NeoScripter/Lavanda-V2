@@ -8,6 +8,7 @@ extract(component_props(
 
 <?php slot('layouts/web/app-layout', [
     'title' => 'Главная',
+    'class' => 'bg-white',
 ]); ?>
 
 <!-- Hero Section -->

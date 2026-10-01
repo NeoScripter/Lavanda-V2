@@ -9,7 +9,7 @@ extract(component_props(
 )); ?>
 <?php slot('layouts/web/app-shell', compact('title')); ?>
 
-<div class="space-y-(--spacing-y) pt-(--px-sm) bg-no-repeat <?= $class ?>">
+<div class="<?= cc('space-y-(--spacing-y) bg-background pt-(--px-sm) bg-no-repeat', $class) ?>">
     <?= partial('web/shared/header') ?>
 
     <main

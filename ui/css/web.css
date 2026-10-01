@@ -49,7 +49,7 @@
     h2,
     h3,
     h4 {
-        @apply text-primary text-balance text-center;
+        @apply text-primary text-balance text-center wrap-anywhere leading-[130%];
     }
     p,
     li,

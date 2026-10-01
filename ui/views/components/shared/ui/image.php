@@ -16,7 +16,7 @@ $uid = 'aimg-' . uniqid();
 <div
     component-adaptive-image
     id="<?= $uid ?>"
-    class="overflow-clip image bg-cover bg-center bg-no-repeat relative <?= $prt_class ?? '' ?>">
+    class="<?= cc('overflow-clip image bg-cover bg-center bg-no-repeat relative', $prt_class) ?>">
     <style>
         #<?= $uid ?> {
             background-image: <?= "url({$path}-mb-tiny.webp)" ?>;
@@ -76,11 +76,11 @@ $uid = 'aimg-' . uniqid();
             srcset="<?= build_src_set($path, 'mb', 'webp') ?>"
             loading="lazy"
             alt="<?= $alt ?>"
-            class="block transition-opacity duration-500 ease-in opacity-0 size-full object-cover object-center <?= $img_class ?? '' ?>" />
+            class="<?= cc('block transition-opacity duration-500 ease-in opacity-0 size-full object-cover object-center', $img_class) ?>" />
     </picture>
 
     <div
         component-overlay
         aria-hidden="true"
-        class="animate-loading absolute inset-0 size-full bg-white/15 <?= $overlay_class ?? '' ?>"></div>
+        class="<?= cc('animate-loading absolute inset-0 size-full bg-white/15', $overlay_class) ?>"></div>
 </div>

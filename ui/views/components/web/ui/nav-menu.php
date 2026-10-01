@@ -5,12 +5,17 @@ $nav_links = [
     [
         'label' => 'Решение',
         'nav_links' => [
-            // ['url' => '/education', 'label' => 'Общая информация'],
+            ['url' => '/decision', 'label' => 'Общая информация'],
             ['url' => '/practice', 'label' => 'Практика'],
-            // ['url' => '/economic-development', 'label' => 'Спросить у рун'],
             // ['url' => '/sustainable-environment', 'label' => 'Спросить у карт'],
             // ['url' => '/social-mobilization', 'label' => 'Книга перемен'],
             // ['url' => '/disaster-relief', 'label' => 'Игры разума'],
+        ]
+    ],
+    [
+        'label' => 'Мне грустно',
+        'nav_links' => [
+            ['url' => '/sadness', 'label' => 'Общая информация'],
         ]
     ],
     // ['url' => '/history', 'label' => 'Настрой'],

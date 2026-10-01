@@ -8,7 +8,7 @@ extract(component_props(
 
 <?php slot('layouts/web/app-layout', [
     'title' => 'Полезные ресурсы',
-    'class' => "bg-[url('/assets/images/pages/articles/articles-bg.webp')] bg-cover bg-center"
+    'class' => "bg-[url('/assets/images/pages/articles/articles-bg.webp')] bg-cover bg-center bg-no-repeat"
 ]); ?>
 
 <!-- Hero Section -->
