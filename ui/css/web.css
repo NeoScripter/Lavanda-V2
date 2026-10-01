@@ -53,7 +53,8 @@
     }
     p,
     li,
-    a {
+    a,
+    summary {
         @apply md:text-lg xl:text-xl leading-[160%];
     }
 }
