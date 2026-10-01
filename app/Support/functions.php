@@ -638,3 +638,40 @@ function load_env_vars()
         putenv($line);
     }
 }
+
+function cc(string $base, string $merged = '')
+{
+    if (empty(trim($merged))) {
+        return $base;
+    }
+    $tw_classes = ['pb-', 'pt-', 'px-', 'pl-', 'pr-', 'py-', 'm-', 'mx-', 'mt-', 'ml-', 'mr-', 'mb-', 'my-', 'bg-cover', 'bg-contain', 'bg-no-repeat'];
+    $media_qrs = ['xs', 'sm', 'lg', 'xl', '2xl'];
+    $prefixes = [];
+
+    foreach ($tw_classes as $tw_name) {
+        $prefixes[] = $tw_name;
+
+        foreach ($media_qrs as $query) {
+            $prefixes[] = "$query:$tw_name";
+        }
+    }
+
+    $merged = preg_split('/\s+/', $merged);
+
+    foreach ($prefixes as $prefix) {
+        $match = array_find_key($merged, fn($class) => str_starts_with($class, $prefix));
+
+        if ($match === null) {
+            continue;
+        }
+
+        $base = preg_replace("/\s+$prefix\S*/", '', " $base");
+        $base = $merged[$match] . ' ' . $base;
+        array_splice($merged, $match, 1);
+
+    }
+    $base = array_merge($merged, preg_split('/\s+/', $base));
+    sort($base);
+
+    return trim(implode(' ', $base));
+}
