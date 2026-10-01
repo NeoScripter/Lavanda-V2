@@ -52,7 +52,7 @@ $items = [
 <section>
     <ul class='grid sm:grid-cols-[repeat(auto-fill,35.4rem)] gap-y-15 sm:gap-17 lg:gap-23 justify-center lg:even:-mb-23'>
         <?php foreach ($items as $idx => $item) : ?>
-            <li class='bg-white rounded-xl px-4 xs:px-6 space-y-[1em] transition-[outline] ease-in-out duration-200 hover:ring-4 hover:ring-primary relative sm:px-10 py-11 w-full shadow-accent lg:even:translate-y-23'>
+            <li class='bg-white rounded-xl px-4 xs:px-6 lg:px-12 space-y-[1em] transition-[outline] ease-in-out duration-200 hover:ring-4 hover:ring-primary relative sm:px-10 py-11 w-full shadow-accent lg:even:translate-y-23'>
                 <?= component('shared/ui/image', [
                     'sizes' => 'mb',
                     'path' => '/assets/images/pages/decision/item-' . $idx + 1,
