@@ -1,0 +1,39 @@
+<?php
+
+extract(component_props(
+    required: ['cards'],
+    optional: [],
+    props: get_defined_vars(),
+)); ?>
+
+<?php slot('layouts/web/app-layout', [
+    'title' => 'Бонусная игра',
+]); ?>
+
+<?php ob_start(); ?>
+Экспресс-карта от Lavanda<sup>Kim</sup>
+<?php $heading = ob_get_clean(); ?>
+
+<?php ob_start(); ?>
+<p>Проверим, умеет ли Лаванда удивлять?</p>
+<p>Выберите карту и посмотрите, какое послание ждёт именно вас. Это займёт меньше минуты, однако часто одна случайная встреча с образом оказывается удивительно своевременной.</p>
+<p>Этот раздел доступен всем и всегда, с него удобно начать знакомство с Lavanda Kim и нашей авторской колодой.</p>
+<p>Никаких сложных раскладов. Просто одна карта. Один символ. И, возможно, одна важная мысль.</p>
+<p>Ну что, попробуем?</p>
+<?php $html = ob_get_clean(); ?>
+
+<?php ob_start(); ?>
+<?= component('web/ui/button', [
+    'variant' => 'primary',
+    'slot' => 'Перейти к игре',
+    'class' => 'hidden lg:flex',
+]) ?>
+<?php $slot = ob_get_clean(); ?>
+
+<?php $image = '/assets/images/pages/bonus/hero-fg'; ?>
+
+<section class='full-bleed'>
+    <?= component('web/layout/hero-game', compact('heading', 'html', 'slot', 'image')); ?>
+</section>
+
+<?php end_slot(); ?>

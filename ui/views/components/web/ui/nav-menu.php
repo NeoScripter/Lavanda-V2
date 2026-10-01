@@ -18,7 +18,7 @@ $nav_links = [
             ['url' => '/sadness', 'label' => 'Общая информация'],
         ]
     ],
-    // ['url' => '/history', 'label' => 'Настрой'],
+    ['url' => $hive->alias('bonus'), 'label' => 'Бонусная игра'],
     // ['url' => '/faqs', 'label' => 'Мне грустно'],
     // ['url' => '/memberships', 'label' => 'Бонус игра'],
     // ['url' => '/reports', 'label' => 'Расслабиться'],
