@@ -7,12 +7,13 @@ namespace Http\Controllers\Web;
 use Enums\CardVariant;
 use Http\Controller;
 use Http\Models\FlipCard;
+use Support\Session;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $locale = get_user_locale();
+        $locale = Session::get_locale();
 
         $cards = new FlipCard();
         $cards = $cards->find(

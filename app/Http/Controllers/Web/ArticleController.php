@@ -7,6 +7,7 @@ namespace Http\Controllers\Web;
 use Http\Controller;
 use Http\Models\Article;
 use Http\Models\ArticlePreview;
+use Support\Session;
 
 class ArticleController extends Controller
 {
@@ -15,7 +16,7 @@ class ArticleController extends Controller
         $page = $hive->GET['page'] ?? 1;
         $page = is_numeric($page) ? (int) $page : 1;
 
-        $locale = get_user_locale();
+        $locale = Session::get_locale();
         $articles = new ArticlePreview();
         $articles = $articles->paginate(
             $page - 1,
@@ -31,7 +32,7 @@ class ArticleController extends Controller
     {
         $id = $hive->PARAMS['id'];
 
-        $locale = get_user_locale();
+        $locale = Session::get_locale();
         $article = new Article();
         $article->load(['id=? AND locale=?', $id, $locale]);
 

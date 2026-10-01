@@ -6,12 +6,13 @@ namespace Http\Controllers\Api;
 
 use Http\Controller;
 use Http\Models\PracticeItemAsset;
+use Support\Session;
 
 class PracticeController extends Controller
 {
     public function __invoke(\Base $hive)
     {
-        $locale = get_user_locale();
+        $locale = Session::get_locale();
 
         $items = new PracticeItemAsset();
         $items = $items->find(
