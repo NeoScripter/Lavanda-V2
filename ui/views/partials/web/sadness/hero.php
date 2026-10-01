@@ -1,7 +1,5 @@
 <section class='full-bleed [--sq-size:min(20.875rem,90vw)] lg:[--sq-size:25rem] 2xl:[--sq-size:30rem] [--offset:calc(var(--sq-size)/4)] sm:[--offset:calc(var(--sq-size)/2)] mb-(--offset) lg:mb-[calc(var(--offset)-7.75rem)] xl:mb-[calc(var(--offset)-12rem)]'>
-    <?php slot('components/web/layout/hero', [
-        'class' => "bg-white pb-0 sm:pb-0"
-    ]); ?>
+    <?php slot('components/web/layout/hero-light'); ?>
     <div class='lg:flex lg:items-start lg:gap-23.25'>
         <div class='space-y-8 md:space-y-12'>
             <h1 class='mb-2 text-left'>Мне грустно</h1>
