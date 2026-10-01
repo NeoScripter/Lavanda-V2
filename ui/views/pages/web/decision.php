@@ -7,14 +7,14 @@
 <?= partial('web/decision/hero') ?>
 
 <section>
-    <div class='mx-auto max-w-xl lg:flex lg:*:flex-1 lg:max-w-full lg:gap-13'>
+    <div class='mx-auto max-w-xl lg:flex lg:*:flex-1 lg:max-w-full lg:gap-23'>
         <div class='mb-[1.5em] lg:mb-0'>
             <h2 class='text-left lg:text-left text-2xl md:text-4xl lg:text-5xl font-bold normal-case'>
                 Правильного решения в реальности не существует - есть только сделанный выбор и его последствия.
             </h2>
             <small class='text-xl md:text-2xl lg:text-3xl text-primary font-semibold'>Эльчин Сафарли</small>
         </div>
-        <div class='space-y-[0.75em] text-balance lg:translate-y-20 lg:-mb-20'>
+        <div class='space-y-[0.75em] text-balance lg:translate-y-23 lg:-mb-23'>
             <p>В этом разделе собраны символические системы разных культур. Каждая из них предлагает свой взгляд на происходящее: через архетипы, древние тексты, образы, звуки или случайность.</p>
         </div>
     </div>
@@ -50,9 +50,9 @@ $items = [
 ]; ?>
 
 <section>
-    <ul class='grid sm:grid-cols-[repeat(auto-fill,35.4rem)] gap-y-15 sm:gap-17 lg:gap-13 justify-center lg:even:-mb-20'>
+    <ul class='grid sm:grid-cols-[repeat(auto-fill,35.4rem)] gap-y-15 sm:gap-17 lg:gap-23 justify-center lg:even:-mb-23'>
         <?php foreach ($items as $idx => $item) : ?>
-            <li class='bg-white rounded-xl px-4 xs:px-6 space-y-[1em] transition-[outline] ease-in-out duration-200 hover:ring-4 hover:ring-primary relative sm:px-10 py-11 w-full shadow-accent lg:even:translate-y-20'>
+            <li class='bg-white rounded-xl px-4 xs:px-6 space-y-[1em] transition-[outline] ease-in-out duration-200 hover:ring-4 hover:ring-primary relative sm:px-10 py-11 w-full shadow-accent lg:even:translate-y-23'>
                 <?= component('shared/ui/image', [
                     'sizes' => 'mb',
                     'path' => '/assets/images/pages/decision/item-' . $idx + 1,

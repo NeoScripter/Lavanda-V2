@@ -7,9 +7,9 @@
 <?= partial('web/sadness/hero') ?>
 
 <section>
-    <div class='mx-auto max-w-xl lg:flex lg:*:flex-1 lg:max-w-full lg:gap-13'>
+    <div class='mx-auto max-w-xl lg:flex lg:*:flex-1 lg:max-w-full lg:gap-23'>
         <h2 class='text-left lg:text-left text-2xl md:text-4xl lg:text-5xl font-bold normal-case'>Пространство, где можно немного помолчать вместе с собой.</h2>
-        <div class='space-y-[0.75em] text-balance lg:translate-y-20 lg:-mb-20'>
+        <div class='space-y-[0.75em] text-balance lg:translate-y-23 lg:-mb-23'>
             <p>Не каждая грусть просит, чтобы её прогоняли. Иногда она приходит лишь затем, чтобы вы ненадолго остановились.</p>
 
             <p>Здесь не нужно искать правильные слова или правильные решения. Достаточно выбрать то, что откликается именно сегодня: карту, руну, гексаграмму, историю или голос.</p>
@@ -50,9 +50,9 @@ $items = [
 ];; ?>
 
 <section>
-    <ul class='grid sm:grid-cols-[repeat(auto-fill,35.4rem)] gap-y-15 sm:gap-17 lg:gap-13 justify-center lg:even:-mb-20'>
+    <ul class='grid sm:grid-cols-[repeat(auto-fill,35.4rem)] gap-y-15 sm:gap-17 lg:gap-23 justify-center lg:even:-mb-23'>
         <?php foreach ($items as $idx => $item) : ?>
-            <li class='bg-white rounded-xl px-4 xs:px-6 space-y-[1em] transition-[outline] ease-in-out duration-200 hover:ring-4 hover:ring-primary relative sm:px-10 py-11 w-full shadow-accent lg:even:translate-y-20'>
+            <li class='bg-white rounded-xl px-4 xs:px-6 space-y-[1em] transition-[outline] ease-in-out duration-200 hover:ring-4 hover:ring-primary relative sm:px-10 py-11 w-full shadow-accent lg:even:translate-y-23'>
                 <?= component('shared/ui/image', [
                     'sizes' => 'mb',
                     'path' => '/assets/images/pages/sadness/item-' . $idx + 1,
