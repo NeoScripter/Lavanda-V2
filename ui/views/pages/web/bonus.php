@@ -26,7 +26,6 @@ extract(component_props(
 <?= component('web/ui/button', [
     'variant' => 'primary',
     'slot' => 'Перейти к игре',
-    'class' => 'hidden lg:flex',
 ]) ?>
 <?php $slot = ob_get_clean(); ?>
 
@@ -35,5 +34,18 @@ extract(component_props(
 <section class='full-bleed'>
     <?= component('web/layout/hero-game', compact('heading', 'html', 'slot', 'image')); ?>
 </section>
+
+
+<?php ob_start(); ?>
+Hello world
+<?php $slot1 = ob_get_clean(); ?>
+
+<?php ob_start(); ?>
+Hello world 2
+<?php $slot2 = ob_get_clean(); ?>
+
+<?php $labels = ['Выбор гостя', 'Выбор лаванды']; ?>
+
+<?= component('web/layout/playground', ['labels' => $labels, 'slots' => [$slot1, $slot2]]); ?>
 
 <?php end_slot(); ?>
