@@ -6,8 +6,10 @@ extract(component_props(
     props: get_defined_vars(),
 )); ?>
 
-<?php slot('components/web/layout/hero', ['class' => 'bg-background-muted']); ?>
-<div class='flex flex-col gap-8 md:gap-12 lg:flex-row lg:items-center'>
+<?php slot('components/web/layout/hero', ['class' => 'bg-background-muted relative']); ?>
+<span class='absolute -bottom-px before:left-0 inset-0 before:top-0 overflow-clip before:bg-no-repeat before:aspect-square before:absolute before:bg-contain before:w-3/5 lg:before:w-2/5 block before:bg-[url("/assets/images/shared/hero-game/blob-1.svg")]'></span>
+<span class='absolute -bottom-px before:right-0 inset-0 before:top-1/2 before:translate-x-2/3 lg:before:translate-x-1/4 before:-translate-y-1/2 overflow-clip before:bg-no-repeat before:aspect-square before:absolute before:bg-contain before:w-full xs:before:w-4/5 lg:before:w-2/5 block before:bg-[url("/assets/images/shared/hero-game/blob-2.svg")]'></span>
+<div class='flex flex-col gap-8 md:gap-12 isolate lg:flex-row lg:items-center'>
     <?= component('shared/ui/image', [
         'sizes'    => 'mb|tb',
         'alt' => 'black-cat',
