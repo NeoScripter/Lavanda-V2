@@ -4,7 +4,7 @@ $id = 'deck-' . uniqid();
 
 extract(component_props(
     required: ['count', 'slot'],
-    optional: ['gap' => 0.4, 'width' => 10],
+    optional: ['gap' => 0.4, 'width' => 10, 'attrs' => []],
     props: get_defined_vars(),
 )); ?>
 
@@ -22,7 +22,7 @@ extract(component_props(
     </style>
 
     <ul id='<?= $id ?>'
-        class='grid max-w-full mx-auto'>
+        class='grid max-w-full gap-y-1 mx-auto' <?= serialize_attrs($attrs) ?>>
         <?= $slot ?>
     </ul>
 <?php else: ?>

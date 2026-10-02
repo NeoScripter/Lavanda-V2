@@ -7,7 +7,7 @@ extract(component_props(
     props: get_defined_vars(),
 )); ?>
 
-<li cmp-flip-card class="<?= cc('relative aspect-160/229 overflow-clip rounded-xl shrink-0', $class) ?>">
+<li cmp-flip-card data-id="<?= $card['id'] ?>" class="<?= cc('relative aspect-160/229 overflow-clip rounded-xl shrink-0', $class) ?>">
     <?= component('shared/ui/image', [
         'sizes'    => 'mb',
         'path'     => $card['front_src'],

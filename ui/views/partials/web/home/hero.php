@@ -50,7 +50,10 @@ extract(component_props(
             </header>
 
 
-            <?php slot('components/web/layout/card-deck', ['count' => count($cards)]); ?>
+            <?php slot('components/web/layout/card-deck', [
+                'count' => count($cards),
+                'attrs' => ['cmp-random-card-game' => true]
+            ]); ?>
 
             <?php foreach ($cards as $card) : ?>
                 <?= component('web/ui/flip-card', compact('card')) ?>
