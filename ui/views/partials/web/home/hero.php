@@ -53,18 +53,7 @@ extract(component_props(
             <?php slot('components/web/layout/card-deck', ['count' => count($cards)]); ?>
 
             <?php foreach ($cards as $card) : ?>
-
-                <?php $flipcard = $card->to_resource(); ?>
-
-                <li class="relative">
-                    <?= component('shared/ui/image', [
-                        'sizes'    => 'mb',
-                        'avif'    => false,
-                        'path'     => $flipcard['back_image']['src'],
-                        'prt_class' => 'w-full shrink-0 rounded-xl aspect-2/3 bg-contain!',
-                        'img_class' => 'object-contain!',
-                    ]) ?>
-                </li>
+                <?= component('web/ui/flip-card', compact('card')) ?>
             <?php endforeach; ?>
 
             <?php end_slot(); ?>

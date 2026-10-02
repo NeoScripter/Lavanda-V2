@@ -55,7 +55,8 @@
     p,
     li,
     a,
-    summary, label {
+    summary,
+    label {
         @apply md:text-lg xl:text-xl leading-[160%];
     }
 }
@@ -292,10 +293,37 @@ li[component-pic].open {
         padding 500ms ease-out;
 }
 
-div[cmp-playground]:has(input[value='playground-toggle-1']:checked) #playground-slot-1 {
+div[cmp-playground]:has(input[value='playground-toggle-1']:checked)
+    #playground-slot-1 {
     display: none;
 }
-div[cmp-playground]:has(input[value='playground-toggle-2']:checked) #playground-slot-2 {
+div[cmp-playground]:has(input[value='playground-toggle-2']:checked)
+    #playground-slot-2 {
     display: none;
 }
 
+li[cmp-flip-card]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: white;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+    /* z-index: 1; */
+}
+
+li[cmp-flip-card] {
+    transition: transform 150ms ease-in-out;
+}
+li[cmp-flip-card].highlighted::after {
+    opacity: 0.4;
+}
+li[cmp-flip-card].highlighted {
+    transform: translateY(-7.5%);
+}
+li[cmp-flip-card].flipped > *:nth-child(1) {
+    transform: rotateY(0deg);
+}
+li[cmp-flip-card].flipped > *:nth-child(2) {
+    transform: rotateY(180deg);
+}

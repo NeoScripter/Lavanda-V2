@@ -44,7 +44,7 @@ Hello world
 Hello world 2
 <?php $slot2 = ob_get_clean(); ?>
 
-<?php $labels = ['Выбор гостя', 'Выбор лаванды']; ?>
+<?php $labels = ['Выбор лаванды', 'Выбор гостя']; ?>
 
 <?= component('web/layout/playground', ['labels' => $labels, 'slots' => [$slot1, $slot2]]); ?>
 
