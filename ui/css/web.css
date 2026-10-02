@@ -302,23 +302,26 @@ div[cmp-playground]:has(input[value='playground-toggle-2']:checked)
     display: none;
 }
 
-li[cmp-flip-card]::after {
+li[cmp-flip-card]::after,
+li[cmp-card]::after {
     content: '';
     position: absolute;
     inset: 0;
     background-color: white;
     opacity: 0;
     transition: opacity 150ms ease-in-out;
-    /* z-index: 1; */
 }
 
-li[cmp-flip-card] {
+li[cmp-flip-card],
+li[cmp-card] {
     transition: transform 150ms ease-in-out;
 }
-li[cmp-flip-card].highlighted::after {
+li[cmp-flip-card].highlighted::after,
+li[cmp-card].highlighted::after {
     opacity: 0.4;
 }
-li[cmp-flip-card].highlighted {
+li[cmp-flip-card].highlighted,
+li[cmp-card].highlighted {
     transform: translateY(-7.5%);
 }
 li[cmp-flip-card].flipped > *:nth-child(1) {
