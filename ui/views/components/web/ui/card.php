@@ -8,6 +8,7 @@ extract(component_props(
 )); ?>
 
 <li cmp-card 
+    data-id="<?= $card['id'] ?>" 
     data-img-src="<?= $card['front_src'] ?>" 
     data-img-alt="<?= $card['front_alt'] ?>" 
     class="<?= cc('relative aspect-160/229 overflow-clip rounded-xl shrink-0', $class) ?>">

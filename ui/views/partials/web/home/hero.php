@@ -52,7 +52,7 @@ extract(component_props(
 
             <?php slot('components/web/layout/card-deck', [
                 'count' => count($cards),
-                'attrs' => ['cmp-random-card-game' => true]
+                'attrs' => ['cmp-start-spin-btn' => true]
             ]); ?>
 
             <?php foreach ($cards as $card) : ?>
@@ -67,7 +67,7 @@ extract(component_props(
                         'variant' => 'primary',
                         'slot' => 'Открыть карту',
                         'class' => 'mx-auto mb-1',
-                        'attrs' => ['cmp-game-trigger' => true]
+                        'attrs' => ['cmp-start-spin-btn' => true]
                     ]) ?>
                     <small>Бесплатно. Без регистрации</small>
                 </div>

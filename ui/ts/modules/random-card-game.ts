@@ -3,7 +3,7 @@ import { qsa, wait } from '../utils';
 
 export default function initRandomCardGame() {
     async function spinCardDeck() {
-        const cards = qsa<HTMLLIElement>('[cmp-random-card-game]>*');
+        const cards = qsa<HTMLLIElement>('[cmp-start-spin-btn]>*');
 
         let duration = 50;
         let currentIdx = 0;

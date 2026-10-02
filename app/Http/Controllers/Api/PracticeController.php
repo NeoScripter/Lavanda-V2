@@ -10,7 +10,7 @@ use Support\Session;
 
 class PracticeController extends Controller
 {
-    public function __invoke(\Base $hive)
+    public function __invoke()
     {
         $locale = Session::get_locale();
 
@@ -21,7 +21,6 @@ class PracticeController extends Controller
 
         if (! $items) {
             send_json(['message' =>  "Items not found"], 404);
-            $hive->error(404, "Items not found");
         }
 
         $payload = [];

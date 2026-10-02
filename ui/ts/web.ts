@@ -23,7 +23,6 @@ class WebUI {
             initAdaptiveImages,
             initPracticeItems,
             initHeader,
-            initRandomCardGame,
             initGameHanlders,
         ];
 

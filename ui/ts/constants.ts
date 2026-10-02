@@ -15,3 +15,7 @@ export const DURATION = {
 export const DISTANCE = {
     SWIPE_THRESHOLD: 50,
 };
+
+export const GAME_TYPES = {
+    RANDOM_CARDS: 'random_cards',
+};

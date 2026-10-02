@@ -7,7 +7,7 @@ extract(component_props(
 )); ?>
 
 <section cmp-playground-wrapper
-    class="<?= cc('full-bleed lg:px-(--px-lg)', $class) ?>">
+    class="<?= cc('full-bleed lg:px-(--px-lg) group', $class) ?>">
     <div cmp-playground>
         <nav class="flex flex-col xs:flex-row justify-center xs:gap-[1.25em] <?= count($labels) < 2 ? 'hidden' : '' ?>">
             <?php foreach ($labels as $idx => $label) : ?>
@@ -18,7 +18,7 @@ extract(component_props(
             <?php endforeach; ?>
         </nav>
 
-        <div class='py-14.5 px-7 sm:px-9 sm:py-25 text-white lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23 bg-linear-(--bg-primary) lg:rounded-xl'>
+        <div class='py-14.5 px-7 sm:px-9 sm:py-25 text-white lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23 bg-linear-(--bg-primary) lg:rounded-t-xl lg:group-has-[article[cmp-game-results].hidden]:rounded-b-xl'>
             <?php foreach ($slots as $idx => $slot) : ?>
                 <div id="<?= 'playground-slot-' . $idx + 1 ?>" cmp-playground-slot>
                     <?= $slot ?>
@@ -26,4 +26,11 @@ extract(component_props(
             <?php endforeach; ?>
         </div>
     </div>
+
+    <article cmp-game-results 
+        class='bg-white py-14.5 rounded-b-xl px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23'>
+        <ul>
+            <li>hiasdsad</li>
+        </ul>
+    </article>
 </section>

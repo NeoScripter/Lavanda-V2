@@ -26,7 +26,7 @@ extract(component_props(
 <?= component('web/ui/button', [
     'variant' => 'primary',
     'slot' => 'Перейти к игре',
-    'attrs' => ['cmp-hide-on-click' => true, 'cmp-setup-game-btn' => true],
+    'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
 ]) ?>
 <?php $slot = ob_get_clean(); ?>
 
@@ -43,16 +43,15 @@ extract(component_props(
     <?= component('web/ui/button', [
         'variant' => 'primary',
         'slot' => 'Получить ответ',
-        'attrs' => ['cmp-game-trigger' => true],
+        'attrs' => ['cmp-start-spin-btn' => true],
         'class' => 'mx-auto'
     ]) ?>
 
     <?php slot('components/web/layout/card-deck', [
         'count' => count($cards),
         'gap' => 0.8,
-        'attrs' => ['cmp-random-card-game' => true]
+        'attrs' => ['cmp-game' => true, 'data-type' => 'random_cards']
     ]); ?>
-
     <?php foreach ($cards as $card) : ?>
         <?= component('web/ui/card', compact('card')) ?>
     <?php endforeach; ?>
@@ -71,7 +70,7 @@ Hello world 2
 <?= component('web/layout/playground', [
     'labels' => $labels,
     'slots' => [$slot1, $slot2],
-    'class' => 'hidden'
+    // 'class' => 'hidden'
 ]); ?>
 
 <?php end_slot(); ?>
