@@ -2,7 +2,7 @@
 
 import { qs } from '../utils';
 
-const THRESHOLD_PX = 100;
+const THRESHOLD_PX = 75;
 
 export default function initHeader() {
     const header = qs<HTMLDivElement>('[component-app-header]', 'silent');
