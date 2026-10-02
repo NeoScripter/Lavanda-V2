@@ -17,16 +17,14 @@ export default function initRandomCardGame() {
         };
 
         const endGame = () => {
+            const prevIdx =
+                currentIdx === 0 ? cards.length - 1 : currentIdx - 1;
             const card = cards[currentIdx];
             card.classList.remove('highlighted');
+            cards[prevIdx].classList.remove('highlighted');
 
-            const cardId = card.getAttribute('data-id');
-
-            if (!cardId) {
-                throw new Error('Selected card id not found');
-            }
-            const event = new CustomEvent(EVENTS.SPIN_END_RANDOM_CARDS, {
-                detail: { cardId },
+            const event = new CustomEvent(EVENTS.END_SPIN, {
+                detail: { card },
             });
             window.dispatchEvent(event);
         };
@@ -42,5 +40,5 @@ export default function initRandomCardGame() {
         endGame();
     }
 
-    window.addEventListener(EVENTS.START_RANDOM_CARDS_GAME, spinCardDeck);
+    window.addEventListener(EVENTS.START_SPIN, spinCardDeck);
 }

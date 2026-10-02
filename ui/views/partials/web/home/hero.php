@@ -56,17 +56,18 @@ extract(component_props(
             ]); ?>
 
             <?php foreach ($cards as $card) : ?>
-                <?= component('web/ui/flip-card', compact('card')) ?>
+                <?= component('web/ui/card', compact('card')) ?>
             <?php endforeach; ?>
 
             <?php end_slot(); ?>
 
-            <div class='flex flex-col items-center justify-center gap-4 md:flex-row lg:gap-6 text-center'>
+            <div class='flex flex-col isolate items-center justify-center gap-4 md:flex-row lg:gap-6 text-center'>
                 <div>
                     <?= component('web/ui/button', [
                         'variant' => 'primary',
                         'slot' => 'Открыть карту',
                         'class' => 'mx-auto mb-1',
+                        'attrs' => ['cmp-game-trigger' => true]
                     ]) ?>
                     <small>Бесплатно. Без регистрации</small>
                 </div>

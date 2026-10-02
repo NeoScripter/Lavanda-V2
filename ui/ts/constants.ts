@@ -1,8 +1,11 @@
 export const EVENTS = {
     SHOW_MODAL: 'modal-show',
     HIDE_MODAL: 'modal-hide',
-    SPIN_END_RANDOM_CARDS: 'spin_end_random_cards',
-    START_RANDOM_CARDS_GAME: 'start_random_cards_game',
+    START_GAME: 'start_game',
+    END_GAME: 'end_game',
+    START_SPIN: 'start_spin',
+    END_SPIN: 'end_spin',
+    SETUP_GAME: 'setup_game',
 };
 
 export const DURATION = {

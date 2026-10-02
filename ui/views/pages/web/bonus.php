@@ -26,6 +26,7 @@ extract(component_props(
 <?= component('web/ui/button', [
     'variant' => 'primary',
     'slot' => 'Перейти к игре',
+    'attrs' => ['cmp-hide-on-click' => true, 'cmp-setup-game-btn' => true],
 ]) ?>
 <?php $slot = ob_get_clean(); ?>
 
@@ -37,7 +38,28 @@ extract(component_props(
 
 
 <?php ob_start(); ?>
-Hello world
+<div class='items-center space-y-8 lg:space-y-12'>
+    <p class='text-balance mx-auto max-w-xl'>Карта открывается сама — как знак, который приходит вовремя. Иногда именно случай отражает то, что мы уже чувствуем, но не осознаём.</p>
+    <?= component('web/ui/button', [
+        'variant' => 'primary',
+        'slot' => 'Получить ответ',
+        'attrs' => ['cmp-game-trigger' => true],
+        'class' => 'mx-auto'
+    ]) ?>
+
+    <?php slot('components/web/layout/card-deck', [
+        'count' => count($cards),
+        'gap' => 0.8,
+        'attrs' => ['cmp-random-card-game' => true]
+    ]); ?>
+
+    <?php foreach ($cards as $card) : ?>
+        <?= component('web/ui/card', compact('card')) ?>
+    <?php endforeach; ?>
+
+    <?php end_slot(); ?>
+
+</div>
 <?php $slot1 = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
@@ -46,6 +68,10 @@ Hello world 2
 
 <?php $labels = ['Выбор лаванды', 'Выбор гостя']; ?>
 
-<?= component('web/layout/playground', ['labels' => $labels, 'slots' => [$slot1, $slot2]]); ?>
+<?= component('web/layout/playground', [
+    'labels' => $labels,
+    'slots' => [$slot1, $slot2],
+    'class' => 'hidden'
+]); ?>
 
 <?php end_slot(); ?>
