@@ -43,7 +43,7 @@ extract(component_props(
     <?= component('web/ui/button', [
         'variant' => 'primary',
         'slot' => 'Получить ответ',
-        'attrs' => ['cmp-start-spin-btn' => true],
+        'attrs' => ['cmp-launch-game-btn' => true],
         'class' => 'mx-auto'
     ]) ?>
 
@@ -67,7 +67,7 @@ Hello world 2
 
 <?php $labels = ['Выбор лаванды', 'Выбор гостя']; ?>
 
-<?= component('web/layout/playground', [
+<?= component('web/layout/game-stage', [
     'labels' => $labels,
     'slots' => [$slot1, $slot2],
     // 'class' => 'hidden'

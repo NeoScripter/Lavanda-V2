@@ -44,6 +44,17 @@
 
         <div id="modals"></div>
     </div>
+
+    <template cmp-img-template>
+        <?= component('shared/ui/image', [
+            'sizes'    => 'mb|tb',
+            'alt' => "Empty image alt",
+            'path'     => '/assets/images/shared/empty/empty',
+            'prt_class' => 'bg-contain! size-full',
+            'img_class' => 'size-full object-contain! object-center',
+        ]) ?>
+    </template>
+
 </body>
 
 </html>

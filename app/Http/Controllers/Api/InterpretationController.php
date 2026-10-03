@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Http\Controllers\Api;
 
 use Enums\MatcheableType;
+use Enums\ThemeableType;
 use Http\Controller;
 use Http\Models\FlipCard;
 use Http\Models\RuneAsset;
 use Http\Models\StoneAsset;
 use Support\Session;
 
-class GameController extends Controller
+class InterpretationController extends Controller
 {
     public function __invoke(\Base $hive)
     {
@@ -51,9 +52,11 @@ class GameController extends Controller
         foreach ($items as $item) {
             $payload[] = [
                 'id' => $item->id,
+                'name' => $item->name,
                 'img' => $item->front_src,
                 'alt' => $item->front_alt,
-                'advice' => $item->advice
+                'advice' => $item->advice,
+                'themes' => get_unique_themes_by_type(ThemeableType::from($resource), $item->id),
             ];
         }
 

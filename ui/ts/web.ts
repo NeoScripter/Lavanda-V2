@@ -1,12 +1,12 @@
 import '../css/web.css';
+import Game from './classes/Game';
+import GameStage from './classes/GameStage';
 import initAdaptiveImages from './modules/adaptiveImages';
 import initCheckboxes from './modules/checkboxes';
-import initGameHanlders from './modules/game-handlers';
 import initHeader from './modules/header';
 import initModals from './modules/modals';
 import initNavMenu from './modules/navMenu';
 import initPracticeItems from './modules/practiceItems';
-import initRandomCardGame from './modules/random-card-game';
 import initToasts from './modules/toasts';
 
 class WebUI {
@@ -23,7 +23,8 @@ class WebUI {
             initAdaptiveImages,
             initPracticeItems,
             initHeader,
-            initGameHanlders,
+            new Game().init,
+            new GameStage().init,
         ];
 
         for (const handler of handlers) {

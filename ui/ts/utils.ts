@@ -122,3 +122,22 @@ export async function wait(ms: number) {
         setTimeout(res, ms);
     });
 }
+
+export function createAdaptiveImg(newSrc: string, newAlt: string) {
+    const template = qs<HTMLTemplateElement>('[cmp-img-template]');
+
+    const clone = document.importNode(template.content, true);
+    const wrapper = qs<HTMLDivElement>(
+        '[component-adaptive-image]',
+        'error',
+        clone
+    );
+
+    const imgSrc = '/assets/images/shared/empty/empty';
+    const imgAlt = 'Empty image alt';
+
+    wrapper.innerHTML = wrapper.innerHTML.replaceAll(imgSrc, newSrc);
+    wrapper.innerHTML = wrapper.innerHTML.replace(imgAlt, newAlt);
+
+    return wrapper;
+}

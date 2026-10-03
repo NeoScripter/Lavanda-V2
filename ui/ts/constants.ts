@@ -19,3 +19,7 @@ export const DISTANCE = {
 export const GAME_TYPES = {
     RANDOM_CARDS: 'random_cards',
 };
+
+export const DISPLAY_TYPES = {
+    BONUS_HOMEPAGE: 'bonus_homepage',
+};

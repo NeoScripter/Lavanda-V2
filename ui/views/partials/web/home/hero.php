@@ -50,24 +50,34 @@ extract(component_props(
             </header>
 
 
-            <?php slot('components/web/layout/card-deck', [
-                'count' => count($cards),
-                'attrs' => ['cmp-start-spin-btn' => true]
-            ]); ?>
+            <div>
 
-            <?php foreach ($cards as $card) : ?>
-                <?= component('web/ui/card', compact('card')) ?>
-            <?php endforeach; ?>
+                <?php slot('components/web/layout/card-deck', [
+                    'count' => count($cards),
+                    'attrs' => [
+                        'cmp-game' => true,
+                        'data-game-type' => 'random_cards',
+                        'data-game-category' => 'bonus',
+                    ]
+                ]); ?>
 
-            <?php end_slot(); ?>
+                <?php foreach ($cards as $card) : ?>
+                    <?= component('web/ui/card', compact('card')) ?>
+                <?php endforeach; ?>
 
+                <?php end_slot(); ?>
+
+                <div cmp-interpretation>
+
+                </div>
+            </div>
             <div class='flex flex-col isolate items-center justify-center gap-4 md:flex-row lg:gap-6 text-center'>
                 <div>
                     <?= component('web/ui/button', [
                         'variant' => 'primary',
                         'slot' => 'Открыть карту',
                         'class' => 'mx-auto mb-1',
-                        'attrs' => ['cmp-start-spin-btn' => true]
+                        'attrs' => ['cmp-launch-game-btn' => true]
                     ]) ?>
                     <small>Бесплатно. Без регистрации</small>
                 </div>
