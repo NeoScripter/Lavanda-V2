@@ -342,9 +342,18 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
 
 [cmp-interpretation] > *.skeleton [component-adaptive-image],
 [cmp-interpretation] > *.skeleton p {
-    @apply animate-pulse bg-gray-300 rounded-sm;
+    background-color: #b9b2cb;
+    background-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 5s linear infinite;
+    border-radius: 0.5rem;
+    overflow: hidden;
 }
-
 [cmp-interpretation] > *.skeleton p {
     color: transparent;
     white-space: nowrap;
@@ -366,4 +375,13 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
 [cmp-interpretation-preview] p {
     text-wrap: balance;
     text-align: center;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
 }
