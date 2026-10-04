@@ -25,7 +25,7 @@ export default function initAdaptiveImages() {
         if (img.complete) {
             handleImgLoad();
         } else {
-            img.addEventListener('load', () => handleImgLoad());
+            img.addEventListener('load', () => handleImgLoad(), { once: true });
         }
     });
 }
