@@ -12,6 +12,14 @@ const HTML_TYPE_MAP = {
     bonus_home: HTML_TYPE.PREVIEW,
 };
 
+const LOREM = {
+    NAME: 'Lorem ipsum dolor sit',
+    THEME:
+        'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.',
+    ADVICE:
+        'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor.',
+};
+
 type HtmlType = typeof HTML_TYPE_MAP;
 
 export default class InterpretationHTML {
@@ -27,6 +35,17 @@ export default class InterpretationHTML {
                 return this.items(payload);
             case HTML_TYPE.PREVIEW:
                 return this.preview(payload);
+            default:
+                throw new Error('Unknown interpretation html type');
+        }
+    }
+
+    public getLoader(): HTMLElement {
+        switch (this.html_type) {
+            case HTML_TYPE.ITEMS:
+                return this.itemsLoader();
+            case HTML_TYPE.PREVIEW:
+                return this.previewLoader();
             default:
                 throw new Error('Unknown interpretation html type');
         }
@@ -89,5 +108,49 @@ export default class InterpretationHTML {
 
         const key = type as keyof HtmlType;
         return HTML_TYPE_MAP[key];
+    }
+
+    private previewLoader() {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('skeleton')
+
+        const p = document.createElement('p');
+        p.textContent = LOREM.THEME;
+        const img = document.createElement('div');
+        img.setAttribute('component-adaptive-image', '');
+        wrapper.appendChild(img);
+        wrapper.appendChild(p);
+        wrapper.setAttribute('cmp-interpretation-preview', '');
+
+        return wrapper;
+    }
+
+    private itemsLoader() {
+        const wrapper = document.createElement('ul');
+        wrapper.classList.add('skeleton')
+
+        for (let i = 0; i < 4; i++) {
+            const li = document.createElement('li');
+
+            const w1 = document.createElement('div');
+            const img = document.createElement('div');
+            img.setAttribute('component-adaptive-image', '');
+            const name = document.createElement('h3');
+            name.textContent = LOREM.NAME;
+            w1.append(name, img);
+
+            const w2 = document.createElement('div');
+            const theme = document.createElement('p');
+            theme.textContent = LOREM.THEME;
+            const advice = document.createElement('p');
+            advice.textContent = LOREM.ADVICE;
+            w2.append(theme, advice);
+
+            li.append(w1, w2);
+
+            wrapper.appendChild(li);
+        }
+
+        return wrapper;
     }
 }

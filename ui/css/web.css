@@ -340,6 +340,15 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
     aspect-ratio: 224 / 319;
 }
 
+[cmp-interpretation] > *.skeleton [component-adaptive-image],
+[cmp-interpretation] > *.skeleton p {
+    @apply animate-pulse bg-gray-300 rounded-sm;
+}
+
+[cmp-interpretation] > *.skeleton p {
+    color: transparent;
+}
+
 [cmp-interpretation-preview] {
     margin-bottom: 1.5rem;
 }
@@ -353,3 +362,4 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
     text-wrap: balance;
     text-align: center;
 }
+

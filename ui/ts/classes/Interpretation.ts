@@ -1,5 +1,5 @@
 import initAdaptiveImages from '../modules/adaptiveImages';
-import { qs } from '../utils';
+import { qs, wait } from '../utils';
 import InterpretationHTML from './InterpretationHTML';
 
 type Elements = {
@@ -51,6 +51,7 @@ export default class Interpretation {
     category: CategoryType[keyof CategoryType];
     elements: Elements;
     payload: InterpretationPayload | null;
+    html: InterpretationHTML;
 
     constructor(items: HTMLElement[]) {
         this.elements = {
@@ -59,6 +60,7 @@ export default class Interpretation {
         this.items = items;
         this.category = this.getCategory();
         this.payload = null;
+        this.html = new InterpretationHTML();
     }
 
     public async show() {
@@ -66,7 +68,7 @@ export default class Interpretation {
             const payload = (await this.getPayload()) as InterpretationPayload;
             this.payload = payload;
         }
-        const html = new InterpretationHTML().generate(this.payload);
+        const html = this.html.generate(this.payload);
         this.elements.interpretation.appendChild(html);
         this.elements.interpretation.classList.remove('hidden');
         this.elements.interpretation.scrollIntoView({
@@ -104,8 +106,15 @@ export default class Interpretation {
         }
     }
 
-    private displayLoader() {}
-    private hideLoader() {}
+    private displayLoader() {
+        const loader = this.html.getLoader();
+        this.elements.interpretation.classList.remove('hidden');
+        this.elements.interpretation.appendChild(loader);
+    }
+
+    private hideLoader() {
+        this.elements.interpretation.innerHTML = '';
+    }
 
     private getCategory() {
         const game = qs<HTMLDivElement>('[cmp-game]');
