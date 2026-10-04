@@ -347,6 +347,11 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
 
 [cmp-interpretation] > *.skeleton p {
     color: transparent;
+    white-space: nowrap;
+    max-width: 100%;
+    display: block;
+    margin-block: 0.75em;
+    text-box-trim: trim-both;
 }
 
 [cmp-interpretation-preview] {

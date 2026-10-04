@@ -97,6 +97,7 @@ export default class Interpretation {
             const queryString = new URLSearchParams(queryParams).toString();
             const url = `${API_URL}?${queryString}`;
 
+            // await wait(5000);
             const response = await fetch(url);
             return await response.json();
         } catch (error) {
@@ -110,6 +111,10 @@ export default class Interpretation {
         const loader = this.html.getLoader();
         this.elements.interpretation.classList.remove('hidden');
         this.elements.interpretation.appendChild(loader);
+        this.elements.interpretation.scrollIntoView({
+            block: 'center',
+            behavior: 'smooth',
+        });
     }
 
     private hideLoader() {
