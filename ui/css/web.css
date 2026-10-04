@@ -293,11 +293,11 @@ li[component-pic].open {
         padding 500ms ease-out;
 }
 
-div[cmp-game-stage]:has(input[value='game-stage-toggle-1']:checked)
+[cmp-game-stage]:has(input[value='game-stage-toggle-1']:checked)
     #game-stage-slot-2 {
     display: none;
 }
-div[cmp-game-stage]:has(input[value='game-stage-toggle-2']:checked)
+[cmp-game-stage]:has(input[value='game-stage-toggle-2']:checked)
     #game-stage-slot-1 {
     display: none;
 }
@@ -362,4 +362,3 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
     text-wrap: balance;
     text-align: center;
 }
-
