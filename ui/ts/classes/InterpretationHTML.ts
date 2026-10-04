@@ -34,33 +34,40 @@ export default class InterpretationHTML {
 
     private items(data: InterpretationPayload) {
         const wrapper = document.createElement('ul');
-        const item = document.createElement('li');
 
-        const w1 = document.createElement('div');
-        const img = createAdaptiveImg(data.img, data.alt);
-        const name = document.createElement('h3');
-        name.textContent = data.title;
-        w1.append(name, img);
+        for (const item of data.items) {
+            const li = document.createElement('li');
 
-        const w2 = document.createElement('div');
-        const theme = document.createElement('p');
-        theme.textContent = data.theme;
-        const advice = document.createElement('p');
-        advice.textContent = data.advice;
-        w2.append(theme, advice);
+            const w1 = document.createElement('div');
+            const img = createAdaptiveImg(item.img, item.alt);
+            const name = document.createElement('h3');
+            name.textContent = item.name;
+            w1.append(name, img);
 
-        item.append(w1, w2);
+            const w2 = document.createElement('div');
+            const theme = document.createElement('p');
+            theme.textContent = item.themes[0]?.html ?? '';
+            const advice = document.createElement('p');
+            advice.textContent = item.advice;
+            w2.append(theme, advice);
 
-        wrapper.appendChild(item);
+            li.append(w1, w2);
+
+            wrapper.appendChild(li);
+        }
 
         return wrapper;
     }
 
     private preview(data: InterpretationPayload) {
         const wrapper = document.createElement('div');
+
+        if (data.items.length === 0) return wrapper;
+
+        const item = data.items[0];
         const p = document.createElement('p');
-        p.textContent = data.theme;
-        const img = createAdaptiveImg(data.img, data.alt);
+        p.textContent = item.themes[0]?.html;
+        const img = createAdaptiveImg(item.img, item.alt);
         wrapper.appendChild(img);
         wrapper.appendChild(p);
 

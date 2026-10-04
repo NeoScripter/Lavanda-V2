@@ -5,7 +5,28 @@ type Elements = {
     interpretation: HTMLDivElement;
 };
 
-export type InterpretationPayload = {};
+export type InterpretationPayload = {
+    items: {
+        id: number;
+        name: string;
+        img: string;
+        alt: string;
+        advice: string;
+        themes: {
+            id: number;
+            name: string;
+            themeable_type: string;
+            themeable_id: number;
+            html: string;
+        }[];
+    }[];
+    match_sets: {
+        id: number;
+        matcheable_id: string;
+        matcheable_type: string;
+        html: string;
+    }[];
+};
 
 const GAME_CATEGORY = {
     TAROT: 'tarot',
@@ -16,7 +37,6 @@ const GAME_CATEGORY = {
     STONE: 'stone',
     BONUS: 'bonus',
 };
-
 
 const GAME_CATEGORY_MAP = {
     bonus: GAME_CATEGORY.BONUS,
@@ -29,7 +49,7 @@ export default class Interpretation {
     ids: string[];
     category: CategoryType[keyof CategoryType];
     elements: Elements;
-    payload: InterpretationPayload;
+    payload: InterpretationPayload | null;
 
     constructor(items: HTMLElement[]) {
         this.elements = {
@@ -37,10 +57,14 @@ export default class Interpretation {
         };
         this.ids = this.pluckIds(items);
         this.category = this.getCategory();
-        this.payload = this.getPayload();
+        this.payload = null;
     }
 
-    public show() {
+    public async show() {
+        if (! this.payload) {
+            const payload = await this.getPayload() as InterpretationPayload; 
+            this.payload = payload;
+        }
         const html = new InterpretationHTML().generate(this.payload);
         this.elements.interpretation.appendChild(html);
     }
@@ -63,7 +87,7 @@ export default class Interpretation {
             const url = `${API_URL}?${queryString}`;
 
             const response = await fetch(url);
-            this.payload = await response.json();
+            return await response.json();
         } catch (error) {
             console.log(error);
         } finally {
