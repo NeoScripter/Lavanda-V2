@@ -50,7 +50,7 @@
             'sizes'    => 'mb|tb',
             'alt' => "Empty image alt",
             'path'     => '/assets/images/shared/empty/empty',
-            'prt_class' => 'bg-contain! size-full',
+            'prt_class' => 'bg-contain!',
             'img_class' => 'size-full object-contain! object-center',
         ]) ?>
     </template>

@@ -51,27 +51,38 @@ export default class InterpretationHTML {
 
     private items(data: InterpretationPayload) {
         const wrapper = document.createElement('ul');
+        wrapper.setAttribute('cmp-interpretation-items', '');
+
+        const children = [];
 
         for (const item of data.items) {
             const li = document.createElement('li');
 
             const w1 = document.createElement('div');
+            w1.classList.add('headline');
             const img = createAdaptiveImg(item.img, item.alt);
             const name = document.createElement('h3');
             name.textContent = item.name;
             w1.append(name, img);
 
             const w2 = document.createElement('div');
+            w2.classList.add('content');
             const theme = document.createElement('p');
             theme.textContent = item.themes[0]?.html ?? '';
             const advice = document.createElement('p');
-            advice.textContent = item.advice;
+            advice.textContent = LOREM.ADVICE;
+            advice.classList.add('advice');
             w2.append(theme, advice);
 
             li.append(w1, w2);
 
-            wrapper.appendChild(li);
+            const hr = document.createElement('hr');
+
+            children.push(li, hr);
         }
+
+        children.pop();
+        wrapper.append(...children);
 
         return wrapper;
     }
