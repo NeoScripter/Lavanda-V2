@@ -17,17 +17,17 @@ class InterpretationController extends Controller
     public function __invoke(\Base $hive)
     {
         $locale = Session::get_locale();
-        $resource = $hive->GET['resource'];
+        $category = $hive->GET['category'];
         $ids = $hive->GET['ids'];
 
-        if (! in_array($resource, MatcheableType::values())) {
-            send_json(['message' =>  "Invalid resource type"], 400);
+        if (! in_array($category, MatcheableType::values())) {
+            send_json(['message' =>  "Invalid category type"], 400);
         }
 
         $ids = explode(',', $ids);
         $wildcards = to_wildcards($ids);
 
-        $model = match ($resource) {
+        $model = match ($category) {
             MatcheableType::RUNE->value => RuneAsset::class,
             MatcheableType::STONE->value => StoneAsset::class,
             default => FlipCard::class,
@@ -36,7 +36,7 @@ class InterpretationController extends Controller
         $items = new $model();
 
         if ($model === FlipCard::class) {
-            $sql = ["locale=? AND id IN ($wildcards) AND variant=?", $locale, ...$ids, $resource];
+            $sql = ["locale=? AND id IN ($wildcards) AND variant=?", $locale, ...$ids, $category];
         } else {
             $sql = ["locale=? AND id IN ($wildcards)", $locale, ...$ids];
         }
@@ -47,18 +47,40 @@ class InterpretationController extends Controller
             send_json(['message' =>  "Items not found"], 404);
         }
 
-        $payload = [];
+        $db = $hive->get('DB');
+
+        $all_themes = $db->exec(
+                "SELECT * FROM themes WHERE themeable_type = ? AND themeable_id IN ($wildcards)",
+                [$category, ...$ids]
+            );
+
+        $match_sets = $db->exec(
+                "SELECT * FROM match_sets WHERE matcheable_type = ? AND locale = ? AND matcheable_id = ?",
+                [$category, $locale, implode('|', $ids)]
+            );
+
+        $payload = ['items' => [], 'match_sets' => []];
 
         foreach ($items as $item) {
-            $payload[] = [
+            $themes = [];
+
+            foreach ($all_themes as $theme) {
+                if ($theme['themeable_id'] === $item->id) {
+                    $themes[] = $theme;
+                }
+            }
+
+            $payload['items'][] = [
                 'id' => $item->id,
                 'name' => $item->name,
                 'img' => $item->front_src,
                 'alt' => $item->front_alt,
                 'advice' => $item->advice,
-                'themes' => get_unique_themes_by_type(ThemeableType::from($resource), $item->id),
+                'themes' => $themes
             ];
         }
+
+        $payload['match_sets'] = $match_sets;
 
         send_json($payload);
     }
