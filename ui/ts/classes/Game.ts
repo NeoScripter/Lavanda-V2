@@ -6,14 +6,13 @@ type Elements = {
     launchGameBtns: NodeListOf<HTMLButtonElement>;
     setNumRoundsBtns: NodeListOf<HTMLButtonElement>;
     game: HTMLDivElement;
-
 };
 
 export default class Game {
     selected: HTMLElement[];
     numRounds: number;
     elements: Elements;
-    resultUI: Interpretation;
+    result: Interpretation;
 
     constructor() {
         this.elements = {
@@ -25,7 +24,7 @@ export default class Game {
         };
         this.selected = [];
         this.numRounds = 1;
-        this.resultUI = new Interpretation(this.selected);
+        this.result = new Interpretation(this.selected);
     }
 
     public init() {
@@ -43,7 +42,7 @@ export default class Game {
         this.selected.push(selectedItem);
 
         if (this.selected.length >= this.numRounds) {
-            this.resultUI.show();
+            this.result.show();
             this.showResetBtns();
         }
         this.enableLaunchGameBtns();
@@ -51,8 +50,12 @@ export default class Game {
 
     private reset() {
         this.selected.length = 0;
-        this.resultUI.reset();
+        this.result.reset();
         this.showLaunchGameBtns();
+        this.elements.game.scrollIntoView({
+            block: 'center',
+            behavior: 'smooth',
+        });
     }
 
     private setNumRounds() {

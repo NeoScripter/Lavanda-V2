@@ -62,19 +62,24 @@ export default class Interpretation {
     }
 
     public async show() {
-        if (! this.payload) {
-            const payload = await this.getPayload() as InterpretationPayload; 
+        if (!this.payload) {
+            const payload = (await this.getPayload()) as InterpretationPayload;
             this.payload = payload;
         }
         const html = new InterpretationHTML().generate(this.payload);
         this.elements.interpretation.appendChild(html);
         this.elements.interpretation.classList.remove('hidden');
+        this.elements.interpretation.scrollIntoView({
+            block: 'center',
+            behavior: 'smooth',
+        });
         initAdaptiveImages();
     }
 
     public reset() {
         this.elements.interpretation.innerHTML = '';
         this.elements.interpretation.classList.add('hidden');
+        this.payload = null;
     }
 
     public async getPayload() {

@@ -62,6 +62,11 @@ export default class GameRound {
             cards[prevIdx].classList.remove('highlighted');
             cards[currentIdx].classList.add('highlighted');
             currentIdx = currentIdx === cards.length - 1 ? 0 : currentIdx + 1;
+
+            cards[currentIdx].scrollIntoView({
+                block: 'center',
+                behavior: 'smooth',
+            });
         };
 
         let extraDuration = Math.floor(Math.random() * 10);
