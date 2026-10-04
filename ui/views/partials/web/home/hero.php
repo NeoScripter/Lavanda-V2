@@ -74,7 +74,11 @@ extract(component_props(
                         'variant' => 'primary',
                         'slot' => 'Открыть карту',
                         'class' => 'mx-auto mb-1',
-                        'attrs' => ['cmp-launch-game-btn' => true]
+                        'attrs' => [
+                            'cmp-launch-game-btn' => true,
+                            'data-default-slot' => 'Открыть карту',
+                            'data-reset-slot' => 'Попробовать снова'
+                        ]
                     ]) ?>
                     <small>Бесплатно. Без регистрации</small>
                 </div>

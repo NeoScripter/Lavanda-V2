@@ -6,12 +6,14 @@ type Elements = {
     launchGameBtns: NodeListOf<HTMLButtonElement>;
     setNumRoundsBtns: NodeListOf<HTMLButtonElement>;
     game: HTMLDivElement;
+
 };
 
 export default class Game {
     selected: HTMLElement[];
     numRounds: number;
     elements: Elements;
+    resultUI: Interpretation;
 
     constructor() {
         this.elements = {
@@ -23,6 +25,7 @@ export default class Game {
         };
         this.selected = [];
         this.numRounds = 1;
+        this.resultUI = new Interpretation(this.selected);
     }
 
     public init() {
@@ -40,14 +43,16 @@ export default class Game {
         this.selected.push(selectedItem);
 
         if (this.selected.length >= this.numRounds) {
-            const result = new Interpretation(this.selected);
-            result.show();
+            this.resultUI.show();
+            this.showResetBtns();
         }
         this.enableLaunchGameBtns();
     }
 
     private reset() {
         this.selected.length = 0;
+        this.resultUI.reset();
+        this.showLaunchGameBtns();
     }
 
     private setNumRounds() {
@@ -73,7 +78,9 @@ export default class Game {
 
     private launchGameOnClick() {
         this.elements.launchGameBtns.forEach((btn) =>
-            btn.addEventListener('click', () => this.launchGame())
+            btn.addEventListener('click', () => this.launchGame(), {
+                once: true,
+            })
         );
     }
 
@@ -87,5 +94,34 @@ export default class Game {
         this.elements.launchGameBtns.forEach((btn) =>
             btn.removeAttribute('disabled')
         );
+    }
+
+    private showLaunchGameBtns() {
+        this.elements.launchGameBtns.forEach((btn) => {
+            const launchGameLabel = btn.getAttribute('data-default-slot');
+
+            if (!launchGameLabel) {
+                throw new Error(
+                    "The launch game button doesn't have a default slot attribute"
+                );
+            }
+            btn.textContent = launchGameLabel;
+        });
+
+        this.launchGameOnClick();
+    }
+
+    private showResetBtns() {
+        this.elements.launchGameBtns.forEach((btn) => {
+            const resetLabel = btn.getAttribute('data-reset-slot');
+
+            if (!resetLabel) {
+                throw new Error(
+                    "The launch game button doesn't have a reset slot attribute"
+                );
+            }
+            btn.textContent = resetLabel;
+            btn.addEventListener('click', () => this.reset(), { once: true });
+        });
     }
 }

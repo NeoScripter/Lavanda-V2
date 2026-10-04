@@ -47,7 +47,7 @@ const GAME_CATEGORY_MAP = {
 type CategoryType = typeof GAME_CATEGORY_MAP;
 
 export default class Interpretation {
-    ids: string[];
+    items: HTMLElement[];
     category: CategoryType[keyof CategoryType];
     elements: Elements;
     payload: InterpretationPayload | null;
@@ -56,7 +56,7 @@ export default class Interpretation {
         this.elements = {
             interpretation: qs<HTMLDivElement>('[cmp-interpretation]'),
         };
-        this.ids = this.pluckIds(items);
+        this.items = items;
         this.category = this.getCategory();
         this.payload = null;
     }
@@ -80,7 +80,7 @@ export default class Interpretation {
     public async getPayload() {
         const API_URL = '/api/interpretation';
         const queryParams = {
-            ids: this.ids.join(','),
+            ids: this.pluckItemsIds().join(','),
             category: this.category,
         };
 
@@ -118,8 +118,8 @@ export default class Interpretation {
         return GAME_CATEGORY_MAP[key];
     }
 
-    private pluckIds(items: HTMLElement[]) {
-        return items.map((item) => {
+    private pluckItemsIds() {
+        return this.items.map((item) => {
             const id = item.getAttribute('data-id');
 
             if (!id) {
