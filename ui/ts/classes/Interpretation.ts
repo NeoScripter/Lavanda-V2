@@ -1,3 +1,4 @@
+import initAdaptiveImages from '../modules/adaptiveImages';
 import { qs } from '../utils';
 import InterpretationHTML from './InterpretationHTML';
 
@@ -67,10 +68,13 @@ export default class Interpretation {
         }
         const html = new InterpretationHTML().generate(this.payload);
         this.elements.interpretation.appendChild(html);
+        this.elements.interpretation.classList.remove('hidden');
+        initAdaptiveImages();
     }
 
     public reset() {
         this.elements.interpretation.innerHTML = '';
+        this.elements.interpretation.classList.add('hidden');
     }
 
     public async getPayload() {

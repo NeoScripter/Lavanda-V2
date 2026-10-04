@@ -330,3 +330,26 @@ li[cmp-flip-card].flipped > *:nth-child(1) {
 li[cmp-flip-card].flipped > *:nth-child(2) {
     transform: rotateY(180deg);
 }
+
+[cmp-game]:has(+ [cmp-interpretation]:not(.hidden)) {
+    display: none;
+}
+
+[cmp-interpretation] [component-adaptive-image] {
+    width: 100%;
+    aspect-ratio: 224 / 319;
+}
+
+[cmp-interpretation-preview] {
+    margin-bottom: 1.5rem;
+}
+[cmp-interpretation-preview] [component-adaptive-image] {
+    max-width: 14rem;
+    margin-block: 2rem;
+    margin-inline: auto;
+}
+
+[cmp-interpretation-preview] p {
+    text-wrap: balance;
+    text-align: center;
+}

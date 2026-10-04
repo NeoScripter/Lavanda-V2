@@ -23,10 +23,10 @@ class WebUI {
             initAdaptiveImages,
             initPracticeItems,
             initHeader,
-            new Game().init,
-            new GameStage().init,
         ];
 
+        new Game().init();
+        new GameStage().init();
         for (const handler of handlers) {
             try {
                 handler();

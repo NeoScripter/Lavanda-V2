@@ -70,6 +70,7 @@ export default class InterpretationHTML {
         const img = createAdaptiveImg(item.img, item.alt);
         wrapper.appendChild(img);
         wrapper.appendChild(p);
+        wrapper.setAttribute('cmp-interpretation-preview', '');
 
         return wrapper;
     }

@@ -48,8 +48,8 @@ extract(component_props(
         </div>
         <article class='lg:basis-1/2 space-y-6'>
             <header class='text-center text-balance'>
-                <h2 class='text-2xl md:text-3xl! lg:text-4xl!'>Попробуйте одну карту</h2>
-                <p>Авторская колода "Почему вы сегодня здесь"</p>
+                <h2 class='text-2xl md:text-3xl! lg:text-4xl!'>Давай познакомимся?</h2>
+                <p>Начни с авторской колоды с котиками. Без сложных раскладов и длинных объяснений - просто открой карту и посмотри, что она расскажет о том, почему именно сегодня ты здесь.</p>
             </header>
 
 
@@ -66,9 +66,7 @@ extract(component_props(
 
                 <?php end_slot(); ?>
 
-                <div cmp-interpretation>
-
-                </div>
+                <article cmp-interpretation class='hidden'></article>
             </div>
             <div class='flex flex-col isolate items-center justify-center gap-4 md:flex-row lg:gap-6 text-center'>
                 <div>

@@ -4,7 +4,7 @@ type Elements = {
     revealGameBtns: NodeListOf<HTMLButtonElement>;
     hideGameBtns: NodeListOf<HTMLButtonElement>;
     hideOnClickBtns: NodeListOf<HTMLDivElement>;
-    stage: HTMLDivElement;
+    stage: HTMLDivElement | null;
 };
 
 export default class GameStage {
@@ -15,7 +15,7 @@ export default class GameStage {
             revealGameBtns: qsa<HTMLButtonElement>('[cmp-reveal-game-btn]'),
             hideGameBtns: qsa<HTMLButtonElement>('[cmp-hide-game-btn]'),
             hideOnClickBtns: qsa<HTMLDivElement>('[cmp-hide-on-click]'),
-            stage: qs<HTMLDivElement>('[cmp-game-stage]'),
+            stage: qs<HTMLDivElement>('[cmp-game-stage]', 'silent'),
         };
     }
 
@@ -32,10 +32,10 @@ export default class GameStage {
     }
 
     private revealGame() {
-        this.elements.stage.classList.remove('hidden');
+        this.elements.stage?.classList.remove('hidden');
     }
 
     private hideGame() {
-        this.elements.stage.classList.add('hidden');
+        this.elements.stage?.classList.add('hidden');
     }
 }
