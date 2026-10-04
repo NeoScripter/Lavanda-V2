@@ -1,5 +1,6 @@
 import { GAME_TYPES } from '../constants';
 import { qs, qsa, wait } from '../utils';
+import GameRound from './GameRound';
 
 type Elements = {
     launchGameBtns: NodeListOf<HTMLButtonElement>;
@@ -34,15 +35,12 @@ export default class Game {
     }
 
     private async launchGame() {
-        const type = this.elements.game.getAttribute('data-type');
-
-        if (!type) {
-            throw new Error("The game doesn't contain the type attribute");
-        }
+        const round = new GameRound();
+        round.init();
 
         this.disableLaunchGameBtns();
 
-        const selectedItem = await this.gameTypes[type](this.elements.game);
+        const selectedItem = await round.run();
 
         this.selected.push(selectedItem);
 
@@ -56,7 +54,6 @@ export default class Game {
     private reset() {
         this.selected.length = 0;
     }
-
 
     private setNumRounds() {
         this.elements.setNumRoundsBtns.forEach((btn) =>
@@ -95,32 +92,5 @@ export default class Game {
         this.elements.launchGameBtns.forEach((btn) =>
             btn.removeAttribute('disabled')
         );
-    }
-
-    private async spinRandomCards(gameElement: HTMLElement) {
-        const cards = qsa<HTMLLIElement>('[cmp-card]', gameElement);
-
-        let duration = 50;
-        let currentIdx = 0;
-
-        const handleNext = () => {
-            const prevIdx =
-                currentIdx === 0 ? cards.length - 1 : currentIdx - 1;
-            cards[prevIdx].classList.remove('highlighted');
-            cards[currentIdx].classList.add('highlighted');
-            currentIdx = currentIdx === cards.length - 1 ? 0 : currentIdx + 1;
-        };
-
-        let extraDuration = Math.floor(Math.random() * 10);
-        const maxDuration = 100;
-
-        while (duration < maxDuration) {
-            handleNext();
-            duration = Math.min(maxDuration, duration + 5 + extraDuration);
-            await wait(duration);
-        }
-
-        cards.forEach((card) => card.classList.remove('highlighted'));
-        return cards[currentIdx];
     }
 }

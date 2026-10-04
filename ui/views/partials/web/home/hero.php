@@ -1,4 +1,7 @@
 <?php
+
+use Enums\GameType;
+
 $hive = \Base::instance();
 
 extract(component_props(
@@ -54,11 +57,7 @@ extract(component_props(
 
                 <?php slot('components/web/layout/card-deck', [
                     'count' => count($cards),
-                    'attrs' => [
-                        'cmp-game' => true,
-                        'data-game-type' => 'random_cards',
-                        'data-game-category' => 'bonus',
-                    ]
+                    'attrs' => ['cmp-game' => GameType::BONUS_HOME->value]
                 ]); ?>
 
                 <?php foreach ($cards as $card) : ?>

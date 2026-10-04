@@ -1,5 +1,7 @@
 <?php
 
+use Enums\GameType;
+
 extract(component_props(
     required: ['cards'],
     optional: [],
@@ -50,7 +52,7 @@ extract(component_props(
     <?php slot('components/web/layout/card-deck', [
         'count' => count($cards),
         'gap' => 0.8,
-        'attrs' => ['cmp-game' => true, 'data-type' => 'random_cards']
+        'attrs' => ['cmp-game' => GameType::BONUS->value]
     ]); ?>
     <?php foreach ($cards as $card) : ?>
         <?= component('web/ui/card', compact('card')) ?>

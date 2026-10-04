@@ -1,7 +1,7 @@
 <?php
 
 extract(component_props(
-    required: ['slots', 'html-type'],
+    required: ['slots'],
     optional: ['class' => '', 'labels' => ['Выбор лаванды']],
     props: get_defined_vars(),
 )); ?>
@@ -28,7 +28,6 @@ extract(component_props(
     </div>
 
     <article cmp-interpretation 
-        data-html-type="<?= $html_type ?>"
         class='bg-white py-14.5 rounded-b-xl px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23'>
         <ul>
             <li>hiasdsad</li>
