@@ -1,5 +1,4 @@
-import { GAME_TYPES } from '../constants';
-import { qs, qsa, wait } from '../utils';
+import { qs, qsa } from '../utils';
 import GameRound from './GameRound';
 import Interpretation from './Interpretation';
 
@@ -13,7 +12,6 @@ export default class Game {
     selected: HTMLElement[];
     numRounds: number;
     elements: Elements;
-    gameTypes: Record<string, (arg: HTMLElement) => Promise<HTMLElement>>;
 
     constructor() {
         this.elements = {
@@ -25,9 +23,6 @@ export default class Game {
         };
         this.selected = [];
         this.numRounds = 1;
-        this.gameTypes = {
-            [GAME_TYPES.RANDOM_CARDS]: this.spinRandomCards,
-        };
     }
 
     public init() {
@@ -37,7 +32,6 @@ export default class Game {
 
     private async launchGame() {
         const round = new GameRound();
-        round.init();
 
         this.disableLaunchGameBtns();
 
@@ -46,9 +40,8 @@ export default class Game {
         this.selected.push(selectedItem);
 
         if (this.selected.length >= this.numRounds) {
-            const interpretation = new Interpretation();
-            this.displayResults();
-            this.reset();
+            const result = new Interpretation(this.selected);
+            result.show();
         }
         this.enableLaunchGameBtns();
     }
