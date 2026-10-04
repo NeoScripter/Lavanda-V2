@@ -1,6 +1,7 @@
 import { GAME_TYPES } from '../constants';
 import { qs, qsa, wait } from '../utils';
 import GameRound from './GameRound';
+import Interpretation from './Interpretation';
 
 type Elements = {
     launchGameBtns: NodeListOf<HTMLButtonElement>;
@@ -45,6 +46,7 @@ export default class Game {
         this.selected.push(selectedItem);
 
         if (this.selected.length >= this.numRounds) {
+            const interpretation = new Interpretation();
             this.displayResults();
             this.reset();
         }

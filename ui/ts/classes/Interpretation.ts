@@ -12,27 +12,43 @@ const HTML_TYPE = {
     ITEMS: 'items',
 };
 
+const GAME_CATEGORY = {
+    TAROT: 'tarot',
+    METAPHORIC: 'metaphoric',
+    LENORMAND: 'lenormand',
+    MIND_GAMES: 'mind_games',
+    RUNE: 'rune',
+    STONE: 'stone',
+    BONUS: 'bonus',
+};
+
 const HTML_TYPE_MAP = {
     bonus: HTML_TYPE.ITEMS,
     bonus_home: HTML_TYPE.ITEMS,
 };
 
+const GAME_CATEGORY_MAP = {
+    bonus: GAME_CATEGORY.BONUS,
+    bonus_home: GAME_CATEGORY.BONUS,
+};
+
 type HtmlType = typeof HTML_TYPE_MAP;
+type CategoryType = typeof GAME_CATEGORY_MAP;
 
 export default class Interpretation {
     ids: string[];
-    category: string;
+    category: CategoryType[keyof CategoryType];
     elements: Elements;
     payload: InterpretationPayload;
     htmlType: HtmlType[keyof HtmlType];
 
-    constructor(items: HTMLElement[], category: string) {
+    constructor(items: HTMLElement[]) {
         this.elements = {
             interpretation: qs<HTMLDivElement>('[cmp-interpretation]'),
             game: qs<HTMLDivElement>('[cmp-game]'),
         };
         this.ids = this.pluckIds(items);
-        this.category = category;
+        this.category = this.getCategory();
         this.payload = this.getPayload();
         this.htmlType = this.getHtmlType();
     }
@@ -84,6 +100,21 @@ export default class Interpretation {
 
         const key = type as keyof HtmlType;
         return HTML_TYPE_MAP[key];
+    }
+
+    private getCategory() {
+        const type = this.elements.game.getAttribute('cmp-game');
+
+        if (!type) {
+            throw new Error("The game doesn't contain the cmp-game attribute");
+        }
+
+        if (!Object.keys(GAME_CATEGORY_MAP).includes(type)) {
+            throw new Error('The game category is invalid');
+        }
+
+        const key = type as keyof CategoryType;
+        return GAME_CATEGORY_MAP[key];
     }
 
     private pluckIds(items: HTMLElement[]) {
