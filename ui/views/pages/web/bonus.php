@@ -54,6 +54,8 @@ extract(component_props(
         'class' => 'mx-auto'
     ]) ?>
 
+    <?= component('web/layout/selected-items') ?>
+
     <?php slot('components/web/layout/card-deck', [
         'count' => count($cards),
         'gap' => 0.8,

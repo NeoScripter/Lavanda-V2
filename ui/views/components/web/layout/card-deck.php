@@ -21,7 +21,10 @@ extract(component_props(
         }
     </style>
 
-    <ul id='<?= $id ?>'
+    <ul 
+        cmp-visible-at-start
+        cmp-visible-during
+        id='<?= $id ?>'
         class='grid max-w-full gap-y-1 mx-auto' <?= serialize_attrs($attrs) ?>>
         <?= $slot ?>
     </ul>

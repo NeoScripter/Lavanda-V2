@@ -10,6 +10,7 @@ type Elements = {
     visibleDuring: NodeListOf<HTMLElement>;
     setNumRoundsBtns: NodeListOf<HTMLButtonElement>;
     game: HTMLDivElement;
+    selectedItemsUI: HTMLUListElement | null;
 };
 
 export default class Game {
@@ -29,6 +30,10 @@ export default class Game {
             visibleAtStart: qsa<HTMLElement>('[cmp-visible-at-start]'),
             visibleAtEnd: qsa<HTMLElement>('[cmp-visible-at-end]'),
             visibleDuring: qsa<HTMLElement>('[cmp-visible-during]'),
+            selectedItemsUI: qs<HTMLUListElement>(
+                '[cmp-selected-items]',
+                'silent'
+            ),
         };
         this.selected = [];
         this.numRounds = 1;
@@ -50,10 +55,11 @@ export default class Game {
         const selectedItem = await round.run();
 
         this.selected.push(selectedItem);
+        this.showSelectedItem(selectedItem);
 
         if (this.selected.length >= this.numRounds) {
-            await this.result.show();
             this.setState('end');
+            await this.result.show();
         }
 
         this.enableGameBtns();
@@ -61,6 +67,11 @@ export default class Game {
 
     private reset() {
         this.selected.length = 0;
+
+        if (this.elements.selectedItemsUI) {
+            this.elements.selectedItemsUI.innerHTML = '';
+        }
+
         this.result.reset();
         this.setState('start');
         this.elements.game.scrollIntoView({
@@ -121,20 +132,44 @@ export default class Game {
     }
 
     private setState(type: 'start' | 'during' | 'end') {
-        this.elements.visibleAtStart.forEach((element) =>
-            type === 'start'
-                ? element.classList.remove('hidden')
-                : element.classList.add('hidden')
-        );
-        this.elements.visibleDuring.forEach((element) =>
-            type === 'during'
-                ? element.classList.remove('hidden')
-                : element.classList.add('hidden')
-        );
-        this.elements.visibleAtEnd.forEach((element) =>
-            type === 'end'
-                ? element.classList.remove('hidden')
-                : element.classList.add('hidden')
-        );
+        [
+            ...this.elements.visibleAtStart,
+            ...this.elements.visibleAtEnd,
+            ...this.elements.visibleDuring,
+        ].forEach((el) => el.classList.add('hidden'));
+
+        if (type === 'start') {
+            this.elements.visibleAtStart.forEach((el) =>
+                el.classList.remove('hidden')
+            );
+        } else if (type === 'end') {
+            this.elements.visibleAtEnd.forEach((el) =>
+                el.classList.remove('hidden')
+            );
+        } else {
+            this.elements.visibleDuring.forEach((el) =>
+                el.classList.remove('hidden')
+            );
+        }
+    }
+
+    private showSelectedItem(item: HTMLLIElement) {
+        if (!this.elements.selectedItemsUI) return;
+
+        const frontSrc = item.getAttribute('data-front-img-src');
+        const frontAlt = item.getAttribute('data-front-img-alt');
+        const backSrc = item.getAttribute('data-back-img-src');
+        const backAlt = item.getAttribute('data-back-img-alt');
+
+        if (!backSrc || !backAlt || !frontSrc || !frontAlt) {
+            throw new Error(
+                "Item element doesn't contain the image data attributes"
+            );
+        }
+
+        item.innerHTML = item.innerHTML.replaceAll(backSrc, frontSrc);
+        item.innerHTML = item.innerHTML.replace(backAlt, frontAlt);
+
+        this.elements.selectedItemsUI.appendChild(item);
     }
 }
