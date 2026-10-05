@@ -21,5 +21,4 @@ extract(component_props(
         'prt_class' => 'size-full bg-contain! isolate transition-transform',
         'img_class' => 'object-contain!',
     ]) ?>
-    <button cmp-selectable-item class='absolute z-1000 cursor-pointer inset-0 bg-red-400/20'></button>
 </li>
