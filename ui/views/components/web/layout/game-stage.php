@@ -11,7 +11,10 @@ extract(component_props(
     <div>
         <nav class="flex flex-col xs:flex-row justify-center xs:gap-[1.25em] <?= count($labels) < 2 ? 'hidden' : '' ?>">
             <?php foreach ($labels as $idx => $label) : ?>
-                <label cmp-game-stage-toggle class='has-checked:bg-primary has-checked:text-white xs:min-w-[15em] font-medium bg-white cursor-pointer py-[0.75em] uppercase text-center xs:rounded-t-2xl px-[1.25em] text-primary transition-colors'>
+                <label
+                    cmp-game-stage-toggle
+                    cmp-reset-game-btn
+                    class='has-checked:bg-primary has-checked:text-white xs:min-w-[15em] font-medium bg-white cursor-pointer py-[0.75em] uppercase text-center xs:rounded-t-2xl px-[1.25em] text-primary transition-colors'>
                     <input name="section" type="radio" class="hidden" value="<?= 'game-stage-toggle-' . $idx + 1 ?>" <?= $idx === 0 ? 'checked' : '' ?> />
                     <?= $label ?>
                 </label>

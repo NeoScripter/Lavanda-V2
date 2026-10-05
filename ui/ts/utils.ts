@@ -141,3 +141,9 @@ export function createAdaptiveImg(newSrc: string, newAlt: string) {
 
     return wrapper;
 }
+
+export function cloneAttributes(to: HTMLElement, from: HTMLElement) {
+    [...from.attributes].forEach((attr) => {
+        to.setAttribute(attr.nodeName, attr.nodeValue ?? '');
+    });
+}

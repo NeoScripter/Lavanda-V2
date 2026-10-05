@@ -4,6 +4,7 @@ import Interpretation from './Interpretation';
 
 type Elements = {
     launchGameBtns: NodeListOf<HTMLButtonElement>;
+    resetGameBtns: NodeListOf<HTMLButtonElement>;
     setNumRoundsBtns: NodeListOf<HTMLButtonElement>;
     game: HTMLDivElement;
 };
@@ -17,6 +18,7 @@ export default class Game {
     constructor() {
         this.elements = {
             launchGameBtns: qsa<HTMLButtonElement>('[cmp-launch-game-btn]'),
+            resetGameBtns: qsa<HTMLButtonElement>('[cmp-reset-game-btn]'),
             setNumRoundsBtns: qsa<HTMLButtonElement>(
                 '[cmp-set-num-rounds-btn]'
             ),
@@ -29,6 +31,7 @@ export default class Game {
 
     public init() {
         this.launchGameOnClick();
+        this.resetGameOnClick();
         this.setNumRounds();
     }
 
@@ -84,6 +87,12 @@ export default class Game {
             btn.addEventListener('click', () => this.launchGame(), {
                 once: true,
             })
+        );
+    }
+
+    private resetGameOnClick() {
+        this.elements.resetGameBtns.forEach((btn) =>
+            btn.addEventListener('click', () => this.reset())
         );
     }
 

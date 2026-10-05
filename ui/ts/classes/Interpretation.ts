@@ -29,6 +29,34 @@ export type InterpretationPayload = {
     }[];
 };
 
+const LOREM = {
+    NAME: 'Lorem ipsum dolor sit',
+    THEME: 'Lorem ipsum dolor sit amet',
+    ADVICE: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor.',
+};
+
+const SKELETON_PAYLOAD: InterpretationPayload = {
+    items: [
+        {
+            id: 1,
+            name: LOREM.NAME,
+            img: 'lorem',
+            alt: 'lorem',
+            advice: LOREM.THEME,
+            themes: [
+                {
+                    id: 1,
+                    name: 'theme',
+                    themeable_type: 'theme',
+                    themeable_id: 1,
+                    html: LOREM.THEME,
+                },
+            ],
+        },
+    ],
+    match_sets: [],
+};
+
 const GAME_CATEGORY = {
     TAROT: 'tarot',
     METAPHORIC: 'metaphoric',
@@ -97,6 +125,7 @@ export default class Interpretation {
             const queryString = new URLSearchParams(queryParams).toString();
             const url = `${API_URL}?${queryString}`;
 
+            await wait(125000);
             const response = await fetch(url);
             return await response.json();
         } catch (error) {
@@ -107,7 +136,9 @@ export default class Interpretation {
     }
 
     private displayLoader() {
-        const loader = this.html.getLoader();
+        const loader = this.html.convertToLoader(
+            this.html.generate(SKELETON_PAYLOAD)
+        );
         this.elements.interpretation.classList.remove('hidden');
         this.elements.interpretation.appendChild(loader);
         this.elements.interpretation.scrollIntoView({

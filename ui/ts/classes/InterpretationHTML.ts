@@ -1,4 +1,4 @@
-import { createAdaptiveImg } from '../utils';
+import { cloneAttributes, createAdaptiveImg, qsa } from '../utils';
 import { qs } from '../utils';
 import type { InterpretationPayload } from './Interpretation';
 
@@ -14,7 +14,7 @@ const HTML_TYPE_MAP = {
 
 const LOREM = {
     NAME: 'Lorem ipsum dolor sit',
-    THEME: 'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
+    THEME: 'Lorem ipsum dolor sit amet',
     ADVICE: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor.',
 };
 
@@ -38,15 +38,37 @@ export default class InterpretationHTML {
         }
     }
 
-    public getLoader(): HTMLElement {
-        switch (this.html_type) {
-            case HTML_TYPE.ITEMS:
-                return this.itemsLoader();
-            case HTML_TYPE.PREVIEW:
-                return this.previewLoader();
-            default:
-                throw new Error('Unknown interpretation html type');
-        }
+    public convertToLoader(element: HTMLElement): HTMLElement {
+        element.classList.add('skeleton');
+
+        const images = qsa<HTMLDivElement>(
+            '[component-adaptive-image]',
+            element
+        );
+
+        images.forEach((img) => {
+            const div = document.createElement('div');
+            cloneAttributes(div, img)
+            div.setAttribute('component-adaptive-image', '');
+            img.replaceWith(div);
+        });
+
+        const paragraphs = qsa<HTMLParagraphElement>('p', element);
+
+        paragraphs.forEach((paragraph) => {
+            const div = document.createElement('div');
+            cloneAttributes(div, paragraph)
+
+            for (let i = 0; i < 6; i++) {
+                const p = document.createElement('p');
+                p.textContent = paragraph.textContent;
+                div.appendChild(p);
+            }
+
+            paragraph.replaceWith(div);
+        });
+
+        return element;
     }
 
     private items(data: InterpretationPayload) {
@@ -70,7 +92,7 @@ export default class InterpretationHTML {
             const theme = document.createElement('p');
             theme.textContent = item.themes[0]?.html ?? '';
             const advice = document.createElement('p');
-            advice.textContent = LOREM.ADVICE;
+            advice.textContent = item.advice;
             advice.classList.add('advice');
             w2.append(theme, advice);
 
@@ -117,52 +139,5 @@ export default class InterpretationHTML {
 
         const key = type as keyof HtmlType;
         return HTML_TYPE_MAP[key];
-    }
-
-    private previewLoader() {
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('skeleton');
-
-        const img = document.createElement('div');
-        img.setAttribute('component-adaptive-image', '');
-        wrapper.appendChild(img);
-
-        for (let i = 0; i < 9; i++) {
-            const p = document.createElement('p');
-            p.textContent = LOREM.THEME;
-            wrapper.appendChild(p);
-        }
-        wrapper.setAttribute('cmp-interpretation-preview', '');
-
-        return wrapper;
-    }
-
-    private itemsLoader() {
-        const wrapper = document.createElement('ul');
-        wrapper.classList.add('skeleton');
-
-        for (let i = 0; i < 4; i++) {
-            const li = document.createElement('li');
-
-            const w1 = document.createElement('div');
-            const img = document.createElement('div');
-            img.setAttribute('component-adaptive-image', '');
-            const name = document.createElement('h3');
-            name.textContent = LOREM.NAME;
-            w1.append(name, img);
-
-            const w2 = document.createElement('div');
-            const theme = document.createElement('p');
-            theme.textContent = LOREM.THEME;
-            const advice = document.createElement('p');
-            advice.textContent = LOREM.ADVICE;
-            w2.append(theme, advice);
-
-            li.append(w1, w2);
-
-            wrapper.appendChild(li);
-        }
-
-        return wrapper;
     }
 }
