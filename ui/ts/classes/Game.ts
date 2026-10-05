@@ -5,6 +5,9 @@ import Interpretation from './Interpretation';
 type Elements = {
     launchGameBtns: NodeListOf<HTMLButtonElement>;
     resetGameBtns: NodeListOf<HTMLButtonElement>;
+    visibleAtStart: NodeListOf<HTMLElement>;
+    visibleAtEnd: NodeListOf<HTMLElement>;
+    visibleDuring: NodeListOf<HTMLElement>;
     setNumRoundsBtns: NodeListOf<HTMLButtonElement>;
     game: HTMLDivElement;
 };
@@ -17,12 +20,15 @@ export default class Game {
 
     constructor() {
         this.elements = {
+            game: qs<HTMLDivElement>('[cmp-game]'),
             launchGameBtns: qsa<HTMLButtonElement>('[cmp-launch-game-btn]'),
             resetGameBtns: qsa<HTMLButtonElement>('[cmp-reset-game-btn]'),
             setNumRoundsBtns: qsa<HTMLButtonElement>(
                 '[cmp-set-num-rounds-btn]'
             ),
-            game: qs<HTMLDivElement>('[cmp-game]'),
+            visibleAtStart: qsa<HTMLElement>('[cmp-visible-at-start]'),
+            visibleAtEnd: qsa<HTMLElement>('[cmp-visible-at-end]'),
+            visibleDuring: qsa<HTMLElement>('[cmp-visible-during]'),
         };
         this.selected = [];
         this.numRounds = 1;
@@ -38,23 +44,26 @@ export default class Game {
     private async launchGame() {
         const round = new GameRound();
 
-        this.disableLaunchGameBtns();
+        this.disableGameBtns();
 
         const selectedItem = await round.run();
 
         this.selected.push(selectedItem);
 
         if (this.selected.length >= this.numRounds) {
-            this.result.show();
-            this.showResetBtns();
+            await this.result.show();
+            this.setState('end');
+        } else {
+            this.setState('during');
         }
-        this.enableLaunchGameBtns();
+
+        this.enableGameBtns();
     }
 
     private reset() {
         this.selected.length = 0;
         this.result.reset();
-        this.showLaunchGameBtns();
+        this.setState('start');
         this.elements.game.scrollIntoView({
             block: 'center',
             behavior: 'smooth',
@@ -84,9 +93,7 @@ export default class Game {
 
     private launchGameOnClick() {
         this.elements.launchGameBtns.forEach((btn) =>
-            btn.addEventListener('click', () => this.launchGame(), {
-                once: true,
-            })
+            btn.addEventListener('click', () => this.launchGame())
         );
     }
 
@@ -96,44 +103,39 @@ export default class Game {
         );
     }
 
-    private disableLaunchGameBtns() {
-        this.elements.launchGameBtns.forEach((btn) =>
-            btn.setAttribute('disabled', 'true')
+    private disableGameBtns() {
+        [
+            ...this.elements.launchGameBtns,
+            ...this.elements.visibleAtStart,
+            ...this.elements.visibleAtEnd,
+            ...this.elements.visibleDuring,
+        ].forEach((btn) => btn.setAttribute('disabled', 'true'));
+    }
+
+    private enableGameBtns() {
+        [
+            ...this.elements.launchGameBtns,
+            ...this.elements.visibleAtStart,
+            ...this.elements.visibleAtEnd,
+            ...this.elements.visibleDuring,
+        ].forEach((btn) => btn.removeAttribute('disabled'));
+    }
+
+    private setState(type: 'start' | 'during' | 'end') {
+        this.elements.visibleAtStart.forEach((element) =>
+            type === 'start'
+                ? element.classList.remove('hidden')
+                : element.classList.add('hidden')
         );
-    }
-
-    private enableLaunchGameBtns() {
-        this.elements.launchGameBtns.forEach((btn) =>
-            btn.removeAttribute('disabled')
+        this.elements.visibleDuring.forEach((element) =>
+            type === 'during'
+                ? element.classList.remove('hidden')
+                : element.classList.add('hidden')
         );
-    }
-
-    private showLaunchGameBtns() {
-        this.elements.launchGameBtns.forEach((btn) => {
-            const launchGameLabel = btn.getAttribute('data-default-slot');
-
-            if (!launchGameLabel) {
-                throw new Error(
-                    "The launch game button doesn't have a default slot attribute"
-                );
-            }
-            btn.textContent = launchGameLabel;
-        });
-
-        this.launchGameOnClick();
-    }
-
-    private showResetBtns() {
-        this.elements.launchGameBtns.forEach((btn) => {
-            const resetLabel = btn.getAttribute('data-reset-slot');
-
-            if (!resetLabel) {
-                throw new Error(
-                    "The launch game button doesn't have a reset slot attribute"
-                );
-            }
-            btn.textContent = resetLabel;
-            btn.addEventListener('click', () => this.reset(), { once: true });
-        });
+        this.elements.visibleAtEnd.forEach((element) =>
+            type === 'end'
+                ? element.classList.remove('hidden')
+                : element.classList.add('hidden')
+        );
     }
 }

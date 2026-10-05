@@ -125,7 +125,7 @@ export default class Interpretation {
             const queryString = new URLSearchParams(queryParams).toString();
             const url = `${API_URL}?${queryString}`;
 
-            await wait(125000);
+            await wait(5000);
             const response = await fetch(url);
             return await response.json();
         } catch (error) {

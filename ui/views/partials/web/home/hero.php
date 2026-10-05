@@ -76,8 +76,16 @@ extract(component_props(
                         'class' => 'mx-auto mb-1',
                         'attrs' => [
                             'cmp-launch-game-btn' => true,
-                            'data-default-slot' => 'Открыть карту',
-                            'data-reset-slot' => 'Попробовать снова'
+                            'cmp-visible-at-start' => true,
+                        ]
+                    ]) ?>
+                    <?= component('web/ui/button', [
+                        'variant' => 'primary',
+                        'slot' => 'Попробовать снова',
+                        'class' => 'mx-auto mb-1 hidden',
+                        'attrs' => [
+                            'cmp-reset-game-btn' => true,
+                            'cmp-visible-at-end' => true,
                         ]
                     ]) ?>
                     <small>Бесплатно. Без регистрации</small>
