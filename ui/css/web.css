@@ -316,6 +316,7 @@ li[cmp-flip-card],
 li[cmp-card] {
     transition: transform 150ms ease-in-out;
 }
+
 li[cmp-flip-card].highlighted::after,
 li[cmp-card].highlighted::after {
     opacity: 0.4;
@@ -328,6 +329,21 @@ li[cmp-flip-card].flipped > *:nth-child(1) {
     transform: rotateY(0deg);
 }
 li[cmp-flip-card].flipped > *:nth-child(2) {
+    transform: rotateY(180deg);
+}
+
+li[cmp-flip-card][aria-selected='true']::after,
+li[cmp-card][aria-selected='true']::after {
+    opacity: 0.4;
+}
+li[cmp-flip-card][aria-selected='true'],
+li[cmp-card][aria-selected='true'] {
+    transform: translateY(-7.5%);
+}
+li[cmp-flip-card][aria-selected='true'] > *:nth-child(1) {
+    transform: rotateY(0deg);
+}
+li[cmp-flip-card][aria-selected='true'] > *:nth-child(2) {
     transform: rotateY(180deg);
 }
 

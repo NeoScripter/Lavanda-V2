@@ -1,4 +1,4 @@
-import { qs, qsa, selectFirstVisibleElement } from '../utils';
+import { qsa, selectFirstVisibleElement } from '../utils';
 import GameRound from './GameRound';
 import Interpretation from './Interpretation';
 
@@ -9,6 +9,7 @@ type Elements = {
     visibleAtEnd: NodeListOf<HTMLElement>;
     visibleDuring: NodeListOf<HTMLElement>;
     setNumRoundsBtns: NodeListOf<HTMLButtonElement>;
+    selectableItems: NodeListOf<HTMLButtonElement>;
     selectedItemsUI: HTMLUListElement | null;
 };
 
@@ -32,6 +33,7 @@ export default class Game {
                 '[cmp-selected-items]',
                 'silent'
             ),
+            selectableItems: qsa<HTMLButtonElement>('[cmp-selectable-item]'),
         };
         this.selected = [];
         this.numRounds = 1;
@@ -42,6 +44,7 @@ export default class Game {
         this.launchGameOnClick();
         this.resetGameOnClick();
         this.setNumRounds();
+        this.selectItemOnClick();
     }
 
     private async launchGame() {
@@ -53,7 +56,7 @@ export default class Game {
         const selectedItem = await round.run();
 
         this.selected.push(selectedItem);
-        this.showSelectedItem(selectedItem);
+        this.showSelectedItem(structuredClone(selectedItem));
 
         if (this.selected.length >= this.numRounds) {
             this.setState('end');
@@ -63,23 +66,37 @@ export default class Game {
         this.enableGameBtns();
     }
 
-    private async addItem(item: HTMLLIElement) {
-        const round = new GameRound();
+    private handleItemSelect(selectedItem: HTMLElement) {
+        if (selectedItem.hasAttribute('aria-selected')) {
+            selectedItem.removeAttribute('aria-selected');
+            this.selected = this.selected.filter(
+                (item) => item !== selectedItem
+            );
 
-        this.disableGameBtns();
-        this.setState('during');
+            if (this.selected.length === 0) {
+                this.setState('start');
+            }
 
-        const selectedItem = await round.run();
+            const ui = this.elements.selectedItemsUI;
+            const id = selectedItem.getAttribute('data-id');
+            if (!ui || !id) return;
 
-        this.selected.push(selectedItem);
-        this.showSelectedItem(selectedItem);
+            const visibleItem = ui.querySelector(`[data-id=${id}]`);
 
-        if (this.selected.length >= this.numRounds) {
-            this.setState('end');
-            await this.result.show();
+            if (!visibleItem) return;
+
+            visibleItem.remove();
+        } else {
+            selectedItem.setAttribute('aria-selected', 'true');
+            this.setState('during');
+            this.selected.push(selectedItem);
+            this.showSelectedItem(selectedItem);
+
+            if (this.selected.length >= this.numRounds) {
+                this.setState('end');
+                this.result.show();
+            }
         }
-
-        this.enableGameBtns();
     }
 
     private reset() {
@@ -119,6 +136,22 @@ export default class Game {
                 }
 
                 this.numRounds = Math.max(5, num);
+            })
+        );
+    }
+
+    private selectItemOnClick() {
+        this.elements.selectableItems.forEach((btn) =>
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+
+                if (!item) {
+                    throw new Error(
+                        "The button doesn't have an li direct parent element"
+                    );
+                }
+
+                this.handleItemSelect(item);
             })
         );
     }
@@ -175,7 +208,7 @@ export default class Game {
         }
     }
 
-    private showSelectedItem(item: HTMLLIElement) {
+    private showSelectedItem(item: HTMLElement) {
         if (!this.elements.selectedItemsUI) return;
 
         const frontSrc = item.getAttribute('data-front-img-src');
@@ -191,6 +224,12 @@ export default class Game {
 
         item.innerHTML = item.innerHTML.replaceAll(backSrc, frontSrc);
         item.innerHTML = item.innerHTML.replace(backAlt, frontAlt);
+
+        const seletableButton = item.querySelector('[cmp-selectable-item]');
+
+        if (seletableButton) {
+            seletableButton.remove();
+        }
 
         this.elements.selectedItemsUI.appendChild(item);
     }

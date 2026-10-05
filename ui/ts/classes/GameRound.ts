@@ -1,4 +1,4 @@
-import { qs, qsa, selectFirstVisibleElement, wait } from '../utils';
+import { qsa, selectFirstVisibleElement, wait } from '../utils';
 
 type Elements = {
     game: HTMLDivElement;
