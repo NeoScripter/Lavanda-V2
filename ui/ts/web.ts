@@ -3,6 +3,7 @@ import Game from './classes/Game';
 import GameStage from './classes/GameStage';
 import initAdaptiveImages from './modules/adaptiveImages';
 import initCheckboxes from './modules/checkboxes';
+import initGame from './modules/game';
 import initHeader from './modules/header';
 import initModals from './modules/modals';
 import initNavMenu from './modules/navMenu';
@@ -23,9 +24,9 @@ class WebUI {
             initAdaptiveImages,
             initPracticeItems,
             initHeader,
+            initGame,
         ];
 
-        new Game().init();
         new GameStage().init();
         for (const handler of handlers) {
             try {

@@ -1,5 +1,5 @@
 import initAdaptiveImages from '../modules/adaptiveImages';
-import { qs, wait } from '../utils';
+import { qs, selectFirstVisibleElement, wait } from '../utils';
 import InterpretationHTML from './InterpretationHTML';
 
 type Elements = {
@@ -152,7 +152,7 @@ export default class Interpretation {
     }
 
     private getCategory() {
-        const game = qs<HTMLDivElement>('[cmp-game]');
+        const game = selectFirstVisibleElement<HTMLDivElement>('[cmp-game]');
         const type = game.getAttribute('cmp-game');
 
         if (!type) {

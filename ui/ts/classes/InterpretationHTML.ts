@@ -1,4 +1,4 @@
-import { cloneAttributes, createAdaptiveImg, qsa } from '../utils';
+import { cloneAttributes, createAdaptiveImg, qsa, selectFirstVisibleElement } from '../utils';
 import { qs } from '../utils';
 import type { InterpretationPayload } from './Interpretation';
 
@@ -10,12 +10,6 @@ const HTML_TYPE = {
 const HTML_TYPE_MAP = {
     bonus: HTML_TYPE.ITEMS,
     bonus_home: HTML_TYPE.PREVIEW,
-};
-
-const LOREM = {
-    NAME: 'Lorem ipsum dolor sit',
-    THEME: 'Lorem ipsum dolor sit amet',
-    ADVICE: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor.',
 };
 
 type HtmlType = typeof HTML_TYPE_MAP;
@@ -126,7 +120,7 @@ export default class InterpretationHTML {
     }
 
     private getHtmlType() {
-        const game = qs<HTMLDivElement>('[cmp-game]');
+        const game = selectFirstVisibleElement<HTMLDivElement>('[cmp-game]');
         const type = game.getAttribute('cmp-game');
 
         if (!type) {

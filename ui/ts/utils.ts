@@ -147,3 +147,38 @@ export function cloneAttributes(to: HTMLElement, from: HTMLElement) {
         to.setAttribute(attr.nodeName, attr.nodeValue ?? '');
     });
 }
+
+export function selectFirstVisibleElement<T extends Element>(
+    selector: string,
+    behavior: 'silent'
+): T | null;
+
+export function selectFirstVisibleElement<T extends Element>(
+    selector: string,
+    behavior?: 'error'
+): T;
+
+export function selectFirstVisibleElement<T extends HTMLElement>(
+    selector: string,
+    behavior: 'silent' | 'error' = 'error'
+): T | null {
+    const candidates = qsa<T>(selector);
+    let element = null;
+
+    for (const candidate of candidates) {
+        if (candidate.offsetParent !== null) {
+            element = candidate;
+            break;
+        }
+    }
+
+    if (!element) {
+        if (behavior === 'silent') {
+            return null;
+        }
+        console.error(`Could not find an element with '${selector}' selector`);
+        throw new Error();
+    }
+
+    return element;
+}

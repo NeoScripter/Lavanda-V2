@@ -1,3 +1,4 @@
+import initGame from '../modules/game';
 import { qs, qsa } from '../utils';
 
 type Elements = {
@@ -39,6 +40,8 @@ export default class GameStage {
             block: 'center',
             behavior: 'smooth',
         });
+
+        initGame();
     }
 
     private hideGame() {

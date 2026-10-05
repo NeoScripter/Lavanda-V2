@@ -1,4 +1,4 @@
-import { qs, qsa, wait } from '../utils';
+import { qs, qsa, selectFirstVisibleElement, wait } from '../utils';
 
 type Elements = {
     game: HTMLDivElement;
@@ -21,7 +21,7 @@ export default class GameRound {
 
     constructor() {
         this.elements = {
-            game: qs<HTMLDivElement>('[cmp-game]'),
+            game: selectFirstVisibleElement<HTMLDivElement>('[cmp-game]'),
         };
         this.type = this.getType();
     }

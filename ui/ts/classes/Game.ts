@@ -1,4 +1,4 @@
-import { qs, qsa } from '../utils';
+import { qs, qsa, selectFirstVisibleElement } from '../utils';
 import GameRound from './GameRound';
 import Interpretation from './Interpretation';
 
@@ -9,7 +9,6 @@ type Elements = {
     visibleAtEnd: NodeListOf<HTMLElement>;
     visibleDuring: NodeListOf<HTMLElement>;
     setNumRoundsBtns: NodeListOf<HTMLButtonElement>;
-    game: HTMLDivElement;
     selectedItemsUI: HTMLUListElement | null;
 };
 
@@ -21,7 +20,6 @@ export default class Game {
 
     constructor() {
         this.elements = {
-            game: qs<HTMLDivElement>('[cmp-game]'),
             launchGameBtns: qsa<HTMLButtonElement>('[cmp-launch-game-btn]'),
             resetGameBtns: qsa<HTMLButtonElement>('[cmp-reset-game-btn]'),
             setNumRoundsBtns: qsa<HTMLButtonElement>(
@@ -30,7 +28,7 @@ export default class Game {
             visibleAtStart: qsa<HTMLElement>('[cmp-visible-at-start]'),
             visibleAtEnd: qsa<HTMLElement>('[cmp-visible-at-end]'),
             visibleDuring: qsa<HTMLElement>('[cmp-visible-during]'),
-            selectedItemsUI: qs<HTMLUListElement>(
+            selectedItemsUI: selectFirstVisibleElement<HTMLUListElement>(
                 '[cmp-selected-items]',
                 'silent'
             ),
@@ -65,6 +63,25 @@ export default class Game {
         this.enableGameBtns();
     }
 
+    private async addItem(item: HTMLLIElement) {
+        const round = new GameRound();
+
+        this.disableGameBtns();
+        this.setState('during');
+
+        const selectedItem = await round.run();
+
+        this.selected.push(selectedItem);
+        this.showSelectedItem(selectedItem);
+
+        if (this.selected.length >= this.numRounds) {
+            this.setState('end');
+            await this.result.show();
+        }
+
+        this.enableGameBtns();
+    }
+
     private reset() {
         this.selected.length = 0;
 
@@ -74,7 +91,12 @@ export default class Game {
 
         this.result.reset();
         this.setState('start');
-        this.elements.game.scrollIntoView({
+
+        const game = selectFirstVisibleElement('[cmp-game]', 'silent');
+
+        if (!game) return;
+
+        game.scrollIntoView({
             block: 'center',
             behavior: 'smooth',
         });

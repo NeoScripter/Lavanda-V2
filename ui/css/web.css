@@ -293,12 +293,12 @@ li[component-pic].open {
         padding 500ms ease-out;
 }
 
-[cmp-game-stage]:has(input[value='game-stage-toggle-1']:checked)
-    #game-stage-slot-2 {
+[cmp-game-stage]:has(input[value='slot-1']:checked)
+    #slot-2 {
     display: none;
 }
-[cmp-game-stage]:has(input[value='game-stage-toggle-2']:checked)
-    #game-stage-slot-1 {
+[cmp-game-stage]:has(input[value='slot-2']:checked)
+    #slot-1 {
     display: none;
 }
 
