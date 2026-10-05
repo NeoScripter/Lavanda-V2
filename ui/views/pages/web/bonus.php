@@ -41,11 +41,16 @@ extract(component_props(
 
 <?php ob_start(); ?>
 <div class='items-center space-y-8 lg:space-y-12'>
-    <p class='text-balance mx-auto max-w-xl'>Карта открывается сама — как знак, который приходит вовремя. Иногда именно случай отражает то, что мы уже чувствуем, но не осознаём.</p>
+    <p cmp-visible-at-start
+        class='text-balance mx-auto max-w-xl'>Карта открывается сама — как знак, который приходит вовремя. Иногда именно случай отражает то, что мы уже чувствуем, но не осознаём.</p>
+
     <?= component('web/ui/button', [
         'variant' => 'primary',
         'slot' => 'Получить ответ',
-        'attrs' => ['cmp-launch-game-btn' => true],
+        'attrs' => [
+            'cmp-launch-game-btn' => true,
+            'cmp-visible-at-start' => true
+        ],
         'class' => 'mx-auto'
     ]) ?>
 
@@ -60,6 +65,17 @@ extract(component_props(
 
     <?php end_slot(); ?>
 
+    <?= component('web/ui/button', [
+        'variant' => 'primary',
+        'slot' => 'Попробовать снова',
+        'attrs' => [
+            'cmp-reset-game-btn' => true,
+            'cmp-visible-at-end' => true
+        ],
+        'class' => 'mx-auto hidden'
+    ]) ?>
+
+    <?= component('web/ui/arrow-hint') ?>
 </div>
 <?php $slot1 = ob_get_clean(); ?>
 
@@ -72,7 +88,7 @@ Hello world 2
 <?= component('web/layout/game-stage', [
     'labels' => $labels,
     'slots' => [$slot1, $slot2],
-    // 'class' => 'hidden'
+    'class' => 'hidden'
 ]); ?>
 
 <?php end_slot(); ?>

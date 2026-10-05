@@ -32,7 +32,13 @@ export default class GameStage {
     }
 
     private revealGame() {
-        this.elements.stage?.classList.remove('hidden');
+        if (!this.elements.stage) return;
+
+        this.elements.stage.classList.remove('hidden');
+        this.elements.stage.scrollIntoView({
+            block: 'center',
+            behavior: 'smooth',
+        });
     }
 
     private hideGame() {

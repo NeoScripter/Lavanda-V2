@@ -45,6 +45,7 @@ export default class Game {
         const round = new GameRound();
 
         this.disableGameBtns();
+        this.setState('during');
 
         const selectedItem = await round.run();
 
@@ -53,8 +54,6 @@ export default class Game {
         if (this.selected.length >= this.numRounds) {
             await this.result.show();
             this.setState('end');
-        } else {
-            this.setState('during');
         }
 
         this.enableGameBtns();

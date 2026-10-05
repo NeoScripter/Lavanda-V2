@@ -359,8 +359,6 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
 [cmp-interpretation] > *.skeleton p,
 [cmp-interpretation] > *.skeleton h3 {
     color: transparent;
-    max-width: 100%;
-    display: block;
     margin-block: 0.75em;
     text-box-trim: trim-both;
 }
@@ -400,7 +398,7 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
     @apply mx-auto max-w-56 md:shrink-0 md:mx-0;
 }
 [cmp-interpretation-items] .content {
-    @apply flex flex-col gap-6 md:justify-between md:items-start;
+    @apply flex flex-col gap-6 md:justify-between;
 }
 [cmp-interpretation-items] .advice {
     @apply font-medium;
