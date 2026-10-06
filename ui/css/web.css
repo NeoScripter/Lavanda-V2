@@ -332,21 +332,6 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
     transform: rotateY(180deg);
 }
 
-li[cmp-flip-card][aria-selected='true']::after,
-li[cmp-card][aria-selected='true']::after {
-    opacity: 0.4;
-}
-li[cmp-flip-card][aria-selected='true'],
-li[cmp-card][aria-selected='true'] {
-    transform: translateY(-7.5%);
-}
-li[cmp-flip-card][aria-selected='true'] > *:nth-child(1) {
-    transform: rotateY(0deg);
-}
-li[cmp-flip-card][aria-selected='true'] > *:nth-child(2) {
-    transform: rotateY(180deg);
-}
-
 [cmp-game]:has(+ [cmp-interpretation]:not(.hidden)) {
     display: none;
 }

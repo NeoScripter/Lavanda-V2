@@ -36,7 +36,6 @@ export default class GameStage {
         this.elements.hideOnClickBtns.forEach((btn) =>
             btn.addEventListener('click', () => btn.remove())
         );
-
         this.elements.toggleGameInputs.forEach((input) =>
             input.addEventListener('change', () =>
                 window.dispatchEvent(new CustomEvent(EVENTS.RESET_GAME))

@@ -2,23 +2,25 @@ import {
     EVENTS,
     GAME_CATEGORY_MAP,
     HTML_TYPE_MAP,
+    PICKER_TYPE_MAP,
     ROUND_TYPE_MAP,
     type CategoryType,
     type GameInfo,
 } from '../constants';
-import { qs, qsa, selectFirstVisibleElement } from '../utils';
+import { qs, qsa } from '../utils';
 import GameRound from './GameRound';
 import Interpretation from './Interpretation';
+import ItemPicker from './ItemPicker';
 
 type Elements = {
+    game: HTMLElement;
     launchGameBtns: NodeListOf<HTMLButtonElement>;
     resetGameBtns: NodeListOf<HTMLButtonElement>;
     visibleAtStart: NodeListOf<HTMLElement>;
     visibleAtEnd: NodeListOf<HTMLElement>;
     visibleDuring: NodeListOf<HTMLElement>;
     setNumRoundsBtns: NodeListOf<HTMLButtonElement>;
-    selectableItems: NodeListOf<HTMLButtonElement>;
-    game: HTMLElement;
+    pickableItems: NodeListOf<HTMLButtonElement>;
     selectedItemsUI: HTMLUListElement | null;
 };
 
@@ -48,8 +50,8 @@ export default class Game {
             ),
             visibleAtEnd: qsa<HTMLElement>('[cmp-visible-at-end]', container),
             visibleDuring: qsa<HTMLElement>('[cmp-visible-during]', container),
-            selectableItems: qsa<HTMLButtonElement>(
-                '[cmp-selectable-item]',
+            pickableItems: qsa<HTMLButtonElement>(
+                '[cmp-pickable-item]',
                 container
             ),
             game: qs<HTMLElement>('[cmp-game]', 'error', container),
@@ -92,11 +94,9 @@ export default class Game {
     }
 
     private handleItemSelect(selectedItem: HTMLElement) {
-        const clone = selectedItem.cloneNode(true) as HTMLElement;
-        selectedItem.setAttribute('aria-selected', 'true');
         this.setState('during');
         this.selected.push(selectedItem);
-        this.showSelectedItem(clone);
+        this.showSelectedItem(selectedItem.cloneNode(true) as HTMLElement);
 
         if (this.selected.length >= this.numRounds) {
             this.setState('end');
@@ -107,6 +107,7 @@ export default class Game {
     private reset() {
         this.selected.forEach((item) => item.removeAttribute('aria-selected'));
         this.selected.length = 0;
+        new ItemPicker().cleanup(this.info);
 
         if (this.elements.selectedItemsUI) {
             this.elements.selectedItemsUI.innerHTML = '';
@@ -143,15 +144,11 @@ export default class Game {
     }
 
     private selectItemOnClick() {
-        this.elements.selectableItems.forEach((btn) =>
-            btn.addEventListener('click', () => {
-                const item = btn.parentElement;
+        const picker = new ItemPicker();
 
-                if (!item) {
-                    throw new Error(
-                        "The button doesn't have an li direct parent element"
-                    );
-                }
+        this.elements.pickableItems.forEach((btn) =>
+            btn.addEventListener('click', () => {
+                const item = picker.select(btn, this.info);
 
                 this.handleItemSelect(item);
             })
@@ -221,6 +218,7 @@ export default class Game {
             html: HTML_TYPE_MAP[key],
             category: GAME_CATEGORY_MAP[key],
             round: ROUND_TYPE_MAP[key],
+            picker: PICKER_TYPE_MAP[key],
         };
 
         return info;

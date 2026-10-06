@@ -17,7 +17,6 @@ export const DISTANCE = {
     SWIPE_THRESHOLD: 50,
 };
 
-
 export const GAME_CATEGORY = {
     TAROT: 'tarot',
     METAPHORIC: 'metaphoric',
@@ -58,9 +57,20 @@ export const ROUND_TYPE_MAP = {
 
 export type RoundType = typeof ROUND_TYPE_MAP;
 
+export const PICKER_TYPE = {
+    ONE_CARD: 'ONE_CARD',
+};
+
+export const PICKER_TYPE_MAP = {
+    bonus: PICKER_TYPE.ONE_CARD,
+    bonus_home: PICKER_TYPE.ONE_CARD,
+};
+
+export type PickerType = typeof PICKER_TYPE_MAP;
+
 export type GameInfo = {
     html: HtmlType[keyof HtmlType];
     category: CategoryType[keyof CategoryType];
     round: RoundType[keyof RoundType];
-}
-
+    picker: PickerType[keyof PickerType];
+};
