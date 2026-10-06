@@ -21,6 +21,8 @@ class BonusController extends Controller
             ['order' => 'created_at DESC']
         );
 
+        shuffle($cards);
+
         view('pages/web/bonus', compact('cards'));
     }
 }

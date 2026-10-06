@@ -21,6 +21,8 @@ class HomeController extends Controller
             ['order' => 'created_at DESC']
         );
 
+        shuffle($cards);
+
         view('pages/web/home', compact('cards'));
     }
 }
