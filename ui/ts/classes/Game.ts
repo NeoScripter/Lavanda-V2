@@ -22,6 +22,7 @@ type Elements = {
     setNumRoundsBtns: NodeListOf<HTMLButtonElement>;
     pickableItems: NodeListOf<HTMLButtonElement>;
     selectedItemsUI: HTMLUListElement | null;
+    container: HTMLElement;
 };
 
 export default class Game {
@@ -60,9 +61,10 @@ export default class Game {
                 'silent',
                 container
             ),
+            container
         };
         this.selected = [];
-        this.numRounds = 3;
+        this.numRounds = 1;
         this.inter = inter;
         this.info = this.getInfo();
     }
@@ -116,8 +118,8 @@ export default class Game {
         this.inter.reset();
         this.setState('start');
 
-        this.elements.game.scrollIntoView({
-            block: 'center',
+        this.elements.container.scrollIntoView({
+            block: 'start',
             behavior: 'smooth',
         });
     }

@@ -29,12 +29,12 @@ export default class ItemPicker {
     }
 
     private selectOneCard(card: HTMLLIElement) {
-        card.classList.add('flipped', 'highlighted', 'pointer-events-none');
+        card.classList.add('flipped', 'pointer-events-none');
 
         return card;
     }
 
     private cleanupOneCard(item: HTMLElement) {
-        item.classList.remove('flipped', 'highlighted', 'pointer-events-none');
+        item.classList.remove('flipped', 'pointer-events-none');
     }
 }

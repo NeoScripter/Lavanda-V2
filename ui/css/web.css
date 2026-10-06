@@ -332,6 +332,13 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
     transform: rotateY(180deg);
 }
 
+[cmp-card-grid] > li:not(.flipped):hover {
+    transform: translateY(-7.5%);
+}
+[cmp-card-grid] > li:not(.flipped):hover::after {
+    opacity: 0.4;
+}
+
 [cmp-game]:has(+ [cmp-interpretation]:not(.hidden)) {
     display: none;
 }
