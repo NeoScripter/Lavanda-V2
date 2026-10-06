@@ -31,12 +31,12 @@ export default class GameRound {
             });
         };
 
-        let extraDuration = Math.floor(Math.random() * 10);
-        const maxDuration = 400;
+        let extraDuration = Math.floor(Math.random() * 15);
+        const maxDuration = 500;
 
         while (duration < maxDuration) {
             handleNext();
-            duration = Math.min(maxDuration, duration + 5 + extraDuration);
+            duration = Math.min(maxDuration, duration + extraDuration);
             await wait(duration);
         }
 
