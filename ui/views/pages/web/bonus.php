@@ -90,17 +90,18 @@ extract(component_props(
 
     <?= component('web/layout/selected-items') ?>
 
-    <ul cmp-game="<?= GameType::BONUS->value ?>"
-        class="grid grid-cols-[repeat(auto-fit,10rem)] grid-rows-[auto_4rem] gap-4">
+    <?php slot('components/web/layout/card-grid', [
+        'attrs' => ['cmp-game' => GameType::BONUS->value]
+    ]); ?>
+    <?php foreach ($cards as $card) : ?>
+        <?= component('web/ui/flip-card', [
+            'card' => $card,
+            'isPickable' => true,
+            'class' => 'grid-row-2/3'
+        ]) ?>
+    <?php endforeach; ?>
 
-        <?php foreach ($cards as $card) : ?>
-            <?= component('web/ui/flip-card', [
-                'card' => $card,
-                'isPickable' => true,
-                'class' => 'grid-row-2/3'
-            ]) ?>
-        <?php endforeach; ?>
-    </ul>
+    <?php end_slot(); ?>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',

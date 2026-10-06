@@ -1,5 +1,6 @@
 import '../css/web.css';
 import initAdaptiveImages from './modules/adaptiveImages';
+import initCardGrid from './modules/cardGrid';
 import initCheckboxes from './modules/checkboxes';
 import initGame from './modules/game';
 import initHeader from './modules/header';
@@ -23,6 +24,7 @@ class WebUI {
             initPracticeItems,
             initHeader,
             initGame,
+            initCardGrid,
         ];
 
         for (const handler of handlers) {

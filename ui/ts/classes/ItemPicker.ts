@@ -2,7 +2,6 @@ import { PICKER_TYPE, type GameInfo } from '../constants';
 import { qsa } from '../utils';
 
 export default class ItemPicker {
-
     public select(button: HTMLButtonElement, info: GameInfo) {
         const card = button.closest(
             '[cmp-flip-card],[cmp-card]'
@@ -20,26 +19,22 @@ export default class ItemPicker {
         }
     }
 
-    public cleanup(info: GameInfo) {
+    public cleanup(item: HTMLElement, info: GameInfo) {
         switch (info.picker) {
             case PICKER_TYPE.ONE_CARD:
-                return this.cleanupOneCard();
+                return this.cleanupOneCard(item);
             default:
                 throw new Error('Unknown game round option');
         }
     }
 
     private selectOneCard(card: HTMLLIElement) {
-        card.classList.add('.flipped', '.highlighted');
+        card.classList.add('flipped', 'highlighted', 'pointer-events-none');
 
         return card;
     }
 
-    private cleanupOneCard() {
-        const cards = qsa<HTMLLIElement>('li[cmp-flip-card]');
-
-        cards.forEach((card) =>
-            card.classList.remove('.flipped', '.highlighted')
-        );
+    private cleanupOneCard(item: HTMLElement) {
+        item.classList.remove('flipped', 'highlighted', 'pointer-events-none');
     }
 }

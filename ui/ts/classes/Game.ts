@@ -62,7 +62,7 @@ export default class Game {
             ),
         };
         this.selected = [];
-        this.numRounds = 1;
+        this.numRounds = 3;
         this.inter = inter;
         this.info = this.getInfo();
     }
@@ -105,9 +105,9 @@ export default class Game {
     }
 
     private reset() {
-        this.selected.forEach((item) => item.removeAttribute('aria-selected'));
+        const picker = new ItemPicker();
+        this.selected.forEach((item) => picker.cleanup(item, this.info));
         this.selected.length = 0;
-        new ItemPicker().cleanup(this.info);
 
         if (this.elements.selectedItemsUI) {
             this.elements.selectedItemsUI.innerHTML = '';
@@ -246,6 +246,8 @@ export default class Game {
         if (pickableBtn) {
             pickableBtn.remove();
         }
+        const picker = new ItemPicker();
+        picker.cleanup(item, this.info);
 
         this.elements.selectedItemsUI.appendChild(item);
     }
