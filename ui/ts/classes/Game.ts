@@ -241,10 +241,10 @@ export default class Game {
         item.innerHTML = item.innerHTML.replaceAll(backSrc, frontSrc);
         item.innerHTML = item.innerHTML.replace(backAlt, frontAlt);
 
-        const seletableButton = item.querySelector('[cmp-selectable-item]');
+        const pickableBtn = item.querySelector('[cmp-pickable-item]');
 
-        if (seletableButton) {
-            seletableButton.remove();
+        if (pickableBtn) {
+            pickableBtn.remove();
         }
 
         this.elements.selectedItemsUI.appendChild(item);

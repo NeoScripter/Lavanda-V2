@@ -1,10 +1,7 @@
 import {
-    GAME_CATEGORY_MAP,
-    type CategoryType,
     type GameInfo,
 } from '../constants';
 import initAdaptiveImages from '../modules/adaptiveImages';
-import { qs, selectFirstVisibleElement } from '../utils';
 import InterpretationHTML from './InterpretationHTML';
 
 type Elements = {
