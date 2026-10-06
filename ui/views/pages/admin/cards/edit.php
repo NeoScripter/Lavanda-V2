@@ -66,14 +66,14 @@ slot('layouts/admin/theme-layout', [
 
         <div class="flex justify-start gap-4.5">
             <?= component(
-                'ui/auth-button',
+                'admin/ui/auth-button',
                 [
                     'slot' => $hive->get('admin.save'),
                     'attrs' => ['type' => 'submit']
                 ]
             ) ?>
             <?= component(
-                'ui/auth-button',
+                'admin/ui/auth-button',
                 [
                     'slot' => $hive->get('admin.cancel'),
                     'href' => $hive->alias('admin_cards_index', [], ['variant' => $card['variant']]),

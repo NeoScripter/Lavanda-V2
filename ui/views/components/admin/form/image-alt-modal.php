@@ -25,7 +25,7 @@ $hive = \Base::instance();
 </div>
 
 <?= component(
-    'form/input-error',
+    'admin/form/input-error',
     ['message' => \Flash::instance()->getKey("errors.alt")]
 ) ?>
 
@@ -49,11 +49,11 @@ $hive = \Base::instance();
 
     <div class="flex justify-start gap-3.5">
         <?= component(
-            'ui/auth-button',
+            'admin/ui/auth-button',
             ['slot' => 'Save', 'attrs' => ['type' => 'submit']]
         ) ?>
         <?= component(
-            'ui/auth-button',
+            'admin/ui/auth-button',
             [
                 'slot' => 'Cancel',
                 'variant' => 'secondary',
