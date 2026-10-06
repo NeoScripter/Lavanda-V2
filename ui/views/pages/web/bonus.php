@@ -82,7 +82,34 @@ extract(component_props(
 <?php $slot1 = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-Hello world 2
+<div class='items-center space-y-8 lg:space-y-12'>
+    <p cmp-visible-at-start
+        class='text-balance mx-auto max-w-xl'>
+        Вы сами выбираете карту, которая откликается сердцем. Этот способ помогает довериться интуиции и увидеть собственный внутренний ответ.
+    </p>
+
+    <?= component('web/layout/selected-items') ?>
+
+    <ul cmp-game="<?= GameType::BONUS->value ?>"
+        class="grid grid-cols-[repeat(auto-fit,10rem)] grid-rows-[auto_4rem] gap-4">
+
+        <?php foreach ($cards as $card) : ?>
+            <?= component('web/ui/flip-card', ['card' => $card, 'isSelectable' => true, 'class' => 'grid-row-2/3']) ?>
+        <?php endforeach; ?>
+    </ul>
+
+    <?= component('web/ui/button', [
+        'variant' => 'primary',
+        'slot' => 'Попробовать снова',
+        'attrs' => [
+            'cmp-reset-game-btn' => true,
+            'cmp-visible-at-end' => true
+        ],
+        'class' => 'mx-auto hidden'
+    ]) ?>
+
+    <?= component('web/ui/arrow-hint') ?>
+</div>
 <?php $slot2 = ob_get_clean(); ?>
 
 <?php $labels = ['Выбор лаванды', 'Выбор гостя']; ?>
@@ -90,7 +117,7 @@ Hello world 2
 <?= component('web/layout/game-stage', [
     'labels' => $labels,
     'slots' => [$slot1, $slot2],
-    'class' => 'hidden'
+    // 'class' => 'hidden'
 ]); ?>
 
 <?php end_slot(); ?>

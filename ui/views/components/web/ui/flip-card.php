@@ -3,15 +3,17 @@ $hive = \Base::instance();
 
 extract(component_props(
     required: ['card'],
-    optional: ['class' => ''],
+    optional: ['class' => '', 'isSelectable' => 'false'],
     props: get_defined_vars(),
 )); ?>
 
 <li cmp-flip-card
     cmp-card
     data-id="<?= $card['id'] ?>" 
-    data-img-src="<?= $card['front_src'] ?>"
-    data-img-alt="<?= $card['front_alt'] ?>"
+    data-front-img-src="<?= $card['front_src'] ?>"
+    data-front-img-alt="<?= $card['front_alt'] ?>"
+    data-back-img-src="<?= $card['back_src'] ?>"
+    data-back-img-alt="<?= $card['back_alt'] ?>"
     class="<?= cc('relative aspect-160/229 overflow-clip rounded-xl shrink-0', $class) ?>">
     <?= component('shared/ui/image', [
         'sizes'    => 'mb',
@@ -27,4 +29,7 @@ extract(component_props(
         'prt_class' => 'size-full bg-contain! isolate backface-hidden transition-transform',
         'img_class' => 'object-contain!',
     ]) ?>
+    <?php if ($isSelectable === true) : ?>
+        <button cmp-selectable-item cmp-visible-at-start cmp-visible-during class='absolute z-1 cursor-pointer inset-0'></button>
+    <?php endif; ?>
 </li>

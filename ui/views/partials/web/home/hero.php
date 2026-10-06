@@ -46,15 +46,13 @@ extract(component_props(
             ]) ?>
 
         </div>
-        <article class='lg:basis-1/2 space-y-6'>
+        <article cmp-game-container class='lg:basis-1/2 space-y-6'>
             <header class='text-center text-balance'>
                 <h2 class='text-2xl md:text-3xl! lg:text-4xl!'>Давай познакомимся?</h2>
                 <p>Начни с авторской колоды с котиками. Без сложных раскладов и длинных объяснений - просто открой карту и посмотри, что она расскажет о том, почему именно сегодня ты здесь.</p>
             </header>
 
-
             <div>
-
                 <?php slot('components/web/layout/card-deck', [
                     'count' => count($cards),
                     'attrs' => ['cmp-game' => GameType::BONUS_HOME->value]
@@ -77,6 +75,7 @@ extract(component_props(
                         'attrs' => [
                             'cmp-launch-game-btn' => true,
                             'cmp-visible-at-start' => true,
+                            'cmp-visible-during' => true,
                         ]
                     ]) ?>
                     <?= component('web/ui/button', [

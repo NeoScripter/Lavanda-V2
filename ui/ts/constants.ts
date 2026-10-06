@@ -6,6 +6,7 @@ export const EVENTS = {
     START_SPIN: 'start_spin',
     END_SPIN: 'end_spin',
     SETUP_GAME: 'setup_game',
+    RESET_GAME: 'reset_game',
 };
 
 export const DURATION = {
@@ -16,10 +17,50 @@ export const DISTANCE = {
     SWIPE_THRESHOLD: 50,
 };
 
-export const GAME_TYPES = {
+
+export const GAME_CATEGORY = {
+    TAROT: 'tarot',
+    METAPHORIC: 'metaphoric',
+    LENORMAND: 'lenormand',
+    MIND_GAMES: 'mind_games',
+    RUNE: 'rune',
+    STONE: 'stone',
+    BONUS: 'bonus',
+};
+
+export const GAME_CATEGORY_MAP = {
+    bonus: GAME_CATEGORY.BONUS,
+    bonus_home: GAME_CATEGORY.BONUS,
+};
+
+export type CategoryType = typeof GAME_CATEGORY_MAP;
+
+export const HTML_TYPE = {
+    ITEMS: 'items',
+    PREVIEW: 'preview',
+};
+
+export const HTML_TYPE_MAP = {
+    bonus: HTML_TYPE.ITEMS,
+    bonus_home: HTML_TYPE.PREVIEW,
+};
+
+export type HtmlType = typeof HTML_TYPE_MAP;
+
+export const ROUND_TYPE = {
     RANDOM_CARDS: 'random_cards',
 };
 
-export const DISPLAY_TYPES = {
-    BONUS_HOMEPAGE: 'bonus_homepage',
+export const ROUND_TYPE_MAP = {
+    bonus: ROUND_TYPE.RANDOM_CARDS,
+    bonus_home: ROUND_TYPE.RANDOM_CARDS,
 };
+
+export type RoundType = typeof ROUND_TYPE_MAP;
+
+export type GameInfo = {
+    html: HtmlType[keyof HtmlType];
+    category: CategoryType[keyof CategoryType];
+    round: RoundType[keyof RoundType];
+}
+

@@ -7,12 +7,12 @@ extract(component_props(
     props: get_defined_vars(),
 )); ?>
 
-<li cmp-card 
-    data-id="<?= $card['id'] ?>" 
-    data-front-img-src="<?= $card['front_src'] ?>" 
-    data-front-img-alt="<?= $card['front_alt'] ?>" 
-    data-back-img-src="<?= $card['back_src'] ?>" 
-    data-back-img-alt="<?= $card['back_alt'] ?>" 
+<li cmp-card
+    data-id="<?= $card['id'] ?>"
+    data-front-img-src="<?= $card['front_src'] ?>"
+    data-front-img-alt="<?= $card['front_alt'] ?>"
+    data-back-img-src="<?= $card['back_src'] ?>"
+    data-back-img-alt="<?= $card['back_alt'] ?>"
     class="<?= cc('relative aspect-160/229 overflow-clip rounded-xl shrink-0', $class) ?>">
     <?= component('shared/ui/image', [
         'sizes'    => 'mb',

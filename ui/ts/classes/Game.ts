@@ -1,4 +1,12 @@
-import { qsa, selectFirstVisibleElement } from '../utils';
+import {
+    EVENTS,
+    GAME_CATEGORY_MAP,
+    HTML_TYPE_MAP,
+    ROUND_TYPE_MAP,
+    type CategoryType,
+    type GameInfo,
+} from '../constants';
+import { qs, qsa, selectFirstVisibleElement } from '../utils';
 import GameRound from './GameRound';
 import Interpretation from './Interpretation';
 
@@ -10,6 +18,7 @@ type Elements = {
     visibleDuring: NodeListOf<HTMLElement>;
     setNumRoundsBtns: NodeListOf<HTMLButtonElement>;
     selectableItems: NodeListOf<HTMLButtonElement>;
+    game: HTMLElement;
     selectedItemsUI: HTMLUListElement | null;
 };
 
@@ -17,27 +26,43 @@ export default class Game {
     selected: HTMLElement[];
     numRounds: number;
     elements: Elements;
-    result: Interpretation;
+    inter: Interpretation;
+    info: GameInfo;
 
-    constructor() {
+    constructor(container: HTMLElement, inter: Interpretation) {
         this.elements = {
-            launchGameBtns: qsa<HTMLButtonElement>('[cmp-launch-game-btn]'),
-            resetGameBtns: qsa<HTMLButtonElement>('[cmp-reset-game-btn]'),
+            launchGameBtns: qsa<HTMLButtonElement>(
+                '[cmp-launch-game-btn]',
+                container
+            ),
+            resetGameBtns: qsa<HTMLButtonElement>(
+                '[cmp-reset-game-btn]',
+                container
+            ),
             setNumRoundsBtns: qsa<HTMLButtonElement>(
                 '[cmp-set-num-rounds-btn]'
             ),
-            visibleAtStart: qsa<HTMLElement>('[cmp-visible-at-start]'),
-            visibleAtEnd: qsa<HTMLElement>('[cmp-visible-at-end]'),
-            visibleDuring: qsa<HTMLElement>('[cmp-visible-during]'),
-            selectedItemsUI: selectFirstVisibleElement<HTMLUListElement>(
-                '[cmp-selected-items]',
-                'silent'
+            visibleAtStart: qsa<HTMLElement>(
+                '[cmp-visible-at-start]',
+                container
             ),
-            selectableItems: qsa<HTMLButtonElement>('[cmp-selectable-item]'),
+            visibleAtEnd: qsa<HTMLElement>('[cmp-visible-at-end]', container),
+            visibleDuring: qsa<HTMLElement>('[cmp-visible-during]', container),
+            selectableItems: qsa<HTMLButtonElement>(
+                '[cmp-selectable-item]',
+                container
+            ),
+            game: qs<HTMLElement>('[cmp-game]', 'error', container),
+            selectedItemsUI: qs<HTMLUListElement>(
+                '[cmp-selected-items]',
+                'silent',
+                container
+            ),
         };
         this.selected = [];
         this.numRounds = 1;
-        this.result = new Interpretation(this.selected);
+        this.inter = inter;
+        this.info = this.getInfo();
     }
 
     public init() {
@@ -53,67 +78,44 @@ export default class Game {
         this.disableGameBtns();
         this.setState('during');
 
-        const selectedItem = await round.run();
+        const selectedItem = await round.run(this.info);
 
         this.selected.push(selectedItem);
-        this.showSelectedItem(structuredClone(selectedItem));
+        this.showSelectedItem(selectedItem);
 
         if (this.selected.length >= this.numRounds) {
             this.setState('end');
-            await this.result.show();
+            await this.inter.show(this.selected, this.info);
         }
 
         this.enableGameBtns();
     }
 
     private handleItemSelect(selectedItem: HTMLElement) {
-        if (selectedItem.hasAttribute('aria-selected')) {
-            selectedItem.removeAttribute('aria-selected');
-            this.selected = this.selected.filter(
-                (item) => item !== selectedItem
-            );
+        const clone = selectedItem.cloneNode(true) as HTMLElement;
+        selectedItem.setAttribute('aria-selected', 'true');
+        this.setState('during');
+        this.selected.push(selectedItem);
+        this.showSelectedItem(clone);
 
-            if (this.selected.length === 0) {
-                this.setState('start');
-            }
-
-            const ui = this.elements.selectedItemsUI;
-            const id = selectedItem.getAttribute('data-id');
-            if (!ui || !id) return;
-
-            const visibleItem = ui.querySelector(`[data-id=${id}]`);
-
-            if (!visibleItem) return;
-
-            visibleItem.remove();
-        } else {
-            selectedItem.setAttribute('aria-selected', 'true');
-            this.setState('during');
-            this.selected.push(selectedItem);
-            this.showSelectedItem(selectedItem);
-
-            if (this.selected.length >= this.numRounds) {
-                this.setState('end');
-                this.result.show();
-            }
+        if (this.selected.length >= this.numRounds) {
+            this.setState('end');
+            this.inter.show(this.selected, this.info);
         }
     }
 
     private reset() {
+        this.selected.forEach((item) => item.removeAttribute('aria-selected'));
         this.selected.length = 0;
 
         if (this.elements.selectedItemsUI) {
             this.elements.selectedItemsUI.innerHTML = '';
         }
 
-        this.result.reset();
+        this.inter.reset();
         this.setState('start');
 
-        const game = selectFirstVisibleElement('[cmp-game]', 'silent');
-
-        if (!game) return;
-
-        game.scrollIntoView({
+        this.elements.game.scrollIntoView({
             block: 'center',
             behavior: 'smooth',
         });
@@ -166,24 +168,20 @@ export default class Game {
         this.elements.resetGameBtns.forEach((btn) =>
             btn.addEventListener('click', () => this.reset())
         );
+
+        window.addEventListener(EVENTS.RESET_GAME, () => this.reset());
     }
 
     private disableGameBtns() {
-        [
-            ...this.elements.launchGameBtns,
-            ...this.elements.visibleAtStart,
-            ...this.elements.visibleAtEnd,
-            ...this.elements.visibleDuring,
-        ].forEach((btn) => btn.setAttribute('disabled', 'true'));
+        [...this.elements.launchGameBtns].forEach((btn) =>
+            btn.setAttribute('disabled', 'true')
+        );
     }
 
     private enableGameBtns() {
-        [
-            ...this.elements.launchGameBtns,
-            ...this.elements.visibleAtStart,
-            ...this.elements.visibleAtEnd,
-            ...this.elements.visibleDuring,
-        ].forEach((btn) => btn.removeAttribute('disabled'));
+        [...this.elements.launchGameBtns].forEach((btn) =>
+            btn.removeAttribute('disabled')
+        );
     }
 
     private setState(type: 'start' | 'during' | 'end') {
@@ -206,6 +204,26 @@ export default class Game {
                 el.classList.remove('hidden')
             );
         }
+    }
+
+    private getInfo() {
+        const type = this.elements.game.getAttribute('cmp-game');
+
+        if (!type) {
+            throw new Error(
+                'There is not cmp-game attribute on the game element'
+            );
+        }
+
+        const key = type as keyof CategoryType;
+
+        const info: GameInfo = {
+            html: HTML_TYPE_MAP[key],
+            category: GAME_CATEGORY_MAP[key],
+            round: ROUND_TYPE_MAP[key],
+        };
+
+        return info;
     }
 
     private showSelectedItem(item: HTMLElement) {

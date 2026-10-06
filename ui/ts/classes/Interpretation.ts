@@ -1,5 +1,10 @@
+import {
+    GAME_CATEGORY_MAP,
+    type CategoryType,
+    type GameInfo,
+} from '../constants';
 import initAdaptiveImages from '../modules/adaptiveImages';
-import { qs, selectFirstVisibleElement, wait } from '../utils';
+import { qs, selectFirstVisibleElement } from '../utils';
 import InterpretationHTML from './InterpretationHTML';
 
 type Elements = {
@@ -57,46 +62,28 @@ const SKELETON_PAYLOAD: InterpretationPayload = {
     match_sets: [],
 };
 
-const GAME_CATEGORY = {
-    TAROT: 'tarot',
-    METAPHORIC: 'metaphoric',
-    LENORMAND: 'lenormand',
-    MIND_GAMES: 'mind_games',
-    RUNE: 'rune',
-    STONE: 'stone',
-    BONUS: 'bonus',
-};
-
-const GAME_CATEGORY_MAP = {
-    bonus: GAME_CATEGORY.BONUS,
-    bonus_home: GAME_CATEGORY.BONUS,
-};
-
-type CategoryType = typeof GAME_CATEGORY_MAP;
-
 export default class Interpretation {
-    items: HTMLElement[];
-    category: CategoryType[keyof CategoryType];
     elements: Elements;
     payload: InterpretationPayload | null;
     html: InterpretationHTML;
 
-    constructor(items: HTMLElement[]) {
+    constructor(container: HTMLDivElement) {
         this.elements = {
-            interpretation: qs<HTMLDivElement>('[cmp-interpretation]'),
+            interpretation: container,
         };
-        this.items = items;
-        this.category = this.getCategory();
         this.payload = null;
         this.html = new InterpretationHTML();
     }
 
-    public async show() {
+    public async show(items: HTMLElement[], info: GameInfo) {
         if (!this.payload) {
-            const payload = (await this.getPayload()) as InterpretationPayload;
+            const payload = (await this.getPayload(
+                items,
+                info
+            )) as InterpretationPayload;
             this.payload = payload;
         }
-        const html = this.html.generate(this.payload);
+        const html = this.html.generate(this.payload, info);
         this.elements.interpretation.appendChild(html);
         this.elements.interpretation.classList.remove('hidden');
         this.elements.interpretation.scrollIntoView({
@@ -112,20 +99,30 @@ export default class Interpretation {
         this.payload = null;
     }
 
-    public async getPayload() {
+    public async getPayload(items: HTMLElement[], info: GameInfo) {
+        const ids = items.map((item) => {
+            const id = item.getAttribute('data-id');
+
+            if (!id) {
+                throw new Error("item doesn't have an id");
+            }
+
+            return id;
+        });
+
         const API_URL = '/api/interpretation';
         const queryParams = {
-            ids: this.pluckItemsIds().join(','),
-            category: this.category,
+            ids: ids.join(','),
+            category: info.category,
         };
 
-        this.displayLoader();
+        this.displayLoader(info);
 
         try {
             const queryString = new URLSearchParams(queryParams).toString();
             const url = `${API_URL}?${queryString}`;
 
-            await wait(2000);
+            // await wait(2000);
             const response = await fetch(url);
             return await response.json();
         } catch (error) {
@@ -135,9 +132,9 @@ export default class Interpretation {
         }
     }
 
-    private displayLoader() {
+    private displayLoader(info: GameInfo) {
         const loader = this.html.convertToLoader(
-            this.html.generate(SKELETON_PAYLOAD)
+            this.html.generate(SKELETON_PAYLOAD, info)
         );
         this.elements.interpretation.classList.remove('hidden');
         this.elements.interpretation.appendChild(loader);
@@ -149,33 +146,5 @@ export default class Interpretation {
 
     private hideLoader() {
         this.elements.interpretation.innerHTML = '';
-    }
-
-    private getCategory() {
-        const game = selectFirstVisibleElement<HTMLDivElement>('[cmp-game]');
-        const type = game.getAttribute('cmp-game');
-
-        if (!type) {
-            throw new Error("The game doesn't contain the cmp-game attribute");
-        }
-
-        if (!Object.keys(GAME_CATEGORY_MAP).includes(type)) {
-            throw new Error('The game category is invalid');
-        }
-
-        const key = type as keyof CategoryType;
-        return GAME_CATEGORY_MAP[key];
-    }
-
-    private pluckItemsIds() {
-        return this.items.map((item) => {
-            const id = item.getAttribute('data-id');
-
-            if (!id) {
-                throw new Error("item doesn't have an id");
-            }
-
-            return id;
-        });
     }
 }

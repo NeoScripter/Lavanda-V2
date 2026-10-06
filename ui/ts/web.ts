@@ -1,6 +1,4 @@
 import '../css/web.css';
-import Game from './classes/Game';
-import GameStage from './classes/GameStage';
 import initAdaptiveImages from './modules/adaptiveImages';
 import initCheckboxes from './modules/checkboxes';
 import initGame from './modules/game';
@@ -27,7 +25,6 @@ class WebUI {
             initGame,
         ];
 
-        new GameStage().init();
         for (const handler of handlers) {
             try {
                 handler();
