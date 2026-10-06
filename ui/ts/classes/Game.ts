@@ -42,9 +42,7 @@ export default class Game {
                 '[cmp-reset-game-btn]',
                 container
             ),
-            setNumRoundsBtns: qsa<HTMLButtonElement>(
-                '[cmp-set-num-rounds-btn]'
-            ),
+            setNumRoundsBtns: qsa<HTMLButtonElement>('[data-num-rounds]'),
             visibleAtStart: qsa<HTMLElement>(
                 '[cmp-visible-at-start]',
                 container
@@ -61,7 +59,7 @@ export default class Game {
                 'silent',
                 container
             ),
-            container
+            container,
         };
         this.selected = [];
         this.numRounds = 1;
@@ -127,20 +125,26 @@ export default class Game {
     private setNumRounds() {
         this.elements.setNumRoundsBtns.forEach((btn) =>
             btn.addEventListener('click', () => {
-                const numRounds = btn.getAttribute('data-numRounds');
+                const numRounds = btn.getAttribute('data-num-rounds');
+
+                this.elements.setNumRoundsBtns.forEach((btn) =>
+                    btn.removeAttribute('aria-selected')
+                );
+                btn.setAttribute('aria-selected', 'true');
 
                 if (!numRounds) {
-                    console.error('No numRounds attribute is set');
+                    console.error('Attribute data-num-rounds is not set');
                     return;
                 }
-                const num = Number(numRounds);
+                let num = Math.max(Number(numRounds), 0);
 
                 if (isNaN(num)) {
                     console.error('Invalid data attribute format');
                     return;
                 }
 
-                this.numRounds = Math.max(5, num);
+                this.reset();
+                this.numRounds = Math.min(5, num);
             })
         );
     }
