@@ -32,7 +32,7 @@ extract(component_props(
     </div>
 
     <article cmp-interpretation
-        class='bg-white py-14.5 rounded-b-xl px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23'>
+        class='bg-white py-14.5 rounded-b-xl px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23 hidden'>
     </article>
 
     <template cmp-theme-picker>
