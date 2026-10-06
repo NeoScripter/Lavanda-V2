@@ -13,9 +13,9 @@ extract(component_props(
             <?php foreach ($labels as $idx => $label) : ?>
                 <label
                     tabindex="0"
-                    class='has-checked:bg-primary has-checked:opacity-100 opacity-60 hover:opacity-100 has-checked:cursor-default has-checked:pointer-events-none has-checked:text-white xs:min-w-[15em] font-medium bg-white cursor-pointer py-[0.75em] uppercase text-center xs:rounded-t-2xl px-[1.25em] text-primary transition-[opacity,background-color,color] duration-300 ease'>
+                    class='has-checked:bg-primary has-checked:opacity-100 opacity-60 hover:opacity-100 focus-visible:opacity-100 has-checked:cursor-default has-checked:pointer-events-none has-checked:text-white xs:min-w-[15em] font-medium bg-white cursor-pointer py-[0.75em] uppercase text-center xs:rounded-t-2xl px-[1.25em] text-primary transition-[opacity,background-color,color] duration-300 ease'>
                     <input cmp-game-toggle
-                        name="section" type="radio" class="hidden" value="<?= 'slot-' . $idx + 1 ?>" <?= $idx === 1 ? 'checked' : '' ?> />
+                        name="section" type="radio" class="hidden" value="<?= 'slot-' . $idx + 1 ?>" <?= $idx === 0 ? 'checked' : '' ?> />
                     <?= $label ?>
                 </label>
             <?php endforeach; ?>
@@ -32,6 +32,16 @@ extract(component_props(
     </div>
 
     <article cmp-interpretation
-        class='bg-white py-14.5 rounded-b-xl px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23 hidden'>
+        class='bg-white py-14.5 rounded-b-xl px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23'>
     </article>
+
+    <template cmp-theme-picker>
+        <div>
+            <h4 class='text-foreground font-semibold text-xl md:text-2xl xl:text-3xl'>Выберите тему для интерпретации</h4>
+            <nav class='flex flex-col sm:flex-wrap sm:flex-row mt-10 justify-center gap-y-[1em] gap-x-[1.25em]'>
+                <button cmp-theme-btn class='font-medium bg-primary-muted/75 text-white cursor-pointer py-[0.75em] uppercase text-center sm:min-w-80 rounded-2xl px-[1.25em] transition-[opacity,background-color,color] duration-300 ease [[selected-theme]]:bg-primary'>
+                </button>
+            </nav>
+        </div>
+    </template>
 </section>

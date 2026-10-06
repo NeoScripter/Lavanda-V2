@@ -1,10 +1,12 @@
 import { HTML_TYPE, type GameInfo } from '../constants';
-import { cloneAttributes, createAdaptiveImg, qsa } from '../utils';
+import { cloneAttributes, createAdaptiveImg, qs, qsa } from '../utils';
 import type { InterpretationPayload } from './Interpretation';
 
 export default class InterpretationHTML {
-
-    public generate(payload: InterpretationPayload, info: GameInfo): HTMLElement {
+    public generate(
+        payload: InterpretationPayload,
+        info: GameInfo
+    ): HTMLElement {
         switch (info.html) {
             case HTML_TYPE.ITEMS:
                 return this.items(payload);
@@ -25,7 +27,7 @@ export default class InterpretationHTML {
 
         images.forEach((img) => {
             const div = document.createElement('div');
-            cloneAttributes(div, img)
+            cloneAttributes(div, img);
             div.setAttribute('component-adaptive-image', '');
             img.replaceWith(div);
         });
@@ -34,7 +36,7 @@ export default class InterpretationHTML {
 
         paragraphs.forEach((paragraph) => {
             const div = document.createElement('div');
-            cloneAttributes(div, paragraph)
+            cloneAttributes(div, paragraph);
 
             for (let i = 0; i < 6; i++) {
                 const p = document.createElement('p');
@@ -50,9 +52,77 @@ export default class InterpretationHTML {
 
     private items(data: InterpretationPayload) {
         const wrapper = document.createElement('ul');
+
+        if (data.items.length === 0) return wrapper;
+
         wrapper.setAttribute('cmp-interpretation-items', '');
 
         const children = [];
+
+        if (data.items.some((item) => item.themes.length > 1)) {
+            const template = qs<HTMLTemplateElement>(
+                '[cmp-theme-picker]',
+                'error'
+            );
+
+            const picker = document.importNode(template.content, true);
+            const button = qs<HTMLButtonElement>(
+                '[cmp-theme-btn]',
+                'error',
+                picker
+            );
+            const nav = qs<HTMLDivElement>('nav', 'error', picker);
+
+            const unique = [
+                ...new Set(
+                    data.items.flatMap((item) =>
+                        item.themes.map((theme) =>
+                            theme.name.toLowerCase().trim()
+                        )
+                    )
+                ),
+            ].toSorted();
+
+            button.textContent = unique.splice(0, 1)[0];
+            button.setAttribute('selected-theme', '');
+
+            for (const theme of unique) {
+                const btnCopy = button.cloneNode(true) as HTMLButtonElement;
+                btnCopy.removeAttribute('selected-theme');
+
+                btnCopy.textContent = theme;
+
+                nav.appendChild(btnCopy);
+            }
+
+            for (const btn of qsa<HTMLButtonElement>('[cmp-theme-btn]', nav)) {
+                btn.addEventListener('click', () => {
+                    const key = btn.textContent;
+
+                    const nodes = qsa<HTMLLIElement>('li', wrapper);
+
+                    for (let i = 0; i < data.items.length; i++) {
+                        const theme = data.items[i].themes.find(
+                            (theme) => theme.name.toLowerCase() === key.toLowerCase()
+                        );
+
+                        if (!theme) continue;
+
+                        const node = nodes[i];
+                        qs<HTMLParagraphElement>(
+                            '*.theme>p',
+                            'error',
+                            node
+                        ).textContent = theme.html;
+                    }
+                    qsa<HTMLButtonElement>('[cmp-theme-btn]', nav).forEach(
+                        (button) => button.removeAttribute('selected-theme')
+                    );
+                    btn.setAttribute('selected-theme', '');
+                });
+            }
+            children.push(picker);
+        }
 
         for (const item of data.items) {
             const li = document.createElement('li');
@@ -65,7 +135,7 @@ export default class InterpretationHTML {
             w1.append(name, img);
 
             const w2 = document.createElement('div');
-            w2.classList.add('content');
+            w2.classList.add('theme');
             const theme = document.createElement('p');
             theme.textContent = item.themes[0]?.html ?? '';
             const advice = document.createElement('p');

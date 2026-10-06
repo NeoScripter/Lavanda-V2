@@ -2,6 +2,7 @@ import {
     type GameInfo,
 } from '../constants';
 import initAdaptiveImages from '../modules/adaptiveImages';
+import { wait } from '../utils';
 import InterpretationHTML from './InterpretationHTML';
 
 type Elements = {
@@ -119,7 +120,7 @@ export default class Interpretation {
             const queryString = new URLSearchParams(queryParams).toString();
             const url = `${API_URL}?${queryString}`;
 
-            // await wait(2000);
+            await wait(2000);
             const response = await fetch(url);
             return await response.json();
         } catch (error) {

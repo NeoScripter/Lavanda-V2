@@ -293,12 +293,10 @@ li[component-pic].open {
         padding 500ms ease-out;
 }
 
-[cmp-game-stage]:has(input[value='slot-1']:checked)
-    #slot-2 {
+[cmp-game-stage]:has(input[value='slot-1']:checked) #slot-2 {
     display: none;
 }
-[cmp-game-stage]:has(input[value='slot-2']:checked)
-    #slot-1 {
+[cmp-game-stage]:has(input[value='slot-2']:checked) #slot-1 {
     display: none;
 }
 
@@ -350,7 +348,9 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
 
 [cmp-interpretation] > *.skeleton [component-adaptive-image],
 [cmp-interpretation] > *.skeleton p,
-[cmp-interpretation] > *.skeleton h3 {
+[cmp-interpretation] > *.skeleton h3,
+[cmp-interpretation] > *.skeleton h4,
+[cmp-interpretation] > *.skeleton button {
     background-color: #b9b2cb;
     background-image: linear-gradient(
         90deg,
@@ -361,11 +361,13 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
     background-size: 200% 100%;
     animation: shimmer 5s linear infinite;
     border-radius: 0.5rem;
+    color: transparent;
     overflow: hidden;
 }
 
 [cmp-interpretation] > *.skeleton p,
-[cmp-interpretation] > *.skeleton h3 {
+[cmp-interpretation] > *.skeleton h3,
+[cmp-interpretation] > *.skeleton h4 {
     color: transparent;
     margin-block: 0.75em;
     text-box-trim: trim-both;
@@ -405,7 +407,7 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
 [cmp-interpretation-items] .headline {
     @apply mx-auto max-w-56 md:shrink-0 md:mx-0;
 }
-[cmp-interpretation-items] .content {
+[cmp-interpretation-items] .theme {
     @apply flex flex-col gap-6 md:justify-between;
 }
 [cmp-interpretation-items] .advice {
