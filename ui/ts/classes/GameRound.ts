@@ -32,7 +32,7 @@ export default class GameRound {
         };
 
         let extraDuration = Math.floor(Math.random() * 10);
-        const maxDuration = 100;
+        const maxDuration = 400;
 
         while (duration < maxDuration) {
             handleNext();
