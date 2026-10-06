@@ -94,7 +94,11 @@ extract(component_props(
         class="grid grid-cols-[repeat(auto-fit,10rem)] grid-rows-[auto_4rem] gap-4">
 
         <?php foreach ($cards as $card) : ?>
-            <?= component('web/ui/flip-card', ['card' => $card, 'isPickable' => true, 'class' => 'grid-row-2/3']) ?>
+            <?= component('web/ui/flip-card', [
+                'card' => $card,
+                'isPickable' => true,
+                'class' => 'grid-row-2/3'
+            ]) ?>
         <?php endforeach; ?>
     </ul>
 

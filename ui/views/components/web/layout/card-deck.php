@@ -1,7 +1,5 @@
 <?php
 
-$id = 'deck-' . uniqid();
-
 extract(component_props(
     required: ['count', 'slot'],
     optional: ['gap' => 0.4, 'width' => 10, 'attrs' => []],
@@ -9,23 +7,11 @@ extract(component_props(
 )); ?>
 
 <?php if ($count > 0) : ?>
-    <style>
-        #<?= $id ?> {
-            max-width: calc(<?= ($count + 1) * $gap ?>rem + <?= $width ?>rem);
-            padding-right: <?= $width ?>rem;
-            grid-template-columns: repeat(auto-fill, <?= $gap ?>rem);
-        }
-
-        #<?= $id ?>>li {
-            width: <?= $width ?>rem;
-        }
-    </style>
-
-    <ul 
+    <ul
         cmp-visible-at-start
         cmp-visible-during
-        id='<?= $id ?>'
-        class='grid max-w-full gap-y-1 mx-auto' <?= serialize_attrs($attrs) ?>>
+        style="--card-size: <?= $width ?>rem; --gap: <?= $gap ?>rem; --count: <?= $count ?>;"
+        class='grid [&>li]:w-(--card-size) max-w-[calc((var(--count)+1)*var(--gap)+var(--card-size))] grid-cols-[repeat(auto-fill,var(--gap))] pr-(--card-size) gap-y-1 mx-auto' <?= serialize_attrs($attrs) ?>>
         <?= $slot ?>
     </ul>
 <?php else: ?>

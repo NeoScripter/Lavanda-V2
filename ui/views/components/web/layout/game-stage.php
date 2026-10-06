@@ -9,10 +9,10 @@ extract(component_props(
 <section cmp-game-stage
     class="<?= cc('full-bleed lg:px-(--px-lg) group', $class) ?>">
     <div>
-        <nav class="flex flex-col xs:flex-row justify-center xs:gap-[1.25em] <?= count($labels) < 2 ? 'hidden' : '' ?>">
+        <nav class="flex flex-col xs:flex-row has-[input:last-of-type:checked]:border-b border-white xs:border-none justify-center xs:gap-[1.25em] <?= count($labels) < 2 ? 'hidden' : '' ?>">
             <?php foreach ($labels as $idx => $label) : ?>
                 <label
-                    class='has-checked:bg-primary has-checked:text-white xs:min-w-[15em] font-medium bg-white cursor-pointer py-[0.75em] uppercase text-center xs:rounded-t-2xl px-[1.25em] text-primary transition-colors'>
+                    class='has-checked:bg-primary has-checked:cursor-default has-checked:pointer-events-none has-checked:text-white xs:min-w-[15em] font-medium bg-white cursor-pointer py-[0.75em] uppercase text-center xs:rounded-t-2xl px-[1.25em] text-primary transition-colors'>
                     <input cmp-game-toggle
                         name="section" type="radio" class="hidden" value="<?= 'slot-' . $idx + 1 ?>" <?= $idx === 1 ? 'checked' : '' ?> />
                     <?= $label ?>
