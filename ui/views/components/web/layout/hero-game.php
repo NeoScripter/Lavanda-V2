@@ -14,7 +14,7 @@ extract(component_props(
         'sizes'    => 'mb|tb',
         'alt' => 'black-cat',
         'path'     => $image,
-        'prt_class' => 'shrink-0 bg-contain! lg:order-2 max-w-xl aspect-square lg:max-w-2/5 2xl:max-w-[min(50%,40rem)] mx-auto lg:w-full',
+        'prt_class' => 'shrink-0 bg-contain! lg:order-2 max-w-xl aspect-square lg:max-w-2/5 2xl:max-w-[min(40%,40rem)] mx-auto lg:w-full',
         'img_class' => 'size-full object-contain',
     ]) ?>
 

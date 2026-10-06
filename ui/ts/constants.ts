@@ -30,6 +30,7 @@ export const GAME_CATEGORY = {
 export const GAME_CATEGORY_MAP = {
     bonus: GAME_CATEGORY.BONUS,
     bonus_home: GAME_CATEGORY.BONUS,
+    metaphoric: GAME_CATEGORY.METAPHORIC,
 };
 
 export type CategoryType = typeof GAME_CATEGORY_MAP;
@@ -42,6 +43,7 @@ export const HTML_TYPE = {
 export const HTML_TYPE_MAP = {
     bonus: HTML_TYPE.ITEMS,
     bonus_home: HTML_TYPE.PREVIEW,
+    metaphoric: HTML_TYPE.ITEMS,
 };
 
 export type HtmlType = typeof HTML_TYPE_MAP;
@@ -53,6 +55,7 @@ export const ROUND_TYPE = {
 export const ROUND_TYPE_MAP = {
     bonus: ROUND_TYPE.RANDOM_CARDS,
     bonus_home: ROUND_TYPE.RANDOM_CARDS,
+    metaphoric: ROUND_TYPE.RANDOM_CARDS,
 };
 
 export type RoundType = typeof ROUND_TYPE_MAP;
@@ -64,6 +67,7 @@ export const PICKER_TYPE = {
 export const PICKER_TYPE_MAP = {
     bonus: PICKER_TYPE.ONE_CARD,
     bonus_home: PICKER_TYPE.ONE_CARD,
+    metaphoric: PICKER_TYPE.ONE_CARD,
 };
 
 export type PickerType = typeof PICKER_TYPE_MAP;
