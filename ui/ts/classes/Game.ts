@@ -179,14 +179,20 @@ export default class Game {
     }
 
     private disableGameBtns() {
-        [...this.elements.launchGameBtns].forEach((btn) =>
+        this.elements.launchGameBtns.forEach((btn) =>
             btn.setAttribute('disabled', 'true')
+        );
+        this.elements.setNumRoundsBtns.forEach((btn) =>
+            btn.classList.add('pointer-events-none')
         );
     }
 
     private enableGameBtns() {
-        [...this.elements.launchGameBtns].forEach((btn) =>
+        this.elements.launchGameBtns.forEach((btn) =>
             btn.removeAttribute('disabled')
+        );
+        this.elements.setNumRoundsBtns.forEach((btn) =>
+            btn.classList.remove('pointer-events-none')
         );
     }
 
