@@ -36,48 +36,53 @@ export default async function initPracticeItems() {
     }
 
     function calculateColumnNum() {
-        if (!grid || items.length === 0) return;
+        if (!grid || items.length === 0) return 0;
 
         const styles = window.getComputedStyle(grid, null);
-        const paddingLeft = styles
-            .getPropertyValue('padding-left')
-            .replace(/\D+/, '');
-        const paddingRight = styles
-            .getPropertyValue('padding-right')
-            .replace(/\D+/, '');
-        const gap = styles.getPropertyValue('gap').replace(/\D+/, '');
-        const width = styles.getPropertyValue('width').replace(/\D+/, '');
-        const availableWidth =
-            Number(width) - (Number(paddingLeft) + Number(paddingRight));
+        const paddingLeft = parseFloat(styles.getPropertyValue('padding-left'));
+        const paddingRight = parseFloat(
+            styles.getPropertyValue('padding-right')
+        );
+        const gap = parseFloat(styles.getPropertyValue('gap'));
+        const width = parseFloat(styles.getPropertyValue('width'));
+        const availableWidth = width - (paddingLeft + paddingRight);
 
         const itemWidth = items[0].clientWidth;
         const canFitNoGap = Math.floor(availableWidth / itemWidth);
-        const takenByGaps = (canFitNoGap - 1) * Number(gap);
+        const takenByGaps = (canFitNoGap - 1) * gap;
         return Math.floor((availableWidth - takenByGaps) / itemWidth);
     }
 
-    function handleScreenResize() {
+    async function handleScreenResize() {
         const currentColumnNum = calculateColumnNum();
         if (prevColNum === currentColumnNum) return;
 
         prevColNum = currentColumnNum;
-        syncState();
+        await syncState();
     }
 
     const resizeObserver = new ResizeObserver(handleScreenResize);
     resizeObserver.observe(grid);
 
     function getInsertPosition(idx: number, columns: number) {
+        if (isNaN(columns)) {
+            columns = 1;
+        }
         while ((idx + 1) % columns !== 0) {
             idx++;
+            if (idx > 50) {
+                throw new Error(
+                    'Infinite loop in the getInsertPosition method'
+                );
+            }
         }
         return Math.min(items.length - 1, idx);
     }
 
-
     async function syncState() {
         const currentIdx = entries.findIndex((e) => e.isActive === true);
         const columnNum = calculateColumnNum();
+        items.forEach(item => item.removeAttribute('aria-selected'))
 
         const visibleItem = qs<HTMLLIElement>('[component-pic]', 'silent');
 
@@ -89,7 +94,7 @@ export default async function initPracticeItems() {
 
         const duplicates = qsa<HTMLLIElement>('[component-pic]');
 
-        duplicates.forEach(item => item.remove());
+        duplicates.forEach((item) => item.remove());
 
         if (currentIdx === -1 || columnNum == null) return;
 
@@ -106,6 +111,7 @@ export default async function initPracticeItems() {
         );
 
         if (newItem) {
+            items[currentIdx].setAttribute('aria-selected', 'true');
             await wait(100);
             newItem.classList.add('open');
             await wait(500);
@@ -230,14 +236,14 @@ export default async function initPracticeItems() {
             const faqs = JSON.parse(item.faqs);
 
             for (let j = 0; j < faqs.length; j++) {
-                const faq =faqs[j];
+                const faq = faqs[j];
 
                 const [details, summary, p] = createElements([
                     'details',
                     'summary',
                     'p',
                 ]);
-                summary.textContent = `${j+1}. ${faq.question}`;
+                summary.textContent = `${j + 1}. ${faq.question}`;
                 p.textContent = faq.answer;
                 details.append(summary, p);
                 details.setAttribute('name', 'faqs');

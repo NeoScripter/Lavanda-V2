@@ -8,6 +8,7 @@ export default defineConfig({
     build: {
         outDir: 'public/dist',
         manifest: true,
+        minify: true,
         emptyOutDir: true,
         rollupOptions: {
             input: ['ui/ts/web.ts', 'ui/ts/admin.ts'],
