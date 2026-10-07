@@ -1,11 +1,6 @@
 export const EVENTS = {
     SHOW_MODAL: 'modal-show',
     HIDE_MODAL: 'modal-hide',
-    START_GAME: 'start_game',
-    END_GAME: 'end_game',
-    START_SPIN: 'start_spin',
-    END_SPIN: 'end_spin',
-    SETUP_GAME: 'setup_game',
     RESET_GAME: 'reset_game',
 };
 

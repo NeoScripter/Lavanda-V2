@@ -44,4 +44,12 @@ export default class GameRound {
         cards.forEach((card) => card.classList.remove('highlighted'));
         return cards[currentIdx];
     }
+
+    private lenormand() {
+        const keyCardMap = {
+            man: ['джентльмен'],
+            woman: ['дама'],
+        }
+
+    }
 }
