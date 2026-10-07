@@ -11,7 +11,7 @@ $idx = rand(1, 6);
 ?>
 
 <li data-practice-item-id="<?= $item['id'] ?>"
-    class="<?= cc('rounded-2xl relative aria-selected:bg-primary aria-selected:text-white group justify-end bg-no-repeat overflow-clip before:absolute before:inset-0 before:bg-linear-to-b before:from-transparent before:to-white/91 aria-selected:before:from-transparent aria-selected:before:to-primary bg-cover bg-center shadow-accent px-6 py-8 md:px-8 md:py-10 min-h-65 md:min-h-75 flex flex-col', $class) ?>"
+    class="<?= cc('rounded-2xl relative focus-within:ring-blue-400 focus-within:ring-4 aria-selected:bg-primary aria-selected:text-white group justify-end bg-no-repeat overflow-clip before:absolute before:inset-0 before:bg-linear-to-b before:from-transparent before:to-white/91 aria-selected:before:from-transparent aria-selected:before:to-primary bg-cover bg-center shadow-accent px-6 py-8 md:px-8 md:py-10 min-h-65 md:min-h-75 flex flex-col', $class) ?>"
     style="background-image: url(<?= "/assets/images/shared/card-bg/card-bg-$idx.webp" ?>)"
     <?= serialize_attrs($attrs) ?>>
 
