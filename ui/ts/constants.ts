@@ -28,6 +28,7 @@ export const GAME_CATEGORY_MAP = {
     metaphoric: GAME_CATEGORY.METAPHORIC,
     tarot: GAME_CATEGORY.TAROT,
     mind_games: GAME_CATEGORY.MIND_GAMES,
+    lenormand: GAME_CATEGORY.LENORMAND,
 };
 
 export type CategoryType = typeof GAME_CATEGORY_MAP;
@@ -44,12 +45,14 @@ export const HTML_TYPE_MAP = {
     metaphoric: HTML_TYPE.ITEMS,
     tarot: HTML_TYPE.ITEMS,
     mind_games: HTML_TYPE.EMPTY,
+    lenormand: HTML_TYPE.ITEMS,
 };
 
 export type HtmlType = typeof HTML_TYPE_MAP;
 
 export const ROUND_TYPE = {
     RANDOM_CARDS: 'random_cards',
+    LENORMAND: 'lenormand',
 };
 
 export const ROUND_TYPE_MAP = {
@@ -58,6 +61,7 @@ export const ROUND_TYPE_MAP = {
     metaphoric: ROUND_TYPE.RANDOM_CARDS,
     tarot: ROUND_TYPE.RANDOM_CARDS,
     mind_games: ROUND_TYPE.RANDOM_CARDS,
+    lenormand: ROUND_TYPE.LENORMAND,
 };
 
 export type RoundType = typeof ROUND_TYPE_MAP;
@@ -72,6 +76,7 @@ export const PICKER_TYPE_MAP = {
     metaphoric: PICKER_TYPE.ONE_CARD,
     tarot: PICKER_TYPE.ONE_CARD,
     mind_games: PICKER_TYPE.ONE_CARD,
+    lenormand: PICKER_TYPE.ONE_CARD,
 };
 
 export type PickerType = typeof PICKER_TYPE_MAP;

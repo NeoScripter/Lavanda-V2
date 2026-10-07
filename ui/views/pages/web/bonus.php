@@ -40,7 +40,7 @@ extract(component_props(
 
 
 <?php ob_start(); ?>
-<div class='items-center space-y-8 lg:space-y-12'>
+<div>
     <p cmp-visible-at-start
         class='text-balance mx-auto max-w-xl'>Карта открывается сама — как знак, который приходит вовремя. Иногда именно случай отражает то, что мы уже чувствуем, но не осознаём.</p>
 
@@ -82,7 +82,7 @@ extract(component_props(
 <?php $slot1 = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<div class='items-center space-y-8 lg:space-y-12'>
+<div>
     <p cmp-visible-at-start
         class='text-balance mx-auto max-w-xl'>
         Вы сами выбираете карту, которая откликается сердцем. Этот способ помогает довериться интуиции и увидеть собственный внутренний ответ.

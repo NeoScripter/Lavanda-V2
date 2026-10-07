@@ -21,9 +21,10 @@ extract(component_props(
             <?php endforeach; ?>
         </nav>
 
-        <div class='py-14.5 px-7 sm:px-9 sm:py-25 text-white lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23 bg-linear-(--bg-primary) lg:rounded-t-xl lg:group-has-[article[cmp-interpretation].hidden]:rounded-b-xl'>
+        <div class='py-14.5 px-7 sm:px-9 md:py-20 text-white lg:px-12 lg:py-18 2xl:px-21.5 2xl:py-23 bg-linear-(--bg-primary) lg:rounded-t-xl lg:group-has-[article[cmp-interpretation].hidden]:rounded-b-xl'>
             <?php foreach ($slots as $idx => $slot) : ?>
                 <div cmp-game-container
+                    class='[&>*>*:has(+*:not(.hidden))]:mb-(--space-y) [--space-y:2rem] md:[--space-y:2.5rem] lg:[--space-y:3rem]'
                     id="<?= 'slot-' . $idx + 1 ?>">
                     <?= $slot ?>
                 </div>

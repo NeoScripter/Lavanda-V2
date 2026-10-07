@@ -4,6 +4,7 @@ import initCardGrid from './modules/cardGrid';
 import initCheckboxes from './modules/checkboxes';
 import initGame from './modules/game';
 import initHeader from './modules/header';
+import initLenormandPickers from './modules/lenormand';
 import initModals from './modules/modals';
 import initNavMenu from './modules/navMenu';
 import initPracticeItems from './modules/practiceItems';
@@ -25,6 +26,7 @@ class WebUI {
             initHeader,
             initGame,
             initCardGrid,
+            initLenormandPickers,
         ];
 
         for (const handler of handlers) {

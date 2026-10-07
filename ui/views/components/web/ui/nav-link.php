@@ -13,13 +13,13 @@ $uid = uniqid('popover_');
     <?php if (isset($url)) : ?>
         <a
             href="<?= $url ?>"
-            class="<?= $base_class ?> <?= $url === \Base::instance()->PATH ? 'font-semibold md:before:absolute md:before:-inset-x-2 md:before:-inset-y-0.5 md:before:bg-gray-50 md:before:rounded-sm md:before:-z-1' : '' ?>">
+            class="<?= $base_class ?> <?= $url === \Base::instance()->PATH ? 'font-semibold text-center md:before:absolute md:before:-inset-x-2 md:before:-inset-y-0.5 md:before:bg-gray-50 md:before:rounded-sm md:before:-z-1' : '' ?>">
             <?= $label ?>
         </a>
     <?php else : ?>
         <button
             popovertarget="<?= $uid ?>"
-            class="<?= $base_class ?> hover:text-primary focus-visible:text-primary transition-colors cursor-pointer flex relative items-center mx-auto w-fit"
+            class="<?= $base_class ?> hover:text-primary focus-visible:text-primary transition-colors text-center cursor-pointer flex relative items-center mx-auto w-fit"
             style="anchor-name: --nav;">
             <span><?= $label ?></span>
         </button>
@@ -33,7 +33,7 @@ $uid = uniqid('popover_');
                 <nav>
                     <ol class="flex flex-col text-base gap-3 justify-end">
                         <?php foreach ($nav_links as $link) : ?>
-                            <?= component('web/ui/nav-link', [...$link, 'class' => 'block! text-balance']) ?>
+                            <?= component('web/ui/nav-link', [...$link, 'class' => 'block! text-center text-balance']) ?>
                         <?php endforeach; ?>
                     </ol>
                 </nav>

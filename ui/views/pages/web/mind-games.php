@@ -43,7 +43,7 @@ extract(component_props(
 </section>
 
 <?php ob_start(); ?>
-<div class='items-center space-y-8 lg:space-y-12'>
+<div>
     <p cmp-visible-at-start
         class='text-balance mx-auto max-w-xl'>
         Самая первая фраза, которая буквально «бросится вам в глаза» – это и будет совет. Опишите (желательно проговорить вслух или записать), что вы увидели и почувствовали о своем запросе. Сделайте выводы.

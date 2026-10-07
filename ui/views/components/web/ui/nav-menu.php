@@ -19,6 +19,7 @@ $nav_links = [
         'nav_links' => [
             ['url' => '/sadness', 'label' => 'Общая информация'],
             ['url' =>  $hive->alias('metaphoric'), 'label' => 'Метафорические карты'],
+            ['url' =>  $hive->alias('lenormand'), 'label' => 'Старинное гадание госпожи Ленорман'],
             ['url' =>  $hive->alias('tarot'), 'label' => 'Карты Таро'],
         ]
     ],

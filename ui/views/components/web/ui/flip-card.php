@@ -10,6 +10,7 @@ extract(component_props(
 <li cmp-flip-card
     cmp-card
     data-id="<?= $card['id'] ?>"
+    data-name="<?= $card['name'] ?>"
     data-front-img-src="<?= $card['front_src'] ?>"
     data-front-img-alt="<?= $card['front_alt'] ?>"
     data-back-img-src="<?= $card['back_src'] ?>"
