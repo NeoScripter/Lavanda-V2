@@ -17,7 +17,7 @@
                 <p>Остались вопросы? Напишите авторам - будем рады обратной связи.</p>
             </li>
             <li>
-                <a href="" class='font-semibold text-[1.25em] text-primary'>Оферта</a>
+                <a href="/legal/privacy_policy" class='font-semibold text-[1.25em] text-primary'>Оферта</a>
                 <span class='h-1 bg-primary w-15 block my-4'></span>
                 <p>Здесь можно ознакомиться с условиями использования и политиками ресурса.</p>
             </li>

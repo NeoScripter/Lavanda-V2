@@ -7,7 +7,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => $article->name,
+    'title' => $article['name'],
     'class' => "bg-primary-muted/50"
 ]); ?>
 
