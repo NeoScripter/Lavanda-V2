@@ -20,7 +20,7 @@
 ]; ?>
 
 <ul
-    class="grid [--sq-size:min(100%,20.6rem)] md:[--sq-size:25.6rem] -mt-12 sm:-mt-25 px-2 relative grid-cols-[repeat(auto-fill,var(--sq-size))] justify-center gap-8 md:gap-10">
+    class="grid [--sq-size:min(100%,20.6rem)] md:[--sq-size:25.6rem] -mt-12 sm:-mt-25 px-2 relative grid-cols-[repeat(auto-fit,var(--sq-size))] justify-center gap-8 md:gap-10">
 
     <?php foreach ($items as $idx => $item) : ?>
         <?= component('web/ui/practice-item-card', [
