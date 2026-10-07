@@ -6,18 +6,23 @@ export default class InterpretationHTML {
     public generate(
         payload: InterpretationPayload,
         info: GameInfo
-    ): HTMLElement {
+    ): HTMLElement | null {
         switch (info.html) {
             case HTML_TYPE.ITEMS:
                 return this.items(payload);
             case HTML_TYPE.PREVIEW:
                 return this.preview(payload);
+            case HTML_TYPE.EMPTY:
+                return this.empty();
             default:
                 throw new Error('Unknown interpretation html type');
         }
     }
 
-    public convertToLoader(element: HTMLElement): HTMLElement {
+    public convertToLoader(element: HTMLElement | null): HTMLElement | null {
+
+        if (!element) return null;
+
         element.classList.add('skeleton');
 
         const images = qsa<HTMLDivElement>(
@@ -170,5 +175,9 @@ export default class InterpretationHTML {
         wrapper.setAttribute('cmp-interpretation-preview', '');
 
         return wrapper;
+    }
+
+    private empty() {
+        return null;
     }
 }

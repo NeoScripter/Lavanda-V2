@@ -7,6 +7,7 @@ $nav_links = [
         'nav_links' => [
             ['url' => '/decision', 'label' => 'Общая информация'],
             ['url' => '/practice', 'label' => 'Практика'],
+            ['url' => $hive->alias('mind_games'), 'label' => 'Игры разума'],
             // ['url' => '/sustainable-environment', 'label' => 'Спросить у карт'],
             // ['url' => '/social-mobilization', 'label' => 'Книга перемен'],
             // ['url' => '/disaster-relief', 'label' => 'Игры разума'],

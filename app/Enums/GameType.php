@@ -8,4 +8,6 @@ enum GameType: string
     case BONUS = 'bonus';
     case METAPHORIC = 'metaphoric';
     case TAROT = 'tarot';
+    case MIND_GAMES = 'mind_games';
+
 }

@@ -32,6 +32,7 @@ export const GAME_CATEGORY_MAP = {
     bonus_home: GAME_CATEGORY.BONUS,
     metaphoric: GAME_CATEGORY.METAPHORIC,
     tarot: GAME_CATEGORY.TAROT,
+    mind_games: GAME_CATEGORY.MIND_GAMES,
 };
 
 export type CategoryType = typeof GAME_CATEGORY_MAP;
@@ -39,6 +40,7 @@ export type CategoryType = typeof GAME_CATEGORY_MAP;
 export const HTML_TYPE = {
     ITEMS: 'items',
     PREVIEW: 'preview',
+    EMPTY: 'empty',
 };
 
 export const HTML_TYPE_MAP = {
@@ -46,6 +48,7 @@ export const HTML_TYPE_MAP = {
     bonus_home: HTML_TYPE.PREVIEW,
     metaphoric: HTML_TYPE.ITEMS,
     tarot: HTML_TYPE.ITEMS,
+    mind_games: HTML_TYPE.EMPTY,
 };
 
 export type HtmlType = typeof HTML_TYPE_MAP;
@@ -59,6 +62,7 @@ export const ROUND_TYPE_MAP = {
     bonus_home: ROUND_TYPE.RANDOM_CARDS,
     metaphoric: ROUND_TYPE.RANDOM_CARDS,
     tarot: ROUND_TYPE.RANDOM_CARDS,
+    mind_games: ROUND_TYPE.RANDOM_CARDS,
 };
 
 export type RoundType = typeof ROUND_TYPE_MAP;
@@ -72,6 +76,7 @@ export const PICKER_TYPE_MAP = {
     bonus_home: PICKER_TYPE.ONE_CARD,
     metaphoric: PICKER_TYPE.ONE_CARD,
     tarot: PICKER_TYPE.ONE_CARD,
+    mind_games: PICKER_TYPE.ONE_CARD,
 };
 
 export type PickerType = typeof PICKER_TYPE_MAP;

@@ -81,6 +81,9 @@ export default class Interpretation {
             this.payload = payload;
         }
         const html = this.html.generate(this.payload, info);
+
+        if (!html) return;
+
         this.elements.interpretation.appendChild(html);
         this.elements.interpretation.classList.remove('hidden');
         this.elements.interpretation.scrollIntoView({
@@ -133,6 +136,9 @@ export default class Interpretation {
         const loader = this.html.convertToLoader(
             this.html.generate(SKELETON_PAYLOAD, info)
         );
+
+        if (!loader) return;
+
         this.elements.interpretation.classList.remove('hidden');
         this.elements.interpretation.appendChild(loader);
         this.elements.interpretation.scrollIntoView({
