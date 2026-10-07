@@ -3,7 +3,7 @@
         component-pic
         data-img-src="/assets/images/shared/empty/empty"
         data-img-alt="Empty image alt"
-        class='col-start-1 -col-end-1 xl:-mx-[calc(var(--px-lg)/2)] xs:-mx-(--px-lg) isolate relative before:absolute before:-z-1 before:bg-background-muted before:inset-y-0 md:px-(--px-lg) lg:px-0 before:left-1/2 before:-translate-x-1/2 before:w-screen grid'>
+        class='col-start-1 -col-end-1 xl:-mx-[calc(var(--px-lg)/2)] xs:-mx-(--px-lg) isolate relative before:absolute before:-z-1 before:bg-background-muted before:inset-y-0 md:px-(--px-lg) lg:px-0 before:left-1/2 before:-translate-x-1/2 before:w-screen before:max-w-480 grid'>
         <div class='flex flex-col gap-12 sm:gap-14 lg:gap-23 lg:flex-row 2xl:gap-49 lg:justify-between overflow-y-clip'>
             <?= component('shared/ui/image', [
                 'sizes'    => 'mb|tb',
