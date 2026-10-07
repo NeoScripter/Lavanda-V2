@@ -7,7 +7,6 @@ extract(component_props(
 ));
 
 $idx = rand(1, 6);
-
 ?>
 
 <li data-practice-item-id="<?= $item['id'] ?>"

@@ -10,7 +10,7 @@
     <?php foreach ($items as $idx => $item) : ?>
         <?= component('web/ui/practice-item-card', [
             'item' => $item,
-            'class' => $idx === 2 ? 'md:col-span-2 md:max-w-(--sq-size) md:mx-auto xl:col-span-1' : '',
+            'class' => 'justify-center' . ($idx === 2 ? ' md:col-span-2 md:max-w-(--sq-size) md:mx-auto xl:col-span-1' : ''),
             'max_char' => 150,
             'attrs' => ['data-num-rounds' => $item['num'], 'cmp-reveal-game-btn' => true]
         ]) ?>
