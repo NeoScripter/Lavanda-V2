@@ -20,7 +20,8 @@ class CardController extends Controller
 {
     use RequiresAuth;
 
-    private $image_sizes = ['mb' => 150, 'tb' => 250, 'dk' => 300];
+    private $sm_img_sizes = ['mb' => 150, 'tb' => 250, 'dk' => 300];
+    private $lg_img_sizes = ['mb' => 300, 'tb' => 400, 'dk' => 600];
 
     public function index(\Base $hive)
     {
@@ -98,12 +99,15 @@ class CardController extends Controller
         $card->save();
 
         if (! $card->dry() && !empty($request->input('front_image'))) {
+            $sizes = $variant === CardVariant::MIND_GAMES->value ?
+                $this->lg_img_sizes : $this->sm_img_sizes;
+
             attach_image_to_model(
                 model: $card,
                 imageable_type: $card->variant,
                 variant: 'front_image',
                 file: $request->input('front_image')[0],
-                sizes: $this->image_sizes
+                sizes: $sizes,
             );
         }
 
@@ -129,12 +133,15 @@ class CardController extends Controller
         $card->save();
 
         if (!empty($request->input('front_image'))) {
+            $sizes = $card->variant === CardVariant::MIND_GAMES->value ?
+                $this->lg_img_sizes : $this->sm_img_sizes;
+
             attach_image_to_model(
                 model: $card,
                 imageable_type: $card->variant,
                 variant: 'front_image',
                 file: $request->input('front_image')[0],
-                sizes: $this->image_sizes
+                sizes: $sizes,
             );
         }
 
