@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Web;
 
+use Enums\LegalSlug;
 use Http\Controller;
 use Http\Models\Legal;
 use Support\Session;
@@ -17,7 +18,7 @@ class LegalController extends Controller
         $locale = Session::get_locale();
         $article = new Legal();
         $article->load(['slug=? AND locale=?', $slug, $locale]);
-        $article->virtual('name', $article->slug);
+        $article->virtual('name', LegalSlug::from($article->slug)->getLabel());
 
         view('pages/web/article', compact('article'));
     }
