@@ -1,5 +1,5 @@
 import { ROUND_TYPE, type GameInfo } from '../constants';
-import { qs, qsa, shuffle, wait } from '../utils';
+import { getElementNeighbors, qs, qsa, shuffle, wait } from '../utils';
 
 export default class GameRound {
     public run(info: GameInfo) {
@@ -125,102 +125,15 @@ export default class GameRound {
         });
 
         await wait(1500);
-        const keyCardPos = keyCard.getBoundingClientRect();
 
-        const neighbors = [
-            // Top
-            ...document.elementsFromPoint(
-                keyCardPos.right - keyCardPos.width / 2,
-                keyCardPos.top - keyCardPos.height / 2
-            ),
-            // Bottom
-            ...document.elementsFromPoint(
-                keyCardPos.right - keyCardPos.width / 2,
-                keyCardPos.bottom + keyCardPos.height / 2
-            ),
-            // Left
-            ...document.elementsFromPoint(
-                keyCardPos.left - keyCardPos.width / 2,
-                keyCardPos.bottom - keyCardPos.height / 2
-            ),
-            // Right
-            ...document.elementsFromPoint(
-                keyCardPos.right + keyCardPos.width / 2,
-                keyCardPos.bottom - keyCardPos.height / 2
-            ),
-        ].filter((item) => item != null && item.tagName.toLowerCase() === 'li');
-
-        const corners = [
-            // Top-Left
-            ...document.elementsFromPoint(
-                keyCardPos.left - keyCardPos.width / 2,
-                keyCardPos.top - keyCardPos.height / 2
-            ),
-            // Top-Right
-            ...document.elementsFromPoint(
-                keyCardPos.right + keyCardPos.width / 2,
-                keyCardPos.top - keyCardPos.height / 2
-            ),
-            // Bottom-Right
-            ...document.elementsFromPoint(
-                keyCardPos.right + keyCardPos.width / 2,
-                keyCardPos.bottom + keyCardPos.height / 2
-            ),
-            // Bottom-Left
-            ...document.elementsFromPoint(
-                keyCardPos.left - keyCardPos.width / 2,
-                keyCardPos.bottom + keyCardPos.height / 2
-            ),
-        ].filter((item) => item != null && item.tagName.toLowerCase() === 'li');
-
-        const left = [
-            // Top-Left
-            ...document.elementsFromPoint(
-                keyCardPos.left - keyCardPos.width / 2,
-                keyCardPos.top - keyCardPos.height / 2
-            ),
-            // Left
-            ...document.elementsFromPoint(
-                keyCardPos.left - keyCardPos.width / 2,
-                keyCardPos.bottom - keyCardPos.height / 2
-            ),
-            // Bottom-Left
-            ...document.elementsFromPoint(
-                keyCardPos.left - keyCardPos.width / 2,
-                keyCardPos.bottom + keyCardPos.height / 2
-            ),
-        ].filter((item) => item != null && item.tagName.toLowerCase() === 'li');
-
-        const right = [
-            // Top-Right
-            ...document.elementsFromPoint(
-                keyCardPos.right + keyCardPos.width / 2,
-                keyCardPos.top - keyCardPos.height / 2
-            ),
-            // Right
-            ...document.elementsFromPoint(
-                keyCardPos.right + keyCardPos.width / 2,
-                keyCardPos.bottom - keyCardPos.height / 2
-            ),
-            // Bottom-Right
-            ...document.elementsFromPoint(
-                keyCardPos.right + keyCardPos.width / 2,
-                keyCardPos.bottom + keyCardPos.height / 2
-            ),
-        ].filter((item) => item != null && item.tagName.toLowerCase() === 'li');
-        const unique: HTMLLIElement[] = [];
-
-        outer: for (const nei of neighbors) {
-            for (const node of unique) {
-                if (node === nei) continue outer;
-            }
-
-            unique.push(nei as HTMLLIElement);
-        }
+        const neighbors = getElementNeighbors(keyCard, ['T', 'D', 'L', 'R']);
+        const corners = getElementNeighbors(keyCard, ['TL', 'DR', 'DL', 'TR']);
+        const leftmost = getElementNeighbors(keyCard, ['L', 'TL', 'DL']);
+        const rightmost = getElementNeighbors(keyCard, ['R', 'TR', 'DR']);
 
         for (const card of cards) {
             if (
-                !unique.includes(card) &&
+                !neighbors.includes(card) &&
                 card !== keyCard &&
                 !corners.includes(card)
             ) {
@@ -232,10 +145,10 @@ export default class GameRound {
 
         // Edge case left or right sides are empty
 
-        if (left.length === 0) {
+        if (leftmost.length === 0) {
             game.setAttribute('two-cols', '');
             game.classList.add('shift-right');
-        } else if (right.length === 0) {
+        } else if (rightmost.length === 0) {
             game.classList.add('shift-left');
             game.setAttribute('two-cols', '');
         } else {
@@ -248,7 +161,7 @@ export default class GameRound {
         });
 
         await wait(1000);
-        return unique;
+        return neighbors;
     }
 
     private cleanupLenormand() {

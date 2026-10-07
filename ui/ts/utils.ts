@@ -189,3 +189,102 @@ export function shuffle<T>(array: T[]) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+
+type Direction = 'T' | 'D' | 'L' | 'R' | 'TL' | 'TR' | 'DL' | 'DR';
+
+export function getElementNeighbors(
+    element: HTMLElement,
+    directions: Direction[]
+) {
+    const tag = element.tagName;
+    const rect = element.getBoundingClientRect();
+
+    const coords = [];
+
+    for (const dir of directions) {
+        switch (dir) {
+            case 'T': {
+                coords.push([
+                    rect.right - rect.width / 2,
+                    rect.top - rect.height / 2,
+                ]);
+                break;
+            }
+            case 'D': {
+                coords.push([
+                    rect.right - rect.width / 2,
+                    rect.bottom + rect.height / 2,
+                ]);
+                break;
+            }
+            case 'L': {
+                coords.push([
+                    rect.left - rect.width / 2,
+                    rect.bottom - rect.height / 2,
+                ]);
+                break;
+            }
+            case 'R': {
+                coords.push([
+                    rect.right + rect.width / 2,
+                    rect.bottom - rect.height / 2,
+                ]);
+                break;
+            }
+            case 'TL': {
+                coords.push([
+                    rect.left - rect.width / 2,
+                    rect.top - rect.height / 2,
+                ]);
+                break;
+            }
+            case 'TR': {
+                coords.push([
+                    rect.right + rect.width / 2,
+                    rect.top - rect.height / 2,
+                ]);
+                break;
+            }
+            case 'DR': {
+                coords.push([
+                    rect.right + rect.width / 2,
+                    rect.bottom + rect.height / 2,
+                ]);
+                break;
+            }
+            case 'DL': {
+                coords.push([
+                    rect.left - rect.width / 2,
+                    rect.bottom + rect.height / 2,
+                ]);
+                break;
+            }
+            default:
+                throw new Error('Unknown direction');
+        }
+    }
+
+    const rawElements = [];
+
+    for (const [x, y] of coords) {
+        rawElements.push(...document.elementsFromPoint(x, y));
+    }
+
+    const matched = rawElements.filter(
+        (element) => element != null && element.tagName === tag
+    );
+    const unique = [];
+
+    for (const match of matched) {
+        let isDuplicate = false;
+        for (const node of unique) {
+            if (node === match) isDuplicate  = true;
+        }
+
+        if (! isDuplicate) {
+            unique.push(match)
+        }
+    }
+
+    return unique;
+}
