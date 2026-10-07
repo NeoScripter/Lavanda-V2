@@ -8,7 +8,7 @@ extract(component_props(
 
 <?php slot('layouts/web/app-layout', [
     'title' => $article['name'],
-    'class' => "bg-primary-muted/50"
+    'class' => "bg-[url('/assets/images/pages/article/page-bg.webp')] bg-cover bg-center"
 ]); ?>
 
 <section class='pt-(--pt-lg)'>
