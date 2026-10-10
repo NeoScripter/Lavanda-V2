@@ -30,6 +30,7 @@ $nav_links = [
     [
         'label' => 'Прочее',
         'nav_links' => [
+            ['url' => '/about', 'label' => 'О ресурсе'],
             ['url' => $hive->alias('articles'), 'label' => 'Полезные ресурсы'],
             ['url' => $hive->alias('faqs'), 'label' => 'Часто задаваемые вопросы'],
         ]
