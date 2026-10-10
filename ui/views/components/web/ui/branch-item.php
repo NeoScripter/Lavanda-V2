@@ -6,7 +6,7 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 
-$classes = ['left-[5%] top-[30%]', 'left-[10%] top-[42.5%]', 'left-[12%] top-[55%]', 'left-[11%] top-[67.5%]','right-[10%] top-[10%]', 'right-[7%] top-[24%]', 'right-[0%] top-[40%]', 'right-[0%] top-[60%]'];
+$classes = ['left-[5%] top-[30%]', 'left-[10%] top-[42.5%]', 'left-[12%] top-[55%]', 'left-[11%] top-[67.5%]', 'right-[10%] top-[10%]', 'right-[7%] top-[24%]', 'right-[0%] top-[40%]', 'right-[0%] top-[60%]'];
 
 ?>
 <li class='<?= $class ?> max-w-75 w-full mx-auto sm:max-w-100'>
@@ -16,13 +16,18 @@ $classes = ['left-[5%] top-[30%]', 'left-[10%] top-[42.5%]', 'left-[12%] top-[55
 
     <div style="background-image: url(<?= $img_bg ?>)"
         class="bg-cover relative flex items-center justify-center aspect-5/6 bg-center">
-        <?= component('shared/ui/image', [
-            'sizes'    => 'mb',
-            'alt' => 'Stairs',
-            'path'     => $img_fg,
-            'prt_class' => 'h-2/3',
-            'img_class' => 'size-full object-contain!',
-        ]) ?>
+
+        <div cmp-branch-item class='h-2/3 relative isolate w-full'>
+            <?php for ($i = 1; $i <= 5; $i++) : ?>
+                <?= component('shared/ui/image', [
+                    'sizes'    => 'mb',
+                    'alt' => 'Stairs',
+                    'path'     => "$img_fg/item-$i",
+                    'prt_class' => 'size-full absolute! inset-0 transition-opacity ease-in-out duration-750 opacity-0',
+                    'img_class' => 'size-full object-contain!',
+                ]) ?>
+            <?php endfor; ?>
+        </div>
 
         <?php foreach ($words as $idx => $word) : ?>
             <span class='absolute text-primary font-medium text-center text-sm max-w-25 <?= $classes[$idx] ?>'>

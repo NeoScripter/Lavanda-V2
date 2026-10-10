@@ -1,5 +1,6 @@
 import '../css/web.css';
 import initAdaptiveImages from './modules/adaptiveImages';
+import initBranchItems from './modules/branchItems';
 import initCardGrid from './modules/cardGrid';
 import initCheckboxes from './modules/checkboxes';
 import initGame from './modules/game';
@@ -27,6 +28,7 @@ class WebUI {
             initGame,
             initCardGrid,
             initLenormandPickers,
+            initBranchItems,
         ];
 
         for (const handler of handlers) {
