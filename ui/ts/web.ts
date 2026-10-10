@@ -4,7 +4,6 @@ import initBranchItems from './modules/branchItems';
 import initCardGrid from './modules/cardGrid';
 import initCheckboxes from './modules/checkboxes';
 import initGame from './modules/game';
-import initHeader from './modules/header';
 import initLenormandPickers from './modules/lenormand';
 import initModals from './modules/modals';
 import initNavMenu from './modules/navMenu';
@@ -24,7 +23,6 @@ class WebUI {
             initCheckboxes,
             initAdaptiveImages,
             initPracticeItems,
-            initHeader,
             initGame,
             initCardGrid,
             initLenormandPickers,
