@@ -8,7 +8,7 @@
 
 <section class='full-bleed'>
 
-    <?php slot('components/web/layout/hero', ['class' => 'shadow-none relative pb-(--spacing-y)!']); ?>
+    <?php slot('components/web/layout/hero', ['class' => 'shadow-none relative pb-0 sm:pb-0 lg:pb-0 xl:pb-0']); ?>
 
     <div class='flex flex-col gap-8 md:gap-12 isolate lg:flex-row lg:items-center'>
         <?= component('shared/ui/image', [
@@ -71,33 +71,70 @@ $items = [
 <section class='full-bleed px-(--px-lg) py-(--spacing-y) bg-primary-muted text-white'>
     <h2 class='text-white'>Что делает Lavanda особенной</h2>
     <ol class="mx-auto max-w-250">
-        <?php foreach ($items as $item) :?>
-            
-        <li class='py-[1.5em] border-b border-white list-decimal list-inside font-bold text-lg md:text-xl xl:text-2xl'>
-            <span><?= $item['title'] ?></span>
-            <p class='font-normal text-base md:text-lg xl:text-xl mt-[1em]'><?= $item['description'] ?></p>
-        </li>
-        <?php endforeach ;?>
+        <?php foreach ($items as $item) : ?>
+
+            <li class='py-[1.5em] border-b border-white list-decimal list-inside font-bold text-lg md:text-xl xl:text-2xl'>
+                <span><?= $item['title'] ?></span>
+                <p class='font-normal text-base md:text-lg xl:text-xl mt-[1em]'><?= $item['description'] ?></p>
+            </li>
+        <?php endforeach; ?>
 
     </ol>
 
 </section>
 
-<!-- li[component-pic] div[component-pic-faqs] details { -->
-<!--     border-bottom: 1px solid oklch(70.7% 0.022 261.325); -->
-<!--     padding-block: 1em; -->
-<!--     padding-inline: 0.5em; -->
-<!-- } -->
-<!---->
-<!-- li[component-pic] div[component-pic-faqs] summary { -->
-<!--     cursor: pointer; -->
-<!--     font-weight: 600; -->
-<!-- } -->
-<!---->
-<!-- li[component-pic] div[component-pic-faqs] p { -->
-<!--     padding-block: 1em; -->
-<!-- } -->
+
+<section>
+    <h2>Почему доступ платный?</h2>
+
+    <div class='space-y-[1em] max-w-200 mx-auto'>
+        <p>В интернете действительно много бесплатных сайтов с онлайн-гаданиями. Но Lavanda<sup>Kim</sup> - это не генератор случайных карт и не сборник шаблонных трактований.</p>
+
+        <p>Платформа создана для тех, кто ценит внимательный подход, глубину и спокойное пространство без шума и рекламы.</p>
+
+        <p>Поэтому доступ к ресурсу платный — чтобы сохранять качество, развивать проект и поддерживать работу команды. Lavanda<sup>Kim</sup> — это не поток случайных трактований, а пространство избранных подсказок.</p>
+
+        <p>При регистрации вы можете протестировать сайт в течение 24 часов, чтобы прочувствовать его возможности и приемущества.</p>
+    </div>
+
+    <div class='flex flex-wrap justify-center gap-6 lg:gap-8 items-center mt-[3.5em]'>
+        <?= component('web/ui/button', [
+            'variant' => 'outline',
+            'slot' => 'Вернуться на главную',
+            'class' => 'w-fit',
+            'href' => $hive->alias('home')
+        ]) ?>
+        <?= component('web/ui/button', [
+            'variant' => 'primary',
+            'slot' => 'Попробовать бесплатно',
+            'class' => 'w-fit',
+            'href' => $hive->alias('home')
+        ]) ?>
+        <?= component('web/ui/button', [
+            'variant' => 'outline',
+            'slot' => 'Подробнее о тарифах',
+            'class' => 'w-fit',
+            'href' => $hive->alias('home')
+        ]) ?>
 
 
+
+    </div>
+</section>
+
+<section>
+    <h2>Остались вопросы?</h2>
+
+    <div class='space-y-[1em] max-w-200 mx-auto'>
+        <p>В разделе “Вопросы и Ответы” мы собрали еще больше информации, чтобы как можно подробнее рассказать о ресурсе.</p>
+    </div>
+
+    <?= component('web/ui/button', [
+        'variant' => 'primary',
+        'slot' => 'Вопросы и ответы',
+        'class' => 'mt-[2.5em] mx-auto w-fit',
+        'href' => $hive->alias('home')
+    ]) ?>
+</section>
 
 <?php end_slot(); ?>
