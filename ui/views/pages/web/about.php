@@ -170,7 +170,7 @@ $items = [
         'variant' => 'primary',
         'slot' => 'Вопросы и ответы',
         'class' => 'mt-[2.5em] mx-auto w-fit',
-        'href' => $hive->alias('home')
+        'href' => $hive->alias('faqs')
     ]) ?>
 </section>
 
