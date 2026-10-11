@@ -7,7 +7,7 @@
                 <p>Lavanda.Kim — пространство поддержки и вдохновения. Здесь вы найдёте простые инструменты, которые помогают услышать себя.</p>
             </li>
             <li>
-                <a href="" class='font-semibold text-[1.25em] text-primary'>Доступ</a>
+                <a href="/plans" class='font-semibold text-[1.25em] text-primary'>Доступ</a>
                 <span class='h-1 bg-primary w-15 block my-4'></span>
                 <p>Выберите подходящий тариф. Поддержка всегда под рукой.</p>
             </li>

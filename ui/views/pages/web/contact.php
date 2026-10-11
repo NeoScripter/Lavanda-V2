@@ -3,10 +3,6 @@
     'class' => 'bg-white relative isolate',
 ]); ?>
 
-<?php $hive = \Base::instance(); ?>
-
-<?php $image = '/assets/images/pages/about/hero-fg'; ?>
-
 <section class='pt-(--pt-lg)'>
 
     <article class='bg-white rounded-2xl shadow-accent max-w-200 mx-auto px-6 py-8 sm:px-12.5 sm:py-10 lg:px-14 lg:pt-13 lg:pb-18'>
