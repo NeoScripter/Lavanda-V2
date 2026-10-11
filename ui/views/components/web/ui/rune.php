@@ -3,7 +3,7 @@ $hive = \Base::instance();
 
 extract(component_props(
     required: ['rune'],
-    optional: ['class' => '', 'side' => 'back'],
+    optional: ['class' => '', 'side' => 'back', 'idx' => 1],
     props: get_defined_vars(),
 )); ?>
 
@@ -13,7 +13,8 @@ extract(component_props(
     data-front-img-alt="<?= $rune['front_alt'] ?>"
     data-back-img-src="<?= $rune['back_src'] ?>"
     data-back-img-alt="<?= $rune['back_alt'] ?>"
-    class="<?= cc('relative aspect-square overflow-clip rounded-xl shrink-0', $class) ?>">
+    class="<?= cc('relative aspect-square overflow-clip rounded-xl shrink-0', $class) ?>"
+    style="--index: <?= $idx ?>;">
     <?= component('shared/ui/image', [
         'sizes'    => 'mb',
         'path'     => $rune[$side . '_src'],

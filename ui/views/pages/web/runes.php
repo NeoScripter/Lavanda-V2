@@ -70,8 +70,8 @@ extract(component_props(
         'count' => count($runes),
         'attrs' => ['cmp-game' => GameType::RUNES->value]
     ]); ?>
-    <?php foreach ($runes as $rune) : ?>
-        <?= component('web/ui/rune', compact('rune')) ?>
+    <?php foreach ($runes as $idx => $rune) : ?>
+        <?= component('web/ui/rune', compact('rune', 'idx')) ?>
     <?php endforeach; ?>
 
     <?php end_slot(); ?>

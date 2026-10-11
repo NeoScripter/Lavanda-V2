@@ -462,42 +462,87 @@ li[cmp-card].accent {
 [cmp-lenormand-game].shift-left {
     margin-right: 7rem;
 }
-
+[cmp-planet-spinner] {
+    perspective: 1500px;
+}
 [cmp-planet-spinner] > ul {
+    animation: rotate 10s infinite linear;
+    /* -webkit-perspective: 1500px; */
+    /* perspective: 1000px; */
+    /* display: flex; */
+    /* align-items: center; */
     --count: 0;
 
     --gap: 5px;
-    --item-size: 107px;
+    --item-size: 40px;
+    /* state.elementSize / config.itemGap / Math.tan(Math.PI / cellCount), */
+
+    --radius: calc(var(--item-size) * 2.5 / var(--gap)) / tan(pi / var(--count));
     --selected-idx: 10;
-    --theta: calc(360 / var(--count));
-    --radius: calc(var(--item-size) / var(--gap) / tan(pi / var(--count)));
-    --angle: calc(var(--theta) * var(--selected-idx) * -1deg);
-    transform: translateZ(calc(var(--radius) * 1px)) rotateY(calc(var(--angle) * 1deg));
+    /* --radius: 173px; */
+    /* --theta: calc(360 / var(--count)); */
+    /* --radius: calc(var(--item-size) / var(--gap) / tan(pi / var(--count))); */
+    /* --angle: calc(var(--theta) * var(--selected-idx) * -1deg); */
+    /* transform: translateZ(calc(var(--radius) * 1px)) rotateY(calc(var(--angle) * 1deg)); */
+    @media (min-width: 40rem) {
+        --item-size: 60px;
+    }
+    @media (min-width: 48rem) {
+        --item-size: 70px;
+    }
+    @media (min-width: 64rem) {
+        --item-size: 80px;
+    }
+    @media (min-width: 80rem) {
+        --item-size: 90px;
+    }
 
     transform-style: preserve-3d;
-    transition: transform 500ms
-        linear(
-            0,
-            0.012 0.9%,
-            0.05 2%,
-            0.411 9.2%,
-            0.517 11.8%,
-            0.611 14.6%,
-            0.694 17.7%,
-            0.765 21.1%,
-            0.824 24.8%,
-            0.872 28.9%,
-            0.91 33.4%,
-            0.939 38.4%,
-            0.977 50.9%,
-            0.994 68.4%,
-            1
-        );
+    > span {
+        animation: rotate 10s infinite linear reverse;
+    }
+    /* transition: transform 500ms */
+    /*     linear( */
+    /*         0, */
+    /*         0.012 0.9%, */
+    /*         0.05 2%, */
+    /*         0.411 9.2%, */
+    /*         0.517 11.8%, */
+    /*         0.611 14.6%, */
+    /*         0.694 17.7%, */
+    /*         0.765 21.1%, */
+    /*         0.824 24.8%, */
+    /*         0.872 28.9%, */
+    /*         0.91 33.4%, */
+    /*         0.939 38.4%, */
+    /*         0.977 50.9%, */
+    /*         0.994 68.4%, */
+    /*         1 */
+    /*     ); */
 }
 [cmp-planet-spinner] > ul > li {
+    /* display: none; */
     width: var(--item-size);
-    height: var(--item-size);
-    --cell-angle: calc(var(--theta) * sibling-index() * 1deg);
-    transform: rotateY(var(--cell-angle)) translateZ(calc(var(--radius) * 1px));
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* z-index: round(abs(var(--count) / 2 - var(--index))); */
+    /* transform:  skewY(-0.46turn); */
+    transform: rotateY(calc(var(--index) * (360deg / var(--count))))
+        translateZ(calc(var(--radius) * 1px)) translateX(-50%)
+        translateY(calc(round(abs(var(--count) / 2 - var(--index))) * -5%));
+    /* height: var(--item-size); */
+    /* --cell-angle: calc(var(--theta) * sibling-index() * 1deg); */
+    /* transform: rotateY(var(--cell-angle)) translateZ(calc(var(--radius) * 1px)); */
+    /* transform: rotateY(calc(var(--index) * (360deg / var(--count)))) */
+    /* translateZ(var(--radius)); */
 }
 
+@keyframes rotate {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
