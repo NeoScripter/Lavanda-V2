@@ -67,6 +67,7 @@ extract(component_props(
     <?= component('web/layout/selected-items') ?>
 
     <?php slot('components/web/layout/planet-spinner', [
+        'count' => count($runes),
         'attrs' => ['cmp-game' => GameType::RUNES->value]
     ]); ?>
     <?php foreach ($runes as $rune) : ?>

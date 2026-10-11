@@ -464,6 +464,16 @@ li[cmp-card].accent {
 }
 
 [cmp-planet-spinner] > ul {
+    --count: 0;
+
+    --gap: 5px;
+    --item-size: 107px;
+    --selected-idx: 10;
+    --theta: calc(360 / var(--count));
+    --radius: calc(var(--item-size) / var(--gap) / tan(pi / var(--count)));
+    --angle: calc(var(--theta) * var(--selected-idx) * -1deg);
+    transform: translateZ(calc(var(--radius) * 1px)) rotateY(calc(var(--angle) * 1deg));
+
     transform-style: preserve-3d;
     transition: transform 500ms
         linear(
@@ -484,3 +494,10 @@ li[cmp-card].accent {
             1
         );
 }
+[cmp-planet-spinner] > ul > li {
+    width: var(--item-size);
+    height: var(--item-size);
+    --cell-angle: calc(var(--theta) * sibling-index() * 1deg);
+    transform: rotateY(var(--cell-angle)) translateZ(calc(var(--radius) * 1px));
+}
+

@@ -1,7 +1,7 @@
 <?php
 
 extract(component_props(
-    required: ['slot'],
+    required: ['count', 'slot'],
     optional: ['attrs' => []],
     props: get_defined_vars(),
 )); ?>
@@ -10,7 +10,9 @@ extract(component_props(
     <ul
         cmp-visible-at-start
         cmp-visible-during
+        style="--count: <?= $count ?>;"
 
-        class='inset-0 absolute size-full' <?= serialize_attrs($attrs) ?>>
+        class='inset-0 bg-red-400 absolute size-full' <?= serialize_attrs($attrs) ?>>
+        <?= $slot ?>
     </ul>
 </div>
