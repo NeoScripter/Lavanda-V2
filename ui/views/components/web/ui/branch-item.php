@@ -9,7 +9,7 @@ extract(component_props(
 $classes = ['left-[5%] top-[30%]', 'left-[10%] top-[42.5%]', 'left-[12%] top-[55%]', 'left-[11%] top-[67.5%]', 'right-[10%] top-[10%]', 'right-[7%] top-[24%]', 'right-[0%] top-[40%]', 'right-[0%] top-[60%]'];
 
 ?>
-<li class='<?= $class ?> max-w-75 w-full mx-auto sm:max-w-100'>
+<li cmp-branch-item class='<?= $class ?> max-w-75 w-full mx-auto sm:max-w-100'>
     <h5 class='mb-5 shadow-md uppercase text-primary px-[1em] w-fit mx-auto rounded-full py-[0.5em] font-medium rounded-br-none'>
         <?= $title ?>
     </h5>
@@ -17,23 +17,22 @@ $classes = ['left-[5%] top-[30%]', 'left-[10%] top-[42.5%]', 'left-[12%] top-[55
     <div style="background-image: url(<?= $img_bg ?>)"
         class="bg-cover relative flex items-center justify-center aspect-5/6 bg-center">
 
-        <div cmp-branch-item class='h-2/3 relative isolate w-full'>
+        <div class='h-2/3 relative isolate w-full'>
             <?php for ($i = 1; $i <= 5; $i++) : ?>
                 <?= component('shared/ui/image', [
                     'sizes'    => 'mb',
                     'alt' => 'Stairs',
                     'path'     => "$img_fg/item-$i",
-                    'prt_class' => 'size-full absolute! inset-0 transition-opacity ease-in-out duration-750 opacity-0',
+                    'prt_class' => 'size-full absolute! bg-contain! inset-0 transition-opacity ease-in-out duration-1200 opacity-0',
                     'img_class' => 'size-full object-contain!',
                 ]) ?>
             <?php endfor; ?>
         </div>
 
         <?php foreach ($words as $idx => $word) : ?>
-            <span class='absolute text-primary font-medium text-center text-sm max-w-25 <?= $classes[$idx] ?>'>
+            <span cmp-floating-word class='absolute text-primary font-medium text-center transition-opacity ease-in-out duration-2000 opacity-0 text-sm max-w-25 <?= $classes[$idx] ?>'>
                 <?= $word ?>
             </span>
-
         <?php endforeach; ?>
     </div>
 </li>
