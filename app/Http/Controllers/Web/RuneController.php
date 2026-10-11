@@ -15,12 +15,8 @@ class RuneController extends Controller
         $locale = Session::get_locale();
 
         $runes = new RuneAsset();
-        // $items = $items->select(
-        //     'id, title, description, created_at',
-        //     ['locale=?', $locale],
-        //     ['order' => 'created_at DESC']
-        // );
-        $runes = $runes->find(
+        $runes = $runes->select(
+            'id, locale, created_at, front_src, front_alt, back_src, back_alt',
             ['locale=?', $locale],
             ['order' => 'created_at DESC']
         );

@@ -36,6 +36,12 @@
     --shadow-accent: 0 6px 12px #0000003b, 0 10px 40px #00000030;
 
     --bg-primary-pale: 180deg, #c8b5ff75, #ffffff57;
+    --bg-primary-fluid:
+        145deg, rgba(255, 255, 255, 0.3) 15%, oklch(0.59 0.142 288) 40%,
+        oklch(0.59 0.142 288) 60%, rgba(255, 255, 255, 0.3) 95%;
+    --bg-danger-muted:
+        70.71% 70.71% at 50% 50%, rgba(255, 94, 78, 0.61) 0%,
+        rgba(255, 94, 78, 0) 68%;
     --bg-golden: 90deg, #b9a65b, #e5d3ab 49.25%, #bdaa61 95.67%;
     --bg-primary: 173deg, #5f4e8c 3.75%, #b9b2cb 94.67%;
 }
@@ -332,6 +338,13 @@ li[cmp-flip-card].flipped > *:nth-child(2) {
     transform: rotateY(180deg);
 }
 
+li[cmp-flip-rune].flipped > *:nth-child(1) {
+    transform: rotateY(0deg);
+}
+li[cmp-flip-rune].flipped > *:nth-child(2) {
+    transform: rotateY(180deg);
+}
+
 [cmp-card-grid] > li:not(.flipped):hover {
     transform: translateY(-7.5%);
 }
@@ -448,4 +461,26 @@ li[cmp-card].accent {
 }
 [cmp-lenormand-game].shift-left {
     margin-right: 7rem;
+}
+
+[cmp-planet-spinner] > ul {
+    transform-style: preserve-3d;
+    transition: transform 500ms
+        linear(
+            0,
+            0.012 0.9%,
+            0.05 2%,
+            0.411 9.2%,
+            0.517 11.8%,
+            0.611 14.6%,
+            0.694 17.7%,
+            0.765 21.1%,
+            0.824 24.8%,
+            0.872 28.9%,
+            0.91 33.4%,
+            0.939 38.4%,
+            0.977 50.9%,
+            0.994 68.4%,
+            1
+        );
 }

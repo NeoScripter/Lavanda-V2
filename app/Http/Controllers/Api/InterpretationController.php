@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Http\Controllers\Api;
 
 use Enums\MatcheableType;
-use Enums\ThemeableType;
 use Http\Controller;
 use Http\Models\FlipCard;
 use Http\Models\RuneAsset;

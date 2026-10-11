@@ -6,9 +6,10 @@ $nav_links = [
         'label' => 'Решение',
         'nav_links' => [
             ['url' => '/decision', 'label' => 'Общая информация'],
-            ['url' => '/practice', 'label' => 'Практика'],
-            ['url' => $hive->alias('mind_games'), 'label' => 'Игры разума'],
+            ['url' => $hive->alias('practice'), 'label' => 'Практика'],
+            ['url' => $hive->alias('runes'), 'label' => 'Спросить у рун'],
             ['url' => '/cards', 'label' => 'Спросить у карт'],
+            ['url' => $hive->alias('mind_games'), 'label' => 'Игры разума'],
             // ['url' => '/sustainable-environment', 'label' => 'Спросить у карт'],
             // ['url' => '/social-mobilization', 'label' => 'Книга перемен'],
             // ['url' => '/disaster-relief', 'label' => 'Игры разума'],

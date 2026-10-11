@@ -10,5 +10,6 @@ enum GameType: string
     case TAROT = 'tarot';
     case MIND_GAMES = 'mind_games';
     case LENORMAND = 'lenormand';
+    case RUNES = 'runes';
 
 }
