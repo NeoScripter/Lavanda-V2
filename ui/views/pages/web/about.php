@@ -68,7 +68,8 @@ $items = [
     ],
 ]; ?>
 
-<section class='full-bleed px-(--px-lg) py-(--spacing-y) bg-primary-muted text-white'>
+<section class='full-bleed px-(--px-lg) py-(--spacing-y) relative isolate before:-z-1 before:absolute before:inset-0 before:bg-primary-accent/88 bg-no-repeat bg-cover bg-center text-white' style="background-image: url(/assets/images/pages/about/benefits-bg-mb.webp)">
+    <span></span>
     <h2 class='text-white'>Что делает Lavanda особенной</h2>
     <ol class="mx-auto max-w-250">
         <?php foreach ($items as $item) : ?>
