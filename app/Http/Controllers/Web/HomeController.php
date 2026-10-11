@@ -16,7 +16,8 @@ class HomeController extends Controller
         $locale = Session::get_locale();
 
         $cards = new FlipCard();
-        $cards = $cards->find(
+        $cards = $cards->select(
+            'id, variant, locale, created_at, front_src, front_alt, back_src, back_alt',
             ['locale=? AND variant=?', $locale, CardVariant::BONUS->value],
             ['order' => 'created_at DESC']
         );

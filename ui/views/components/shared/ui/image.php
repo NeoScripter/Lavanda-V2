@@ -6,7 +6,8 @@ extract(component_props(
         'img_class' => '',
         'overlay_class' => '',
         'avif' => true,
-        'alt' => ''
+        'lazy' => true,
+        'alt' => '',
     ],
     props: get_defined_vars(),
 ));
@@ -74,7 +75,7 @@ $uid = 'aimg-' . uniqid();
 
         <img
             srcset="<?= build_src_set($path, 'mb', 'webp') ?>"
-            loading="lazy"
+            loading="<?= $lazy === true ? 'lazy' : 'eager' ?>"
             alt="<?= $alt ?>"
             class="<?= cc('block transition-opacity duration-500 ease-in opacity-0 size-full object-cover object-center', $img_class) ?>" />
     </picture>

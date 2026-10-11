@@ -15,7 +15,8 @@ class PracticeController extends Controller
         $locale = Session::get_locale();
 
         $items = new PracticeItemAsset();
-        $items = $items->find(
+        $items = $items->select(
+            'id, title, description, created_at',
             ['locale=?', $locale],
             ['order' => 'created_at DESC']
         );
