@@ -118,9 +118,45 @@ $items = [
             'href' => $hive->alias('home')
         ]) ?>
 
-
-
     </div>
+</section>
+
+<section>
+    <article class='bg-white rounded-2xl shadow-accent flex flex-col gap-14 px-6 py-8 sm:px-12.5 sm:py-13 lg:px-23 lg:py-22.5 lg:pb-30 2xl:px-24 2xl:py-21 lg:flex-row xl:gap-0'>
+        <div>
+            <h2 class='text-left'>Об авторе</h2>
+
+            <div class='space-y-[1em] max-w-200'>
+                <p>Этот проект создан человеком, который хорошо знает, что такое сомнения, новые начала и возвращение к себе. Опыт в консалтинге, IT и личные поворотные этапы жизни стали основой пространства поддержки — здесь бережно собраны любимые инструменты, а их логика, алгоритмы и визуализации продуманы до деталей.</p>
+
+                <p>Здесь нет универсальных рецептов. Но есть слова, образы и практики, которые помогают услышать свой голос, снизить тревогу и сделать следующий шаг чуть увереннее — наедине с собой и LavandaKim.</p>
+
+                <p>Тепло. Конфиденциально. И Вам здесь рады.</p>
+
+                <p>С уважением к вам и вашему выбору,
+                    LavandaKim</p>
+            </div>
+        </div>
+
+        <div class='relative lg:w-60 xl:w-123 lg:shrink-0 lg:ml-auto'>
+            <?= component('shared/ui/image', [
+                'sizes'    => 'mb|tb',
+                'alt' => 'Абстрактный светлый фон из полупрозрачной струящейся ткани с мягкими складками и плавными линиями',
+                'path'     => '/assets/images/pages/about/author-bg',
+                'prt_class' => 'w-full rounded-2xl lg:aspect-2/3 xl:aspect-3/4 xl:w-2/3 xl:ml-auto',
+                'img_class' => 'size-full object-cover',
+            ]) ?>
+
+            <?= component('shared/ui/image', [
+                'sizes'    => 'mb|tb',
+                'alt' => 'Портрет светловолосой женщины в очках с тонкой оправой, нейтральное выражение лица, мягкий дневной свет, светлый фон',
+                'path'     => '/assets/images/pages/about/author-fg',
+                'prt_class' => 'w-1/2 mx-auto lg:mx-0 absolute! inset-0 lg:w-60 aspect-4/5 lg:top-5 xl:w-2/3 xl:bottom-0 xl:left-0 xl:translate-y-1/3',
+                'img_class' => 'size-full object-cover',
+            ]) ?>
+
+        </div>
+    </article>
 </section>
 
 <section>
