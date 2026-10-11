@@ -2,7 +2,7 @@
     <nav class='bg-white shadow-accent rounded-3xl translate-y-12 px-8 lg:px-10 lg:py-12 py-10 mx-auto text-balance max-w-[min(calc(100%-var(--px-lg)*2),25rem)] lg:max-w-4/5'>
         <ol class='grid gap-8 lg:grid-cols-4 lg:gap-14 xl:[&_li,p]:text-lg '>
             <li>
-                <a href="" class='font-semibold text-[1.25em] text-primary'>О ресурсе</a>
+                <a href="/about" class='font-semibold text-[1.25em] text-primary'>О ресурсе</a>
                 <span class='h-1 bg-primary w-15 block my-4'></span>
                 <p>Lavanda.Kim — пространство поддержки и вдохновения. Здесь вы найдёте простые инструменты, которые помогают услышать себя.</p>
             </li>
@@ -12,7 +12,7 @@
                 <p>Выберите подходящий тариф. Поддержка всегда под рукой.</p>
             </li>
             <li>
-                <a href="" class='font-semibold text-[1.25em] text-primary'>Контакты</a>
+                <a href="/contact" class='font-semibold text-[1.25em] text-primary'>Контакты</a>
                 <span class='h-1 bg-primary w-15 block my-4'></span>
                 <p>Остались вопросы? Напишите авторам - будем рады обратной связи.</p>
             </li>
