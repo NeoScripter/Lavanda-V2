@@ -15,6 +15,7 @@ $nav_links = [
             // ['url' => '/disaster-relief', 'label' => 'Игры разума'],
         ]
     ],
+    ['url' => $hive->alias('audios'), 'label' => 'Настрой'],
     [
         'label' => 'Мне грустно',
         'nav_links' => [
