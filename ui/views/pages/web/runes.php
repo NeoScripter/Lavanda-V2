@@ -64,21 +64,26 @@ extract(component_props(
         'class' => 'mx-auto'
     ]) ?>
 
-    <?= component('web/layout/selected-items') ?>
+    <?= component('web/layout/selected-items', ['class' => '[&>li]:aspect-square bg-linear-(--bg-linear-pale) shadow-accent rounded-2xl p-5 backdrop-blur-sm']) ?>
 
     <?php slot('components/web/layout/planet-spinner', [
         'count' => count($runes),
-        'attrs' => ['cmp-game' => GameType::RUNES->value]
+        'attrs' => ['cmp-game' => GameType::RUNE->value]
     ]); ?>
     <?php foreach ($runes as $idx => $rune) : ?>
-        <?= component('web/ui/rune', compact('rune', 'idx')) ?>
+        <?= component('web/ui/rune', [
+            'rune' => $rune,
+            'idx' => $idx,
+            'side' => 'front',
+            'class' => $idx === 0 ? 'current' : ''
+        ]) ?>
     <?php endforeach; ?>
 
     <?php end_slot(); ?>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Следующая карта',
+        'slot' => 'Следующая руна',
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-during' => true
@@ -108,7 +113,7 @@ extract(component_props(
 
     <?= component('web/layout/selected-items') ?>
 
-    <ul cmp-game="<?= GameType::RUNES->value ?>">
+    <ul cmp-game="<?= GameType::RUNE->value ?>">
         <?php foreach ($runes as $rune) : ?>
             <?= component('web/ui/flip-rune', [
                 'rune' => $rune,
@@ -137,7 +142,7 @@ extract(component_props(
 <?= component('web/layout/game-stage', [
     'labels' => $labels,
     'slots' => [$slot1, $slot2],
-    // 'class' => 'hidden'
+    'class' => 'runes hidden'
 ]); ?>
 
 <?php end_slot(); ?>

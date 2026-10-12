@@ -13,7 +13,7 @@ extract(component_props(
     data-front-img-alt="<?= $card['front_alt'] ?>"
     data-back-img-src="<?= $card['back_src'] ?>"
     data-back-img-alt="<?= $card['back_alt'] ?>"
-    class="<?= cc('relative aspect-160/229 overflow-clip rounded-xl shrink-0', $class) ?>">
+    class="<?= cc('relative select-none aspect-160/229 overflow-clip rounded-xl shrink-0', $class) ?>">
     <?= component('shared/ui/image', [
         'sizes'    => 'mb',
         'path'     => $card[$side . '_src'],

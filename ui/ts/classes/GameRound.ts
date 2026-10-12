@@ -8,6 +8,8 @@ export default class GameRound {
                 return this.randomCards();
             case ROUND_TYPE.LENORMAND:
                 return this.lenormand();
+            case ROUND_TYPE.RUNE:
+                return this.runes();
             default:
                 throw new Error('Unknown game round option');
         }
@@ -19,13 +21,64 @@ export default class GameRound {
                 return;
             case ROUND_TYPE.LENORMAND:
                 return this.cleanupLenormand();
+            case ROUND_TYPE.RUNE:
+                return this.cleanupRunes();
             default:
                 throw new Error('Unknown game round option');
         }
     }
+    private async runes() {
+        const game = qs<HTMLUListElement>('[cmp-planet-spinner]>[cmp-game][cmp-item-list]');
+        const runes = qsa<HTMLLIElement>('[cmp-planet-spinner]>[cmp-game]>li:not(.hidden)');
+        game.style.setProperty('--count', runes.length.toString());
+
+        let duration = 50;
+        let offset = Number(game.style.getPropertyValue('--offset') ?? '0');
+
+        const handleNext = async () => {
+            const currentIdx = offset % runes.length;
+            const prevIdx =
+                currentIdx === 0 ? runes.length - 1 : currentIdx - 1;
+            offset++;
+            game.style.setProperty('--offset', offset.toString());
+
+            runes[prevIdx].classList.remove('highlighted');
+            runes[currentIdx].classList.add('highlighted');
+
+            await wait(500);
+            runes[currentIdx].scrollIntoView({
+                block: 'center',
+                behavior: 'smooth',
+            });
+        };
+
+        let extraDuration = Math.floor(Math.random() * 10) + 5;
+        const maxDuration = 200;
+
+        while (duration < maxDuration) {
+            handleNext();
+            duration = Math.min(maxDuration, duration + extraDuration);
+            await wait(duration);
+        }
+
+        const currentOffset = Number(game.style.getPropertyValue('--offset') ?? '0')
+        game.style.setProperty('--offset', (currentOffset - 1).toString());
+        return [runes[((currentOffset - 1 + runes.length) % runes.length)]];
+    }
+
+    private cleanupRunes() {
+        const runes = qsa<HTMLLIElement>('[cmp-planet-spinner]>[cmp-game]>li[cmp-rune]');
+        const game = qs<HTMLUListElement>('[cmp-planet-spinner]>[cmp-game][cmp-item-list]');
+        game.style.setProperty('--offset', '0');
+        game.style.setProperty('--count', runes.length.toString());
+
+        runes.forEach((rune) => {
+            rune.classList.remove('highlighted');
+        });
+    }
 
     private async randomCards() {
-        const cards = qsa<HTMLLIElement>('[cmp-game]>li');
+        const cards = qsa<HTMLLIElement>('[cmp-game]>li:not(.hidden)');
 
         let duration = 50;
         let currentIdx = 0;
@@ -43,7 +96,7 @@ export default class GameRound {
             });
         };
 
-        let extraDuration = Math.floor(Math.random() * 15);
+        let extraDuration = Math.floor(Math.random() * 10) + 5;
         // const maxDuration = 400;
         const maxDuration = 200;
 

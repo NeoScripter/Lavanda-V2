@@ -15,7 +15,7 @@ extract(component_props(
     data-front-img-alt="<?= $rune['front_alt'] ?>"
     data-back-img-src="<?= $rune['back_src'] ?>"
     data-back-img-alt="<?= $rune['back_alt'] ?>"
-    class="<?= cc('relative aspect-square overflow-clip rounded-xl shrink-0', $class) ?>">
+    class="<?= cc('relative aspect-square select-none overflow-clip rounded-xl shrink-0', $class) ?>">
     <?= component('shared/ui/image', [
         'sizes'    => 'mb',
         'path'     => $rune['front_src'],

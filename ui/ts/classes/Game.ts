@@ -80,11 +80,14 @@ export default class Game {
         this.disableGameBtns();
         this.setState('during');
 
-        const selectedItems = await round.run(this.info);
+        const selectedItems = (await round.run(this.info)) as HTMLElement[];
 
         this.selected.push(...selectedItems);
 
-        selectedItems.forEach((item) => this.showSelectedItem(item));
+        selectedItems.forEach((item) => {
+            this.showSelectedItem(item.cloneNode(true) as HTMLElement);
+            item.classList.add('hidden');
+        });
 
         if (this.selected.length >= this.numRounds) {
             this.setState('end');
@@ -109,6 +112,7 @@ export default class Game {
         this.selected.forEach((item) =>
             new ItemPicker().cleanup(item, this.info)
         );
+        this.selected.forEach(item => item.classList.remove('hidden'));
         this.selected.length = 0;
 
         new GameRound().cleanup(this.info);

@@ -1,19 +1,20 @@
 import { PICKER_TYPE, type GameInfo } from '../constants';
-import { qsa } from '../utils';
 
 export default class ItemPicker {
     public select(button: HTMLButtonElement, info: GameInfo) {
-        const card = button.closest(
-            '[cmp-flip-card],[cmp-card]'
+        const item = button.closest(
+            '[cmp-flip-card],[cmp-card],[cmp-rune],[cmp-flip-rune]'
         ) as HTMLLIElement;
 
-        if (!card) {
-            throw new Error('Pickable card element was not found');
+        if (!item) {
+            throw new Error('Pickable item element was not found');
         }
 
         switch (info.picker) {
             case PICKER_TYPE.ONE_CARD:
-                return this.selectOneCard(card);
+                return this.selectOneCard(item);
+            case PICKER_TYPE.ONE_RUNE:
+                return this.selectOneRune(item);
             default:
                 throw new Error('Unknown game round option');
         }
@@ -23,6 +24,8 @@ export default class ItemPicker {
         switch (info.picker) {
             case PICKER_TYPE.ONE_CARD:
                 return this.cleanupOneCard(item);
+            case PICKER_TYPE.ONE_RUNE:
+                return this.cleanupOneRune(item);
             default:
                 throw new Error('Unknown game round option');
         }
@@ -34,7 +37,17 @@ export default class ItemPicker {
         return card;
     }
 
+    private selectOneRune(rune: HTMLLIElement) {
+        rune.classList.add('flipped', 'pointer-events-none');
+
+        return rune;
+    }
+
     private cleanupOneCard(item: HTMLElement) {
         item.classList.remove('flipped', 'pointer-events-none');
+    }
+
+    private cleanupOneRune(rune: HTMLElement) {
+        rune.classList.remove('flipped', 'pointer-events-none');
     }
 }
