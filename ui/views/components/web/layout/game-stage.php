@@ -37,7 +37,7 @@ extract(component_props(
     </article>
 
     <template cmp-theme-picker>
-        <div>
+        <div class='lg:mb-10 2xl:mb-0'>
             <h4 class='text-foreground font-semibold text-xl md:text-2xl xl:text-3xl'>Выберите тему для интерпретации</h4>
             <nav class='flex flex-col sm:flex-wrap sm:flex-row mt-10 justify-center gap-y-[1em] gap-x-[1.25em]'>
                 <button cmp-theme-btn class='font-medium bg-primary-muted/75 text-white cursor-pointer py-[0.75em] uppercase text-center sm:min-w-80 rounded-2xl px-[1.25em] transition-[opacity,background-color,color] duration-300 ease [[selected-theme]]:bg-primary'>

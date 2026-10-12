@@ -64,7 +64,9 @@ extract(component_props(
         'class' => 'mx-auto'
     ]) ?>
 
-    <?= component('web/layout/selected-items', ['class' => '[&>li]:aspect-square bg-linear-(--bg-linear-pale) shadow-accent rounded-2xl p-5 backdrop-blur-sm']) ?>
+    <?= component('web/layout/selected-items', [
+        'class' => '[&>li]:aspect-square bg-linear-(--bg-linear-pale) shadow-accent rounded-2xl p-5 backdrop-blur-sm'
+    ]) ?>
 
     <?php slot('components/web/layout/planet-spinner', [
         'count' => count($runes),
@@ -111,16 +113,32 @@ extract(component_props(
         Нажмите на руну, которая первой привлекла взгляд или куда потянулась рука
     </p>
 
-    <?= component('web/layout/selected-items') ?>
+    <?= component('web/layout/selected-items', [
+        'class' => '[&>li]:aspect-square bg-linear-(--bg-linear-pale) shadow-accent rounded-2xl p-5 backdrop-blur-sm'
+    ]) ?>
 
-    <ul cmp-game="<?= GameType::RUNE->value ?>">
-        <?php foreach ($runes as $rune) : ?>
+    <?= component('web/ui/button', [
+        'variant' => 'primary',
+        'slot' => 'Перетасовать',
+        'attrs' => [
+            'cmp-shuffle-runes-btn' => true,
+            'cmp-visible-during' => true,
+            'cmp-visible-at-start' => true,
+        ],
+        'class' => 'mx-auto hidden'
+    ]) ?>
+
+    <ul class="grid grid-rows-3 grid-cols-3 h-200 place-content-center place-items-center md:h-auto md:aspect-square max-w-160 mx-auto"
+        cmp-rune-grid
+        cmp-game="<?= GameType::RUNE->value ?>">
+        <?php foreach ($runes as $idx => $rune) : ?>
             <?= component('web/ui/flip-rune', [
                 'rune' => $rune,
                 'isPickable' => true,
+                'idx' => $idx,
+                'class' => 'w-20',
             ]) ?>
         <?php endforeach; ?>
-
     </ul>
 
     <?= component('web/ui/button', [

@@ -1,4 +1,4 @@
-import { PICKER_TYPE, type GameInfo } from '../constants';
+import { EVENTS, PICKER_TYPE, type GameInfo } from '../constants';
 
 export default class ItemPicker {
     public select(button: HTMLButtonElement, info: GameInfo) {
@@ -39,6 +39,7 @@ export default class ItemPicker {
 
     private selectOneRune(rune: HTMLLIElement) {
         rune.classList.add('flipped', 'pointer-events-none');
+        window.dispatchEvent(new CustomEvent(EVENTS.SHUFFLE_RUNES));
 
         return rune;
     }
@@ -49,5 +50,6 @@ export default class ItemPicker {
 
     private cleanupOneRune(rune: HTMLElement) {
         rune.classList.remove('flipped', 'pointer-events-none');
+        rune.style.removeProperty('transform')
     }
 }

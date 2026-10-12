@@ -2,6 +2,7 @@ export const EVENTS = {
     SHOW_MODAL: 'modal-show',
     HIDE_MODAL: 'modal-hide',
     RESET_GAME: 'reset_game',
+    SHUFFLE_RUNES: 'shuffle_runes',
 };
 
 export const DURATION = {

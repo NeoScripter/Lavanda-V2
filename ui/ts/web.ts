@@ -9,6 +9,7 @@ import initModals from './modules/modals';
 import initNavMenu from './modules/navMenu';
 import initPlanetSpinner from './modules/planetSpinner';
 import initPracticeItems from './modules/practiceItems';
+import initRuneGrid from './modules/runeGrid';
 import initToasts from './modules/toasts';
 
 class WebUI {
@@ -29,6 +30,7 @@ class WebUI {
             initLenormandPickers,
             initBranchItems,
             initPlanetSpinner,
+            initRuneGrid,
         ];
 
         for (const handler of handlers) {
