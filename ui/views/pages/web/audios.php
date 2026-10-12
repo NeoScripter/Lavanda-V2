@@ -54,7 +54,7 @@ extract(component_props(
 
 <?php end_slot(); ?>
 
-<div>hello</div>
+<ul class='my-auto'>hello</ul>
 <?php $slot2 = ob_get_clean(); ?>
 
 <?= component('web/layout/split', [

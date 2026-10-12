@@ -15,7 +15,7 @@ $nav_links = [
             // ['url' => '/disaster-relief', 'label' => 'Игры разума'],
         ]
     ],
-    ['url' => $hive->alias('audios'), 'label' => 'Настрой'],
+    ['url' => $hive->alias('affirmation_topics'), 'label' => 'Настрой'],
     [
         'label' => 'Мне грустно',
         'nav_links' => [
@@ -23,6 +23,7 @@ $nav_links = [
             ['url' =>  $hive->alias('metaphoric'), 'label' => 'Метафорические карты'],
             ['url' =>  $hive->alias('lenormand'), 'label' => 'Старинное гадание госпожи Ленорман'],
             ['url' =>  $hive->alias('tarot'), 'label' => 'Карты Таро'],
+            ['url' =>  $hive->alias('audios'), 'label' => 'Послание поддержки от автора'],
         ]
     ],
     ['url' => $hive->alias('bonus'), 'label' => 'Бонусная игра'],
