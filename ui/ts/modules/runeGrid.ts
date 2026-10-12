@@ -9,7 +9,7 @@ export default function initRuneGrid() {
         if (!grid) return;
 
         const factorX = window.innerWidth > 768 ? 18 : 8;
-        const factorY = window.innerWidth > 768 ? 18 : 20;
+        const factorY = window.innerWidth > 768 ? 16 : 20;
         const runes = qsa<HTMLLIElement>('[cmp-flip-rune]', grid);
 
         for (const rune of runes) {

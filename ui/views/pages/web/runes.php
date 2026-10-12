@@ -136,7 +136,7 @@ extract(component_props(
                 'rune' => $rune,
                 'isPickable' => true,
                 'idx' => $idx,
-                'class' => 'w-20',
+                'class' => 'w-20 md:w-22 lg:w-25',
             ]) ?>
         <?php endforeach; ?>
     </ul>
