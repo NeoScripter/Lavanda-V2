@@ -1,0 +1,66 @@
+import { qs, qsa, wait } from '../utils';
+
+export default function initAffirmations() {
+    const wrapper = qs<HTMLDivElement>('[cmp-aff-wrapper]', 'silent');
+    let offset = 0;
+
+    if (!wrapper) return;
+
+    const button = qs<HTMLButtonElement>('[cmp-aff-btn]');
+    const quoteContainer = qs<HTMLParagraphElement>('[cmp-aff-quote]');
+
+    async function selectAffirmation() {
+        if (!wrapper || !quoteContainer) return;
+
+        const affirmations = qsa<HTMLLIElement>('[cmp-aff-wrapper] li[data-quote]');
+        const list = qs<HTMLDivElement>('[cmp-aff-wrapper] [cmp-item-list]');
+
+        let duration = 50;
+
+        const handleNext = async () => {
+            const currentIdx = offset % affirmations.length;
+            const prevIdx =
+                currentIdx === 0 ? affirmations.length - 1 : currentIdx - 1;
+            offset++;
+            list.style.setProperty('--offset', offset.toString());
+
+            affirmations[prevIdx].classList.remove('highlighted');
+            affirmations[currentIdx].classList.add('highlighted');
+
+            await wait(500);
+            affirmations[currentIdx].scrollIntoView({
+                block: 'center',
+                behavior: 'smooth',
+            });
+        };
+
+        let extraDuration = Math.floor(Math.random() * 10) + 5;
+        const maxDuration = 200;
+
+        while (duration < maxDuration) {
+            handleNext();
+            duration = Math.min(maxDuration, duration + extraDuration);
+            await wait(duration);
+        }
+
+        const selected =
+            affirmations[
+                (offset + 1 + affirmations.length) % affirmations.length
+            ];
+
+        const quote = selected.getAttribute('data-quote');
+
+        if (!quote) {
+            throw new Error(
+                'No data-quote attribute found on the affirmation list item element'
+            );
+        }
+
+        quoteContainer.textContent = quote;
+    }
+
+    button.addEventListener('click', () => {
+        button.textContent = 'Повторить';
+        selectAffirmation();
+    });
+}

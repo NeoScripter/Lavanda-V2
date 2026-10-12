@@ -17,10 +17,10 @@ class AffirmationController extends Controller
 
         $affirmations = new Affirmation();
         $affirmations = $affirmations->find(
-            ['locale=? AND topic=?', $locale, $topic],
+            ['locale=? AND topic=?', $locale, mb_strtolower($topic)],
             ['order' => 'created_at DESC']
         );
 
-        view('pages/web/affirmations', compact('affirmations'));
+        view('pages/web/affirmations', compact('affirmations', 'topic'));
     }
 }

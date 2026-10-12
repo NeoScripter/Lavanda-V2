@@ -1,5 +1,6 @@
 import '../css/web.css';
 import initAdaptiveImages from './modules/adaptiveImages';
+import initAffirmations from './modules/affirmations';
 import initBranchItems from './modules/branchItems';
 import initCardGrid from './modules/cardGrid';
 import initCheckboxes from './modules/checkboxes';
@@ -31,6 +32,7 @@ class WebUI {
             initBranchItems,
             initPlanetSpinner,
             initRuneGrid,
+            initAffirmations,
         ];
 
         for (const handler of handlers) {

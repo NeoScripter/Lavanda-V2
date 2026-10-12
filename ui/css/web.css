@@ -495,13 +495,16 @@ li[cmp-card].accent {
 }
 
 [cmp-planet-spinner] [cmp-item-list] > li {
+    --tilt: 5%;
     width: var(--item-size);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: rotateY(calc(var(--index) * var(--theta)))
         translateZ(calc(var(--radius))) translateX(-50%)
-        translateY(calc(round(abs(var(--count) / 2 - var(--index))) * -5%));
+        translateY(
+            calc(round(abs(var(--count) / 2 - var(--index))) * var(--tilt) * -1)
+        );
 }
 
 [cmp-planet-spinner] [cmp-item-list] > li.highlighted::after {
