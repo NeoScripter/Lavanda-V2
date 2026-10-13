@@ -1,6 +1,6 @@
 import { defineFilePond } from 'filepond';
 import { locale } from 'filepond/locales/en-gb';
-import { qs } from '../utils';
+import { qs, qsa } from '../utils';
 
 export default function initFilePond() {
     const instances = defineFilePond({
@@ -81,6 +81,24 @@ export default function initFilePond() {
             }
 
             updateLegend(legend, altWrapper);
+
+            const form = instance.closest('form');
+
+            if (!form) return;
+
+            const submitBtns = qsa<HTMLButtonElement>(
+                'button[type="submit"]',
+                form
+            );
+
+            console.log(submitBtns)
+            submitBtns.forEach((button) => {
+                if (files.length === 0) {
+                    button.setAttribute('disabled', 'true');
+                } else {
+                    button.removeAttribute('disabled');
+                }
+            });
         };
     }
 }

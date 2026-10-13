@@ -454,9 +454,9 @@ function get_parent_dir(string $path)
 
 function read_dir_files(string $path)
 {
-    if (!is_dir($path)) {
-        return [];
-    }
+    // if (!is_dir($path) || !is_file($path)) {
+    //     return [];
+    // }
     $all = scandir($path);
 
     $files = [];
@@ -483,6 +483,10 @@ function read_existing_variant_sizes(string $path)
 
     $target_sizes = ['-mb.webp' => 'mb', '-tb.webp' => 'tb', '-dk.webp' => 'dk'];
     $sizes = [];
+
+    // if (empty($files)) {
+    //     return ['mb' => 300];
+    // }
 
     foreach ($target_sizes as $suffix => $ext) {
         $matched_file = array_find(
