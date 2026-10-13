@@ -12,7 +12,11 @@ export default function initAffirmations() {
     async function selectAffirmation() {
         if (!wrapper || !quoteContainer) return;
 
-        const affirmations = qsa<HTMLLIElement>('[cmp-aff-wrapper] li[data-quote]');
+        quoteContainer.textContent = '';
+
+        const affirmations = qsa<HTMLLIElement>(
+            '[cmp-aff-wrapper] li[data-quote]'
+        );
         const list = qs<HTMLDivElement>('[cmp-aff-wrapper] [cmp-item-list]');
 
         let duration = 50;
@@ -35,7 +39,7 @@ export default function initAffirmations() {
         };
 
         let extraDuration = Math.floor(Math.random() * 10) + 5;
-        const maxDuration = 200;
+        const maxDuration = 400;
 
         while (duration < maxDuration) {
             handleNext();
@@ -44,9 +48,7 @@ export default function initAffirmations() {
         }
 
         const selected =
-            affirmations[
-                (offset + affirmations.length) % affirmations.length
-            ];
+            affirmations[(offset + affirmations.length) % affirmations.length];
 
         const quote = selected.getAttribute('data-quote');
 
@@ -60,7 +62,15 @@ export default function initAffirmations() {
     }
 
     button.addEventListener('click', () => {
-        button.textContent = 'Повторить';
+        const repeatLabel = button.getAttribute('data-repeat-label');
+
+        if (!repeatLabel) {
+            throw new Error(
+                'No data-repeat-label attribute found on the start affirmation carousel button element'
+            );
+        }
+
+        button.textContent = repeatLabel;
         selectAffirmation();
     });
 }

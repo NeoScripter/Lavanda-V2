@@ -22,11 +22,6 @@ extract(component_props(
     <p>Выбери тему и откройте своё послание на сегодня. Пусть оно станет точкой опоры на весь день, девизом или лозунгом </p>
 </div>
 
-<?= component('web/ui/button', [
-    'variant' => 'primary',
-    'slot' => 'Начать',
-    'class' => 'w-fit mt-10 mx-auto',
-]) ?>
 <?php $slot1 = ob_get_clean(); ?>
 
 <?php ob_start(); ?>

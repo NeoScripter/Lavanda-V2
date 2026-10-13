@@ -25,7 +25,7 @@ extract(component_props(
         'variant' => 'primary',
         'slot' => 'Начать',
         'class' => 'min-w-40',
-        'attrs' => ['cmp-aff-btn' => true]
+        'attrs' => ['cmp-aff-btn' => true, 'data-repeat-label' => 'Повторить']
     ]) ?>
 
     <?= component('web/ui/button', [
