@@ -346,6 +346,12 @@ li[cmp-flip-rune].flipped > *:nth-child(1) {
 li[cmp-flip-rune].flipped > *:nth-child(2) {
     transform: rotateY(180deg);
 }
+[cmp-flip-coin].flipped > *:nth-child(1) {
+    transform: rotateY(0deg);
+}
+[cmp-flip-coin].flipped > *:nth-child(2) {
+    transform: rotateY(180deg);
+}
 
 [cmp-card-grid] > li:not(.flipped):hover {
     transform: translateY(-7.5%);
