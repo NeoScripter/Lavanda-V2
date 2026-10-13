@@ -81,6 +81,7 @@ export default function initFilePond() {
             }
 
             updateLegend(legend, altWrapper);
+            console.log('works')
 
             const form = instance.closest('form');
 
@@ -91,7 +92,6 @@ export default function initFilePond() {
                 form
             );
 
-            console.log(submitBtns)
             submitBtns.forEach((button) => {
                 if (files.length === 0) {
                     button.setAttribute('disabled', 'true');

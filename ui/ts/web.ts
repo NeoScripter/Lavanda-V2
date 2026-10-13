@@ -58,9 +58,9 @@ class App {
     init() {
         try {
             this.ui = new WebUI();
-            console.log('App ialized successfully');
+            console.log('App initialized successfully');
         } catch (error) {
-            console.error('Failed to ialize app:', error);
+            console.error('Failed to initialize app:', error);
         }
     }
 }

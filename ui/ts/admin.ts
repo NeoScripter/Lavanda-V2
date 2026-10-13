@@ -55,9 +55,9 @@ class App {
     init() {
         try {
             this.ui = new AdminUI();
-            console.log('Admin ialized successfully');
+            console.log('Admin initialized successfully');
         } catch (error) {
-            console.error('Failed to ialize app:', error);
+            console.error('Failed to initialize app:', error);
         }
     }
 }
