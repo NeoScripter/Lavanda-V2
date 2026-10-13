@@ -40,7 +40,7 @@ extract(component_props(
 <?php ob_start(); ?>
 
 <div cmp-aff-wrapper
-    class='flex flex-col gap-4 sm:gap-6 py-6 justify-center items-center overflow-clip'>
+    class='flex flex-col h-full gap-4 sm:gap-6 py-6 justify-center items-center overflow-clip'>
     <?php slot('components/web/layout/planet-spinner', [
         'count' => count($affirmations),
         'ratio' => 12,
@@ -73,7 +73,7 @@ extract(component_props(
 <?= component('web/layout/split', [
     'slot1' => $slot1,
     'slot2' => $slot2,
-    'class' => '[&>*:last-child]:justify-center! [&>*:last-child]:px-0!',
+    'class' => '[&>*:last-child]:px-0!',
     'bg_img' => '/assets/images/shared/backgrounds/split/waves-pattern-mb2x.webp'
 ]); ?>
 

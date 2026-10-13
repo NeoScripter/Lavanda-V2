@@ -24,22 +24,26 @@ export default function initAudioPlayers() {
         updateProgress(player);
         audio.addEventListener('loadedmetadata', () => updateProgress(player));
         audio.addEventListener('timeupdate', () => updateProgress(player));
+        audio.addEventListener('pause', () => {
+            pauseBtn.classList.add('hidden');
+            playBtn.classList.remove('hidden');
+        });
+        audio.addEventListener('play', () => {
+            pauseBtn.classList.remove('hidden');
+            playBtn.classList.add('hidden');
+        });
 
         input.addEventListener('change', () => {
             audio.currentTime = Number(input.value);
-        })
+        });
 
         playBtn.addEventListener('click', () => {
             if (audio.paused) {
-                pauseBtn.classList.remove('hidden');
-                playBtn.classList.add('hidden');
                 audio.play();
             }
         });
         pauseBtn.addEventListener('click', () => {
             if (!audio.paused) {
-                pauseBtn.classList.add('hidden');
-                playBtn.classList.remove('hidden');
                 audio.pause();
             }
         });

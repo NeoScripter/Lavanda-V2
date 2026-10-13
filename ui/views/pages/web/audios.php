@@ -25,38 +25,47 @@ extract(component_props(
     'variant' => 'primary',
     'slot' => 'Начать',
     'class' => 'w-fit mt-10 mx-auto',
+    'attrs' => ['cmp-audio-btn' => true, 'data-repeat-label' => 'Повторить']
 ]) ?>
 <?php $slot1 = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
 
-<h2 class='text-white text-xl md:text-2xl lg:text-3xl'>Hello world</h2>
+<div cmp-audio-wrapper class='flex h-full flex-col justify-center gap-6'>
+    <h2 cmp-audio-description class='text-white empty:hidden text-xl md:text-2xl lg:text-3xl'></h2>
 
-<?php slot('components/web/layout/planet-spinner', [
-    'count' => count($audios),
-    'ratio' => 12,
-    'gap' => 1.8,
-    'class' => 'mb-10'
-]); ?>
-<?php foreach ($audios as $idx => $audio) : ?>
-    <li data-file="<?= $audio->file ?>"
-        class='bg-white shadow-accent flex items-center justify-center rounded-md aspect-square'
-        style="--index: <?= $idx ?>">
-        <?= component('shared/ui/image', [
-            'sizes'    => 'mb',
-            'path'     => '/assets/images/pages/audios/heart',
-            'alt'     => 'dark image of a heart',
-            'lazy' => false,
-            'prt_class' => 'size-2/3 bg-contain! isolate transition-transform',
-            'img_class' => 'object-contain!',
+    <?php slot('components/web/layout/planet-spinner', [
+        'count' => count($audios),
+        'ratio' => 12,
+        'gap' => 1.8,
+        'class' => 'mb-10'
+    ]); ?>
+    <?php foreach ($audios as $idx => $audio) : ?>
+        <li data-file="<?= $audio['file'] ?>"
+            data-description="<?= $audio['description'] ?>"
+            class='bg-white shadow-accent flex items-center justify-center rounded-md aspect-square'
+            style="--index: <?= $idx ?>">
+            <?= component('shared/ui/image', [
+                'sizes'    => 'mb',
+                'path'     => '/assets/images/pages/audios/heart',
+                'alt'     => 'dark image of a heart',
+                'lazy' => false,
+                'prt_class' => 'size-2/3 bg-contain! isolate transition-transform',
+                'img_class' => 'object-contain!',
+            ]) ?>
+        </li>
+    <?php endforeach; ?>
+
+    <?php end_slot(); ?>
+
+    <?php if (! empty($audios)) : ?>
+        <?= component('web/ui/audio-player', [
+            'figcaption' => $audios[0]['description'],
+            'src' => $audios[0]['file'],
+            'class' => 'hidden',
         ]) ?>
-    </li>
-<?php endforeach; ?>
-
-<?php end_slot(); ?>
-
-<?= component('web/ui/audio-player', ['figcaption' => 'hello world', 'src' => $audios[0]->file]) ?>
-
+    <?php endif; ?>
+</div>
 <?php $slot2 = ob_get_clean(); ?>
 
 <?= component('web/layout/split', [

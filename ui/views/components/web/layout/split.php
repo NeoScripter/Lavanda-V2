@@ -11,7 +11,7 @@ extract(component_props(
         style="background-image: url(<?= $bg_img ?>);">
         <?= $slot1 ?>
     </article>
-    <article class='flex-1 bg-linear-(--bg-primary) flex flex-col pt-19 lg:pt-(--pt-lg) justify-between gap-6 overflow-x-clip'>
+    <article class='flex-1 bg-linear-(--bg-primary) pt-19 lg:pt-(--pt-lg) overflow-x-clip'>
         <?= $slot2 ?>
     </article>
 </div>

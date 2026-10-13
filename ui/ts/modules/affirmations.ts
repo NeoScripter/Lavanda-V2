@@ -39,7 +39,7 @@ export default function initAffirmations() {
         };
 
         let extraDuration = Math.floor(Math.random() * 10) + 5;
-        const maxDuration = 400;
+        const maxDuration = 300;
 
         while (duration < maxDuration) {
             handleNext();

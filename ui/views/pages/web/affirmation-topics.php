@@ -14,14 +14,15 @@ extract(component_props(
 
 <?php ob_start(); ?>
 
-<h1>Войти в нужный настрой</h1>
+<div class='flex flex-col h-full justify-center gap-6'>
+    <h1>Войти в нужный настрой</h1>
 
-<div class='space-y-[1em] text-center text-balance max-w-200 mx-auto'>
-    <p>Настрой - это то, с чего все начинается.</p>
-    <p>Замечали, как несколько слов способны изменить взгляд на происходящее, вернуть спокойствие, вдохновение или уверенность?</p>
-    <p>Выбери тему и откройте своё послание на сегодня. Пусть оно станет точкой опоры на весь день, девизом или лозунгом </p>
+    <div class='space-y-[1em] text-center text-balance max-w-200 mx-auto'>
+        <p>Настрой - это то, с чего все начинается.</p>
+        <p>Замечали, как несколько слов способны изменить взгляд на происходящее, вернуть спокойствие, вдохновение или уверенность?</p>
+        <p>Выбери тему и откройте своё послание на сегодня. Пусть оно станет точкой опоры на весь день, девизом или лозунгом </p>
+    </div>
 </div>
-
 <?php $slot1 = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
@@ -43,7 +44,7 @@ extract(component_props(
 <?= component('web/layout/split', [
     'slot1' => $slot1,
     'slot2' => $slot2,
-    'class' => '[&>*:last-child]:justify-center! [&>*:last-child]:lg:pb-(--pt-lg)',
+    'class' => '[&>*:last-child]:lg:pb-(--pt-lg)',
     'bg_img' => '/assets/images/shared/backgrounds/split/waves-pattern-mb2x.webp'
 ]); ?>
 

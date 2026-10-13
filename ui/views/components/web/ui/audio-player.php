@@ -20,7 +20,7 @@ extract(component_props(
             </span>
             <input type="range" step="1" min="0" class='accent-white min-w-0 w-full block' value="0" />
             <span cmp-end-time class='block w-fit'>
-                00:11
+                00:00
             </span>
         </div>
         <button cmp-play-audio-btn class='mt-4 size-10 flex items-center justify-center rounded-full border border-white bg-white mx-auto cursor-pointer transition-transform hover:scale-105 text-[#b9b2cb] [&>svg]:fill-[#b9b2cb]'>
