@@ -247,18 +247,21 @@ export default class Game {
         if (!this.elements.selectedItemsUI) return;
 
         const frontSrc = item.getAttribute('data-front-img-src');
-        const frontAlt = item.getAttribute('data-front-img-alt');
+        const frontAlt = item.getAttribute('data-front-img-alt') ?? '';
         const backSrc = item.getAttribute('data-back-img-src');
-        const backAlt = item.getAttribute('data-back-img-alt');
+        const backAlt = item.getAttribute('data-back-img-alt') ?? '';
 
-        if (!backSrc || !backAlt || !frontSrc || !frontAlt) {
+        if (!backSrc || !frontSrc) {
             throw new Error(
                 "Item element doesn't contain the image data attributes"
             );
         }
 
         item.innerHTML = item.innerHTML.replaceAll(backSrc, frontSrc);
-        item.innerHTML = item.innerHTML.replace(backAlt, frontAlt);
+
+        if (backAlt !== '') {
+            item.innerHTML = item.innerHTML.replace(backAlt, frontAlt);
+        }
 
         const pickableBtn = item.querySelector('[cmp-pickable-item]');
 
