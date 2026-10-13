@@ -5,6 +5,7 @@ use Enums\Locale;
 use Enums\ThemeableType;
 use Http\Models\Image;
 use Jobs\ProcessImageJob;
+use PHPUnit\TextUI\XmlConfiguration\Logging\Logging;
 
 define('VITE_DEV_SERVER', 'http://localhost:5173');
 
@@ -476,6 +477,11 @@ function read_existing_variant_sizes(string $path)
         )
     );
     $parent_dir = get_parent_dir($current_path);
+
+    if (! is_dir($parent_dir)) {
+        new Log('error.log')->write("Parent directory for the image was not found, $parent_dir");
+        return ['mb' => 300];
+    }
     $files = read_dir_files($parent_dir);
 
     $target_sizes = ['-mb.webp' => 'mb', '-tb.webp' => 'tb', '-dk.webp' => 'dk'];
