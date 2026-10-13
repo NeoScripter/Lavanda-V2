@@ -119,7 +119,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Перетасовать',
+        'slot' => 'Перемешать',
         'attrs' => [
             'cmp-shuffle-runes-btn' => true,
             'cmp-visible-during' => true,
