@@ -58,7 +58,7 @@ $items = [
                 <?= component('shared/ui/image', [
                     'sizes' => 'mb',
                     'path' => '/assets/images/pages/decision/item-' . $idx + 1,
-                    'prt_class' => 'mx-auto w-full max-w-2/3 aspect-square',
+                    'prt_class' => 'mx-auto w-full max-w-2/3 aspect-square bg-contain!',
                     'img_class' => $idx !== 4 ? 'object-contain' : '',
                 ]) ?>
 
