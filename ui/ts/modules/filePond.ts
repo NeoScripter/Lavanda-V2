@@ -1,6 +1,6 @@
 import { defineFilePond } from 'filepond';
 import { locale } from 'filepond/locales/en-gb';
-import { qs, qsa } from '../utils';
+import { qs } from '../utils';
 
 export default function initFilePond() {
     const instances = defineFilePond({
@@ -37,24 +37,27 @@ export default function initFilePond() {
 
             const altWrapper = qs<HTMLOListElement>(
                 '[component-file-alts]',
-                'error',
+                'silent',
                 parent
             );
 
             const altTemplate = qs<HTMLTemplateElement>(
                 '[component-alt-template]',
-                'error',
+                'silent',
                 parent
             );
 
             const legend = qs<HTMLLegendElement>(
                 '[component-legend]',
-                'error',
+                'silent',
                 parent
             );
 
             imageWrapper.innerHTML = '';
-            altWrapper.innerHTML = '';
+
+            if (altWrapper) {
+                altWrapper.innerHTML = '';
+            }
 
             for (const file of files) {
                 const imageClone = document.importNode(
@@ -69,36 +72,29 @@ export default function initFilePond() {
 
                 imageWrapper.appendChild(imageClone);
 
-                const altClone = document.importNode(altTemplate.content, true);
-                const inputName = altWrapper.getAttribute('data-alt-name');
+                if (altTemplate && altWrapper) {
+                    const altClone = document.importNode(
+                        altTemplate.content,
+                        true
+                    );
+                    const inputName = altWrapper.getAttribute('data-alt-name');
 
-                if (!inputName) continue;
+                    if (!inputName) continue;
 
-                const input = qs<HTMLInputElement>('input', 'error', altClone);
-                input.setAttribute('name', inputName);
+                    const input = qs<HTMLInputElement>(
+                        'input',
+                        'error',
+                        altClone
+                    );
+                    input.setAttribute('name', inputName);
 
-                altWrapper.appendChild(altClone);
+                    altWrapper.appendChild(altClone);
+                }
             }
 
-            updateLegend(legend, altWrapper);
-            console.log('works')
-
-            const form = instance.closest('form');
-
-            if (!form) return;
-
-            const submitBtns = qsa<HTMLButtonElement>(
-                'button[type="submit"]',
-                form
-            );
-
-            submitBtns.forEach((button) => {
-                if (files.length === 0) {
-                    button.setAttribute('disabled', 'true');
-                } else {
-                    button.removeAttribute('disabled');
-                }
-            });
+            if (altWrapper && legend) {
+                updateLegend(legend, altWrapper);
+            }
         };
     }
 }

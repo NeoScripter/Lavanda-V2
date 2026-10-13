@@ -57,6 +57,7 @@ $flipside_modal_id = uniqid('flipside_modal_');
                     'value'    => [$backside],
                     'attrs' => [
                         'multiple' => false,
+                        'required' => true
                     ],
                 ]) ?>
 
