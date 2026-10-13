@@ -454,6 +454,9 @@ function get_parent_dir(string $path)
 
 function read_dir_files(string $path)
 {
+    if (!is_dir($path)) {
+        return [];
+    }
     $all = scandir($path);
 
     $files = [];
