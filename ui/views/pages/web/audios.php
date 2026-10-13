@@ -36,6 +36,7 @@ extract(component_props(
     'count' => count($audios),
     'ratio' => 12,
     'gap' => 1.8,
+    'class' => 'mb-10'
 ]); ?>
 <?php foreach ($audios as $idx => $audio) : ?>
     <li data-file="<?= $audio->file ?>"
@@ -54,7 +55,8 @@ extract(component_props(
 
 <?php end_slot(); ?>
 
-<ul class='my-auto'>hello</ul>
+<?= component('web/ui/audio-player', ['figcaption' => 'hello world', 'src' => $audios[0]->file]) ?>
+
 <?php $slot2 = ob_get_clean(); ?>
 
 <?= component('web/layout/split', [

@@ -2,14 +2,14 @@
 
 extract(component_props(
     required: ['count', 'slot'],
-    optional: ['attrs' => [], 'ratio' => 11, 'gap' => 2],
+    optional: ['attrs' => [], 'ratio' => 11, 'gap' => 2, 'class' => ''],
     props: get_defined_vars(),
 )); ?>
 
 <div cmp-visible-at-start
     cmp-visible-during
     cmp-planet-spinner
-    class='aspect-2/1 mx-auto w-full max-w-206 relative'>
+    class="<?= cc('aspect-2/1 mx-auto w-full max-w-206 relative', $class) ?>">
     <ul
         cmp-item-list
         data-item-size-ratio="<?= $ratio ?>"
