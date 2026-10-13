@@ -59,6 +59,7 @@ export default function initAffirmations() {
         }
 
         quoteContainer.textContent = quote;
+        button.removeAttribute('disabled');
     }
 
     button.addEventListener('click', () => {
@@ -71,6 +72,7 @@ export default function initAffirmations() {
         }
 
         button.textContent = repeatLabel;
+        button.setAttribute('disabled', 'true');
         selectAffirmation();
     });
 }
