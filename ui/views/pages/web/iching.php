@@ -81,7 +81,7 @@ slot('layouts/web/app-layout', [
             'class' => 'mx-auto'
         ]) ?>
 
-        <ul class='space-y-6 md:space-y-8'>
+        <ul class='space-y-6 md:space-y-8 mt-[calc(var(--space-y)*1.5)]'>
             <?php for ($i = 0; $i < 3; $i++) : ?>
                 <li class='flex items-center justify-between gap-6 xs:gap-10 md:gap-16 flex-wrap xs:flex-nowrap'>
                     <div cmp-iching-pattern class='p-4 w-full border border-white md:p-6 rounded-md flex items-center justify-center'>
@@ -101,9 +101,18 @@ slot('layouts/web/app-layout', [
 
             <?php endfor; ?>
         </ul>
-
     </article>
+
 </div>
+<template cmp-iching-scheme>
+    <?= component('shared/ui/image', [
+        'sizes'    => 'mb|tb|dk',
+        'alt' => 'black-cat',
+        'path'     => '/assets/images/pages/iching/scheme/iching-scheme',
+        'prt_class' => 'w-full bg-contain!',
+        'img_class' => 'size-full object-contain',
+    ]) ?>
+</template>
 <?php $slot1 = ob_get_clean(); ?>
 
 <?= component('web/layout/game-stage', [
