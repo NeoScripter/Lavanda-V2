@@ -524,3 +524,6 @@ li[cmp-card].accent {
     pointer-events: none;
 }
 
+[cmp-iching-pattern].split {
+    @apply gap-4 md:gap-6;
+}
