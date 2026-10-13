@@ -36,10 +36,10 @@ export default class GameRound {
         let offset = Number(game.style.getPropertyValue('--offset') ?? '0');
 
         const handleNext = async () => {
+            offset++;
             const currentIdx = offset % runes.length;
             const prevIdx =
                 currentIdx === 0 ? runes.length - 1 : currentIdx - 1;
-            offset++;
             game.style.setProperty('--offset', offset.toString());
 
             runes[prevIdx].classList.remove('highlighted');
@@ -62,8 +62,8 @@ export default class GameRound {
         }
 
         const currentOffset = Number(game.style.getPropertyValue('--offset') ?? '0')
-        game.style.setProperty('--offset', (currentOffset - 1).toString());
-        return [runes[((currentOffset - 1 + runes.length) % runes.length)]];
+        game.style.setProperty('--offset', (currentOffset).toString());
+        return [runes[((currentOffset + runes.length) % runes.length)]];
     }
 
     private cleanupRunes() {

@@ -18,10 +18,10 @@ export default function initAffirmations() {
         let duration = 50;
 
         const handleNext = async () => {
+            offset++;
             const currentIdx = offset % affirmations.length;
             const prevIdx =
                 currentIdx === 0 ? affirmations.length - 1 : currentIdx - 1;
-            offset++;
             list.style.setProperty('--offset', offset.toString());
 
             affirmations[prevIdx].classList.remove('highlighted');
@@ -45,7 +45,7 @@ export default function initAffirmations() {
 
         const selected =
             affirmations[
-                (offset + 1 + affirmations.length) % affirmations.length
+                (offset + affirmations.length) % affirmations.length
             ];
 
         const quote = selected.getAttribute('data-quote');
