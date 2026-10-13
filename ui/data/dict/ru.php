@@ -55,6 +55,7 @@ return [
         'cards' => 'Карты',
         'user_successfully_updated' => 'Информация профиля успешно обновлена!',
         'tarot' => 'Таро',
+        'minori' => 'Минори',
         'lenormand' => 'Ленорманд',
         'mind_games' => 'Игры разума',
         'bonus' => 'Бонус',

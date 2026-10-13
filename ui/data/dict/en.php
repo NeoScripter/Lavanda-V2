@@ -56,6 +56,7 @@ return [
         'cards' => 'Cards',
         'user_successfully_updated' => 'User successfully updated!',
         'tarot' => 'Tarot',
+        'minori' => 'Minori',
         'lenormand' => 'Lenormand',
         'mind_games' => 'Mind Games',
         'bonus' => 'Bonus',
