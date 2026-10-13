@@ -43,7 +43,8 @@ extract(component_props(
 <?= component('web/layout/split', [
     'slot1' => $slot1,
     'slot2' => $slot2,
-    'class' => '[&>*:last-child]:justify-center! [&>*:last-child]:lg:pb-(--pt-lg)'
+    'class' => '[&>*:last-child]:justify-center! [&>*:last-child]:lg:pb-(--pt-lg)',
+    'bg_img' => '/assets/images/shared/backgrounds/split/waves-pattern-mb2x.webp'
 ]); ?>
 
 <?php end_slot(); ?>
