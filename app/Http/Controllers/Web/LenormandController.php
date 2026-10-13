@@ -17,7 +17,7 @@ class LenormandController extends Controller
 
         $cards = new FlipCard();
         $cards = $cards->select(
-            'id, variant, locale, created_at, front_src, front_alt, back_src, back_alt',
+            'id, variant, locale, name, created_at, front_src, front_alt, back_src, back_alt',
             ['locale=? AND variant=?', $locale, CardVariant::LENORMAND->value],
             ['order' => 'created_at DESC']
         );

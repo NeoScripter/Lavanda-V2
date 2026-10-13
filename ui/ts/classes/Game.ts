@@ -86,7 +86,6 @@ export default class Game {
 
         selectedItems.forEach((item) => {
             this.showSelectedItem(item.cloneNode(true) as HTMLElement);
-            item.classList.add('hidden');
         });
 
         if (this.selected.length >= this.numRounds) {
@@ -112,7 +111,6 @@ export default class Game {
         this.selected.forEach((item) =>
             new ItemPicker().cleanup(item, this.info)
         );
-        this.selected.forEach(item => item.classList.remove('hidden'));
         this.selected.length = 0;
 
         new GameRound().cleanup(this.info);
@@ -270,6 +268,7 @@ export default class Game {
         }
         const picker = new ItemPicker();
         picker.cleanup(item, this.info);
+        item.classList.remove('hidden');
 
         this.elements.selectedItemsUI.appendChild(item);
     }

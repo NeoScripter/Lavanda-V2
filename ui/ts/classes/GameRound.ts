@@ -18,7 +18,7 @@ export default class GameRound {
     public cleanup(info: GameInfo) {
         switch (info.round) {
             case ROUND_TYPE.RANDOM_CARDS:
-                return;
+                return this.cleanupRandomCards();
             case ROUND_TYPE.LENORMAND:
                 return this.cleanupLenormand();
             case ROUND_TYPE.RUNE:
@@ -28,8 +28,12 @@ export default class GameRound {
         }
     }
     private async runes() {
-        const game = qs<HTMLUListElement>('[cmp-planet-spinner]>[cmp-game][cmp-item-list]');
-        const runes = qsa<HTMLLIElement>('[cmp-planet-spinner]>[cmp-game]>li:not(.hidden)');
+        const game = qs<HTMLUListElement>(
+            '[cmp-planet-spinner]>[cmp-game][cmp-item-list]'
+        );
+        const runes = qsa<HTMLLIElement>(
+            '[cmp-planet-spinner]>[cmp-game]>li:not(.hidden)'
+        );
         game.style.setProperty('--count', runes.length.toString());
 
         let duration = 50;
@@ -61,14 +65,22 @@ export default class GameRound {
             await wait(duration);
         }
 
-        const currentOffset = Number(game.style.getPropertyValue('--offset') ?? '0')
-        game.style.setProperty('--offset', (currentOffset).toString());
-        return [runes[((currentOffset + runes.length) % runes.length)]];
+        const currentOffset = Number(
+            game.style.getPropertyValue('--offset') ?? '0'
+        );
+        game.style.setProperty('--offset', currentOffset.toString());
+        const selectedRune = runes[(currentOffset + runes.length) % runes.length];
+        selectedRune.classList.add('hidden');
+        return [selectedRune];
     }
 
     private cleanupRunes() {
-        const runes = qsa<HTMLLIElement>('[cmp-planet-spinner]>[cmp-game]>li[cmp-rune]');
-        const game = qs<HTMLUListElement>('[cmp-planet-spinner]>[cmp-game][cmp-item-list]');
+        const runes = qsa<HTMLLIElement>(
+            '[cmp-planet-spinner]>[cmp-game]>li[cmp-rune]'
+        );
+        const game = qs<HTMLUListElement>(
+            '[cmp-planet-spinner]>[cmp-game][cmp-item-list]'
+        );
         game.style.setProperty('--offset', '0');
         game.style.setProperty('--count', runes.length.toString());
 
@@ -107,6 +119,7 @@ export default class GameRound {
         }
 
         cards.forEach((card) => card.classList.remove('highlighted'));
+        cards[currentIdx].classList.add('hidden');
         return [cards[currentIdx]];
     }
 
@@ -120,7 +133,7 @@ export default class GameRound {
         const cards = [...qsa<HTMLLIElement>('[cmp-game]>li')];
 
         const selectedCategoryBtn = qs<HTMLLIElement>(
-            "[cmp-selected-lenormand][aria-selected='true']"
+            '[cmp-selected-lenormand][aria-selected="true"]'
         );
 
         if (!selectedCategoryBtn) {
@@ -242,5 +255,15 @@ export default class GameRound {
         dFrag.append(...shuffled);
         game.innerHTML = '';
         game.appendChild(dFrag);
+    }
+
+    private cleanupRandomCards() {
+        const cards = qsa<HTMLLIElement>('[cmp-game]>li');
+
+        cards.forEach((card) => {
+            card.classList.remove(
+                'hidden',
+            );
+        });
     }
 }
