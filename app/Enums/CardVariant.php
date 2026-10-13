@@ -9,6 +9,7 @@ enum CardVariant: string
     case LENORMAND = 'lenormand';
     case MIND_GAMES = 'mind_games';
     case BONUS = 'bonus';
+    case MINORI = 'minori';
 
     public static function values(): array
     {

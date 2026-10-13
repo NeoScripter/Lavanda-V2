@@ -8,6 +8,7 @@ enum MatcheableType: string
     case METAPHORIC = 'metaphoric';
     case LENORMAND = 'lenormand';
     case MIND_GAMES = 'mind_games';
+    case MINORI = 'minori';
     case RUNE = 'rune';
     case STONE = 'stone';
     case BONUS = 'bonus';
