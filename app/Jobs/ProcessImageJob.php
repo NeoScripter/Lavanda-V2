@@ -6,7 +6,6 @@ namespace Jobs;
 
 use Enums\AppEnv;
 use Exception;
-use Http\Models\Image;
 use RuntimeException;
 use Support\ImageHandler;
 

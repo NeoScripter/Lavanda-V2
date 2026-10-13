@@ -536,7 +536,8 @@ function set_no_image_placeholder()
 
 function attach_image_to_model(Cortex $model, string $imageable_type, string $variant, array $file, array $sizes): void
 {
-    $image = $model->{$variant} ?? new Image();
+    $current_image = $model->{$variant};
+    $image = $current_image ?? new Image();
 
     if (empty($image->src)) {
         $image->copyfrom([
