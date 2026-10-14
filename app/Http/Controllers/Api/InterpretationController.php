@@ -75,6 +75,7 @@ class InterpretationController extends Controller
                 'img' => $item->front_src,
                 'alt' => $item->front_alt,
                 'advice' => $item->advice,
+                'html' => $item->html ?? '',
                 'themes' => $themes
             ];
         }

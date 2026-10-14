@@ -13,5 +13,5 @@ enum GameType: string
     case MINORI = 'minori';
     case LENORMAND = 'lenormand';
     case RUNE = 'rune';
-
+    case STONE = 'stone';
 }

@@ -15,6 +15,7 @@ export type InterpretationPayload = {
         img: string;
         alt: string;
         advice: string;
+        html: string;
         themes: {
             id: number;
             name: string;

@@ -33,6 +33,7 @@ export const GAME_CATEGORY_MAP = {
     mind_games: GAME_CATEGORY.MIND_GAMES,
     lenormand: GAME_CATEGORY.LENORMAND,
     rune: GAME_CATEGORY.RUNE,
+    stone: GAME_CATEGORY.STONE,
 };
 
 export type CategoryType = typeof GAME_CATEGORY_MAP;
@@ -41,6 +42,7 @@ export const HTML_TYPE = {
     ITEMS: 'items',
     PREVIEW: 'preview',
     EMPTY: 'empty',
+    STONE: 'stone',
 };
 
 export const HTML_TYPE_MAP = {
@@ -52,6 +54,7 @@ export const HTML_TYPE_MAP = {
     mind_games: HTML_TYPE.EMPTY,
     lenormand: HTML_TYPE.ITEMS,
     rune: HTML_TYPE.ITEMS,
+    stone: HTML_TYPE.STONE,
 };
 
 export type HtmlType = typeof HTML_TYPE_MAP;
@@ -60,6 +63,7 @@ export const ROUND_TYPE = {
     RANDOM_CARDS: 'random_cards',
     LENORMAND: 'lenormand',
     RUNE: 'rune',
+    STONE: 'stone',
 };
 
 export const ROUND_TYPE_MAP = {
@@ -71,6 +75,7 @@ export const ROUND_TYPE_MAP = {
     mind_games: ROUND_TYPE.RANDOM_CARDS,
     lenormand: ROUND_TYPE.LENORMAND,
     rune: ROUND_TYPE.RUNE,
+    stone: ROUND_TYPE.STONE,
 };
 
 export type RoundType = typeof ROUND_TYPE_MAP;
@@ -78,6 +83,7 @@ export type RoundType = typeof ROUND_TYPE_MAP;
 export const PICKER_TYPE = {
     ONE_CARD: 'ONE_CARD',
     ONE_RUNE: 'ONE_RUNE',
+    ONE_STONE: 'ONE_STONE',
 };
 
 export const PICKER_TYPE_MAP = {
@@ -89,6 +95,7 @@ export const PICKER_TYPE_MAP = {
     mind_games: PICKER_TYPE.ONE_CARD,
     lenormand: PICKER_TYPE.ONE_CARD,
     rune: PICKER_TYPE.ONE_RUNE,
+    stone: PICKER_TYPE.ONE_STONE,
 };
 
 export type PickerType = typeof PICKER_TYPE_MAP;
