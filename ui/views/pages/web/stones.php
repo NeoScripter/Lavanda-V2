@@ -46,7 +46,61 @@ $winner = $stones[array_rand($stones)]; ?>
 
 
 <?php ob_start(); ?>
-<div>
+<div class="isolate">
+    <article cmp-game="<?= GameType::STONE->value ?>"
+        cmp-random-stone-game
+        data-id="<?= $winner['id'] ?>"
+        data-prev-image="<?= $winner['image_src'] ?>"
+        data-prev-alt="<?= $winner['image_alt'] ?>">
+        <div class='relative mx-auto max-w-160 pt-10 xs:pt-20 w-full grid'>
+            <div cmp-initial-sack class='col-start-1 col-end-1 row-start-1 row-end-1 transition-opacity duration-500 ease-in-out'>
+                <?= component('shared/ui/image', [
+                    'sizes'    => 'mb|tb|dk',
+                    'alt' => 'sack of stones',
+                    'lazy' => false,
+                    'path'     => '/assets/images/pages/stones/sack',
+                    'prt_class' => 'bg-contain! aspect-square',
+                    'img_class' => 'size-full object-contain',
+                ]) ?>
+            </div>
+            <div cmp-closed-sack class='mx-auto col-start-1 col-end-1 row-start-1 row-end-1 opacity-0 max-w-200 transition-opacity duration-500 ease-in-out'>
+                <?= component('shared/ui/image', [
+                    'sizes'    => 'mb|tb|dk',
+                    'alt' => 'closed sack',
+                    'lazy' => false,
+                    'path'     => '/assets/images/pages/stones/closed-sack',
+                    'prt_class' => 'bg-contain! aspect-square',
+                    'img_class' => 'size-full object-contain',
+                ]) ?>
+            </div>
+            <div cmp-open-sack class='mx-auto col-start-1 col-end-1 row-start-1 row-end-1 w-full relative max-w-200 hidden transition-opacity duration-500 ease-in-out'>
+                <?= component('shared/ui/image', [
+                    'sizes'    => 'mb|tb|dk',
+                    'alt' => 'open sack',
+                    'lazy' => false,
+                    'path'     => '/assets/images/pages/stones/open-sack',
+                    'prt_class' => 'bg-contain! transition-opacity aspect-square duration-500 ease-in-out',
+                    'img_class' => 'size-full object-contain',
+                ]) ?>
+                <div cmp-selected-stone class='starting:opacity-0 w-2/5 aspect-square appearing inset-x-0 top-0 mx-auto duration-500 ease-in-out transition-[opacity,transform]'>
+                    <?= component('shared/ui/image', [
+                        'sizes'    => 'mb|tb',
+                        'alt' => 'cloth',
+                        'lazy' => false,
+                        'path'     => $winner['image_src'],
+                        'prt_class' => 'size-full bg-contain!',
+                        'img_class' => 'size-full object-contain',
+                    ]) ?>
+                </div>
+
+            </div>
+        </div>
+        <div cmp-visible-at-end
+            cmp-interpretation
+            class='relative z-30 hidden bg-primary/50 backdrop-blur-sm max-w-200 mx-auto px-[1.5em] py-[1em] rounded-lg'>
+        </div>
+    </article>
+
     <?= component('web/ui/button', [
         'variant' => 'primary',
         'slot' => 'Получить ответ',
@@ -56,13 +110,6 @@ $winner = $stones[array_rand($stones)]; ?>
         ],
         'class' => 'mx-auto'
     ]) ?>
-
-    <?= component('web/layout/selected-items') ?>
-
-    <article cmp-game="<?= GameType::STONE->value ?>"
-        data-winner-id="<?= $winner['id'] ?>">
-    </article>
-
     <?= component('web/ui/button', [
         'variant' => 'primary',
         'slot' => 'Попробовать снова',
@@ -72,8 +119,6 @@ $winner = $stones[array_rand($stones)]; ?>
         ],
         'class' => 'mx-auto hidden'
     ]) ?>
-
-    <?= component('web/ui/arrow-hint') ?>
 </div>
 <?php $slot1 = ob_get_clean(); ?>
 
@@ -110,7 +155,7 @@ $winner = $stones[array_rand($stones)]; ?>
         data-id="<?= $winner['id'] ?>"
         data-prev-image="<?= $winner['image_src'] ?>"
         data-prev-alt="<?= $winner['image_alt'] ?>"
-        class='absolute select-none starting:opacity-0 transition-opacity hidden inset-0 z-20 left-1/2 top-1/2 -translate-1/2 aspect-square w-[min(100vw,150%)] xs:w-[min(90vw,80%)] lg:w-1/2'>
+        class='absolute select-none starting:opacity-0 transition-opacity duration-300 ease-in-out hidden inset-0 z-20 left-1/2 top-1/2 -translate-1/2 aspect-square w-[min(100vw,150%)] xs:w-[min(90vw,80%)] lg:w-1/2'>
         <?= component('shared/ui/image', [
             'sizes'    => 'mb|tb|dk',
             'alt' => 'cloth',
@@ -127,7 +172,7 @@ $winner = $stones[array_rand($stones)]; ?>
             Нажмите в любую область платка, чтобы вытянуть камень
         </div>
         <button cmp-pickable-item class='absolute inset-0 size-2/3 cursor-pointer m-auto [&:has(+:not(.hidden))]:hidden'></button>
-        <div cmp-winner-stone class='starting:opacity-0 transition-opacity hidden '>
+        <div cmp-winner-stone class='starting:opacity-0 duration-300 ease-in-out transition-opacity hidden '>
             <?= component('shared/ui/image', [
                 'sizes'    => 'mb|tb',
                 'alt' => 'cloth',

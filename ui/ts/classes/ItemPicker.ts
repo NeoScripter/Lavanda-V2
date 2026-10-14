@@ -69,7 +69,12 @@ export default class ItemPicker {
     }
 
     private cleanupOneStone(item: HTMLElement) {
-        const winner = qs<HTMLDivElement>('[cmp-winner-stone]', 'error', item);
+        const winner = qs<HTMLDivElement>('[cmp-winner-stone]', 'silent', item);
+
+        if (!winner) {
+            return;
+        }
+
         winner.classList.add('hidden');
         const prevImgSrc = item.getAttribute('data-prev-image');
         const prevImgAlt = item.getAttribute('data-prev-alt') ?? 'No image alt';
@@ -85,6 +90,7 @@ export default class ItemPicker {
 
         if (randomStone) {
             const nextImgSrc = randomStone.getAttribute('data-image');
+            const nextStoneId = randomStone.getAttribute('data-id');
             const nextImgAlt =
                 randomStone.getAttribute('data-alt') ?? 'No image alt';
 
@@ -102,6 +108,9 @@ export default class ItemPicker {
                     nextImgAlt
                 );
                 item.setAttribute('data-prev-alt', nextImgAlt);
+            }
+            if (nextStoneId) {
+                item.setAttribute('data-id', nextStoneId);
             }
             initAdaptiveImages();
         }

@@ -360,12 +360,10 @@ li[cmp-flip-rune].flipped > *:nth-child(2) {
         rotateZ(calc(var(--rotation) * 1deg));
 }
 [cmp-flip-coin].still [cmp-surface] {
-    transform: translate(-50%, -50%) rotateX(30deg)
-        rotateZ(180deg);
+    transform: translate(-50%, -50%) rotateX(30deg) rotateZ(180deg);
 }
 [cmp-flip-coin].still.flipped [cmp-surface] {
-    transform: translate(-50%, -50%) rotateX(210deg)
-        rotateZ(180deg);
+    transform: translate(-50%, -50%) rotateX(210deg) rotateZ(180deg);
 }
 [cmp-flip-coin] [cmp-surface] > *:nth-child(1) {
     top: 50%;
@@ -592,4 +590,20 @@ li[cmp-card].accent {
 
 [cmp-iching-line].split {
     gap: 8%;
+}
+
+[cmp-initial-sack], [cmp-closed-sack] {
+    @starting-style {
+        opacity: 0;
+        transform: translateY(0%);
+    }
+}
+[cmp-selected-stone].appearing {
+    position: absolute;
+    transform: translateY(-40%);
+
+    @starting-style {
+        opacity: 0;
+        transform: translateY(0%);
+    }
 }

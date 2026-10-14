@@ -1,5 +1,13 @@
 import { ROUND_TYPE, type GameInfo } from '../constants';
-import { getElementNeighbors, qs, qsa, shuffle, wait } from '../utils';
+import initAdaptiveImages from '../modules/adaptiveImages';
+import {
+    getElementNeighbors,
+    getRandomItem,
+    qs,
+    qsa,
+    shuffle,
+    wait,
+} from '../utils';
 
 export default class GameRound {
     public run(info: GameInfo) {
@@ -32,19 +40,138 @@ export default class GameRound {
         }
     }
 
-    private stones() {
-        return [];
+    private async stones() {
+        const game = qs<HTMLDivElement>('[cmp-random-stone-game]', 'error');
+        const initialSack = qs<HTMLDivElement>(
+            '[cmp-initial-sack]',
+            'error',
+            game
+        );
+        const closedSack = qs<HTMLDivElement>(
+            '[cmp-closed-sack]',
+            'error',
+            game
+        );
+        const openSack = qs<HTMLDivElement>('[cmp-open-sack]', 'error', game);
+        const openSackImage = qs<HTMLDivElement>(
+            '[cmp-open-sack] > [component-adaptive-image]:first-child',
+            'error',
+            openSack
+        );
 
+        const selectedStone = qs<HTMLDivElement>(
+            '[cmp-selected-stone]',
+            'error',
+            game
+        );
+
+        game.scrollIntoView({
+            block: 'center',
+            behavior: 'smooth',
+        });
+
+        initialSack.classList.add('opacity-0');
+        closedSack.classList.remove('opacity-0');
+        await wait(500);
+        initialSack.classList.add('hidden');
+        await wait(1000);
+
+        game.scrollIntoView({
+            block: 'center',
+            behavior: 'smooth',
+        });
+
+        closedSack.classList.add('opacity-0');
+        openSack.classList.remove('hidden');
+        await wait(500);
+        closedSack.classList.add('hidden');
+        await wait(1000);
+
+        game.scrollIntoView({
+            block: 'center',
+            behavior: 'smooth',
+        });
+
+        openSackImage.classList.add('opacity-0');
+        selectedStone.classList.remove('appearing');
+        await wait(500);
+        openSackImage.classList.add('hidden');
+
+        game.scrollIntoView({
+            block: 'center',
+            behavior: 'smooth',
+        });
+
+        await wait(1000);
+
+        return [game];
     }
 
     private cleanupStones() {
-        // const cards = qsa<HTMLLIElement>('[cmp-game]>li');
-        //
-        // cards.forEach((card) => {
-        //     card.classList.remove(
-        //         'hidden',
-        //     );
-        // });
+        const game = qs<HTMLDivElement>('[cmp-random-stone-game]', 'error');
+
+        const initialSack = qs<HTMLDivElement>('[cmp-initial-sack]');
+        const closedSack = qs<HTMLDivElement>('[cmp-closed-sack]');
+        const openSack = qs<HTMLDivElement>('[cmp-open-sack]');
+        const openSackImage = qs<HTMLDivElement>(
+            '[cmp-open-sack] > [component-adaptive-image]:first-child',
+            'error',
+            openSack
+        );
+
+        const winner = qs<HTMLDivElement>(
+            '[cmp-selected-stone]',
+            'error',
+            game
+        );
+
+        initialSack.classList.remove('opacity-0', 'hidden');
+        closedSack.classList.add('opacity-0');
+        closedSack.classList.remove('hidden');
+        openSack.classList.add('hidden');
+        openSackImage.classList.remove('opacity-0', 'hidden');
+        winner.classList.add('appearing');
+
+        const prevImgSrc = game.getAttribute('data-prev-image');
+        const prevImgAlt = game.getAttribute('data-prev-alt') ?? 'No image alt';
+
+        if (!prevImgSrc) {
+            throw new Error(
+                "Stone cloth doesn't contain the data-prev-image attribute"
+            );
+        }
+        const stones = qsa<HTMLLIElement>('[cmp-stone-grid] [cmp-stone]');
+
+        const randomStone = getRandomItem([...stones]);
+
+        if (randomStone) {
+            const nextImgSrc = randomStone.getAttribute('data-image');
+            const nextStoneId = randomStone.getAttribute('data-id');
+            const nextImgAlt =
+                randomStone.getAttribute('data-alt') ?? 'No image alt';
+
+            if (nextImgSrc) {
+                winner.innerHTML = winner.innerHTML.replaceAll(
+                    prevImgSrc,
+                    nextImgSrc
+                );
+                game.setAttribute('data-prev-image', nextImgSrc);
+            }
+
+            if (nextImgAlt !== '') {
+                winner.innerHTML = winner.innerHTML.replace(
+                    prevImgAlt,
+                    nextImgAlt
+                );
+                game.setAttribute('data-prev-alt', nextImgAlt);
+            }
+
+            if (nextStoneId) {
+                game.setAttribute('data-id', nextStoneId);
+            }
+
+            initAdaptiveImages();
+        }
     }
     private async runes() {
         const game = qs<HTMLUListElement>(
@@ -88,7 +215,8 @@ export default class GameRound {
             game.style.getPropertyValue('--offset') ?? '0'
         );
         game.style.setProperty('--offset', currentOffset.toString());
-        const selectedRune = runes[(currentOffset + runes.length) % runes.length];
+        const selectedRune =
+            runes[(currentOffset + runes.length) % runes.length];
         selectedRune.classList.add('hidden');
         return [selectedRune];
     }
@@ -280,9 +408,7 @@ export default class GameRound {
         const cards = qsa<HTMLLIElement>('[cmp-game]>li');
 
         cards.forEach((card) => {
-            card.classList.remove(
-                'hidden',
-            );
+            card.classList.remove('hidden');
         });
     }
 }
