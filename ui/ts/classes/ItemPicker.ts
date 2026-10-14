@@ -54,30 +54,29 @@ export default class ItemPicker {
         }
         const stones = qsa<HTMLLIElement>('[cmp-stone-grid] [cmp-stone]');
 
-        const stoneCloth = qs<HTMLDivElement>('[cmp-stone-cloth]', 'silent');
         const randomStone = getRandomItem([...stones]);
 
         const winner = qs<HTMLDivElement>('[cmp-winner-stone]', 'error', item);
 
-        if (randomStone && stoneCloth) {
+        if (randomStone) {
             const nextImgSrc = randomStone.getAttribute('data-image');
             const nextImgAlt =
                 randomStone.getAttribute('data-alt') ?? 'No image alt';
 
             if (nextImgSrc) {
-                item.setAttribute('data-prev-image', nextImgSrc);
                 winner.innerHTML = winner.innerHTML.replaceAll(
                     prevImgSrc,
                     nextImgSrc
                 );
+                item.setAttribute('data-prev-image', nextImgSrc);
             }
 
             if (nextImgAlt !== '') {
-                item.setAttribute('data-prev-image', nextImgAlt);
                 winner.innerHTML = winner.innerHTML.replace(
                     prevImgAlt,
                     nextImgAlt
                 );
+                item.setAttribute('data-prev-alt', nextImgAlt);
             }
             initAdaptiveImages();
         }
