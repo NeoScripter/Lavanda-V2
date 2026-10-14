@@ -10,6 +10,8 @@ export default class GameRound {
                 return this.lenormand();
             case ROUND_TYPE.RUNE:
                 return this.runes();
+            case ROUND_TYPE.STONE:
+                return this.stones();
             default:
                 throw new Error('Unknown game round option');
         }
@@ -23,9 +25,26 @@ export default class GameRound {
                 return this.cleanupLenormand();
             case ROUND_TYPE.RUNE:
                 return this.cleanupRunes();
+            case ROUND_TYPE.STONE:
+                return this.cleanupStones();
             default:
                 throw new Error('Unknown game round option');
         }
+    }
+
+    private stones() {
+        return [];
+
+    }
+
+    private cleanupStones() {
+        // const cards = qsa<HTMLLIElement>('[cmp-game]>li');
+        //
+        // cards.forEach((card) => {
+        //     card.classList.remove(
+        //         'hidden',
+        //     );
+        // });
     }
     private async runes() {
         const game = qs<HTMLUListElement>(

@@ -16,7 +16,7 @@ class StoneController extends Controller
 
         $stones = new StoneAsset();
         $stones = $stones->select(
-            'id, locale, created_at, preview_src, preview_alt',
+            'id, locale, created_at, preview_src, preview_alt, image_src, image_alt',
             ['locale=?', $locale],
             ['order' => 'created_at DESC']
         );

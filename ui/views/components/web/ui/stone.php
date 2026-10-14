@@ -9,6 +9,8 @@ extract(component_props(
 
 <li cmp-stone
     cmp-flip-rune
+    data-image="<?= $stone['image_src'] ?>"
+    data-alt="<?= $stone['image_alt'] ?>"
     style="--index: <?= $idx ?>;"
     class="<?= cc('relative aspect-square group select-none overflow-clip rounded-xl transition-transform duration-300 ease-in-out shrink-0 col-start-2 col-end-2 row-start-2 row-start-2', $class) ?>">
     <?= component('shared/ui/image', [

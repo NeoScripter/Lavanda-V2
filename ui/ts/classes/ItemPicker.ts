@@ -1,9 +1,11 @@
 import { EVENTS, PICKER_TYPE, type GameInfo } from '../constants';
+import initAdaptiveImages from '../modules/adaptiveImages';
+import { getRandomItem, qs, qsa, wait } from '../utils';
 
 export default class ItemPicker {
     public select(button: HTMLButtonElement, info: GameInfo) {
         const item = button.closest(
-            '[cmp-flip-card],[cmp-card],[cmp-rune],[cmp-flip-rune]'
+            '[cmp-flip-card],[cmp-card],[cmp-rune],[cmp-flip-rune],[cmp-stone-cloth]'
         ) as HTMLLIElement;
 
         if (!item) {
@@ -15,6 +17,8 @@ export default class ItemPicker {
                 return this.selectOneCard(item);
             case PICKER_TYPE.ONE_RUNE:
                 return this.selectOneRune(item);
+            case PICKER_TYPE.ONE_STONE:
+                return this.selectOneStone(item as unknown as HTMLDivElement);
             default:
                 throw new Error('Unknown game round option');
         }
@@ -26,6 +30,8 @@ export default class ItemPicker {
                 return this.cleanupOneCard(item);
             case PICKER_TYPE.ONE_RUNE:
                 return this.cleanupOneRune(item);
+            case PICKER_TYPE.ONE_STONE:
+                return this.cleanupOneStone(item);
             default:
                 throw new Error('Unknown game round option');
         }
@@ -35,6 +41,50 @@ export default class ItemPicker {
         card.classList.add('flipped', 'pointer-events-none');
 
         return card;
+    }
+
+    private async selectOneStone(item: HTMLDivElement) {
+        const prevImgSrc = item.getAttribute('data-prev-image');
+        const prevImgAlt = item.getAttribute('data-prev-alt') ?? 'No image alt';
+
+        if (!prevImgSrc) {
+            throw new Error(
+                "Stone cloth doesn't contain the data-prev-image attribute"
+            );
+        }
+        const stones = qsa<HTMLLIElement>('[cmp-stone-grid] [cmp-stone]');
+
+        const stoneCloth = qs<HTMLDivElement>('[cmp-stone-cloth]', 'silent');
+        const randomStone = getRandomItem([...stones]);
+
+        const winner = qs<HTMLDivElement>('[cmp-winner-stone]', 'error', item);
+
+        if (randomStone && stoneCloth) {
+            const nextImgSrc = randomStone.getAttribute('data-image');
+            const nextImgAlt =
+                randomStone.getAttribute('data-alt') ?? 'No image alt';
+
+            if (nextImgSrc) {
+                winner.innerHTML = winner.innerHTML.replaceAll(
+                    prevImgSrc,
+                    nextImgSrc
+                );
+            }
+
+            if (nextImgAlt !== '') {
+                winner.innerHTML = winner.innerHTML.replace(
+                    prevImgAlt,
+                    nextImgAlt
+                );
+            }
+            initAdaptiveImages();
+        }
+
+        winner.classList.remove('hidden');
+
+        await wait(3000);
+
+        return item;
     }
 
     private selectOneRune(rune: HTMLLIElement) {
@@ -50,6 +100,11 @@ export default class ItemPicker {
 
     private cleanupOneRune(rune: HTMLElement) {
         rune.classList.remove('flipped', 'pointer-events-none');
-        rune.style.removeProperty('transform')
+        rune.style.removeProperty('transform');
+    }
+
+    private cleanupOneStone(item: HTMLElement) {
+        const winner = qs<HTMLDivElement>('[cmp-winner-stone]', 'error', item);
+        winner.classList.add('hidden');
     }
 }

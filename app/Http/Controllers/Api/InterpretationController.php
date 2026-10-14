@@ -72,9 +72,9 @@ class InterpretationController extends Controller
             $payload['items'][] = [
                 'id' => $item->id,
                 'name' => $item->name,
-                'img' => $item->front_src,
-                'alt' => $item->front_alt,
-                'advice' => $item->advice,
+                'img' => $item->front_src ?? $item->image_src,
+                'alt' => $item->front_alt ?? $item->image_alt,
+                'advice' => $item->advice ?? '',
                 'html' => $item->html ?? '',
                 'themes' => $themes
             ];

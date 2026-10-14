@@ -158,8 +158,8 @@ export default class Game {
         const picker = new ItemPicker();
 
         this.elements.pickableItems.forEach((btn) =>
-            btn.addEventListener('click', () => {
-                const item = picker.select(btn, this.info);
+            btn.addEventListener('click', async () => {
+                const item = await picker.select(btn, this.info);
 
                 this.handleItemSelect(item);
             })

@@ -46,6 +46,7 @@ const SKELETON_PAYLOAD: InterpretationPayload = {
             img: 'lorem',
             alt: 'lorem',
             advice: LOREM.THEME,
+            html: 'lorem',
             themes: [
                 {
                     id: 1,

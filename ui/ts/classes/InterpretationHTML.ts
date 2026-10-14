@@ -1,5 +1,11 @@
 import { HTML_TYPE, type GameInfo } from '../constants';
-import { cloneAttributes, createAdaptiveImg, qs, qsa } from '../utils';
+import {
+    cloneAttributes,
+    createAdaptiveImg,
+    getRandomItem,
+    qs,
+    qsa,
+} from '../utils';
 import type { InterpretationPayload } from './Interpretation';
 
 export default class InterpretationHTML {
@@ -14,13 +20,14 @@ export default class InterpretationHTML {
                 return this.preview(payload);
             case HTML_TYPE.EMPTY:
                 return this.empty();
+            case HTML_TYPE.STONE:
+                return this.stone(payload);
             default:
                 throw new Error('Unknown interpretation html type');
         }
     }
 
     public convertToLoader(element: HTMLElement | null): HTMLElement | null {
-
         if (!element) return null;
 
         element.classList.add('skeleton');
@@ -108,7 +115,8 @@ export default class InterpretationHTML {
 
                     for (let i = 0; i < data.items.length; i++) {
                         const theme = data.items[i].themes.find(
-                            (theme) => theme.name.toLowerCase() === key.toLowerCase()
+                            (theme) =>
+                                theme.name.toLowerCase() === key.toLowerCase()
                         );
 
                         if (!theme) continue;
@@ -177,6 +185,13 @@ export default class InterpretationHTML {
         return wrapper;
     }
 
+    private stone(data: InterpretationPayload) {
+
+        const p = document.createElement('p');
+        p.textContent = data.items[0].html;
+
+        return p;
+    }
     private empty() {
         return null;
     }
