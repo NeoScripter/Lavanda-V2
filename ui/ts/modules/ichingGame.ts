@@ -29,6 +29,7 @@ export default function initIchingGame() {
     );
 
     const scheme = qs<HTMLTemplateElement>('[cmp-iching-scheme]');
+    const preloader = qs<HTMLTemplateElement>('[cmp-iching-preloader]');
 
     const patterns = [
         ...qsa<HTMLDivElement>('[cmp-iching-pattern]', container),
@@ -58,6 +59,7 @@ export default function initIchingGame() {
         'error',
         container
     );
+
     const inter = qs<HTMLDivElement>('[cmp-interpretation]');
 
     const marked: number[] = [];
@@ -71,11 +73,9 @@ export default function initIchingGame() {
         disableBtns();
         setState('during');
 
-
         const outcome = await Promise.all(
             [...coins].map((coin) => flipCoin(coin, INITIAL_DELAY))
         );
-
 
         const isTales =
             outcome.reduce((acc, coin) => Number(coin) + acc, 0) > 1;
@@ -87,9 +87,9 @@ export default function initIchingGame() {
         }
 
         if (marked.length === patterns.length) {
+            setState('end');
             const bitmask = convertArrayToBinary(marked);
             await showOutcome(bitmask);
-            setState('end');
         }
 
         enableBtns();
@@ -116,7 +116,9 @@ export default function initIchingGame() {
         const API_URL = '/api/iching';
         const queryParams = { bitmask: bitmask.toString() };
 
-        // this.displayLoader(info);
+        if (container) {
+            container.appendChild(document.importNode(preloader.content, true));
+        }
 
         let payload: Payload | null = null;
         try {
@@ -129,7 +131,14 @@ export default function initIchingGame() {
         } catch (error) {
             console.log(error);
         } finally {
-            // this.hideLoader();
+            if (container) {
+                const skeleton = qs<HTMLDivElement>(
+                    '[cmp-skeleton]',
+                    'silent',
+                    container
+                );
+                skeleton?.remove();
+            }
         }
 
         if (payload === null) return;

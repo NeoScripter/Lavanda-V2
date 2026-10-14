@@ -31,7 +31,7 @@ slot('layouts/web/app-layout', [
 
 
 <?php ob_start(); ?>
-<div cmp-iching-game>
+<div cmp-iching-game class="group">
     <div cmp-visible-at-start
         class='mx-auto max-w-200 *:py-[0.5em]'>
         <h2 class="text-white text-2xl md:text-3xl lg:text-4xl">Правила</h2>
@@ -41,9 +41,10 @@ slot('layouts/web/app-layout', [
         <p>Вы также можете самостоятельно оффлайн сформировать гексаграмму с помощью трех монет (можно древних или иногда советуют брать серебряные). А затем, по полученной гексаграмме, найти трактование на нашем уютном Лавандовом Пространстве.</p>
     </div>
 
-    <article 
+
+    <article
         cmp-visible-at-end
-        class='flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-[calc(var(--space-y)*1.5)] pb-(--space-y) lg:py-[calc(var(--space-y)/2)] mx-auto max-w-280 hidden'>
+        class='flex flex-col items-center group-has-[[cmp-skeleton]]:hidden gap-4 md:flex-row md:items-start md:gap-[calc(var(--space-y)*1.5)] pb-(--space-y) lg:py-[calc(var(--space-y)/2)] mx-auto max-w-280 hidden'>
         <div class="space-y-4 xs:space-y-6 relative">
             <div class='flex items-center border border-white/50 rounded-2xl justify-around flex-col py-[8%] px-[12%] aspect-square bg-accent-foreground w-40 xs:w-50 lg:w-60'>
                 <?php for ($i = 6; $i > 0; $i--) : ?>
@@ -68,11 +69,11 @@ slot('layouts/web/app-layout', [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
         ],
-        'class' => 'mx-auto hidden'
+        'class' => 'mx-auto hidden group-has-[[cmp-skeleton]]:hidden'
     ]) ?>
 
-    <article 
-        cmp-visible-at-start 
+    <article
+        cmp-visible-at-start
         cmp-visible-during
         class="md:rounded-2xl shadow-[10px_10px_20px_#00000040,0_1.5px_1px_#e1d4ff_inset] space-y-(--space-y) backdrop-blur-sm bg-linear-[180deg,#c8b5ff42,#ffffff30] -mx-7 p-(--space-y) sm:-mx-9 py-14.5 -mb-14.5 md:mb-0 md:mx-auto max-w-280">
 
@@ -117,6 +118,29 @@ slot('layouts/web/app-layout', [
         'prt_class' => 'w-full bg-contain!',
         'img_class' => 'size-full object-contain',
     ]) ?>
+</template>
+
+<template cmp-iching-preloader>
+    <article
+        cmp-skeleton
+        class='flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-[calc(var(--space-y)*1.5)] pb-(--space-y) lg:py-[calc(var(--space-y)/2)] mx-auto max-w-280'>
+        <div class="space-y-4 xs:space-y-6 relative animate-pulse">
+            <div class='flex items-center border border-white/50 rounded-2xl justify-around flex-col py-[8%] px-[12%] aspect-square bg-accent-foreground w-40 xs:w-50 lg:w-60'>
+                <?php for ($i = 6; $i > 0; $i--) : ?>
+                    <div class="flex overflow-hidden w-full text-background items-center justify-center">
+                        <span class='h-1 w-full flex-1 bg-gray-300'></span>
+                        <span class='h-1 w-full flex-1 bg-gray-300'></span>
+                    </div>
+                <?php endfor; ?>
+            </div>
+            <p class="mb-2 text-center text-3xl xs:text-4xl lg:text-5xl bg-gray-300 text-transparent w-fit mx-auto h-[1em] rounded-sm font-bold">27</p>
+        </div>
+
+        <p class="text-pretty -mx-2 space-y-[0.5em] sm:mx-0 w-full *:w-full *:bg-gray-300 *:animate-pulse *:block *:rounded-sm *:text-transparent">
+            <span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span>
+        </p>
+
+    </article>
 </template>
 <?php $slot1 = ob_get_clean(); ?>
 
