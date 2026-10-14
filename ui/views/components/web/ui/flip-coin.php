@@ -8,19 +8,23 @@ extract(component_props(
 )); ?>
 
 <div cmp-flip-coin
-    class="<?= cc('relative aspect-square select-none overflow-clip rounded-xl shrink-0', $class) ?>">
-    <?= component('shared/ui/image', [
-        'sizes'    => 'mb',
-        'path'     => '/assets/images/pages/iching/tales',
-        'alt'     => 'Flipside of a golden coin',
-        'prt_class' => 'size-full bg-contain! absolute! transition-transform rotate-y-180 backface-hidden inset-0',
-        'img_class' => 'object-contain!',
-    ]) ?>
-    <?= component('shared/ui/image', [
-        'sizes'    => 'mb',
-        'path'     => '/assets/images/pages/iching/heads',
-        'alt'     => 'Front side of a golden coin',
-        'prt_class' => 'size-full bg-contain! isolate backface-hidden transition-transform',
-        'img_class' => 'object-contain!',
-    ]) ?>
+    style="--rotation: 180"
+    class="<?= cc('relative aspect-square still select-none shrink-0', $class) ?>">
+    <div cmp-surface class='relative size-full'>
+        <?= component('shared/ui/image', [
+            'sizes'    => 'mb',
+            'path'     => '/assets/images/pages/iching/tales',
+            'alt'     => 'Flipside of a golden coin',
+            'prt_class' => 'size-full bg-contain! absolute!',
+            'img_class' => 'object-contain!',
+        ]) ?>
+        <?= component('shared/ui/image', [
+            'sizes'    => 'mb',
+            'path'     => '/assets/images/pages/iching/heads',
+            'alt'     => 'Front side of a golden coin',
+            'prt_class' => 'size-full absolute! bg-contain!',
+            'img_class' => 'object-contain!',
+        ]) ?>
+        <span cmp-shadow></span>
+    </div>
 </div>

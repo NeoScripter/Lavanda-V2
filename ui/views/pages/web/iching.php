@@ -122,7 +122,7 @@ slot('layouts/web/app-layout', [
 
 <?= component('web/layout/game-stage', [
     'slots' => [$slot1],
-    'class' => 'hidden'
+    // 'class' => 'hidden'
 ]); ?>
 
 <?php end_slot(); ?>

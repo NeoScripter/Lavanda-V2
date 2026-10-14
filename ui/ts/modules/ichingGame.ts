@@ -1,7 +1,7 @@
 import convertArrayToBinary, { qs, qsa, wait } from '../utils';
 import initAdaptiveImages from './adaptiveImages';
 
-const INITIAL_DELAY = 40;
+const INITIAL_DELAY = 50;
 
 type Payload = {
     number: number;
@@ -71,9 +71,12 @@ export default function initIchingGame() {
         disableBtns();
         setState('during');
 
+
         const outcome = await Promise.all(
             [...coins].map((coin) => flipCoin(coin, INITIAL_DELAY))
         );
+
+
         const isTales =
             outcome.reduce((acc, coin) => Number(coin) + acc, 0) > 1;
         marked.push(Number(isTales));
@@ -97,7 +100,11 @@ export default function initIchingGame() {
         inter.innerHTML = '';
         marked.length = 0;
         inter.classList.add('hidden');
-        coins.forEach((coin) => coin.classList.remove('flipped'));
+        coins.forEach((coin) => {
+            coin.classList.remove('flipped');
+            coin.classList.add('still');
+            coin.style.setProperty('--rotation', '180');
+        });
         patterns.forEach((pattern) => {
             pattern.classList.remove('split');
             pattern.classList.add('masked');
@@ -142,11 +149,32 @@ export default function initIchingGame() {
     }
 
     async function flipCoin(coin: HTMLDivElement, currentDelay: number) {
-        coin.classList.toggle('flipped');
+        coin.classList.remove('still');
+        const currentRotation = parseFloat(
+            coin.style.getPropertyValue('--rotation')
+        );
+        coin.style.setProperty(
+            '--rotation',
+            (currentRotation + 180).toString()
+        );
+        const surface = qs<HTMLDivElement>('[cmp-surface]', 'error', coin);
+        surface.style.transitionDuration = `${currentDelay}ms`;
 
-        if (currentDelay < 120) {
-            const increase = Math.floor(Math.random() * 5) + 2;
-            const nextDelay = currentDelay + increase;
+        if (currentDelay > 35 && currentDelay < 40) {
+            const shouldFlip = Math.round(Math.random()) === 0;
+
+            if (shouldFlip) {
+                coin.classList.add('flipped');
+            } else {
+                coin.classList.remove('flipped');
+            }
+
+            currentDelay = 35;
+        }
+
+        if (currentDelay > 20) {
+            const increase = Math.round(Math.random() * 2);
+            const nextDelay = currentDelay - increase;
 
             await wait(currentDelay);
 
@@ -160,6 +188,7 @@ export default function initIchingGame() {
             return flipCoin(coin, nextDelay);
         }
 
+        coin.classList.add('still');
         return coin.classList.contains('flipped');
     }
 
