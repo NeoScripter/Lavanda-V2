@@ -2,6 +2,7 @@ import {
     type GameInfo,
 } from '../constants';
 import initAdaptiveImages from '../modules/adaptiveImages';
+import { wait } from '../utils';
 import InterpretationHTML from './InterpretationHTML';
 
 type Elements = {

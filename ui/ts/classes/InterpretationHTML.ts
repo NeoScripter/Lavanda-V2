@@ -186,11 +186,12 @@ export default class InterpretationHTML {
     }
 
     private stone(data: InterpretationPayload) {
-
+        const div = document.createElement('div');
         const p = document.createElement('p');
         p.textContent = data.items[0].html;
+        div.appendChild(p);
 
-        return p;
+        return div;
     }
     private empty() {
         return null;
