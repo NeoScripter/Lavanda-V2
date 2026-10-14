@@ -116,6 +116,7 @@ $winner = $stones[array_rand($stones)]; ?>
             'alt' => 'cloth',
             'path'     => '/assets/images/pages/stones/cloth',
             'prt_class' => 'w-full bg-contain!',
+            'lazy' => false,
             'img_class' => 'size-full object-contain',
         ]) ?>
         <div class='absolute left-1/2 top-0 group-has-[[cmp-interpretation]:not(.hidden)]:hidden -translate-x-1/2 backdrop-blur-sm border border-white rounded-lg p-4 w-[min(100vw,25rem)] md:left-0 md:translate-x-0'>
@@ -130,6 +131,7 @@ $winner = $stones[array_rand($stones)]; ?>
             <?= component('shared/ui/image', [
                 'sizes'    => 'mb|tb',
                 'alt' => 'cloth',
+                'lazy' => false,
                 'path'     => $winner['image_src'],
                 'prt_class' => 'size-2/5 absolute! inset-0 m-auto bg-contain!',
                 'img_class' => 'size-full object-contain',

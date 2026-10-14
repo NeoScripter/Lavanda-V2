@@ -65,6 +65,7 @@ export default class ItemPicker {
                 randomStone.getAttribute('data-alt') ?? 'No image alt';
 
             if (nextImgSrc) {
+                item.setAttribute('data-prev-image', nextImgSrc);
                 winner.innerHTML = winner.innerHTML.replaceAll(
                     prevImgSrc,
                     nextImgSrc
@@ -72,6 +73,7 @@ export default class ItemPicker {
             }
 
             if (nextImgAlt !== '') {
+                item.setAttribute('data-prev-image', nextImgAlt);
                 winner.innerHTML = winner.innerHTML.replace(
                     prevImgAlt,
                     nextImgAlt
