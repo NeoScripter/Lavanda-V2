@@ -278,13 +278,26 @@ export function getElementNeighbors(
     for (const match of matched) {
         let isDuplicate = false;
         for (const node of unique) {
-            if (node === match) isDuplicate  = true;
+            if (node === match) isDuplicate = true;
         }
 
-        if (! isDuplicate) {
-            unique.push(match)
+        if (!isDuplicate) {
+            unique.push(match);
         }
     }
 
     return unique;
+}
+
+export default function convertArrayToBinary(arr: number[]) {
+    const rev = arr.toReversed();
+    let res = 0;
+
+    for (let i = 0; i < 6; i++) {
+        if (rev[5 - i] === 1) {
+            res |= 1 << i;
+        }
+    }
+
+    return res;
 }

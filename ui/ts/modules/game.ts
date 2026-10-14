@@ -3,9 +3,11 @@ import { qs, qsa } from '../utils';
 
 export default async function initGame() {
     const interContainer = qs<HTMLDivElement>('[cmp-interpretation]', 'silent');
+    const games = qsa<HTMLElement>('[cmp-game]');
+
     new GameStage().init();
 
-    if (!interContainer) return;
+    if (!interContainer || games.length === 0) return;
 
     const Interpretation = await import('../classes/Interpretation');
     const interpretation = new Interpretation.default(interContainer);

@@ -527,3 +527,10 @@ li[cmp-card].accent {
 [cmp-iching-pattern].split {
     @apply gap-4 md:gap-6;
 }
+[cmp-iching-pattern].masked > span {
+    opacity: 0;
+}
+
+[cmp-iching-line].split {
+    gap: 8%;
+}
