@@ -11,6 +11,7 @@ enum ThemeableType: string
     case MINORI = 'minori';
     case RUNE = 'rune';
     case BONUS = 'bonus';
+    case DICE = 'dice';
 
     public static function values(): array
     {
