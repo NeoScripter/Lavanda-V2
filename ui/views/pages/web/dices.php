@@ -45,6 +45,10 @@
         'class' => 'mx-auto'
     ]) ?>
 
+    <div>
+        <?= component('web/ui/dice') ?>
+    </div>
+
     <?= component('web/ui/button', [
         'variant' => 'primary',
         'slot' => 'Попробовать снова',
