@@ -22,14 +22,12 @@ $nav_links = [
             ['url' =>  $hive->alias('lenormand'), 'label' => 'Старинное гадание госпожи Ленорман'],
             ['url' =>  $hive->alias('tarot'), 'label' => 'Карты Таро'],
             ['url' =>  $hive->alias('stones'), 'label' => 'Магические камни'],
+            ['url' =>  '/dices', 'label' => 'Тибетское гадание МО'],
             ['url' =>  $hive->alias('minori'), 'label' => 'Карты Минори'],
             ['url' =>  $hive->alias('audios'), 'label' => 'Послание поддержки от автора'],
         ]
     ],
     ['url' => $hive->alias('bonus'), 'label' => 'Бонусная игра'],
-    // ['url' => '/faqs', 'label' => 'Мне грустно'],
-    // ['url' => '/memberships', 'label' => 'Бонус игра'],
-    // ['url' => '/reports', 'label' => 'Расслабиться'],
     [
         'label' => 'Прочее',
         'nav_links' => [

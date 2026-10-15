@@ -2,7 +2,11 @@
 
 extract(component_props(
     required: ['slots'],
-    optional: ['class' => '', 'labels' => ['Выбор лаванды']],
+    optional: [
+        'class' => '',
+        'labels' => ['Выбор лаванды'],
+        'interpretation' => null
+    ],
     props: get_defined_vars(),
 )); ?>
 
@@ -33,7 +37,9 @@ extract(component_props(
     </div>
 
     <article cmp-interpretation
-        class='bg-white py-14.5 rounded-b-xl px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23 hidden'>
+        class="bg-white py-14.5 rounded-b-xl px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23 
+        <?= empty($interpretation) ? 'hidden' : '' ?>">
+        <?= $interpretation ?>
     </article>
 
     <template cmp-theme-picker>
