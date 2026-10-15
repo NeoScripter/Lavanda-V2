@@ -9,6 +9,7 @@ use Http\Models\Affirmation;
 use Http\Models\Article;
 use Http\Models\AudioMessage;
 use Http\Models\Card;
+use Http\Models\Dice;
 use Http\Models\FAQ;
 use Http\Models\Iching;
 use Http\Models\User;
@@ -32,7 +33,7 @@ use Seeders\StoneSeeder;
 
 class CliController
 {
-    private $db_models = [User::class, Theme::class, Card::class, Image::class, FAQ::class, Rune::class, Iching::class, PracticeItem::class, AudioMessage::class, Affirmation::class, Article::class, Stone::class, MatchSet::class, Legal::class];
+    private $db_models = [User::class, Theme::class, Card::class, Image::class, FAQ::class, Rune::class, Iching::class, PracticeItem::class, AudioMessage::class, Affirmation::class, Article::class, Stone::class, MatchSet::class, Legal::class, Dice::class];
 
     private $db_seeders = [CardSeeder::class, FAQSeeder::class, RuneSeeder::class, IchingSeeder::class, PracticeItemSeeder::class, AudioMessageSeeder::class, AffirmationSeeder::class, ArticleSeeder::class, StoneSeeder::class, LegalSeeder::class];
 

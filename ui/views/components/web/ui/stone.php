@@ -18,7 +18,7 @@ extract(component_props(
         'sizes'    => 'mb',
         'path'     => $stone['preview_src'],
         'alt'     => $stone['preview_alt'],
-        'lazy' => false,
+        'lazy' => true,
         'prt_class' => 'size-full bg-contain! isolate',
         'img_class' => 'object-contain!',
     ]) ?>
