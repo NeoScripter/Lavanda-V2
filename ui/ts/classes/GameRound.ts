@@ -93,8 +93,8 @@ export default class GameRound {
         });
 
         openSackImage.classList.add('opacity-0');
-        selectedStone.classList.remove('appearing');
         await wait(500);
+        selectedStone.classList.remove('appearing');
         openSackImage.classList.add('hidden');
 
         game.scrollIntoView({

@@ -79,10 +79,10 @@ $winner = $stones[array_rand($stones)]; ?>
                     'alt' => 'open sack',
                     'lazy' => false,
                     'path'     => '/assets/images/pages/stones/open-sack',
-                    'prt_class' => 'bg-contain! transition-opacity aspect-square duration-500 ease-in-out',
+                    'prt_class' => 'bg-contain! max-h-400 transition-[max-height,opacity] opacity-0 [&.opacity-0]:max-h-50! aspect-square duration-500 ease-in-out',
                     'img_class' => 'size-full object-contain',
                 ]) ?>
-                <div cmp-selected-stone class='starting:opacity-0 w-2/5 aspect-square appearing inset-x-0 top-0 mx-auto duration-500 ease-in-out transition-[opacity,transform]'>
+                <div cmp-selected-stone class='starting:opacity-0 w-2/5 aspect-square appearing inset-x-0 top-0 select-none mx-auto duration-500 ease-in-out transition-[opacity,transform]'>
                     <?= component('shared/ui/image', [
                         'sizes'    => 'mb|tb',
                         'alt' => 'cloth',
@@ -94,10 +94,6 @@ $winner = $stones[array_rand($stones)]; ?>
                 </div>
 
             </div>
-        </div>
-        <div cmp-visible-at-end
-            cmp-interpretation
-            class='relative z-30 hidden bg-primary/50 backdrop-blur-sm max-w-200 mx-auto px-[1.5em] py-[1em] rounded-lg'>
         </div>
     </article>
 
@@ -123,7 +119,7 @@ $winner = $stones[array_rand($stones)]; ?>
 <?php $slot1 = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<div class='relative group'>
+<div class='relative group min-h-100 md:min-h-150 isolate'>
     <?= component('web/ui/button', [
         'variant' => 'primary',
         'slot' => 'Получить ответ',
@@ -155,7 +151,7 @@ $winner = $stones[array_rand($stones)]; ?>
         data-id="<?= $winner['id'] ?>"
         data-prev-image="<?= $winner['image_src'] ?>"
         data-prev-alt="<?= $winner['image_alt'] ?>"
-        class='absolute select-none starting:opacity-0 transition-opacity duration-300 ease-in-out hidden inset-0 z-20 left-1/2 top-1/2 -translate-1/2 aspect-square w-[min(100vw,150%)] xs:w-[min(90vw,80%)] lg:w-1/2'>
+        class='absolute select-none starting:opacity-0 transition-opacity duration-300 ease-in-out hidden inset-0 z-20 left-1/2 top-1/2 -translate-1/2 aspect-square w-[min(100vw,150%)] xs:w-[min(90vw,80%)] lg:w-[60%] xl:w-1/2'>
         <?= component('shared/ui/image', [
             'sizes'    => 'mb|tb|dk',
             'alt' => 'cloth',
@@ -164,7 +160,7 @@ $winner = $stones[array_rand($stones)]; ?>
             'lazy' => false,
             'img_class' => 'size-full object-contain',
         ]) ?>
-        <div class='absolute left-1/2 top-0 group-has-[[cmp-interpretation]:not(.hidden)]:hidden -translate-x-1/2 backdrop-blur-sm border border-white rounded-lg p-4 w-[min(100vw,25rem)] md:left-0 md:translate-x-0'>
+        <div class='absolute left-1/2 top-0 [&:has(+*+:not(.hidden))]:hidden -translate-x-1/2 backdrop-blur-sm border border-white rounded-lg p-4 w-[min(100vw,25rem)] md:left-0 md:translate-x-0'>
             <span
                 class='absolute left-0 top-0 hidden sm:block -translate-1/2 size-7 backdrop-blur-2xl bg-primary-pale/50 *:size-full rounded-full text-white'>
                 <?= svg('info-circle') ?>
@@ -182,11 +178,6 @@ $winner = $stones[array_rand($stones)]; ?>
                 'img_class' => 'size-full object-contain',
             ]) ?>
         </div>
-    </div>
-
-    <div cmp-visible-at-end
-        cmp-interpretation
-        class='relative hidden z-30 bg-primary/50 backdrop-blur-sm max-w-200 mx-auto px-[1.5em] py-[1em] rounded-lg'>
     </div>
 
     <?= component('web/ui/button', [

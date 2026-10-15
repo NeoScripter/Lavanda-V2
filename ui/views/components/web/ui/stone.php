@@ -9,6 +9,7 @@ extract(component_props(
 
 <li cmp-stone
     cmp-flip-rune
+    data-id="<?= $stone['id'] ?>"
     data-image="<?= $stone['image_src'] ?>"
     data-alt="<?= $stone['image_alt'] ?>"
     style="--index: <?= $idx ?>;"
