@@ -63,7 +63,7 @@ $winner = $stones[array_rand($stones)]; ?>
                     'img_class' => 'size-full object-contain',
                 ]) ?>
             </div>
-            <div cmp-closed-sack class='mx-auto col-start-1 col-end-1 row-start-1 row-end-1 opacity-0 max-w-200 transition-opacity duration-500 ease-in-out'>
+            <div cmp-closed-sack class='mx-auto col-start-1 col-end-1 row-start-1 row-end-1 opacity-0 aspect-square w-full max-w-200 transition-opacity duration-750 ease-in-out'>
                 <?= component('shared/ui/image', [
                     'sizes'    => 'mb|tb|dk',
                     'alt' => 'closed sack',
@@ -79,7 +79,7 @@ $winner = $stones[array_rand($stones)]; ?>
                     'alt' => 'open sack',
                     'lazy' => false,
                     'path'     => '/assets/images/pages/stones/open-sack',
-                    'prt_class' => 'bg-contain! max-h-400 transition-[max-height,opacity] opacity-0 [&.opacity-0]:max-h-50! aspect-square duration-500 ease-in-out',
+                    'prt_class' => 'bg-contain! max-h-400 transition-[max-height,opacity] w-full [&.opacity-0]:max-h-50! aspect-square duration-500 ease-in-out',
                     'img_class' => 'size-full object-contain',
                 ]) ?>
                 <div cmp-selected-stone class='starting:opacity-0 w-2/5 aspect-square appearing inset-x-0 top-0 select-none mx-auto duration-500 ease-in-out transition-[opacity,transform]'>
