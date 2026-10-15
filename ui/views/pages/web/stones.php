@@ -197,7 +197,7 @@ $winner = $stones[array_rand($stones)]; ?>
 <?= component('web/layout/game-stage', [
     'labels' => $labels,
     'slots' => [$slot1, $slot2],
-    'class' => 'stones'
+    'class' => 'stones hidden'
 ]); ?>
 
 <?php end_slot(); ?>
