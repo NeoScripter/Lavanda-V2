@@ -45,7 +45,8 @@
         'class' => 'mx-auto'
     ]) ?>
 
-    <div>
+    <div class='flex items-center justify-center flex-col xs:flex-row'>
+        <?= component('web/ui/dice') ?>
         <?= component('web/ui/dice') ?>
     </div>
 
@@ -58,8 +59,6 @@
         ],
         'class' => 'mx-auto hidden'
     ]) ?>
-
-    <?= component('web/ui/arrow-hint') ?>
 </div>
 <?php $slot1 = ob_get_clean(); ?>
 

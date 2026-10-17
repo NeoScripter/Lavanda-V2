@@ -628,6 +628,24 @@ li[cmp-card].accent {
         rotateDice 0.3s ease-in reverse,
         throwDice 1s linear;
 }
+[cmp-dice="1"] {
+    transform: rotate3d(0, 0.9, 0.9, 0deg);
+}
+[cmp-dice="2"] {
+    transform: rotate3d(0.9, 0, 0, 270deg);
+}
+[cmp-dice="3"] {
+    transform: rotate3d(0, 0.9, 0, 90deg);
+}
+[cmp-dice="4"] {
+    transform: rotate3d(0, 0.9, 0, 270deg);
+}
+[cmp-dice="5"] {
+    transform: rotate3d(0, 0.9, 0.9, 180deg);
+}
+[cmp-dice="6"] {
+    transform: rotate3d(0, 0.9, 0, 180deg);
+}
 [cmp-dice-face] {
     box-sizing: border-box;
     position: absolute;
