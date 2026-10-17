@@ -609,146 +609,57 @@ li[cmp-card].accent {
     }
 }
 
-.diceFace {
-    box-sizing: border-box;
+[cmp-dice] {
+    --size: 100px;
     position: absolute;
-    width: 100px;
-    height: 100px;
-    background-color: red;
-        border: 2px solid lighten(red, 10%);
-    border-radius: 10px;
-        transform-style: preserve-3d;
-    transition: 0.5s;
-
-    &::before {
-        position: absolute;
-        content: '';
-        width: 100%;
-        height: 100%;
-        background-color: lighten(red, 10%);
-        border-radius: 20px;
-        transform: translateZ(-1px);
-    }
-
-    &::after {
-        position: absolute;
-        content: '';
-        width: 20px;
-        height: 20px;
-        top: 50%;
-        left: 50%;
-        margin: -10px 0 0 -10px;
-        background-color: yellow;
-        border-radius: 100%;
-        transform: translateZ(1px);
-    }
-}
-
-.front {
-    transform: translateZ(50px);
-    &::after {
-        width: 40px;
-        height: 40px;
-        margin: -20px 0 0 -20px;
-        background-color: green;
-    }
-}
-
-.up {
-    transform: rotateX(90deg) translateZ(50px);
-    &::after {
-        margin: -30px 0 0 -30px;
-        box-shadow: 40px 40px yellow;
-    }
-}
-
-.left {
-    transform: rotateY(-90deg) translateZ(50px);
-    &::after {
-        margin: -40px 0 0 -40px;
-        box-shadow:
-            30px 30px yellow,
-            60px 60px yellow;
-    }
-}
-
-.right {
-    transform: rotateY(90deg) translateZ(50px);
-    &::after {
-        margin: -30px 0 0 -30px;
-        background-color: green;
-        box-shadow:
-            40px 0px green,
-            0px 40px green,
-            40px 40px green;
-    }
-}
-
-.bottom {
-    transform: rotateX(-90deg) translateZ(50px);
-    &::after {
-        margin: -36px 0 0 -36px;
-        box-shadow:
-            26px 26px yellow,
-            52px 52px yellow,
-            52px 0px yellow,
-            0px 52px yellow;
-    }
-}
-
-.back {
-    transform: rotateX(180deg) translateZ(50px);
-    &::after {
-        margin: -40px 0 0 -30px;
-        box-shadow:
-            40px 0px yellow,
-            0px 30px yellow,
-            40px 30px yellow,
-            0px 60px yellow,
-            40px 60px yellow;
-    }
-}
-
-.dice {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    top: calc(50% - 50px);
-    left: calc(50% - 50px);
+    width: var(--size);
+    height: var(--size);
+    top: calc(50% - var(--size) / 2);
+    left: calc(50% - var(--size) / 2);
     transform-style: preserve-3d;
     transform: rotate3d(0, 0.9, 0.9, 90deg);
     transition: 0.5s cubic-bezier(0.42, 1.57, 0.62, 0.86);
-
-    &.rolling {
-        animation: rotatePerFace 3s cubic-bezier(0.42, 1.57, 0.62, 0.86)
-            infinite;
-    }
-
-    &.throw {
-        animation:
-            rotateDice 0.3s ease-in reverse,
-            throwDice 1s linear;
-    }
+}
+[cmp-dice].rolling {
+    animation: rotatePerFace 3s cubic-bezier(0.42, 1.57, 0.62, 0.86) infinite;
+}
+[cmp-dice].throw {
+    animation:
+        rotateDice 0.3s ease-in reverse,
+        throwDice 1s linear;
+}
+[cmp-dice-face] {
+    box-sizing: border-box;
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    border-radius: calc(var(--size) / 10);
+    transform-style: preserve-3d;
+    transition: 0.5s;
 }
 
-.diceWrap {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    top: calc(50% - 100px);
-    left: calc(50% - 100px);
+[cmp-dice-face].front {
+    transform: translateZ(calc(var(--size) / 2));
+}
 
-    &::before {
-        position: absolute;
-        content: '';
-        width: 70%;
-        height: 10%;
-        top: 90%;
-        left: 15%;
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 100%;
-        filter: blur(10px);
-    }
+[cmp-dice-face].up {
+    transform: rotateX(90deg) translateZ(calc(var(--size) / 2));
+}
+
+[cmp-dice-face].left {
+    transform: rotateY(-90deg) translateZ(calc(var(--size) / 2));
+}
+
+[cmp-dice-face].right {
+    transform: rotateY(90deg) translateZ(calc(var(--size) / 2));
+}
+
+[cmp-dice-face].bottom {
+    transform: rotateX(-90deg) translateZ(calc(var(--size) / 2));
+}
+
+[cmp-dice-face].back {
+    transform: rotateX(180deg) translateZ(calc(var(--size) / 2));
 }
 
 @keyframes rotateDice {
@@ -783,25 +694,25 @@ li[cmp-card].accent {
 
 @keyframes throwDice {
     20% {
-        margin-top: -100px;
+        margin-top: calc(var(--size) / -1);
     }
     40% {
         margin-top: 0px;
     }
     60% {
-        margin-top: -30px;
+        margin-top: calc(var(--size) / -3);
     }
     80% {
         margin-top: 0px;
     }
     85% {
-        margin-top: -10px;
+        margin-top: calc(var(--size) / -10);
     }
     90% {
         margin-top: 0px;
     }
     95% {
-        margin-top: -3px;
+        margin-top: calc(var(--size) / -30);
     }
     100% {
         margin-top: 0px;

@@ -63,7 +63,7 @@
 </div>
 <?php $slot1 = ob_get_clean(); ?>
 
-<?php $dices = require_once(APP_DIR . '/ui/data/models/dices.php'); ?>
+<?php $dices = require(APP_DIR . '/ui/data/models/dices.php'); ?>
 
 <?php ob_start(); ?>
 <div>
