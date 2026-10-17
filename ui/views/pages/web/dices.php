@@ -53,10 +53,7 @@
     <article
         cmp-visible-at-end
         cmp-dice-interpretation
-        class="xs:mx-auto max-w-200 bg-primary/80 -mx-4 rounded-2xl p-8">
-        <h4 class="text-white">Helllow world</h4>
-        <p>Helo Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, et id! Obcaecati necessitatibus eaque incidunt, nesciunt nemo aut ipsum quasi.</p>
-
+        class="xs:mx-auto hidden *:text-white! max-w-200 bg-primary/80 -mx-4 rounded-2xl p-8 prose prose-md">
     </article>
 
     <?= component('web/ui/button', [
@@ -70,15 +67,13 @@
     ]) ?>
 </div>
 <template cmp-dice-preloader>
-    <article
-        cmp-skeleton
-        class='flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-[calc(var(--space-y)*1.5)] pb-(--space-y) lg:py-[calc(var(--space-y)/2)] mx-auto max-w-280'>
+    <div cmp-skeleton>
 
         <p class="text-pretty -mx-2 space-y-[0.5em] sm:mx-0 w-full *:w-full *:bg-gray-300 *:animate-pulse *:block *:rounded-sm *:text-transparent">
             <span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span>
         </p>
 
-    </article>
+    </div>
 </template>
 
 <?php $slot1 = ob_get_clean(); ?>
@@ -118,7 +113,7 @@
 <?= component('web/layout/game-stage', [
     'slots' => [$slot1],
     'interpretation' => $interpretation,
-    // 'class' => 'hidden'
+    'class' => 'hidden'
 ]); ?>
 
 <?php end_slot(); ?>

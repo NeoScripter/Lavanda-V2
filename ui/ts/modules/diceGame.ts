@@ -1,8 +1,7 @@
 import { qs, qsa, wait } from '../utils';
 
 type Payload = {
-    number: number;
-    description: string;
+    html: string;
 };
 
 export default function initDiceGame() {
@@ -42,20 +41,21 @@ export default function initDiceGame() {
     async function launchGameRound() {
         disableBtns();
         setState('during');
+        const theme = 'general';
 
         const winnerIds = await Promise.all(
             [...dices].map((dice) => throwDice(dice))
         );
-        console.log(winnerIds);
 
         setState('end');
-        // await showOutcome(bitmask);
+        await showOutcome(theme, winnerIds.join('|'));
 
         enableBtns();
     }
 
     function reset() {
         setState('start');
+        dices.forEach((dice) => dice.setAttribute('cmp-dice', ''));
         inter.innerHTML = '';
         inter.classList.add('hidden');
     }
@@ -76,23 +76,23 @@ export default function initDiceGame() {
         return winnerId;
     }
 
-    async function showOutcome(bitmask: number) {
+    async function showOutcome(theme: string, winnerId: string) {
         const API_URL = '/api/dice';
-        const queryParams = { bitmask: bitmask.toString() };
+        const queryParams = { theme, winner_id: winnerId };
 
-        if (container) {
-            container.appendChild(document.importNode(preloader.content, true));
-        }
+        inter.appendChild(document.importNode(preloader.content, true));
+        inter.classList.remove('hidden');
 
         let payload: Payload | null = null;
         try {
             const queryString = new URLSearchParams(queryParams).toString();
             const url = `${API_URL}?${queryString}`;
 
-            // await wait(2000);
+            await wait(2000);
             const response = await fetch(url);
             payload = await response.json();
         } catch (error) {
+            inter.classList.add('hidden');
             console.log(error);
         } finally {
             if (container) {
@@ -107,14 +107,14 @@ export default function initDiceGame() {
 
         if (payload === null) return;
 
-        inter.classList.remove('hidden');
+        inter.innerHTML = payload.html;
     }
 
     function disableBtns() {
-        launchGameBtns.forEach((btn) => btn.setAttribute('disabled', 'true'));
+        [...launchGameBtns, ...resetGameBtns].forEach((btn) => btn.setAttribute('disabled', 'true'));
     }
     function enableBtns() {
-        launchGameBtns.forEach((btn) => btn.removeAttribute('disabled'));
+        [...launchGameBtns, ...resetGameBtns].forEach((btn) => btn.removeAttribute('disabled'));
     }
 
     function setState(type: 'start' | 'during' | 'end') {
