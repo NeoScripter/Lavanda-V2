@@ -55,7 +55,13 @@ export default function initDiceGame() {
 
     function reset() {
         setState('start');
-        dices.forEach((dice) => dice.setAttribute('cmp-dice', ''));
+        dices.forEach((dice) => {
+            dice.setAttribute('cmp-dice', '');
+            if (dice.nextElementSibling) {
+                dice.nextElementSibling.textContent = '';
+                dice.nextElementSibling.classList.add('hidden');
+            }
+        });
         inter.innerHTML = '';
         inter.classList.add('hidden');
     }
@@ -73,6 +79,22 @@ export default function initDiceGame() {
 
         dice.setAttribute('cmp-dice', `${winnerId}`);
         await wait(105);
+
+        const nameContainer = dice.nextElementSibling;
+
+        if (!nameContainer) {
+            throw new Error('Name container was not found');
+        }
+
+        const winnerFace = qs<HTMLDivElement>(
+            `[cmp-dice-face][data-id="${winnerId}"]`,
+            'error',
+            dice
+        );
+        const name = winnerFace.getAttribute('data-name');
+        nameContainer.textContent = name;
+        nameContainer.classList.remove('hidden')
+
         return winnerId;
     }
 
@@ -88,7 +110,7 @@ export default function initDiceGame() {
             const queryString = new URLSearchParams(queryParams).toString();
             const url = `${API_URL}?${queryString}`;
 
-            await wait(2000);
+            // await wait(2000);
             const response = await fetch(url);
             payload = await response.json();
         } catch (error) {
@@ -111,10 +133,14 @@ export default function initDiceGame() {
     }
 
     function disableBtns() {
-        [...launchGameBtns, ...resetGameBtns].forEach((btn) => btn.setAttribute('disabled', 'true'));
+        [...launchGameBtns, ...resetGameBtns].forEach((btn) =>
+            btn.setAttribute('disabled', 'true')
+        );
     }
     function enableBtns() {
-        [...launchGameBtns, ...resetGameBtns].forEach((btn) => btn.removeAttribute('disabled'));
+        [...launchGameBtns, ...resetGameBtns].forEach((btn) =>
+            btn.removeAttribute('disabled')
+        );
     }
 
     function setState(type: 'start' | 'during' | 'end') {

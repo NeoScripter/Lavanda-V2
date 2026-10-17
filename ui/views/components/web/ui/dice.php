@@ -18,5 +18,5 @@
             </div>
         <?php endforeach; ?>
     </div>
-    <div cmp-dice-name class='text-white text-3xl absolute inset-x-0 hidden text-center font-bold translate-x-[calc(var(--side)/30)] bottom-0'>HA</div>
+    <div cmp-dice-name class='text-white uppercase text-3xl absolute inset-x-0 hidden text-center font-bold translate-x-[calc(var(--side)/100)] bottom-0'>HA</div>
 </div>
