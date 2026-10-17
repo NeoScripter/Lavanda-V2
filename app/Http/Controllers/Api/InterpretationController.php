@@ -60,11 +60,14 @@ class InterpretationController extends Controller
 
         $payload = ['items' => [], 'match_sets' => []];
 
+        $markdown = \Markdown::instance();
+
         foreach ($items as $item) {
             $themes = [];
 
             foreach ($all_themes as $theme) {
                 if ($theme['themeable_id'] === $item->id) {
+                    // $theme['html'] = $markdown->convert($theme['html']);
                     $themes[] = $theme;
                 }
             }
@@ -75,7 +78,7 @@ class InterpretationController extends Controller
                 'img' => $item->front_src ?? $item->image_src,
                 'alt' => $item->front_alt ?? $item->image_alt,
                 'advice' => $item->advice ?? '',
-                'html' => $item->html ?? '',
+                'html' => $markdown->convert($item->html ?? ''),
                 'themes' => $themes
             ];
         }

@@ -124,7 +124,7 @@ $winner = $stones[array_rand($stones)]; ?>
         'variant' => 'primary',
         'slot' => 'Получить ответ',
         'attrs' => [
-            'cmp-launch-game-btn' => true,
+            'cmp-show-cloth-btn' => true,
             'cmp-visible-at-start' => true
         ],
         'class' => 'z-20 left-1/2 top-1/2 -translate-1/2 absolute!'

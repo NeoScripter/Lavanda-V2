@@ -187,9 +187,13 @@ export default class InterpretationHTML {
 
     private stone(data: InterpretationPayload) {
         const div = document.createElement('div');
-        const p = document.createElement('p');
-        p.textContent = data.items[0].html;
-        div.appendChild(p);
+        div.classList.add(
+            'prose',
+            'prose-md',
+            'max-w-full',
+            'lg:prose-lg'
+        );
+        div.innerHTML = data.items[0].html;
 
         return div;
     }

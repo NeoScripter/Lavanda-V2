@@ -8,7 +8,7 @@ type Payload = {
     description: string;
 };
 
-export default function initIchingGame() {
+export default function ichingGame() {
     const container = qs<HTMLDivElement>('[cmp-iching-game]', 'silent');
 
     if (!container) return;

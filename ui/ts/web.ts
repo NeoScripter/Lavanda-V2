@@ -1,4 +1,5 @@
 import '../css/web.css';
+import initStoneGame from './initializers/initStoneGame';
 import initAdaptiveImages from './modules/adaptiveImages';
 import initAffirmations from './modules/affirmations';
 import initAudioPlayers from './modules/audioPlayers';
@@ -7,7 +8,7 @@ import initBranchItems from './modules/branchItems';
 import initCardGrid from './modules/cardGrid';
 import initCheckboxes from './modules/checkboxes';
 import initGame from './modules/game';
-import initIchingGame from './modules/ichingGame';
+import initIchingGame from './initializers/initIchingGame';
 import initLenormandPickers from './modules/lenormand';
 import initModals from './modules/modals';
 import initNavMenu from './modules/navMenu';
@@ -39,6 +40,7 @@ class WebUI {
             initAudioPlayers,
             initAudios,
             initIchingGame,
+            initStoneGame,
         ];
 
         for (const handler of handlers) {
