@@ -11,7 +11,8 @@ import theme from './modules/theme';
 import initToasts from './modules/toasts';
 import initWysiwygs from './modules/wysiwygs';
 import initAccordionFormInputs from './modules/accordionFormInputs';
-import initMatchSetPickers from './modules/match_sets';
+import initMatchSetPickers from './modules/matchSets';
+import initDicePickers from './modules/dices';
 
 
 class AdminUI {
@@ -33,7 +34,8 @@ class AdminUI {
             initPasswordInputButtons,
             initWysiwygs,
             initAccordionFormInputs,
-            initMatchSetPickers
+            initMatchSetPickers,
+            initDicePickers,
         ];
 
         for (const handler of handlers) {

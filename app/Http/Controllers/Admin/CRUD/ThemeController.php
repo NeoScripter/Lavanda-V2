@@ -125,6 +125,7 @@ class ThemeController extends Controller
 
         return match ($model) {
             'runes' => ThemeableType::RUNE,
+            'dices' => ThemeableType::DICE,
             'cards' => ThemeableType::from($db->exec(
                 'SELECT variant FROM cards WHERE id = ?',
                 [$model_id]

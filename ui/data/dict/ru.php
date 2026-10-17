@@ -103,6 +103,9 @@ return [
         "set_successfully_created" => "Комбинация успешно создана!",
         "set_successfully_updated" => "Комбинация успешно обновлена!",
         "set_successfully_deleted" => "Комбинация успешно удалена!",
+        "dice_successfully_created" => "Комбинация костей успешно создана!",
+        "dice_successfully_updated" => "Комбинация костей успешно обновлена!",
+        "dice_successfully_deleted" => "Комбинация костей успешно удалена!",
         "create_a_card" => "Создать карту",
         "card_name" => "Название карты",
         "card_description" => "Описание карты",
@@ -213,5 +216,12 @@ return [
         "legals" => "Соглашения",
         "legal" => "Соглашение",
         "content" => "Содержание",
+        "there_are_no_dices_here_yet" => "Пока не добавлено ни одной комбинации костей...",
+        "select_items_for_the_dices" => "Выберите кости для комбинации",
+        "dices" => "Кости",
+        "dice" => "Комбинация костей",
+        "create_dice" => "Создать комбинацию костей",
+        "delete_dice" => "Удалить комбинацию костей",
+        "edit_dice" => "Редактировать комбинацию костей",
     ]
 ];

@@ -104,6 +104,9 @@ return [
         "set_successfully_created" => "Set successfully created!",
         "set_successfully_updated" => "Set successfully updated!",
         "set_successfully_deleted" => "Set successfully deleted!",
+        "dice_successfully_created" => "Dice successfully created!",
+        "dice_successfully_updated" => "Dice successfully updated!",
+        "dice_successfully_deleted" => "Dice successfully deleted!",
         "legal_successfully_updated" => "Document successfully updated!",
         "create_a_card" => "Create a card",
         "create_a_rune" => "Create a rune",
@@ -214,5 +217,12 @@ return [
         "user_agreement" => "User agreement",
         "privacy_policy" => "Privacy policy",
         "content" => "Content",
+        "there_are_no_dices_here_yet" => "There are no dices here yet...",
+        "select_items_for_the_dices" => "Select items for the set",
+        "dices" => "dices",
+        "dice" => "dice",
+        "create_dice" => "Create dice",
+        "delete_dice" => "Delete dice",
+        "edit_dice" => "Edit dice",
     ]
 ];

@@ -33,7 +33,7 @@ class Dice extends Cortex
                 [$self->diceable_id]
             );
 
-            if (empty($res) || !$res[0]['exists']) {
+            if ($res[0]['exists']) {
                 throw new InvalidArgumentException('This dice combination already exists');
             }
         });
@@ -71,7 +71,7 @@ class Dice extends Cortex
 
             return $themes->find([
                 'themeable_type = ? AND themeable_id = ?',
-                $self->variant,
+                ThemeableType::DICE->value,
                 $self->id,
             ], ['order' => 'name']);
         });
