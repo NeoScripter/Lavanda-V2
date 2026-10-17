@@ -611,6 +611,12 @@ li[cmp-card].accent {
 
 [cmp-dice] {
     --size: 100px;
+    --dir1: 1;
+    --dir2: 1;
+    --dir3: 1;
+    --dir4: 1;
+    --dir5: 1;
+    --dir6: 1;
     position: absolute;
     width: var(--size);
     height: var(--size);
@@ -618,32 +624,31 @@ li[cmp-card].accent {
     left: calc(50% - var(--size) / 2);
     transform-style: preserve-3d;
     transform: rotate3d(0, 0.9, 0.9, 90deg);
-    transition: 0.5s cubic-bezier(0.42, 1.57, 0.62, 0.86);
+    transition: 0.75s cubic-bezier(0.42, 1.57, 0.62, 0.86);
 }
 [cmp-dice].rolling {
     animation: rotatePerFace 3s cubic-bezier(0.42, 1.57, 0.62, 0.86) infinite;
 }
 [cmp-dice].throw {
     animation:
-        rotateDice 0.3s ease-in reverse,
-        throwDice 1s linear;
+        rotatePerFace 0.75s linear infinite;
 }
-[cmp-dice="1"] {
+[cmp-dice='1'] {
     transform: rotate3d(0, 0.9, 0.9, 0deg);
 }
-[cmp-dice="2"] {
+[cmp-dice='2'] {
     transform: rotate3d(0.9, 0, 0, 270deg);
 }
-[cmp-dice="3"] {
+[cmp-dice='3'] {
     transform: rotate3d(0, 0.9, 0, 90deg);
 }
-[cmp-dice="4"] {
+[cmp-dice='4'] {
     transform: rotate3d(0, 0.9, 0, 270deg);
 }
-[cmp-dice="5"] {
+[cmp-dice='5'] {
     transform: rotate3d(0, 0.9, 0.9, 180deg);
 }
-[cmp-dice="6"] {
+[cmp-dice='6'] {
     transform: rotate3d(0, 0.9, 0, 180deg);
 }
 [cmp-dice-face] {
@@ -691,22 +696,28 @@ li[cmp-card].accent {
 
 @keyframes rotatePerFace {
     16% {
-        transform: rotate3d(-0.1, 0.6, -0.4, 180deg);
+        /* transform: rotate3d(-0.1, 0.6, -0.4, 180deg); */
+        transform: rotate3d(calc(var(--dir1) * -0.1),calc(var(--dir2) * 0.6), -calc(var(--dir3) * -0.4), calc(180deg * var(--dir4)));
     }
     32% {
-        transform: rotate3d(-0.85, -0.42, 0.73, 180deg);
+        /* transform: rotate3d(-0.85, -0.42, 0.73, 180deg); */
+        transform: rotate3d(calc(var(--dir5) * -0.85), calc(var(--dir6) * -0.42), calc(var(--dir1) * -0.73), calc(180deg * var(--dir2)));
     }
     48% {
-        transform: rotate3d(-0.8, 0.3, -0.75, 180deg);
+        /* transform: rotate3d(-0.8, 0.3, -0.75, 180deg); */
+        transform: rotate3d(calc(var(--dir3) * -0.8), calc(var(--dir4) * 0.3), calc(var(--dir5) * -0.75), calc(180deg * var(--dir6)));
     }
     64% {
-        transform: rotate3d(0.3, 0.45, 0.9, 180deg);
+        /* transform: rotate3d(0.3, 0.45, 0.9, 180deg); */
+        transform: rotate3d(calc(var(--dir1) * 0.3), calc(var(--dir2) * 0.45), calc(var(--dir3) * 0.9), calc(180deg * var(--dir4)));
     }
     80% {
-        transform: rotate3d(-0.16, 0.6, 0.18, 180deg);
+        /* transform: rotate3d(-0.16, 0.6, 0.18, 180deg); */
+        transform: rotate3d(calc(var(--dir5) * -0.16), calc(var(--dir6) * 0.6), calc(var(--dir1) * 0.18), calc(180deg * var(--dir2)));
     }
     100% {
-        transform: rotate3d(-0.1, 0.3, -1, 180deg);
+        /* transform: rotate3d(-0.1, 0.3, -1, 180deg); */
+        transform: rotate3d(calc(var(--dir3) * -0.1), calc(var(--dir4) * 0.3), calc(var(--dir5) * -1), calc(180deg * var(--dir6)));
     }
 }
 

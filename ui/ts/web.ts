@@ -16,6 +16,7 @@ import initPlanetSpinner from './modules/planetSpinner';
 import initPracticeItems from './modules/practiceItems';
 import initRuneGrid from './modules/runeGrid';
 import initToasts from './modules/toasts';
+import initDiceGame from './modules/diceGame';
 
 class WebUI {
     constructor() {
@@ -41,6 +42,7 @@ class WebUI {
             initAudios,
             initIchingGame,
             initStoneGame,
+            initDiceGame,
         ];
 
         for (const handler of handlers) {

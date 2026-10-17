@@ -27,7 +27,7 @@
 </section>
 
 <?php ob_start(); ?>
-<div>
+<div cmp-dice-game>
     <div cmp-visible-at-start class='text-balance text-center md:mx-auto max-w-200 -mx-4'>
         <h2 class='text-lg normal-case md:text-xl lg:text-2xl text-white'>Задай вопрос. Брось кубики. Узнай свою комбинацию МО.</h2>
         <p>
@@ -50,6 +50,15 @@
         <?= component('web/ui/dice') ?>
     </div>
 
+    <article
+        cmp-visible-at-end
+        cmp-dice-interpretation
+        class="xs:mx-auto max-w-200 bg-primary/80 -mx-4 rounded-2xl p-8">
+        <h4 class="text-white">Helllow world</h4>
+        <p>Helo Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, et id! Obcaecati necessitatibus eaque incidunt, nesciunt nemo aut ipsum quasi.</p>
+
+    </article>
+
     <?= component('web/ui/button', [
         'variant' => 'primary',
         'slot' => 'Попробовать снова',
@@ -60,6 +69,18 @@
         'class' => 'mx-auto hidden'
     ]) ?>
 </div>
+<template cmp-dice-preloader>
+    <article
+        cmp-skeleton
+        class='flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-[calc(var(--space-y)*1.5)] pb-(--space-y) lg:py-[calc(var(--space-y)/2)] mx-auto max-w-280'>
+
+        <p class="text-pretty -mx-2 space-y-[0.5em] sm:mx-0 w-full *:w-full *:bg-gray-300 *:animate-pulse *:block *:rounded-sm *:text-transparent">
+            <span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span>
+        </p>
+
+    </article>
+</template>
+
 <?php $slot1 = ob_get_clean(); ?>
 
 <?php $dices = require(APP_DIR . '/ui/data/models/dices.php'); ?>
