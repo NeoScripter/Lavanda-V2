@@ -51,6 +51,22 @@ export default class GameStage {
             block: 'center',
             behavior: 'smooth',
         });
+
+        this.startLoadingLazyImages();
+    }
+
+    private startLoadingLazyImages() {
+        const images = qsa<HTMLDivElement>(
+            '[cmp-flip-card],[cmp-card],[cmp-rune],[cmp-flip-rune],[cmp-stone]'
+        );
+
+        for (const image of images) {
+            const tag = qs<HTMLImageElement>('picture img', 'silent', image);
+
+            if (!tag) continue;
+
+            tag.setAttribute('loading', 'eager');
+        }
     }
 
     private hideGame() {

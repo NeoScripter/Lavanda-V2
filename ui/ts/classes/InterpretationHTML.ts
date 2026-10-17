@@ -2,7 +2,6 @@ import { HTML_TYPE, type GameInfo } from '../constants';
 import {
     cloneAttributes,
     createAdaptiveImg,
-    getRandomItem,
     qs,
     qsa,
 } from '../utils';
