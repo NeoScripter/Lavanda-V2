@@ -42,7 +42,7 @@ class UpdateArticleRequest extends Request
         ]);
     }
 
-    protected function on_failure(): void
+    public function on_failure(): void
     {
         set_values([
             'description' => $this->hive->POST['description'] ?? '',

@@ -81,6 +81,21 @@ class DiceController extends Controller
     public function store(\Base $hive)
     {
         $request = $this->request(StoreDiceRequest::class);
+        $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
+
+        $existing_diceable_ids = array_map(
+            fn($arr) => $arr['diceable_id'],
+            $hive->get("DB")->exec(
+                'SELECT d.diceable_id FROM dices d WHERE d.locale = ?',
+                [$locale]
+            )
+        );
+
+        if (in_array($request->input('diceable_id'), $existing_diceable_ids)) {
+            $request->flash_errors(['diceable_id' => 'This combination already exists']);
+            $request->on_failure();
+        }
+
         $request->validate();
 
         $dice = new Dice();

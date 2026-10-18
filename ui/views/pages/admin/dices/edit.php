@@ -18,40 +18,26 @@ slot('layouts/admin/theme-layout', [
     'themes' => $themes
 ]); ?>
 
+<?php $dices = require(APP_DIR . '/ui/data/models/dices.php'); ?>
+
 <div class="space-y-6">
 
-    <?= component('admin/ui/subheading', ['title' => $hive->get('admin.edit_dice')]) ?>
+    <?= component('admin/ui/subheading', ['title' => $hive->get('admin.dice')]) ?>
 
-    <form action="<?= $hive->alias('admin_dices_update') ?>" method="post" class="space-y-6 max-w-260" enctype="multipart/form-data">
-        <input type="hidden" name="_method" value="put">
-        <?= csrf() ?>
-
-        <?= component('admin/ui/dice-picker', [
-            'diceable_id' => $dice['diceable_id']
-        ]) ?>
-
-        <div class="flex justify-start gap-4.5">
-            <?= component(
-                'admin/ui/auth-button',
-                [
-                    'slot' => $hive->get('admin.save'),
-                    'attrs' => [
-                        'type' => 'submit',
-                        'cmp-submit-form-btn' => true
-                    ]
-                ]
-            ) ?>
-            <?= component(
-                'admin/ui/auth-button',
-                [
-                    'slot' => $hive->get('admin.cancel'),
-                    'href' => $hive->alias('admin_dices_index'),
-                    'variant' => 'secondary',
-                    'attrs' => ['type' => 'submit']
-                ]
-            ) ?>
-        </div>
-    </form>
+    <ul class='grid gap-2 grid-cols-[repeat(auto-fill,minmax(8rem,1fr))]'>
+        <?php foreach (explode('|', $dice['diceable_id']) as $id) : ?>
+            <?php $item = array_find($dices, fn($dice) => $dice['id'] === (int) $id); ?>
+            <li class="relative w-full">
+                <?= component('shared/ui/image', [
+                    'sizes'    => 'mb',
+                    'path'     => $item['image'],
+                    'prt_class' => 'w-full shrink-0 rounded-xl aspect-square bg-contain!',
+                    'img_class' => 'object-contain!',
+                ]) ?>
+                <p class='uppercase text-center text-2xl font-bold mt-2'><?= $item['name'] ?></p>
+            </li>
+        <?php endforeach; ?>
+    </ul>
 </div>
 
 <?php end_slot(); ?>

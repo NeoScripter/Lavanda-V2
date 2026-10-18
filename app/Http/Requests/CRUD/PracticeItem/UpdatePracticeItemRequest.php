@@ -49,7 +49,7 @@ class UpdatePracticeItemRequest extends Request
         ]);
     }
 
-    protected function on_failure(): void
+    public function on_failure(): void
     {
         set_values([
             'title' => $this->hive->POST['title'] ?? '',

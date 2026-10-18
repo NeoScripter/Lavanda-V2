@@ -26,7 +26,7 @@ class UpdateImageRequest extends Request
         return array_merge(['alt' => ''], $this->data);
     }
 
-    protected function on_failure(): void
+    public function on_failure(): void
     {
         set_values([
             'alt'  => $this->hive->POST['alt'] ?? '',

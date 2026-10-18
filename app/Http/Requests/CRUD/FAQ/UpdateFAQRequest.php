@@ -20,7 +20,7 @@ class UpdateFAQRequest extends Request
         ];
     }
 
-    protected function on_failure(): void
+    public function on_failure(): void
     {
         set_values([
             'question'    => $this->hive->POST['question'] ?? '',

@@ -20,7 +20,7 @@ class UpdateAffirmationRequest extends Request
         ];
     }
 
-    protected function on_failure(): void
+    public function on_failure(): void
     {
         set_values([
             'quote'    => $this->hive->POST['quote'] ?? '',

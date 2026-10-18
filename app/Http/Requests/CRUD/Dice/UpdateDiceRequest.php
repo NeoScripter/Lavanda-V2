@@ -24,7 +24,7 @@ class UpdateDiceRequest extends Request
         ]);
     }
 
-    protected function on_failure(): void
+    public function on_failure(): void
     {
         set_values([
             'diceable_id' => $this->hive->POST['diceable_id'] ?? '',

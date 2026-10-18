@@ -13,21 +13,21 @@ class DiceController extends Controller
     public function index()
     {
         $locale = Session::get_locale();
-
-        // $themes = get_unique_themes_by_type();
-        $themes = [];
         $db = \Base::instance()->get('DB');
 
-        $themes = $db->exec(
-            "SELECT t1.name
-            FROM themes t1
-            WHERE t1.themeable_type = ?
-            GROUP BY t1.name
-            ORDER BY t1.name",
-            [ThemeableType::DICE->value]
+        $themes = array_map(
+            fn($row) => $row['name'],
+            $db->exec(
+                "SELECT t.name
+                FROM themes t
+                JOIN dices d
+                ON d.id = t.themeable_id
+                WHERE t.themeable_type = ? AND d.locale = ?
+                GROUP BY t.name
+                ORDER BY t.name",
+                [ThemeableType::DICE->value, $locale]
+            )
         );
-
-        dd($themes);
 
         view('pages/web/dices', compact('themes'));
     }

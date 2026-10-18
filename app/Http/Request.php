@@ -49,7 +49,7 @@ abstract class Request
         return true;
     }
 
-    protected function on_failure(): void
+    public function on_failure(): void
     {
         $this->hive->reroute($this->redirect_on_failure());
     }
@@ -69,7 +69,7 @@ abstract class Request
         return $this->data[$key] ?? $default;
     }
 
-    protected function flash_errors(array $errors)
+    public function flash_errors(array $errors)
     {
         foreach ($errors as $key => $text) {
             \Base::instance()->set('errors.' . $key, $text);

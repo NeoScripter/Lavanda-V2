@@ -47,19 +47,21 @@ $selected_dices = array_filter(
 
             <?php foreach ($dices as $dice) : ?>
 
-                <li data-imgbl-id="<?= $dice['id'] ?>"
-                    class='relative transition-transform hover:scale-110 hover:z-1 group'>
+                <li data-imgbl-id="<?= $dice['id'] ?>">
 
-                    <figure class='aspect-square w-full'>
-                        <img src="<?= $dice['image'] . '-mb.webp' ?>"
-                            alt="<?= $dice['meaning'] ?>"
-                            class='size-full object-contain object-center' />
-                    </figure>
+                    <div class='relative transition-transform hover:scale-110 hover:z-1 group'>
+                        <figure class='aspect-square w-full'>
+                            <img src="<?= $dice['image'] . '-mb.webp' ?>"
+                                alt="<?= $dice['meaning'] ?>"
+                                class='size-full object-contain object-center' />
+                        </figure>
 
+                        <button cmp-select-dice-btn
+                            type="button"
+                            class='absolute inset-0 bg-black/30 transition-opacity opacity-0 group-hover:opacity-100'>
+                    </div>
 
-                    <button cmp-select-dice-btn
-                        type="button"
-                        class='absolute inset-0 bg-black/30 transition-opacity opacity-0 group-hover:opacity-100'>
+                    <p class='uppercase text-center text-xl font-bold mt-2'><?= $dice['name'] ?></p>
 
                     </button>
                 </li>

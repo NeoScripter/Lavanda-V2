@@ -41,7 +41,7 @@ class StoreRuneRequest extends Request
         ]);
     }
 
-    protected function on_failure(): void
+    public function on_failure(): void
     {
         set_values([
             'name'    => $this->hive->POST['name'] ?? '',

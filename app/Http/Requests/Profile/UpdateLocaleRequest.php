@@ -21,7 +21,7 @@ class UpdateLocaleRequest extends Request
         return $this->data;
     }
 
-    protected function on_failure(): void
+    public function on_failure(): void
     {
         set_values([
             'locale'  => $this->hive->POST['locale'] ?? '',

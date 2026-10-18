@@ -22,7 +22,7 @@ final class ValidatorTest extends TestCase
             {
                 return ['name' => ['validate' => 'in:abs,1,2']];
             }
-            protected function on_failure(): void {}
+            public function on_failure(): void {}
         };
 
 
@@ -40,7 +40,7 @@ final class ValidatorTest extends TestCase
             {
                 return ['name' => ['validate' => 'in:abs,1,2']];
             }
-            protected function on_failure(): void {}
+            public function on_failure(): void {}
         };
 
 

@@ -28,9 +28,9 @@ class Dice extends Cortex
 
             $res = $db->exec(
                 "SELECT EXISTS 
-                    (SELECT 1 FROM dices WHERE diceable_id = ?) 
+                    (SELECT 1 FROM dices WHERE diceable_id = ? AND locale = ?) 
                 AS exists",
-                [$self->diceable_id]
+                [$self->diceable_id, $self->locale]
             );
 
             if ($res[0]['exists']) {

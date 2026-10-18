@@ -42,7 +42,7 @@ class UpdateFeaturedRequest extends Request
         return array_merge($this->data, ['alt' => 'example']);
     }
 
-    protected function on_failure(): void
+    public function on_failure(): void
     {
         set_values([
             'title'    => $this->hive->POST['title'] ?? '',

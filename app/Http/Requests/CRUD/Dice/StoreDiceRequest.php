@@ -12,7 +12,7 @@ class StoreDiceRequest extends Request
         return [
             'diceable_id' => [
                 'filter' => 'trim',
-                'validate' => 'required|min_len:1|unique:dices,diceable_id',
+                'validate' => 'required|min_len:1',
             ],
             'locale' => [
                 'filter'   => 'trim',
@@ -27,7 +27,7 @@ class StoreDiceRequest extends Request
         ]);
     }
 
-    protected function on_failure(): void
+    public function on_failure(): void
     {
         set_values([
             'diceable_id' => $this->hive->POST['diceable_id'] ?? '',
