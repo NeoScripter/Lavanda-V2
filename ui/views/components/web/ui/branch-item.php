@@ -18,7 +18,7 @@ $classes = ['left-[5%] top-[30%]', 'left-[10%] top-[42.5%]', 'left-[12%] top-[55
         class="bg-cover relative flex items-center justify-center aspect-5/6 bg-center">
 
         <div class='h-2/3 relative isolate w-full'>
-            <?php for ($i = 1; $i <= 5; $i++) : ?>
+            <?php for ($i = 1; $i <= 10; $i++) : ?>
                 <?= component('shared/ui/image', [
                     'sizes'    => 'mb',
                     'alt' => 'Stairs',

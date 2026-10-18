@@ -6,20 +6,20 @@
         <?= component('web/ui/branch-item', [
             'title' => 'Можно',
             'img_bg' => '/assets/images/pages/home/what_is_now/what_is_now_1_bg.webp',
-            'img_fg' => '/assets/images/pages/home/what_is_now/item-1',
+            'img_fg' => '/assets/images/pages/home/what_is_now/branch-1',
             'words' => ['чувствовать', 'довериться', 'выдохнуть', 'остановиться', 'ошибаться', 'выбирать', 'не спешить', 'не знать ответа'],
         ]) ?>
         <?= component('web/ui/branch-item', [
             'title' => 'Быть',
             'img_bg' => '/assets/images/pages/home/what_is_now/what_is_now_2_bg.webp',
-            'img_fg' => '/assets/images/pages/home/what_is_now/item-2',
+            'img_fg' => '/assets/images/pages/home/what_is_now/branch-2',
             'words' => ['услышанной', 'с поддержкой', 'наедине с собой', 'собой', 'понятой', 'в безопасности', 'настоящей', 'такой, какая ты есть'],
             'class' => 'sm:row-span-2 sm:self-center lg:self-auto lg:row-span-1'
         ]) ?>
         <?= component('web/ui/branch-item', [
             'title' => 'Вместе',
             'img_bg' => '/assets/images/pages/home/what_is_now/what_is_now_3_bg.webp',
-            'img_fg' => '/assets/images/pages/home/what_is_now/item-3',
+            'img_fg' => '/assets/images/pages/home/what_is_now/branch-3',
             'words' => ['теплее', 'смелее', 'спокойнее', 'легче', 'с пониманием', 'находить ответы', 'делать следующий шаг', 'идти дальше'],
         ]) ?>
     </ul>
