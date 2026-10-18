@@ -28,12 +28,13 @@
             <figure class='mx-auto w-45 sm:ml-0'>
                 <img src="/assets/svgs/logo-lg-white.svg" class="size-full object-contain object-center" />
             </figure>
-            <a href="mailto:info@lavanda.kim"
-                class='flex items-center gap-[0.5em] sm:justify-start lg:justify-end justify-center [&>svg]:size-[1.25em] [&>svg]:stroke-1 hover:underline'
-                target="_blank">
-                <?= svg('mail') ?>
-                info@lavanda.kim</a>
-
+            <div class='sm:justify-start lg:justify-end justify-center w-full flex'>
+                <a href="mailto:info@lavanda.kim"
+                    class='[&>svg]:size-[1.25em] [&>svg]:stroke-1 hover:underline flex items-center gap-[0.5em]'
+                    target="_blank">
+                    <?= svg('mail') ?>
+                    info@lavanda.kim</a>
+            </div>
             <p>Lavanda.Kim <?= date('Y') ?> © Все права защищены</p>
         </div>
     </div>
