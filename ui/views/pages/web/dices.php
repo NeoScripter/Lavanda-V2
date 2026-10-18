@@ -124,7 +124,7 @@ extract(component_props(
 <?= component('web/layout/game-stage', [
     'slots' => [$slot1],
     'interpretation' => $interpretation,
-    // 'class' => 'hidden'
+    'class' => 'hidden'
 ]); ?>
 
 <?php end_slot(); ?>
