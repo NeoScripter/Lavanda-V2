@@ -19,6 +19,9 @@ class StoreAudioMessageRequest extends Request
                 'validate' => 'required|max_size:8800|file:3dm,skp,mp3,mpa',
                 'post_filter'   => 'file:practice_item',
             ],
+            'locale' => [
+                'filter'   => 'trim',
+            ],
         ];
     }
 

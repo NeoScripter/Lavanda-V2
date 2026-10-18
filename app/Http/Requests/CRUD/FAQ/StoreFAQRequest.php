@@ -16,7 +16,10 @@ class StoreFAQRequest extends Request
             'answer' => [
                 'filter'   => 'trim|trim_spaces|strip_tags',
                 'validate' => 'required|max_len:2200',
-            ]
+            ],
+            'locale' => [
+                'filter'   => 'trim',
+            ],
         ];
     }
 

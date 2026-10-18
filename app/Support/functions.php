@@ -5,7 +5,6 @@ use Enums\Locale;
 use Enums\ThemeableType;
 use Http\Models\Image;
 use Jobs\ProcessImageJob;
-use PHPUnit\TextUI\XmlConfiguration\Logging\Logging;
 
 define('VITE_DEV_SERVER', 'http://localhost:5173');
 
@@ -565,7 +564,7 @@ function attach_image_to_model(Cortex $model, string $imageable_type, string $va
     ]);
 }
 
-function get_unique_themes_by_type(ThemeableType $themeable_type, string|int $themeable_id)
+function get_unique_themes_for_model(ThemeableType $themeable_type, string|int $themeable_id)
 {
     $db = \Base::instance()->get('DB');
 

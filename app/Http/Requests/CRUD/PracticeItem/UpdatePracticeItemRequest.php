@@ -22,6 +22,9 @@ class UpdatePracticeItemRequest extends Request
                 'filter'   => 'trim|trim_spaces|strip_tags',
                 'validate' => 'required|max_len:2200',
             ],
+            'locale' => [
+                'filter'   => 'trim',
+            ],
             'faqs' => [
                 'validate' => 'max_len:5200',
                 'post_filter'   => 'json',

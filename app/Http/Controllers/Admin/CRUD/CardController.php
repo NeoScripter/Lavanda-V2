@@ -72,7 +72,7 @@ class CardController extends Controller
         view('pages/admin/cards/edit', [
             'title' => $card['name'],
             'card' => $card->to_resource(),
-            'themes' => get_unique_themes_by_type(ThemeableType::from($card->variant), $id),
+            'themes' => get_unique_themes_for_model(ThemeableType::from($card->variant), $id),
         ]);
     }
 

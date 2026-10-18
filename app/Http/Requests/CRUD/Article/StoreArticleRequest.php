@@ -27,6 +27,9 @@ class StoreArticleRequest extends Request
                 'validate' => 'image:webp,jpg,jpeg,png|max_size:8800',
                 'post_filter'   => 'file:article',
             ],
+            'locale' => [
+                'filter'   => 'trim',
+            ],
             'preview' => [
                 'filter'   => 'file',
                 'validate' => 'image:webp,jpg,jpeg,png|max_size:8800',

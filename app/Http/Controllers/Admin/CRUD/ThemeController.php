@@ -31,7 +31,7 @@ class ThemeController extends Controller
         view('pages/admin/themes/edit', [
             'title' => $theme['name'],
             'theme' => $theme,
-            'themes' => get_unique_themes_by_type($themeable_type, $model_id),
+            'themes' => get_unique_themes_for_model($themeable_type, $model_id),
             'model' => $model,
             'model_id' => $model_id,
             'layout' => $model === 'cards' ? 'admin/card-grid-layout' : 'admin/app-layout',
@@ -47,7 +47,7 @@ class ThemeController extends Controller
 
         view('pages/admin/themes/create', [
             'title' => $hive->get('admin.create_theme'),
-            'themes' => get_unique_themes_by_type($themeable_type, $model_id),
+            'themes' => get_unique_themes_for_model($themeable_type, $model_id),
             'model' => $model,
             'name' => $hive->GET['name'] ?? '',
             'model_id' => $model_id,

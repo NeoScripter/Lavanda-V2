@@ -16,7 +16,10 @@ class StoreAffirmationRequest extends Request
             'topic' => [
                 'filter'   => 'trim|escape_tags',
                 'validate' => 'required|max_len:80',
-            ]
+            ],
+            'locale' => [
+                'filter'   => 'trim',
+            ],
         ];
     }
 

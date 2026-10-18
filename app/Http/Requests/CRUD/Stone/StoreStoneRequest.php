@@ -16,7 +16,10 @@ class StoreStoneRequest extends Request
             ],
             'html' => [
                 'filter'   => 'trim|trim_spaces',
-                'validate' => 'requied|max_len:42000|no_tags',
+                'validate' => 'required|max_len:42000|no_tags',
+            ],
+            'locale' => [
+                'filter'   => 'trim',
             ],
             'preview' => [
                 'filter'   => 'file',

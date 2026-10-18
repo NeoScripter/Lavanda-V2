@@ -18,6 +18,9 @@ class StoreMatchSetRequest extends Request
                 'filter'   => 'trim|trim_spaces|strip_tags',
                 'validate' => 'required|max_len:1200',
             ],
+            'locale' => [
+                'filter'   => 'trim',
+            ],
             'html' => [
                 'filter'   => 'trim',
                 'validate' => 'required|max_len:42000|no_tags',

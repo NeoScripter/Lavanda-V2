@@ -26,6 +26,9 @@ class StoreCardRequest extends Request
                 'filter'   => 'trim',
                 'validate' => 'required',
             ],
+            'locale' => [
+                'filter'   => 'trim',
+            ],
             'front_image' => [
                 'filter'   => 'file',
                 'validate' => 'required|image:webp,jpg,jpeg,png|max_size:8800',

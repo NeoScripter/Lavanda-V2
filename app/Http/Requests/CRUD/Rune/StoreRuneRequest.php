@@ -18,6 +18,9 @@ class StoreRuneRequest extends Request
                 'filter'   => 'trim|trim_spaces|strip_tags',
                 'validate' => 'required|max_len:1200',
             ],
+            'locale' => [
+                'filter'   => 'trim',
+            ],
             'front_image' => [
                 'filter'   => 'file',
                 'validate' => 'required|image:webp,jpg,jpeg,png|max_size:8800',

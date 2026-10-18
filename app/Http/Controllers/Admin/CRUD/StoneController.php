@@ -28,9 +28,8 @@ class StoneController extends Controller
         $page = is_numeric($page) ? (int) $page : 1;
         $locale = Locale::normalize($hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value) ?? '');
 
-
-        $stone = new StoneAsset();
-        $stone = $stone->paginate(
+        $stones = new StoneAsset();
+        $stones = $stones->paginate(
             $page - 1,
             15,
             ['locale=?', $locale],
@@ -39,7 +38,7 @@ class StoneController extends Controller
 
         view('pages/admin/stones/index', [
             'title' => 'All stones',
-            'stones' => $stone,
+            'stones' => $stones,
         ]);
     }
 

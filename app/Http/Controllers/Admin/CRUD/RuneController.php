@@ -57,7 +57,7 @@ class RuneController extends Controller
         view('pages/admin/runes/edit', [
             'title' => $rune['name'],
             'rune' => $rune->to_resource(),
-            'themes' => get_unique_themes_by_type(ThemeableType::RUNE, $id),
+            'themes' => get_unique_themes_for_model(ThemeableType::RUNE, $id),
         ]);
     }
 

@@ -22,7 +22,7 @@ $nav_links = [
             ['url' =>  $hive->alias('lenormand'), 'label' => 'Старинное гадание госпожи Ленорман'],
             ['url' =>  $hive->alias('tarot'), 'label' => 'Карты Таро'],
             ['url' =>  $hive->alias('stones'), 'label' => 'Магические камни'],
-            ['url' =>  '/dices', 'label' => 'Тибетское гадание МО'],
+            ['url' =>  $hive->alias('dices'), 'label' => 'Тибетское гадание МО'],
             ['url' =>  $hive->alias('minori'), 'label' => 'Карты Минори'],
             ['url' =>  $hive->alias('audios'), 'label' => 'Послание поддержки от автора'],
         ]

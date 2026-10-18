@@ -18,6 +18,9 @@ class UpdateStoneRequest extends Request
                 'filter'   => 'trim|trim_spaces',
                 'validate' => 'max_len:42000|no_tags',
             ],
+            'locale' => [
+                'filter'   => 'trim',
+            ],
             'preview' => [
                 'filter'   => 'file',
                 'validate' => 'image:webp,jpg,jpeg,png|max_size:8800',

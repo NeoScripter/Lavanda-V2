@@ -59,7 +59,7 @@ class DiceController extends Controller
         view('pages/admin/dices/edit', [
             'title' => 'Dice',
             'dice' => $dice,
-            'themes' => get_unique_themes_by_type(ThemeableType::DICE, $id),
+            'themes' => get_unique_themes_for_model(ThemeableType::DICE, $id),
         ]);
     }
 

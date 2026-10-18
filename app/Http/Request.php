@@ -12,10 +12,10 @@ abstract class Request
     protected \Base $hive;
     protected array $data = [];
 
-    public function __construct(\Base $hive)
+    public function __construct()
     {
-        $this->hive = $hive;
-        $this->data = array_merge($hive->POST, $hive->FILES);
+        $this->hive = \Base::instance();
+        $this->data = array_merge($this->hive->POST, $this->hive->FILES);
     }
 
     abstract public function rules(): array;

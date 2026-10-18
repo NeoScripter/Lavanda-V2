@@ -13,7 +13,10 @@ class StoreDiceRequest extends Request
             'diceable_id' => [
                 'filter' => 'trim',
                 'validate' => 'required|min_len:1|unique:dices,diceable_id',
-            ]
+            ],
+            'locale' => [
+                'filter'   => 'trim',
+            ],
         ];
     }
 

@@ -39,7 +39,7 @@ final class HelpersTest extends TestCase
             }
         }
 
-        $unique_themes = get_unique_themes_by_type(
+        $unique_themes = get_unique_themes_for_model(
             themeable_type: ThemeableType::from($one_theme_card->variant),
             themeable_id: $one_theme_card->id
         );
