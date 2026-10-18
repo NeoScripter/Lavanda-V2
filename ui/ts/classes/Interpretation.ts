@@ -46,7 +46,7 @@ const SKELETON_PAYLOAD: InterpretationPayload = {
             img: 'lorem',
             alt: 'lorem',
             advice: LOREM.THEME,
-            html: 'lorem',
+            html: '<p>lorem</p><p>lorem</p>',
             themes: [
                 {
                     id: 1,
@@ -124,7 +124,7 @@ export default class Interpretation {
             const queryString = new URLSearchParams(queryParams).toString();
             const url = `${API_URL}?${queryString}`;
 
-            // await wait(2000);
+            // await wait(3000);
             const response = await fetch(url);
             return await response.json();
         } catch (error) {

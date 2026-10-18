@@ -7,7 +7,7 @@ import initAudios from './modules/audios';
 import initBranchItems from './modules/branchItems';
 import initCardGrid from './modules/cardGrid';
 import initCheckboxes from './modules/checkboxes';
-import initGame from './modules/game';
+import initGame from './initializers/initGame';
 import initIchingGame from './initializers/initIchingGame';
 import initLenormandPickers from './modules/lenormand';
 import initModals from './modules/modals';

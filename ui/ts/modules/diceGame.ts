@@ -48,7 +48,7 @@ export default function initDiceGame() {
         );
 
         setState('end');
-        await showOutcome(theme, winnerIds.join('|'));
+        await showOutcome(theme, winnerIds.toSorted().join('|'));
 
         enableBtns();
     }
