@@ -570,13 +570,13 @@ function get_unique_themes_for_model(ThemeableType $themeable_type, string|int $
 
     $themes = $db->exec(
         "SELECT
-            t1.name,
-            MAX(CASE WHEN t1.themeable_id = ? THEN t1.themeable_id ELSE NULL END) AS model_id,
-            MAX(CASE WHEN t1.themeable_id = ? THEN t1.id ELSE NULL END) AS theme_id
-        FROM themes t1
-        WHERE t1.themeable_type = ?
-        GROUP BY t1.name
-        ORDER BY t1.name",
+            t.name,
+            MAX(CASE WHEN t.themeable_id = ? THEN t.themeable_id ELSE NULL END) AS model_id,
+            MAX(CASE WHEN t.themeable_id = ? THEN t.id ELSE NULL END) AS theme_id
+        FROM themes t
+        WHERE t.themeable_type = ?
+        GROUP BY t.name
+        ORDER BY t.name",
         [$themeable_id, $themeable_id, $themeable_type->value]
     );
 
