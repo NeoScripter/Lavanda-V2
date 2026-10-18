@@ -115,7 +115,7 @@ $items = [
             'variant' => 'outline',
             'slot' => 'Подробнее о тарифах',
             'class' => 'w-fit',
-            'href' => $hive->alias('plans')
+            'href' => '/plans'
         ]) ?>
 
     </div>
