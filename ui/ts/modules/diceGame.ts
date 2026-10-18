@@ -31,6 +31,9 @@ export default function initDiceGame() {
         'error',
         container
     );
+
+    const themeSelector = qs<HTMLSelectElement>('#theme-select');
+
     const dices = qsa<HTMLDivElement>('[cmp-dice]', container);
 
     launchGameBtns.forEach((button) =>
@@ -41,7 +44,7 @@ export default function initDiceGame() {
     async function launchGameRound() {
         disableBtns();
         setState('during');
-        const theme = 'general';
+        const theme = themeSelector.value.toLowerCase();
 
         const winnerIds = await Promise.all(
             [...dices].map((dice) => throwDice(dice))
@@ -93,24 +96,25 @@ export default function initDiceGame() {
         );
         const name = winnerFace.getAttribute('data-name');
         nameContainer.textContent = name;
-        nameContainer.classList.remove('hidden')
+        nameContainer.classList.remove('hidden');
 
         return winnerId;
     }
 
     async function showOutcome(theme: string, winnerId: string) {
         const API_URL = '/api/dice';
-        const queryParams = { theme, winner_id: winnerId };
 
         inter.appendChild(document.importNode(preloader.content, true));
         inter.classList.remove('hidden');
 
         let payload: Payload | null = null;
         try {
-            const queryString = new URLSearchParams(queryParams).toString();
+            const queryString = new URLSearchParams({
+                theme,
+                winner_id: winnerId,
+            }).toString();
             const url = `${API_URL}?${queryString}`;
 
-            // await wait(2000);
             const response = await fetch(url);
             payload = await response.json();
         } catch (error) {

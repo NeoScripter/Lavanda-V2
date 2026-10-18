@@ -6,7 +6,6 @@ namespace Http\Controllers\Api;
 
 use Enums\ThemeableType;
 use Http\Controller;
-use Http\Models\Iching;
 use Support\Session;
 
 class DiceController extends Controller
@@ -14,21 +13,23 @@ class DiceController extends Controller
     public function __invoke(\Base $hive)
     {
         $locale = Session::get_locale();
-        $theme  = $hive->GET['theme'];
-        $winner_id  = $hive->GET['winner_id'];
+        $theme  = urldecode($hive->GET['theme']);
+        $winner_id = urldecode($hive->GET['winner_id']);
 
         $db = $hive->get('DB');
 
-        $rows = $db->exec("SELECT t.html FROM themes t JOIN dices d ON d.id = t.themeable_id WHERE t.themeable_type = ? AND t.name = ? AND d.diceable_id = ?", [ThemeableType::DICE->value, $theme, $winner_id]);
-        dd($rows);
+        $rows = $db->exec(
+            "SELECT t.html FROM themes t 
+            JOIN dices d ON d.id = t.themeable_id 
+            WHERE t.themeable_type = ? AND LOWER(t.name) = ? AND d.diceable_id = ? AND d.locale = ?",
+            [ThemeableType::DICE->value, $theme, $winner_id, $locale]
+        );
 
-        // if ($->dry()) {
-        //     send_json(['message' =>  "Iching with this bitmask was not found"], 400);
-        // }
+        if (empty($rows[0]['html'])) {
+            send_json(['message' =>  "Could not find the requested html with this theme"], 400);
+        }
 
-        $payload = [
-            'html' => '<h3>Hello world</h3><p>Helo Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, et id! Obcaecati necessitatibus eaque incidunt, nesciunt nemo aut ipsum quasi.</p>',
-        ];
+        $payload = ['html' => \Markdown::instance()->convert($rows[0]['html'])];
 
         send_json($payload);
     }

@@ -1,6 +1,12 @@
 <?php slot('layouts/web/app-layout', [
     'title' => 'Тибетское гадание МО',
-]); ?>
+]);
+
+extract(component_props(
+    required: ['themes'],
+    optional: [],
+    props: get_defined_vars(),
+)); ?>
 
 <?php ob_start(); ?>
 Тибетское гадание МО
@@ -35,15 +41,20 @@
         </p>
     </div>
 
-    <?= component('web/ui/button', [
-        'variant' => 'primary',
-        'slot' => 'Получить ответ',
-        'attrs' => [
-            'cmp-launch-game-btn' => true,
-            'cmp-visible-at-start' => true
-        ],
-        'class' => 'mx-auto'
-    ]) ?>
+    <div cmp-visible-at-start class='mx-auto flex gap-4 justify-center flex-col max-w-80 sm:max-w-150 sm:flex-row'>
+        <?php if (! empty($themes)) : ?>
+            <select name="theme-select" id="theme-select" class='text-foreground bg-white rounded-sm'>
+                <?php foreach ($themes as $theme) : ?>
+                    <option value="<?= mb_strtolower($theme) ?>"><?= $theme ?></option>
+                <?php endforeach; ?>
+            </select>
+        <?php endif; ?>
+        <?= component('web/ui/button', [
+            'variant' => 'primary',
+            'slot' => 'Получить ответ',
+            'attrs' => ['cmp-launch-game-btn' => true],
+        ]) ?>
+    </div>
 
     <div class='flex items-center justify-center flex-col xs:flex-row'>
         <?= component('web/ui/dice') ?>
@@ -113,7 +124,7 @@
 <?= component('web/layout/game-stage', [
     'slots' => [$slot1],
     'interpretation' => $interpretation,
-    'class' => 'hidden'
+    // 'class' => 'hidden'
 ]); ?>
 
 <?php end_slot(); ?>

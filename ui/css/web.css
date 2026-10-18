@@ -66,6 +66,7 @@
     li,
     a,
     summary,
+    select,
     label {
         @apply md:text-lg xl:text-xl leading-[160%];
     }
