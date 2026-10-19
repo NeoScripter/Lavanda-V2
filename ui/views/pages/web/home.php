@@ -14,6 +14,9 @@ extract(component_props(
 <!-- Hero Section -->
 <?= partial('web/home/hero', compact('cards')) ?>
 
+<!-- Is For You -->
+<?= partial('web/home/is-for-you') ?>
+
 <!-- How It Works -->
 <?= partial('web/home/how-it-works', compact('cards')) ?>
 
