@@ -17,6 +17,9 @@ extract(component_props(
 <!-- Is For You -->
 <?= partial('web/home/is-for-you') ?>
 
+<!-- What You Will Get -->
+<?= partial('web/home/what-you-will-get') ?>
+
 <!-- How It Works -->
 <?= partial('web/home/how-it-works', compact('cards')) ?>
 
