@@ -32,4 +32,7 @@ extract(component_props(
 <!-- What Is Now -->
 <?= partial('web/home/what-is-now') ?>
 
+<!-- Site Map -->
+<?= partial('web/home/site-map') ?>
+
 <?php end_slot(); ?>
