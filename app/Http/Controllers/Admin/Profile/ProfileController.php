@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Admin\Profile;
 
+use Enums\UserRole;
 use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\UpdateProfileRequest;
 use Support\Auth;
-use Traits\RequiresAdminRights;
+use Traits\RequiresAuth;
 
 class ProfileController extends Controller
 {
-    use RequiresAdminRights;
+    use RequiresAuth;
 
     public function index(\Base $hive)
     {
         $user = Auth::user();
+
+        if ($user['role'] !== UserRole::ADMIN->value) {
+            $hive->reroute('@admin_login');
+        }
 
         set_values(['email' => $user['email'], 'name' => $user['name']]);
 
@@ -40,6 +45,8 @@ class ProfileController extends Controller
         Auth::set_user($user->cast());
 
         notify($hive->get('admin.user_successfully_updated'));
-        $hive->reroute('@admin_profile');
+
+        $redirect_route = $user['role'] === UserRole::ADMIN->value ? '@admin_profile' : '@profile';
+        $hive->reroute($redirect_route);
     }
 }

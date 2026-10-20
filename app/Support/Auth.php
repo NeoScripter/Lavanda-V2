@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Support;
 
 use DB\SQL\Mapper;
+use Http\Models\User;
 use InvalidArgumentException;
+
+const TTL_MS = 60 * 60 * 24;
 
 final class Auth extends \Prefab
 {
@@ -13,14 +16,25 @@ final class Auth extends \Prefab
 
     function __construct()
     {
-        $session_user = \Base::instance()->get('SESSION.user');
-        $this->user = $session_user
-            ? [
-                'name' => $session_user['name'],
-                'email' => $session_user['email'],
-                'role' => $session_user['role']
-            ]
-            : null;
+        $hive = \Base::instance();
+        $session_user = $hive->get('SESSION.user');
+
+        if (empty($session_user)) {
+            $this->user = null;
+            return;
+        }
+
+        if ($session_user['cached_at'] < (time() - 10)) {
+            $user = new User();
+            $user->load(['id = ?', $session_user['id']]);
+
+            $session_user['name'] = $user['name'];
+            $session_user['email'] = $user['email'];
+            $session_user['cached_at'] = time();
+            $hive->set('SESSION.user', $session_user, TTL_MS);
+        }
+
+        $this->user = $session_user;
     }
 
     public static function user(): array|null
@@ -31,16 +45,21 @@ final class Auth extends \Prefab
     public static function set_user(array|Mapper $values): void
     {
         $data =  [
+            'id' => $values['id'] ?? $values['_id'],
             'name' => $values['name'],
             'email' => $values['email'],
             'role' => $values['role'],
+            'cached_at' => time(),
         ];
 
-        if (empty($data['name']) || empty($data['email'])) {
-            throw new InvalidArgumentException('User must have a name and email');
+        if (empty($data['name']) || empty($data['email']) || empty($data['role'])) {
+            throw new InvalidArgumentException('User must have a name, role, and email');
         }
 
-        \Base::instance()->set('SESSION.user', $data);
+        $hive = \Base::instance();
+
+        $hive->set('SESSION.user', $data, TTL_MS);
+
         self::instance()->user = $data;
     }
 

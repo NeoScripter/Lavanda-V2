@@ -14,7 +14,7 @@ $variant_classes = [
 ];
 
 $size_classes = [
-    'sm'    => "px-[1em] has-[>svg]:pr-6 text-sm lg:text-base",
+    'sm'    => "px-[1.5em] has-[>svg]:pr-6 text-sm lg:text-base",
     'md'    => "has-[>svg]:pr-7.5 text-base lg:text-lg",
     'lg'    => "has-[>svg]:pr-8.5 text-lg lg:text-xl",
     'icon'  => 'size-9 rounded-lg',

@@ -10,7 +10,7 @@
         'description' => $hive->get('admin.update_your_name_and_email_address'),
     ]) ?>
 
-    <form action="<?= \Base::instance()->alias('admin_profile_update') ?>" method="post" class="space-y-6">
+    <form action="<?= \Base::instance()->alias('profile_update') ?>" method="post" class="space-y-6">
         <?= csrf() ?>
 
         <?= component('admin/form/form-input', [

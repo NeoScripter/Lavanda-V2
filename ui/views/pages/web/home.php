@@ -6,6 +6,14 @@ extract(component_props(
     props: get_defined_vars(),
 )); ?>
 
+<?php 
+
+// $cache->set('FOO', 'BAR', 20);
+// dd(\Base::instance()->get('SESSION'));
+// dd(time());
+
+;?>
+
 <?php slot('layouts/web/app-layout', [
     'title' => 'Главная',
     'class' => 'bg-white',

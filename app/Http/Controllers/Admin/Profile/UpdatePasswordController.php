@@ -4,18 +4,25 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Admin\Profile;
 
+use Enums\UserRole;
 use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\UpdatePasswordRequest;
 use Support\auth;
-use Traits\RequiresAdminRights;
+use Traits\RequiresAuth;
 
 class UpdatePasswordController extends Controller
 {
-    use RequiresAdminRights;
+    use RequiresAuth;
 
-    public function index()
+    public function index(\Base $hive)
     {
+        $user = Auth::user();
+
+        if ($user['role'] !== UserRole::ADMIN->value) {
+            $hive->reroute('@admin_login');
+        }
+
         view('pages/admin/password', [
             'title' => 'Update Password',
         ]);
@@ -39,6 +46,9 @@ class UpdatePasswordController extends Controller
         $user->save();
 
         notify($hive->get("admin.password_updated_successfully"));
-        $hive->reroute('@password');
+
+        $redirect_route = $user['role'] === UserRole::ADMIN->value ? '@password' : '@profile';
+        $hive->reroute($redirect_route);
+        // $hive->reroute('@password');
     }
 }
