@@ -19,6 +19,20 @@ $hive = \Base::instance();
 
         <?php if (in_array($hive->ALIAS, ['login'])) : ?>
             <span aria-hidden="true" class='basis-31.5 sm:basis-52'></span>
+        <?php elseif (in_array($hive->ALIAS, ['profile'])) : ?>
+            <form action="<?= $hive->alias('logout') ?>" method="post" class="my-0.5 mx-1">
+                <input type="hidden" name="_method" value="delete">
+                <?= csrf() ?>
+
+                <?php slot('components/web/ui/button', [
+                    'variant' => 'primary',
+                    'class' => 'hidden sm:flex',
+                    'attrs' => ['type' => 'submit']
+                ]); ?>
+                <?= svg('logout') ?>
+                Выйти
+                <?php end_slot(); ?>
+            </form>
         <?php else : ?>
             <?php slot('components/web/ui/button', [
                 'variant' => 'primary',
