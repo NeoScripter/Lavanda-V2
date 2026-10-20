@@ -31,6 +31,7 @@ class LoginRequest extends Request
             'email' => $this->hive->POST['email'] ?? '',
         ]);
 
-        $this->hive->reroute('@login');
+        $referrer = $hive->HEADERS['Referer'] ?? '/';
+        $this->hive->reroute($referrer);
     }
 }

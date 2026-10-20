@@ -6,7 +6,7 @@
     'title' => $hive->get('admin.login')
 ]); ?>
 
-<form action="<?= $hive->alias("login") ?>" method="post" class="max-w-160 flex flex-col gap-6">
+<form action="<?= $hive->alias("admin_login_store") ?>" method="post" class="max-w-160 flex flex-col gap-6">
     <?= csrf() ?>
 
     <?= component('admin/form/form-input', [

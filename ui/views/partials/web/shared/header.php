@@ -1,16 +1,28 @@
+<?php
+
+use Support\Auth;
+
+$user = Auth::user();
+$hive = \Base::instance();
+
+?>
 <header
-   component-app-header 
+    component-app-header
     class="fixed xs:absolute top-4.5 z-10 sm:top-8 xl:top-13 inset-x-(--px-sm) bg-white rounded-4xl sm:bg-transparent transition-transform">
     <div class='flex items-center justify-between gap-2 bg-linear-(--bg-primary-pale) sm:bg-none p-4 rounded-full'>
         <figure class='w-31.5 sm:w-52'>
-            <img src="/assets/svgs/logo-lg-purple.svg" />
+            <img src="/assets/svgs/logo-lg-violet.svg" />
         </figure>
 
         <?= component('web/ui/nav-menu', ['class' => 'hidden! xl:block!']); ?>
 
-        <?php slot('components/web/ui/button', ['variant' => 'primary', 'class' => 'hidden sm:flex']); ?>
+        <?php slot('components/web/ui/button', [
+            'variant' => 'primary',
+            'class' => 'hidden sm:flex',
+            'href' => empty($user) ? $hive->alias('login') : $hive->alias('profile'),
+        ]); ?>
         <?= svg('circle-user') ?>
-        Войти
+        <?= empty($user) ? 'Войти' : $user['name'] ?>
         <?php end_slot(); ?>
 
         <?= component('web/ui/burger-menu', ['class' => 'text-primary mr-2 sm:hidden']); ?>

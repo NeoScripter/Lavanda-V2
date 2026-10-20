@@ -21,7 +21,7 @@ $hive = \Base::instance();
             'label' => $hive->get('admin.settings'),
         ]) ?>
         <?= component('admin/ui/sidebar-delete-btn', [
-            'url'   => $hive->alias('logout'),
+            'url'   => $hive->alias('admin_logout'),
             'label' => $hive->get('admin.log_out'),
         ]) ?>
     </ul>

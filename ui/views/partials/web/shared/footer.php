@@ -1,28 +1,31 @@
 <footer>
-    <nav class='bg-white shadow-accent rounded-3xl translate-y-12 px-8 lg:px-10 lg:py-12 py-10 mx-auto text-balance max-w-[min(calc(100%-var(--px-lg)*2),25rem)] lg:max-w-4/5'>
-        <ol class='grid gap-8 lg:grid-cols-4 lg:gap-14 xl:[&_li,p]:text-lg '>
-            <li>
-                <a href="/about" class='font-semibold text-[1.25em] text-primary'>О ресурсе</a>
-                <span class='h-1 bg-primary w-15 block my-4'></span>
-                <p>Lavanda.Kim — пространство поддержки и вдохновения. Здесь вы найдёте простые инструменты, которые помогают услышать себя.</p>
-            </li>
-            <li>
-                <a href="/plans" class='font-semibold text-[1.25em] text-primary'>Доступ</a>
-                <span class='h-1 bg-primary w-15 block my-4'></span>
-                <p>Выберите подходящий тариф. Поддержка всегда под рукой.</p>
-            </li>
-            <li>
-                <a href="/contact" class='font-semibold text-[1.25em] text-primary'>Контакты</a>
-                <span class='h-1 bg-primary w-15 block my-4'></span>
-                <p>Остались вопросы? Напишите авторам - будем рады обратной связи.</p>
-            </li>
-            <li>
-                <a href="/legal/privacy_policy" class='font-semibold text-[1.25em] text-primary'>Оферта</a>
-                <span class='h-1 bg-primary w-15 block my-4'></span>
-                <p>Здесь можно ознакомиться с условиями использования и политиками ресурса.</p>
-            </li>
-        </ol>
-    </nav>
+    <?php if (!in_array(\Base::instance()->ALIAS, ['login', 'signup'])) : ?>
+
+        <nav class='bg-white shadow-accent rounded-3xl translate-y-12 px-8 lg:px-10 lg:py-12 py-10 mx-auto text-balance max-w-[min(calc(100%-var(--px-lg)*2),25rem)] lg:max-w-4/5'>
+            <ol class='grid gap-8 lg:grid-cols-4 lg:gap-14 xl:[&_li,p]:text-lg '>
+                <li>
+                    <a href="/about" class='font-semibold text-[1.25em] text-primary'>О ресурсе</a>
+                    <span class='h-1 bg-primary w-15 block my-4'></span>
+                    <p>Lavanda.Kim — пространство поддержки и вдохновения. Здесь вы найдёте простые инструменты, которые помогают услышать себя.</p>
+                </li>
+                <li>
+                    <a href="/plans" class='font-semibold text-[1.25em] text-primary'>Доступ</a>
+                    <span class='h-1 bg-primary w-15 block my-4'></span>
+                    <p>Выберите подходящий тариф. Поддержка всегда под рукой.</p>
+                </li>
+                <li>
+                    <a href="/contact" class='font-semibold text-[1.25em] text-primary'>Контакты</a>
+                    <span class='h-1 bg-primary w-15 block my-4'></span>
+                    <p>Остались вопросы? Напишите авторам - будем рады обратной связи.</p>
+                </li>
+                <li>
+                    <a href="/legal/privacy_policy" class='font-semibold text-[1.25em] text-primary'>Оферта</a>
+                    <span class='h-1 bg-primary w-15 block my-4'></span>
+                    <p>Здесь можно ознакомиться с условиями использования и политиками ресурса.</p>
+                </li>
+            </ol>
+        </nav>
+    <?php endif; ?>
     <div class='px-(--px-lg) text-white bg-primary py-18 sm:py-20 lg:pt-24 rounded-t-2xl'>
         <div class='text-center sm:text-left space-y-[1.25em] lg:space-y-0 sm:pl-6'>
             <figure class='mx-auto w-45 sm:ml-0'>

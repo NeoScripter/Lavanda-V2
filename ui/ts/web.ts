@@ -18,6 +18,7 @@ import initRuneGrid from './modules/runeGrid';
 import initToasts from './modules/toasts';
 import initDiceGame from './modules/diceGame';
 import initReviewBook from './modules/reviewBook';
+import initPasswordInputButtons from './modules/passwordInputButtons';
 
 class WebUI {
     constructor() {
@@ -45,6 +46,7 @@ class WebUI {
             initStoneGame,
             initDiceGame,
             initReviewBook,
+            initPasswordInputButtons,
         ];
 
         for (const handler of handlers) {
