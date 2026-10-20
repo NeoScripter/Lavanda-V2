@@ -20,6 +20,9 @@ extract(component_props(
 <!-- What You Will Get -->
 <?= partial('web/home/what-you-will-get') ?>
 
+<!-- Why It Helps -->
+<?= partial('web/home/why-it-helps') ?>
+
 <!-- How It Works -->
 <?= partial('web/home/how-it-works', compact('cards')) ?>
 

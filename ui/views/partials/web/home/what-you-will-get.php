@@ -7,7 +7,7 @@
 <section class='full-bleed bg-primary-pale/75 py-(--spacing-y) px-(--px-lg)'>
     <h2>Здесь вы получите</h2>
 
-    <ul class='grid justify-items-center place-content-center items-stretch sm:grid-cols-[repeat(2,17.625rem)] gap-x-15 lg:gap-x-25 gap-y-10 lg:grid-cols-[repeat(3,17.625rem)]'>
+    <ul class='grid justify-items-center place-content-center items-stretch sm:grid-cols-[repeat(2,17.625rem)] gap-x-15 lg:gap-x-25 2xl:gap-x-30 gap-y-10 lg:grid-cols-[repeat(3,17.625rem)]'>
         <?php foreach ($items as $item) : ?>
 
             <li class='max-w-70.5 w-full gap-y-[0.75em] sm:grid-rows-subgrid sm:row-span-3 grid justify-items-center last:sm:col-span-2 last:lg:col-span-1'>
@@ -15,7 +15,7 @@
                     'sizes'    => 'mb',
                     'alt' => $item['alt'],
                     'path'     => $item['img'],
-                    'prt_class' => 'aspect-square w-26 aspect-square bg-contain!',
+                    'prt_class' => 'aspect-square w-26 lg:w-32 aspect-square bg-contain!',
                     'img_class' => 'size-full object-contain!',
                 ]) ?>
                 <h3 class='text-lg mb-0! sm:text-xl lg:text-2xl'><?= $item['title'] ?></h3>
