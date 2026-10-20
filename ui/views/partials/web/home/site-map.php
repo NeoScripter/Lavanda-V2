@@ -44,7 +44,7 @@
     ],
 ]; ?>
 
-<section>
+<section class='visibility-auto'>
     <h2>Разделы сайта</h2>
 
     <ul class='grid gap-y-10 sm:gap-y-11 lg:gap-y-16'>

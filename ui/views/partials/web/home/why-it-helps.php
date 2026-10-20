@@ -1,4 +1,4 @@
-<section class='flex flex-col sm:flex-row gap-y-10 sm:justify-center sm:items-center xl:gap-10'>
+<section class='flex flex-col sm:flex-row gap-y-10 sm:justify-center sm:items-center xl:gap-10 visibility-auto'>
     <div class='sm:w-2/3 sm:max-w-160'>
         <h2 class='sm:text-left'>Почему вам понравится</h2>
         <ul class='*:bg-[url(/assets/svgs/golden-star.svg)] text-balance space-y-[1em] *:bg-no-repeat *:bg-position-[0%_0.25em] *:pl-[2em]'>

@@ -1,4 +1,4 @@
-<section>
+<section class='visibility-auto'>
     <h2>А что сейчас?</h2>
     <p class='text-center text-balance font-medium uppercase mb-[1.5em] text-primary text-xl md:text-3xl lg:text-4xl'>Сегодня...</p>
 

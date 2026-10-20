@@ -76,9 +76,9 @@ html:has(#nav-popup[open]) {
     overflow: hidden;
 }
 
-/* section { */
-/*     content-visibility: auto; */
-/* } */
+.visibility-auto {
+    content-visibility: auto;
+}
 
 h1,
 h2,
