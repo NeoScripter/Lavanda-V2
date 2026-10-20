@@ -10,7 +10,7 @@
 ]); ?>
 
 <section class='pt-(--pt-lg) full-bleed'>
-    <div class="<?= cc('bg-white w-full max-w-120 mx-auto rounded-primary px-6 py-9 sm:py-11 sm:px-9', $class) ?>">
+    <div class="<?= cc('bg-white w-full max-w-120 mx-auto xs:rounded-xl sm:rounded-primary px-6 py-9 sm:py-11 sm:px-9', $class) ?>">
 
         <div class="flex flex-col gap-8">
             <div class="flex flex-col items-center gap-6">
