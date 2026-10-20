@@ -23,8 +23,11 @@ extract(component_props(
 <!-- Why It Helps -->
 <?= partial('web/home/why-it-helps') ?>
 
+<!-- Reviews -->
+<?= partial('web/home/reviews') ?>
+
 <!-- How It Works -->
-<?= partial('web/home/how-it-works', compact('cards')) ?>
+<?= partial('web/home/how-it-works') ?>
 
 <!-- What Is Now -->
 <?= partial('web/home/what-is-now') ?>
