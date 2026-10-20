@@ -631,8 +631,7 @@ li[cmp-card].accent {
     animation: rotatePerFace 3s cubic-bezier(0.42, 1.57, 0.62, 0.86) infinite;
 }
 [cmp-dice].throw {
-    animation:
-        rotatePerFace 0.75s linear infinite;
+    animation: rotatePerFace 0.75s linear infinite;
 }
 [cmp-dice='1'] {
     transform: rotate3d(0, 0.9, 0.9, 0deg);
@@ -698,27 +697,57 @@ li[cmp-card].accent {
 @keyframes rotatePerFace {
     16% {
         /* transform: rotate3d(-0.1, 0.6, -0.4, 180deg); */
-        transform: rotate3d(calc(var(--dir1) * -0.1),calc(var(--dir2) * 0.6), -calc(var(--dir3) * -0.4), calc(180deg * var(--dir4)));
+        transform: rotate3d(
+            calc(var(--dir1) * -0.1),
+            calc(var(--dir2) * 0.6),
+            -calc(var(--dir3) * -0.4),
+            calc(180deg * var(--dir4))
+        );
     }
     32% {
         /* transform: rotate3d(-0.85, -0.42, 0.73, 180deg); */
-        transform: rotate3d(calc(var(--dir5) * -0.85), calc(var(--dir6) * -0.42), calc(var(--dir1) * -0.73), calc(180deg * var(--dir2)));
+        transform: rotate3d(
+            calc(var(--dir5) * -0.85),
+            calc(var(--dir6) * -0.42),
+            calc(var(--dir1) * -0.73),
+            calc(180deg * var(--dir2))
+        );
     }
     48% {
         /* transform: rotate3d(-0.8, 0.3, -0.75, 180deg); */
-        transform: rotate3d(calc(var(--dir3) * -0.8), calc(var(--dir4) * 0.3), calc(var(--dir5) * -0.75), calc(180deg * var(--dir6)));
+        transform: rotate3d(
+            calc(var(--dir3) * -0.8),
+            calc(var(--dir4) * 0.3),
+            calc(var(--dir5) * -0.75),
+            calc(180deg * var(--dir6))
+        );
     }
     64% {
         /* transform: rotate3d(0.3, 0.45, 0.9, 180deg); */
-        transform: rotate3d(calc(var(--dir1) * 0.3), calc(var(--dir2) * 0.45), calc(var(--dir3) * 0.9), calc(180deg * var(--dir4)));
+        transform: rotate3d(
+            calc(var(--dir1) * 0.3),
+            calc(var(--dir2) * 0.45),
+            calc(var(--dir3) * 0.9),
+            calc(180deg * var(--dir4))
+        );
     }
     80% {
         /* transform: rotate3d(-0.16, 0.6, 0.18, 180deg); */
-        transform: rotate3d(calc(var(--dir5) * -0.16), calc(var(--dir6) * 0.6), calc(var(--dir1) * 0.18), calc(180deg * var(--dir2)));
+        transform: rotate3d(
+            calc(var(--dir5) * -0.16),
+            calc(var(--dir6) * 0.6),
+            calc(var(--dir1) * 0.18),
+            calc(180deg * var(--dir2))
+        );
     }
     100% {
         /* transform: rotate3d(-0.1, 0.3, -1, 180deg); */
-        transform: rotate3d(calc(var(--dir3) * -0.1), calc(var(--dir4) * 0.3), calc(var(--dir5) * -1), calc(180deg * var(--dir6)));
+        transform: rotate3d(
+            calc(var(--dir3) * -0.1),
+            calc(var(--dir4) * 0.3),
+            calc(var(--dir5) * -1),
+            calc(180deg * var(--dir6))
+        );
     }
 }
 
@@ -746,5 +775,41 @@ li[cmp-card].accent {
     }
     100% {
         margin-top: 0px;
+    }
+}
+
+.bubble-animation {
+    --delay: 0s;
+    transform-origin: 100% 100%;
+
+    @media (prefers-reduced-motion: no-preference) {
+        scale: 0;
+
+        animation: bubble 1.3s
+            linear(
+                0,
+                0.029 1.6%,
+                0.123 3.5%,
+                0.651 10.6%,
+                0.862 14.1%,
+                1.002 17.7%,
+                1.046 19.6%,
+                1.074 21.6%,
+                1.087 23.9%,
+                1.086 26.6%,
+                1.014 38.5%,
+                0.994 46.3%,
+                1
+            )
+            var(--delay) forwards;
+    }
+}
+
+@keyframes bubble {
+    from {
+        scale: 0;
+    }
+    to {
+        scale: 1;
     }
 }
