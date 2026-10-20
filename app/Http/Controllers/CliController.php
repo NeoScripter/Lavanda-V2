@@ -4,6 +4,7 @@ namespace Http\Controllers;
 
 use Enums\AppEnv;
 use Enums\DBView;
+use Enums\UserRole;
 use Exception;
 use Http\Models\Affirmation;
 use Http\Models\Article;
@@ -158,6 +159,7 @@ class CliController
         try {
             $user = new User();
             $user->copyFrom(compact('name', 'email', 'password'));
+            $user->role = UserRole::ADMIN->value;
             $user->save();
 
             if (! $is_test) {
