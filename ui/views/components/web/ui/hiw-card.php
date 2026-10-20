@@ -7,7 +7,7 @@ extract(component_props(
     props: get_defined_vars(),
 )); ?>
 
-<li class="<?= cc('[--sq-size:min(90vw,20rem)] mt-[calc(var(--sq-size)/-5)]', $class) ?>">
+<li class="<?= cc('[--sq-size:min(90vw,18rem)] max-w-80 sm:max-w-100 mx-auto mt-[calc(var(--sq-size)/-5)]', $class) ?>">
     <?= component('shared/ui/image', [
         'sizes'    => 'mb',
         'alt' => 'Stairs',
@@ -16,7 +16,7 @@ extract(component_props(
         'img_class' => 'size-full object-contain',
     ]) ?>
 
-    <article class='shadow-accent px-[1.5em] pb-10 pt-[calc(1.25rem+(var(--sq-size)/5))] h-fit rounded-2xl mx-auto [&>div]:space-y-[1em] max-w-110 lg:max-w-auto lg:[&_h3]:text-3xl'>
+    <article class='shadow-accent px-[1.5em] pb-10 [&_p]:text-base! pt-[calc(1.25rem+(var(--sq-size)/5))] h-fit rounded-2xl mx-auto [&>div]:space-y-[1em] max-w-110 lg:max-w-auto [&_h3]:text-xl lg:[&_h3]:text-2xl'>
         <?= $slot ?>
     </article>
 
