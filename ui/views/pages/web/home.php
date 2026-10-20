@@ -9,7 +9,7 @@ extract(component_props(
 <?php 
 
 // $cache->set('FOO', 'BAR', 20);
-// dd(\Base::instance()->get('SESSION'));
+// dd(\Base::instance()->get('COOKIE'));
 // dd(time());
 
 ;?>
