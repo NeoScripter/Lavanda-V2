@@ -14,7 +14,7 @@ class AuthSessionController extends Controller
     public function index(\Base $hive)
     {
         if (Auth::check()) {
-            $hive->reroute('@profile');
+            $hive->reroute('@home');
         }
 
         view('pages/web/login');

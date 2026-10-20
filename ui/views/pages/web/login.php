@@ -21,7 +21,6 @@
     <?= component('web/form/form-input', [
         'name'        => 'password',
         'label'       => 'Пароль',
-        'placeholder' => '******',
         'attrs' => [
             'type'        => 'password',
             'placeholder' => 'Введите пароль',
@@ -51,7 +50,7 @@
     [
         'slot' => 'Регистрация',
         'variant' => 'outline',
-        'href' => '/signup',
+        'href' => $hive->alias('signup'),
         'class' => 'px-[2em] mx-auto w-fit',
         'size' => 'sm'
     ]

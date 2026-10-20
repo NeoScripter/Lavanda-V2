@@ -12,9 +12,9 @@ $attrs = array_merge(
     $attrs,
 );
 
-$base = 'relative inline-flex size-4 shrink-0 items-center justify-center rounded-sm border border-input shadow-xs transition-shadow outline-none'
-    . ' focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50'
-    . ' aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40'
+$base = 'relative inline-flex size-4 shrink-0 items-center justify-center rounded-sm border border-primary shadow-xs transition-shadow outline-none'
+    . ' focus-visible:border-primary/50 focus-visible:ring-[3px] focus-visible:ring-primary-pale/50'
+    . ' aria-invalid:border-destructive aria-invalid:ring-destructive/20'
     . ' cursor-pointer disabled:cursor-not-allowed disabled:opacity-50';
 
 
@@ -27,14 +27,14 @@ $attr_string = serialize_attrs($attrs);
     <label class="flex items-center select-none cursor-pointer w-fit gap-2">
         <span
             component-checkbox-input
-            class="<?= $final_class ?> <?= $checked ? 'bg-primary border-primary text-primary-foreground' : '' ?>">
+            class="<?= $final_class ?> <?= $checked ? 'bg-primary border-primary text-white' : '' ?>">
 
             <input type="checkbox" class="peer sr-only" <?= $attr_string ?>>
 
             <span
                 component-checkbox-checkmark
                 class="flex items-center justify-center text-current transition-none <?= $checked ? '' : 'opacity-0' ?>">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
                     <path d="M20 6 9 17l-5-5" />
                 </svg>
             </span>

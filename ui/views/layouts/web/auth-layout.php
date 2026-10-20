@@ -13,7 +13,7 @@
     <div class="<?= cc('bg-white w-full max-w-120 mx-auto rounded-primary px-6 py-9 sm:py-11 sm:px-9', $class) ?>">
 
         <div class="flex flex-col gap-8">
-            <div class="flex flex-col items-center gap-4">
+            <div class="flex flex-col items-center gap-6">
                 <a
                     href="/"
                     class="flex flex-col items-center gap-2 font-medium">
@@ -26,9 +26,11 @@
 
                 <div class="space-y-2 text-center">
                     <h1 class="text-xl font-semibold"><?= $title ?? '' ?></h1>
-                    <p class="text-muted-foreground text-center text-sm text-balance">
-                        <?= $description ?? '' ?>
-                    </p>
+                    <?php if (!empty($description)) : ?>
+                        <p class="text-muted-foreground text-center text-sm text-balance">
+                            <?= $description ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
             </div>
 
