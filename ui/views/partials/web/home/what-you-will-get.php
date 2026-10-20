@@ -4,7 +4,7 @@
     ['img' => '/assets/images/pages/home/what-you-will-get/item-3', 'alt' => 'crown', 'title' => "Ощущение «я справлюсь»", 'description' => 'Своё, настоящее'],
 ]; ?>
 
-<section class='full-bleed bg-primary-pale/75 py-(--spacing-y) px-(--px-lg)'>
+<section class='full-bleed bg-primary-pale/50 py-(--spacing-y) px-(--px-lg) visibility-auto'>
     <h2>Здесь вы получите</h2>
 
     <ul class='grid justify-items-center place-content-center items-stretch sm:grid-cols-[repeat(2,17.625rem)] gap-x-15 lg:gap-x-25 2xl:gap-x-30 gap-y-10 lg:grid-cols-[repeat(3,17.625rem)]'>
