@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Http\Controllers\Admin\CRUD;
 
 use Http\Controller;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class DashboardController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function index(\Base $hive)
     {

@@ -10,11 +10,11 @@ use Exception;
 use Http\Controller;
 use Http\Models\Iching;
 use Http\Requests\CRUD\Iching\UpdateIchingRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class IchingController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function index(\Base $hive)
     {

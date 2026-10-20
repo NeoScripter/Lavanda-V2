@@ -13,7 +13,6 @@ load_env_vars();
 $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
 $hive->set('UI', APP_DIR . '/ui/views/');
 $hive->set('LOGS', APP_DIR . '/storage/logs/');
-$hive->set('JAR.expire', 60 * 60 * 24);
 
 define('UPLOAD_DIR', APP_DIR . '/public/storage/uploads/');
 define('WEBROOT', APP_DIR . '/public/');

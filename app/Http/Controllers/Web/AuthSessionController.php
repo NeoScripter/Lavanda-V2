@@ -27,9 +27,17 @@ class AuthSessionController extends Controller
         }
 
         $request = $this->request(LoginRequest::class);
+        $user = new User();
+        $user->load(["email = ? AND is_deleted = 'TRUE'", $request->input('email')]);
+
+        if (!$user->dry()) {
+            $request->flash_errors(['email' => $hive->get('admin.these_credentials_dont_match_our_records')]);
+            $request->on_failure();
+            exit;
+        }
+
         $request->validate();
 
-        $user = new User();
         $user->load(['email=?', $request->input('email')]);
 
         if ($user->dry() || !password_verify($request->input('password'), $user->password)) {

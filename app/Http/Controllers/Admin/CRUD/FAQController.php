@@ -11,11 +11,11 @@ use Http\Controller;
 use Http\Models\FAQ;
 use Http\Requests\CRUD\FAQ\StoreFAQRequest;
 use Http\Requests\CRUD\FAQ\UpdateFAQRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class FAQController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function index(\Base $hive)
     {

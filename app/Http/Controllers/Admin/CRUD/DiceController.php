@@ -12,11 +12,11 @@ use Http\Controller;
 use Http\Models\Dice;
 use Http\Requests\CRUD\Dice\StoreDiceRequest;
 use Http\Requests\CRUD\Dice\UpdateDiceRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class DiceController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     private string $locale;
 

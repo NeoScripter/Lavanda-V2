@@ -7,12 +7,12 @@ namespace Http\Controllers\Admin\Profile;
 use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\UpdatePasswordRequest;
-use Support\Auth;
-use Traits\RequiresAuth;
+use Support\auth;
+use Traits\RequiresAdminRights;
 
 class UpdatePasswordController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function index()
     {

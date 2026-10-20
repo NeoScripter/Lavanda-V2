@@ -11,7 +11,7 @@ trait RequiresAuth
     public function beforeroute(\Base $hive)
     {
         if (! Auth::check()) {
-            $hive->reroute('@admin_login');
+            $hive->reroute('@login');
         }
     }
 }

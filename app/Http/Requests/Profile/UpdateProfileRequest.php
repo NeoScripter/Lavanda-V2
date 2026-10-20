@@ -32,6 +32,7 @@ class UpdateProfileRequest extends Request
             'email' => $this->hive->POST['email']           ?? '',
         ]);
 
-        $this->hive->reroute('@profile');
+        $referrer = $hive->HEADERS['Referer'] ?? '/';
+        $this->hive->reroute($referrer);
     }
 }

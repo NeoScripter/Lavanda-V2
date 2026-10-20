@@ -11,11 +11,11 @@ use Http\Controller;
 use Http\Models\AudioMessage;
 use Http\Requests\CRUD\AudioMessage\StoreAudioMessageRequest;
 use Http\Requests\CRUD\AudioMessage\UpdateAudioMessageRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class AudioMessageController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function index(\Base $hive)
     {

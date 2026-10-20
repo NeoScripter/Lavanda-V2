@@ -13,11 +13,11 @@ use Http\Models\Stone;
 use Http\Models\StoneAsset;
 use Http\Requests\CRUD\Stone\StoreStoneRequest;
 use Http\Requests\CRUD\Stone\UpdateStoneRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class StoneController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     private $preview_sizes = ['mb' => 120];
     private $image_sizes = ['mb' => 120, 'tb' => 240];

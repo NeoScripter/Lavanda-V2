@@ -6,11 +6,11 @@ namespace Http\Controllers\Admin\Profile;
 
 use Http\Controller;
 use Http\Requests\Profile\UpdateLocaleRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class LocaleController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function index()
     {

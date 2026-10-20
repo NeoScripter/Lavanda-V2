@@ -7,11 +7,11 @@ namespace Http\Controllers\Admin\Profile;
 use Enums\Locale;
 use Enums\SessionKey;
 use Http\Controller;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class ResourceLocaleController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function update(\Base $hive)
     {

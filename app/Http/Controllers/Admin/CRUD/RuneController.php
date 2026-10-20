@@ -14,11 +14,11 @@ use Http\Models\Rune;
 use Http\Models\RuneAsset;
 use Http\Requests\CRUD\Rune\StoreRuneRequest;
 use Http\Requests\CRUD\Rune\UpdateRuneRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class RuneController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     private $image_sizes = ['mb' => 120, 'tb' => 200];
 

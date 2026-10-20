@@ -10,7 +10,7 @@
 </p>
 <?php end_slot(); ?>
 
-<form action="<?= $hive->alias("login_store") ?>" method="post" class="max-w-160 flex flex-col gap-6">
+<form action="<?= $hive->alias("register_store") ?>" method="post" class="max-w-160 flex flex-col gap-6">
     <?= csrf() ?>
 
     <?= component('web/form/form-input', [
@@ -44,7 +44,7 @@
     ]) ?>
 
     <?= component('web/form/form-input', [
-        'name'        => 'password_repeat',
+        'name'        => 'password_confirmation',
         'label'       => 'Повторите пароль',
         'attrs' => [
             'type'        => 'password',

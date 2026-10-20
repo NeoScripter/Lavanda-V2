@@ -13,11 +13,11 @@ use Http\Models\PracticeItem;
 use Http\Models\PracticeItemAsset;
 use Http\Requests\CRUD\PracticeItem\StorePracticeItemRequest;
 use Http\Requests\CRUD\PracticeItem\UpdatePracticeItemRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class PracticeItemController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     private $image_sizes = ['mb' => 450, 'tb' => 600, 'dk' => 750];
 

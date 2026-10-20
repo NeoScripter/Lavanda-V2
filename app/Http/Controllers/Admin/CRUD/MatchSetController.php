@@ -14,11 +14,11 @@ use Http\Models\MatchSet;
 use Http\Models\MatchSetImage;
 use Http\Requests\CRUD\MatchSet\StoreMatchSetRequest;
 use Http\Requests\CRUD\MatchSet\UpdateMatchSetRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class MatchSetController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     private string $mt_type;
     private string $locale;

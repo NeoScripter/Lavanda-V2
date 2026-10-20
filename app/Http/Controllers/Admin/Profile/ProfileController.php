@@ -8,11 +8,11 @@ use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\UpdateProfileRequest;
 use Support\Auth;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class ProfileController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function index(\Base $hive)
     {
@@ -40,6 +40,6 @@ class ProfileController extends Controller
         Auth::set_user($user->cast());
 
         notify($hive->get('admin.user_successfully_updated'));
-        $hive->reroute('@profile');
+        $hive->reroute('@admin_profile');
     }
 }

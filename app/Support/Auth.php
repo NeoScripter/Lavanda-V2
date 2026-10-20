@@ -15,7 +15,11 @@ final class Auth extends \Prefab
     {
         $session_user = \Base::instance()->get('SESSION.user');
         $this->user = $session_user
-            ? ['name' => $session_user['name'], 'email' => $session_user['email']]
+            ? [
+                'name' => $session_user['name'],
+                'email' => $session_user['email'],
+                'role' => $session_user['role']
+            ]
             : null;
     }
 
@@ -26,9 +30,11 @@ final class Auth extends \Prefab
 
     public static function set_user(array|Mapper $values): void
     {
-        $data = $values instanceof Mapper
-            ? ['name' => $values->name, 'email' => $values->email]
-            : $values;
+        $data =  [
+            'name' => $values['name'],
+            'email' => $values['email'],
+            'role' => $values['role'],
+        ];
 
         if (empty($data['name']) || empty($data['email'])) {
             throw new InvalidArgumentException('User must have a name and email');

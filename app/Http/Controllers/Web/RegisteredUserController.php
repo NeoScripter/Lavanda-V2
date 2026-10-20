@@ -6,7 +6,7 @@ namespace Http\Controllers\Web;
 
 use Http\Controller;
 use Http\Models\User;
-use Http\Requests\Profile\LoginRequest;
+use Http\Requests\Profile\RegisterUserRequest;
 use Support\Auth;
 
 class RegisteredUserController extends Controller
@@ -17,7 +17,7 @@ class RegisteredUserController extends Controller
             $hive->reroute('@home');
         }
 
-        view('pages/web/signup');
+        view('pages/web/register');
     }
 
     public function store(\Base $hive)
@@ -26,18 +26,19 @@ class RegisteredUserController extends Controller
             $hive->reroute('@home');
         }
 
-        $request = $this->request(LoginRequest::class);
-        $request->validate();
+        $request = $this->request(RegisterUserRequest::class);
 
         $user = new User();
-        $user->load(['email=?', $request->input('email')]);
+        $user->load(["email = ? AND is_deleted = 'TRUE'", $request->input('email')]);
 
-        if ($user->dry() || !password_verify($request->input('password'), $user->password)) {
-            set_values(['email' => $hive->POST['email']]);
-            set_errors(['email' =>  $hive->get("admin.these_credentials_dont_match_our_records")]);
-            $hive->reroute('@login');
+        if (!$user->dry()) {
+            $user->is_deleted = false;
+        } else {
+            $request->validate();
+            $user->copyFrom($request->all());
         }
 
+        $user->save();
         Auth::set_user($user->cast());
 
         // notify("{$hive->get("admin.welcome")}, {$user->name}");
@@ -47,6 +48,13 @@ class RegisteredUserController extends Controller
     public function destroy(\Base $hive)
     {
         check_csrf($hive->POST);
+
+        $user = Auth::user();
+
+        $user = new User();
+        $user->load(['email = ?', $user['email']]);
+        $user->is_deleted = true;
+        $user->save();
 
         Auth::clear();
         $hive->reroute('/');

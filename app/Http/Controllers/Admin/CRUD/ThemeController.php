@@ -11,11 +11,11 @@ use Http\Models\Theme;
 use Http\Requests\CRUD\Theme\StoreThemeRequest;
 use Http\Requests\CRUD\Theme\UpdateThemeRequest;
 use RuntimeException;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class ThemeController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function edit(\Base $hive)
     {

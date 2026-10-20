@@ -13,11 +13,11 @@ use Http\Models\Article;
 use Http\Models\ArticlePreview;
 use Http\Requests\CRUD\Article\StoreArticleRequest;
 use Http\Requests\CRUD\Article\UpdateArticleRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class ArticleController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     private $preview_sizes = ['mb' => 150, 'tb' => 200, 'dk' => 250];
     private $image_sizes = ['mb' => 550, 'tb' => 800, 'dk' => 1400];

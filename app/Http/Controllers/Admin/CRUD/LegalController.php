@@ -10,11 +10,11 @@ use Exception;
 use Http\Controller;
 use Http\Models\Legal;
 use Http\Requests\CRUD\Legal\UpdateLegalRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class LegalController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function index(\Base $hive)
     {

@@ -8,6 +8,7 @@ $hive = Base::instance();
 
 $rd_host = getenv('REDIS_HOST');
 $rd_port = (int) getenv('REDIS_POST');
+$hive->set('JAR.expire', 60 * 60 * 24);
 $hive->set('CACHE', "redis={$rd_host}:{$rd_port}");
 
 $session = new Session(function () {

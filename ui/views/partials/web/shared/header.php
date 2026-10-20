@@ -17,7 +17,7 @@ $hive = \Base::instance();
 
         <?= component('web/ui/nav-menu', ['class' => 'hidden! xl:block!']); ?>
 
-        <?php if (in_array($hive->ALIAS, ['login', 'signup'])) : ?>
+        <?php if (in_array($hive->ALIAS, ['login'])) : ?>
             <span aria-hidden="true" class='basis-31.5 sm:basis-52'></span>
         <?php else : ?>
             <?php slot('components/web/ui/button', [

@@ -8,11 +8,11 @@ use Http\Controller;
 use Http\Models\Image;
 use Http\Requests\CRUD\Image\UpdateImageRequest;
 use Jobs\ProcessImageJob;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class ImageController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function update(\Base $hive)
     {

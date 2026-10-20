@@ -11,11 +11,11 @@ use Http\Controller;
 use Http\Models\Affirmation;
 use Http\Requests\CRUD\Affirmation\StoreAffirmationRequest;
 use Http\Requests\CRUD\Affirmation\UpdateAffirmationRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class AffirmationController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function index(\Base $hive)
     {

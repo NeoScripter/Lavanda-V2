@@ -50,7 +50,7 @@
     [
         'slot' => 'Регистрация',
         'variant' => 'outline',
-        'href' => $hive->alias('signup'),
+        'href' => $hive->alias('register'),
         'class' => 'px-[2em] mx-auto w-fit',
         'size' => 'sm'
     ]

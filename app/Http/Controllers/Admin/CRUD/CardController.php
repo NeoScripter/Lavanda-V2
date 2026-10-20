@@ -14,11 +14,11 @@ use Http\Models\Card;
 use Http\Models\FlipCard;
 use Http\Requests\CRUD\Card\StoreCardRequest;
 use Http\Requests\CRUD\Card\UpdateCardRequest;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class CardController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     private $sm_img_sizes = ['mb' => 150, 'tb' => 250, 'dk' => 300];
     private $lg_img_sizes = ['mb' => 300, 'tb' => 400, 'dk' => 600];
