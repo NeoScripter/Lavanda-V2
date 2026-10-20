@@ -68,7 +68,7 @@
     <div class='space-y-2 text-balance'>
         <?= component('web/form/checkbox', [
             'name'        => 'agreement_accepted',
-            'label'       => "Дай согласие на <a href='/legal/user_agreement' class='text-sm underline hover:text-primary transition-colors underline-offset-5'>обработку персональных данных</a>",
+            'label'       => "Даю согласие на <a href='/legal/user_agreement' class='text-sm underline hover:text-primary transition-colors underline-offset-5'>обработку персональных данных</a>",
             'attrs' => ['required' => true]
         ]) ?>
 
