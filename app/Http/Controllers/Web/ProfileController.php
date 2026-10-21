@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Web;
 
+use Enums\UserRole;
 use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\UpdateUserProfileRequest;
@@ -15,9 +16,13 @@ class ProfileController extends Controller
 {
     use RequiresAuth;
 
-    public function index()
+    public function index(\Base $hive)
     {
         $user = Auth::user();
+
+        if (AccessStatus::is_admin($user)) {
+            $hive->reroute('@home');
+        }
         $plans = AccessStatus::list_plans($user);
 
         set_values(['email' => $user['email'], 'name' => $user['name']]);

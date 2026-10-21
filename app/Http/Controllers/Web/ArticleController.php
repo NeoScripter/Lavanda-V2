@@ -7,6 +7,8 @@ namespace Http\Controllers\Web;
 use Http\Controller;
 use Http\Models\Article;
 use Http\Models\ArticlePreview;
+use Support\AccessStatus;
+use Support\Auth;
 use Support\Session;
 
 class ArticleController extends Controller
@@ -30,6 +32,12 @@ class ArticleController extends Controller
 
     public function show(\Base $hive)
     {
+        $user = Auth::user();
+
+        if (! AccessStatus::is_admin($user) && ! AccessStatus::has_active_subscription($user)) {
+            $hive->reroute('@home');
+        }
+
         $id = $hive->PARAMS['id'];
 
         $locale = Session::get_locale();

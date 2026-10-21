@@ -7,6 +7,7 @@ namespace Support;
 use DateTime;
 use DB\SQL;
 use Enums\PlanSlug;
+use Enums\UserRole;
 
 final class AccessStatus extends \Prefab
 {
@@ -109,14 +110,22 @@ final class AccessStatus extends \Prefab
 
         return $plans;
     }
+    public static function is_admin(array $user): bool
+    {
+        return $user['role'] === UserRole::ADMIN->value;
+    }
 
     public static function can_play_game(array $user): bool
     {
-        return self::instance()->has_active_subscription($user) || self::instance()->has_purchased_games($user);
+        return self::instance()->is_admin($user) || self::instance()->has_active_subscription($user) || self::instance()->has_purchased_games($user);
     }
 
     public static function subtract_game(array $user): void
     {
+        if (self::instance()->has_active_subscription($user)) {
+            return;
+        }
+
         self::instance()->db->exec(
             "UPDATE games SET number = number - 1 WHERE games.user = ?",
             [$user['id']]
