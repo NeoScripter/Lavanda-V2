@@ -9,19 +9,15 @@ use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\UpdateProfileRequest;
 use Support\Auth;
-use Traits\RequiresAuth;
+use Traits\RequiresAdminRights;
 
 class ProfileController extends Controller
 {
-    use RequiresAuth;
+    use RequiresAdminRights;
 
     public function index(\Base $hive)
     {
         $user = Auth::user();
-
-        if ($user['role'] !== UserRole::ADMIN->value) {
-            $hive->reroute('@admin_login');
-        }
 
         set_values(['email' => $user['email'], 'name' => $user['name']]);
 
@@ -46,7 +42,6 @@ class ProfileController extends Controller
 
         notify($hive->get('admin.user_successfully_updated'));
 
-        $redirect_route = $user['role'] === UserRole::ADMIN->value ? '@admin_profile' : '@profile';
-        $hive->reroute($redirect_route);
+        $hive->reroute('@admin_profile');
     }
 }

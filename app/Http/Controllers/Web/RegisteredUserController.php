@@ -30,6 +30,7 @@ class RegisteredUserController extends Controller
 
         $user = new User();
         $user->load(["email = ? AND is_deleted = 'TRUE'", $request->input('email')]);
+        // TODO: add email verification
 
         if (!$user->dry()) {
             $user->is_deleted = false;

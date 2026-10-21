@@ -23,15 +23,15 @@ class User extends Cortex
             'type' => Schema::DT_TEXT,
             'nullable' => false,
         ],
-        'yandex_id' => [
-            'type' => Schema::DT_VARCHAR128,
-            'unique' => true,
-            'nullable' => true,
-        ],
         'is_deleted' => [
             'type' => Schema::DT_BOOLEAN,
             'nullable' => false,
             'default' => false,
+        ],
+        'yandex_id' => [
+            'type' => Schema::DT_VARCHAR128,
+            'unique' => true,
+            'nullable' => true,
         ],
         'google_id' => [
             'type' => Schema::DT_VARCHAR128,
