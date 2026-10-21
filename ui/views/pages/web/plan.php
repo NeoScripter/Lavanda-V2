@@ -1,50 +1,39 @@
+<?php extract(component_props(
+    required: ['item'],
+    optional: ['class' => ''],
+    props: get_defined_vars()
+)); ?>
+
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Подписка',
+    'title' => 'Оформление подписки',
     'class' => 'bg-white relative isolate',
 ]); ?>
 
-<?php $hive = \Base::instance();
-
-$items = [
-    ['title' => 'Здесь и сейчас', 'image' => '/assets/images/pages/plans/plan-1/plan-1', 'headline' => '3 вопроса - 3 ответа', 'description' => 'Когда нужен ответ на то, что волнует прямо сейчас', 'price' => 990],
-    ['title' => 'Остаться на месяц', 'image' => '/assets/images/pages/plans/plan-2/plan-2', 'headline' => 'Неограниченное число обращений', 'description' => 'В период, когда один разговор не решает все', 'price' => 1990],
-    ['title' => 'Быть вместе год', 'image' => '/assets/images/pages/plans/plan-3/plan-3', 'headline' => 'Неограниченное число обращений', 'description' => 'Когда хочется чтобы пространство для размышлений было рядом 365 дней в году', 'price' => 9990],
-    ['title' => 'Поговорить лично с Lavanda', 'image' => '/assets/images/pages/plans/plan-4/plan-4', 'headline' => 'Персональный разбор', 'description' => 'Заполните форму, выберите формат и получите личный ответ от Lavanda на почту в течение 3 дней', 'price' => 9990],
-]; ?>
+<?php $hive = \Base::instance(); ?>
 
 <section class='pt-(--pt-lg)'>
 
-    <h1>Подписка</h1>
+    <h1>Оформление подписки</h1>
 
-    <p class='text-center text-balance'>Каждому - подходящий формат</p>
+    <div class='gap-y-45 grid place-content-center mt-38 sm:mt-45 md:mt-50 2xl:mx-0'>
+        <?= component('web/ui/plan-card', ['item' => $item, 'as' => 'article', 'button_label' => 'Оплатить']) ?>
+    </div>
 
-    <ul class='grid grid-cols-[repeat(auto-fit,minmax(min(100%,18.75rem),1fr))] justify-items-center gap-y-45 gap-x-10 mt-38 sm:mt-45 md:mt-50 lg:w-200 lg:mx-auto 2xl:mx-0 2xl:w-full '>
-        <?php foreach ($items as $item) : ?>
-            <li class='bg-white shadow-accent rounded-2xl px-7.5 pb-9 w-full max-w-75 text-balance flex flex-col gap-4 relative pt-28'>
-                <?= component('shared/ui/image', [
-                    'sizes' => 'mb',
-                    'path' => $item['image'],
-                    'prt_class' => 'bg-contain! w-[130%] aspect-video absolute! top-0 left-1/2 -translate-1/2',
-                    'img_class' => 'object-contain',
-                ]) ?>
+    <article class='bg-white w-full max-w-120 shadow-accent lg:max-w-220 mx-auto xs:rounded-xl sm:rounded-primary px-6 py-9 sm:py-11 sm:px-9 lg:px-12 xl:px-15 mt-(--spacing-y)'>
 
-                <h2 class='text-xl!'><?= $item['title'] ?></h2>
-                <div class='mb-8 text-center text-balance'>
-                    <p class='font-bold text-base! mb-[0.5em]'><?= $item['headline'] ?></p>
-                    <p class='text-base!'><?= $item['description'] ?></p>
-                </div>
-                <p class='text-primary font-medium text-center text-lg md:text-xl xl:text-2xl mt-auto'><?= $item['price'] ?>₽</p>
+        <ul class='list-inside list-disc space-y-[0.5em]'>
+            Оформляя подписку на сайте <span class='text-primary'>Lavanda<sup>Kim</sup></span>, вы подтверждаете, что:
 
-                <?= component('web/ui/button', [
-                    'variant' => 'primary',
-                    'slot' => 'Открыть доступ',
-                    'class' => '',
-                ]) ?>
+            <li class='mt-[0.5em]'>приобретаете доступ к цифровому контенту развлекательного и информационного характера;</li>
+            <li>понимаете, что материалы сайта не являются психологической, медицинской, терапевтической или иной профессиональной услугой;</li>
+            <li>соглашаетесь с Пользовательским соглашением и Политикой конфиденциальности сайта;</li>
+            <li>подписка является автоматически продлевающейся, если иное не указано в тарифе;</li>
+            <li>вы можете отменить подписку в любой момент в личном кабинете или обратившись по адресу: info@lavanda.kim — доступ будет сохраняться до окончания оплаченного периода;</li>
+            <li class='mb-[0.5em]'>после активации подписки возврат платежа возможен только в случаях, предусмотренных условиями сервиса.</li>
 
-            </li>
-
-        <?php endforeach; ?>
-    </ul>
+            Нажимая «Оплатить», вы подтверждаете корректность данных и своё согласие на списание стоимости подписки.
+        </ul>
+    </article>
 
 </section>
 

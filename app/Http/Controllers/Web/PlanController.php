@@ -28,7 +28,7 @@ class PlanController extends Controller
         foreach ($plans as $plan) {
             $items[] = array_merge(
                 $data[$plan['slug']],
-                ['name' => PlanSlug::from($plan['slug'])->label(), 'price' => $plan['price']]
+                ['name' => PlanSlug::from($plan['slug'])->label(), 'price' => $plan['price'], 'slug' => $plan['slug']]
             );
         }
 
@@ -49,7 +49,7 @@ class PlanController extends Controller
 
         $item = array_merge(
             $data[$plan['slug']],
-            ['name' => PlanSlug::from($plan['slug'])->label(), 'price' => $plan['price']]
+            ['name' => PlanSlug::from($plan['slug'])->label(), 'price' => $plan['price'], 'slug' => $plan['slug']]
         );
 
         view('pages/web/plan', compact('item'));
