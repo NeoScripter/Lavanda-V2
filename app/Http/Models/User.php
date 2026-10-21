@@ -39,10 +39,10 @@ class User extends Cortex
             'nullable' => true,
         ],
         'subscription' => [
-            'has-one' => ["\Subscription", "subscription"]
+            'has-one' => ["\Http\Models\Subscription", "user"]
         ],
         'consultation' => [
-            'has-one' => ["\Consultation", "consultation"]
+            'has-one' => ["\Http\Models\Consultation", "user"]
         ],
         'role' => [
             'type' => Schema::DT_INT,
