@@ -48,7 +48,7 @@ class AuthSessionController extends Controller
 
         Auth::set_user($user->cast());
 
-        // notify("{$hive->get("admin.welcome")}, {$user->name}");
+        notify("{$hive->get("web.добро_пожаловать")}, {$user->name}");
 
         $hive->reroute($hive->POST['referrer'] ?? '@home');
     }
