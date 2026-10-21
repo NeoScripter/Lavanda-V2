@@ -74,6 +74,11 @@ extract(component_props(
                 'icon'  => 'dices',
             ],
             [
+                'url'   => $hive->alias('admin_plans_index'),
+                'label' => $hive->get('admin.plans'),
+                'icon'  => 'dollar',
+            ],
+            [
                 'url'   => $hive->alias('admin_legals_index'),
                 'label' => $hive->get('admin.legals'),
                 'icon'  => 'book-text',

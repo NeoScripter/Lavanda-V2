@@ -229,5 +229,11 @@ return [
         "create_dice" => "Create dice",
         "delete_dice" => "Delete dice",
         "edit_dice" => "Edit dice",
+        "plans" => "Plans",
+        "plan" => "Plan",
+        "edit_plan" => "Edit plan",
+        "plan_successfully_updated" => "Plan successfully updated!",
+        "price" => "Price",
+        "active" => "Active",
     ]
 ];
