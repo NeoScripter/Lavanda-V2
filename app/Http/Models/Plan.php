@@ -12,12 +12,9 @@ class Plan extends Cortex
             'type' => Schema::DT_VARCHAR512,
             'nullable' => false,
         ],
-        'subscription_type' => [
-            'type' => Schema::DT_VARCHAR128,
+        'price' => [
+            'type' => Schema::DT_INT8,
             'nullable' => false,
-        ],
-        'localizations' => [
-            'has-many' => ["\PlanLocalization", "plan"],
         ],
         'created_at' => [
             'type' => Schema::DT_DATE,
