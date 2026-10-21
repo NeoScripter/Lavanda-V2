@@ -107,12 +107,6 @@ $items = [
         ]) ?>
         <?= component('web/ui/button', [
             'variant' => 'primary',
-            'slot' => 'Попробовать бесплатно',
-            'class' => 'w-fit',
-            'href' => $hive->alias('home')
-        ]) ?>
-        <?= component('web/ui/button', [
-            'variant' => 'outline',
             'slot' => 'Подробнее о тарифах',
             'class' => 'w-fit',
             'href' => '/plans'
