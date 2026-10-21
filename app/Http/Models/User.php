@@ -38,6 +38,12 @@ class User extends Cortex
             'unique' => true,
             'nullable' => true,
         ],
+        'subscription' => [
+            'has-one' => ["\Subscription", "subscription"]
+        ],
+        'consultation' => [
+            'has-one' => ["\Consultation", "consultation"]
+        ],
         'role' => [
             'type' => Schema::DT_INT,
             'nullable' => false,
@@ -46,7 +52,8 @@ class User extends Cortex
     ];
     protected $db = 'DB', $table = 'users';
 
-    public function set_password(string $value) {
+    public function set_password(string $value)
+    {
         return password_hash($value, PASSWORD_DEFAULT);
     }
 }
