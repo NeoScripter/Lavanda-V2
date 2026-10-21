@@ -105,14 +105,23 @@ extract(component_props(
                     </form>
                 </article>
             </div>
-            <div class='flex flex-col items-center sm:flex-row gap-[0.5em]'>
-                <ul class='space-y-[0.5em]'>
-                    <?php foreach ($plans as $plan) : ?>
-                        <li class='text-primary font-bold'><?= $plan ?></li>
 
-                    <?php endforeach; ?>
-                </ul>
-            </div>
+            <form action="<?= $hive->alias('register_destroy') ?>" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <?= csrf() ?>
+
+                <!-- TODO: Add a confirmation modal -->
+                <button class='flex text-foreground/80 mx-auto lg:ml-0 items-center justify-center gap-[0.5em]'>
+                    <span class='*:size-[1em]'> <?= svg('x') ?> </span>
+                    Удалить аккаунт
+                </button>
+            </form>
+            <ul class='space-y-[0.5em] text-center order-2 lg:order-0'>
+                <?php foreach ($plans as $plan) : ?>
+                    <li class='text-primary font-bold'><?= $plan ?></li>
+
+                <?php endforeach; ?>
+            </ul>
         </div>
     </div>
 </section>

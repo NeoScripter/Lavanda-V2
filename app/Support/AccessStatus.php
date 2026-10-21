@@ -105,8 +105,6 @@ final class AccessStatus extends \Prefab
 
         if (empty($plans)) {
             $plans[] = "У вас нет активных тарифов";
-            // $plans[] = "У вас нет активных тарифов";
-            // $plans[] = "У вас нет активных тарифов";
         }
 
         return $plans;

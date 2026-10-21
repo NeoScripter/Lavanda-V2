@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
         $user->save();
         Auth::set_user($user->cast());
 
-        // notify("{$hive->get("admin.welcome")}, {$user->name}");
+        notify("{$hive->get("web.welcome")}, {$user->name}");
         $hive->reroute($hive->POST['referrer'] ?? '@home');
     }
 
@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller
         $user = Auth::user();
 
         $user = new User();
-        $user->load(['email = ?', $user['email']]);
+        $user->load(['id = ?', $user['id']]);
         $user->is_deleted = true;
         $user->save();
 
