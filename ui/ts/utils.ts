@@ -307,3 +307,12 @@ export function getRandomItem<T>(array: T[]): T | undefined {
     const index = Math.floor(Math.random() * array.length);
     return array[index];
 }
+
+export function isApiError(error: unknown) {
+    return (
+        typeof error === 'object' &&
+        error != null &&
+        'code' in error &&
+        error.code === 403
+    );
+}

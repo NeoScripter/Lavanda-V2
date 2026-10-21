@@ -1,7 +1,7 @@
-import {
-    type GameInfo,
-} from '../constants';
+import { type GameInfo } from '../constants';
 import initAdaptiveImages from '../modules/adaptiveImages';
+import type { ApiError } from '../types';
+import { isApiError } from '../utils';
 import InterpretationHTML from './InterpretationHTML';
 
 type Elements = {
@@ -36,6 +36,30 @@ const LOREM = {
     NAME: 'Lorem ipsum dolor sit',
     THEME: 'Lorem ipsum dolor sit amet',
     ADVICE: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor.',
+    HTML: '<h3>Lorem ipsum dolor sit amet</h3><p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p><p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>',
+};
+
+const BLUR_PAYLOAD: InterpretationPayload = {
+    items: [
+        {
+            id: 1,
+            name: LOREM.NAME,
+            img: '/assets/images/placeholders/no-image/no-image',
+            alt: 'lorem',
+            advice: LOREM.ADVICE,
+            html: LOREM.ADVICE,
+            themes: [
+                {
+                    id: 1,
+                    name: 'theme',
+                    themeable_type: 'theme',
+                    themeable_id: 1,
+                    html: LOREM.HTML,
+                },
+            ],
+        },
+    ],
+    match_sets: [],
 };
 
 const SKELETON_PAYLOAD: InterpretationPayload = {
@@ -125,10 +149,25 @@ export default class Interpretation {
             const url = `${API_URL}?${queryString}`;
 
             // await wait(3000);
-            const response = await fetch(url);
+            const response = await fetch(url, {
+                credentials: 'same-origin',
+                mode: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                if (response.status === 403) {
+                    return BLUR_PAYLOAD;
+                } else {
+                    console.error('Response failed:', response);
+                }
+            }
             return await response.json();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         } finally {
             this.hideLoader();
         }

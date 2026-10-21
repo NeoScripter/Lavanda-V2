@@ -9,6 +9,8 @@ use Http\Controller;
 use Http\Models\FlipCard;
 use Http\Models\RuneAsset;
 use Http\Models\StoneAsset;
+use Support\AccessStatus;
+use Support\Auth;
 use Support\Session;
 
 class InterpretationController extends Controller
@@ -21,6 +23,16 @@ class InterpretationController extends Controller
 
         if (! in_array($category, MatcheableType::values())) {
             send_json(['message' =>  "Invalid category type"], 400);
+        }
+
+        $free = [MatcheableType::BONUS->value];
+
+        if (! in_array($category, $free)) {
+            $user = Auth::user();
+
+            if (empty($user) || ! AccessStatus::can_play_game($user)) {
+                send_json(['message' =>  "You don't have the access to this game"], 403);
+            }
         }
 
         $ids = explode(',', $ids);
@@ -49,14 +61,14 @@ class InterpretationController extends Controller
         $db = $hive->get('DB');
 
         $all_themes = $db->exec(
-                "SELECT * FROM themes WHERE themeable_type = ? AND themeable_id IN ($wildcards)",
-                [$category, ...$ids]
-            );
+            "SELECT * FROM themes WHERE themeable_type = ? AND themeable_id IN ($wildcards)",
+            [$category, ...$ids]
+        );
 
         $match_sets = $db->exec(
-                "SELECT * FROM match_sets WHERE matcheable_type = ? AND locale = ? AND matcheable_id = ?",
-                [$category, $locale, implode('|', $ids)]
-            );
+            "SELECT * FROM match_sets WHERE matcheable_type = ? AND locale = ? AND matcheable_id = ?",
+            [$category, $locale, implode('|', $ids)]
+        );
 
         $payload = ['items' => [], 'match_sets' => []];
 

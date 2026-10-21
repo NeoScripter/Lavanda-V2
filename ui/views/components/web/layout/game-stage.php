@@ -37,9 +37,32 @@ extract(component_props(
     </div>
 
     <article cmp-interpretation
-        class="bg-white py-14.5 rounded-b-xl px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23 
-        <?= empty($interpretation) ? 'hidden' : '' ?>">
+        class="bg-white py-14.5 rounded-b-xl relative px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23 
+        <?= empty($interpretation) ? 'hidd' : '' ?>">
         <?= $interpretation ?>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius sunt cupiditate necessitatibus reprehenderit minima illum velit rerum quibusdam, commodi dolorum quo sint officiis ea provident, perspiciatis a, tenetur fugiat optio fuga. Vel neque dignissimos ea ducimus tenetur consequuntur suscipit expedita.
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius sunt cupiditate necessitatibus reprehenderit minima illum velit rerum quibusdam, commodi dolorum quo sint officiis ea provident, perspiciatis a, tenetur fugiat optio fuga. Vel neque dignissimos ea ducimus tenetur consequuntur suscipit expedita.
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius sunt cupiditate necessitatibus reprehenderit minima illum velit rerum quibusdam, commodi dolorum quo sint officiis ea provident, perspiciatis a, tenetur fugiat optio fuga. Vel neque dignissimos ea ducimus tenetur consequuntur suscipit expedita.
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius sunt cupiditate necessitatibus reprehenderit minima illum velit rerum quibusdam, commodi dolorum quo sint officiis ea provident, perspiciatis a, tenetur fugiat optio fuga. Vel neque dignissimos ea ducimus tenetur consequuntur suscipit expedita.
+        </p>
+        <div class='absolute inset-0 backdrop-blur-sm flex items-center justify-center'>
+            <div class="bg-white w-full border border-primary max-w-120 lg:max-w-220 mx-auto xs:rounded-xl sm:rounded-primary px-6 py-9 sm:py-11 sm:px-9">
+
+                <div class="flex flex-col text-center text-balance gap-8">
+
+                    <p class='font-semibold'>Знакомство с данным ресурсом завершено</p>
+                    <p> Продолжите знакомство с другими подсказками Lavanda.</p>
+                    <p>Или зарегистрируйтесь, чтобы открыть полный доступ ко всем инструментам на 5 дней.</p>
+                </div>
+            </div>
+
     </article>
 
     <template cmp-theme-picker>
