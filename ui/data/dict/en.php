@@ -11,6 +11,7 @@ return [
         "остаться_на_месяц" => "Stay for a month",
         "быть_вместе_год" => "Be together a year",
         "поговорить_лично_с_lavanda" => "Personal talk with Lavanda",
+        "web.админа_нельзя_удалить" => "You cannot delete an admin",
 
 
     ],

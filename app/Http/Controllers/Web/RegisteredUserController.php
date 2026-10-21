@@ -7,6 +7,7 @@ namespace Http\Controllers\Web;
 use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\RegisterUserRequest;
+use Support\AccessStatus;
 use Support\Auth;
 
 class RegisteredUserController extends Controller
@@ -51,6 +52,11 @@ class RegisteredUserController extends Controller
         check_csrf($hive->POST);
 
         $user = Auth::user();
+
+        if (AccessStatus::is_admin($user)) {
+            notify("{$hive->get("web.админа_нельзя_удалить")}");
+            $hive->reroute("@home");
+        }
 
         $user = new User();
         $user->load(['id = ?', $user['id']]);
