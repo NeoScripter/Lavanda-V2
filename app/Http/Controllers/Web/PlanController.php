@@ -17,7 +17,7 @@ class PlanController extends Controller
 
         $plans = new Plan();
         $plans = $plans->find(
-            ['active=?', true],
+            ['is_active=?', true],
             ['order' => 'created_at DESC']
         );
 
@@ -39,7 +39,7 @@ class PlanController extends Controller
     {
         $slug = $hive->PARAMS['slug'];
         $plan = new Plan();
-        $plan->load(['active=? AND slug=?', true, $slug]);
+        $plan->load(['is_active=? AND slug=?', true, $slug]);
 
         if ($plan->dry()) {
             $hive->reroute('@plans');
