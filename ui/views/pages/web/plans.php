@@ -38,6 +38,7 @@ $items = [
                 <?= component('web/ui/button', [
                     'variant' => 'primary',
                     'slot' => 'Открыть доступ',
+                    'href' => $hive->alias('login'),
                     'class' => '',
                 ]) ?>
 

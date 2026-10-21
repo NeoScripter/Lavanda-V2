@@ -8,6 +8,8 @@
 <form action="<?= $hive->alias("login_store") ?>" method="post" class="max-w-160 flex flex-col gap-6">
     <?= csrf() ?>
 
+    <input type="hidden" name="referrer" value="<?= $hive->HEADERS['Referer'] ?? '@home' ?>">
+
     <?= component('web/form/form-input', [
         'name'        => 'email',
         'label'       => 'Электронная почта',
