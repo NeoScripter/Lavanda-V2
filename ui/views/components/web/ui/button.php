@@ -11,6 +11,7 @@ $variant_classes = [
     'primary'     => 'bg-primary shine outline-background outline-1 text-background hover:scale-104 focus-visible:scale-104',
     'accent'   => 'bg-linear-(--bg-golden) shine text-foregound hover:scale-104 focus-visible:scale-104',
     'outline'     => 'outline-background outline-1 text-primary hover:bg-primary hover:text-background',
+    'muted'     => 'bg-linear-to-b from-[#252525]/50 to-white text-foregound',
 ];
 
 $size_classes = [
