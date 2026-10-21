@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Models;
 
-use Enums\ConsultationType;
 use Enums\PlanSlug;
 use Http\Models\Consultation;
+use Http\Models\Game;
 use Http\Models\Subscription;
 use Http\Models\User;
 use InvalidArgumentException;
@@ -27,7 +27,7 @@ final class UserTest extends TestCase
     }
 
     #[Test]
-    public function rejects_creating_a_subscription_with_the_same_user(): void
+    public function rejects_creating_a_second_subscription_with_the_same_user(): void
     {
         $sub1 = new Subscription();
         $sub1->plan_slug = PlanSlug::ONE_TIME->value;
@@ -62,11 +62,10 @@ final class UserTest extends TestCase
     }
 
     #[Test]
-    public function rejects_creating_a_consultation_with_the_same_user(): void
+    public function rejects_creating_a_second_consultation_with_the_same_user(): void
     {
         $consultation1 = new Consultation();
         $consultation1->plan_slug = PlanSlug::ONE_TIME->value;
-        $consultation1->type = ConsultationType::GAME->value;
         $consultation1->user = $this->user;
         $consultation1->save();
 
@@ -74,7 +73,6 @@ final class UserTest extends TestCase
 
         $consultation2 = new Consultation();
         $consultation2->plan_slug = PlanSlug::MONTHLY->value;
-        $consultation1->type = ConsultationType::GAME->value;
         $consultation2->user = $this->user;
         $consultation2->save();
 
@@ -85,7 +83,6 @@ final class UserTest extends TestCase
     {
         $consultation1 = new Consultation();
         $consultation1->plan_slug = PlanSlug::ONE_TIME->value;
-        $consultation1->type = ConsultationType::GAME->value;
         $consultation1->save();
         $this->user->consultation = $consultation1;
         $this->user->save();
@@ -94,9 +91,43 @@ final class UserTest extends TestCase
 
         $consultation2 = new Consultation();
         $consultation2->plan_slug = PlanSlug::ONE_TIME->value;
-        $consultation2->type = ConsultationType::SURVEY->value;
         $consultation2->save();
         $this->user->consultation = $consultation2;
+        $this->user->save();
+    }
+
+    #[Test]
+    public function rejects_creating_a_second_game_with_the_same_user(): void
+    {
+        $game1 = new Game();
+        $game1->plan_slug = PlanSlug::ONE_TIME->value;
+        $game1->user = $this->user;
+        $game1->save();
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $game2 = new Game();
+        $game2->plan_slug = PlanSlug::MONTHLY->value;
+        $game2->user = $this->user;
+        $game2->save();
+
+    }
+
+    #[Test]
+    public function rejects_assigning_a_second_game_to_the_same_user(): void
+    {
+        $game1 = new Game();
+        $game1->plan_slug = PlanSlug::ONE_TIME->value;
+        $game1->save();
+        $this->user->game = $game1;
+        $this->user->save();
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $game2 = new Game();
+        $game2->plan_slug = PlanSlug::ONE_TIME->value;
+        $game2->save();
+        $this->user->game = $game2;
         $this->user->save();
     }
 }

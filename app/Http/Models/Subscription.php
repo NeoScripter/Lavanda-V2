@@ -4,6 +4,7 @@ namespace Http\Models;
 
 use DB\Cortex;
 use DB\SQL\Schema;
+use Log;
 
 class Subscription extends Cortex
 {
@@ -25,7 +26,10 @@ class Subscription extends Cortex
             );
 
             if ($res[0]['exists']) {
-                throw new \InvalidArgumentException('This user already has a subscription');
+                $error_msg = 'This user already has a subscription';
+                $logger = new Log('error.log');
+                $logger->write($error_msg . ' user id:' . $self->user->id, format: 'd-m-Y H:i:s');
+                throw new \InvalidArgumentException($error_msg);
             }
         });
     }

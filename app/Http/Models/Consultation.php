@@ -4,6 +4,7 @@ namespace Http\Models;
 
 use DB\Cortex;
 use DB\SQL\Schema;
+use Log;
 
 class Consultation extends Cortex
 {
@@ -25,7 +26,10 @@ class Consultation extends Cortex
             );
 
             if ($res[0]['exists']) {
-                throw new \InvalidArgumentException('This user already has a consultation');
+                $error_msg = 'This user already has a consultation';
+                $logger = new Log('error.log');
+                $logger->write($error_msg . ' user id:' . $self->user->id, format: 'd-m-Y H:i:s');
+                throw new \InvalidArgumentException($error_msg);
             }
         });
     }
@@ -33,10 +37,6 @@ class Consultation extends Cortex
     protected $fieldConf = [
         'plan_slug' => [
             'type' => Schema::DT_VARCHAR512,
-            'nullable' => false,
-        ],
-        'type' => [
-            'type' => Schema::DT_VARCHAR128,
             'nullable' => false,
         ],
         'number' => [

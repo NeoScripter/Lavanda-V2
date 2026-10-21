@@ -44,6 +44,9 @@ class User extends Cortex
         'consultation' => [
             'has-one' => ["\Http\Models\Consultation", "user"]
         ],
+        'game' => [
+            'has-one' => ["\Http\Models\Game", "user"]
+        ],
         'role' => [
             'type' => Schema::DT_INT,
             'nullable' => false,
