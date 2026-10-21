@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Helpers;
 
+use Enums\PlanSlug;
 use Enums\ThemeableType;
 use Factories\CardFactory;
 use Factories\ThemeFactory;
+use Http\Models\Game;
+use Http\Models\User;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use Support\AccessStatus;
 use Tests\TestCase;
 
 final class HelpersTest extends TestCase
@@ -79,5 +83,25 @@ final class HelpersTest extends TestCase
                 'expected' => 'pt-(--pt-lg) px-4 sm:px-18 rounded-primary pb-19 sm:pb-38 shadow-accent relative isolate lg:pb-31 xl:pb-48 xl:px-45 full-bleed sm:w-[calc(100%-var(--px-sm)*2)]! mx-auto bg-no-repeat'
             ]
         ];
+    }
+
+    #[Test]
+    public function subtracts_one_unit_from_games(): void
+    {
+        $user = new User();
+        $user->copyFrom(['name' => 'John', 'email' => 'john@gmail.com', 'password' => 'password']);
+        $user->save();
+
+        $game = new Game();
+        $game->plan_slug = PlanSlug::ONE_TIME->value;
+        $game->number = 5;
+        $game->user = $user;
+        $game->save();
+
+        AccessStatus::subtract_game([...$user->cast(), 'id' => $user->id]);
+
+        $rows = \Base::instance()->get('DB')->exec("SELECT number FROM games WHERE games.user = ?", [$user->id]);
+
+        $this->assertEquals(expected: 4, actual: $rows[0]['number']);
     }
 }

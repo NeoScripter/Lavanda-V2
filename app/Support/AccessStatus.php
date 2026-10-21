@@ -109,4 +109,17 @@ final class AccessStatus extends \Prefab
 
         return $plans;
     }
+
+    public static function can_play_game(array $user): bool
+    {
+        return self::instance()->has_active_subscription($user) || self::instance()->has_purchased_games($user);
+    }
+
+    public static function subtract_game(array $user): void
+    {
+        self::instance()->db->exec(
+            "UPDATE games SET number = number - 1 WHERE games.user = ?",
+            [$user['id']]
+        );
+    }
 }
