@@ -21,9 +21,14 @@ final class Auth extends \Prefab
         if (! empty($session_user['cached_at']) && $session_user['cached_at'] < (time() - CACHE_TTL_SECONDS)) {
             $db_user = new User();
             $db_user->load(['id=?', $session_user['id']]);
-            $session_user['name'] = $db_user->name;
-            $session_user['email'] = $db_user->email;
-            $session_user['cached_at'] = time();
+
+            if ($db_user->dry()) {
+                $session_user = null;
+            } else {
+                $session_user['name'] = $db_user->name;
+                $session_user['email'] = $db_user->email;
+                $session_user['cached_at'] = time();
+            }
 
             \Base::instance()->set('SESSION.user', $session_user);
         }
