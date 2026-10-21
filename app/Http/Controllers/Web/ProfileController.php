@@ -7,6 +7,7 @@ namespace Http\Controllers\Web;
 use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\UpdateUserProfileRequest;
+use Support\AccessStatus;
 use Support\Auth;
 use Traits\RequiresAuth;
 
@@ -17,10 +18,11 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $plans = AccessStatus::list_plans($user);
 
         set_values(['email' => $user['email'], 'name' => $user['name']]);
 
-        view('pages/web/profile');
+        view('pages/web/profile', compact('plans'));
     }
 
     public function update(\Base $hive)

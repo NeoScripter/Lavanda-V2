@@ -7,7 +7,6 @@ namespace Support;
 use DateTime;
 use DB\SQL;
 use Enums\PlanSlug;
-use Http\Models\User;
 
 final class AccessStatus extends \Prefab
 {
@@ -18,11 +17,11 @@ final class AccessStatus extends \Prefab
         $this->db = \Base::instance()->get('DB');
     }
 
-    public static function has_active_subscription(User $user): bool
+    public static function has_active_subscription(array $user): bool
     {
         $rows = self::instance()->db->exec(
-            "SELECT EXISTS ( SELECT 1 FROM subscriptions s WHERE s.user = ? AND s.ends_at > ?) AS exists);",
-            [$user['id'], new DateTime()->format('d/m/y')]
+            "SELECT EXISTS ( SELECT 1 FROM subscriptions s WHERE s.user = ? AND s.ends_at > ?) AS exists",
+            [$user['id'], new DateTime()->format('Y-m-d H:i:s')]
         );
 
         if ($rows[0]['exists']) {
@@ -32,10 +31,10 @@ final class AccessStatus extends \Prefab
         return false;
     }
 
-    public static function has_purchased_games(User $user): bool
+    public static function has_purchased_games(array $user): bool
     {
         $rows = self::instance()->db->exec(
-            "SELECT EXISTS ( SELECT 1 FROM games g WHERE g.user = ? AND g.number > 0) AS exists);",
+            "SELECT EXISTS ( SELECT 1 FROM games g WHERE g.user = ? AND g.number > 0) AS exists",
             [$user['id']]
         );
 
@@ -46,10 +45,10 @@ final class AccessStatus extends \Prefab
         return false;
     }
 
-    public static function has_purchased_consultations(User $user): bool
+    public static function has_purchased_consultations(array $user): bool
     {
         $rows = self::instance()->db->exec(
-            "SELECT EXISTS ( SELECT 1 FROM consultations c WHERE c.user = ? AND c.number > 0) AS exists);",
+            "SELECT EXISTS ( SELECT 1 FROM consultations c WHERE c.user = ? AND c.number > 0) AS exists",
             [$user['id']]
         );
 
@@ -60,31 +59,31 @@ final class AccessStatus extends \Prefab
         return false;
     }
 
-    public static function has_active_plans(User $user): bool
+    public static function has_active_plans(array $user): bool
     {
         return self::instance()->has_active_subscription($user) ||
             self::instance()->has_purchased_consultations($user) ||
             self::instance()->has_purchased_games($user);
     }
 
-    public static function list_plans(User $user): array
+    public static function list_plans(array $user): array
     {
         $plans = [];
 
         if (self::instance()->has_active_subscription($user)) {
             $rows = self::instance()->db->exec(
-                "SELECT plan_slug, ends_at FROM subscriptions s WHERE s.user = ?);",
+                "SELECT plan_slug, ends_at FROM subscriptions s WHERE s.user = ?",
                 [$user['id']]
             );
 
             $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
-            $date = new DateTime($rows[0]['ends_at'])->format('d/m/Y');
+            $date = new DateTime($rows[0]['ends_at'])->format('d/m/y');
             $plans[] = "Тариф $label, оплачен до $date";
         }
 
         if (self::instance()->has_purchased_games($user)) {
             $rows = self::instance()->db->exec(
-                "SELECT plan_slug, number FROM games g WHERE g.user = ?);",
+                "SELECT plan_slug, number FROM games g WHERE g.user = ?",
                 [$user['id']]
             );
 
@@ -95,7 +94,7 @@ final class AccessStatus extends \Prefab
 
         if (self::instance()->has_purchased_consultations($user)) {
             $rows = self::instance()->db->exec(
-                "SELECT plan_slug, number FROM consultations c WHERE c.user = ?);",
+                "SELECT plan_slug, number FROM consultations c WHERE c.user = ?",
                 [$user['id']]
             );
 
@@ -106,6 +105,8 @@ final class AccessStatus extends \Prefab
 
         if (empty($plans)) {
             $plans[] = "У вас нет активных тарифов";
+            // $plans[] = "У вас нет активных тарифов";
+            // $plans[] = "У вас нет активных тарифов";
         }
 
         return $plans;

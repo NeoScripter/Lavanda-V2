@@ -2,7 +2,7 @@
 $hive = \Base::instance();
 
 extract(component_props(
-    required: [],
+    required: ['plans'],
     optional: [],
     props: get_defined_vars(),
 )); ?>
@@ -104,6 +104,14 @@ extract(component_props(
                         </div>
                     </form>
                 </article>
+            </div>
+            <div class='flex flex-col items-center sm:flex-row gap-[0.5em]'>
+                <ul class='space-y-[0.5em]'>
+                    <?php foreach ($plans as $plan) : ?>
+                        <li class='text-primary font-bold'><?= $plan ?></li>
+
+                    <?php endforeach; ?>
+                </ul>
             </div>
         </div>
     </div>
