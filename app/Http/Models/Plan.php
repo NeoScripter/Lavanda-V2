@@ -12,6 +12,11 @@ class Plan extends Cortex
             'type' => Schema::DT_VARCHAR512,
             'nullable' => false,
         ],
+        'active' => [
+            'type' => Schema::DT_BOOLEAN,
+            'nullable' => false,
+            'default' => true,
+        ],
         'price' => [
             'type' => Schema::DT_INT8,
             'nullable' => false,
