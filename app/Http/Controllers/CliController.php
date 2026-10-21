@@ -29,6 +29,7 @@ use Seeders\CardSeeder;
 use Seeders\FAQSeeder;
 use Seeders\IchingSeeder;
 use Seeders\LegalSeeder;
+use Seeders\PlanSeeder;
 use Seeders\PracticeItemSeeder;
 use Seeders\RuneSeeder;
 use Seeders\StoneSeeder;
@@ -37,7 +38,7 @@ class CliController
 {
     private $db_models = [User::class, Theme::class, Card::class, Image::class, FAQ::class, Rune::class, Iching::class, PracticeItem::class, AudioMessage::class, Affirmation::class, Article::class, Stone::class, MatchSet::class, Legal::class, Dice::class, Plan::class];
 
-    private $db_seeders = [CardSeeder::class, FAQSeeder::class, RuneSeeder::class, IchingSeeder::class, PracticeItemSeeder::class, AudioMessageSeeder::class, AffirmationSeeder::class, ArticleSeeder::class, StoneSeeder::class, LegalSeeder::class];
+    private $db_seeders = [CardSeeder::class, FAQSeeder::class, RuneSeeder::class, IchingSeeder::class, PracticeItemSeeder::class, AudioMessageSeeder::class, AffirmationSeeder::class, ArticleSeeder::class, StoneSeeder::class, LegalSeeder::class, PlanSeeder::class];
 
 
     function routes(\Base $hive)
