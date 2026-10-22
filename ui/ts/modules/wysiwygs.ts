@@ -1,6 +1,6 @@
 import OverType from 'overtype';
 
-export default function initWysiwygs() {
+export default function wysiwygs() {
     const editor = document.querySelector('[component-wysiwyg-editor]');
 
     if (!editor) return;

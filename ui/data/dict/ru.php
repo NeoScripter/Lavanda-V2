@@ -235,5 +235,6 @@ return [
         "plan_successfully_updated" => "Тариф успешно обновлен!",
         "price" => "Цена",
         "active" => "Активирован",
+        "there_are_no_added_items_yet_to_select_from" => "Пока не добавлено ни одного элемента для создания комбинации",
     ]
 ];

@@ -236,5 +236,6 @@ return [
         "plan_successfully_updated" => "Plan successfully updated!",
         "price" => "Price",
         "active" => "Active",
+        "there_are_no_added_items_yet_to_select_from" => "There are no added items yet to select from",
     ]
 ];

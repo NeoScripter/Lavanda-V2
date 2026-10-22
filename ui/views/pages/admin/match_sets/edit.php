@@ -21,10 +21,14 @@ slot('layouts/admin/match-set-layout', [
         <input type="hidden" name="_method" value="put">
         <?= csrf() ?>
 
-        <?= component('admin/ui/match-set-picker', [
-            'images' => $images,
-            'matcheable_id' => $match_set['matcheable_id']
-        ]) ?>
+        <?php if (! empty($images)) : ?>
+            <?= component('admin/ui/match-set-picker', [
+                'images' => $images,
+                'matcheable_id' => $match_set['matcheable_id']
+            ]) ?>
+        <?php else: ?>
+            <p><?= $hive->get('admin.there_are_no_added_items_yet_to_select_from') ?></p>
+        <?php endif; ?>
 
         <?= component('admin/form/form-textarea', [
             'name'  => 'advice',

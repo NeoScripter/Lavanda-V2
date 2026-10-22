@@ -21,9 +21,13 @@ slot('layouts/admin/match-set-layout', [
     <form action="<?= \Base::instance()->alias('admin_match_sets_store') ?>" method="post" class="space-y-6 max-w-200" enctype="multipart/form-data">
         <?= csrf() ?>
 
-        <?= component('admin/ui/match-set-picker', [
-            'images' => $images
-        ]) ?>
+        <?php if (! empty($images)) : ?>
+            <?= component('admin/ui/match-set-picker', [
+                'images' => $images
+            ]) ?>
+        <?php else: ?>
+            <p><?= $hive->get('admin.there_are_no_added_items_yet_to_select_from') ?></p>
+        <?php endif; ?>
 
         <?= component('admin/form/form-textarea', [
             'name'  => 'advice',

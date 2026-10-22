@@ -9,7 +9,7 @@ import initPasswordInputButtons from './modules/passwordInputButtons';
 import initSidebar from './modules/sidebar';
 import theme from './modules/theme';
 import initToasts from './modules/toasts';
-import initWysiwygs from './modules/wysiwygs';
+import initWysiwygs from './initializers/initWysiwygs';
 import initAccordionFormInputs from './modules/accordionFormInputs';
 import initMatchSetPickers from './modules/matchSets';
 import initDicePickers from './modules/dices';
