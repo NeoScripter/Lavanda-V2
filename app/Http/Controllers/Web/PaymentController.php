@@ -58,6 +58,8 @@ class PaymentController extends Controller
             $link = sprintf('%s?%s', $link_to_form, http_build_query($data));
 
             $hive->reroute($link);
-        } 
+        } else {
+
+        }
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Support;
 
+use DateInterval;
 use DateTime;
 use DB\SQL;
 use Enums\PlanSlug;
@@ -130,5 +131,54 @@ final class AccessStatus extends \Prefab
             "UPDATE games SET number = number - 1 WHERE games.user = ?",
             [$user['id']]
         );
+    }
+
+    public static function give(PlanSlug $slug, array $user): void
+    {
+        switch ($slug) {
+            case PlanSlug::MONTHLY:
+            case PlanSlug::YEARLY: {
+                    $interval = $slug === PlanSlug::MONTHLY ? 'P1M' : 'P1Y';
+
+                    $rows = self::instance()->db->exec(
+                        "SELECT ends_at FROM subscriptions s WHERE s.user = ? LIMIT 1",
+                        [$user['id']]
+                    );
+
+                    $now = new DateTime();
+
+                    if (empty($rows[0]['ends_at'])) {
+                        self::instance()->db->exec(
+                            "INSERT INTO subscriptions (plan_slug, ends_at, user, starts_at) VALUES (?, ?, ?, ?)",
+                            [$slug->value, $now->add(new DateInterval($interval))->format('Y-m-d H:i:s'), $user['id'], $now]
+                        );
+                    } else {
+                        $ends_at = new DateTime($rows[0]['ends_at']);
+
+                        if ($ends_at < $now) {
+                            $ends_at = $now;
+                        }
+
+                        $now->add(new DateInterval($interval));
+
+                        self::instance()->db->exec(
+                            "UPDATE subscriptions SET plan_slug = ?, ends_at = ? WHERE subscriptions.user = ?",
+                            [$slug->value, $now->add(new DateInterval('P6M'))->format('Y-m-d H:i:s')]
+                        );
+                    }
+                };
+            case PlanSlug::ONE_TIME: {
+                    self::instance()->db->exec(
+                        "UPDATE games SET number = number + 3 WHERE games.user = ?",
+                        [$user['id']]
+                    );
+                };
+            case PlanSlug::PERSONAL: {
+                    self::instance()->db->exec(
+                        "UPDATE consultations SET number = number + 1 WHERE consultations.user = ?",
+                        [$user['id']]
+                    );
+                };
+        }
     }
 }
