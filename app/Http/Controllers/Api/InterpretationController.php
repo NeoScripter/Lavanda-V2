@@ -7,6 +7,7 @@ namespace Http\Controllers\Api;
 use Enums\MatcheableType;
 use Http\Controller;
 use Http\Models\FlipCard;
+use Http\Models\MatchSetImage;
 use Http\Models\RuneAsset;
 use Http\Models\StoneAsset;
 use Support\AccessStatus;
@@ -67,10 +68,13 @@ class InterpretationController extends Controller
             [$category, ...$ids]
         );
 
-        $match_sets = $db->exec(
-            "SELECT * FROM match_sets WHERE matcheable_type = ? AND locale = ? AND matcheable_id = ?",
-            [$category, $locale, implode('|', $ids)]
+        $match_sets = new MatchSetImage();
+        $match_sets = $match_sets->find(
+            ['locale=? AND matcheable_type=? AND matcheable_id = ?', $locale, $category, implode('|', $ids)],
+            ['order' => 'created_at DESC']
         );
+
+        $match_sets = array_map(fn($set) => $set->to_resource(), $match_sets);
 
         $payload = ['items' => [], 'match_sets' => []];
 

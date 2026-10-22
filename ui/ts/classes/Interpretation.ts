@@ -25,9 +25,15 @@ export type InterpretationPayload = {
     }[];
     match_sets: {
         id: number;
+        advice: string;
         matcheable_id: string;
         matcheable_type: string;
         html: string;
+        images: {
+            id: number;
+            src: string;
+            alt: string;
+        }[];
     }[];
 };
 

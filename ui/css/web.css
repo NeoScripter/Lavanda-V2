@@ -513,6 +513,23 @@ li[cmp-card].accent {
 [cmp-interpretation-items] [component-adaptive-image] {
     @apply my-8 mx-auto md:mx-0 w-full md:mb-0 md:order-2 lg:mt-12;
 }
+[cmp-interpretation-items] .match_set_images {
+    grid-template-columns: repeat(auto-fill,minmax(8rem,1fr));
+    @apply grid gap-4 md:mb-8; 
+}
+[cmp-interpretation-items] .match_set_images > li {
+    @apply relative w-30;
+}
+[cmp-interpretation-items] .match_set .headline {
+    @apply mx-auto max-w-full md:mx-auto;
+}
+[cmp-interpretation-items] li.match_set  {
+    @apply md:block;
+}
+[cmp-interpretation-items] .match_set_images [component-adaptive-image] {
+    @apply w-full mt-0 shrink-0 rounded-xl aspect-2/3 bg-contain! md:mt-0!;
+}
+
 [cmp-game-stage].runes [cmp-interpretation-items] [component-adaptive-image] {
     @apply aspect-square;
 }

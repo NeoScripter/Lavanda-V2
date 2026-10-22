@@ -1,10 +1,5 @@
 import { HTML_TYPE, type GameInfo } from '../constants';
-import {
-    cloneAttributes,
-    createAdaptiveImg,
-    qs,
-    qsa,
-} from '../utils';
+import { cloneAttributes, createAdaptiveImg, qs, qsa } from '../utils';
 import type { InterpretationPayload } from './Interpretation';
 
 export default class InterpretationHTML {
@@ -162,6 +157,36 @@ export default class InterpretationHTML {
             children.push(li, hr);
         }
 
+        for (const set of data.match_sets) {
+            const li = document.createElement('li');
+            li.classList.add('match_set');
+
+            const w1 = document.createElement('div');
+            w1.classList.add('headline');
+            const imgGrid = document.createElement('div');
+            imgGrid.classList.add('match_set_images');
+
+            for (const image of set.images) {
+                const img = createAdaptiveImg(image.src, image.alt);
+                imgGrid.appendChild(img)
+            }
+            w1.append(imgGrid);
+
+            const w2 = document.createElement('div');
+            w2.classList.add('theme');
+            const theme = document.createElement('p');
+            theme.textContent = set.html ?? '';
+            const advice = document.createElement('p');
+            advice.textContent = set.advice;
+            advice.classList.add('advice');
+            w2.append(theme, advice);
+
+            li.append(w1, w2);
+
+            const hr = document.createElement('hr');
+
+            children.push(li, hr);
+        }
         children.pop();
         wrapper.append(...children);
 
@@ -186,12 +211,7 @@ export default class InterpretationHTML {
 
     private stone(data: InterpretationPayload) {
         const div = document.createElement('div');
-        div.classList.add(
-            'prose',
-            'prose-md',
-            'max-w-full',
-            'lg:prose-lg'
-        );
+        div.classList.add('prose', 'prose-md', 'max-w-full', 'lg:prose-lg');
         div.innerHTML = data.items[0].html;
 
         return div;
