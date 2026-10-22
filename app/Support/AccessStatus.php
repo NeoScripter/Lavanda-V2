@@ -172,16 +172,40 @@ final class AccessStatus extends \Prefab
                     }
                 };
             case PlanSlug::ONE_TIME: {
-                    self::instance()->db->exec(
-                        "UPDATE games SET number = number + 3 WHERE games.user = ?",
+                    $rows = self::instance()->db->exec(
+                        "SELECT number FROM games g WHERE g.user = ? LIMIT 1",
                         [$user['id']]
                     );
+
+                    if (empty($rows[0]['number'])) {
+                        self::instance()->db->exec(
+                            'INSERT INTO games ("plan_slug","number","user") VALUES (?,?,?)',
+                            [$slug->value, 3, $user['id']]
+                        );
+                    } else {
+                        self::instance()->db->exec(
+                            "UPDATE games SET number = number + 3 WHERE games.user = ?",
+                            [$user['id']]
+                        );
+                    }
                 };
             case PlanSlug::PERSONAL: {
-                    self::instance()->db->exec(
-                        "UPDATE consultations SET number = number + 1 WHERE consultations.user = ?",
+                    $rows = self::instance()->db->exec(
+                        "SELECT number FROM consultations c WHERE c.user = ? LIMIT 1",
                         [$user['id']]
                     );
+
+                    if (empty($rows[0]['number'])) {
+                        self::instance()->db->exec(
+                            'INSERT INTO consultations ("plan_slug","number","user") VALUES (?,?,?)',
+                            [$slug->value, 1, $user['id']]
+                        );
+                    } else {
+                        self::instance()->db->exec(
+                            "UPDATE consultations SET number = number + 1 WHERE consultations.user = ?",
+                            [$user['id']]
+                        );
+                    }
                 };
         }
     }
