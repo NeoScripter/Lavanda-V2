@@ -647,7 +647,6 @@ function cc(string $base, string $merged = '')
         $base = preg_replace("/\s+$prefix\S*/", '', " $base");
         $base = $merged[$match] . ' ' . $base;
         array_splice($merged, $match, 1);
-
     }
     $base = array_merge($merged, preg_split('/\s+/', $base));
     sort($base);
