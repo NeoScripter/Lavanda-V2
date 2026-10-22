@@ -11,7 +11,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('components/web/layout/hero', [
-    'class' => "bg-[url('/assets/images/pages/home/hero/hero-bg.webp')] bg-cover bg-center overflow-x-clip"
+    'class' => "bg-[url('/assets/images/pages/home/hero/hero-bg.webp')] bg-violet-100/75 bg-cover bg-center overflow-x-clip"
 ]); ?>
 <section class='space-y-8 md:space-y-12'>
     <h1 class='mb-2'>Ответ ближе, чем кажется</h1>
