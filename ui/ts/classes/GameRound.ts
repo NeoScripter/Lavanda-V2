@@ -272,8 +272,8 @@ export default class GameRound {
 
     private async lenormand() {
         const keyCardMap = {
-            man: ['джентльмен'],
-            woman: ['дама'],
+            man: ['джентльмен', 'gentleman', 'џентлмен'],
+            woman: ['дама', 'dame'],
         };
 
         const game = qs<HTMLUListElement>('[cmp-game]');
