@@ -163,11 +163,11 @@ final class AccessStatus extends \Prefab
                             $ends_at = $now;
                         }
 
-                        $now->add(new DateInterval($interval))->format('Y-m-d H:i:s');
+                        $ends_at = $ends_at->add(new DateInterval($interval))->format('Y-m-d H:i:s');
 
                         self::instance()->db->exec(
                             "UPDATE subscriptions SET plan_slug = ?, ends_at = ? WHERE subscriptions.user = ?",
-                            [$slug->value, $now]
+                            [$slug->value, $ends_at, $user['id']]
                         );
                     }
                 };

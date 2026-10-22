@@ -33,13 +33,13 @@ final class AccessStatusTest extends TestCase
     }
 
     #[Test]
-    public function add_one_month_access_to_new_user(): void
+    public function adds_one_month_access_to_new_user(): void
     {
         $this->assertFalse(AccessStatus::has_active_subscription($this->user));
         AccessStatus::give(PlanSlug::MONTHLY, $this->user);
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
-        
+
         Clock::turn_forward('P30D');
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
@@ -47,5 +47,26 @@ final class AccessStatusTest extends TestCase
         Clock::turn_forward('P2M');
 
         $this->assertFalse(AccessStatus::has_active_subscription($this->user));
+    }
+
+    #[Test]
+    public function sums_up_two_subscriptions(): void
+    {
+        $this->assertFalse(AccessStatus::has_active_subscription($this->user));
+        AccessStatus::give(PlanSlug::MONTHLY, $this->user);
+        AccessStatus::give(PlanSlug::MONTHLY, $this->user);
+
+        $this->assertTrue(AccessStatus::has_active_subscription($this->user));
+
+        Clock::turn_forward('P60D');
+
+        $this->assertTrue(AccessStatus::has_active_subscription($this->user));
+
+        $rows = \Base::instance()->get("DB")->exec(
+            "SELECT count(id) FROM subscriptions s WHERE s.user = ?",
+            [$this->user['id']]
+        );
+
+        $this->assertEquals(expected: 1, actual: $rows[0]['count']);
     }
 }
