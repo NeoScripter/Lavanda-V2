@@ -9,6 +9,8 @@ use DateTime;
 use DB\SQL;
 use Enums\PlanSlug;
 use Enums\UserRole;
+use Http\Models\Subscription;
+use Http\Models\User;
 
 final class AccessStatus extends \Prefab
 {
@@ -138,7 +140,7 @@ final class AccessStatus extends \Prefab
         switch ($slug) {
             case PlanSlug::MONTHLY:
             case PlanSlug::YEARLY: {
-                    $interval = $slug === PlanSlug::MONTHLY ? 'P1M' : 'P1Y';
+                    $interval = ($slug === PlanSlug::MONTHLY) ? 'P1M' : 'P1Y';
 
                     $rows = self::instance()->db->exec(
                         "SELECT ends_at FROM subscriptions s WHERE s.user = ? LIMIT 1",
@@ -148,9 +150,11 @@ final class AccessStatus extends \Prefab
                     $now = new DateTime();
 
                     if (empty($rows[0]['ends_at'])) {
+                        $new_date = $now->add(new DateInterval($interval))->format('Y-m-d H:i:s');
+
                         self::instance()->db->exec(
-                            "INSERT INTO subscriptions (plan_slug, ends_at, user, starts_at) VALUES (?, ?, ?, ?)",
-                            [$slug->value, $now->add(new DateInterval($interval))->format('Y-m-d H:i:s'), $user['id'], $now]
+                            'INSERT INTO subscriptions ("plan_slug","ends_at","user") VALUES (?,?,?)',
+                            [$slug->value, $new_date, $user['id']]
                         );
                     } else {
                         $ends_at = new DateTime($rows[0]['ends_at']);
@@ -159,11 +163,11 @@ final class AccessStatus extends \Prefab
                             $ends_at = $now;
                         }
 
-                        $now->add(new DateInterval($interval));
+                        $now->add(new DateInterval($interval))->format('Y-m-d H:i:s');
 
                         self::instance()->db->exec(
                             "UPDATE subscriptions SET plan_slug = ?, ends_at = ? WHERE subscriptions.user = ?",
-                            [$slug->value, $now->add(new DateInterval('P6M'))->format('Y-m-d H:i:s')]
+                            [$slug->value, $now]
                         );
                     }
                 };
