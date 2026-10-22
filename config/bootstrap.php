@@ -13,6 +13,7 @@ load_env_vars();
 $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
 $hive->set('UI', APP_DIR . '/ui/views/');
 $hive->set('LOGS', APP_DIR . '/storage/logs/');
+$hive->set('CURRENT_DATE', 'now');
 
 define('UPLOAD_DIR', APP_DIR . '/public/storage/uploads/');
 define('WEBROOT', APP_DIR . '/public/');

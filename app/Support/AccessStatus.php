@@ -9,8 +9,6 @@ use DateTime;
 use DB\SQL;
 use Enums\PlanSlug;
 use Enums\UserRole;
-use Http\Models\Subscription;
-use Http\Models\User;
 
 final class AccessStatus extends \Prefab
 {
@@ -23,9 +21,11 @@ final class AccessStatus extends \Prefab
 
     public static function has_active_subscription(array $user): bool
     {
+        $date = \Base::instance()->get('CURRENT_DATE') ?? 'now';
+
         $rows = self::instance()->db->exec(
             "SELECT EXISTS ( SELECT 1 FROM subscriptions s WHERE s.user = ? AND s.ends_at > ?) AS exists",
-            [$user['id'], new DateTime()->format('Y-m-d H:i:s')]
+            [$user['id'], new DateTime($date)->format('Y-m-d H:i:s')]
         );
 
         if ($rows[0]['exists']) {
@@ -147,7 +147,7 @@ final class AccessStatus extends \Prefab
                         [$user['id']]
                     );
 
-                    $now = new DateTime();
+                    $now = new DateTime(\Base::instance()->get('CURRENT_DATE') ?? 'now');
 
                     if (empty($rows[0]['ends_at'])) {
                         $new_date = $now->add(new DateInterval($interval))->format('Y-m-d H:i:s');
