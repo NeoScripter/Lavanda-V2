@@ -23,7 +23,7 @@ class ProdamusWebhookController extends Controller
         $required_payload_keys = ['customer_email', 'payment_status', 'order_id', 'order_num'];
 
         foreach ($required_payload_keys as $key) {
-            if (array_key_exists($key, $data)) {
+            if (! array_key_exists($key, $data)) {
                 $logger->write("Error: request payload doesn't contain $key. Available keys are: $serialized_data_keys");
                 http_response_code(400);
                 exit;
