@@ -1,7 +1,17 @@
-import { qs, qsa, wait } from '../utils';
+import {
+    displayPaywallBanner,
+    qs,
+    qsa,
+    removePaywallBanner,
+    wait,
+} from '../utils';
 
 type Payload = {
     html: string;
+};
+
+const BLUR_PAYLOAD: Payload = {
+    html: '<h3>Lorem ipsum dolor sit amet</h3><p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p><p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>',
 };
 
 export default function initDiceGame() {
@@ -32,7 +42,7 @@ export default function initDiceGame() {
         container
     );
 
-    const themeSelector = qs<HTMLSelectElement>('#theme-select');
+    const themeSelector = qs<HTMLSelectElement>('#theme-select', 'silent');
 
     const dices = qsa<HTMLDivElement>('[cmp-dice]', container);
 
@@ -42,6 +52,8 @@ export default function initDiceGame() {
     resetGameBtns.forEach((button) => button.addEventListener('click', reset));
 
     async function launchGameRound() {
+        if (!themeSelector) return;
+
         disableBtns();
         setState('during');
         const theme = themeSelector.value.toLowerCase();
@@ -65,6 +77,7 @@ export default function initDiceGame() {
                 dice.nextElementSibling.classList.add('hidden');
             }
         });
+        removePaywallBanner();
         inter.innerHTML = '';
         inter.classList.add('hidden');
     }
@@ -101,6 +114,17 @@ export default function initDiceGame() {
         return winnerId;
     }
 
+    function hideLoader() {
+        if (container) {
+            const skeleton = qs<HTMLDivElement>(
+                '[cmp-skeleton]',
+                'silent',
+                container
+            );
+            skeleton?.remove();
+        }
+    }
+
     async function showOutcome(theme: string, winnerId: string) {
         const API_URL = '/api/dice';
 
@@ -116,19 +140,24 @@ export default function initDiceGame() {
             const url = `${API_URL}?${queryString}`;
 
             const response = await fetch(url);
+
+            if (!response.ok) {
+                if (response.status === 403) {
+                    hideLoader();
+                    inter.classList.add('hidden');
+                    displayPaywallBanner();
+                    return BLUR_PAYLOAD;
+                } else {
+                    console.error('Response failed:', response);
+                }
+            }
+            hideLoader();
+
             payload = await response.json();
         } catch (error) {
             inter.classList.add('hidden');
+            hideLoader();
             console.log(error);
-        } finally {
-            if (container) {
-                const skeleton = qs<HTMLDivElement>(
-                    '[cmp-skeleton]',
-                    'silent',
-                    container
-                );
-                skeleton?.remove();
-            }
         }
 
         if (payload === null) return;

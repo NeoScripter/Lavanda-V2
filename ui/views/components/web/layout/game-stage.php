@@ -41,7 +41,7 @@ extract(component_props(
     </div>
 
     <article cmp-interpretation
-        class="bg-white py-14.5 rounded-b-xl relative px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23 
+        class="bg-white py-14.5 rounded-b-xl isolate relative px-7 sm:px-9 sm:py-25 lg:px-12 lg:py-12 2xl:px-21.5 2xl:py-23 
         <?= empty($interpretation) ? 'hidden' : '' ?>">
         <?= $interpretation ?>
     </article>
@@ -56,8 +56,8 @@ extract(component_props(
         </div>
     </template>
 
-    <template cmp-paywall>
-        <div class='absolute inset-0 backdrop-blur-sm flex items-center justify-center'>
+    <template cmp-paywall-template>
+        <div cmp-paywall class='absolute inset-0 z-50 text-foreground backdrop-blur-sm flex items-center justify-center'>
             <div class="bg-white w-full border border-primary relative max-w-120 lg:max-w-220 mx-auto xs:rounded-xl sm:rounded-primary px-6 pb-9 pt-28 sm:pb-11 sm:px-9">
                 <?= component('shared/ui/image', [
                     'sizes'    => 'mb',

@@ -1,3 +1,5 @@
+import initAdaptiveImages from "./modules/adaptiveImages";
+
 export function gid<T extends Element>(
     id: string,
     behavior: 'silent'
@@ -315,4 +317,28 @@ export function isApiError(error: unknown) {
         'code' in error &&
         error.code === 403
     );
+}
+
+export function displayPaywallBanner(inter: HTMLElement | null) {
+    const template = qs<HTMLTemplateElement>('[cmp-paywall-template]');
+    if (!inter) {
+        inter = qs<HTMLTemplateElement>('[cmp-interpretation]');
+    }
+
+    const clone = document.importNode(template.content, true);
+
+    inter.appendChild(clone);
+    inter.classList.remove('hidden');
+    initAdaptiveImages();
+}
+
+export function removePaywallBanner() {
+    const paywall = qs<HTMLTemplateElement>(
+        '[cmp-interpretation] [cmp-paywall]',
+        'silent'
+    );
+
+    if (!paywall) return;
+
+    paywall.remove();
 }

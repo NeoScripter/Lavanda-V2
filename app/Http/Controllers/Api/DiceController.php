@@ -6,12 +6,22 @@ namespace Http\Controllers\Api;
 
 use Enums\ThemeableType;
 use Http\Controller;
+use Support\AccessStatus;
+use Support\Auth;
 use Support\Session;
 
 class DiceController extends Controller
 {
     public function __invoke(\Base $hive)
     {
+        $user = Auth::user();
+
+        if (empty($user) || ! AccessStatus::can_play_game($user)) {
+            send_json(['message' =>  "You don't have the access to this game"], 403);
+        }
+
+        AccessStatus::subtract_game($user);
+
         $locale = Session::get_locale();
         $theme  = urldecode($hive->GET['theme']);
         $winner_id = urldecode($hive->GET['winner_id']);

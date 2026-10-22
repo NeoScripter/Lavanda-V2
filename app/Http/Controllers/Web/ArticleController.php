@@ -34,7 +34,7 @@ class ArticleController extends Controller
     {
         $user = Auth::user();
 
-        if (! AccessStatus::is_admin($user) && ! AccessStatus::has_active_subscription($user)) {
+        if (empty($user) || (! AccessStatus::is_admin($user) && ! AccessStatus::has_active_subscription($user))) {
             $hive->reroute('@home');
         }
 

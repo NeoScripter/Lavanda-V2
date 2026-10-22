@@ -1,7 +1,6 @@
 import { type GameInfo } from '../constants';
 import initAdaptiveImages from '../modules/adaptiveImages';
-import type { ApiError } from '../types';
-import { isApiError } from '../utils';
+import { displayPaywallBanner } from '../utils';
 import InterpretationHTML from './InterpretationHTML';
 
 type Elements = {
@@ -54,6 +53,23 @@ const BLUR_PAYLOAD: InterpretationPayload = {
                     name: 'theme',
                     themeable_type: 'theme',
                     themeable_id: 1,
+                    html: LOREM.HTML,
+                },
+            ],
+        },
+        {
+            id: 2,
+            name: LOREM.NAME,
+            img: '/assets/images/placeholders/no-image/no-image',
+            alt: 'lorem',
+            advice: LOREM.ADVICE,
+            html: LOREM.ADVICE,
+            themes: [
+                {
+                    id: 2,
+                    name: 'theme',
+                    themeable_type: 'theme',
+                    themeable_id: 2,
                     html: LOREM.HTML,
                 },
             ],
@@ -160,16 +176,18 @@ export default class Interpretation {
 
             if (!response.ok) {
                 if (response.status === 403) {
+                    this.hideLoader();
+                    displayPaywallBanner();
                     return BLUR_PAYLOAD;
                 } else {
                     console.error('Response failed:', response);
                 }
             }
+            this.hideLoader();
             return await response.json();
         } catch (error) {
-            console.error(error);
-        } finally {
             this.hideLoader();
+            console.error(error);
         }
     }
 

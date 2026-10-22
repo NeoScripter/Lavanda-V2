@@ -31,7 +31,7 @@ slot('layouts/web/app-layout', [
 
 
 <?php ob_start(); ?>
-<div cmp-iching-game class="group">
+<div cmp-iching-game class="group isolate relative">
     <div cmp-visible-at-start
         class='mx-auto max-w-200 *:py-[0.5em]'>
         <h2 class="text-white text-2xl md:text-3xl lg:text-4xl">Правила</h2>

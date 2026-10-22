@@ -1,4 +1,9 @@
-import convertArrayToBinary, { qs, qsa, wait } from '../utils';
+import convertArrayToBinary, {
+    displayPaywallBanner,
+    qs,
+    qsa,
+    wait,
+} from '../utils';
 import initAdaptiveImages from './adaptiveImages';
 
 const INITIAL_DELAY = 50;
@@ -6,6 +11,12 @@ const INITIAL_DELAY = 50;
 type Payload = {
     number: number;
     description: string;
+};
+
+const BLUR_PAYLOAD: Payload = {
+    number: 22,
+    description:
+        'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor.',
 };
 
 export default function ichingGame() {
@@ -112,6 +123,17 @@ export default function ichingGame() {
         ichingLines.forEach((line) => line.classList.remove('split'));
     }
 
+    function hideLoader() {
+        if (container) {
+            const skeleton = qs<HTMLDivElement>(
+                '[cmp-skeleton]',
+                'silent',
+                container
+            );
+            skeleton?.remove();
+        }
+    }
+
     async function showOutcome(bitmask: number) {
         const API_URL = '/api/iching';
         const queryParams = { bitmask: bitmask.toString() };
@@ -127,18 +149,21 @@ export default function ichingGame() {
 
             // await wait(2000);
             const response = await fetch(url);
+
+            if (!response.ok) {
+                if (response.status === 403) {
+                    hideLoader();
+                    displayPaywallBanner(container);
+                    return BLUR_PAYLOAD;
+                } else {
+                    console.error('Response failed:', response);
+                }
+            }
+            hideLoader();
             payload = await response.json();
         } catch (error) {
+            hideLoader();
             console.log(error);
-        } finally {
-            if (container) {
-                const skeleton = qs<HTMLDivElement>(
-                    '[cmp-skeleton]',
-                    'silent',
-                    container
-                );
-                skeleton?.remove();
-            }
         }
 
         if (payload === null) return;

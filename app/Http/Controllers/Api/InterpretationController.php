@@ -33,6 +33,8 @@ class InterpretationController extends Controller
             if (empty($user) || ! AccessStatus::can_play_game($user)) {
                 send_json(['message' =>  "You don't have the access to this game"], 403);
             }
+
+            AccessStatus::subtract_game($user);
         }
 
         $ids = explode(',', $ids);

@@ -122,7 +122,7 @@ final class AccessStatus extends \Prefab
 
     public static function subtract_game(array $user): void
     {
-        if (self::instance()->has_active_subscription($user)) {
+        if (self::instance()->is_admin($user) || self::instance()->has_active_subscription($user)) {
             return;
         }
 

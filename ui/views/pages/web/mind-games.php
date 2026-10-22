@@ -43,7 +43,7 @@ extract(component_props(
 </section>
 
 <?php ob_start(); ?>
-<div>
+<div class='relative isolate'>
     <p cmp-visible-at-start
         class='text-balance mx-auto max-w-xl'>
         Самая первая фраза, которая буквально «бросится вам в глаза» – это и будет совет. Опишите (желательно проговорить вслух или записать), что вы увидели и почувствовали о своем запросе. Сделайте выводы.
@@ -82,7 +82,7 @@ extract(component_props(
         'class' => 'mx-auto hidden'
     ]) ?>
 
-    <?= component('web/ui/arrow-hint') ?>
+    <div cmp-interpretation class='absolute inset-0 hidden z-10'></div>
 </div>
 <?php $slot1 = ob_get_clean(); ?>
 
