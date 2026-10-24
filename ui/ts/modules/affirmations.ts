@@ -47,8 +47,12 @@ export default function initAffirmations() {
             await wait(duration);
         }
 
-        const selected =
-            affirmations[(offset + affirmations.length) % affirmations.length];
+        const currentIdx = (offset + affirmations.length) % affirmations.length;
+        const prevIdx = currentIdx === 0 ? affirmations.length - 1 : currentIdx - 1;
+
+        affirmations[prevIdx].classList.remove('highlighted');
+        affirmations[currentIdx].classList.add('highlighted');
+        const selected = affirmations[currentIdx];
 
         const quote = selected.getAttribute('data-quote');
 

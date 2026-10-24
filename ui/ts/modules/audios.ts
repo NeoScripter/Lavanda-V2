@@ -66,7 +66,12 @@ export default function initAudios() {
             await wait(duration);
         }
 
-        const selected = audios[(offset + audios.length) % audios.length];
+        const currentIdx = (offset + audios.length) % audios.length;
+        const prevIdx = currentIdx === 0 ? audios.length - 1 : currentIdx - 1;
+
+        audios[prevIdx].classList.remove('highlighted');
+        audios[currentIdx].classList.add('highlighted');
+        const selected = audios[currentIdx];
 
         const description = selected.getAttribute('data-description');
         const audioLink = selected.getAttribute('data-file');
