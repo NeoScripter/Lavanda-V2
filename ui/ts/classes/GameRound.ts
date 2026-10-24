@@ -232,7 +232,7 @@ export default class GameRound {
         game.style.setProperty('--count', runes.length.toString());
 
         runes.forEach((rune) => {
-            rune.classList.remove('highlighted');
+            rune.classList.remove('highlighted', 'hidden');
         });
     }
 
@@ -256,8 +256,7 @@ export default class GameRound {
         };
 
         let extraDuration = Math.floor(Math.random() * 10) + 5;
-        // const maxDuration = 400;
-        const maxDuration = 200;
+        const maxDuration = 400;
 
         while (duration < maxDuration) {
             handleNext();
