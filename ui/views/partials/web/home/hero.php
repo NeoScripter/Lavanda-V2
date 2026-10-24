@@ -55,6 +55,7 @@ extract(component_props(
             <div>
                 <?php slot('components/web/layout/card-deck', [
                     'count' => count($cards),
+                    'width' => 8,
                     'attrs' => ['cmp-game' => GameType::BONUS_HOME->value]
                 ]); ?>
 
