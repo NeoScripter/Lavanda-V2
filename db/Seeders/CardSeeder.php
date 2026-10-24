@@ -70,9 +70,19 @@ class CardSeeder extends Seeder
         }
 
         foreach (CardVariant::values() as $card_variant) {
+
+            $subfolder = match (CardVariant::from($card_variant)) {
+                CardVariant::BONUS => 'bonus',
+                CardVariant::LENORMAND => 'lenormand',
+                CardVariant::METAPHORIC => 'metaphoric',
+                CardVariant::TAROT => 'tarot',
+                CardVariant::MIND_GAMES => 'mind-games',
+                CardVariant::MINORI => 'minori',
+            };
+
             (new ImageFactory)->create(
                 attrs: ['imageable_type' => $card_variant, 'imageable_id' => 1, 'variant' => 'back_image'],
-                src_dir: APP_DIR . '/db/Fixtures/Image/back_image/',
+                src_dir: APP_DIR . "/db/Fixtures/Image/card_back/$subfolder",
             );
         }
 
