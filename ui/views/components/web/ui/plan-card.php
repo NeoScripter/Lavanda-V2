@@ -2,9 +2,9 @@
 
 use Enums\PlanSlug;
 
- extract(component_props(
+extract(component_props(
     required: ['item'],
-    optional: ['class' => '', 'as' => 'li', 'url' => '', 'button_type' => 'primary', 'button_label' => 'Открыть доступ'],
+    optional: ['class' => '', 'as' => 'li', 'url' => '', 'button' => null],
     props: get_defined_vars()
 )); ?>
 
@@ -23,11 +23,8 @@ use Enums\PlanSlug;
     </div>
     <p class='text-primary font-medium text-center text-lg md:text-xl xl:text-2xl mt-auto'><?= $item['price'] ?>₽</p>
 
-    <?= component('web/ui/button', [
-        'variant' => $button_type,
-        'slot' => $button_label,
-        'href' => $url,
-        'class' => '',
-    ]) ?>
+    <?php if (! empty($button)) : ?>
+        <?= $button ?>
+    <?php endif; ?>
 
 </<?= $as ?>>

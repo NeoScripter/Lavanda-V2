@@ -20,7 +20,6 @@ if (!is_dir(UPLOAD_DIR)) {
 $hive = Base::instance();
 
 $hive->set('AUTOLOAD', APP_DIR . '/app/;' . APP_DIR . '/db/;');
-$hive->set('CURRENT_DATE', 'now');
 $hive->config(APP_DIR . '/config/routes.ini');
 
 putenv('APP_ENV='. AppEnv::TESTING->value);

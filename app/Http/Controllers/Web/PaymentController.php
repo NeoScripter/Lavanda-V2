@@ -8,6 +8,7 @@ use Enums\AppEnv;
 use Enums\PlanSlug;
 use Http\Controller;
 use Http\Models\Plan;
+use Support\AccessStatus;
 use Support\Auth;
 use Support\Hmac;
 
@@ -59,7 +60,10 @@ class PaymentController extends Controller
 
             $hive->reroute($link);
         } else {
+            AccessStatus::give(PlanSlug::from($slug), $user);
 
+            notify('Покупка успешно совершена!');
+            $hive->reroute('@home');
         }
     }
 }

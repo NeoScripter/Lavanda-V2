@@ -11,12 +11,21 @@
 
 <?php $hive = \Base::instance(); ?>
 
+<?php ob_start(); ?>
+
+<?= component('web/ui/button', [
+    'slot' => 'Оплатить',
+    'class' => '',
+]); ?>
+
+<?php $button = ob_get_clean(); ?>
+
 <section class='pt-(--pt-lg)'>
 
     <h1>Оформление подписки</h1>
 
     <div class='gap-y-45 grid place-content-center mt-38 sm:mt-45 md:mt-50 2xl:mx-0'>
-        <?= component('web/ui/plan-card', ['item' => $item, 'as' => 'article', 'button_label' => 'Оплатить']) ?>
+        <?= component('web/ui/plan-card', ['item' => $item, 'as' => 'article', 'button_label' => 'Оплатить', 'url' => $hive->alias('pay')]) ?>
     </div>
 
     <article class='bg-white w-full max-w-120 shadow-accent lg:max-w-220 mx-auto xs:rounded-xl sm:rounded-primary px-6 py-9 sm:py-11 sm:px-9 lg:px-12 xl:px-15 mt-(--spacing-y)'>

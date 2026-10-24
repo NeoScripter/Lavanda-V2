@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Web;
 
+use Enums\PlanSlug;
 use Http\Controller;
 use Http\Models\Plan;
 use Http\Models\User;
 use Log;
+use Support\AccessStatus;
 use Support\Hmac;
 
 class ProdamusWebhookController extends Controller
@@ -90,7 +92,7 @@ class ProdamusWebhookController extends Controller
             $db = $hive->get("DB");
             $db->begin();
 
-            // TODO: handle subscription purchase
+            AccessStatus::give(PlanSlug::from($plan_slug), [...$user->cast(), 'id' => $user->id]);
 
             $logger->write("Subscription processed successfully. Email: $email order id: $order_id");
 

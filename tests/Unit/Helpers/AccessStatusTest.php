@@ -7,12 +7,12 @@ namespace Tests\Unit\Helpers;
 use DateInterval;
 use DateTime;
 use DB\SQL;
+use Enums\ClockMode;
 use Enums\PlanSlug;
 use Http\Models\Subscription;
 use Http\Models\User;
 use PHPUnit\Framework\Attributes\Test;
 use Support\AccessStatus;
-use Support\Clock;
 use Tests\TestCase;
 
 final class AccessStatusTest extends TestCase
@@ -27,7 +27,7 @@ final class AccessStatusTest extends TestCase
         $user->copyFrom(['name' => 'John', 'email' => 'john@gmail.com', 'password' => 'password']);
         $user->save();
 
-        Clock::reset();
+        AccessStatus::set_clock(ClockMode::RESET);
 
         $this->user = ['id' => $user->id, ...$user->cast()];
         $this->db = \Base::instance()->get('DB');
@@ -41,11 +41,11 @@ final class AccessStatusTest extends TestCase
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
 
-        Clock::turn_forward('P30D');
+        AccessStatus::set_clock(ClockMode::FORWARD, 'P30D');
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
 
-        Clock::turn_forward('P2M');
+        AccessStatus::set_clock(ClockMode::FORWARD, 'P2M');
 
         $this->assertFalse(AccessStatus::has_active_subscription($this->user));
     }
@@ -58,11 +58,11 @@ final class AccessStatusTest extends TestCase
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
 
-        Clock::turn_forward('P11M');
+        AccessStatus::set_clock(ClockMode::FORWARD, 'P11M');
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
 
-        Clock::turn_forward('P13M');
+        AccessStatus::set_clock(ClockMode::FORWARD, 'P13M');
 
         $this->assertFalse(AccessStatus::has_active_subscription($this->user));
     }
@@ -76,23 +76,23 @@ final class AccessStatusTest extends TestCase
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
 
-        Clock::turn_forward('P60D');
+        AccessStatus::set_clock(ClockMode::FORWARD, 'P60D');
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
 
-        Clock::turn_forward('P62D');
+        AccessStatus::set_clock(ClockMode::FORWARD, 'P62D');
 
         $this->assertFalse(AccessStatus::has_active_subscription($this->user));
 
         AccessStatus::give(PlanSlug::YEARLY, $this->user);
 
-        Clock::turn_forward('P13M');
+        AccessStatus::set_clock(ClockMode::FORWARD, 'P13M');
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
 
         AccessStatus::give(PlanSlug::YEARLY, $this->user);
 
-        Clock::turn_forward('P25M');
+        AccessStatus::set_clock(ClockMode::FORWARD, 'P25M');
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
 
@@ -119,7 +119,7 @@ final class AccessStatusTest extends TestCase
 
         AccessStatus::give(PlanSlug::MONTHLY, $this->user);
 
-        Clock::turn_forward('P30D');
+        AccessStatus::set_clock(ClockMode::FORWARD, 'P30D');
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
     }

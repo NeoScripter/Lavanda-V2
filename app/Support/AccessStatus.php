@@ -7,11 +7,13 @@ namespace Support;
 use DateInterval;
 use DateTime;
 use DB\SQL;
+use Enums\ClockMode;
 use Enums\PlanSlug;
 use Enums\UserRole;
 
 final class AccessStatus extends \Prefab
 {
+    private string $clock = 'now';
     private SQL $db;
 
     function __construct()
@@ -19,9 +21,18 @@ final class AccessStatus extends \Prefab
         $this->db = \Base::instance()->get('DB');
     }
 
+    public static function set_clock(ClockMode $mode, ?string $interval = 'now'): void
+    {
+        self::instance()->clock = match ($mode) {
+            ClockMode::BACK => new DateTime()->sub(new DateInterval($interval))->format('Y-m-d'),
+            ClockMode::FORWARD => new DateTime()->add(new DateInterval($interval))->format('Y-m-d'),
+            ClockMode::RESET => 'now',
+        };
+    }
+
     public static function has_active_subscription(array $user): bool
     {
-        $date = \Base::instance()->get('CURRENT_DATE') ?? 'now';
+        $date = self::instance()->clock;
 
         $rows = self::instance()->db->exec(
             "SELECT EXISTS ( SELECT 1 FROM subscriptions s WHERE s.user = ? AND s.ends_at > ?) AS exists",
@@ -147,7 +158,8 @@ final class AccessStatus extends \Prefab
                         [$user['id']]
                     );
 
-                    $now = new DateTime(\Base::instance()->get('CURRENT_DATE') ?? 'now');
+                    $date = self::instance()->clock;
+                    $now = new DateTime($date);
 
                     if (empty($rows[0]['ends_at'])) {
                         $new_date = $now->add(new DateInterval($interval))->format('Y-m-d H:i:s');
