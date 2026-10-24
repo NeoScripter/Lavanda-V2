@@ -29,8 +29,12 @@ $user = Auth::user();
         <?php foreach ($items as $idx => $item) : ?>
             <?= component('web/ui/plan-card', [
                 'item' => $item,
-                'button_type' => $idx < 2 ? 'primary' : 'accent',
-                'url' => empty($user) ? $hive->alias('login') : $hive->alias('plans_show', ['slug' => $item['slug']])
+                'button' => component('web/ui/button', [
+                    'variant' => $idx < 2 ? 'primary' : 'accent',
+                    'slot' => 'Открыть доступ',
+                    'size' => 'md',
+                    'href' => empty($user) ? $hive->alias('login') : $hive->alias('plans_show', ['slug' => $item['slug']]),
+                ])
             ]) ?>
         <?php endforeach; ?>
     </ul>

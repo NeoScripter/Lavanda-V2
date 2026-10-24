@@ -4,7 +4,7 @@ use Enums\PlanSlug;
 
 extract(component_props(
     required: ['item'],
-    optional: ['class' => '', 'as' => 'li', 'url' => '', 'button' => null],
+    optional: ['class' => '', 'as' => 'li', 'button' => null],
     props: get_defined_vars()
 )); ?>
 

@@ -7,6 +7,7 @@ namespace Http\Controllers\Web;
 use Enums\PlanSlug;
 use Http\Controller;
 use Http\Models\Plan;
+use Support\Auth;
 use Support\Session;
 
 class PlanController extends Controller
@@ -37,6 +38,10 @@ class PlanController extends Controller
 
     public function show(\Base $hive)
     {
+        if (empty(Auth::user())) {
+            $hive->reroute('@login');
+        }
+
         $slug = $hive->PARAMS['slug'];
         $plan = new Plan();
         $plan->load(['is_active=? AND slug=?', true, $slug]);
