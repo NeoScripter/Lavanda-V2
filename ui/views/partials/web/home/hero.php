@@ -46,10 +46,13 @@ extract(component_props(
             ]) ?>
 
         </div>
+
+
         <article cmp-game-container class='lg:basis-1/2 space-y-6'>
             <header class='text-center text-balance'>
                 <h2 class='text-2xl md:text-3xl! lg:text-4xl!'>Давай познакомимся?</h2>
-                <p>Начни с авторской колоды с котиками. Без сложных раскладов и длинных объяснений - просто открой карту и посмотри, что она расскажет о том, почему именно сегодня ты здесь.</p>
+                <p class='mb-[0.5em]'> Почему ты здесь именно сегодня? Что привело тебя в пространство Lavanda.kim и с чего хочется начать?</p>
+                <p> Авторский Оракул TheCat поможет прислушаться к себе, найти свою отправную точку и выбрать, куда заглянуть дальше.</p>
             </header>
 
             <div>
@@ -88,7 +91,6 @@ extract(component_props(
                             'cmp-visible-at-end' => true,
                         ]
                     ]) ?>
-                    <small>Бесплатно. Без регистрации</small>
                 </div>
                 <div>
                     <?= component('web/ui/button', [
@@ -96,7 +98,6 @@ extract(component_props(
                         'slot' => 'Следующий раздел',
                         'class' => 'mx-auto mb-1',
                     ]) ?>
-                    <small>Позвольте Lavanda вести вас</small>
                 </div>
             </div>
         </article>
