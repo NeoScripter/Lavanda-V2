@@ -32,12 +32,6 @@ class ArticleController extends Controller
 
     public function show(\Base $hive)
     {
-        $user = Auth::user();
-
-        if (empty($user) || (! AccessStatus::is_admin($user) && ! AccessStatus::has_active_subscription($user))) {
-            $hive->reroute('@home');
-        }
-
         $id = $hive->PARAMS['id'];
 
         $locale = Session::get_locale();
