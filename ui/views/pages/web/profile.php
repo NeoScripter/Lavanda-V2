@@ -54,6 +54,10 @@ extract(component_props(
                             <?php end_slot(); ?>
                         </div>
                     </form>
+                    <form action="<?= $hive->alias('email') ?>" method="post" class='mt-10'>
+                        <button type="submit">Send an email</button>
+
+                    </form>
                 </article>
 
                 <article>
