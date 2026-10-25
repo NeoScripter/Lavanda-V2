@@ -151,6 +151,12 @@ final class AccessStatus extends \Prefab
         switch ($slug) {
             case PlanSlug::MONTHLY:
             case PlanSlug::YEARLY: {
+                    self::instance()->db->exec(
+                        "DELETE FROM subscriptions WHERE subscriptions.ends_at != (
+                            SELECT max(ends_at) FROM subscriptions WHERE subscriptions.user = ?
+                        )",
+                        [$user['id']]
+                    );
                     $interval = ($slug === PlanSlug::MONTHLY) ? 'P1M' : 'P1Y';
 
                     $rows = self::instance()->db->exec(
@@ -184,6 +190,13 @@ final class AccessStatus extends \Prefab
                     }
                 };
             case PlanSlug::ONE_TIME: {
+                    self::instance()->db->exec(
+                        "DELETE FROM games WHERE games.number != (
+                            SELECT max(number) FROM games WHERE games.user = ?
+                        )",
+                        [$user['id']]
+                    );
+
                     $rows = self::instance()->db->exec(
                         "SELECT number FROM games g WHERE g.user = ? LIMIT 1",
                         [$user['id']]
@@ -202,6 +215,12 @@ final class AccessStatus extends \Prefab
                     }
                 };
             case PlanSlug::PERSONAL: {
+                    self::instance()->db->exec(
+                        "DELETE FROM consultations WHERE consultations.number != (
+                            SELECT max(number) FROM consultations WHERE consultations.user = ?
+                        )",
+                        [$user['id']]
+                    );
                     $rows = self::instance()->db->exec(
                         "SELECT number FROM consultations c WHERE c.user = ? LIMIT 1",
                         [$user['id']]
