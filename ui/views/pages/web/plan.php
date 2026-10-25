@@ -9,7 +9,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Оформление подписки',
+    'title' => 'Оформление тарифа',
     'class' => 'bg-white relative isolate',
 ]); ?>
 
@@ -28,11 +28,12 @@ extract(component_props(
     ]); ?>
 
 </form>
+<a href="<?= $hive->alias('plans') ?>" class='text-center text-sm mt-2 hover:underline underline-offset-4'>Посмотреть другие форматы</a>
 <?php $button = ob_get_clean(); ?>
 
 <section class='pt-(--pt-lg)'>
 
-    <h1>Оформление подписки</h1>
+    <h1>Оформление тарифа</h1>
 
     <div class='gap-y-45 grid place-content-center mt-38 sm:mt-45 md:mt-50 2xl:mx-0'>
         <?= component('web/ui/plan-card', [
@@ -43,7 +44,6 @@ extract(component_props(
     </div>
 
     <article class='bg-white w-full max-w-120 shadow-accent lg:max-w-220 mx-auto xs:rounded-xl sm:rounded-primary px-6 py-9 sm:py-11 sm:px-9 lg:px-12 xl:px-15 mt-(--spacing-y)'>
-
 
         <ul class='list-inside list-disc space-y-[0.5em]'>
             Оформляя подписку на сайте <span class='text-primary'>Lavanda<sup>Kim</sup></span>, вы подтверждаете, что:
