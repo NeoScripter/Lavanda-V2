@@ -1,37 +1,36 @@
 <?php
 $hive = \Base::instance();
 $nav_links = [
-    ['url' => '/', 'label' => 'Главная'],
+    ['url' => '/about', 'label' => 'О ресурсе'],
     [
-        'label' => 'Решение',
+        'label' => 'По типу помощника',
         'nav_links' => [
-            ['url' => '/decision', 'label' => 'Общая информация'],
-            ['url' => $hive->alias('practice'), 'label' => 'Практика'],
-            ['url' => $hive->alias('runes'), 'label' => 'Спросить у рун'],
-            ['url' => '/cards', 'label' => 'Спросить у карт'],
-            ['url' => '/iching', 'label' => 'Книга перемен'],
-            ['url' => $hive->alias('mind_games'), 'label' => 'Игры разума'],
-        ]
-    ],
-    ['url' => $hive->alias('affirmation_topics'), 'label' => 'Настрой'],
-    [
-        'label' => 'Мне грустно',
-        'nav_links' => [
-            ['url' => '/sadness', 'label' => 'Общая информация'],
+            ['url' => $hive->alias('runes'), 'label' => 'Скандинавские руны'],
             ['url' =>  $hive->alias('metaphoric'), 'label' => 'Метафорические карты'],
-            ['url' =>  $hive->alias('lenormand'), 'label' => 'Старинное гадание госпожи Ленорман'],
+            ['url' => '/iching', 'label' => 'Книга перемен'],
+            ['url' =>  $hive->alias('dices'), 'label' => 'Тибетские кубики МО new'],
+            ['url' =>  $hive->alias('stones'), 'label' => 'Самоцветы (70 камней) new'],
             ['url' =>  $hive->alias('tarot'), 'label' => 'Карты Таро'],
-            ['url' =>  $hive->alias('stones'), 'label' => 'Магические камни'],
-            ['url' =>  $hive->alias('dices'), 'label' => 'Тибетское гадание МО'],
-            ['url' =>  $hive->alias('minori'), 'label' => 'Карты Минори'],
+            ['url' =>  $hive->alias('lenormand'), 'label' => 'Карты Ленорман'],
+            ['url' =>  $hive->alias('minori'), 'label' => '28 целительных моментов new'],
+            ['url' => $hive->alias('mind_games'), 'label' => 'Игры разума МАК'],
             ['url' =>  $hive->alias('audios'), 'label' => 'Послание поддержки от автора'],
+            ['url' => $hive->alias('practice'), 'label' => 'Практика'],
+            ['url' => $hive->alias('bonus'), 'label' => 'Кошачий оракул'],
         ]
     ],
-    ['url' => $hive->alias('bonus'), 'label' => 'Бонусная игра'],
+    [
+        'label' => 'По проблеме',
+        'nav_links' => [
+            ['url' => '/decision', 'label' => 'Принять решение'],
+            ['url' => '/sadness', 'label' => 'Мне грусно'],
+            ['url' => '/cards', 'label' => 'Спросить у карт'],
+            ['url' => $hive->alias('affirmation_topics'), 'label' => 'Войти в нужный настрой'],
+        ]
+    ],
     [
         'label' => 'Прочее',
         'nav_links' => [
-            ['url' => '/about', 'label' => 'О ресурсе'],
             ['url' => $hive->alias('articles'), 'label' => 'Полезные ресурсы'],
             ['url' => $hive->alias('faqs'), 'label' => 'Часто задаваемые вопросы'],
         ]
