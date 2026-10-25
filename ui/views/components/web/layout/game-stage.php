@@ -69,14 +69,12 @@ extract(component_props(
 
                 <div class="flex flex-col text-center text-balance gap-4 lg:gap-8">
 
-                    <p class='font-semibold'>Знакомство с данным ресурсом завершено</p>
-                    <p> Продолжите знакомство с другими подсказками Lavanda.</p>
-                    <p>Или зарегистрируйтесь, чтобы открыть полный доступ ко всем инструментам на несколько дней.</p>
-
+                    <p class='font-semibold'> Твой ответ уже здесь </p>
+                    <p> Первое знакомство с Lavanda позади. Открой ответ на свой вопрос — или выбери формат, чтобы возвращаться, когда захочется. </p>
                     <div class='flex flex-col lg:flex-row items-center justify-center mt-2 gap-4 lg:gap-8'>
                         <?= component('web/ui/button', [
                             'variant' => 'accent',
-                            'slot' => 'Открыть доступ',
+                            'slot' => 'Выбрать постоянный формат',
                             'size' => 'sm',
                             'href' => $hive->alias('plans'),
                             'class' => 'w-fit lg:min-w-70',
@@ -84,12 +82,13 @@ extract(component_props(
 
                         <?= component('web/ui/button', [
                             'variant' => 'muted',
-                            'slot' => 'Разовая интерпретация',
+                            'slot' => 'Продолжить как гость',
                             'size' => 'sm',
                             'href' => $hive->alias('plans_show', ['slug' => PlanSlug::ONE_TIME->value]),
                             'class' => 'w-fit lg:min-w-70',
                         ]) ?>
                     </div>
+                    <a href="<?= $hive->alias('plans_show', ['slug' => PlanSlug::PERSONAL->value]) ?>" class='underline underline-offset-4 text-sm hover:text-primary transition-colors'>Заказать персональный разбор</a>
                 </div>
             </div>
     </template>

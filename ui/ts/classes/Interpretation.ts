@@ -183,7 +183,7 @@ export default class Interpretation {
             if (!response.ok) {
                 if (response.status === 403) {
                     this.hideLoader();
-                    displayPaywallBanner();
+                    displayPaywallBanner(this.elements.interpretation);
                     return BLUR_PAYLOAD;
                 } else {
                     console.error('Response failed:', response);
