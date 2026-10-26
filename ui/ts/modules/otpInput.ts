@@ -31,6 +31,7 @@ export default function initOtpInput() {
 
     otpForm.addEventListener('submit', async (e) => {
         const newEmail = emailInput.value;
+        // TODO: add password mismatch trigger
 
         if (newEmail !== initialEmail) {
             codeInputWrapper.classList.remove('hidden');

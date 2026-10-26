@@ -65,15 +65,15 @@ class RegisteredUserController extends Controller
     {
         check_csrf($hive->POST);
 
-        $user = Auth::user();
+        $current_user = Auth::user();
 
-        if (AccessStatus::is_admin($user)) {
+        if (AccessStatus::is_admin($current_user)) {
             notify("{$hive->get("web.админа_нельзя_удалить")}");
             $hive->reroute("@home");
         }
 
         $user = new User();
-        $user->load(['email = ?', $user['email']]);
+        $user->load(['email = ?', $current_user['email']]);
         $user->is_deleted = true;
         $user->save();
 
