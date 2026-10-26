@@ -20,6 +20,7 @@ import initDiceGame from './modules/diceGame';
 import initReviewBook from './modules/reviewBook';
 import initPasswordInputButtons from './modules/passwordInputButtons';
 import initOtpInput from './modules/otpInput';
+import initPasswordConfirmationInput from './modules/passwordConfirmationInput';
 
 class WebUI {
     constructor() {
@@ -49,6 +50,7 @@ class WebUI {
             initReviewBook,
             initPasswordInputButtons,
             initOtpInput,
+            initPasswordConfirmationInput,
         ];
 
         for (const handler of handlers) {
