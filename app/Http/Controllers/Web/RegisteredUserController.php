@@ -78,6 +78,8 @@ class RegisteredUserController extends Controller
         $user->save();
 
         Auth::clear();
+
+        notify('До новых встреч!');
         $hive->reroute('/');
     }
 }

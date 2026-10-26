@@ -118,16 +118,29 @@ extract(component_props(
                 </article>
             </div>
 
-            <form action="<?= $hive->alias('register_destroy') ?>" method="post">
-                <input type="hidden" name="_method" value="delete">
-                <?= csrf() ?>
+            <dialog id="delete-profile-dialog" popover class='border border-primary p-4 rounded-sm relative max-w-80'>
+                <p class='text-base'>Вы уверены что хотите удалить свой аккаунт?</p>
+                <div class='flex items-center justify-center gap-6 mt-3'>
+                    <form action="<?= $hive->alias('register_destroy') ?>" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <?= csrf() ?>
 
-                <!-- TODO: Add a confirmation modal -->
-                <button class='flex text-foreground/80 mx-auto lg:ml-0 items-center justify-center gap-[0.5em]'>
-                    <span class='*:size-[1em]'> <?= svg('x') ?> </span>
-                    Удалить аккаунт
-                </button>
-            </form>
+                        <?= component('web/ui/button', [
+                            'size' => 'sm',
+                            'variant' => 'danger',
+                            'slot' => 'Удалить',
+                            'attrs' => ['type' => 'submit']
+                        ]) ?>
+                    </form>
+                    <button popovertarget="delete-profile-dialog" popovertargetaction="hide" class='cursor-pointer min-w-25 transition-colors hover:text-primary'>
+                        <span class='block size-6'>Отмена</span>
+                    </button>
+                </div>
+            </dialog>
+            <button popovertarget="delete-profile-dialog" class='flex text-foreground/80 mx-auto lg:ml-0 items-center justify-center gap-[0.5em]'>
+                <span class='*:size-[1em]'> <?= svg('x') ?> </span>
+                Удалить аккаунт
+            </button>
             <ul class='space-y-[0.5em] text-center order-2 lg:order-0'>
                 <?php foreach ($plans as $plan) : ?>
                     <li class='text-primary font-bold'><?= $plan ?></li>

@@ -42,7 +42,7 @@ class UpdatePasswordController extends Controller
             $hive->reroute('@password');
         }
 
-        $user->copyFrom(['password' => $request->input('new_password')]);
+        $user->copyFrom(['password' => $request->input('password')]);
         $user->save();
 
         notify($hive->get("admin.password_updated_successfully"));
