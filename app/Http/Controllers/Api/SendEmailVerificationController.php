@@ -7,20 +7,26 @@ namespace Http\Controllers\Api;
 use Enums\SessionKey;
 use Http\Controller;
 use Jobs\SendEmailJob;
-use Support\Auth;
 use View;
 
 class SendEmailVerificationController extends Controller
 {
     public function __invoke(\Base $hive)
     {
+        $payload = get_json();
+        $user_name = $payload['name'];
+        $user_email = $payload['email'];
+
+        if (empty($user_name) || empty($user_email)) {
+            send_json(['message' =>  "Invalid user data"], 400);
+        }
+
         $job = new SendEmailJob();
-        $user = Auth::user();
 
         $otp_code = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
 
         $html = View::instance()->render("pages/email/send-code.php", "text/html", [
-            'name' => $user['name'],
+            'name' => $user_name,
             'code' => $otp_code,
         ]);
 
@@ -32,8 +38,8 @@ class SendEmailVerificationController extends Controller
         $payload = [
             'subject' => $hive->get('email.подтверждение_электронной_почты'),
             'html' => $html,
-            'user_name' => $user['name'],
-            'user_email' => $user['email']
+            'user_name' => $user_name,
+            'user_email' => $user_email
         ];
 
         $job->handle($payload);

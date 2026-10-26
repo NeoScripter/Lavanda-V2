@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Web;
 
+use Enums\SessionKey;
 use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\RegisterUserRequest;
@@ -31,10 +32,23 @@ class RegisteredUserController extends Controller
 
         $user = new User();
         $user->load(["email = ? AND is_deleted = 'TRUE'", $request->input('email')]);
-        // TODO: add email verification
+
+        $actual_code = $request->input('otp_code');
+        $stored_code = $hive->get('SESSION.' . SessionKey::OTP_CODE->value);
+
+        if ($stored_code['expires_at'] < time()) {
+            $request->flash_errors(['email' => $hive->get('validation.your_otp_code_has_expired')]);
+            $hive->reroute('@register');
+        }
+
+        if ($actual_code !== $stored_code['code']) {
+            $request->flash_errors(['email' => $hive->get('validation.incorrect_otp_code')]);
+            $hive->reroute('@register');
+        }
 
         if (!$user->dry()) {
             $user->is_deleted = false;
+            $user->password = $request->input('password');
         } else {
             $request->validate();
             $user->copyFrom($request->all());
@@ -59,7 +73,7 @@ class RegisteredUserController extends Controller
         }
 
         $user = new User();
-        $user->load(['id = ?', $user['id']]);
+        $user->load(['email = ?', $user['email']]);
         $user->is_deleted = true;
         $user->save();
 

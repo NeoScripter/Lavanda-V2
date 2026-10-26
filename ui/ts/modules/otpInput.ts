@@ -15,6 +15,11 @@ export default function initOtpInput() {
         'error',
         otpForm
     );
+    const nameInput = qs<HTMLInputElement>(
+        'input[name="name"]',
+        'error',
+        otpForm
+    );
     const codeInput = qs<HTMLInputElement>(
         'input[name="otp_code"]',
         'error',
@@ -43,6 +48,10 @@ export default function initOtpInput() {
                             'Content-Type': 'application/json',
                             Accept: 'application/json',
                         },
+                        body: JSON.stringify({
+                            name: nameInput.value,
+                            email: emailInput.value,
+                        }),
                     });
 
                     if (!response.ok) {

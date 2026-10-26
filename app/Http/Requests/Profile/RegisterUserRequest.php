@@ -25,6 +25,10 @@ class RegisterUserRequest extends Request
                 'filter' => 'trim',
                 'validate' => 'required|min_len:8|matches:password',
             ],
+            'otp_code' => [
+                'filter' => 'trim',
+                'validate' => 'numeric|min_len:6|max_len:6',
+            ],
         ];
     }
 
