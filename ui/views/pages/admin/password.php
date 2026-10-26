@@ -25,13 +25,13 @@
         ]) ?>
 
         <?= component('admin/form/form-input', [
-            'name'  => 'new_password',
+            'name'  => 'password',
             'label' => $hive->get('admin.new_password'),
-            'error' => $errors['new_password'] ?? '',
+            'error' => $errors['password'] ?? '',
             'attrs' => [
                 'type'     => 'password',
                 'required' => true,
-                'value'    => $values['new_password'] ?? '',
+                'value'    => $values['password'] ?? '',
             ],
         ]) ?>
 

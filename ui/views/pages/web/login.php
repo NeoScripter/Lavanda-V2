@@ -30,7 +30,9 @@
         ]
     ]) ?>
 
-    <div class="flex justify-between gap-2.5">
+    <div class="flex flex-col gap-2.5">
+        <a href="<?= $hive->alias('password_reset_index') ?>"
+            class='text-xs transition-colors hover:text-primary underline underline-offset-4 font-medium ml-auto'>Забыли пароль?</a>
         <?= component(
             'web/ui/button',
             [

@@ -13,13 +13,13 @@ class UpdatePasswordRequest extends Request
                 'filter' => 'trim',
                 'validate' => 'required|min_len:8',
             ],
-            'new_password' => [
+            'password' => [
                 'filter' => 'trim',
                 'validate' => 'required|min_len:8|diff:current_password',
             ],
             'password_confirmation' => [
                 'filter' => 'trim',
-                'validate' => 'required|min_len:8|matches:new_password',
+                'validate' => 'required|min_len:8|matches:password',
             ],
         ];
     }
