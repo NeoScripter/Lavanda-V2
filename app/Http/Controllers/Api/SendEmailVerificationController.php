@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Api;
 
+use Enums\SessionKey;
 use Http\Controller;
 use Jobs\SendEmailJob;
 use Support\Auth;
@@ -16,9 +17,16 @@ class SendEmailVerificationController extends Controller
         $job = new SendEmailJob();
         $user = Auth::user();
 
+        $otp_code = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+
         $html = View::instance()->render("pages/email/send-code.php", "text/html", [
             'name' => $user['name'],
-            'code' => '232323'
+            'code' => $otp_code,
+        ]);
+
+        $hive->set('SESSION.' . SessionKey::OTP_CODE->value, [
+            'expires_at' => time() + (60 * 3),
+            'code' => $otp_code
         ]);
 
         $payload = [
@@ -30,6 +38,6 @@ class SendEmailVerificationController extends Controller
 
         $job->handle($payload);
 
-        $hive->reroute('profile');
+        send_json(['message' => 'Code successfully sent']);
     }
 }

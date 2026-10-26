@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Web;
 
-use Enums\UserRole;
+use Enums\SessionKey;
 use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\UpdateUserProfileRequest;
@@ -33,11 +33,25 @@ class ProfileController extends Controller
     public function update(\Base $hive)
     {
         $request = $this->request(UpdateUserProfileRequest::class);
-        $request->validate();
-
         $current_user = Auth::user();
 
-        // TODO: add email verification
+        if ($current_user['email'] !== $request->input('email')) {
+            $actual_code = $request->input('otp_code');
+            $stored_code = $hive->get('SESSION.' . SessionKey::OTP_CODE->value);
+
+            if ($stored_code['expires_at'] < time()) {
+                $request->flash_errors(['email' => $hive->get('validation.your_otp_code_has_expired')]);
+                $hive->reroute('@profile');
+            }
+
+            if ($actual_code !== $stored_code['code']) {
+                $request->flash_errors(['email' => $hive->get('validation.incorrect_otp_code')]);
+                $hive->reroute('@profile');
+            }
+        }
+
+        $request->validate();
+
         $user = new User();
         $user->load(['email=?', $current_user['email']]);
         $user->copyFrom($request->all());

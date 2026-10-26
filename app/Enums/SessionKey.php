@@ -8,6 +8,7 @@ enum SessionKey: string
     case RESOURCE_LOCALE = 'resource_locale';
     case AFFIRMATION_TOPIC = 'affirmation_topic';
     case MATCHEABLE_TYPE = 'matcheable_type';
+    case OTP_CODE = 'otp_code';
 
     public static function values()
     {

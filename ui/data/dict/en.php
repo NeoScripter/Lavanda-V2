@@ -22,6 +22,11 @@ return [
         "вот_ваш_код_верификации" => "Here is your verification code",
         "подтверждение_электронной_почты" => "Email verification",
     ],
+    'validation' => [
+        'your_otp_code_has_expired' => 'Your otp code has expired',
+        "incorrect_otp_code" => "Incorrect otp code",
+
+    ],
     'auth' => [
         'login' => 'login',
 

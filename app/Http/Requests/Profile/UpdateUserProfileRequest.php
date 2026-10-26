@@ -17,6 +17,10 @@ class UpdateUserProfileRequest extends Request
                 'filter' => 'trim|lowercase|sanitize_email',
                 'validate' => 'required|email|max_len:200|unique:users,email*' . $this->hive->POST['email'],
             ],
+            'otp_code' => [
+                'filter' => 'trim',
+                'validate' => 'numeric|min_len:6|max_len:6',
+            ],
         ];
     }
 

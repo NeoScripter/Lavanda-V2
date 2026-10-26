@@ -24,7 +24,7 @@ extract(component_props(
                         Обновить профиль
                     </h2>
 
-                    <form action="<?= \Base::instance()->alias('profile_update') ?>" method="post" class="space-y-6">
+                    <form cmp-otp-form action="<?= \Base::instance()->alias('profile_update') ?>" method="post" class="space-y-6">
                         <?= csrf() ?>
 
                         <?= component('web/form/form-input', [
@@ -47,6 +47,17 @@ extract(component_props(
                             ],
                         ]) ?>
 
+                        <div cmp-otp-input class='hidden'>
+                            <?= component('web/form/form-input', [
+                                'name'  => 'otp_code',
+                                'label' => 'Введите код подтверждения, отправленный вам на электронную почту',
+                                'error' => $errors['otp_code'] ?? '',
+                                'attrs' => [
+                                    'type'     => 'text',
+                                    'required' => false,
+                                ],
+                            ]) ?>
+                        </div>
 
                         <div class="flex justify-between gap-2.5">
                             <?php slot('components/web/ui/button', ['attrs' => ['type' => 'submit'], 'size' => 'sm']); ?>
@@ -54,10 +65,7 @@ extract(component_props(
                             <?php end_slot(); ?>
                         </div>
                     </form>
-                    <form action="<?= $hive->alias('email') ?>" method="post" class='mt-10'>
-                        <button type="submit">Send an email</button>
 
-                    </form>
                 </article>
 
                 <article>
