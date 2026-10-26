@@ -15,22 +15,18 @@
                     <!-- Header -->
                     <tr>
                         <td style="background-color:#635782;padding:20px 30px;text-align:center;">
-                            <h1 style="margin:0;color:#ffffff;font-size:20px;font-weight:bold;">Lavanda</h1>
+                            <h1 style="margin:0;color:#ffffff;font-size:20px;font-weight:bold;"><?= \Base::instance()->get('email.lavanda') ?></h1>
                         </td>
                     </tr>
                     <!-- Main Content -->
                     <tr>
                         <td style="padding-inline:40px;padding-bottom:20px;padding-top:30px;">
-                            <h2 style="margin:0 0 16px;color:#18181b;font-size:18px;">Hello <?= html_entity_decode($receiver_name) ?></h2>
-
-                            <?= html_entity_decode($html) ?>
-
-                            <?php if (!empty($link) && !empty($link_label)) : ?>
-                                <a href="<?= $link ?>" style="display:inline-block;background-color:#635782;color:#ffffff;text-decoration:none;padding:8px 14px;border-radius:4px;font-size:14px;font-weight:medium;"><?= $link_label ?></a>
+                            <?php if (isset($html)) : ?>
+                                <?= html_entity_decode($html) ?>
                             <?php endif; ?>
 
                             <hr style="margin:30px 0;border:none;border-top:1px solid #e4e4e7;">
-                            <p>С теплом, Lavanda Kim</p>
+                            <p><?= \Base::instance()->get('email.с_теплом_lavanda_kim') ?></p>
                         </td>
                     </tr>
                 </table>

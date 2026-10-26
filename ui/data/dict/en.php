@@ -16,6 +16,12 @@ return [
 
 
     ],
+    'email' => [
+        'lavanda' => 'Lavanda',
+        'с_теплом_lavanda_kim' => 'Best regards, Lavanda Kim',
+        "вот_ваш_код_верификации" => "Here is your verification code",
+        "подтверждение_электронной_почты" => "Email verification",
+    ],
     'auth' => [
         'login' => 'login',
 
