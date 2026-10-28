@@ -83,6 +83,7 @@ final class AccessStatus extends \Prefab
 
     public static function list_plans(array $user): array
     {
+        $hive = \Base::instance();
         $plans = [];
 
         if (self::instance()->has_active_subscription($user)) {
@@ -93,9 +94,7 @@ final class AccessStatus extends \Prefab
 
             $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
             $date = new DateTime($rows[0]['ends_at'])->format('d/m/y');
-            $plans[] = "{$hive->get("web.тариф")
-} $label, {$hive->get("web.оплачен_до")
-}$date";
+            $plans[] = "{$hive->get("web.тариф")} $label, {$hive->get("web.оплачен_до")}$date";
         }
 
         if (self::instance()->has_purchased_games($user)) {
@@ -106,10 +105,7 @@ final class AccessStatus extends \Prefab
 
             $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
             $number = $rows[0]['number'];
-            $plans[] = "{$hive->get("web.тариф")
-} $label, {$hive->get("web.в_наличии")
-} $number {$hive->get("web.ответа")
-}";
+            $plans[] = "{$hive->get("web.тариф")} $label, {$hive->get("web.в_наличии")} $number {$hive->get("web.ответа")}";
         }
 
         if (self::instance()->has_purchased_consultations($user)) {
@@ -120,15 +116,11 @@ final class AccessStatus extends \Prefab
 
             $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
             $number = $rows[0]['number'];
-            $plans[] = "{$hive->get("web.тариф")
-} $label, {$hive->get("web.в_наличии")
-} $number {$hive->get("web.консультации")
-}";
+            $plans[] = "{$hive->get("web.тариф")} $label, {$hive->get("web.в_наличии")} $number {$hive->get("web.консультации")}";
         }
 
         if (empty($plans)) {
-            $plans[] = $hive->get("web.у_вас_нет_активных_тарифов")
-;
+            $plans[] = $hive->get("web.у_вас_нет_активных_тарифов");
         }
 
         return $plans;

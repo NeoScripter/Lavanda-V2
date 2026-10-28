@@ -15,10 +15,12 @@ extract(component_props(
 
 <?php ob_start(); ?>
 
-<h1>Настрой на день: <?= $topic ?></h1>
+<h1><?= $hive->get("web.настрой_на_день_") ?>
+<?= $topic ?></h1>
 
 <div class='space-y-[1em] text-center text-balance max-w-200 mx-auto'>
-    <p>Карточки на каждый день, чтобы вернуть опору, спокойствие и веру в себя. Подходят, когда нужно настроиться на лучшее и укрепить внутренний ресурс.</p>
+    <p><?= $hive->get("web.карточки_на_каждый_день_чтобы_вернуть_опору_спокойствие_и_веру_в_себя_подходят_когда_нужно_настроиться_на_лучшее_и_укрепить_внутренний_ресурс_") ?>
+</p>
 </div>
 
 <div class='mt-10 mx-auto flex items-center justify-center flex-col sm:flex-row gap-y-4 gap-x-6'>

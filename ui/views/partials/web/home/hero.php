@@ -14,7 +14,7 @@ extract(component_props(
     'class' => "bg-[url('/assets/images/pages/home/hero/hero-bg.webp')] bg-violet-100/75 bg-cover bg-center overflow-x-clip"
 ]); ?>
 <section class='space-y-8 md:space-y-12'>
-    <h1 class='mb-2'>Ответ ближе, чем кажется</h1>
+    <h1 class='mb-2'><?= $hive->get("web.ответ_ближе_чем_кажется_") ?> </h1>
 
     <div class='text-center text-balance sm:hidden md:block max-w-lg mx-auto isolate z-1'>
         <p><?= $hive->get('web.Любовь_Выбор_Страх_Надежда') ?></p>
@@ -50,9 +50,11 @@ extract(component_props(
 
         <article cmp-game-container class='lg:basis-1/2 space-y-6'>
             <header class='text-center text-balance'>
-                <h2 class='text-2xl md:text-3xl! lg:text-4xl!'>Давай познакомимся?</h2>
-                <p class='mb-[0.5em]'> Почему ты здесь именно сегодня? Что привело тебя в пространство Lavanda.kim и с чего хочется начать?</p>
-                <p> Авторский Оракул TheCat поможет прислушаться к себе, найти свою отправную точку и выбрать, куда заглянуть дальше.</p>
+                <h2 class='text-2xl md:text-3xl! lg:text-4xl!'>qquila1 Давай познакомимся? qquila2
+                </h2>
+                <p class='mb-[0.5em]'>qquila1 Почему ты здесь именно сегодня? Что привело тебя в пространство Lavanda.kim и с чего хочется начать? qquila2 </p>
+                <p><?= $hive->get("web._авторский_оракул_поможет_прислушаться_к_себе_найти_свою_отправную_точку_и_выбрать_куда_заглянуть_дальше_") ?>
+                </p>
             </header>
 
             <div>
@@ -74,8 +76,7 @@ extract(component_props(
                 <div>
                     <?= component('web/ui/button', [
                         'variant' => 'primary',
-                        'slot' => $hive->get("web.открыть_карту")
-,
+                        'slot' => $hive->get("web.открыть_карту"),
                         'class' => 'mx-auto mb-1',
                         'attrs' => [
                             'cmp-launch-game-btn' => true,
@@ -85,8 +86,7 @@ extract(component_props(
                     ]) ?>
                     <?= component('web/ui/button', [
                         'variant' => 'primary',
-                        'slot' => $hive->get("web.попробовать_снова")
-,
+                        'slot' => $hive->get("web.попробовать_снова"),
                         'class' => 'mx-auto mb-1 hidden',
                         'attrs' => [
                             'cmp-reset-game-btn' => true,
@@ -97,8 +97,7 @@ extract(component_props(
                 <div>
                     <?= component('web/ui/button', [
                         'variant' => 'accent',
-                        'slot' => $hive->get("web.следующий_раздел")
-,
+                        'slot' => $hive->get("web.следующий_раздел"),
                         'class' => 'mx-auto mb-1',
                     ]) ?>
                 </div>

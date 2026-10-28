@@ -56,7 +56,7 @@ class PasswordResetController extends Controller
 
         Cache::instance()->set(key: $hash, val: $request->input('email'), ttl: 60 * 3);
 
-        $href = remove_extra_slashes(getenv('APP_URL'). '/'. $hive->alias('password_reset_edit', [], ['signature' => $hash]));
+        $href = remove_extra_slashes(getenv('APP_URL') . '/' . $hive->alias('password_reset_edit', [], ['signature' => $hash]));
 
         $job = new SendEmailJob();
 
@@ -65,15 +65,15 @@ class PasswordResetController extends Controller
         $payload = [
             'subject' => $hive->get('email.восстановление_пароля'),
             'html' => $html,
-            'user_name' => $hive->get("web.пользователь")
-,
+            'user_name' => $hive->get("web.пользователь"),
             'user_email' => $request->input('email')
         ];
 
         $job->handle($payload);
 
-        notify($hive->get("web.на_указанную_вами_почту_была_отправлена_ссылка_для_сброса_пароля")
-);
+        notify(
+            $hive->get("web.на_указанную_вами_почту_была_отправлена_ссылка_для_сброса_пароля")
+        );
         $hive->reroute('@password_reset_index');
     }
 
@@ -100,8 +100,9 @@ class PasswordResetController extends Controller
         $user->password = $request->input('password');
         $user->save();
 
-        notify($hive->get("web.пароль_успешно_изменен")
-);
+        notify(
+            $hive->get("web.пароль_успешно_изменен")
+        );
         $hive->reroute('@login');
     }
 }

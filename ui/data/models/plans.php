@@ -3,6 +3,8 @@
 
 use Enums\PlanSlug;
 
+$hive = \Base::instance();
+
 return [
     PlanSlug::ONE_TIME->value => [
         'image' => '/assets/images/pages/plans/plan-1/plan-1',

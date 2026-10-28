@@ -11,7 +11,8 @@ extract(component_props(
 ]); ?>
 
 <section class='pt-(--pt-lg)'>
-    <h1 class='mb-[1.75em]!'>Часто задаваемые вопросы</h1>
+    <h1 class='mb-[1.75em]!'><?= $hive->get("web.часто_задаваемые_вопросы_") ?>
+</h1>
 
     <div class='space-y-3 md:space-y-4'>
         <?php foreach ($faqs as $faq) : ?>

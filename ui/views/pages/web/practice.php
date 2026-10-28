@@ -4,7 +4,10 @@ extract(component_props(
     required: ['items'],
     optional: [],
     props: get_defined_vars(),
-)); ?>
+)); 
+
+$hive = \Base::instance();
+?>
 
 <?php slot('layouts/web/app-layout', [
     'title' => $hive->get("web.практика")
@@ -15,8 +18,10 @@ extract(component_props(
 <!-- Hero Section -->
 <section class='bg-white/90 full-bleed pt-[calc(var(--pt-lg)+var(--px-sm))] relative z-1 px-6 pb-10 sm:px-16 sm:pb-16 lg:max-w-208 lg:px-18 lg:pb-18 xl:max-w-263 xl:pb-22.5 xl:px-20 sm:rounded-b-2xl sm:max-w-177 mx-auto'>
 
-    <h1>Практика</h1>
-    <p class='text-center text-balance'>Иногда решение приходит не тогда, когда мы мучительно думаем о нём, а когда даём себе немного тишины и внимания. Или делаем анализ и рассчет отодвигая тревоги в сторону. Этот раздел — набор простых практик, которые помогут остановиться, настроиться на себя и яснее услышать внутренний голос.</p>
+    <h1> qquila1Практика qquila2
+</h1>
+    <p class='text-center text-balance'><?= $hive->get("web.иногда_решение_приходит_не_тогда_когда_мы_мучительно_думаем_о_нём_а_когда_даём_себе_немного_тишины_и_внимания_или_делаем_анализ_и_рассчет_отодвигая_тревоги_в_сторону_этот_раздел_набор_простых_практик_которые_помогут_остановиться_настроиться_на_себя_и_яснее_услышать_внутренний_голос_") ?>
+</p>
 </section>
 
 

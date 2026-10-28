@@ -1,6 +1,7 @@
+<?php $hive = \Base::instance(); ?>
+
 <?php slot('layouts/web/app-layout', [
-    'title' => $hive->get("web.тибетское_гадание_мо")
-,
+    'title' => $hive->get("web.тибетское_гадание_мо"),
 ]);
 
 extract(component_props(
@@ -10,20 +11,21 @@ extract(component_props(
 )); ?>
 
 <?php ob_start(); ?>
-Тибетское гадание МО
+<?= $hive->get("web.тибетское_гадание_мо_") ?>
+
 <?php $heading = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<p>МО — маленький ритуал, которому уже много веков. Два кубика. Шесть священных слогов. Тридцать шесть возможных комбинаций.
-    Всё остальное начинается с твоего вопроса.</p>
-<p>В тибетской традиции к МО обращались не только за советом. Говорят, его использовали и врачи тибетской медицины — чтобы лучше понять причину болезни, выбрать направление лечения или благоприятное время для его начала.</p>
+<p>qquila1МО — маленький ритуал, которому уже много веков. Два кубика. Шесть священных слогов. Тридцать шесть возможных комбинаций. Всё остальное начинается с твоего вопроса. qquila2
+</p>
+<p><?= $hive->get("web.в_тибетской_традиции_к_мо_обращались_не_только_за_советом_говорят_его_использовали_и_врачи_тибетской_медицины_чтобы_лучше_понять_причину_болезни_выбрать_направление_лечения_или_благоприятное_время_для_его_начала_") ?>
+</p>
 <?php $html = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
 <?= component('web/ui/button', [
     'variant' => 'primary',
-    'slot' => $hive->get("web.перейти_к_игре")
-,
+    'slot' => $hive->get("web.перейти_к_игре"),
     'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
 ]) ?>
 <?php $slot = ob_get_clean(); ?>
@@ -37,9 +39,9 @@ extract(component_props(
 <?php ob_start(); ?>
 <div cmp-dice-game>
     <div cmp-visible-at-start class='text-balance text-center md:mx-auto max-w-200 -mx-4'>
-        <h2 class='text-lg normal-case md:text-xl lg:text-2xl text-white'>Задай вопрос. Брось кубики. Узнай свою комбинацию МО.</h2>
-        <p>
-            В выпадающем окне ниже выбери тему своего вопроса, чтобы получить наиболее точное трактование
+        <h2 class='text-lg normal-case md:text-xl lg:text-2xl text-white'><?= $hive->get("web.задай_вопрос_брось_кубики_узнай_свою_комбинацию_мо_") ?>
+        </h2>
+        <p><?= $hive->get("web._в_выпадающем_окне_ниже_выбери_тему_своего_вопроса_чтобы_получить_наиболее_точное_трактование_") ?>
         </p>
     </div>
 
@@ -53,8 +55,7 @@ extract(component_props(
         <?php endif; ?>
         <?= component('web/ui/button', [
             'variant' => 'primary',
-            'slot' => $hive->get("web.получить_ответ")
-,
+            'slot' => $hive->get("web.получить_ответ"),
             'attrs' => ['cmp-launch-game-btn' => true],
         ]) ?>
     </div>
@@ -72,8 +73,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.попробовать_снова")
-,
+        'slot' => $hive->get("web.попробовать_снова"),
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -97,7 +97,8 @@ extract(component_props(
 
 <?php ob_start(); ?>
 <div>
-    <h3 class='text-balance text-center md:mx-auto max-w-200 -mx-4 mb-[2em]! text-xl uppercase md:text-2xl lg:text-3xl'>Как читать грани</h3>
+    <h3 class='text-balance text-center md:mx-auto max-w-200 -mx-4 mb-[2em]! text-xl uppercase md:text-2xl lg:text-3xl'><?= $hive->get("web.как_читать_грани_") ?>
+    </h3>
     <ul class='max-w-275 mx-auto gap-y-8 gap-x-10.5 sm:gap-y-10.5 justify-items-center justify-center grid grid-cols-[repeat(auto-fit,min(100%,31rem))]'>
         <?php foreach ($dices as $dice) : ?>
 

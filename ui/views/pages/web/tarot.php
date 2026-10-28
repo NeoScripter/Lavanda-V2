@@ -6,19 +6,23 @@ extract(component_props(
     required: ['cards'],
     optional: [],
     props: get_defined_vars(),
-)); ?>
+)); 
+
+$hive = \Base::instance();
+?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => $hive->get("web.карты_таро")
-,
+    'title' => $hive->get("web.карты_таро"),
 ]); ?>
 
 <?php ob_start(); ?>
-Карты Таро
+<?= $hive->get("web.карты_таро_") ?>
+
 <?php $heading = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<p>Пожалуй, нет тех, кто никогда не слышал об этих древнейших картах. Знаменитые карты Таро - это 78 дверей к внутренней ясности. Каждая карта — дверь в сюжет о выборе, испытании или трансформации. Случайный выбор карты может стать ключом к неочевидному ответу, который уже живет внутри вас.</p>
+<p><?= $hive->get("web.пожалуй_нет_тех_кто_никогда_не_слышал_об_этих_древнейших_картах_знаменитые_карты_таро_это_дверей_к_внутренней_ясности_каждая_карта_дверь_в_сюжет_о_выборе_испытании_или_трансформации_случайный_выбор_карты_может_стать_ключом_к_неочевидному_ответу_который_уже_живет_внутри_вас_") ?>
+</p>
 <?php $html = ob_get_clean(); ?>
 
 <?php $image = '/assets/images/pages/tarot/hero-fg'; ?>
@@ -26,26 +30,20 @@ extract(component_props(
 <?php $items = [
     [
         'id' => 1,
-        'title' => $hive->get("web._карта_главное_сейчас")
-,
-        'description' => $hive->get("web.одна_карта_один_фокус_она_подсказывает_на_что_стоит_обратить_внимание_сейчас")
-,
+        'title' => $hive->get("web._карта_главное_сейчас"),
+        'description' => $hive->get("web.одна_карта_один_фокус_она_подсказывает_на_что_стоит_обратить_внимание_сейчас"),
         'num' => 1
     ],
     [
         'id' => 2,
-        'title' => $hive->get("web._карты_путь_ситуации")
-,
-        'description' => $hive->get("web.три_карты_показывают_ситуацию_в_движении_откуда_она_берёт_начало_что_происходит_сейчас_и_куда_ведёт")
-,
+        'title' => $hive->get("web._карты_путь_ситуации"),
+        'description' => $hive->get("web.три_карты_показывают_ситуацию_в_движении_откуда_она_берёт_начало_что_происходит_сейчас_и_куда_ведёт"),
         'num' => 3
     ],
     [
         'id' => 3,
-        'title' => $hive->get("web._карт_глубокий_взгляд")
-,
-        'description' => $hive->get("web.пять_карт_раскрывают_ситуацию_с_разных_сторон_что_происходит_внутри_и_вокруг_что_мешает_и_на_что_можно_опереться")
-,
+        'title' => $hive->get("web._карт_глубокий_взгляд"),
+        'description' => $hive->get("web.пять_карт_раскрывают_ситуацию_с_разных_сторон_что_происходит_внутри_и_вокруг_что_мешает_и_на_что_можно_опереться"),
         'num' => 5
     ],
 ]; ?>
@@ -59,12 +57,12 @@ extract(component_props(
 <?php ob_start(); ?>
 <div>
     <p cmp-visible-at-start
-        class='text-balance mx-auto max-w-xl'>Карта открывается сама — как знак, который приходит вовремя. Иногда именно случай отражает то, что мы уже чувствуем, но не осознаём.</p>
+        class='text-balance mx-auto max-w-xl'><?= $hive->get("web.карта_открывается_сама_как_знак_который_приходит_вовремя_иногда_именно_случай_отражает_то_что_мы_уже_чувствуем_но_не_осознаём_") ?>
+    </p>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.получить_ответ")
-,
+        'slot' => $hive->get("web.получить_ответ"),
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-at-start' => true
@@ -87,8 +85,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.следующая_карта")
-,
+        'slot' => $hive->get("web.следующая_карта"),
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-during' => true
@@ -97,8 +94,7 @@ extract(component_props(
     ]) ?>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.попробовать_снова")
-,
+        'slot' => $hive->get("web.попробовать_снова"),
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -113,8 +109,7 @@ extract(component_props(
 <?php ob_start(); ?>
 <div>
     <p cmp-visible-at-start
-        class='text-balance mx-auto max-w-xl'>
-        Вы сами выбираете карту, которая откликается сердцем. Этот способ помогает довериться интуиции и увидеть собственный внутренний ответ.
+        class='text-balance mx-auto max-w-xl'><?= $hive->get("web._вы_сами_выбираете_карту_которая_откликается_сердцем_этот_способ_помогает_довериться_интуиции_и_увидеть_собственный_внутренний_ответ_") ?>
     </p>
 
     <?= component('web/layout/selected-items') ?>
@@ -134,8 +129,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.попробовать_снова")
-,
+        'slot' => $hive->get("web.попробовать_снова"),
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -147,8 +141,9 @@ extract(component_props(
 </div>
 <?php $slot2 = ob_get_clean(); ?>
 
-<?php $labels = [$hive->get("web.выбор_лаванды")
-, $hive->get("web.выбор_гостя")
+<?php $labels = [
+    $hive->get("web.выбор_лаванды"),
+    $hive->get("web.выбор_гостя")
 ]; ?>
 
 <?= component('web/layout/game-stage', [

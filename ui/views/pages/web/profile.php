@@ -8,8 +8,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => $hive->get("web.редактировать_профиль")
-,
+    'title' => $hive->get("web.редактировать_профиль"),
     'class' => "bg-[url('/assets/images/pages/article/page-bg.webp')] bg-cover bg-center"
 ]); ?>
 
@@ -17,12 +16,12 @@ extract(component_props(
     <div class="bg-white w-full max-w-120 lg:max-w-240 mx-auto xs:rounded-xl sm:rounded-primary px-6 py-9 sm:py-11 sm:px-9">
 
         <div class="flex flex-col gap-8">
-            <h1 class="text-xl text-center font-semibold">Редактировать профиль</h1>
+            <h1 class="text-xl text-center font-semibold"><?= $hive->get("web.редактировать_профиль_") ?>
+            </h1>
 
             <div class='grid lg:grid-cols-2 gap-10 border-b border-primary/50 pb-10'>
                 <article>
-                    <h2 class="font-medium text-base text-left hyphens-auto">
-                        Обновить профиль
+                    <h2 class="font-medium text-base text-left hyphens-auto"><?= $hive->get("web._обновить_профиль_") ?>
                     </h2>
 
                     <form cmp-otp-form action="<?= \Base::instance()->alias('profile_update') ?>" method="post" class="space-y-6">
@@ -30,8 +29,7 @@ extract(component_props(
 
                         <?= component('web/form/form-input', [
                             'name'  => 'name',
-                            'label' => $hive->get("web.имя_пользователя")
-,
+                            'label' => $hive->get("web.имя_пользователя"),
                             'error' => $errors['name'] ?? '',
                             'attrs' => [
                                 'type'     => 'text',
@@ -41,8 +39,7 @@ extract(component_props(
 
                         <?= component('web/form/form-input', [
                             'name'  => 'email',
-                            'label' => $hive->get("web.электронная_почта")
-,
+                            'label' => $hive->get("web.электронная_почта"),
                             'error' => $errors['email'] ?? '',
                             'attrs' => [
                                 'type'     => 'email',
@@ -53,8 +50,7 @@ extract(component_props(
                         <div cmp-otp-input class='hidden'>
                             <?= component('web/form/form-input', [
                                 'name'  => 'otp_code',
-                                'label' => $hive->get("web.введите_код_подтверждения_отправленный_вам_на_электронную_почту")
-,
+                                'label' => $hive->get("web.введите_код_подтверждения_отправленный_вам_на_электронную_почту"),
                                 'error' => $errors['otp_code'] ?? '',
                                 'attrs' => [
                                     'type'     => 'text',
@@ -73,8 +69,7 @@ extract(component_props(
                 </article>
 
                 <article>
-                    <h2 class="font-medium text-base text-left hyphens-auto">
-                        Сменить пароль
+                    <h2 class="font-medium text-base text-left hyphens-auto"><?= $hive->get("web._сменить_пароль_") ?>
                     </h2>
 
                     <form action="<?= \Base::instance()->alias('password_update') ?>" method="post" class="space-y-6">
@@ -123,7 +118,8 @@ extract(component_props(
             </div>
 
             <dialog id="delete-profile-dialog" popover class='border border-primary p-4 rounded-sm relative max-w-80'>
-                <p class='text-base'>Вы уверены что хотите удалить свой аккаунт?</p>
+                <p class='text-base'>qquila1Вы уверены что хотите удалить свой аккаунт? qquila2
+                </p>
                 <div class='flex items-center justify-center gap-6 mt-3'>
                     <form action="<?= $hive->alias('register_destroy') ?>" method="post">
                         <input type="hidden" name="_method" value="delete">
@@ -132,19 +128,20 @@ extract(component_props(
                         <?= component('web/ui/button', [
                             'size' => 'sm',
                             'variant' => 'danger',
-                            'slot' => $hive->get("web.удалить")
-,
+                            'slot' => $hive->get("web.удалить"),
                             'attrs' => ['type' => 'submit']
                         ]) ?>
                     </form>
                     <button popovertarget="delete-profile-dialog" popovertargetaction="hide" class='cursor-pointer min-w-25 transition-colors hover:text-primary'>
-                        <span class='block size-6'>Отмена</span>
+                        <span class='block size-6'><?= $hive->get("web.отмена_") ?>
+                        </span>
                     </button>
                 </div>
             </dialog>
             <button popovertarget="delete-profile-dialog" class='flex text-foreground/80 mx-auto lg:ml-0 items-center justify-center gap-[0.5em]'>
                 <span class='*:size-[1em]'> <?= svg('x') ?> </span>
-                Удалить аккаунт
+                <?= $hive->get("web.удалить_аккаунт_") ?>
+
             </button>
             <ul class='space-y-[0.5em] text-center order-2 lg:order-0'>
                 <?php foreach ($plans as $plan) : ?>

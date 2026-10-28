@@ -30,7 +30,7 @@ $hive = \Base::instance();
                     'attrs' => ['type' => 'submit']
                 ]); ?>
                 <?= svg('logout') ?>
-                Выйти
+                <?= $hive->get("web.выйти_") ?>
                 <?php end_slot(); ?>
             </form>
         <?php else : ?>
@@ -40,8 +40,7 @@ $hive = \Base::instance();
                 'href' => empty($user) ? $hive->alias('login') : $hive->alias('profile'),
             ]); ?>
             <?= svg('circle-user') ?>
-            <?= empty($user) ? $hive->get("web.войти")
- : $user['name'] ?>
+            <?= empty($user) ? $hive->get("web.войти") : $user['name'] ?>
             <?php end_slot(); ?>
         <?php endif; ?>
         <?= component('web/ui/burger-menu', ['class' => 'text-primary mr-2 sm:hidden']); ?>

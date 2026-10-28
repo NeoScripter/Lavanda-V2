@@ -14,12 +14,15 @@ extract(component_props(
 ]); ?>
 
 <?php ob_start(); ?>
-Тихие моменты покоя
+ <?= $hive->get("web.тихие_моменты_покоя_") ?>
+
 <?php $heading = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<p>Чашка чая или ароматный кофе. Любимая книга. Лучики солнца из окна. Цветок в комнате. Мысль, которая пришла внезапно и согрела. Иногда именно из таких мелочей и складывается тёплый день.</p>
-<p>28 карточек - 28 маленьких поводов остановиться, посмотреть вокруг и насладиться этим моментом.</p>
+<p><?= $hive->get("web.чашка_чая_или_ароматный_кофе_любимая_книга_лучики_солнца_из_окна_цветок_в_комнате_мысль_которая_пришла_внезапно_и_согрела_иногда_именно_из_таких_мелочей_и_складывается_тёплый_день_") ?>
+</p>
+<p><?= $hive->get("web._карточек_маленьких_поводов_остановиться_посмотреть_вокруг_и_насладиться_этим_моментом_") ?>
+</p>
 <?php $html = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
@@ -43,7 +46,8 @@ extract(component_props(
 
 
     <?php if (! empty($cards)) : ?>
-        <p cmp-visible-at-start class='text-balance mx-auto max-w-xl'>Карта открывается сама — как знак, который приходит вовремя. Иногда именно случай отражает то, что мы уже чувствуем, но не осознаём.</p>
+        <p cmp-visible-at-start class='text-balance mx-auto max-w-xl'><?= $hive->get("web.карта_открывается_сама_как_знак_который_приходит_вовремя_иногда_именно_случай_отражает_то_что_мы_уже_чувствуем_но_не_осознаём_") ?>
+</p>
 
         <?= component('web/ui/button', [
             'variant' => 'primary',
@@ -68,7 +72,8 @@ extract(component_props(
 
         <?php end_slot(); ?>
     <?php else : ?>
-        <p class='mx-auto max-w-xl'>Пока не добавлено ни одной карты</p>
+        <p class='mx-auto max-w-xl'><?= $hive->get("web.пока_не_добавлено_ни_одной_карты_") ?>
+</p>
     <?php endif; ?>
 
     <?= component('web/ui/button', [
@@ -89,7 +94,8 @@ extract(component_props(
 <?php ob_start(); ?>
 <div>
     <?php if (! empty($cards)) : ?>
-        <p cmp-visible-at-start class='text-balance mx-auto max-w-xl'> Вы сами выбираете карту, которая откликается сердцем. Этот способ помогает довериться интуиции и увидеть собственный внутренний ответ. </p>
+        <p cmp-visible-at-start class='text-balance mx-auto max-w-xl'><?= $hive->get("web._вы_сами_выбираете_карту_которая_откликается_сердцем_этот_способ_помогает_довериться_интуиции_и_увидеть_собственный_внутренний_ответ_") ?>
+</p>
 
         <?= component('web/layout/selected-items') ?>
 
@@ -106,7 +112,8 @@ extract(component_props(
 
         <?php end_slot(); ?>
     <?php else : ?>
-        <p class='mx-auto max-w-xl'>Пока не добавлено ни одной карты</p>
+        <p class='mx-auto max-w-xl'><?= $hive->get("web.пока_не_добавлено_ни_одной_карты_") ?>
+</p>
     <?php endif; ?>
 
     <?= component('web/ui/button', [

@@ -8,28 +8,32 @@ extract(component_props(
     props: get_defined_vars(),
 ));
 
+$hive = \Base::instance();
 $winner = $stones[array_rand($stones)]; ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => $hive->get("web.магические_камни")
-,
+    'title' => $hive->get("web.магические_камни"),
 ]); ?>
 
 <?php ob_start(); ?>
-70 камней в одном мешочке
+<?= $hive->get("web._камней_в_одном_мешочке_") ?>
+
 <?php $heading = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<p><strong>Какой сегодня окажется рядом?</strong></p>
-<p class='mb-0'>Перед Вами 70 камней. Один из них окажется рядом именно сейчас. У каждого минерала — свой характер, своя история и свой способ быть опорой.</p>  
-<p>Выберите камень и узнайте, с чем он может сопровождать Вас.</p>
+<p><strong>
+        qquila1Какой сегодня окажется рядом? qquila2
+    </strong></p>
+<p class='mb-0'><?= $hive->get("web.перед_вами_камней_один_из_них_окажется_рядом_именно_сейчас_у_каждого_минерала_свой_характер_своя_история_и_свой_способ_быть_опорой_") ?>
+</p>  
+<p><?= $hive->get("web.выберите_камень_и_узнайте_с_чем_он_может_сопровождать_вас_") ?>
+</p>
 <?php $html = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
 <?= component('web/ui/button', [
     'variant' => 'primary',
-    'slot' => $hive->get("web.перейти_к_игре")
-,
+    'slot' => $hive->get("web.перейти_к_игре"),
     'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
 ]) ?>
 <?php $slot = ob_get_clean(); ?>
@@ -41,8 +45,7 @@ $winner = $stones[array_rand($stones)]; ?>
 </section>
 
 <section class='[&:has(+_[cmp-game-stage].hidden)]:hidden'>
-    <p class='text-center text-balance max-w-200 mx-auto'>
-        Каждое значение — это подсказка, предостережение или напутствие на ближайшее будущее. Узнайте, что вам шепчет камень — возможно, ответ уже лежит на ладони.
+    <p class='text-center text-balance max-w-200 mx-auto'><?= $hive->get("web._каждое_значение_это_подсказка_предостережение_или_напутствие_на_ближайшее_будущее_узнайте_что_вам_шепчет_камень_возможно_ответ_уже_лежит_на_ладони_") ?>
     </p>
 </section>
 
@@ -101,8 +104,7 @@ $winner = $stones[array_rand($stones)]; ?>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.получить_ответ")
-,
+        'slot' => $hive->get("web.получить_ответ"),
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-at-start' => true
@@ -111,8 +113,7 @@ $winner = $stones[array_rand($stones)]; ?>
     ]) ?>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.попробовать_снова")
-,
+        'slot' => $hive->get("web.попробовать_снова"),
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -126,8 +127,7 @@ $winner = $stones[array_rand($stones)]; ?>
 <div class='relative group min-h-100 md:min-h-150 isolate'>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.получить_ответ")
-,
+        'slot' => $hive->get("web.получить_ответ"),
         'attrs' => [
             'cmp-show-cloth-btn' => true,
             'cmp-visible-at-start' => true
@@ -169,8 +169,7 @@ $winner = $stones[array_rand($stones)]; ?>
             <span
                 class='absolute left-0 top-0 hidden sm:block -translate-1/2 size-7 backdrop-blur-2xl bg-primary-pale/50 *:size-full rounded-full text-white'>
                 <?= svg('info-circle') ?>
-            </span>
-            Нажмите в любую область платка, чтобы вытянуть камень
+            </span><?= $hive->get("web._нажмите_в_любую_область_платка_чтобы_вытянуть_камень_") ?>
         </div>
         <button cmp-pickable-item class='absolute inset-0 size-2/3 cursor-pointer m-auto [&:has(+:not(.hidden))]:hidden'></button>
         <div cmp-winner-stone class='starting:opacity-0 duration-300 ease-in-out transition-opacity hidden '>
@@ -187,8 +186,7 @@ $winner = $stones[array_rand($stones)]; ?>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.попробовать_снова")
-,
+        'slot' => $hive->get("web.попробовать_снова"),
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -198,8 +196,9 @@ $winner = $stones[array_rand($stones)]; ?>
 </div>
 <?php $slot2 = ob_get_clean(); ?>
 
-<?php $labels = [$hive->get("web.выбор_лаванды")
-, $hive->get("web.выбор_гостя")
+<?php $labels = [
+    $hive->get("web.выбор_лаванды"),
+    $hive->get("web.выбор_гостя")
 ]; ?>
 
 <?= component('web/layout/game-stage', [

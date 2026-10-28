@@ -1,12 +1,16 @@
+<?php $hive = \Base::instance() ;?>
+
 <section class='full-bleed [--sq-size:min(20.875rem,90vw)] lg:[--sq-size:25rem] 2xl:[--sq-size:30rem] [--offset:calc(var(--sq-size)/4)] sm:[--offset:calc(var(--sq-size)/2)] mb-(--offset) lg:mb-[calc(var(--offset)-7.75rem)] xl:mb-[calc(var(--offset)-12rem)]'>
     <?php slot('components/web/layout/hero-light'); ?>
 
     <div class='lg:flex lg:items-start lg:gap-23.25'>
         <div class='space-y-8 md:space-y-12'>
-            <h1 class='mb-2 text-left'>Принять решение</h1>
+            <h1 class='mb-2 text-left'><?= $hive->get("web.принять_решение_") ?>
+</h1>
 
             <div class='space-y-[1em]'>
-                <p>Самые важные вопросы сопровождают человека тысячи лет. Меняются эпохи, технологии и привычный уклад жизни, но любовь, выбор, сомнения, страх, надежда и поиск своего пути остаются неизменными</p>
+                <p><?= $hive->get("web.самые_важные_вопросы_сопровождают_человека_тысячи_лет_меняются_эпохи_технологии_и_привычный_уклад_жизни_но_любовь_выбор_сомнения_страх_надежда_и_поиск_своего_пути_остаются_неизменными_") ?>
+</p>
             </div>
 
             <?= component('web/ui/button', [

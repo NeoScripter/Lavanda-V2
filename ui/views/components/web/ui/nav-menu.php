@@ -12,21 +12,16 @@ $other_locales = array_map(
 );
 
 $nav_links = [
-    ['url' => '/about', 'label' => $hive->get("web.о_ресурсе")
-],
-    [
-        'label' => $hive->get("web.по_типу_помощника")
-,
-        'nav_links' => [
-            ['url' => $hive->alias('runes'), 'label' => $hive->get("web.скандинавские_руны")
-],
+    ['url' => '/about', 'label' => $hive->get("web.о_ресурсе") ],
+    [ 'label' => $hive->get("web.по_типу_помощника") ,
+        'nav_links' => [ ['url' => $hive->alias('runes'), 'label' => $hive->get("web.скандинавские_руны") ],
             ['url' =>  $hive->alias('metaphoric'), 'label' => $hive->get("web.метафорические_карты")
 ],
             ['url' => '/iching', 'label' => $hive->get("web.книга_перемен")
 ],
             ['url' =>  $hive->alias('dices'), 'label' => $hive->get("web.тибетские_кубики_мо_")
 ],
-            ['url' =>  $hive->alias('stones'), 'label' => qquila1Самоцветы (70 камней) newqquila2
+            ['url' =>  $hive->alias('stones'), 'label' => qquila1 Самоцветы (70 камней) new qquila2
 ],
             ['url' =>  $hive->alias('tarot'), 'label' => $hive->get("web.карты_таро")
 ],

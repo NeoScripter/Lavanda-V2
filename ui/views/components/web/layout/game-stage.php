@@ -6,8 +6,9 @@ extract(component_props(
     required: ['slots'],
     optional: [
         'class' => '',
-        'labels' => [$hive->get("web.выбор_лаванды")
-],
+        'labels' => [
+            $hive->get("web.выбор_лаванды")
+        ],
         'interpretation' => null
     ],
     props: get_defined_vars(),
@@ -49,7 +50,8 @@ extract(component_props(
 
     <template cmp-theme-picker>
         <div class='lg:mb-10 2xl:mb-0'>
-            <h4 class='text-foreground font-semibold text-xl md:text-2xl xl:text-3xl'>Выберите тему для интерпретации</h4>
+            <h4 class='text-foreground font-semibold text-xl md:text-2xl xl:text-3xl'><?= $hive->get("web.выберите_тему_для_интерпретации_") ?>
+            </h4>
             <nav class='flex flex-col sm:flex-wrap sm:flex-row mt-10 justify-center gap-y-[1em] gap-x-[1.25em]'>
                 <button cmp-theme-btn class='font-medium bg-primary-muted/75 text-white cursor-pointer py-[0.75em] uppercase text-center sm:min-w-80 rounded-2xl px-[1.25em] transition-[opacity,background-color,color] duration-300 ease [[selected-theme]]:bg-primary'>
                 </button>
@@ -70,13 +72,12 @@ extract(component_props(
 
                 <div class="flex flex-col text-center text-balance gap-4 lg:gap-8">
 
-                    <p class='font-semibold'> Твой ответ уже здесь </p>
-                    <p> Первое знакомство с Lavanda позади. Открой ответ на свой вопрос — или выбери формат, чтобы возвращаться, когда захочется. </p>
+                    <p class='font-semibold'><?= $hive->get("web._твой_ответ_уже_здесь_") ?> </p>
+                    <p><?= $hive->get("web._первое_знакомство_с_позади_открой_ответ_на_свой_вопрос_или_выбери_формат_чтобы_возвращаться_когда_захочется_") ?> </p>
                     <div class='flex flex-col lg:flex-row items-center justify-center mt-2 gap-4 lg:gap-8'>
                         <?= component('web/ui/button', [
                             'variant' => 'accent',
-                            'slot' => $hive->get("web.выбрать_постоянный_формат")
-,
+                            'slot' => $hive->get("web.выбрать_постоянный_формат"),
                             'size' => 'sm',
                             'href' => $hive->alias('plans'),
                             'class' => 'w-fit lg:min-w-70',
@@ -84,14 +85,14 @@ extract(component_props(
 
                         <?= component('web/ui/button', [
                             'variant' => 'muted',
-                            'slot' => $hive->get("web.продолжить_как_гость")
-,
+                            'slot' => $hive->get("web.продолжить_как_гость"),
                             'size' => 'sm',
                             'href' => $hive->alias('plans_show', ['slug' => PlanSlug::ONE_TIME->value]),
                             'class' => 'w-fit lg:min-w-70',
                         ]) ?>
                     </div>
-                    <a href="<?= $hive->alias('plans_show', ['slug' => PlanSlug::PERSONAL->value]) ?>" class='underline underline-offset-4 text-sm hover:text-primary transition-colors'>Заказать персональный разбор</a>
+                    <a href="<?= $hive->alias('plans_show', ['slug' => PlanSlug::PERSONAL->value]) ?>" class='underline underline-offset-4 text-sm hover:text-primary transition-colors'><?= $hive->get("web.заказать_персональный_разбор_") ?>
+                    </a>
                 </div>
             </div>
     </template>

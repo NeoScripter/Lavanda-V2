@@ -6,17 +6,10 @@ extract(component_props(
     props: get_defined_vars(),
 )); ?>
 
-<?php 
-
-// $cache->set('FOO', 'BAR', 20);
-// dd(\Base::instance()->get('COOKIE'));
-// dd(time());
-
-;?>
+<?php $hive = \Base::instance(); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => $hive->get("web.главная")
-,
+    'title' => $hive->get("web.главная"),
     'class' => 'bg-white',
 ]); ?>
 

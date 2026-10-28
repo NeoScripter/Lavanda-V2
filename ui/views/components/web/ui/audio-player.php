@@ -4,14 +4,19 @@ extract(component_props(
     required: ['src'],
     optional: ['figcaption' => null, 'class' => ''],
     props: get_defined_vars(),
-)); ?>
+));
+
+$hive = \Base::instance();
+?>
 
 <figure cmp-audio-player class="<?= cc('', $class) ?>">
     <?php if ($figcaption) : ?>
         <figcaption class='sr-only'><?= $figcaption ?></figcaption>
     <?php endif; ?>
     <audio class='sr-only' controls playsinline src="<?= $src ?>">
-        <a href="<?= $src ?>"> Скачать аудио</a>
+        <a href="<?= $src ?>"> 
+            qquila1Скачать аудио qquila2
+        </a>
     </audio>
     <div class='max-w-sm mx-auto'>
         <div class='flex items-center justify-center text-white text-xs gap-4'>

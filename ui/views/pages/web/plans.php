@@ -35,7 +35,8 @@ $button_labels = [
 
     <h1>Выбери свой формат</h1>
 
-    <p class='text-center text-balance'>Каждому — по душе и в своём ритме</p>
+    <p class='text-center text-balance'><?= $hive->get("web.каждому_по_душе_и_в_своём_ритме_") ?>
+</p>
 
     <ul class='grid grid-cols-[repeat(auto-fit,minmax(min(100%,18.75rem),1fr))] justify-items-center gap-y-45 gap-x-10 mt-38 sm:mt-45 md:mt-50 lg:w-200 lg:mx-auto 2xl:mx-0 2xl:w-full '>
         <?php foreach ($items as $idx => $item) : ?>
