@@ -9,23 +9,25 @@ extract(component_props(
 <?php $hive = \Base::instance(); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => $hive->get("web.настрой")
-,
+    'title' => $hive->get("web.настрой"),
 ]); ?>
 
 <?php ob_start(); ?>
 
 <div class='flex flex-col h-full justify-center gap-6'>
-    <h1>qquila1Войти в нужный настрой qquila2
-</h1>
+    <h1><?= $hive->get("web.войти_в_нужный_настрой_") ?>
+    </h1>
 
     <div class='space-y-[1em] text-center text-balance max-w-200 mx-auto'>
         <p><?= $hive->get("web.настрой_это_то_с_чего_все_начинается_") ?>
-</p>
-        <p>qquila1Замечали, как несколько слов способны изменить взгляд на происходящее, вернуть спокойствие, вдохновение или уверенность? qquila2
-</p>
+        </p>
+        <p>
+
+            qquila1Замечали, как несколько слов способны изменить взгляд на происходящее, вернуть спокойствие, вдохновение или уверенность? qquila2
+
+        </p>
         <p><?= $hive->get("web.выбери_тему_и_откройте_своё_послание_на_сегодня_пусть_оно_станет_точкой_опоры_на_весь_день_девизом_или_лозунгом_") ?>
-</p>
+        </p>
     </div>
 </div>
 <?php $slot1 = ob_get_clean(); ?>

@@ -15,10 +15,14 @@
         <div>
             <h3><?= $hive->get("web.загляните_") ?> </h3>
             <p>
+
                 qquila1 Что привело вас в Lavanda? qquila2
+
             </p>
             <p>
+
                 qquila1 В чем сегодня особенно нужна поддержка? qquila2
+
             </p>
             <p class='font-bold text-primary'><?= $hive->get("web.позвольте_первой_заговорить_с_вами_") ?>
             </p>

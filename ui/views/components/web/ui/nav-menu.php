@@ -21,7 +21,9 @@ $nav_links = [
 ],
             ['url' =>  $hive->alias('dices'), 'label' => $hive->get("web.тибетские_кубики_мо_")
 ],
-            ['url' =>  $hive->alias('stones'), 'label' => qquila1 Самоцветы (70 камней) new qquila2
+                        ['url' =>  $hive->alias('stones'), 'label' => 
+                         qquila1 Самоцветы (70 камней) new qquila2
+
 ],
             ['url' =>  $hive->alias('tarot'), 'label' => $hive->get("web.карты_таро")
 ],

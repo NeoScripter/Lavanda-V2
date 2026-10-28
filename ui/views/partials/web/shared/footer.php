@@ -21,7 +21,9 @@
                     </a>
                     <span class='h-1 bg-primary w-15 block my-4'></span>
                     <p>
+
                         qquila1Остались вопросы? Напишите авторам - будем рады обратной связи. qquila2
+
                     </p>
                 </li>
                 <li>

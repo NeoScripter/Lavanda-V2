@@ -37,7 +37,10 @@
 
     <div class="flex flex-col gap-2.5">
         <a href="<?= $hive->alias('password_reset_index') ?>"
-            class='text-xs transition-colors hover:text-primary underline underline-offset-4 font-medium ml-auto'>qquila1Забыли пароль? qquila2
+            class='text-xs transition-colors hover:text-primary underline underline-offset-4 font-medium ml-auto'>
+            
+            qquila1 Забыли пароль? qquila2
+
 </a>
         <?= component(
             'web/ui/button',
@@ -54,7 +57,10 @@
 </form>
 
 <?php slot('components/web/layout/info-banner', ['class' => 'mt-5']) ?>
-<p class='mb-5'>qquila1Впервые на сайте? Пройдите экспресс регистрацию за 1 минуту и получите полный доступ ко всем разделам на 24 часа qquila2
+<p class='mb-5'>
+    
+    qquila1 Впервые на сайте? Пройдите экспресс регистрацию за 1 минуту и получите полный доступ ко всем разделам на 24 часа qquila2
+
 </p>
 
 <?= component(

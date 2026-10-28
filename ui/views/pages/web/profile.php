@@ -118,7 +118,10 @@ extract(component_props(
             </div>
 
             <dialog id="delete-profile-dialog" popover class='border border-primary p-4 rounded-sm relative max-w-80'>
-                <p class='text-base'>qquila1Вы уверены что хотите удалить свой аккаунт? qquila2
+                <p class='text-base'>
+                    
+                    qquila1Вы уверены что хотите удалить свой аккаунт? qquila2
+
                 </p>
                 <div class='flex items-center justify-center gap-6 mt-3'>
                     <form action="<?= $hive->alias('register_destroy') ?>" method="post">

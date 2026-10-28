@@ -50,9 +50,15 @@ extract(component_props(
 
         <article cmp-game-container class='lg:basis-1/2 space-y-6'>
             <header class='text-center text-balance'>
-                <h2 class='text-2xl md:text-3xl! lg:text-4xl!'>qquila1 Давай познакомимся? qquila2
+                <h2 class='text-2xl md:text-3xl! lg:text-4xl!'>
+                    qquila1 Давай познакомимся? qquila2
+
                 </h2>
-                <p class='mb-[0.5em]'>qquila1 Почему ты здесь именно сегодня? Что привело тебя в пространство Lavanda.kim и с чего хочется начать? qquila2 </p>
+                <p class='mb-[0.5em]'>
+
+                    qquila1 Почему ты здесь именно сегодня? Что привело тебя в пространство LavandaKim и с чего хочется начать? qquila2 
+
+                </p>
                 <p><?= $hive->get("web._авторский_оракул_поможет_прислушаться_к_себе_найти_свою_отправную_точку_и_выбрать_куда_заглянуть_дальше_") ?>
                 </p>
             </header>
