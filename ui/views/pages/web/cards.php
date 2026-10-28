@@ -55,7 +55,8 @@
                     'path' => $item['img'],
                     'alt' => $item['alt'],
                     'sizes' => 'mb',
-                    'prt_class' => 'max-w-35 mx-auto mb-4',
+                    'prt_class' => 'mx-auto w-full aspect-4/5 mb-4 bg-contain! ' . (($idx === 2) ? 'max-w-30 mb-6 mt-3' : 'max-w-35 '),
+                    'img_class' => 'object-contain!',
                 ]) ?>
 
                 <h2 class='text-xl text-center md:text-2xl font-bold isolate uppercase'><?= $item['title'] ?></h2>

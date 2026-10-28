@@ -11,12 +11,11 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => $hive->get("web.метафорические_карты")
-,
+    'title' => $hive->get("web.метафорические_карты"),
 ]); ?>
 
 <?php ob_start(); ?>
- <?= $hive->get("web.метафорические_карты") ?>
+<?= $hive->get("web.метафорические_карты") ?>
 
 <?php $heading = ob_get_clean(); ?>
 
@@ -26,10 +25,13 @@ extract(component_props(
 <?php $html = ob_get_clean(); ?>
 
 
-<?php $image = '/assets/images/pages/metaphoric/hero-fg'; ?>
+<?php $image = '/assets/images/pages/metaphoric/hero-fg';
+
+$img_class = '2xl:max-w-[min(40%,30rem)]';
+?>
 
 <section class='full-bleed'>
-    <?= component('web/layout/hero-game', compact('heading', 'html', 'image')); ?>
+    <?= component('web/layout/hero-game', compact('heading', 'html', 'image', 'img_class')); ?>
 </section>
 
 
@@ -37,12 +39,11 @@ extract(component_props(
 <div>
     <p cmp-visible-at-start
         class='text-balance mx-auto max-w-xl'><?= $hive->get("web.карта_открывается_сама_как_знак_который_приходит_вовремя_иногда_именно_случай_отражает_то_что_мы_уже_чувствуем_но_не_осознаём") ?>
-</p>
+    </p>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.получить_ответ")
-,
+        'slot' => $hive->get("web.получить_ответ"),
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-at-start' => true
@@ -65,8 +66,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.попробовать_снова")
-,
+        'slot' => $hive->get("web.попробовать_снова"),
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true

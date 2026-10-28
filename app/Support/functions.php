@@ -623,7 +623,7 @@ function cc(string $base, string $merged = '')
     if (empty(trim($merged))) {
         return $base;
     }
-    $tw_classes = ['pb-', 'pt-', 'px-', 'pl-', 'pr-', 'py-', 'm-', 'mx-', 'mt-', 'ml-', 'mr-', 'mb-', 'my-', 'object-', 'justify-', 'items-', 'shadow-', 'rounded-'];
+    $tw_classes = ['pb-', 'pt-', 'max-w', 'px-', 'pl-', 'pr-', 'py-', 'm-', 'mx-', 'mt-', 'ml-', 'mr-', 'mb-', 'my-', 'object-', 'justify-', 'items-', 'shadow-', 'rounded-'];
     $media_qrs = ['xs', 'sm', 'lg', 'xl', '2xl'];
     $prefixes = [];
 

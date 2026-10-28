@@ -23,7 +23,10 @@ $hive = \Base::instance();
 <?php ob_start(); ?>
 <p><?= $hive->get("web.пожалуй_нет_тех_кто_никогда_не_слышал_об_этих_древнейших_картах_знаменитые_карты_таро_это_дверей_к_внутренней_ясности_каждая_карта_дверь_в_сюжет_о_выборе_испытании_или_трансформации_случайный_выбор_карты_может_стать_ключом_к_неочевидному_ответу_который_уже_живет_внутри_вас") ?>
 </p>
-<?php $html = ob_get_clean(); ?>
+<?php $html = ob_get_clean(); 
+
+$img_class = '2xl:max-w-[min(40%,30rem)]';
+?>
 
 <?php $image = '/assets/images/pages/tarot/hero-fg'; ?>
 
@@ -49,7 +52,7 @@ $hive = \Base::instance();
 ]; ?>
 
 <section class='full-bleed'>
-    <?= component('web/layout/hero-game', compact('heading', 'html', 'image')); ?>
+    <?= component('web/layout/hero-game', compact('heading', 'html', 'image', 'img_class')); ?>
     <?= component('web/ui/set-num-items-btns', compact('items')); ?>
 </section>
 
