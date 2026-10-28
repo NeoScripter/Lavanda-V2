@@ -34,7 +34,7 @@
     <div class="flex flex-col gap-2.5">
         <a href="<?= $hive->alias('password_reset_index') ?>"
             class='text-xs transition-colors hover:text-primary underline underline-offset-4 font-medium ml-auto'>
-            <?= $hive->get('web.забыли_пароль_') ?>
+            <?= $hive->get('web.забыли_пароль') ?>
         </a>
         <?= component(
             'web/ui/button',
@@ -51,7 +51,7 @@
 
 <?php slot('components/web/layout/info-banner', ['class' => 'mt-5']) ?>
 <p class='mb-5'>
-    <?= $hive->get('web._впервые_на_сайте_пройдите_экспресс_регистрацию_за_минуту_и_получите_полный_доступ_ко_всем_разделам_на_часа_') ?>
+    <?= $hive->get('web.впервые_на_сайте_пройдите_экспресс_регистрацию_за_минуту_и_получите_полный_доступ_ко_всем_разделам_на_часа') ?>
 </p>
 
 <?= component(

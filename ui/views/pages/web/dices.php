@@ -11,14 +11,14 @@ extract(component_props(
 )); ?>
 
 <?php ob_start(); ?>
-<?= $hive->get("web.тибетское_гадание_мо_") ?>
+<?= $hive->get("web.тибетское_гадание_мо") ?>
 
 <?php $heading = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<p><?= $hive->get("web.мо_маленький_ритуал_которому_уже_много_веков_два_кубика_шесть_священных_слогов_тридцать_шесть_возможных_комбинаций_всё_остальное_начинается_с_твоего_вопроса_") ?>
+<p><?= $hive->get("web.мо_маленький_ритуал_которому_уже_много_веков_два_кубика_шесть_священных_слогов_тридцать_шесть_возможных_комбинаций_всё_остальное_начинается_с_твоего_вопроса") ?>
 </p>
-<p><?= $hive->get("web.в_тибетской_традиции_к_мо_обращались_не_только_за_советом_говорят_его_использовали_и_врачи_тибетской_медицины_чтобы_лучше_понять_причину_болезни_выбрать_направление_лечения_или_благоприятное_время_для_его_начала_") ?>
+<p><?= $hive->get("web.в_тибетской_традиции_к_мо_обращались_не_только_за_советом_говорят_его_использовали_и_врачи_тибетской_медицины_чтобы_лучше_понять_причину_болезни_выбрать_направление_лечения_или_благоприятное_время_для_его_начала") ?>
 </p>
 <?php $html = ob_get_clean(); ?>
 
@@ -39,9 +39,9 @@ extract(component_props(
 <?php ob_start(); ?>
 <div cmp-dice-game>
     <div cmp-visible-at-start class='text-balance text-center md:mx-auto max-w-200 -mx-4'>
-        <h2 class='text-lg normal-case md:text-xl lg:text-2xl text-white'><?= $hive->get("web.задай_вопрос_брось_кубики_узнай_свою_комбинацию_мо_") ?>
+        <h2 class='text-lg normal-case md:text-xl lg:text-2xl text-white'><?= $hive->get("web.задай_вопрос_брось_кубики_узнай_свою_комбинацию_мо") ?>
         </h2>
-        <p><?= $hive->get("web._в_выпадающем_окне_ниже_выбери_тему_своего_вопроса_чтобы_получить_наиболее_точное_трактование_") ?>
+        <p><?= $hive->get("web.в_выпадающем_окне_ниже_выбери_тему_своего_вопроса_чтобы_получить_наиболее_точное_трактование") ?>
         </p>
     </div>
 
@@ -97,7 +97,7 @@ extract(component_props(
 
 <?php ob_start(); ?>
 <div>
-    <h3 class='text-balance text-center md:mx-auto max-w-200 -mx-4 mb-[2em]! text-xl uppercase md:text-2xl lg:text-3xl'><?= $hive->get("web.как_читать_грани_") ?>
+    <h3 class='text-balance text-center md:mx-auto max-w-200 -mx-4 mb-[2em]! text-xl uppercase md:text-2xl lg:text-3xl'><?= $hive->get("web.как_читать_грани") ?>
     </h3>
     <ul class='max-w-275 mx-auto gap-y-8 gap-x-10.5 sm:gap-y-10.5 justify-items-center justify-center grid grid-cols-[repeat(auto-fit,min(100%,31rem))]'>
         <?php foreach ($dices as $dice) : ?>

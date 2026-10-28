@@ -6,29 +6,29 @@
         <nav class='bg-white shadow-accent rounded-3xl translate-y-12 px-8 lg:px-10 lg:py-12 py-10 mx-auto text-balance max-w-[min(calc(100%-var(--px-lg)*2),25rem)] lg:max-w-4/5'>
             <ol class='grid gap-8 lg:grid-cols-4 lg:gap-14 xl:[&_li,p]:text-lg '>
                 <li>
-                    <a href="/about" class='font-semibold text-[1.25em] text-primary'><?= $hive->get("web.о_ресурсе_") ?> </a>
+                    <a href="/about" class='font-semibold text-[1.25em] text-primary'><?= $hive->get("web.о_ресурсе") ?> </a>
                     <span class='h-1 bg-primary w-15 block my-4'></span>
-                    <p><?= $hive->get("web._пространство_поддержки_и_вдохновения_здесь_вы_найдёте_простые_инструменты_которые_помогают_услышать_себя_") ?> </p>
+                    <p><?= $hive->get("web.пространство_поддержки_и_вдохновения_здесь_вы_найдёте_простые_инструменты_которые_помогают_услышать_себя") ?> </p>
                 </li>
                 <li>
-                    <a href="/plans" class='font-semibold text-[1.25em] text-primary'><?= $hive->get("web.доступ_") ?>
+                    <a href="/plans" class='font-semibold text-[1.25em] text-primary'><?= $hive->get("web.доступ") ?>
                     </a>
                     <span class='h-1 bg-primary w-15 block my-4'></span>
-                    <p><?= $hive->get("web.выберите_подходящий_тариф_поддержка_всегда_под_рукой_") ?> </p>
+                    <p><?= $hive->get("web.выберите_подходящий_тариф_поддержка_всегда_под_рукой") ?> </p>
                 </li>
                 <li>
-                    <a href="/contact" class='font-semibold text-[1.25em] text-primary'><?= $hive->get("web.контакты_") ?>
+                    <a href="/contact" class='font-semibold text-[1.25em] text-primary'><?= $hive->get("web.контакты") ?>
                     </a>
                     <span class='h-1 bg-primary w-15 block my-4'></span>
                     <p>
-                        <?= $hive->get('web.остались_вопросы_напишите_авторам_будем_рады_обратной_связи_') ?>
+                        <?= $hive->get('web.остались_вопросы_напишите_авторам_будем_рады_обратной_связи') ?>
                     </p>
                 </li>
                 <li>
-                    <a href="/legal/privacy_policy" class='font-semibold text-[1.25em] text-primary'><?= $hive->get("web.оферта_") ?>
+                    <a href="/legal/privacy_policy" class='font-semibold text-[1.25em] text-primary'><?= $hive->get("web.оферта") ?>
                     </a>
                     <span class='h-1 bg-primary w-15 block my-4'></span>
-                    <p><?= $hive->get("web.здесь_можно_ознакомиться_с_условиями_использования_и_политиками_ресурса_") ?>
+                    <p><?= $hive->get("web.здесь_можно_ознакомиться_с_условиями_использования_и_политиками_ресурса") ?>
                     </p>
                 </li>
             </ol>
@@ -46,7 +46,7 @@
                     <?= svg('mail') ?>
                     info@lavanda.kim</a>
             </div>
-            <p>Lavanda.Kim <?= date('Y') ?><?= $hive->get("web._все_права_защищены_") ?>
+            <p>Lavanda.Kim <?= date('Y') ?><?= $hive->get("web.все_права_защищены") ?>
             </p>
         </div>
     </div>

@@ -21,7 +21,7 @@
 ]; ?>
 
 <section class='full-bleed bg-primary-pale/50 py-(--spacing-y) px-(--px-lg) visibility-auto'>
-    <h2><?= $hive->get("web.здесь_вы_получите_") ?>
+    <h2><?= $hive->get("web.здесь_вы_получите") ?>
 </h2>
 
     <ul class='grid justify-items-center place-content-center items-stretch sm:grid-cols-[repeat(2,17.625rem)] gap-x-15 lg:gap-x-25 2xl:gap-x-30 gap-y-10 lg:grid-cols-[repeat(3,17.625rem)]'>

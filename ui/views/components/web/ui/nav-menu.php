@@ -27,11 +27,11 @@ $nav_links = [
             ],
             [
                 'url' =>  $hive->alias('dices'),
-                'label' => $hive->get("web.тибетские_кубики_мо_")
+                'label' => $hive->get("web.тибетские_кубики_мо")
             ],
             [
                 'url' =>  $hive->alias('stones'),
-                'label' => $hive->get('web._самоцветы_камней_')
+                'label' => $hive->get('web.самоцветы_камней')
             ],
             [
                 'url' =>  $hive->alias('tarot'),
@@ -43,7 +43,7 @@ $nav_links = [
             ],
             [
                 'url' =>  $hive->alias('minori'),
-                'label' => $hive->get("web._целительных_моментов_")
+                'label' => $hive->get("web.целительных_моментов")
             ],
             [
                 'url' => $hive->alias('mind_games'),
@@ -59,7 +59,7 @@ $nav_links = [
             ],
             [
                 'url' => $hive->alias('bonus'),
-                'label' => $hive->get("web.авторский_оракул_")
+                'label' => $hive->get("web.авторский_оракул")
             ],
         ]
     ],

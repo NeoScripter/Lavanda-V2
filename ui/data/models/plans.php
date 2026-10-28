@@ -8,7 +8,7 @@ $hive = \Base::instance();
 return [
     PlanSlug::ONE_TIME->value => [
         'image' => '/assets/images/pages/plans/plan-1/plan-1',
-        'headline' => $hive->get("web._вопроса_ответа")
+        'headline' => $hive->get("web.вопроса_ответа")
 ,
         'description' => $hive->get("web.когда_нужен_ответ_на_то_что_волнует_прямо_сейчас")
 ,

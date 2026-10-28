@@ -14,7 +14,7 @@ extract(component_props(
     'class' => "bg-[url('/assets/images/pages/home/hero/hero-bg.webp')] bg-violet-100/75 bg-cover bg-center overflow-x-clip"
 ]); ?>
 <section class='space-y-8 md:space-y-12'>
-    <h1 class='mb-2'><?= $hive->get("web.ответ_ближе_чем_кажется_") ?> </h1>
+    <h1 class='mb-2'><?= $hive->get("web.ответ_ближе_чем_кажется") ?> </h1>
 
     <div class='text-center text-balance sm:hidden md:block max-w-lg mx-auto isolate z-1'>
         <p><?= $hive->get('web.Любовь_Выбор_Страх_Надежда') ?></p>
@@ -51,12 +51,12 @@ extract(component_props(
         <article cmp-game-container class='lg:basis-1/2 space-y-6'>
             <header class='text-center text-balance'>
                 <h2 class='text-2xl md:text-3xl! lg:text-4xl!'>
-                    <?= $hive->get('web.давай_познакомимся_') ?>
+                    <?= $hive->get('web.давай_познакомимся') ?>
                 </h2>
                 <p class='mb-[0.5em]'>
-                    <?= $hive->get('web.почему_ты_здесь_именно_сегодня_') ?>
+                    <?= $hive->get('web.почему_ты_здесь_именно_сегодня') ?>
                 </p>
-                <p><?= $hive->get("web._авторский_оракул_поможет_прислушаться_к_себе_найти_свою_отправную_точку_и_выбрать_куда_заглянуть_дальше_") ?>
+                <p><?= $hive->get("web.авторский_оракул_поможет_прислушаться_к_себе_найти_свою_отправную_точку_и_выбрать_куда_заглянуть_дальше") ?>
                 </p>
             </header>
 

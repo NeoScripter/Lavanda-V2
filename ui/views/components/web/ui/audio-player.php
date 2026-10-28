@@ -15,7 +15,7 @@ $hive = \Base::instance();
     <?php endif; ?>
     <audio class='sr-only' controls playsinline src="<?= $src ?>">
         <a href="<?= $src ?>"> 
-            <?= $hive->get("web.скачать_аудио_") ?>
+            <?= $hive->get("web.скачать_аудио") ?>
         </a>
     </audio>
     <div class='max-w-sm mx-auto'>

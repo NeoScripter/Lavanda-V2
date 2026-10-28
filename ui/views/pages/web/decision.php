@@ -1,9 +1,9 @@
+<?php $hive = \Base::instance(); ?>
+
 <?php slot('layouts/web/app-layout', [
     'title' => $hive->get("web.мне_грустно"),
     'class' => "bg-background"
 ]); ?>
-
-<?php $hive = \Base::instance(); ?>
 
 <!-- Hero Section -->
 <?= partial('web/decision/hero') ?>
@@ -11,13 +11,13 @@
 <section>
     <div class='mx-auto max-w-xl lg:flex lg:*:flex-1 lg:max-w-full lg:gap-23'>
         <div class='mb-[1.5em] lg:mb-0'>
-            <h2 class='text-left lg:text-left text-2xl md:text-4xl lg:text-5xl font-bold normal-case'><?= $hive->get("web._правильного_решения_в_реальности_не_существует_есть_только_сделанный_выбор_и_его_последствия_") ?>
+            <h2 class='text-left lg:text-left text-2xl md:text-4xl lg:text-5xl font-bold normal-case'><?= $hive->get("web.правильного_решения_в_реальности_не_существует_есть_только_сделанный_выбор_и_его_последствия") ?>
             </h2>
-            <small class='text-xl md:text-2xl lg:text-3xl text-primary font-semibold'><?= $hive->get("web.эльчин_сафарли_") ?>
+            <small class='text-xl md:text-2xl lg:text-3xl text-primary font-semibold'><?= $hive->get("web.эльчин_сафарли") ?>
             </small>
         </div>
         <div class='space-y-[0.75em] text-balance lg:translate-y-23 lg:-mb-23'>
-            <p><?= $hive->get("web.в_этом_разделе_собраны_символические_системы_разных_культур_каждая_из_них_предлагает_свой_взгляд_на_происходящее_через_архетипы_древние_тексты_образы_звуки_или_случайность_") ?>
+            <p><?= $hive->get("web.в_этом_разделе_собраны_символические_системы_разных_культур_каждая_из_них_предлагает_свой_взгляд_на_происходящее_через_архетипы_древние_тексты_образы_звуки_или_случайность") ?>
             </p>
         </div>
     </div>
@@ -41,7 +41,7 @@ $items = [
         'url' => '/cards'
     ],
     [
-        'title' => $hive->get('web._книга_перемен_ицзин_'),
+        'title' => $hive->get('web.книга_перемен_ицзин'),
         'exerpt' => $hive->get("web.книга_перемен_сопровождает_китайскую_философию_почти_три_тысячи_лет_её_не_читают_как_обычную_книгу_с_ней_советуются_каждая_гексаграмма_предлагает_не_готовый_ответ_а_другой_взгляд_на_происходящее_позволяя_увидеть_ситуацию_шире_бросай_три_древние_монеты_и_расшифруй_свою_гексаграмму_прямо_сейчас"),
         'url' => '/cards'
     ],

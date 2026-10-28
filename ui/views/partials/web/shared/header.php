@@ -30,7 +30,7 @@ $hive = \Base::instance();
                     'attrs' => ['type' => 'submit']
                 ]); ?>
                 <?= svg('logout') ?>
-                <?= $hive->get("web.выйти_") ?>
+                <?= $hive->get("web.выйти") ?>
                 <?php end_slot(); ?>
             </form>
         <?php else : ?>

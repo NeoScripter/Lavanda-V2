@@ -2,6 +2,8 @@
 
 use Enums\GameType;
 
+$hive = \Base::instance();
+
 extract(component_props(
     required: ['cards'],
     optional: [],
@@ -14,14 +16,14 @@ extract(component_props(
 ]); ?>
 
 <?php ob_start(); ?>
- <?= $hive->get("web.тихие_моменты_покоя_") ?>
+ <?= $hive->get("web.тихие_моменты_покоя") ?>
 
 <?php $heading = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<p><?= $hive->get("web.чашка_чая_или_ароматный_кофе_любимая_книга_лучики_солнца_из_окна_цветок_в_комнате_мысль_которая_пришла_внезапно_и_согрела_иногда_именно_из_таких_мелочей_и_складывается_тёплый_день_") ?>
+<p><?= $hive->get("web.чашка_чая_или_ароматный_кофе_любимая_книга_лучики_солнца_из_окна_цветок_в_комнате_мысль_которая_пришла_внезапно_и_согрела_иногда_именно_из_таких_мелочей_и_складывается_тёплый_день") ?>
 </p>
-<p><?= $hive->get("web._карточек_маленьких_поводов_остановиться_посмотреть_вокруг_и_насладиться_этим_моментом_") ?>
+<p><?= $hive->get("web.карточек_маленьких_поводов_остановиться_посмотреть_вокруг_и_насладиться_этим_моментом") ?>
 </p>
 <?php $html = ob_get_clean(); ?>
 
@@ -46,7 +48,7 @@ extract(component_props(
 
 
     <?php if (! empty($cards)) : ?>
-        <p cmp-visible-at-start class='text-balance mx-auto max-w-xl'><?= $hive->get("web.карта_открывается_сама_как_знак_который_приходит_вовремя_иногда_именно_случай_отражает_то_что_мы_уже_чувствуем_но_не_осознаём_") ?>
+        <p cmp-visible-at-start class='text-balance mx-auto max-w-xl'><?= $hive->get("web.карта_открывается_сама_как_знак_который_приходит_вовремя_иногда_именно_случай_отражает_то_что_мы_уже_чувствуем_но_не_осознаём") ?>
 </p>
 
         <?= component('web/ui/button', [
@@ -72,7 +74,7 @@ extract(component_props(
 
         <?php end_slot(); ?>
     <?php else : ?>
-        <p class='mx-auto max-w-xl'><?= $hive->get("web.пока_не_добавлено_ни_одной_карты_") ?>
+        <p class='mx-auto max-w-xl'><?= $hive->get("web.пока_не_добавлено_ни_одной_карты") ?>
 </p>
     <?php endif; ?>
 
@@ -94,7 +96,7 @@ extract(component_props(
 <?php ob_start(); ?>
 <div>
     <?php if (! empty($cards)) : ?>
-        <p cmp-visible-at-start class='text-balance mx-auto max-w-xl'><?= $hive->get("web._вы_сами_выбираете_карту_которая_откликается_сердцем_этот_способ_помогает_довериться_интуиции_и_увидеть_собственный_внутренний_ответ_") ?>
+        <p cmp-visible-at-start class='text-balance mx-auto max-w-xl'><?= $hive->get("web.вы_сами_выбираете_карту_которая_откликается_сердцем_этот_способ_помогает_довериться_интуиции_и_увидеть_собственный_внутренний_ответ") ?>
 </p>
 
         <?= component('web/layout/selected-items') ?>
@@ -112,7 +114,7 @@ extract(component_props(
 
         <?php end_slot(); ?>
     <?php else : ?>
-        <p class='mx-auto max-w-xl'><?= $hive->get("web.пока_не_добавлено_ни_одной_карты_") ?>
+        <p class='mx-auto max-w-xl'><?= $hive->get("web.пока_не_добавлено_ни_одной_карты") ?>
 </p>
     <?php endif; ?>
 

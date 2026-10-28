@@ -1,5 +1,7 @@
 <?php
 
+$hive = \Base::instance();
+
 extract(component_props(
     required: ['article'],
     optional: [],

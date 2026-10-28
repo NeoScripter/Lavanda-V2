@@ -4,6 +4,7 @@
     props: get_defined_vars(),
 )); ?>
 
+
 <ul
     class="flex flex-wrap [--sq-size:min(100%,20.6rem)] md:[--sq-size:25.6rem] -mt-12 sm:-mt-25 px-2 relative justify-center gap-8 md:gap-10">
 

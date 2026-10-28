@@ -171,7 +171,7 @@
             },
             "type": "composer-plugin",
             "extra": {
-                "_": "The following two lines ensure that composer-patches is loaded as early as possible.",
+                "": "The following two lines ensure that composer-patches is loaded as early as possible.",
                 "class": "cweagans\\Composer\\Plugin\\Patches",
                 "plugin-modifies-downloads": true,
                 "plugin-modifies-install-path": true

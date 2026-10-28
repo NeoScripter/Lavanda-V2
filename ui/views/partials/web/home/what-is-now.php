@@ -2,7 +2,7 @@
 
 <section class='visibility-auto'>
     <h2>
-        <?php $hive->get('web._а_что_сейчас_'); ?>
+        <?php $hive->get('web.а_что_сейчас'); ?>
     </h2>
     <p class='text-center text-balance font-medium uppercase mb-[1.5em] text-primary text-xl md:text-3xl lg:text-4xl'>
         <?= $hive->get('web.сегодня') ?>

@@ -2,6 +2,8 @@
 
 use Enums\PlanSlug;
 
+$hive = \Base::instance();
+
 extract(component_props(
     required: ['slots'],
     optional: [
@@ -13,8 +15,6 @@ extract(component_props(
     ],
     props: get_defined_vars(),
 )); ?>
-
-<?php $hive = \Base::instance(); ?>
 
 <section cmp-game-stage
     class="<?= cc('full-bleed lg:px-(--px-lg) group', $class) ?>">
@@ -50,7 +50,7 @@ extract(component_props(
 
     <template cmp-theme-picker>
         <div class='lg:mb-10 2xl:mb-0'>
-            <h4 class='text-foreground font-semibold text-xl md:text-2xl xl:text-3xl'><?= $hive->get("web.выберите_тему_для_интерпретации_") ?>
+            <h4 class='text-foreground font-semibold text-xl md:text-2xl xl:text-3xl'><?= $hive->get("web.выберите_тему_для_интерпретации") ?>
             </h4>
             <nav class='flex flex-col sm:flex-wrap sm:flex-row mt-10 justify-center gap-y-[1em] gap-x-[1.25em]'>
                 <button cmp-theme-btn class='font-medium bg-primary-muted/75 text-white cursor-pointer py-[0.75em] uppercase text-center sm:min-w-80 rounded-2xl px-[1.25em] transition-[opacity,background-color,color] duration-300 ease [[selected-theme]]:bg-primary'>
@@ -72,8 +72,8 @@ extract(component_props(
 
                 <div class="flex flex-col text-center text-balance gap-4 lg:gap-8">
 
-                    <p class='font-semibold'><?= $hive->get("web._твой_ответ_уже_здесь_") ?> </p>
-                    <p><?= $hive->get("web._первое_знакомство_с_позади_открой_ответ_на_свой_вопрос_или_выбери_формат_чтобы_возвращаться_когда_захочется_") ?> </p>
+                    <p class='font-semibold'><?= $hive->get("web.твой_ответ_уже_здесь") ?> </p>
+                    <p><?= $hive->get("web.первое_знакомство_с_позади_открой_ответ_на_свой_вопрос_или_выбери_формат_чтобы_возвращаться_когда_захочется") ?> </p>
                     <div class='flex flex-col lg:flex-row items-center justify-center mt-2 gap-4 lg:gap-8'>
                         <?= component('web/ui/button', [
                             'variant' => 'accent',
@@ -91,7 +91,7 @@ extract(component_props(
                             'class' => 'w-fit lg:min-w-70',
                         ]) ?>
                     </div>
-                    <a href="<?= $hive->alias('plans_show', ['slug' => PlanSlug::PERSONAL->value]) ?>" class='underline underline-offset-4 text-sm hover:text-primary transition-colors'><?= $hive->get("web.заказать_персональный_разбор_") ?>
+                    <a href="<?= $hive->alias('plans_show', ['slug' => PlanSlug::PERSONAL->value]) ?>" class='underline underline-offset-4 text-sm hover:text-primary transition-colors'><?= $hive->get("web.заказать_персональный_разбор") ?>
                     </a>
                 </div>
             </div>

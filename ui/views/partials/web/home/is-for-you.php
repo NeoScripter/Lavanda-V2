@@ -2,16 +2,16 @@
 
 <section class='flex flex-col sm:flex-row sm:justify-center sm:items-center xl:gap-10 visibility-auto'>
     <div class='sm:w-2/3 sm:max-w-160'>
-        <h2 class='sm:text-left'><?= $hive->get("web.вам_сюда_если_") ?>
+        <h2 class='sm:text-left'><?= $hive->get("web.вам_сюда_если") ?>
         </h2>
         <ul class='*:bg-[url(/assets/svgs/golden-star.svg)] text-balance space-y-[1em] *:bg-no-repeat *:bg-position-[0%_0.25em] *:pl-[2em]'>
-            <li><?= $hive->get("web.сомневаетесь_и_хочется_разобраться_прямо_сейчас_") ?>
+            <li><?= $hive->get("web.сомневаетесь_и_хочется_разобраться_прямо_сейчас") ?>
             </li>
-            <li><?= $hive->get("web.важно_услышать_себя_а_не_чужие_советы_") ?>
+            <li><?= $hive->get("web.важно_услышать_себя_а_не_чужие_советы") ?>
             </li>
-            <li><?= $hive->get("web.хочется_чегото_тёплого_и_персонального_вместо_бесконечного_пустого_скролла_") ?>
+            <li><?= $hive->get("web.хочется_чегото_тёплого_и_персонального_вместо_бесконечного_пустого_скролла") ?>
             </li>
-            <li><?= $hive->get("web.или_просто_любопытно_это_тоже_отличная_причина_") ?>
+            <li><?= $hive->get("web.или_просто_любопытно_это_тоже_отличная_причина") ?>
             </li>
         </ul>
 

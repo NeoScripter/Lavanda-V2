@@ -8,11 +8,11 @@
 <section class='pt-(--pt-lg)'>
 
     <article class='bg-white rounded-2xl shadow-accent max-w-200 mx-auto px-6 py-8 sm:px-12.5 sm:py-10 lg:px-14 lg:pt-13 lg:pb-18'>
-        <h1><?= $hive->get("web.контакты_") ?>
+        <h1><?= $hive->get("web.контакты") ?>
         </h1>
 
         <div class='space-y-[1em] max-w-200 text-center text-balance'>
-            <p><?= $hive->get("web.если_у_вас_возникли_вопросы_пожалуйста_свяжитесь_с_нами_") ?>
+            <p><?= $hive->get("web.если_у_вас_возникли_вопросы_пожалуйста_свяжитесь_с_нами") ?>
             </p>
         </div>
 
