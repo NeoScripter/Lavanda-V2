@@ -8,7 +8,7 @@ $hive = \Base::instance();
 ?>
 <header
     component-app-header
-    class="fixed xs:absolute top-4.5 z-10 sm:top-8 xl:top-13 inset-x-(--px-sm) bg-white rounded-4xl sm:bg-transparent transition-transform">
+    class="fixed xs:absolute top-4.5 z-10 sm:top-8 xl:top-13 inset-x-(--px-sm) lg:inset-x-[calc(var(--px-sm)*2)] bg-white rounded-4xl sm:bg-transparent transition-transform">
     <div class='flex items-center justify-between gap-2 bg-linear-(--bg-primary-pale) sm:bg-none p-4 rounded-full'>
         <figure class='w-31.5 sm:w-52 relative'>
             <img src="/assets/svgs/logo-lg-violet.svg" />
