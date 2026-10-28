@@ -1,12 +1,11 @@
-<?php $hive = \Base::instance() ;?>
+<?php $hive = \Base::instance(); ?>
 
 <section class='visibility-auto'>
     <h2>
-        qquila1 А что сейчас? qquila2
-
+        <?php $hive->get('web._а_что_сейчас_'); ?>
     </h2>
     <p class='text-center text-balance font-medium uppercase mb-[1.5em] text-primary text-xl md:text-3xl lg:text-4xl'>
-        qquila2 Сегодня qquila1
+        <?= $hive->get('web.сегодня') ?>
     </p>
 
     <ul class='grid sm:grid-cols-2 gap-4 sm:grid-rows-2 lg:grid-cols-3 lg:grid-rows-1'>

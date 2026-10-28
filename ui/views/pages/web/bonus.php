@@ -20,9 +20,7 @@ extract(component_props(
 
 <?php ob_start(); ?>
 <p>
-    
-    qquila1Почему ты здесь именно сегодня? qquila2
-
+    <?= $hive->get('web.почему_ты_здесь_именно_сегодня_') ?>
 </p>
 <p><?= $hive->get("web.давай_начнем_знакомство_") ?>
 </p>
@@ -36,9 +34,7 @@ extract(component_props(
 <p><?= $hive->get("web.а_дальше_подскажет_какой_инструмент_поможет_разобраться_глубже_") ?>
 </p>
 <p>
-    
-    qquila1Ну что, попробуем? qquila2
-
+    <?= $hive->get('web.ну_что_попробуем_') ?>
 </p>
 <?php $html = ob_get_clean(); ?>
 

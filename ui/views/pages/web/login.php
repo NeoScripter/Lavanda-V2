@@ -1,8 +1,7 @@
 <?php $hive = \Base::instance(); ?>
 
 <?php slot('layouts/web/auth-layout', [
-    'title' => $hive->get("web.добро_пожаловать")
-,
+    'title' => $hive->get("web.добро_пожаловать"),
     'description' => $hive->get("web.для_доступа_ко_всем_разделам_ресурса_пожалуйста_войдите")
 
 ]); ?>
@@ -14,8 +13,7 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'email',
-        'label'       => $hive->get("web.электронная_почта")
-,
+        'label'       => $hive->get("web.электронная_почта"),
         'attrs' => [
             'type'        => 'email',
             'placeholder' => 'email@example.com',
@@ -25,12 +23,10 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'password',
-        'label'       => $hive->get("web.пароль")
-,
+        'label'       => $hive->get("web.пароль"),
         'attrs' => [
             'type'        => 'password',
-            'placeholder' => $hive->get("web.введите_пароль")
-,
+            'placeholder' => $hive->get("web.введите_пароль"),
             'required'    => true,
         ]
     ]) ?>
@@ -38,16 +34,13 @@
     <div class="flex flex-col gap-2.5">
         <a href="<?= $hive->alias('password_reset_index') ?>"
             class='text-xs transition-colors hover:text-primary underline underline-offset-4 font-medium ml-auto'>
-            
-            qquila1 Забыли пароль? qquila2
-
-</a>
+            <?= $hive->get('web.забыли_пароль_') ?>
+        </a>
         <?= component(
             'web/ui/button',
             [
                 'attrs' => ['type' => 'submit'],
-                'slot' => $hive->get("web.войти")
-,
+                'slot' => $hive->get("web.войти"),
                 'class' => 'px-[2em] mx-auto',
                 'size' => 'sm'
             ]
@@ -58,16 +51,13 @@
 
 <?php slot('components/web/layout/info-banner', ['class' => 'mt-5']) ?>
 <p class='mb-5'>
-    
-    qquila1 Впервые на сайте? Пройдите экспресс регистрацию за 1 минуту и получите полный доступ ко всем разделам на 24 часа qquila2
-
+    <?= $hive->get('web._впервые_на_сайте_пройдите_экспресс_регистрацию_за_минуту_и_получите_полный_доступ_ко_всем_разделам_на_часа_') ?>
 </p>
 
 <?= component(
     'web/ui/button',
     [
-        'slot' => $hive->get("web.регистрация")
-,
+        'slot' => $hive->get("web.регистрация"),
         'variant' => 'outline',
         'href' => $hive->alias('register'),
         'class' => 'px-[2em] mx-auto w-fit',

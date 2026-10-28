@@ -100,9 +100,7 @@ $items = [
 
 <section>
     <h2>
-        
-        qquila1Почему доступ платный? qquila2
-
+        <?= $hive->get('web.почему_доступ_платный_') ?>
     </h2>
 
     <div class='space-y-[1em] max-w-200 mx-auto'>
@@ -186,9 +184,7 @@ $items = [
 
 <section>
     <h2>
-        
-        qquila1Остались вопросы? qquila2
-
+        <?= $hive->get('web.остались_вопросы_') ?>
     </h2>
 
     <div class='space-y-[1em] max-w-200 mx-auto'>
