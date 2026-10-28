@@ -1,7 +1,7 @@
 <?php $hive = \Base::instance(); ?>
 
 <?php slot('layouts/web/auth-layout', [
-    'title' => qquila1Регистрацияqquila2
+    'title' => $hive->get("web.регистрация")
 ,
 ]); ?>
 
@@ -18,11 +18,11 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'name',
-        'label'       => qquila1Имяqquila2
+        'label'       => $hive->get("web.имя")
 ,
         'attrs' => [
             'type'        => 'text',
-            'placeholder' => qquila1Иван Ивановqquila2
+            'placeholder' => $hive->get("web.иван_иванов")
 ,
             'required'    => true,
             'maxlength' => 200,
@@ -31,7 +31,7 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'email',
-        'label'       => qquila1Электронная почтаqquila2
+        'label'       => $hive->get("web.электронная_почта")
 ,
         'attrs' => [
             'type'        => 'email',
@@ -43,11 +43,11 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'password',
-        'label'       => qquila1Парольqquila2
+        'label'       => $hive->get("web.пароль")
 ,
         'attrs' => [
             'type'        => 'password',
-            'placeholder' => qquila1Введите парольqquila2
+            'placeholder' => $hive->get("web.введите_пароль")
 ,
             'required'    => true,
             'minlength' => 8,
@@ -56,11 +56,11 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'password_confirmation',
-        'label'       => qquila1Повторите парольqquila2
+        'label'       => $hive->get("web.повторите_пароль")
 ,
         'attrs' => [
             'type'        => 'password',
-            'placeholder' => qquila1Повторите парольqquila2
+            'placeholder' => $hive->get("web.повторите_пароль")
 ,
             'required'    => true,
             'minlength' => 8,
@@ -70,7 +70,7 @@
     <div cmp-otp-input class='hidden'>
         <?= component('web/form/form-input', [
             'name'  => 'otp_code',
-            'label' => qquila1Введите код подтверждения, отправленный вам на электронную почтуqquila2
+            'label' => $hive->get("web.введите_код_подтверждения_отправленный_вам_на_электронную_почту")
 ,
             'error' => $errors['otp_code'] ?? '',
             'attrs' => [
@@ -87,7 +87,7 @@
             'web/ui/button',
             [
                 'attrs' => ['type' => 'submit'],
-                'slot' => qquila1Зарегистрироватьсяqquila2
+                'slot' => $hive->get("web.зарегистрироваться")
 ,
                 'class' => 'px-[2em] mx-auto',
                 'size' => 'sm'
@@ -98,16 +98,16 @@
     <div class='space-y-2 text-balance'>
         <?= component('web/form/checkbox', [
             'name'        => 'agreement_accepted',
-            'label'       => "{qquila1Даю согласие наqquila2
-} <a href='/legal/user_agreement' class='text-sm underline hover:text-primary transition-colors underline-offset-5'>{qquila1обработку персональных данныхqquila2
+            'label'       => "{$hive->get("web.даю_согласие_на")
+} <a href='/legal/user_agreement' class='text-sm underline hover:text-primary transition-colors underline-offset-5'>{$hive->get("web.обработку_персональных_данных")
 }</a>",
             'attrs' => ['required' => true]
         ]) ?>
 
         <?= component('web/form/checkbox', [
             'name'        => 'policy_accepted',
-            'label'       => "{qquila1Принимаюqquila2
-} <a href='/legal/privacy_policy' class='text-sm underline hover:text-primary transition-colors underline-offset-5'>{qquila1политику конфиденциальностиqquila2
+            'label'       => "{$hive->get("web.принимаю")
+} <a href='/legal/privacy_policy' class='text-sm underline hover:text-primary transition-colors underline-offset-5'>{$hive->get("web.политику_конфиденциальности")
 }</a>",
             'attrs' => ['required' => true]
         ]) ?>

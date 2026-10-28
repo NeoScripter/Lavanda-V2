@@ -10,7 +10,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Тарифыqquila2
+    'title' => $hive->get("web.тарифы")
 ,
     'class' => 'bg-white relative isolate',
 ]); ?>
@@ -20,13 +20,13 @@ $hive = \Base::instance();
 $user = Auth::user();
 
 $button_labels = [
-    PlanSlug::YEARLY->value => qquila1Остаться на годqquila2
+    PlanSlug::YEARLY->value => $hive->get("web.остаться_на_год")
 ,
-    PlanSlug::MONTHLY->value => qquila1Остаться на месяцqquila2
+    PlanSlug::MONTHLY->value => $hive->get("web.остаться_на_месяц")
 ,
-    PlanSlug::ONE_TIME->value => qquila1Получить ответыqquila2
+    PlanSlug::ONE_TIME->value => $hive->get("web.получить_ответы")
 ,
-    PlanSlug::PERSONAL->value => qquila1Заказать разборqquila2
+    PlanSlug::PERSONAL->value => $hive->get("web.заказать_разбор")
 ,
 ];
 ?>

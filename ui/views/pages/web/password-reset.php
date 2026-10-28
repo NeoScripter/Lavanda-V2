@@ -3,9 +3,9 @@
 $hive = \Base::instance(); ?>
 
 <?php slot('layouts/web/auth-layout', [
-    'title' => qquila1Восстановление пароляqquila2
+    'title' => $hive->get("web.восстановление_пароля")
 ,
-    'description' => qquila1Введите пожалуйста номер электронной почты, указанный при регистрацииqquila2
+    'description' => $hive->get("web.введите_пожалуйста_номер_электронной_почты_указанный_при_регистрации")
 
 ]); ?>
 
@@ -14,7 +14,7 @@ $hive = \Base::instance(); ?>
 
     <?= component('web/form/form-input', [
         'name'        => 'email',
-        'label'       => qquila1Электронная почтаqquila2
+        'label'       => $hive->get("web.электронная_почта")
 ,
         'attrs' => [
             'type'        => 'email',
@@ -28,7 +28,7 @@ $hive = \Base::instance(); ?>
             'web/ui/button',
             [
                 'attrs' => ['type' => 'submit'],
-                'slot' => qquila1Отправитьqquila2
+                'slot' => $hive->get("web.отправить")
 ,
                 'class' => 'px-[2em] mx-auto',
                 'size' => 'sm'

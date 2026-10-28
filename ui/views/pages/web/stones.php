@@ -11,7 +11,7 @@ extract(component_props(
 $winner = $stones[array_rand($stones)]; ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Магические камниqquila2
+    'title' => $hive->get("web.магические_камни")
 ,
 ]); ?>
 
@@ -28,7 +28,7 @@ $winner = $stones[array_rand($stones)]; ?>
 <?php ob_start(); ?>
 <?= component('web/ui/button', [
     'variant' => 'primary',
-    'slot' => qquila1Перейти к игреqquila2
+    'slot' => $hive->get("web.перейти_к_игре")
 ,
     'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
 ]) ?>
@@ -101,7 +101,7 @@ $winner = $stones[array_rand($stones)]; ?>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Получить ответqquila2
+        'slot' => $hive->get("web.получить_ответ")
 ,
         'attrs' => [
             'cmp-launch-game-btn' => true,
@@ -111,7 +111,7 @@ $winner = $stones[array_rand($stones)]; ?>
     ]) ?>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробовать сноваqquila2
+        'slot' => $hive->get("web.попробовать_снова")
 ,
         'attrs' => [
             'cmp-reset-game-btn' => true,
@@ -126,7 +126,7 @@ $winner = $stones[array_rand($stones)]; ?>
 <div class='relative group min-h-100 md:min-h-150 isolate'>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Получить ответqquila2
+        'slot' => $hive->get("web.получить_ответ")
 ,
         'attrs' => [
             'cmp-show-cloth-btn' => true,
@@ -187,7 +187,7 @@ $winner = $stones[array_rand($stones)]; ?>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробовать сноваqquila2
+        'slot' => $hive->get("web.попробовать_снова")
 ,
         'attrs' => [
             'cmp-reset-game-btn' => true,
@@ -198,8 +198,8 @@ $winner = $stones[array_rand($stones)]; ?>
 </div>
 <?php $slot2 = ob_get_clean(); ?>
 
-<?php $labels = [qquila1Выбор лавандыqquila2
-, qquila1Выбор гостяqquila2
+<?php $labels = [$hive->get("web.выбор_лаванды")
+, $hive->get("web.выбор_гостя")
 ]; ?>
 
 <?= component('web/layout/game-stage', [

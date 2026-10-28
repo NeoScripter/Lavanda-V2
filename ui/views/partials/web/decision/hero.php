@@ -11,7 +11,7 @@
 
             <?= component('web/ui/button', [
                 'variant' => 'primary',
-                'slot' => qquila1Открыть доступqquila2
+                'slot' => $hive->get("web.открыть_доступ")
 ,
                 'class' => 'hidden lg:flex',
             ]) ?>
@@ -20,7 +20,7 @@
         <div class='flex flex-col gap-12 sm:flex-row items-start sm:gap-16 sm:justify-between'>
             <?= component('web/ui/button', [
                 'variant' => 'primary',
-                'slot' => qquila1Открыть доступqquila2
+                'slot' => $hive->get("web.открыть_доступ")
 ,
                 'class' => 'lg:hidden',
             ]) ?>

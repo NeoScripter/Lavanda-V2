@@ -9,7 +9,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Игры разумаqquila2
+    'title' => $hive->get("web.игры_разума")
 ,
 ]); ?>
 
@@ -25,7 +25,7 @@ extract(component_props(
 <?php ob_start(); ?>
 <?= component('web/ui/button', [
     'variant' => 'primary',
-    'slot' => qquila1Перейти к игреqquila2
+    'slot' => $hive->get("web.перейти_к_игре")
 ,
     'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
 ]) ?>
@@ -53,7 +53,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Получить ответqquila2
+        'slot' => $hive->get("web.получить_ответ")
 ,
         'attrs' => [
             'cmp-launch-game-btn' => true,
@@ -77,7 +77,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробовать сноваqquila2
+        'slot' => $hive->get("web.попробовать_снова")
 ,
         'attrs' => [
             'cmp-reset-game-btn' => true,

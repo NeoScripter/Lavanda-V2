@@ -57,8 +57,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Получить ответqquila2
-,
+        'slot' => $hive->get("web.получить_ответ"),
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-at-start' => true
@@ -87,8 +86,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Следующая рунаqquila2
-,
+        'slot' => $hive->get("web.следующая_руна"),
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-during' => true
@@ -97,8 +95,7 @@ extract(component_props(
     ]) ?>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробовать сноваqquila2
-,
+        'slot' => $hive->get("web.попробовать_снова"),
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -123,8 +120,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Перемешатьqquila2
-,
+        'slot' => $hive->get("web.перемешать"),
         'attrs' => [
             'cmp-shuffle-runes-btn' => true,
             'cmp-visible-during' => true,
@@ -148,8 +144,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробовать сноваqquila2
-,
+        'slot' => $hive->get("web.попробовать_снова"),
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -161,8 +156,9 @@ extract(component_props(
 </div>
 <?php $slot2 = ob_get_clean(); ?>
 
-<?php $labels = [qquila1Выбор лавандыqquila2
-, qquila1Выбор гостяqquila2
+<?php $labels = [
+    $hive->get("web.выбор_лаванды"),
+    $hive->get("web.выбор_гостя")
 ]; ?>
 
 <?= component('web/layout/game-stage', [

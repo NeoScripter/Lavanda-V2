@@ -9,7 +9,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Бонусная играqquila2
+    'title' => $hive->get("web.бонусная_игра")
 ,
 ]); ?>
 
@@ -32,13 +32,13 @@ extract(component_props(
 <div class='flex flex-wrap gap-y-4 gap-x-6 lg:gap-x-8'>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробоватьqquila2
+        'slot' => $hive->get("web.попробовать")
 ,
         'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
     ]) ?>
     <?= component('web/ui/button', [
         'variant' => 'muted',
-        'slot' => qquila1Идем дальшеqquila2
+        'slot' => $hive->get("web.идем_дальше")
 ,
     ]) ?>
 </div>
@@ -58,7 +58,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Получить ответqquila2
+        'slot' => $hive->get("web.получить_ответ")
 ,
         'attrs' => [
             'cmp-launch-game-btn' => true,
@@ -82,7 +82,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробовать сноваqquila2
+        'slot' => $hive->get("web.попробовать_снова")
 ,
         'attrs' => [
             'cmp-reset-game-btn' => true,
@@ -119,7 +119,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробовать сноваqquila2
+        'slot' => $hive->get("web.попробовать_снова")
 ,
         'attrs' => [
             'cmp-reset-game-btn' => true,
@@ -132,8 +132,8 @@ extract(component_props(
 </div>
 <?php $slot2 = ob_get_clean(); ?>
 
-<?php $labels = [qquila1Выбор лавандыqquila2
-, qquila1Выбор гостяqquila2
+<?php $labels = [$hive->get("web.выбор_лаванды")
+, $hive->get("web.выбор_гостя")
 ]; ?>
 
 <?= component('web/layout/game-stage', [

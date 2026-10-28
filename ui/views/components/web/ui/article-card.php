@@ -21,7 +21,7 @@ extract(component_props(
     <?= component('web/ui/button', [
         'size' => 'sm',
         'variant' => 'outline',
-        'slot' => qquila1Перейтиqquila2
+        'slot' => $hive->get("web.перейти")
 ,
         'href' => \Base::instance()->alias('articles_show', ['id' => $article['id']]),
         'class' => 'mt-auto font-semibold'

@@ -15,7 +15,7 @@ extract(component_props(
 ;?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Главнаяqquila2
+    'title' => $hive->get("web.главная")
 ,
     'class' => 'bg-white',
 ]); ?>

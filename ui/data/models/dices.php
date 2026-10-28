@@ -4,61 +4,61 @@ return [
     [
         'id' => 1,
         'image' => '/assets/images/dices/dice-1/dice-1',
-        'name' => qquila1ахqquila2
+        'name' => $hive->get("web.ах")
 ,
-        'meaning' => qquila1звук пустотыqquila2
+        'meaning' => $hive->get("web.звук_пустоты")
 ,
-        'description' => qquila1Равновесие, ясность, Инь. Первозданный звук — начало всех мантрqquila2
+        'description' => $hive->get("web.равновесие_ясность_инь_первозданный_звук_начало_всех_мантр")
 ,
     ],
     [
         'id' => 2,
         'image' => '/assets/images/dices/dice-2/dice-2',
-        'name' => qquila1паqquila2
+        'name' => $hive->get("web.па")
 ,
-        'meaning' => qquila1вода, глубинаqquila2
+        'meaning' => $hive->get("web.вода_глубина")
 ,
-        'description' => qquila1Питание, нектар, поток. Глубина, из которой рождается жизньqquila2
+        'description' => $hive->get("web.питание_нектар_поток_глубина_из_которой_рождается_жизнь")
 ,
     ],
     [
         'id' => 3,
         'image' => '/assets/images/dices/dice-3/dice-3',
-        'name' => qquila1наqquila2
+        'name' => $hive->get("web.на")
 ,
-        'meaning' => qquila1земля, концентрацияqquila2
+        'meaning' => $hive->get("web.земля_концентрация")
 ,
-        'description' => qquila1Устойчивость, сосредоточенность, Ян. Сила, уходящая корнями вглубьqquila2
+        'description' => $hive->get("web.устойчивость_сосредоточенность_ян_сила_уходящая_корнями_вглубь")
 ,
     ],
     [
         'id' => 4,
         'image' => '/assets/images/dices/dice-4/dice-4',
-        'name' => qquila1раqquila2
+        'name' => $hive->get("web.ра")
 ,
-        'meaning' => qquila1образ пламениqquila2
+        'meaning' => $hive->get("web.образ_пламени")
 ,
-        'description' => qquila1Огонь, движение, сила. Энергия, которая может согреть или сжечь.qquila2
+        'description' => $hive->get("web.огонь_движение_сила_энергия_которая_может_согреть_или_сжечь")
 ,
     ],
     [
         'id' => 5,
         'image' => '/assets/images/dices/dice-5/dice-5',
-        'name' => qquila1цаqquila2
+        'name' => $hive->get("web.ца")
 ,
-        'meaning' => qquila1быстрая реализацияqquila2
+        'meaning' => $hive->get("web.быстрая_реализация")
 ,
-        'description' => qquila1Скорость воплощения. Желаемое приходит стремительно при правильном намерении.qquila2
+        'description' => $hive->get("web.скорость_воплощения_желаемое_приходит_стремительно_при_правильном_намерении")
 ,
     ],
     [
         'id' => 6,
         'image' => '/assets/images/dices/dice-6/dice-6',
-        'name' => qquila1дхиqquila2
+        'name' => $hive->get("web.дхи")
 ,
-        'meaning' => qquila1слог Манджушриqquila2
+        'meaning' => $hive->get("web.слог_манджушри")
 ,
-        'description' => qquila1Мудрость, совершенство разума. Семенной слог Бодхисаттвы Мудрости.qquila2
+        'description' => $hive->get("web.мудрость_совершенство_разума_семенной_слог_бодхисаттвы_мудрости")
 ,
     ],
 ];

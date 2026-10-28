@@ -1,5 +1,5 @@
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Контактыqquila2
+    'title' => $hive->get("web.контакты")
 ,
     'class' => 'bg-white relative isolate',
 ]); ?>

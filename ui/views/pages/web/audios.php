@@ -7,7 +7,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Послание поддержкиqquila2
+    'title' => $hive->get("web.послание_поддержки")
 ,
 ]); ?>
 
@@ -24,10 +24,10 @@ extract(component_props(
 
 <?= component('web/ui/button', [
     'variant' => 'primary',
-    'slot' => qquila1Начатьqquila2
+    'slot' => $hive->get("web.начать")
 ,
     'class' => 'w-fit mt-10 mx-auto',
-    'attrs' => ['cmp-audio-btn' => true, 'data-repeat-label' => qquila1Повторитьqquila2
+    'attrs' => ['cmp-audio-btn' => true, 'data-repeat-label' => $hive->get("web.повторить")
 ]
 ]) ?>
 <?php $slot1 = ob_get_clean(); ?>

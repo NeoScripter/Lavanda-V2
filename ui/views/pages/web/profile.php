@@ -8,7 +8,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Редактировать профильqquila2
+    'title' => $hive->get("web.редактировать_профиль")
 ,
     'class' => "bg-[url('/assets/images/pages/article/page-bg.webp')] bg-cover bg-center"
 ]); ?>
@@ -30,7 +30,7 @@ extract(component_props(
 
                         <?= component('web/form/form-input', [
                             'name'  => 'name',
-                            'label' => qquila1Имя пользователяqquila2
+                            'label' => $hive->get("web.имя_пользователя")
 ,
                             'error' => $errors['name'] ?? '',
                             'attrs' => [
@@ -41,7 +41,7 @@ extract(component_props(
 
                         <?= component('web/form/form-input', [
                             'name'  => 'email',
-                            'label' => qquila1Электронная почтаqquila2
+                            'label' => $hive->get("web.электронная_почта")
 ,
                             'error' => $errors['email'] ?? '',
                             'attrs' => [
@@ -53,7 +53,7 @@ extract(component_props(
                         <div cmp-otp-input class='hidden'>
                             <?= component('web/form/form-input', [
                                 'name'  => 'otp_code',
-                                'label' => qquila1Введите код подтверждения, отправленный вам на электронную почтуqquila2
+                                'label' => $hive->get("web.введите_код_подтверждения_отправленный_вам_на_электронную_почту")
 ,
                                 'error' => $errors['otp_code'] ?? '',
                                 'attrs' => [
@@ -132,7 +132,7 @@ extract(component_props(
                         <?= component('web/ui/button', [
                             'size' => 'sm',
                             'variant' => 'danger',
-                            'slot' => qquila1Удалитьqquila2
+                            'slot' => $hive->get("web.удалить")
 ,
                             'attrs' => ['type' => 'submit']
                         ]) ?>

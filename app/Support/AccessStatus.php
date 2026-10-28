@@ -93,8 +93,8 @@ final class AccessStatus extends \Prefab
 
             $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
             $date = new DateTime($rows[0]['ends_at'])->format('d/m/y');
-            $plans[] = "{qquila1Тарифqquila2
-} $label, {qquila1оплачен доqquila2
+            $plans[] = "{$hive->get("web.тариф")
+} $label, {$hive->get("web.оплачен_до")
 }$date";
         }
 
@@ -106,9 +106,9 @@ final class AccessStatus extends \Prefab
 
             $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
             $number = $rows[0]['number'];
-            $plans[] = "{qquila1Тарифqquila2
-} $label, {qquila1в наличииqquila2
-} $number {qquila1ответаqquila2
+            $plans[] = "{$hive->get("web.тариф")
+} $label, {$hive->get("web.в_наличии")
+} $number {$hive->get("web.ответа")
 }";
         }
 
@@ -120,14 +120,14 @@ final class AccessStatus extends \Prefab
 
             $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
             $number = $rows[0]['number'];
-            $plans[] = "{qquila1Тарифqquila2
-} $label, {qquila1в наличииqquila2
-} $number {qquila1консультацииqquila2
+            $plans[] = "{$hive->get("web.тариф")
+} $label, {$hive->get("web.в_наличии")
+} $number {$hive->get("web.консультации")
 }";
         }
 
         if (empty($plans)) {
-            $plans[] = qquila1У вас нет активных тарифовqquila2
+            $plans[] = $hive->get("web.у_вас_нет_активных_тарифов")
 ;
         }
 

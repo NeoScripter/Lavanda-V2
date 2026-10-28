@@ -20,7 +20,7 @@
             'variant' => 'accent',
             'size' => 'sm',
             'href' => \Base::instance()->alias('bonus'),
-            'slot' => qquila1Начать знакомствоqquila2
+            'slot' => $hive->get("web.начать_знакомство")
 ,
             'class' => "mx-auto mt-[1.5em] w-fit"
         ]) ?>

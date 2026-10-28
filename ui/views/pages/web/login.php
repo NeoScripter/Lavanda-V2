@@ -1,9 +1,9 @@
 <?php $hive = \Base::instance(); ?>
 
 <?php slot('layouts/web/auth-layout', [
-    'title' => qquila1Добро пожаловать!qquila2
+    'title' => $hive->get("web.добро_пожаловать")
 ,
-    'description' => qquila1Для доступа ко всем разделам ресурса, пожалуйста, войдите.qquila2
+    'description' => $hive->get("web.для_доступа_ко_всем_разделам_ресурса_пожалуйста_войдите")
 
 ]); ?>
 
@@ -14,7 +14,7 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'email',
-        'label'       => qquila1Электронная почтаqquila2
+        'label'       => $hive->get("web.электронная_почта")
 ,
         'attrs' => [
             'type'        => 'email',
@@ -25,11 +25,11 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'password',
-        'label'       => qquila1Парольqquila2
+        'label'       => $hive->get("web.пароль")
 ,
         'attrs' => [
             'type'        => 'password',
-            'placeholder' => qquila1Введите парольqquila2
+            'placeholder' => $hive->get("web.введите_пароль")
 ,
             'required'    => true,
         ]
@@ -42,7 +42,7 @@
             'web/ui/button',
             [
                 'attrs' => ['type' => 'submit'],
-                'slot' => qquila1Войтиqquila2
+                'slot' => $hive->get("web.войти")
 ,
                 'class' => 'px-[2em] mx-auto',
                 'size' => 'sm'
@@ -58,7 +58,7 @@
 <?= component(
     'web/ui/button',
     [
-        'slot' => qquila1Регистрацияqquila2
+        'slot' => $hive->get("web.регистрация")
 ,
         'variant' => 'outline',
         'href' => $hive->alias('register'),

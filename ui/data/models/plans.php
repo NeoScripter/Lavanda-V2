@@ -6,30 +6,30 @@ use Enums\PlanSlug;
 return [
     PlanSlug::ONE_TIME->value => [
         'image' => '/assets/images/pages/plans/plan-1/plan-1',
-        'headline' => qquila13 вопроса - 3 ответаqquila2
+        'headline' => $hive->get("web._вопроса_ответа")
 ,
-        'description' => qquila1Когда нужен ответ на то, что волнует прямо сейчасqquila2
+        'description' => $hive->get("web.когда_нужен_ответ_на_то_что_волнует_прямо_сейчас")
 ,
     ],
     PlanSlug::MONTHLY->value => [
         'image' => '/assets/images/pages/plans/plan-2/plan-2',
-        'headline' => qquila1Неограниченное число обращенийqquila2
+        'headline' => $hive->get("web.неограниченное_число_обращений")
 ,
-        'description' => qquila1В период, когда один разговор не решает всеqquila2
+        'description' => $hive->get("web.в_период_когда_один_разговор_не_решает_все")
 ,
     ],
     PlanSlug::YEARLY->value => [
         'image' => '/assets/images/pages/plans/plan-3/plan-3',
-        'headline' => qquila1Неограниченное число обращенийqquila2
+        'headline' => $hive->get("web.неограниченное_число_обращений")
 ,
-        'description' => qquila1Когда хочется чтобы пространство для размышлений было рядом 365 дней в годуqquila2
+        'description' => $hive->get("web.когда_хочется_чтобы_пространство_для_размышлений_было_рядом_дней_в_году")
 ,
     ],
     PlanSlug::PERSONAL->value => [
         'image' => '/assets/images/pages/plans/plan-4/plan-4',
-        'headline' => qquila1Персональный разборqquila2
+        'headline' => $hive->get("web.персональный_разбор")
 ,
-        'description' => qquila1Заполните форму, выберите формат и получите личный ответ от Lavanda на почту в течение 3 днейqquila2
+        'description' => $hive->get("web.заполните_форму_выберите_формат_и_получите_личный_ответ_от_на_почту_в_течение_дней")
 ,
     ],
 ];

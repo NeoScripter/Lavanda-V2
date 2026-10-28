@@ -3,7 +3,7 @@
 use Enums\GameType;
 
 slot('layouts/web/app-layout', [
-    'title' => qquila1Таблица гексаграммqquila2
+    'title' => $hive->get("web.таблица_гексаграмм")
 ,
 ]); ?>
 
@@ -19,7 +19,7 @@ slot('layouts/web/app-layout', [
 <?php ob_start(); ?>
 <?= component('web/ui/button', [
     'variant' => 'primary',
-    'slot' => qquila1Перейти к игреqquila2
+    'slot' => $hive->get("web.перейти_к_игре")
 ,
     'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
 ]) ?>
@@ -66,7 +66,7 @@ slot('layouts/web/app-layout', [
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробовать сноваqquila2
+        'slot' => $hive->get("web.попробовать_снова")
 ,
         'attrs' => [
             'cmp-reset-game-btn' => true,
@@ -82,7 +82,7 @@ slot('layouts/web/app-layout', [
 
         <?= component('web/ui/button', [
             'variant' => 'primary',
-            'slot' => qquila1Бросить монетыqquila2
+            'slot' => $hive->get("web.бросить_монеты")
 ,
             'attrs' => [
                 'cmp-launch-game-btn' => true,

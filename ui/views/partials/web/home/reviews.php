@@ -1,4 +1,4 @@
-<?php $reviews = [qquila1Как будто с подругой поговорила, которая все про меня знает...qquila2
+<?php $reviews = [$hive->get("web.как_будто_с_подругой_поговорила_которая_все_про_меня_знает")
 , 'Review number 2 about something interesting', 'Review number 3 about something else']; ?>
 
 <section cmp-reviews class='full-bleed isolate relative bg-primary-pale/50 py-(--spacing-y) px-(--px-lg) select-none visibility-auto'>

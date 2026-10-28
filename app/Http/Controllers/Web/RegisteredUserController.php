@@ -79,7 +79,7 @@ class RegisteredUserController extends Controller
 
         Auth::clear();
 
-        notify(qquila1До новых встреч!qquila2
+        notify($hive->get("web.до_новых_встреч")
 );
         $hive->reroute('/');
     }

@@ -9,7 +9,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Карты Тароqquila2
+    'title' => $hive->get("web.карты_таро")
 ,
 ]); ?>
 
@@ -26,25 +26,25 @@ extract(component_props(
 <?php $items = [
     [
         'id' => 1,
-        'title' => qquila11 карта - «Главное сейчас»qquila2
+        'title' => $hive->get("web._карта_главное_сейчас")
 ,
-        'description' => qquila1Одна карта — один фокус. Она подсказывает, на что стоит обратить внимание сейчас.qquila2
+        'description' => $hive->get("web.одна_карта_один_фокус_она_подсказывает_на_что_стоит_обратить_внимание_сейчас")
 ,
         'num' => 1
     ],
     [
         'id' => 2,
-        'title' => qquila13 карты - «Путь ситуации»qquila2
+        'title' => $hive->get("web._карты_путь_ситуации")
 ,
-        'description' => qquila1Три карты показывают ситуацию в движении: откуда она берёт начало, что происходит сейчас и куда ведёт.qquila2
+        'description' => $hive->get("web.три_карты_показывают_ситуацию_в_движении_откуда_она_берёт_начало_что_происходит_сейчас_и_куда_ведёт")
 ,
         'num' => 3
     ],
     [
         'id' => 3,
-        'title' => qquila15 карт - «Глубокий взгляд»qquila2
+        'title' => $hive->get("web._карт_глубокий_взгляд")
 ,
-        'description' => qquila1Пять карт раскрывают ситуацию с разных сторон: что происходит внутри и вокруг, что мешает и на что можно оперетьсяqquila2
+        'description' => $hive->get("web.пять_карт_раскрывают_ситуацию_с_разных_сторон_что_происходит_внутри_и_вокруг_что_мешает_и_на_что_можно_опереться")
 ,
         'num' => 5
     ],
@@ -63,7 +63,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Получить ответqquila2
+        'slot' => $hive->get("web.получить_ответ")
 ,
         'attrs' => [
             'cmp-launch-game-btn' => true,
@@ -87,7 +87,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Следующая картаqquila2
+        'slot' => $hive->get("web.следующая_карта")
 ,
         'attrs' => [
             'cmp-launch-game-btn' => true,
@@ -97,7 +97,7 @@ extract(component_props(
     ]) ?>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробовать сноваqquila2
+        'slot' => $hive->get("web.попробовать_снова")
 ,
         'attrs' => [
             'cmp-reset-game-btn' => true,
@@ -134,7 +134,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробовать сноваqquila2
+        'slot' => $hive->get("web.попробовать_снова")
 ,
         'attrs' => [
             'cmp-reset-game-btn' => true,
@@ -147,8 +147,8 @@ extract(component_props(
 </div>
 <?php $slot2 = ob_get_clean(); ?>
 
-<?php $labels = [qquila1Выбор лавандыqquila2
-, qquila1Выбор гостяqquila2
+<?php $labels = [$hive->get("web.выбор_лаванды")
+, $hive->get("web.выбор_гостя")
 ]; ?>
 
 <?= component('web/layout/game-stage', [

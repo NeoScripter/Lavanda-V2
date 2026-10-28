@@ -40,7 +40,7 @@ $hive = \Base::instance();
                 'href' => empty($user) ? $hive->alias('login') : $hive->alias('profile'),
             ]); ?>
             <?= svg('circle-user') ?>
-            <?= empty($user) ? qquila1Войтиqquila2
+            <?= empty($user) ? $hive->get("web.войти")
  : $user['name'] ?>
             <?php end_slot(); ?>
         <?php endif; ?>

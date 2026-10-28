@@ -9,7 +9,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Оформление тарифаqquila2
+    'title' => $hive->get("web.оформление_тарифа")
 ,
     'class' => 'bg-white relative isolate',
 ]); ?>
@@ -23,7 +23,7 @@ extract(component_props(
     <input type="hidden" name="slug" value="<?= $item['slug'] ?>">
 
     <?= component('web/ui/button', [
-        'slot' => qquila1Оплатитьqquila2
+        'slot' => $hive->get("web.оплатить")
 ,
         'class' => 'min-w-50',
         'size' => 'sm',

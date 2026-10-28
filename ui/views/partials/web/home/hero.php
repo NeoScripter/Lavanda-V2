@@ -74,7 +74,7 @@ extract(component_props(
                 <div>
                     <?= component('web/ui/button', [
                         'variant' => 'primary',
-                        'slot' => qquila1Открыть картуqquila2
+                        'slot' => $hive->get("web.открыть_карту")
 ,
                         'class' => 'mx-auto mb-1',
                         'attrs' => [
@@ -85,7 +85,7 @@ extract(component_props(
                     ]) ?>
                     <?= component('web/ui/button', [
                         'variant' => 'primary',
-                        'slot' => qquila1Попробовать сноваqquila2
+                        'slot' => $hive->get("web.попробовать_снова")
 ,
                         'class' => 'mx-auto mb-1 hidden',
                         'attrs' => [
@@ -97,7 +97,7 @@ extract(component_props(
                 <div>
                     <?= component('web/ui/button', [
                         'variant' => 'accent',
-                        'slot' => qquila1Следующий разделqquila2
+                        'slot' => $hive->get("web.следующий_раздел")
 ,
                         'class' => 'mx-auto mb-1',
                     ]) ?>

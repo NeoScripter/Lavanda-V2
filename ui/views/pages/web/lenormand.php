@@ -9,7 +9,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Карты Ленорманqquila2
+    'title' => $hive->get("web.карты_ленорман")
 ,
 ]); ?>
 
@@ -26,18 +26,18 @@ extract(component_props(
 <?php $items = [
     [
         'img' => '/assets/images/pages/lenormand/man',
-        'alt' => qquila1Мужской портрет в викторианском стиле: профиль молодого мужчины в классическом костюме с жилетом и галстуком, окружённого ветвями сирени.qquila2
+        'alt' => $hive->get("web.мужской_портрет_в_викторианском_стиле_профиль_молодого_мужчины_в_классическом_костюме_с_жилетом_и_галстуком_окружённого_ветвями_сирени")
 ,
         'value' => 'man',
-        'title' => qquila1Предсказание для мужчиныqquila2
+        'title' => $hive->get("web.предсказание_для_мужчины")
 ,
     ],
     [
         'img' => '/assets/images/pages/lenormand/woman',
-        'alt' => qquila1Женский портрет в викторианском стиле: профиль молодой женщины с собранными волосами, украшенными сиренью, в светлом платье с кружевным воротником и букетом сирени.qquila2
+        'alt' => $hive->get("web.женский_портрет_в_викторианском_стиле_профиль_молодой_женщины_с_собранными_волосами_украшенными_сиренью_в_светлом_платье_с_кружевным_воротником_и_букетом_сирени")
 ,
         'value' => 'woman',
-        'title' => qquila1Предсказание для женщиныqquila2
+        'title' => $hive->get("web.предсказание_для_женщины")
 ,
     ]
 ]; ?>
@@ -91,7 +91,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Получить ответqquila2
+        'slot' => $hive->get("web.получить_ответ")
 ,
         'attrs' => [
             'cmp-launch-game-btn' => true,
@@ -112,7 +112,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => qquila1Попробовать сноваqquila2
+        'slot' => $hive->get("web.попробовать_снова")
 ,
         'attrs' => [
             'cmp-reset-game-btn' => true,

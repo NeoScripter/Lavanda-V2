@@ -9,7 +9,7 @@ extract(component_props(
 <?php $hive = \Base::instance(); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Настройqquila2
+    'title' => $hive->get("web.настрой")
 ,
 ]); ?>
 

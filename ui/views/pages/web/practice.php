@@ -7,7 +7,7 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => qquila1Практикаqquila2
+    'title' => $hive->get("web.практика")
 ,
     'class' => "bg-primary-muted/50 pt-0!"
 ]); ?>

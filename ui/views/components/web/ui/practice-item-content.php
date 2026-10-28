@@ -16,7 +16,7 @@
                 <h3 component-pic-title class='sm:text-left'></h3>
                 <p component-pic-description class='text-center text-balance sm:text-left'></p>
 
-                <?= component('web/ui/file-link', ['url' => 'https://example.com', 'label' => qquila1Скачать файлqquila2
+                <?= component('web/ui/file-link', ['url' => 'https://example.com', 'label' => $hive->get("web.скачать_файл")
 , 'class' => 'mx-auto sm:mx-0 mb-[0.75em]']) ?>
 
                 <div component-pic-faqs></div>

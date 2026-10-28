@@ -6,10 +6,10 @@ extract(component_props(
     props: get_defined_vars(),
 )); ?>
 
-<?= component('email/heading', ['label' => qquila1Здравствуйтеqquila2
+<?= component('email/heading', ['label' => $hive->get("web.здравствуйте")
 ]) ?>
 <p>Для смены пароля перейдите пожалуйста по данной ссылке:</p>
-<?= component('email/link', ['label' => qquila1Ссылкаqquila2
+<?= component('email/link', ['label' => $hive->get("web.ссылка")
 , 'href' => $href]) ?>
 <p>Ссылка перестанет быть достуной через 3 минуты.</p>
 <p>Если у вас переход по ссылке не работает, скопируйте и вставьте ее отсюда:</p>

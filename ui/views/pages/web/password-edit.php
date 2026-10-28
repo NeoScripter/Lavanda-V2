@@ -9,9 +9,9 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/auth-layout', [
-    'title' => qquila1Изменение пароляqquila2
+    'title' => $hive->get("web.изменение_пароля")
 ,
-    'description' => qquila1Введите новый пароль от аккаунтаqquila2
+    'description' => $hive->get("web.введите_новый_пароль_от_аккаунта")
 
 ]); ?>
 
@@ -22,11 +22,11 @@ extract(component_props(
 
     <?= component('web/form/form-input', [
         'name'        => 'password',
-        'label'       => qquila1Парольqquila2
+        'label'       => $hive->get("web.пароль")
 ,
         'attrs' => [
             'type'        => 'password',
-            'placeholder' => qquila1Введите парольqquila2
+            'placeholder' => $hive->get("web.введите_пароль")
 ,
             'required'    => true,
             'minlength' => 8,
@@ -35,11 +35,11 @@ extract(component_props(
 
     <?= component('web/form/form-input', [
         'name'        => 'password_confirmation',
-        'label'       => qquila1Повторите парольqquila2
+        'label'       => $hive->get("web.повторите_пароль")
 ,
         'attrs' => [
             'type'        => 'password',
-            'placeholder' => qquila1Повторите парольqquila2
+            'placeholder' => $hive->get("web.повторите_пароль")
 ,
             'required'    => true,
             'minlength' => 8,
@@ -51,7 +51,7 @@ extract(component_props(
             'web/ui/button',
             [
                 'attrs' => ['type' => 'submit'],
-                'slot' => qquila1Отправитьqquila2
+                'slot' => $hive->get("web.отправить")
 ,
                 'class' => 'px-[2em] mx-auto',
                 'size' => 'sm'
