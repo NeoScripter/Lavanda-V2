@@ -9,7 +9,8 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Оформление тарифа',
+    'title' => qquila1Оформление тарифаqquila2
+,
     'class' => 'bg-white relative isolate',
 ]); ?>
 
@@ -22,7 +23,8 @@ extract(component_props(
     <input type="hidden" name="slug" value="<?= $item['slug'] ?>">
 
     <?= component('web/ui/button', [
-        'slot' => 'Оплатить',
+        'slot' => qquila1Оплатитьqquila2
+,
         'class' => 'min-w-50',
         'size' => 'sm',
     ]); ?>

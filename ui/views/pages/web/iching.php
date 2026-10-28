@@ -3,7 +3,8 @@
 use Enums\GameType;
 
 slot('layouts/web/app-layout', [
-    'title' => 'Таблица гексаграмм',
+    'title' => qquila1Таблица гексаграммqquila2
+,
 ]); ?>
 
 <?php ob_start(); ?>
@@ -18,7 +19,8 @@ slot('layouts/web/app-layout', [
 <?php ob_start(); ?>
 <?= component('web/ui/button', [
     'variant' => 'primary',
-    'slot' => 'Перейти к игре',
+    'slot' => qquila1Перейти к игреqquila2
+,
     'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
 ]) ?>
 <?php $slot = ob_get_clean(); ?>
@@ -64,7 +66,8 @@ slot('layouts/web/app-layout', [
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Попробовать снова',
+        'slot' => qquila1Попробовать сноваqquila2
+,
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -79,7 +82,8 @@ slot('layouts/web/app-layout', [
 
         <?= component('web/ui/button', [
             'variant' => 'primary',
-            'slot' => 'Бросить монеты',
+            'slot' => qquila1Бросить монетыqquila2
+,
             'attrs' => [
                 'cmp-launch-game-btn' => true,
                 'cmp-visible-at-start' => true,

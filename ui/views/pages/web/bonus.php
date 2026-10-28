@@ -9,7 +9,8 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Бонусная игра',
+    'title' => qquila1Бонусная играqquila2
+,
 ]); ?>
 
 <?php ob_start(); ?>
@@ -31,12 +32,14 @@ extract(component_props(
 <div class='flex flex-wrap gap-y-4 gap-x-6 lg:gap-x-8'>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Попробовать',
+        'slot' => qquila1Попробоватьqquila2
+,
         'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
     ]) ?>
     <?= component('web/ui/button', [
         'variant' => 'muted',
-        'slot' => 'Идем дальше',
+        'slot' => qquila1Идем дальшеqquila2
+,
     ]) ?>
 </div>
 <?php $slot = ob_get_clean(); ?>
@@ -55,7 +58,8 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Получить ответ',
+        'slot' => qquila1Получить ответqquila2
+,
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-at-start' => true
@@ -78,7 +82,8 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Попробовать снова',
+        'slot' => qquila1Попробовать сноваqquila2
+,
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -114,7 +119,8 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Попробовать снова',
+        'slot' => qquila1Попробовать сноваqquila2
+,
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -126,7 +132,9 @@ extract(component_props(
 </div>
 <?php $slot2 = ob_get_clean(); ?>
 
-<?php $labels = ['Выбор лаванды', 'Выбор гостя']; ?>
+<?php $labels = [qquila1Выбор лавандыqquila2
+, qquila1Выбор гостяqquila2
+]; ?>
 
 <?= component('web/layout/game-stage', [
     'labels' => $labels,

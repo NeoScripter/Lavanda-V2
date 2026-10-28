@@ -7,7 +7,8 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Полезные ресурсы',
+    'title' => qquila1Полезные ресурсыqquila2
+,
     'class' => "bg-[url('/assets/images/pages/articles/articles-bg.webp')] bg-cover bg-center bg-no-repeat"
 ]); ?>
 

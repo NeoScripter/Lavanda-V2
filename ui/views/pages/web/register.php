@@ -1,7 +1,8 @@
 <?php $hive = \Base::instance(); ?>
 
 <?php slot('layouts/web/auth-layout', [
-    'title' => "Регистрация",
+    'title' => qquila1Регистрацияqquila2
+,
 ]); ?>
 
 <?php slot('components/web/layout/info-banner', ['class' => 'mb-2 -mt-4']) ?>
@@ -17,10 +18,12 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'name',
-        'label'       => 'Имя',
+        'label'       => qquila1Имяqquila2
+,
         'attrs' => [
             'type'        => 'text',
-            'placeholder' => 'Иван Иванов',
+            'placeholder' => qquila1Иван Ивановqquila2
+,
             'required'    => true,
             'maxlength' => 200,
         ]
@@ -28,7 +31,8 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'email',
-        'label'       => 'Электронная почта',
+        'label'       => qquila1Электронная почтаqquila2
+,
         'attrs' => [
             'type'        => 'email',
             'placeholder' => 'email@example.com',
@@ -39,10 +43,12 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'password',
-        'label'       => 'Пароль',
+        'label'       => qquila1Парольqquila2
+,
         'attrs' => [
             'type'        => 'password',
-            'placeholder' => 'Введите пароль',
+            'placeholder' => qquila1Введите парольqquila2
+,
             'required'    => true,
             'minlength' => 8,
         ]
@@ -50,10 +56,12 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'password_confirmation',
-        'label'       => 'Повторите пароль',
+        'label'       => qquila1Повторите парольqquila2
+,
         'attrs' => [
             'type'        => 'password',
-            'placeholder' => 'Повторите пароль',
+            'placeholder' => qquila1Повторите парольqquila2
+,
             'required'    => true,
             'minlength' => 8,
         ]
@@ -62,7 +70,8 @@
     <div cmp-otp-input class='hidden'>
         <?= component('web/form/form-input', [
             'name'  => 'otp_code',
-            'label' => 'Введите код подтверждения, отправленный вам на электронную почту',
+            'label' => qquila1Введите код подтверждения, отправленный вам на электронную почтуqquila2
+,
             'error' => $errors['otp_code'] ?? '',
             'attrs' => [
                 'type'     => 'text',
@@ -78,7 +87,8 @@
             'web/ui/button',
             [
                 'attrs' => ['type' => 'submit'],
-                'slot' => 'Зарегистрироваться',
+                'slot' => qquila1Зарегистрироватьсяqquila2
+,
                 'class' => 'px-[2em] mx-auto',
                 'size' => 'sm'
             ]
@@ -88,13 +98,17 @@
     <div class='space-y-2 text-balance'>
         <?= component('web/form/checkbox', [
             'name'        => 'agreement_accepted',
-            'label'       => "Даю согласие на <a href='/legal/user_agreement' class='text-sm underline hover:text-primary transition-colors underline-offset-5'>обработку персональных данных</a>",
+            'label'       => "{qquila1Даю согласие наqquila2
+} <a href='/legal/user_agreement' class='text-sm underline hover:text-primary transition-colors underline-offset-5'>{qquila1обработку персональных данныхqquila2
+}</a>",
             'attrs' => ['required' => true]
         ]) ?>
 
         <?= component('web/form/checkbox', [
             'name'        => 'policy_accepted',
-            'label'       => "Принимаю <a href='/legal/privacy_policy' class='text-sm underline hover:text-primary transition-colors underline-offset-5'>политику конфиденциальности</a>",
+            'label'       => "{qquila1Принимаюqquila2
+} <a href='/legal/privacy_policy' class='text-sm underline hover:text-primary transition-colors underline-offset-5'>{qquila1политику конфиденциальностиqquila2
+}</a>",
             'attrs' => ['required' => true]
         ]) ?>
     </div>

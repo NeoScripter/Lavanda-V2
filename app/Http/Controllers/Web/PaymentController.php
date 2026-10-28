@@ -48,7 +48,8 @@ class PaymentController extends Controller
                 'customer_email' => $user['email'],
                 'products' => [
                     [
-                        'name' => 'Тариф "' . mb_convert_case(PlanSlug::from($slug)->label(), MB_CASE_TITLE, 'UTF-8') . '"',
+                        'name' => "{qquila1Тарифqquila2
+} " . mb_convert_case(PlanSlug::from($slug)->label(), MB_CASE_TITLE, 'UTF-8') . '"',
                         'price' => (string) $plan->price,
                         'quantity' => '1',
                     ]
@@ -62,7 +63,8 @@ class PaymentController extends Controller
         } else {
             AccessStatus::give(PlanSlug::from($slug), $user);
 
-            notify('Покупка успешно совершена!');
+            notify(qquila1Покупка успешно совершена!qquila2
+);
             $hive->reroute('@home');
         }
     }

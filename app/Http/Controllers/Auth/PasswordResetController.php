@@ -65,13 +65,15 @@ class PasswordResetController extends Controller
         $payload = [
             'subject' => $hive->get('email.восстановление_пароля'),
             'html' => $html,
-            'user_name' => 'Пользователь',
+            'user_name' => qquila1Пользовательqquila2
+,
             'user_email' => $request->input('email')
         ];
 
         $job->handle($payload);
 
-        notify("На указанную вами почту была отправлена ссылка для сброса пароля");
+        notify(qquila1На указанную вами почту была отправлена ссылка для сброса пароляqquila2
+);
         $hive->reroute('@password_reset_index');
     }
 
@@ -98,7 +100,8 @@ class PasswordResetController extends Controller
         $user->password = $request->input('password');
         $user->save();
 
-        notify('Пароль успешно изменен!');
+        notify(qquila1Пароль успешно изменен!qquila2
+);
         $hive->reroute('@login');
     }
 }

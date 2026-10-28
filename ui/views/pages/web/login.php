@@ -1,8 +1,10 @@
 <?php $hive = \Base::instance(); ?>
 
 <?php slot('layouts/web/auth-layout', [
-    'title' => "Добро пожаловать!",
-    'description' => "Для доступа ко всем разделам ресурса, пожалуйста, войдите."
+    'title' => qquila1Добро пожаловать!qquila2
+,
+    'description' => qquila1Для доступа ко всем разделам ресурса, пожалуйста, войдите.qquila2
+
 ]); ?>
 
 <form action="<?= $hive->alias("login_store") ?>" method="post" class="max-w-160 flex flex-col gap-6">
@@ -12,7 +14,8 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'email',
-        'label'       => 'Электронная почта',
+        'label'       => qquila1Электронная почтаqquila2
+,
         'attrs' => [
             'type'        => 'email',
             'placeholder' => 'email@example.com',
@@ -22,10 +25,12 @@
 
     <?= component('web/form/form-input', [
         'name'        => 'password',
-        'label'       => 'Пароль',
+        'label'       => qquila1Парольqquila2
+,
         'attrs' => [
             'type'        => 'password',
-            'placeholder' => 'Введите пароль',
+            'placeholder' => qquila1Введите парольqquila2
+,
             'required'    => true,
         ]
     ]) ?>
@@ -37,7 +42,8 @@
             'web/ui/button',
             [
                 'attrs' => ['type' => 'submit'],
-                'slot' => 'Войти',
+                'slot' => qquila1Войтиqquila2
+,
                 'class' => 'px-[2em] mx-auto',
                 'size' => 'sm'
             ]
@@ -52,7 +58,8 @@
 <?= component(
     'web/ui/button',
     [
-        'slot' => 'Регистрация',
+        'slot' => qquila1Регистрацияqquila2
+,
         'variant' => 'outline',
         'href' => $hive->alias('register'),
         'class' => 'px-[2em] mx-auto w-fit',

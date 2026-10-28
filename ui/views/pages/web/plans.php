@@ -10,7 +10,8 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Тарифы',
+    'title' => qquila1Тарифыqquila2
+,
     'class' => 'bg-white relative isolate',
 ]); ?>
 
@@ -19,10 +20,14 @@ $hive = \Base::instance();
 $user = Auth::user();
 
 $button_labels = [
-    PlanSlug::YEARLY->value => 'Остаться на год',
-    PlanSlug::MONTHLY->value => 'Остаться на месяц',
-    PlanSlug::ONE_TIME->value => 'Получить ответы',
-    PlanSlug::PERSONAL->value => 'Заказать разбор',
+    PlanSlug::YEARLY->value => qquila1Остаться на годqquila2
+,
+    PlanSlug::MONTHLY->value => qquila1Остаться на месяцqquila2
+,
+    PlanSlug::ONE_TIME->value => qquila1Получить ответыqquila2
+,
+    PlanSlug::PERSONAL->value => qquila1Заказать разборqquila2
+,
 ];
 ?>
 

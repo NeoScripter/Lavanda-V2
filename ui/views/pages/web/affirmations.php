@@ -9,7 +9,8 @@ extract(component_props(
 <?php $hive = \Base::instance(); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Настрой',
+    'title' => qquila1Настройqquila2
+,
 ]); ?>
 
 <?php ob_start(); ?>
@@ -23,14 +24,17 @@ extract(component_props(
 <div class='mt-10 mx-auto flex items-center justify-center flex-col sm:flex-row gap-y-4 gap-x-6'>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Начать',
+        'slot' => qquila1Начатьqquila2
+,
         'class' => 'min-w-40',
-        'attrs' => ['cmp-aff-btn' => true, 'data-repeat-label' => 'Повторить']
+        'attrs' => ['cmp-aff-btn' => true, 'data-repeat-label' => qquila1Повторитьqquila2
+]
     ]) ?>
 
     <?= component('web/ui/button', [
         'variant' => 'outline',
-        'slot' => 'Сменить тему',
+        'slot' => qquila1Сменить темуqquila2
+,
         'class' => '',
         'href' => $hive->alias('affirmation_topics')
     ]) ?>

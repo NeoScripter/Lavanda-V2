@@ -9,7 +9,8 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Карты Ленорман',
+    'title' => qquila1Карты Ленорманqquila2
+,
 ]); ?>
 
 <?php ob_start(); ?>
@@ -25,15 +26,19 @@ extract(component_props(
 <?php $items = [
     [
         'img' => '/assets/images/pages/lenormand/man',
-        'alt' => 'Мужской портрет в викторианском стиле: профиль молодого мужчины в классическом костюме с жилетом и галстуком, окружённого ветвями сирени.',
+        'alt' => qquila1Мужской портрет в викторианском стиле: профиль молодого мужчины в классическом костюме с жилетом и галстуком, окружённого ветвями сирени.qquila2
+,
         'value' => 'man',
-        'title' => 'Предсказание для мужчины',
+        'title' => qquila1Предсказание для мужчиныqquila2
+,
     ],
     [
         'img' => '/assets/images/pages/lenormand/woman',
-        'alt' => 'Женский портрет в викторианском стиле: профиль молодой женщины с собранными волосами, украшенными сиренью, в светлом платье с кружевным воротником и букетом сирени.',
+        'alt' => qquila1Женский портрет в викторианском стиле: профиль молодой женщины с собранными волосами, украшенными сиренью, в светлом платье с кружевным воротником и букетом сирени.qquila2
+,
         'value' => 'woman',
-        'title' => 'Предсказание для женщины',
+        'title' => qquila1Предсказание для женщиныqquila2
+,
     ]
 ]; ?>
 
@@ -86,7 +91,8 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Получить ответ',
+        'slot' => qquila1Получить ответqquila2
+,
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-at-start' => true
@@ -106,7 +112,8 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Попробовать снова',
+        'slot' => qquila1Попробовать сноваqquila2
+,
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true

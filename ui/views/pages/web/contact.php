@@ -1,5 +1,6 @@
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Контакты',
+    'title' => qquila1Контактыqquila2
+,
     'class' => 'bg-white relative isolate',
 ]); ?>
 

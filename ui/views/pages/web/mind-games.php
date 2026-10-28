@@ -9,7 +9,8 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Игры разума',
+    'title' => qquila1Игры разумаqquila2
+,
 ]); ?>
 
 <?php ob_start(); ?>
@@ -24,7 +25,8 @@ extract(component_props(
 <?php ob_start(); ?>
 <?= component('web/ui/button', [
     'variant' => 'primary',
-    'slot' => 'Перейти к игре',
+    'slot' => qquila1Перейти к игреqquila2
+,
     'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
 ]) ?>
 <?php $slot = ob_get_clean(); ?>
@@ -51,7 +53,8 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Получить ответ',
+        'slot' => qquila1Получить ответqquila2
+,
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-at-start' => true
@@ -74,7 +77,8 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Попробовать снова',
+        'slot' => qquila1Попробовать сноваqquila2
+,
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true

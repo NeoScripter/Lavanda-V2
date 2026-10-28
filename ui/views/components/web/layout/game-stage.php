@@ -6,7 +6,8 @@ extract(component_props(
     required: ['slots'],
     optional: [
         'class' => '',
-        'labels' => ['Выбор лаванды'],
+        'labels' => [qquila1Выбор лавандыqquila2
+],
         'interpretation' => null
     ],
     props: get_defined_vars(),
@@ -74,7 +75,8 @@ extract(component_props(
                     <div class='flex flex-col lg:flex-row items-center justify-center mt-2 gap-4 lg:gap-8'>
                         <?= component('web/ui/button', [
                             'variant' => 'accent',
-                            'slot' => 'Выбрать постоянный формат',
+                            'slot' => qquila1Выбрать постоянный форматqquila2
+,
                             'size' => 'sm',
                             'href' => $hive->alias('plans'),
                             'class' => 'w-fit lg:min-w-70',
@@ -82,7 +84,8 @@ extract(component_props(
 
                         <?= component('web/ui/button', [
                             'variant' => 'muted',
-                            'slot' => 'Продолжить как гость',
+                            'slot' => qquila1Продолжить как гостьqquila2
+,
                             'size' => 'sm',
                             'href' => $hive->alias('plans_show', ['slug' => PlanSlug::ONE_TIME->value]),
                             'class' => 'w-fit lg:min-w-70',

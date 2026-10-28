@@ -74,7 +74,8 @@ extract(component_props(
                 <div>
                     <?= component('web/ui/button', [
                         'variant' => 'primary',
-                        'slot' => 'Открыть карту',
+                        'slot' => qquila1Открыть картуqquila2
+,
                         'class' => 'mx-auto mb-1',
                         'attrs' => [
                             'cmp-launch-game-btn' => true,
@@ -84,7 +85,8 @@ extract(component_props(
                     ]) ?>
                     <?= component('web/ui/button', [
                         'variant' => 'primary',
-                        'slot' => 'Попробовать снова',
+                        'slot' => qquila1Попробовать сноваqquila2
+,
                         'class' => 'mx-auto mb-1 hidden',
                         'attrs' => [
                             'cmp-reset-game-btn' => true,
@@ -95,7 +97,8 @@ extract(component_props(
                 <div>
                     <?= component('web/ui/button', [
                         'variant' => 'accent',
-                        'slot' => 'Следующий раздел',
+                        'slot' => qquila1Следующий разделqquila2
+,
                         'class' => 'mx-auto mb-1',
                     ]) ?>
                 </div>

@@ -7,7 +7,8 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Послание поддержки',
+    'title' => qquila1Послание поддержкиqquila2
+,
 ]); ?>
 
 <?php ob_start(); ?>
@@ -23,9 +24,11 @@ extract(component_props(
 
 <?= component('web/ui/button', [
     'variant' => 'primary',
-    'slot' => 'Начать',
+    'slot' => qquila1Начатьqquila2
+,
     'class' => 'w-fit mt-10 mx-auto',
-    'attrs' => ['cmp-audio-btn' => true, 'data-repeat-label' => 'Повторить']
+    'attrs' => ['cmp-audio-btn' => true, 'data-repeat-label' => qquila1Повторитьqquila2
+]
 ]) ?>
 <?php $slot1 = ob_get_clean(); ?>
 

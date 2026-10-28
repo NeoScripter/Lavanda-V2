@@ -40,7 +40,8 @@ $hive = \Base::instance();
                 'href' => empty($user) ? $hive->alias('login') : $hive->alias('profile'),
             ]); ?>
             <?= svg('circle-user') ?>
-            <?= empty($user) ? 'Войти' : $user['name'] ?>
+            <?= empty($user) ? qquila1Войтиqquila2
+ : $user['name'] ?>
             <?php end_slot(); ?>
         <?php endif; ?>
         <?= component('web/ui/burger-menu', ['class' => 'text-primary mr-2 sm:hidden']); ?>

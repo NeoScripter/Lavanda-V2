@@ -15,7 +15,8 @@ extract(component_props(
 ;?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Главная',
+    'title' => qquila1Главнаяqquila2
+,
     'class' => 'bg-white',
 ]); ?>
 

@@ -1,4 +1,5 @@
-<?php $reviews = ['Как будто с подругой поговорила, которая все про меня знает...', 'Review number 2 about something interesting', 'Review number 3 about something else']; ?>
+<?php $reviews = [qquila1Как будто с подругой поговорила, которая все про меня знает...qquila2
+, 'Review number 2 about something interesting', 'Review number 3 about something else']; ?>
 
 <section cmp-reviews class='full-bleed isolate relative bg-primary-pale/50 py-(--spacing-y) px-(--px-lg) select-none visibility-auto'>
 

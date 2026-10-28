@@ -1,7 +1,13 @@
 <?php $items = [
-    ['img' => '/assets/images/pages/home/what-you-will-get/item-1', 'alt' => 'sandclock', 'title' => 'Немного тишины в голове', 'description' => 'и немного порядка в мыслях'],
-    ['img' => '/assets/images/pages/home/what-you-will-get/item-2', 'alt' => 'eye', 'title' => 'Взгляд со стороны', 'description' => 'на то, что вы, возможно, уже знаете, но пока успели произнести себе'],
-    ['img' => '/assets/images/pages/home/what-you-will-get/item-3', 'alt' => 'crown', 'title' => "Ощущение «я справлюсь»", 'description' => 'Своё, настоящее'],
+    ['img' => '/assets/images/pages/home/what-you-will-get/item-1', 'alt' => 'sandclock', 'title' => qquila1Немного тишины в головеqquila2
+, 'description' => qquila1и немного порядка в мысляхqquila2
+],
+    ['img' => '/assets/images/pages/home/what-you-will-get/item-2', 'alt' => 'eye', 'title' => qquila1Взгляд со стороныqquila2
+, 'description' => qquila1на то, что вы, возможно, уже знаете, но пока успели произнести себеqquila2
+],
+    ['img' => '/assets/images/pages/home/what-you-will-get/item-3', 'alt' => 'crown', 'title' => qquila1Ощущение «я справлюсь»qquila2
+, 'description' => qquila1Своё, настоящееqquila2
+],
 ]; ?>
 
 <section class='full-bleed bg-primary-pale/50 py-(--spacing-y) px-(--px-lg) visibility-auto'>

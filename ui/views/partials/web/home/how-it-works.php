@@ -20,7 +20,8 @@
             'variant' => 'accent',
             'size' => 'sm',
             'href' => \Base::instance()->alias('bonus'),
-            'slot' => 'Начать знакомство',
+            'slot' => qquila1Начать знакомствоqquila2
+,
             'class' => "mx-auto mt-[1.5em] w-fit"
         ]) ?>
         <?php end_slot(); ?>

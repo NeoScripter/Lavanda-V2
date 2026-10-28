@@ -93,7 +93,9 @@ final class AccessStatus extends \Prefab
 
             $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
             $date = new DateTime($rows[0]['ends_at'])->format('d/m/y');
-            $plans[] = "Тариф $label, оплачен до $date";
+            $plans[] = "{qquila1Тарифqquila2
+} $label, {qquila1оплачен доqquila2
+}$date";
         }
 
         if (self::instance()->has_purchased_games($user)) {
@@ -104,7 +106,10 @@ final class AccessStatus extends \Prefab
 
             $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
             $number = $rows[0]['number'];
-            $plans[] = "Тариф $label, в наличии $number ответа";
+            $plans[] = "{qquila1Тарифqquila2
+} $label, {qquila1в наличииqquila2
+} $number {qquila1ответаqquila2
+}";
         }
 
         if (self::instance()->has_purchased_consultations($user)) {
@@ -115,11 +120,15 @@ final class AccessStatus extends \Prefab
 
             $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
             $number = $rows[0]['number'];
-            $plans[] = "Тариф $label, в наличии $number консультации";
+            $plans[] = "{qquila1Тарифqquila2
+} $label, {qquila1в наличииqquila2
+} $number {qquila1консультацииqquila2
+}";
         }
 
         if (empty($plans)) {
-            $plans[] = "У вас нет активных тарифов";
+            $plans[] = qquila1У вас нет активных тарифовqquila2
+;
         }
 
         return $plans;

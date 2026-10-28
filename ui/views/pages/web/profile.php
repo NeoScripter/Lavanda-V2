@@ -8,7 +8,8 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Редактировать профиль',
+    'title' => qquila1Редактировать профильqquila2
+,
     'class' => "bg-[url('/assets/images/pages/article/page-bg.webp')] bg-cover bg-center"
 ]); ?>
 
@@ -29,7 +30,8 @@ extract(component_props(
 
                         <?= component('web/form/form-input', [
                             'name'  => 'name',
-                            'label' => 'Имя пользователя',
+                            'label' => qquila1Имя пользователяqquila2
+,
                             'error' => $errors['name'] ?? '',
                             'attrs' => [
                                 'type'     => 'text',
@@ -39,7 +41,8 @@ extract(component_props(
 
                         <?= component('web/form/form-input', [
                             'name'  => 'email',
-                            'label' => 'Электронная почта',
+                            'label' => qquila1Электронная почтаqquila2
+,
                             'error' => $errors['email'] ?? '',
                             'attrs' => [
                                 'type'     => 'email',
@@ -50,7 +53,8 @@ extract(component_props(
                         <div cmp-otp-input class='hidden'>
                             <?= component('web/form/form-input', [
                                 'name'  => 'otp_code',
-                                'label' => 'Введите код подтверждения, отправленный вам на электронную почту',
+                                'label' => qquila1Введите код подтверждения, отправленный вам на электронную почтуqquila2
+,
                                 'error' => $errors['otp_code'] ?? '',
                                 'attrs' => [
                                     'type'     => 'text',
@@ -128,7 +132,8 @@ extract(component_props(
                         <?= component('web/ui/button', [
                             'size' => 'sm',
                             'variant' => 'danger',
-                            'slot' => 'Удалить',
+                            'slot' => qquila1Удалитьqquila2
+,
                             'attrs' => ['type' => 'submit']
                         ]) ?>
                     </form>

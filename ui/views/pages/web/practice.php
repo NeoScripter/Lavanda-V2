@@ -7,7 +7,8 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Практика',
+    'title' => qquila1Практикаqquila2
+,
     'class' => "bg-primary-muted/50 pt-0!"
 ]); ?>
 

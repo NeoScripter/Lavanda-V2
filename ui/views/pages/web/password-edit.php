@@ -9,8 +9,10 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/auth-layout', [
-    'title' => "Изменение пароля",
-    'description' => "Введите новый пароль от аккаунта"
+    'title' => qquila1Изменение пароляqquila2
+,
+    'description' => qquila1Введите новый пароль от аккаунтаqquila2
+
 ]); ?>
 
 <form action="<?= $hive->alias("password_reset_update") ?>" method="post" class="max-w-160 flex flex-col gap-6">
@@ -20,10 +22,12 @@ extract(component_props(
 
     <?= component('web/form/form-input', [
         'name'        => 'password',
-        'label'       => 'Пароль',
+        'label'       => qquila1Парольqquila2
+,
         'attrs' => [
             'type'        => 'password',
-            'placeholder' => 'Введите пароль',
+            'placeholder' => qquila1Введите парольqquila2
+,
             'required'    => true,
             'minlength' => 8,
         ]
@@ -31,10 +35,12 @@ extract(component_props(
 
     <?= component('web/form/form-input', [
         'name'        => 'password_confirmation',
-        'label'       => 'Повторите пароль',
+        'label'       => qquila1Повторите парольqquila2
+,
         'attrs' => [
             'type'        => 'password',
-            'placeholder' => 'Повторите пароль',
+            'placeholder' => qquila1Повторите парольqquila2
+,
             'required'    => true,
             'minlength' => 8,
         ]
@@ -45,7 +51,8 @@ extract(component_props(
             'web/ui/button',
             [
                 'attrs' => ['type' => 'submit'],
-                'slot' => 'Отправить',
+                'slot' => qquila1Отправитьqquila2
+,
                 'class' => 'px-[2em] mx-auto',
                 'size' => 'sm'
             ]

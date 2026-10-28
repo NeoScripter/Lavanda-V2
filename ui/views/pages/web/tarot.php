@@ -9,7 +9,8 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Карты Таро',
+    'title' => qquila1Карты Тароqquila2
+,
 ]); ?>
 
 <?php ob_start(); ?>
@@ -25,20 +26,26 @@ extract(component_props(
 <?php $items = [
     [
         'id' => 1,
-        'title' => '1 карта - «Главное сейчас»',
-        'description' => " Одна карта — один фокус. Она подсказывает, на что стоит обратить внимание сейчас.",
+        'title' => qquila11 карта - «Главное сейчас»qquila2
+,
+        'description' => qquila1Одна карта — один фокус. Она подсказывает, на что стоит обратить внимание сейчас.qquila2
+,
         'num' => 1
     ],
     [
         'id' => 2,
-        'title' => '3 карты - «Путь ситуации»',
-        'description' => "Три карты показывают ситуацию в движении: откуда она берёт начало, что происходит сейчас и куда ведёт.",
+        'title' => qquila13 карты - «Путь ситуации»qquila2
+,
+        'description' => qquila1Три карты показывают ситуацию в движении: откуда она берёт начало, что происходит сейчас и куда ведёт.qquila2
+,
         'num' => 3
     ],
     [
         'id' => 3,
-        'title' => '5 карт - «Глубокий взгляд»',
-        'description' => "Пять карт раскрывают ситуацию с разных сторон: что происходит внутри и вокруг, что мешает и на что можно опереться",
+        'title' => qquila15 карт - «Глубокий взгляд»qquila2
+,
+        'description' => qquila1Пять карт раскрывают ситуацию с разных сторон: что происходит внутри и вокруг, что мешает и на что можно оперетьсяqquila2
+,
         'num' => 5
     ],
 ]; ?>
@@ -56,7 +63,8 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Получить ответ',
+        'slot' => qquila1Получить ответqquila2
+,
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-at-start' => true
@@ -79,7 +87,8 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Следующая карта',
+        'slot' => qquila1Следующая картаqquila2
+,
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-during' => true
@@ -88,7 +97,8 @@ extract(component_props(
     ]) ?>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Попробовать снова',
+        'slot' => qquila1Попробовать сноваqquila2
+,
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -124,7 +134,8 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Попробовать снова',
+        'slot' => qquila1Попробовать сноваqquila2
+,
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -136,7 +147,9 @@ extract(component_props(
 </div>
 <?php $slot2 = ob_get_clean(); ?>
 
-<?php $labels = ['Выбор лаванды', 'Выбор гостя']; ?>
+<?php $labels = [qquila1Выбор лавандыqquila2
+, qquila1Выбор гостяqquila2
+]; ?>
 
 <?= component('web/layout/game-stage', [
     'labels' => $labels,

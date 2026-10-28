@@ -11,7 +11,8 @@ extract(component_props(
 $winner = $stones[array_rand($stones)]; ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Магические камни',
+    'title' => qquila1Магические камниqquila2
+,
 ]); ?>
 
 <?php ob_start(); ?>
@@ -27,7 +28,8 @@ $winner = $stones[array_rand($stones)]; ?>
 <?php ob_start(); ?>
 <?= component('web/ui/button', [
     'variant' => 'primary',
-    'slot' => 'Перейти к игре',
+    'slot' => qquila1Перейти к игреqquila2
+,
     'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
 ]) ?>
 <?php $slot = ob_get_clean(); ?>
@@ -99,7 +101,8 @@ $winner = $stones[array_rand($stones)]; ?>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Получить ответ',
+        'slot' => qquila1Получить ответqquila2
+,
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-at-start' => true
@@ -108,7 +111,8 @@ $winner = $stones[array_rand($stones)]; ?>
     ]) ?>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Попробовать снова',
+        'slot' => qquila1Попробовать сноваqquila2
+,
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -122,7 +126,8 @@ $winner = $stones[array_rand($stones)]; ?>
 <div class='relative group min-h-100 md:min-h-150 isolate'>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Получить ответ',
+        'slot' => qquila1Получить ответqquila2
+,
         'attrs' => [
             'cmp-show-cloth-btn' => true,
             'cmp-visible-at-start' => true
@@ -182,7 +187,8 @@ $winner = $stones[array_rand($stones)]; ?>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Попробовать снова',
+        'slot' => qquila1Попробовать сноваqquila2
+,
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -192,7 +198,9 @@ $winner = $stones[array_rand($stones)]; ?>
 </div>
 <?php $slot2 = ob_get_clean(); ?>
 
-<?php $labels = ['Выбор лаванды', 'Выбор гостя']; ?>
+<?php $labels = [qquila1Выбор лавандыqquila2
+, qquila1Выбор гостяqquila2
+]; ?>
 
 <?= component('web/layout/game-stage', [
     'labels' => $labels,

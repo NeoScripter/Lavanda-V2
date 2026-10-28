@@ -12,7 +12,8 @@
 
             <?= component('web/ui/button', [
                 'variant' => 'primary',
-                'slot' => 'Открыть доступ',
+                'slot' => qquila1Открыть доступqquila2
+,
                 'class' => 'hidden lg:flex',
             ]) ?>
         </div>
@@ -20,7 +21,8 @@
         <div class='flex flex-col gap-12 sm:flex-row items-start sm:gap-16 sm:justify-between'>
             <?= component('web/ui/button', [
                 'variant' => 'primary',
-                'slot' => 'Открыть доступ',
+                'slot' => qquila1Открыть доступqquila2
+,
                 'class' => 'lg:hidden',
             ]) ?>
             <?= component('shared/ui/image', [

@@ -1,5 +1,6 @@
 <?php slot('layouts/web/app-layout', [
-    'title' => 'Тибетское гадание МО',
+    'title' => qquila1Тибетское гадание МОqquila2
+,
 ]);
 
 extract(component_props(
@@ -21,7 +22,8 @@ extract(component_props(
 <?php ob_start(); ?>
 <?= component('web/ui/button', [
     'variant' => 'primary',
-    'slot' => 'Перейти к игре',
+    'slot' => qquila1Перейти к игреqquila2
+,
     'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
 ]) ?>
 <?php $slot = ob_get_clean(); ?>
@@ -51,7 +53,8 @@ extract(component_props(
         <?php endif; ?>
         <?= component('web/ui/button', [
             'variant' => 'primary',
-            'slot' => 'Получить ответ',
+            'slot' => qquila1Получить ответqquila2
+,
             'attrs' => ['cmp-launch-game-btn' => true],
         ]) ?>
     </div>
@@ -69,7 +72,8 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => 'Попробовать снова',
+        'slot' => qquila1Попробовать сноваqquila2
+,
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
