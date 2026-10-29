@@ -1,34 +1,35 @@
-    private function clone_ichings()
+    private function clone_affirmations()
     {
         $db = \Base::instance()->get("DB");
 
-        $rows = $db->exec("SELECT count(id) FROM ichings WHERE locale = ?", [$this->locale->value]);
+        $rows = $db->exec("SELECT count(id) FROM affirmations WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return "Error cloning the ichings: the ichings for this locale are already seeded {$this->locale->value}";
+            return "Error cloning the affirmations: the affirmations for this locale are already seeded {$this->locale->value}";
         }
 
-        $ichings = new Iching();
-        $ichings = $ichings->find(['locale = ?', Locale::RUSSIAN->value]);
+        $affirmations = new Affirmation();
+        $affirmations = $affirmations->find(['locale = ?', Locale::RUSSIAN->value]);
 
-        $new_iching = new Iching();
+        $new_affirmation = new Affirmation();
 
-        if (empty($ichings)) {
-            return "Error cloning the ichings: the ichings for Russian locale are empty";
+        if (empty($affirmations)) {
+            return "Error cloning the affirmations: the affirmations for Russian locale are empty";
         }
 
-        foreach ($ichings as $iching) {
+        foreach ($affirmations as $affirmation) {
 
-            $new_iching->copyfrom([
-                'answer' => $iching->answer,
-                'question' => $iching->question,
+            $new_affirmation->copyfrom([
+                'bitmask' => $affirmation->bitmask,
+                'number' => $affirmation->number,
+                'description' => $affirmation->description,
                 'locale' => $this->locale->value,
             ]);
 
-            $new_iching->save();
-            $new_iching->reset();
+            $new_affirmation->save();
+            $new_affirmation->reset();
         }
 
-        return "Ichings successfully cloned!";
+        return "Affirmations successfully cloned!";
     }
 

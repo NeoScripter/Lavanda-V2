@@ -7,6 +7,7 @@ namespace Support;
 use Enums\ClonableType;
 use Enums\Locale;
 use Factories\ImageFactory;
+use Http\Models\Affirmation;
 use Http\Models\Card;
 use Http\Models\FAQ;
 use Http\Models\Iching;
@@ -45,6 +46,42 @@ final class ModelLocalizer
                 return $this->clone_articles();
         }
     }
+    private function clone_articles() {}
+
+    private function clone_affirmations()
+    {
+        $db = \Base::instance()->get("DB");
+
+        $rows = $db->exec("SELECT count(id) FROM affirmations WHERE locale = ?", [$this->locale->value]);
+
+        if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
+            return "Error cloning the affirmations: the affirmations for this locale are already seeded {$this->locale->value}";
+        }
+
+        $affirmations = new Affirmation();
+        $affirmations = $affirmations->find(['locale = ?', Locale::RUSSIAN->value]);
+
+        $new_affirmation = new Affirmation();
+
+        if (empty($affirmations)) {
+            return "Error cloning the affirmations: the affirmations for Russian locale are empty";
+        }
+
+        foreach ($affirmations as $affirmation) {
+
+            $new_affirmation->copyfrom([
+                'quote' => $affirmation->quote,
+                'topic' => $affirmation->topic,
+                'locale' => $this->locale->value,
+            ]);
+
+            $new_affirmation->save();
+            $new_affirmation->reset();
+        }
+
+        return "Affirmations successfully cloned!";
+    }
+
 
     private function clone_practice_items()
     {
@@ -94,9 +131,6 @@ final class ModelLocalizer
 
         return "Practice Items successfully cloned!";
     }
-
-    private function clone_affirmations() {}
-    private function clone_articles() {}
 
     private function clone_ichings()
     {
