@@ -635,5 +635,9 @@ return [
         "price" => "Цена",
         "active" => "Активирован",
         "there_are_no_added_items_yet_to_select_from" => "Пока не добавлено ни одного элемента для создания комбинации",
+        "items_successfully_cloned" => "Элементы успешно клонированы",
+        "copy_from_russian_entries" => "Скопировать с русской версии",
+        "clone" => "Скопировать",
+        "are_you_sure_you_want_to_clone_these_entities_from_the_russian_version" => "Вы уверены что хотите скопировать данные элементы с русской версии?",
     ]
 ];

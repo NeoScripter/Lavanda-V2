@@ -635,5 +635,11 @@ return [
         "price" => "Price",
         "active" => "Active",
         "there_are_no_added_items_yet_to_select_from" => "There are no added items yet to select from",
+        "items_successfully_cloned" => "Items successfully cloned!",
+        "copy_from_russian_entries" => "Copy from Russian entries",
+        "clone" => "Clone",
+        "are_you_sure_you_want_to_clone_these_entities_from_the_russian_version" => "Are you sure you want to clone these entities from the Russian version?",
+        "error_cloning_the_items_there_are_no_russian_entires_to_copy_from" => "Error cloning the items: there are no Russian entires to copy from",
+        "error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first" => "Error cloning the items: you must delete all the newly created items in the currently selected locale first",
     ]
 ];

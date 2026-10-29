@@ -45,7 +45,8 @@ final class ModelLocalizer
                 return $this->clone_affirmations();
             case ClonableType::ARTICLE:
                 return $this->clone_articles();
-            default: return '';
+            default:
+                return '';
         }
     }
 
@@ -56,7 +57,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM articles WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return "Error cloning the articles: the articles for this locale are already seeded {$this->locale->value}";
+            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $articles = new Article();
@@ -65,7 +66,7 @@ final class ModelLocalizer
         $new_article = new Article();
 
         if (empty($articles)) {
-            return "Error cloning the articles: the articles for Russian locale are empty";
+            return \Base::instance()->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
         }
 
         foreach ($articles as $article) {
@@ -103,7 +104,7 @@ final class ModelLocalizer
             $new_article->reset();
         }
 
-        return "Articles successfully cloned!";
+        return \Base::instance()->get("admin.items_successfully_cloned");
     }
 
     private function clone_affirmations()
@@ -113,7 +114,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM affirmations WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return "Error cloning the affirmations: the affirmations for this locale are already seeded {$this->locale->value}";
+            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $affirmations = new Affirmation();
@@ -122,7 +123,7 @@ final class ModelLocalizer
         $new_affirmation = new Affirmation();
 
         if (empty($affirmations)) {
-            return "Error cloning the affirmations: the affirmations for Russian locale are empty";
+            return \Base::instance()->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
         }
 
         foreach ($affirmations as $affirmation) {
@@ -137,7 +138,7 @@ final class ModelLocalizer
             $new_affirmation->reset();
         }
 
-        return "Affirmations successfully cloned!";
+        return \Base::instance()->get("admin.items_successfully_cloned");
     }
 
 
@@ -148,7 +149,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM practice_items WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return "Error cloning the practice_items: the practice_items for this locale are already seeded {$this->locale->value}";
+            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $items = new PracticeItem();
@@ -157,7 +158,7 @@ final class ModelLocalizer
         $new_item = new PracticeItem();
 
         if (empty($items)) {
-            return "Error cloning the items: the items for Russian locale are empty";
+            return \Base::instance()->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
         }
 
         foreach ($items as $item) {
@@ -187,7 +188,7 @@ final class ModelLocalizer
             $new_item->reset();
         }
 
-        return "Practice Items successfully cloned!";
+        return \Base::instance()->get("admin.items_successfully_cloned");
     }
 
     private function clone_ichings()
@@ -197,7 +198,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM ichings WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return "Error cloning the ichings: the ichings for this locale are already seeded {$this->locale->value}";
+            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $ichings = new Iching();
@@ -206,7 +207,7 @@ final class ModelLocalizer
         $new_iching = new Iching();
 
         if (empty($ichings)) {
-            return "Error cloning the ichings: the ichings for Russian locale are empty";
+            return \Base::instance()->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
         }
 
         foreach ($ichings as $iching) {
@@ -222,7 +223,7 @@ final class ModelLocalizer
             $new_iching->reset();
         }
 
-        return "Ichings successfully cloned!";
+        return \Base::instance()->get("admin.items_successfully_cloned");
     }
 
 
@@ -233,7 +234,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM stones WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return "Error cloning the stones: the stones for this locale are already seeded {$this->locale->value}";
+            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $stones = new Stone();
@@ -242,7 +243,7 @@ final class ModelLocalizer
         $new_stone = new Stone();
 
         if (empty($stones)) {
-            return "Error cloning the stones: the stones for Russian locale are empty";
+            return \Base::instance()->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
         }
 
         foreach ($stones as $stone) {
@@ -280,7 +281,7 @@ final class ModelLocalizer
             $new_stone->reset();
         }
 
-        return "Stones successfully cloned!";
+        return \Base::instance()->get("admin.items_successfully_cloned");
     }
 
     private function clone_faqs()
@@ -290,7 +291,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM faqs WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return "Error cloning the faqs: the faqs for this locale are already seeded {$this->locale->value}";
+            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $faqs = new FAQ();
@@ -299,7 +300,7 @@ final class ModelLocalizer
         $new_faq = new FAQ();
 
         if (empty($faqs)) {
-            return "Error cloning the faqs: the faqs for Russian locale are empty";
+            return \Base::instance()->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
         }
 
         foreach ($faqs as $faq) {
@@ -314,7 +315,7 @@ final class ModelLocalizer
             $new_faq->reset();
         }
 
-        return "FAQs successfully cloned!";
+        return \Base::instance()->get("admin.items_successfully_cloned");
     }
 
     private function clone_runes()
@@ -324,7 +325,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM runes WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return "Error cloning the runes: the runes for this locale are already seeded {$this->locale->value}";
+            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $runes = new Rune();
@@ -333,7 +334,7 @@ final class ModelLocalizer
         $new_rune = new Rune();
 
         if (empty($runes)) {
-            return "Error cloning the runes: the runes for Russian locale are empty";
+            return \Base::instance()->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
         }
 
         foreach ($runes as $rune) {
@@ -384,7 +385,7 @@ final class ModelLocalizer
             $new_rune->reset();
         }
 
-        return "Runes successfully cloned!";
+        return \Base::instance()->get("admin.items_successfully_cloned");
     }
 
     private function clone_cards()
@@ -394,7 +395,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM cards WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return "Error cloning the cards: the cards for this locale are already seeded {$this->locale->value}";
+            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $cards = new Card();
@@ -403,7 +404,7 @@ final class ModelLocalizer
         $new_card = new Card();
 
         if (empty($cards)) {
-            return "Error cloning the cards: the cards for Russian locale are empty";
+            return \Base::instance()->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
         }
 
         foreach ($cards as $card) {
@@ -445,6 +446,6 @@ final class ModelLocalizer
             $new_card->reset();
         }
 
-        return "Cards successfully cloned!";
+        return \Base::instance()->get("admin.items_successfully_cloned");
     }
 }
