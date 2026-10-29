@@ -85,7 +85,7 @@ class InterpretationController extends Controller
 
             foreach ($all_themes as $theme) {
                 if ($theme['themeable_id'] === $item->id) {
-                    // $theme['html'] = $markdown->convert($theme['html']);
+                    $theme['html'] = strip_tags($markdown->convert($theme['html']));
                     $themes[] = $theme;
                 }
             }
