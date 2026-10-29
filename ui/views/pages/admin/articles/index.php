@@ -30,7 +30,9 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 
         <?= component('admin/ui/resource-locale-picker') ?>
 
-        <?= component('admin/ui/clone-btn', ['category' => ClonableType::ARTICLE->value]) ?>
+        <?= component('admin/ui/clone-btn', [
+            'category' => ClonableType::ARTICLE->value
+        ]) ?>
     </nav>
 
     <?php if (! empty($articles['subset'])) : ?>

@@ -71,6 +71,7 @@ class AudioMessageFactory extends Factory
         $audio = new AudioMessage();
         $audio->file = to_public_url($to);
         $audio->description = $attrs['description'];
+        $audio->locale = $attrs['locale'] ?? Locale::RUSSIAN->value;
         $audio->save();
 
         return $audio;

@@ -6,9 +6,11 @@ namespace Support;
 
 use Enums\ClonableType;
 use Enums\Locale;
+use Factories\AudioMessageFactory;
 use Factories\ImageFactory;
 use Http\Models\Affirmation;
 use Http\Models\Article;
+use Http\Models\AudioMessage;
 use Http\Models\Card;
 use Http\Models\FAQ;
 use Http\Models\Iching;
@@ -45,6 +47,8 @@ final class ModelLocalizer
                 return $this->clone_affirmations();
             case ClonableType::ARTICLE:
                 return $this->clone_articles();
+            case ClonableType::AUDIOS:
+                return $this->clone_audios();
             default:
                 return '';
         }
@@ -220,6 +224,38 @@ final class ModelLocalizer
 
             $new_iching->save();
             $new_iching->reset();
+        }
+
+        return \Base::instance()->get("admin.items_successfully_cloned");
+    }
+
+    private function clone_audios()
+    {
+        $db = \Base::instance()->get("DB");
+
+        $rows = $db->exec("SELECT count(id) FROM audio_messages WHERE locale = ?", [$this->locale->value]);
+
+        if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
+            return \Base::instance()->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
+        }
+
+        $audios = new AudioMessage();
+        $audios = $audios->find(['locale = ?', Locale::RUSSIAN->value]);
+
+        if (empty($audios)) {
+            return \Base::instance()->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
+        }
+
+        $factory = new AudioMessageFactory();
+
+        foreach ($audios as $audio) {
+            $factory->seed(
+                attrs: [
+                    'description' => $audio->description,
+                    'locale' =>  $this->locale->value,
+                ],
+                file: to_absolute_path($audio->file)
+            );
         }
 
         return \Base::instance()->get("admin.items_successfully_cloned");

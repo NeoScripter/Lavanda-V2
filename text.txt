@@ -1,53 +1,40 @@
-    private function clone_articles()
+    private function clone_audios()
     {
         $db = \Base::instance()->get("DB");
 
-        $rows = $db->exec("SELECT count(id) FROM articles WHERE locale = ?", [$this->locale->value]);
+        $rows = $db->exec("SELECT count(id) FROM audios WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return "Error cloning the articles: the articles for this locale are already seeded {$this->locale->value}";
+            return \Base::instance()->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
-        $articles = new Article();
-        $articles = $articles->find(['locale = ?', Locale::RUSSIAN->value]);
+        $audios = new AudioMessage();
+        $audios = $audios->find(['locale = ?', Locale::RUSSIAN->value]);
 
-        $new_article = new Article();
+        $new_audio = new AudioMessage();
 
-        if (empty($articles)) {
-            return "Error cloning the articles: the articles for Russian locale are empty";
+        if (empty($audios)) {
+            return \Base::instance()->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
         }
 
-        foreach ($articles as $article) {
-            $front_img = $article->front_image;
-            $back_img = $article->back_image;
+        foreach ($audios as $audio) {
+            $front_img = $audio->preview;
+            $back_img = $audio->image;
 
-            $themes = $article->themes;
-
-            $new_article->copyfrom([
-                'name' => $article->name,
-                'variant' => $article->variant,
-                'advice' => $article->advice,
+            $new_audio->copyfrom([
+                'name' => $audio->name,
+                'variant' => $audio->variant,
+                'html' => $audio->html,
                 'locale' => $this->locale->value,
             ]);
 
-            $new_article->save();
-
-            foreach ($themes as $theme) {
-                $new_theme = new Theme();
-                $new_theme->copyfrom([
-                    'html' => $theme->html,
-                    'name' => $theme->name,
-                    'themeable_type' => $theme->themeable_type,
-                    'themeable_id' => $new_article->id,
-                ]);
-                $new_theme->save();
-            }
+            $new_audio->save();
 
             $img_factory = new ImageFactory();
             $img_factory->create(
                 attrs: [
                     'imageable_type' => $front_img->imageable_type,
-                    'imageable_id' => $new_article->id,
+                    'imageable_id' => $new_audio->id,
                     'variant' => $front_img->variant,
                     'alt' => $front_img->alt,
                 ],
@@ -56,15 +43,15 @@
             $img_factory->create(
                 attrs: [
                     'imageable_type' => $back_img->imageable_type,
-                    'imageable_id' => $new_article->id,
+                    'imageable_id' => $new_audio->id,
                     'variant' => $back_img->variant,
                     'alt' => $back_img->alt,
                 ],
                 src_dir: to_absolute_path(get_parent_dir($back_img->src))
             );
-            $new_article->reset();
+            $new_audio->reset();
         }
 
-        return "Articles successfully cloned!";
+        return \Base::instance()->get("admin.items_successfully_cloned");
     }
 
