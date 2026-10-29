@@ -9,6 +9,7 @@ use Enums\Locale;
 use Factories\ImageFactory;
 use Http\Models\Card;
 use Http\Models\FAQ;
+use Http\Models\PracticeItem;
 use Http\Models\Rune;
 use Http\Models\Stone;
 use Http\Models\Theme;
@@ -33,6 +34,8 @@ final class ModelLocalizer
                 return $this->clone_stones();
             case ClonableType::FAQ:
                 return $this->clone_faqs();
+            case ClonableType::PRACTICE_ITEM:
+                return $this->clone_practice_items();
             case ClonableType::ICHING:
                 return $this->clone_ichings();
             case ClonableType::AFFIRMATION:
@@ -41,6 +44,59 @@ final class ModelLocalizer
                 return $this->clone_articles();
         }
     }
+
+    private function clone_practice_items()
+    {
+        $db = \Base::instance()->get("DB");
+
+        $rows = $db->exec("SELECT count(id) FROM practice_items WHERE locale = ?", [$this->locale->value]);
+
+        if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
+            return "Error cloning the practice_items: the practice_items for this locale are already seeded {$this->locale->value}";
+        }
+
+        $items = new PracticeItem();
+        $items = $items->find(['locale = ?', Locale::RUSSIAN->value]);
+
+        $new_item = new PracticeItem();
+
+        if (empty($items)) {
+            return "Error cloning the items: the items for Russian locale are empty";
+        }
+
+        foreach ($items as $item) {
+            $front_img = $item->image;
+
+            $new_item->copyfrom([
+                'title' => $item->title,
+                'abstract' => $item->abstract,
+                'file' => 'example',
+                'description' => $item->description,
+                'faqs' => $item->faqs,
+                'locale' => $this->locale->value,
+            ]);
+
+            $new_item->save();
+
+            $img_factory = new ImageFactory();
+            $img_factory->create(
+                attrs: [
+                    'imageable_type' => $front_img->imageable_type,
+                    'imageable_id' => $new_item->id,
+                    'variant' => $front_img->variant,
+                    'alt' => $front_img->alt,
+                ],
+                src_dir: to_absolute_path(get_parent_dir($front_img->src))
+            );
+            $new_item->reset();
+        }
+
+        return "Practice Items successfully cloned!";
+    }
+
+    private function clone_ichings() {}
+    private function clone_affirmations() {}
+    private function clone_articles() {}
 
     private function clone_stones()
     {
@@ -132,10 +188,6 @@ final class ModelLocalizer
 
         return "FAQs successfully cloned!";
     }
-
-    private function clone_ichings() {}
-    private function clone_affirmations() {}
-    private function clone_articles() {}
 
     private function clone_runes()
     {

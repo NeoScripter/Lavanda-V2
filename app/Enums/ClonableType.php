@@ -16,6 +16,7 @@ enum ClonableType: string
     case ICHING = 'iching';
     case AFFIRMATION = 'affirmation';
     case ARTICLE = 'article';
+    case PRACTICE_ITEM = 'practice_item';
 
     public static function values(): array
     {
