@@ -35,13 +35,15 @@ $hive = \Base::instance(); ?>
             <p><?= $item['description'] ?></p>
         </div>
 
-        <div>
-            <h3 class="mb-2 font-medium"> <?= $hive->get('admin.file') ?> </h3>
-            <?= component('admin/ui/file-link', [
-                'label' => extract_file_name($item['file']),
-                'url' => $item['file']
-            ]) ?>
-        </div>
+        <?php if (! empty($item['file'])) : ?>
+            <div>
+                <h3 class="mb-2 font-medium"> <?= $hive->get('admin.file') ?> </h3>
+                <?= component('admin/ui/file-link', [
+                    'label' => extract_file_name($item['file']),
+                    'url' => $item['file']
+                ]) ?>
+            </div>
+        <?php endif; ?>
 
         <div>
             <h3 class="mb-3 font-medium"> <?= $hive->get('admin.faqs') ?> </h3>
