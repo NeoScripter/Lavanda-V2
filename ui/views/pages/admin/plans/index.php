@@ -1,17 +1,12 @@
 <?php
 
-use Enums\SessionKey;
-
 $hive = \Base::instance();
 
 extract(component_props(
     required: ['plans'],
     optional: [],
     props: get_defined_vars(),
-));
-
-$locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
-?>
+)); ?>
 
 <?php slot('layouts/admin/item-layout', [
     'heading' => $hive->get('admin.plans'),

@@ -261,7 +261,6 @@ final class ModelLocalizer
         return \Base::instance()->get("admin.items_successfully_cloned");
     }
 
-
     private function clone_stones()
     {
         $db = \Base::instance()->get("DB");
