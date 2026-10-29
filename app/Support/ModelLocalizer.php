@@ -9,6 +9,7 @@ use Enums\Locale;
 use Factories\ImageFactory;
 use Http\Models\Card;
 use Http\Models\Rune;
+use Http\Models\Stone;
 use Http\Models\Theme;
 
 final class ModelLocalizer
@@ -27,8 +28,6 @@ final class ModelLocalizer
                 return $this->clone_cards();
             case ClonableType::RUNE:
                 return $this->clone_runes();
-            case ClonableType::DICE:
-                return $this->clone_dices();
             case ClonableType::STONE:
                 return $this->clone_stones();
             case ClonableType::FAQ:
@@ -42,8 +41,63 @@ final class ModelLocalizer
         }
     }
 
-    private function clone_stones() {}
-    private function clone_dices() {}
+    private function clone_stones()
+    {
+        $db = \Base::instance()->get("DB");
+
+        $rows = $db->exec("SELECT count(id) FROM stones WHERE locale = ?", [$this->locale->value]);
+
+        if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
+            return "Error cloning the stones: the stones for this locale are already seeded {$this->locale->value}";
+        }
+
+        $stones = new Stone();
+        $stones = $stones->find(['locale = ?', Locale::RUSSIAN->value]);
+
+        $new_stone = new Stone();
+
+        if (empty($stones)) {
+            return "Error cloning the stones: the stones for Russian locale are empty";
+        }
+
+        foreach ($stones as $stone) {
+            $front_img = $stone->preview;
+            $back_img = $stone->image;
+
+            $new_stone->copyfrom([
+                'name' => $stone->name,
+                'variant' => $stone->variant,
+                'html' => $stone->html,
+                'locale' => $this->locale->value,
+            ]);
+
+            $new_stone->save();
+
+            $img_factory = new ImageFactory();
+            $img_factory->create(
+                attrs: [
+                    'imageable_type' => $front_img->imageable_type,
+                    'imageable_id' => $new_stone->id,
+                    'variant' => $front_img->variant,
+                    'alt' => $front_img->alt,
+                ],
+                src_dir: to_absolute_path(get_parent_dir($front_img->src))
+            );
+            $img_factory->create(
+                attrs: [
+                    'imageable_type' => $back_img->imageable_type,
+                    'imageable_id' => $new_stone->id,
+                    'variant' => $back_img->variant,
+                    'alt' => $back_img->alt,
+                ],
+                src_dir: to_absolute_path(get_parent_dir($back_img->src))
+            );
+            $new_stone->reset();
+        }
+
+        return "Stones successfully cloned!";
+    }
+
     private function clone_faqs() {}
     private function clone_ichings() {}
     private function clone_affirmations() {}

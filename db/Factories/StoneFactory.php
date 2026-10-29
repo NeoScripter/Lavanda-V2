@@ -15,7 +15,7 @@ class StoneFactory extends Factory
         $stone = new Stone();
 
         $stone->name = $attrs['name'] ?? $this->faker->word();
-        $stone->advice = $attrs['advice'] ??  $this->faker->sentence();
+        $stone->html = $attrs['html'] ??  $this->faker->sentence();
         $stone->locale = $attrs['locale'] ?? Locale::RUSSIAN->value;
         $stone->save();
 

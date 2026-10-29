@@ -10,7 +10,6 @@ enum ClonableType: string
     case MIND_GAMES = 'mind_games';
     case MINORI = 'minori';
     case RUNE = 'rune';
-    case DICE = 'dice';
     case STONE = 'stone';
     case BONUS = 'bonus';
     case FAQ = 'faq';
