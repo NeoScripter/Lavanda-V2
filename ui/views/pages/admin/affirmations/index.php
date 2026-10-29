@@ -1,5 +1,6 @@
 <?php
 
+use Enums\ClonableType;
 use Enums\SessionKey;
 
 $hive = \Base::instance();
@@ -29,6 +30,8 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
         ]) ?>
 
         <?= component('admin/ui/resource-locale-picker') ?>
+
+        <?= component('admin/ui/clone-btn', ['category' => ClonableType::AFFIRMATION->value]) ?>
     </nav>
 
     <?php if (! empty($affirmations)) : ?>

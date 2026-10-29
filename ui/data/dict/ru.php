@@ -635,9 +635,11 @@ return [
         "price" => "Цена",
         "active" => "Активирован",
         "there_are_no_added_items_yet_to_select_from" => "Пока не добавлено ни одного элемента для создания комбинации",
-        "items_successfully_cloned" => "Элементы успешно клонированы",
+        "items_successfully_cloned" => "Элементы успешно скопированы",
         "copy_from_russian_entries" => "Скопировать с русской версии",
         "clone" => "Скопировать",
         "are_you_sure_you_want_to_clone_these_entities_from_the_russian_version" => "Вы уверены что хотите скопировать данные элементы с русской версии?",
+        "error_cloning_the_items_there_are_no_russian_entires_to_copy_from" => "Ошибка копирования элементов: нет ни одного русскоязычного элемента для копирования",
+        "error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first" => "Ошибка копирования элементов: прежде чем начинать копирование, удалите все элементы той языковой версии, на которую вы копируете",
     ]
 ];

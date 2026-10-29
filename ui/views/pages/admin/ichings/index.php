@@ -1,5 +1,6 @@
 <?php
 
+use Enums\ClonableType;
 use Enums\SessionKey;
 
 $hive = \Base::instance();
@@ -21,6 +22,8 @@ $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 <div class="space-y-12 w-[calc(100%-1rem)]">
     <nav class='flex flex-wrap w-full items-start gap-10 justify-between'>
         <?= component('admin/ui/resource-locale-picker') ?>
+
+        <?= component('admin/ui/clone-btn', ['category' => ClonableType::ICHING->value]) ?>
     </nav>
 
     <?php if (! empty($ichings)) : ?>

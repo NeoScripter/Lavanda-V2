@@ -57,7 +57,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM articles WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
+            return \Base::instance()->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $articles = new Article();
@@ -114,7 +114,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM affirmations WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
+            return \Base::instance()->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $affirmations = new Affirmation();
@@ -149,7 +149,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM practice_items WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
+            return \Base::instance()->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $items = new PracticeItem();
@@ -167,7 +167,6 @@ final class ModelLocalizer
             $new_item->copyfrom([
                 'title' => $item->title,
                 'abstract' => $item->abstract,
-                'file' => 'example',
                 'description' => $item->description,
                 'faqs' => $item->faqs,
                 'locale' => $this->locale->value,
@@ -198,7 +197,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM ichings WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
+            return \Base::instance()->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $ichings = new Iching();
@@ -234,7 +233,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM stones WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
+            return \Base::instance()->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $stones = new Stone();
@@ -291,7 +290,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM faqs WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
+            return \Base::instance()->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $faqs = new FAQ();
@@ -325,7 +324,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM runes WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
+            return \Base::instance()->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $runes = new Rune();
@@ -392,10 +391,10 @@ final class ModelLocalizer
     {
         $db = \Base::instance()->get("DB");
 
-        $rows = $db->exec("SELECT count(id) FROM cards WHERE locale = ?", [$this->locale->value]);
+        $rows = $db->exec("SELECT count(id) FROM cards WHERE locale = ? AND variant = ?", [$this->locale->value, $this->category->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return \Base::instance()->get("admin.error_cloning_the_items:_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
+            return \Base::instance()->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $cards = new Card();
