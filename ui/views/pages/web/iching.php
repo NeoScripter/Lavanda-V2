@@ -79,6 +79,15 @@ slot('layouts/web/app-layout', [
         ],
         'class' => 'mx-auto hidden group-has-[[cmp-skeleton]]:hidden'
     ]) ?>
+    <?= component('web/ui/button', [
+        'variant' => 'accent',
+        'slot' => $hive->get("web.следующий_раздел"),
+        'href' => next_game_route(),
+        'class' => 'mx-auto -mt-2 lg:-mt-5 w-fit hidden group-has-[[cmp-skeleton]]:hidden',
+        'attrs' => [
+            'cmp-visible-at-end' => true
+        ],
+    ]) ?>
 
     <article
         cmp-visible-at-start

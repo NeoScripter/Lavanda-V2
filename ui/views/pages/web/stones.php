@@ -120,6 +120,15 @@ $winner = empty($stones) ? null : $stones[array_rand($stones)]; ?>
         ],
         'class' => 'mx-auto hidden'
     ]) ?>
+    <?= component('web/ui/button', [
+        'variant' => 'accent',
+        'slot' => $hive->get("web.следующий_раздел"),
+        'href' => next_game_route(),
+        'class' => 'mx-auto -mt-2 lg:-mt-5 w-fit hidden',
+        'attrs' => [
+            'cmp-visible-at-end' => true
+        ],
+    ]) ?>
 </div>
 <?php $slot1 = ob_get_clean(); ?>
 
@@ -196,6 +205,15 @@ $winner = empty($stones) ? null : $stones[array_rand($stones)]; ?>
             'cmp-visible-at-end' => true
         ],
         'class' => 'mx-auto hidden relative z-40'
+    ]) ?>
+    <?= component('web/ui/button', [
+        'variant' => 'accent',
+        'slot' => $hive->get("web.следующий_раздел"),
+        'href' => next_game_route(),
+        'class' => 'mx-auto -mt-2 lg:-mt-5 w-fit hidden relative z-40',
+        'attrs' => [
+            'cmp-visible-at-end' => true
+        ],
     ]) ?>
 </div>
 <?php $slot2 = ob_get_clean(); ?>

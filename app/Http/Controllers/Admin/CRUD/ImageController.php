@@ -41,8 +41,8 @@ class ImageController extends Controller
             notify($hive->get('admin.image_successfully_updated'));
         }
 
-        $referrer = $hive->HEADERS['Referer'] ?? '/';
-        $hive->reroute($referrer);
+        $referer = $hive->HEADERS['Referer'] ?? '/';
+        $hive->reroute($referer);
     }
 
     public function destroy(\Base $hive)
@@ -56,7 +56,7 @@ class ImageController extends Controller
             notify('Image successfully deleted');
         }
 
-        $referrer = $hive->HEADERS['Referer'] ?? '/';
-        $hive->reroute($referrer);
+        $referer = $hive->HEADERS['Referer'] ?? '/';
+        $hive->reroute($referer);
     }
 }

@@ -8,7 +8,8 @@ extract(component_props(
     required: ['cards'],
     optional: [],
     props: get_defined_vars(),
-)); ?>
+));
+?>
 
 <?php slot('components/web/layout/hero', [
     'class' => "bg-[url('/assets/images/pages/home/hero/hero-bg.webp')] bg-violet-100/75 bg-cover bg-center overflow-x-clip"
@@ -101,6 +102,7 @@ extract(component_props(
                     <?= component('web/ui/button', [
                         'variant' => 'accent',
                         'slot' => $hive->get("web.следующий_раздел"),
+                        'href' => next_game_route(),
                         'class' => 'mx-auto mb-1',
                     ]) ?>
                 </div>

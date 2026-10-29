@@ -74,6 +74,16 @@ $img_class = '2xl:max-w-[min(40%,30rem)]';
         'class' => 'mx-auto hidden'
     ]) ?>
 
+    <?= component('web/ui/button', [
+        'variant' => 'accent',
+        'slot' => $hive->get("web.следующий_раздел"),
+        'href' => next_game_route(),
+        'class' => 'mx-auto -mt-2 lg:-mt-5 mb-1 w-fit hidden',
+        'attrs' => [
+            'cmp-visible-at-end' => true
+        ],
+    ]) ?>
+
     <?= component('web/ui/arrow-hint') ?>
 </div>
 <?php $slot1 = ob_get_clean(); ?>

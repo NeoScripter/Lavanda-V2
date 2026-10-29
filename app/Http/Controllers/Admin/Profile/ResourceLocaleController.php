@@ -22,7 +22,7 @@ class ResourceLocaleController extends Controller
             Locale::normalize($hive->POST[SessionKey::RESOURCE_LOCALE->value] ?? Locale::RUSSIAN->value)
         );
 
-        $referrer = $hive->HEADERS['Referer'] ?? '/';
-        $hive->reroute($referrer);
+        $referer = $hive->HEADERS['Referer'] ?? '/';
+        $hive->reroute($referer);
     }
 }

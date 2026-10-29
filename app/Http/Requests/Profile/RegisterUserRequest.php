@@ -44,7 +44,7 @@ class RegisterUserRequest extends Request
             'email' => $this->hive->POST['email'] ?? '',
         ]);
 
-        $referrer = $hive->HEADERS['Referer'] ?? '@register';
-        $this->hive->reroute($referrer);
+        $referer = $hive->HEADERS['Referer'] ?? '@register';
+        $this->hive->reroute($referer);
     }
 }

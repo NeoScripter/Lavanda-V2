@@ -19,11 +19,11 @@ class ModelLocalizerController extends Controller
     {
         $locale = $hive->get('SESSION.' . SessionKey::RESOURCE_LOCALE->value);
 
-        $referrer = $hive->HEADERS['Referer'] ?? '/admin';
+        $referer = $hive->HEADERS['Referer'] ?? '/admin';
 
         if ($locale === Locale::RUSSIAN->value) {
             notify($hive->get('Cannot clone Russian resource'));
-            $hive->reroute($referrer);
+            $hive->reroute($referer);
             exit;
         }
 
@@ -33,6 +33,6 @@ class ModelLocalizerController extends Controller
 
         notify($cloner->clone_all());
 
-        $hive->reroute($referrer);
+        $hive->reroute($referer);
     }
 }

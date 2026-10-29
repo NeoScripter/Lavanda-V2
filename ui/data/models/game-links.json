@@ -1,0 +1,15 @@
+{
+    "0/": "/metaphoric",
+    "1/bonus": "/metaphoric",
+    "2/metaphoric": "/stones",
+    "3/stones": "/runes",
+    "4/runes": "/dices",
+    "5/dices": "/lenormand",
+    "6/lenormand": "/audios",
+    "7/audios": "/minori",
+    "8/minori": "/iching",
+    "9/iching": "/tarot",
+    "10/tarot": "/mind_games",
+    "11/mind_games": "/"
+}
+

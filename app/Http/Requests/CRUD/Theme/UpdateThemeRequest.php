@@ -22,7 +22,7 @@ class UpdateThemeRequest extends Request
             'html' => $this->hive->POST['html'] ?? '',
         ]);
 
-        $referrer = $this->hive->HEADERS['Referer'] ?? '/';
-        $this->hive->reroute($referrer);
+        $referer = $this->hive->HEADERS['Referer'] ?? '/';
+        $this->hive->reroute($referer);
     }
 }

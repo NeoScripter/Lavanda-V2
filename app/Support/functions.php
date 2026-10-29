@@ -653,3 +653,17 @@ function cc(string $base, string $merged = '')
 
     return trim(implode(' ', $base));
 }
+
+function next_game_route()
+{
+    $current_route = \Base::instance()->PATH;
+    $map = json_decode(
+        file_get_contents(APP_DIR . '/ui/data/models/game-links.json'),
+        true
+    );
+
+    return array_find(
+        $map,
+        fn($_, $from) => $current_route === preg_replace('/[0-9]+/', '', $from)
+    ) ?? '/';
+}

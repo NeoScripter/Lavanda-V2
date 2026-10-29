@@ -104,6 +104,15 @@ $img_class = '2xl:max-w-[min(40%,30rem)]';
         ],
         'class' => 'mx-auto hidden'
     ]) ?>
+    <?= component('web/ui/button', [
+        'variant' => 'accent',
+        'slot' => $hive->get("web.следующий_раздел"),
+        'href' => next_game_route(),
+        'class' => 'mx-auto -mt-2 lg:-mt-5 w-fit hidden',
+        'attrs' => [
+            'cmp-visible-at-end' => true
+        ],
+    ]) ?>
 
     <?= component('web/ui/arrow-hint') ?>
 </div>
@@ -138,6 +147,15 @@ $img_class = '2xl:max-w-[min(40%,30rem)]';
             'cmp-visible-at-end' => true
         ],
         'class' => 'mx-auto hidden'
+    ]) ?>
+    <?= component('web/ui/button', [
+        'variant' => 'accent',
+        'slot' => $hive->get("web.следующий_раздел"),
+        'href' => next_game_route(),
+        'class' => 'mx-auto -mt-2 lg:-mt-5 w-fit hidden',
+        'attrs' => [
+            'cmp-visible-at-end' => true
+        ],
     ]) ?>
 
     <?= component('web/ui/arrow-hint') ?>

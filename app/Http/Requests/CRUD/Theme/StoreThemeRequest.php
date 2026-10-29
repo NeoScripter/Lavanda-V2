@@ -27,7 +27,7 @@ class StoreThemeRequest extends Request
             'name' => $this->hive->POST['name'] ?? '',
         ]);
 
-        $referrer = $this->hive->HEADERS['Referer'] ?? '/';
-        $this->hive->reroute($referrer);
+        $referer = $this->hive->HEADERS['Referer'] ?? '/';
+        $this->hive->reroute($referer);
     }
 }

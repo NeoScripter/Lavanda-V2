@@ -32,7 +32,7 @@ class UpdateImageRequest extends Request
             'alt'  => $this->hive->POST['alt'] ?? '',
         ]);
 
-        $referrer = $this->hive->HEADERS['Referer'] ?? '/';
-        $this->hive->reroute($referrer);
+        $referer = $this->hive->HEADERS['Referer'] ?? '/';
+        $this->hive->reroute($referer);
     }
 }

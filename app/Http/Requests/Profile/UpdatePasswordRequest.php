@@ -31,7 +31,7 @@ class UpdatePasswordRequest extends Request
 
     public function on_failure(): void
     {
-        $referrer = $hive->HEADERS['Referer'] ?? '/';
-        $this->hive->reroute($referrer);
+        $referer = $hive->HEADERS['Referer'] ?? '/';
+        $this->hive->reroute($referer);
     }
 }

@@ -28,15 +28,23 @@ $hive = \Base::instance(); ?>
     </p>
 </div>
 
-<?= component('web/ui/button', [
-    'variant' => 'primary',
-    'slot' => $hive->get("web.начать"),
-    'class' => 'w-fit mt-10 mx-auto',
-    'attrs' => [
-        'cmp-audio-btn' => true,
-        'data-repeat-label' => $hive->get("web.повторить")
-    ]
-]) ?>
+<div class='flex flex-wrap items-center justify-center gap-6 mt-10 mx-auto'>
+    <?= component('web/ui/button', [
+        'variant' => 'primary',
+        'slot' => $hive->get("web.начать"),
+        'class' => 'w-fit',
+        'attrs' => [
+            'cmp-audio-btn' => true,
+            'data-repeat-label' => $hive->get("web.повторить")
+        ]
+    ]) ?>
+    <?= component('web/ui/button', [
+        'variant' => 'accent',
+        'slot' => $hive->get("web.следующий_раздел"),
+        'href' => next_game_route(),
+        'class' => 'w-fit',
+    ]) ?>
+</div>
 <?php $slot1 = ob_get_clean(); ?>
 
 <?php ob_start(); ?>

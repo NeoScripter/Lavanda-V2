@@ -13,7 +13,7 @@ return [
         "поговорить_лично_с_lavanda" => "Personal talk with Lavanda",
         "админа_нельзя_удалить" => "You cannot delete an admin",
         "подтверждение_электронной_почты" => "Email verification",
-        "_руны_нити_норн" => "3 руны - «Нити Норн»",
+        "руны_нити_норн" => "3 руны - «Нити Норн»",
         "спросить_у_рун" => "Спросить у рун",
         "одна_руна_один_знак_то_что_важно_услышать_сегодня" => "Одна руна — один знак. То, что важно услышать сегодня.",
         "три_руны_три_нити_прошлое_которое_уже_сплетено_настоящее_которое_плетётся_сейчас_и_то_что_только_начинает_проявляться" => "Три руны — три нити: прошлое, которое уже сплетено, настоящее, которое плетётся сейчас, и то, что только начинает проявляться. ",
@@ -641,5 +641,6 @@ return [
         "are_you_sure_you_want_to_clone_these_entities_from_the_russian_version" => "Are you sure you want to clone these entities from the Russian version?",
         "error_cloning_the_items_there_are_no_russian_entires_to_copy_from" => "Error cloning the items: there are no Russian entires to copy from",
         "error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first" => "Error cloning the items: you must delete all the newly created items in the currently selected locale first",
+        "game_links_updated" => "Game links updated",
     ]
 ];
