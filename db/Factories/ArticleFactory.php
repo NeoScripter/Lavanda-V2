@@ -15,8 +15,9 @@ class ArticleFactory extends Factory
         $article = new Article();
 
         $article->description = $attrs['description'] ?? $this->faker->sentences(20, true);
+        $article->name = $attrs['name'] ?? 'example';
         $article->html = $attrs['html'] ?? 'example';
-        $article->locale = $article['locale'] ?? Locale::RUSSIAN->value;
+        $article->locale = $attrs['locale'] ?? Locale::RUSSIAN->value;
         $article->save();
 
         $imageable_type = ImageableType::ARTICLE->value;

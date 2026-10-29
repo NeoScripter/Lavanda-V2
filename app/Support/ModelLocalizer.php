@@ -8,6 +8,7 @@ use Enums\ClonableType;
 use Enums\Locale;
 use Factories\ImageFactory;
 use Http\Models\Affirmation;
+use Http\Models\Article;
 use Http\Models\Card;
 use Http\Models\FAQ;
 use Http\Models\Iching;
@@ -44,9 +45,66 @@ final class ModelLocalizer
                 return $this->clone_affirmations();
             case ClonableType::ARTICLE:
                 return $this->clone_articles();
+            default: return '';
         }
     }
-    private function clone_articles() {}
+
+    private function clone_articles()
+    {
+        $db = \Base::instance()->get("DB");
+
+        $rows = $db->exec("SELECT count(id) FROM articles WHERE locale = ?", [$this->locale->value]);
+
+        if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
+            return "Error cloning the articles: the articles for this locale are already seeded {$this->locale->value}";
+        }
+
+        $articles = new Article();
+        $articles = $articles->find(['locale = ?', Locale::RUSSIAN->value]);
+
+        $new_article = new Article();
+
+        if (empty($articles)) {
+            return "Error cloning the articles: the articles for Russian locale are empty";
+        }
+
+        foreach ($articles as $article) {
+            $front_img = $article->preview;
+            $back_img = $article->image;
+
+            $new_article->copyfrom([
+                'name' => $article->name,
+                'description' => $article->description,
+                'html' => $article->html,
+                'locale' => $this->locale->value,
+            ]);
+
+            $new_article->save();
+
+            $img_factory = new ImageFactory();
+            $img_factory->create(
+                attrs: [
+                    'imageable_type' => $front_img->imageable_type,
+                    'imageable_id' => $new_article->id,
+                    'variant' => $front_img->variant,
+                    'alt' => $front_img->alt,
+                ],
+                src_dir: to_absolute_path(get_parent_dir($front_img->src))
+            );
+            $img_factory->create(
+                attrs: [
+                    'imageable_type' => $back_img->imageable_type,
+                    'imageable_id' => $new_article->id,
+                    'variant' => $back_img->variant,
+                    'alt' => $back_img->alt,
+                ],
+                src_dir: to_absolute_path(get_parent_dir($back_img->src))
+            );
+            $new_article->reset();
+        }
+
+        return "Articles successfully cloned!";
+    }
 
     private function clone_affirmations()
     {
