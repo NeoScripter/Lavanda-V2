@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Factories;
 
 use Enums\ImageableType;
+use Enums\Locale;
 use Http\Models\Article;
 
 class ArticleFactory extends Factory
@@ -15,6 +16,7 @@ class ArticleFactory extends Factory
 
         $article->description = $attrs['description'] ?? $this->faker->sentences(20, true);
         $article->html = $attrs['html'] ?? 'example';
+        $article->locale = $article['locale'] ?? Locale::RUSSIAN->value;
         $article->save();
 
         $imageable_type = ImageableType::ARTICLE->value;

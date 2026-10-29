@@ -6,6 +6,7 @@ namespace Factories;
 
 use Enums\CardVariant;
 use Enums\ImageableType;
+use Enums\Locale;
 use Http\Models\Card;
 
 class CardFactory extends Factory
@@ -19,6 +20,7 @@ class CardFactory extends Factory
 
         $card->description = $attrs['description'] ?? $this->faker->sentences(20, true);
         $card->variant = $attrs['variant'] ?? CardVariant::METAPHORIC->value;
+        $card->locale = $attrs['locale'] ?? Locale::RUSSIAN->value;
         $card->save();
 
         $imageable_type = ImageableType::from($card->variant)->value;

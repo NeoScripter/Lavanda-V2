@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Factories;
 
 use Enums\ImageableType;
+use Enums\Locale;
 use Http\Models\Stone;
 
 class StoneFactory extends Factory
@@ -15,6 +16,7 @@ class StoneFactory extends Factory
 
         $stone->name = $attrs['name'] ?? $this->faker->word();
         $stone->advice = $attrs['advice'] ??  $this->faker->sentence();
+        $stone->locale = $attrs['locale'] ?? Locale::RUSSIAN->value;
         $stone->save();
 
         $img_attrs = [

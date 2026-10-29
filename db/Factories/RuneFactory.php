@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Factories;
 
 use Enums\ImageableType;
+use Enums\Locale;
 use Http\Models\Rune;
 
 class RuneFactory extends Factory
@@ -15,6 +16,7 @@ class RuneFactory extends Factory
 
         $rune->name = $attrs['name'] ?? $this->faker->word();
         $rune->advice = $attrs['advice'] ??  $this->faker->sentence();
+        $rune->locale = $attrs['locale'] ?? Locale::RUSSIAN->value;
         $rune->save();
 
         $imageable_type = ImageableType::RUNE->value;

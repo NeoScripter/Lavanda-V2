@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Factories;
 
+use Enums\Locale;
 use Http\Models\AudioMessage;
 
 class AudioMessageFactory extends Factory
 {
-    public function create()
+    public function create(?array $attrs = [], ?string $template = (APP_DIR . "/db/Fixtures/AudioMessage/audio-1/audio-1.mp3"))
     {
-        $template = APP_DIR . "/db/Fixtures/AudioMessage/audio-1/audio-1.mp3";
         $dir = dirname($template);
 
         $files = array_filter(
@@ -40,7 +40,8 @@ class AudioMessageFactory extends Factory
 
         $audio = new AudioMessage();
         $audio->file = to_public_url(remove_file_extention($to));
-        $audio->description = 'placeholder';
+        $audio->locale = $attrs['locale'] ?? Locale::RUSSIAN->value;
+        $audio->description = $attrs['description'] ?? 'placeholder';
         $audio->save();
 
         return $audio;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Factories;
 
+use Enums\Locale;
 use Http\Models\FAQ;
 
 class FAQFactory extends Factory
@@ -14,6 +15,7 @@ class FAQFactory extends Factory
 
         $faq->question = $attrs['name'] ?? $this->faker->sentence();
         $faq->answer = $attrs['advice'] ??  $this->faker->sentences(3, true);
+        $faq->locale = $attrs['locale'] ?? Locale::RUSSIAN->value;
 
         $faq->save();
 

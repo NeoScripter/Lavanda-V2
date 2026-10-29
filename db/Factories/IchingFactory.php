@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Factories;
 
+use Enums\Locale;
 use Http\Models\Iching;
 
 class IchingFactory extends Factory
@@ -15,6 +16,7 @@ class IchingFactory extends Factory
         $iching->description = $attrs['description'] ?? $this->faker->sentences(25, true);
         $iching->number = $attrs['number'];
         $iching->bitmask = $attrs['bitmask'];
+        $iching->locale = $attrs['locale'] ?? Locale::RUSSIAN->value;
 
         $iching->save();
 

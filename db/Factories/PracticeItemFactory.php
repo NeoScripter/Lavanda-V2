@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Factories;
 
 use Enums\ImageableType;
+use Enums\Locale;
 use Http\Models\PracticeItem;
 
 class PracticeItemFactory extends Factory
@@ -17,6 +18,7 @@ class PracticeItemFactory extends Factory
         $item->description = $attrs['description'] ??  $this->faker->sentence();
         $item->abstract = $attrs['abstract'] ??  $this->faker->sentence();
         $item->file = $attrs['file'] ?? $this->faker->url();
+        $item->locale = $attrs['locale'] ?? Locale::RUSSIAN->value;
 
         $faqs = $attrs['faqs'] ?? [];
 
