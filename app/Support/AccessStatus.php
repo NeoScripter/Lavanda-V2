@@ -190,6 +190,7 @@ final class AccessStatus extends \Prefab
                         );
                     }
                 };
+                break;
             case PlanSlug::ONE_TIME: {
                     self::instance()->db->exec(
                         "DELETE FROM games WHERE games.number != (
@@ -215,6 +216,7 @@ final class AccessStatus extends \Prefab
                         );
                     }
                 };
+                break;
             case PlanSlug::PERSONAL: {
                     self::instance()->db->exec(
                         "DELETE FROM consultations WHERE consultations.number != (
@@ -239,6 +241,7 @@ final class AccessStatus extends \Prefab
                         );
                     }
                 };
+                break;
         }
     }
 }
