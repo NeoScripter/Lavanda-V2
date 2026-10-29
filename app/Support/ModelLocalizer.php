@@ -10,13 +10,12 @@ use Factories\ImageFactory;
 use Http\Models\Card;
 use Http\Models\Rune;
 use Http\Models\Theme;
-use Log;
 
 final class ModelLocalizer
 {
     public function __construct(private ClonableType $category, private Locale $locale) {}
 
-    public function clone_all(): void
+    public function clone_all(): string
     {
         switch ($this->category) {
             case ClonableType::TAROT:
@@ -25,29 +24,21 @@ final class ModelLocalizer
             case ClonableType::MIND_GAMES:
             case ClonableType::MINORI:
             case ClonableType::METAPHORIC:
-                $this->clone_cards();
-                break;
+                return $this->clone_cards();
             case ClonableType::RUNE:
-                $this->clone_runes();
-                break;
+                return $this->clone_runes();
             case ClonableType::DICE:
-                $this->clone_dices();
-                break;
+                return $this->clone_dices();
             case ClonableType::STONE:
-                $this->clone_stones();
-                break;
+                return $this->clone_stones();
             case ClonableType::FAQ:
-                $this->clone_faqs();
-                break;
+                return $this->clone_faqs();
             case ClonableType::ICHING:
-                $this->clone_ichings();
-                break;
+                return $this->clone_ichings();
             case ClonableType::AFFIRMATION:
-                $this->clone_affirmations();
-                break;
+                return $this->clone_affirmations();
             case ClonableType::ARTICLE:
-                $this->clone_articles();
-                break;
+                return $this->clone_articles();
         }
     }
 
@@ -65,9 +56,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM runes WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            $logger = new Log('error.log');
-            $logger->write("Error cloning the runes: the runes for this locale are already seeded {$this->locale->value}");
-            return;
+            return "Error cloning the runes: the runes for this locale are already seeded {$this->locale->value}";
         }
 
         $runes = new Rune();
@@ -75,7 +64,9 @@ final class ModelLocalizer
 
         $new_rune = new Rune();
 
-        if (empty($runes)) return;
+        if (empty($runes)) {
+            return "Error cloning the runes: the runes for Russian locale are empty";
+        }
 
         foreach ($runes as $rune) {
             $front_img = $rune->front_image;
@@ -124,6 +115,8 @@ final class ModelLocalizer
             );
             $new_rune->reset();
         }
+
+        return "Runes successfully cloned!";
     }
 
     private function clone_cards()
@@ -133,9 +126,7 @@ final class ModelLocalizer
         $rows = $db->exec("SELECT count(id) FROM cards WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            $logger = new Log('error.log');
-            $logger->write("Error cloning the cards: the cards for this locale are already seeded {$this->locale->value}");
-            return;
+            return "Error cloning the cards: the cards for this locale are already seeded {$this->locale->value}";
         }
 
         $cards = new Card();
@@ -143,7 +134,9 @@ final class ModelLocalizer
 
         $new_card = new Card();
 
-        if (empty($cards)) return;
+        if (empty($cards)) {
+            return "Error cloning the cards: the cards for Russian locale are empty";
+        }
 
         foreach ($cards as $card) {
             $front_img = $card->front_image;
@@ -183,5 +176,7 @@ final class ModelLocalizer
             );
             $new_card->reset();
         }
+
+        return "Cards successfully cloned!";
     }
 }
