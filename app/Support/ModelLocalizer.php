@@ -8,6 +8,7 @@ use Enums\ClonableType;
 use Enums\Locale;
 use Factories\ImageFactory;
 use Http\Models\Card;
+use Http\Models\FAQ;
 use Http\Models\Rune;
 use Http\Models\Stone;
 use Http\Models\Theme;
@@ -98,7 +99,40 @@ final class ModelLocalizer
         return "Stones successfully cloned!";
     }
 
-    private function clone_faqs() {}
+    private function clone_faqs()
+    {
+        $db = \Base::instance()->get("DB");
+
+        $rows = $db->exec("SELECT count(id) FROM faqs WHERE locale = ?", [$this->locale->value]);
+
+        if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
+            return "Error cloning the faqs: the faqs for this locale are already seeded {$this->locale->value}";
+        }
+
+        $faqs = new FAQ();
+        $faqs = $faqs->find(['locale = ?', Locale::RUSSIAN->value]);
+
+        $new_faq = new FAQ();
+
+        if (empty($faqs)) {
+            return "Error cloning the faqs: the faqs for Russian locale are empty";
+        }
+
+        foreach ($faqs as $faq) {
+
+            $new_faq->copyfrom([
+                'answer' => $faq->answer,
+                'question' => $faq->question,
+                'locale' => $this->locale->value,
+            ]);
+
+            $new_faq->save();
+            $new_faq->reset();
+        }
+
+        return "FAQs successfully cloned!";
+    }
+
     private function clone_ichings() {}
     private function clone_affirmations() {}
     private function clone_articles() {}

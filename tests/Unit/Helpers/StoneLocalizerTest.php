@@ -10,7 +10,6 @@ use Enums\ImageableType;
 use Enums\Locale;
 use Factories\StoneFactory;
 use Http\Models\Stone;
-use Http\Models\Theme;
 use PHPUnit\Framework\Attributes\Test;
 use Support\ModelLocalizer;
 use Tests\TestCase;
