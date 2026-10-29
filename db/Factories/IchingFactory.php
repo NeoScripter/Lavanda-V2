@@ -14,8 +14,8 @@ class IchingFactory extends Factory
         $iching = new Iching();
 
         $iching->description = $attrs['description'] ?? $this->faker->sentences(25, true);
-        $iching->number = $attrs['number'];
-        $iching->bitmask = $attrs['bitmask'];
+        $iching->number = $attrs['number'] ?? 3;
+        $iching->bitmask = $attrs['bitmask'] ?? 43;
         $iching->locale = $attrs['locale'] ?? Locale::RUSSIAN->value;
 
         $iching->save();

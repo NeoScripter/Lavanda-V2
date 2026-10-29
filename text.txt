@@ -1,57 +1,34 @@
-
-    private function clone_items()
+    private function clone_ichings()
     {
         $db = \Base::instance()->get("DB");
 
-        $rows = $db->exec("SELECT count(id) FROM items WHERE locale = ?", [$this->locale->value]);
+        $rows = $db->exec("SELECT count(id) FROM ichings WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return "Error cloning the items: the items for this locale are already seeded {$this->locale->value}";
+            return "Error cloning the ichings: the ichings for this locale are already seeded {$this->locale->value}";
         }
 
-        $items = new PracticeItem();
-        $items = $items->find(['locale = ?', Locale::RUSSIAN->value]);
+        $ichings = new Iching();
+        $ichings = $ichings->find(['locale = ?', Locale::RUSSIAN->value]);
 
-        $new_item = new PracticeItem();
+        $new_iching = new Iching();
 
-        if (empty($items)) {
-            return "Error cloning the items: the items for Russian locale are empty";
+        if (empty($ichings)) {
+            return "Error cloning the ichings: the ichings for Russian locale are empty";
         }
 
-        foreach ($items as $item) {
-            $front_img = $item->preview;
-            $back_img = $item->image;
+        foreach ($ichings as $iching) {
 
-            $new_item->copyfrom([
-                'name' => $item->name,
-                'variant' => $item->variant,
-                'html' => $item->html,
+            $new_iching->copyfrom([
+                'answer' => $iching->answer,
+                'question' => $iching->question,
                 'locale' => $this->locale->value,
             ]);
 
-            $new_item->save();
-
-            $img_factory = new ImageFactory();
-            $img_factory->create(
-                attrs: [
-                    'imageable_type' => $front_img->imageable_type,
-                    'imageable_id' => $new_item->id,
-                    'variant' => $front_img->variant,
-                    'alt' => $front_img->alt,
-                ],
-                src_dir: to_absolute_path(get_parent_dir($front_img->src))
-            );
-            $img_factory->create(
-                attrs: [
-                    'imageable_type' => $back_img->imageable_type,
-                    'imageable_id' => $new_item->id,
-                    'variant' => $back_img->variant,
-                    'alt' => $back_img->alt,
-                ],
-                src_dir: to_absolute_path(get_parent_dir($back_img->src))
-            );
-            $new_item->reset();
+            $new_iching->save();
+            $new_iching->reset();
         }
 
-        return "PracticeItems successfully cloned!";
+        return "Ichings successfully cloned!";
     }
+

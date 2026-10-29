@@ -9,6 +9,7 @@ use Enums\Locale;
 use Factories\ImageFactory;
 use Http\Models\Card;
 use Http\Models\FAQ;
+use Http\Models\Iching;
 use Http\Models\PracticeItem;
 use Http\Models\Rune;
 use Http\Models\Stone;
@@ -94,9 +95,44 @@ final class ModelLocalizer
         return "Practice Items successfully cloned!";
     }
 
-    private function clone_ichings() {}
     private function clone_affirmations() {}
     private function clone_articles() {}
+
+    private function clone_ichings()
+    {
+        $db = \Base::instance()->get("DB");
+
+        $rows = $db->exec("SELECT count(id) FROM ichings WHERE locale = ?", [$this->locale->value]);
+
+        if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
+            return "Error cloning the ichings: the ichings for this locale are already seeded {$this->locale->value}";
+        }
+
+        $ichings = new Iching();
+        $ichings = $ichings->find(['locale = ?', Locale::RUSSIAN->value]);
+
+        $new_iching = new Iching();
+
+        if (empty($ichings)) {
+            return "Error cloning the ichings: the ichings for Russian locale are empty";
+        }
+
+        foreach ($ichings as $iching) {
+
+            $new_iching->copyfrom([
+                'bitmask' => $iching->bitmask,
+                'number' => $iching->number,
+                'description' => $iching->description,
+                'locale' => $this->locale->value,
+            ]);
+
+            $new_iching->save();
+            $new_iching->reset();
+        }
+
+        return "Ichings successfully cloned!";
+    }
+
 
     private function clone_stones()
     {
