@@ -83,6 +83,11 @@ final class AccessStatus extends \Prefab
             self::instance()->has_purchased_games($user);
     }
 
+    public static function get_accessed_plans_num(array $user): int
+    {
+        return 6;
+    }
+
     public static function list_plans(array $user): array
     {
         $hive = \Base::instance();
@@ -159,6 +164,25 @@ final class AccessStatus extends \Prefab
             "UPDATE games SET number = number - 1 WHERE games.user = ?",
             [$user['id']]
         );
+    }
+
+    public static function notify_about_purchase(PlanSlug $slug, array $user): void
+    {
+        if ($slug === PlanSlug::PERSONAL) {
+
+            $job = new SendEmailJob();
+
+            $html = View::instance()->render("pages/email/purchased-consultation.php", "text/html", ['name' => $user['name']]);
+
+            $payload = [
+                'subject' => \Base::instance()->get('web.персональный_разбор'),
+                'html' => $html,
+                'user_name' => $user['name'],
+                'user_email' => $user['email']
+            ];
+
+            $job->handle($payload);
+        }
     }
 
     public static function give(PlanSlug $slug, array $user): void
@@ -254,19 +278,6 @@ final class AccessStatus extends \Prefab
                             [$user['id']]
                         );
                     }
-
-                    $job = new SendEmailJob();
-
-                    $html = View::instance()->render("pages/email/purchased-consultation.php", "text/html", ['name' => $user['name']]);
-
-                    $payload = [
-                        'subject' => \Base::instance()->get('web.персональный_разбор'),
-                        'html' => $html,
-                        'user_name' => $user['name'],
-                        'user_email' => $user['email']
-                    ];
-
-                    $job->handle($payload);
                 };
                 break;
         }
