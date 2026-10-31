@@ -37,8 +37,8 @@ class SendEmailJob extends Job
                 pw: getenv('SMTP_PASSWORD'),
             );
 
-            $smtp->set('From',     'Lavanda.Kim <info@lavanda.kim>');
-            $smtp->set('Reply-To', 'Lavanda.Kim <info@lavanda.kim>');
+            $smtp->set('From',     'Lavanda.Kim');
+            $smtp->set('Reply-To', 'info@lavanda.kim');
             $smtp->set('To',       "$name <$to>");
             $smtp->set('Subject',  $subject);
             $smtp->set('Content-type', 'text/html');
