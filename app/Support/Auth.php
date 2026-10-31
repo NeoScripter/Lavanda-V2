@@ -66,7 +66,7 @@ final class Auth extends \Prefab
 
     public static function clear(): void
     {
-        \Base::instance()->clear('SESSION.user');
+        \Base::instance()->clear('SESSION');
         self::instance()->user = null;
     }
 }
