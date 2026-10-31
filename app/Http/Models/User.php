@@ -52,6 +52,11 @@ class User extends Cortex
             'nullable' => false,
             'default' => UserRole::USER->value,
         ],
+        'created_at' => [
+            'type' => Schema::DT_DATE,
+            'nullable' => false,
+            'default' => Schema::DF_CURRENT_TIMESTAMP,
+        ],
     ];
     protected $db = 'DB', $table = 'users';
 

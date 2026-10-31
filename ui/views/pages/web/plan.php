@@ -6,14 +6,15 @@ extract(component_props(
     required: ['item'],
     optional: ['class' => ''],
     props: get_defined_vars()
-)); ?>
+)); 
+
+$hive = \Base::instance();
+?>
 
 <?php slot('layouts/web/app-layout', [
     'title' => $hive->get("web.оформление_тарифа"),
     'class' => 'bg-white relative isolate',
 ]); ?>
-
-<?php $hive = \Base::instance(); ?>
 
 <?php ob_start(); ?>
 

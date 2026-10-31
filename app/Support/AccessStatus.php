@@ -10,6 +10,8 @@ use DB\SQL;
 use Enums\ClockMode;
 use Enums\PlanSlug;
 use Enums\UserRole;
+use Jobs\SendEmailJob;
+use View;
 
 final class AccessStatus extends \Prefab
 {
@@ -135,6 +137,18 @@ final class AccessStatus extends \Prefab
         return self::instance()->is_admin($user) || self::instance()->has_active_subscription($user) || self::instance()->has_purchased_games($user);
     }
 
+    public static function subtract_consultation(array $user): void
+    {
+        if (self::instance()->is_admin($user)) {
+            return;
+        }
+
+        self::instance()->db->exec(
+            "UPDATE consultations SET number = number - 1 WHERE consultations.user = ?",
+            [$user['id']]
+        );
+    }
+
     public static function subtract_game(array $user): void
     {
         if (self::instance()->is_admin($user) || self::instance()->has_active_subscription($user)) {
@@ -168,7 +182,7 @@ final class AccessStatus extends \Prefab
                     $date = self::instance()->clock;
                     $now = new DateTime($date);
 
-                    if (empty($rows[0]['ends_at'])) {
+                    if (! isset($rows[0]['ends_at'])) {
                         $new_date = $now->add(new DateInterval($interval))->format('Y-m-d H:i:s');
 
                         self::instance()->db->exec(
@@ -204,7 +218,7 @@ final class AccessStatus extends \Prefab
                         [$user['id']]
                     );
 
-                    if (empty($rows[0]['number'])) {
+                    if (! isset($rows[0]['number'])) {
                         self::instance()->db->exec(
                             'INSERT INTO games ("plan_slug","number","user") VALUES (?,?,?)',
                             [$slug->value, 3, $user['id']]
@@ -229,7 +243,7 @@ final class AccessStatus extends \Prefab
                         [$user['id']]
                     );
 
-                    if (empty($rows[0]['number'])) {
+                    if (! isset($rows[0]['number'])) {
                         self::instance()->db->exec(
                             'INSERT INTO consultations ("plan_slug","number","user") VALUES (?,?,?)',
                             [$slug->value, 1, $user['id']]
@@ -240,6 +254,19 @@ final class AccessStatus extends \Prefab
                             [$user['id']]
                         );
                     }
+
+                    $job = new SendEmailJob();
+
+                    $html = View::instance()->render("pages/email/purchased-consultation.php", "text/html", ['name' => $user['name']]);
+
+                    $payload = [
+                        'subject' => \Base::instance()->get('web.персональный_разбор'),
+                        'html' => $html,
+                        'user_name' => $user['name'],
+                        'user_email' => $user['email']
+                    ];
+
+                    $job->handle($payload);
                 };
                 break;
         }

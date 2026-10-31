@@ -3,6 +3,8 @@
 use Enums\PlanSlug;
 use Support\Auth;
 
+$hive = \Base::instance();
+
 extract(component_props(
     required: ['items'],
     optional: ['class' => ''],
@@ -16,7 +18,6 @@ extract(component_props(
 ]); ?>
 
 <?php
-$hive = \Base::instance();
 $user = Auth::user();
 
 $button_labels = [
