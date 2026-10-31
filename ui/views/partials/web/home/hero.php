@@ -9,6 +9,7 @@ extract(component_props(
     optional: [],
     props: get_defined_vars(),
 ));
+
 ?>
 
 <?php slot('components/web/layout/hero', [

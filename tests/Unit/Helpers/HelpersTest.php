@@ -114,4 +114,23 @@ final class HelpersTest extends TestCase
         $this->assertEquals(expected: 'Gregory', actual: capitalize_name($name));
         $this->assertEquals(expected: 'Gregory Smith', actual: capitalize_name($full_name));
     }
+
+    #[Test]
+    public function gets_the_number_of_all_purchased_items(): void
+    {
+
+        $user = new User();
+        $user->copyFrom(['name' => 'John', 'email' => 'john@gmail.com', 'password' => 'password']);
+        $user->save();
+
+        $user_data = [...$user->cast(), 'id' => $user->id];
+
+        AccessStatus::give(PlanSlug::MONTHLY, $user_data);
+        AccessStatus::give(PlanSlug::YEARLY, $user_data);
+        AccessStatus::give(PlanSlug::ONE_TIME, $user_data);
+        AccessStatus::give(PlanSlug::PERSONAL, $user_data);
+        AccessStatus::give(PlanSlug::ONE_TIME, $user_data);
+
+        $this->assertEquals(expected: 8, actual: AccessStatus::get_accessed_plans_num($user_data));
+    }
 }

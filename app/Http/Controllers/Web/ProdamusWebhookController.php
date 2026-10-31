@@ -91,8 +91,10 @@ class ProdamusWebhookController extends Controller
         try {
             $db = $hive->get("DB");
             $db->begin();
+            $user_data = [...$user->cast(), 'id' => $user->id];
 
-            AccessStatus::give(PlanSlug::from($plan_slug), [...$user->cast(), 'id' => $user->id]);
+            AccessStatus::give(PlanSlug::from($plan_slug), $user_data);
+            AccessStatus::notify_about_purchase(PlanSlug::from($plan_slug), $user_data);
 
             $logger->write("Subscription processed successfully. Email: $email order id: $order_id");
 

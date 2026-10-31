@@ -62,9 +62,6 @@ class PaymentController extends Controller
         } else {
             AccessStatus::give(PlanSlug::from($slug), $user);
 
-            notify(
-                $hive->get("web.покупка_успешно_совершена")
-            );
             $hive->reroute('@home');
         }
     }

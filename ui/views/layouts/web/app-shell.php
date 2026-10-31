@@ -42,6 +42,8 @@
 
         <?= component('web/ui/toast') ?>
 
+        <?= component('web/ui/notification') ?>
+
         <div id="modals"></div>
     </div>
 

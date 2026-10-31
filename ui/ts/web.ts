@@ -21,6 +21,7 @@ import initReviewBook from './modules/reviewBook';
 import initPasswordInputButtons from './modules/passwordInputButtons';
 import initOtpInput from './modules/otpInput';
 import initPasswordConfirmationInput from './modules/passwordConfirmationInput';
+import initSSE from './modules/initSSE';
 
 class WebUI {
     constructor() {
@@ -51,6 +52,7 @@ class WebUI {
             initPasswordInputButtons,
             initOtpInput,
             initPasswordConfirmationInput,
+            initSSE,
         ];
 
         for (const handler of handlers) {

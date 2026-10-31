@@ -831,3 +831,10 @@ li[cmp-card].accent {
         scale: 1;
     }
 }
+
+[cmp-notification] {
+    transform: translateY(-300%);
+}
+[cmp-notification].shown {
+    transform: translateY(0%);
+}

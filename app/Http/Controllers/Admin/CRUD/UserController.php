@@ -55,8 +55,10 @@ class UserController extends Controller
         if ($user->dry()) {
             throw new Exception('User not found');
         }
+        $user_data = [...$user->cast(), 'id' => $user->id];
 
-        AccessStatus::give($slug, [...$user->cast(), 'id' => $user->id]);
+        AccessStatus::give($slug, $user_data);
+        AccessStatus::notify_about_purchase($slug, $user_data);
 
         notify($hive->get('admin.user_successfully_updated'));
 

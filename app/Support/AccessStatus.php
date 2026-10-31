@@ -78,14 +78,35 @@ final class AccessStatus extends \Prefab
 
     public static function has_active_plans(array $user): bool
     {
-        return self::instance()->has_active_subscription($user) ||
-            self::instance()->has_purchased_consultations($user) ||
-            self::instance()->has_purchased_games($user);
+        return AccessStatus::get_accessed_plans_num($user) > 0;
     }
 
     public static function get_accessed_plans_num(array $user): int
     {
-        return 6;
+        $db = \Base::instance()->get('DB');
+
+        $date = self::instance()->clock;
+
+        $rows = self::instance()->db->exec(
+            "SELECT EXISTS ( SELECT 1 FROM subscriptions s WHERE s.user = ? AND s.ends_at > ?) AS exists",
+            [$user['id'], new DateTime($date)->format('Y-m-d H:i:s')]
+        );
+
+        $rows = $db->exec(
+            'SELECT (
+            (SELECT max(number) FROM games WHERE games.user = ?) + 
+            (SELECT max(number) FROM consultations WHERE consultations.user = ?) + 
+            COALESCE((SELECT 1 FROM subscriptions s WHERE s.user = ? AND s.ends_at > ?), 0)
+            ) as sum',
+            [
+                $user['id'],
+                $user['id'],
+                $user['id'],
+                new DateTime($date)->format('Y-m-d H:i:s')
+            ]
+        );
+
+        return empty($rows[0]['sum']) ? 0 : $rows[0]['sum'];
     }
 
     public static function list_plans(array $user): array
