@@ -39,7 +39,7 @@ class SendEmailJob extends Job
 
             $smtp->set('From',     'info@lavanda.kim');
             $smtp->set('Reply-To', 'info@lavanda.kim');
-            $smtp->set('To',       "$name <$to>");
+            $smtp->set('To',       "$to");
             $smtp->set('Subject',  $subject);
             $smtp->set('Content-type', 'text/html');
 
