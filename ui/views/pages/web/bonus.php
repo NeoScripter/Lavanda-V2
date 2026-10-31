@@ -11,12 +11,11 @@ extract(component_props(
 )); ?>
 
 <?php slot('layouts/web/app-layout', [
-    'title' => $hive->get("web.бонусная_игра")
-,
+    'title' => $hive->get("web.бонусная_игра"),
 ]); ?>
 
 <?php ob_start(); ?>
- <?= $hive->get("web.экспресскарта_от") ?>
+<?= $hive->get("web.экспресскарта_от") ?>
 <sup>Kim</sup>
 <?php $heading = ob_get_clean(); ?>
 
@@ -44,14 +43,13 @@ extract(component_props(
 <div class='flex flex-wrap gap-y-4 gap-x-6 lg:gap-x-8'>
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.попробовать")
-,
+        'slot' => $hive->get("web.попробовать"),
         'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
     ]) ?>
     <?= component('web/ui/button', [
         'variant' => 'muted',
-        'slot' => $hive->get("web.идем_дальше")
-,
+        'href' => next_game_route(),
+        'slot' => $hive->get("web.идем_дальше"),
     ]) ?>
 </div>
 <?php $slot = ob_get_clean(); ?>
@@ -67,12 +65,11 @@ extract(component_props(
 <div>
     <p cmp-visible-at-start
         class='text-balance mx-auto max-w-xl'><?= $hive->get("web.карта_открывается_сама_как_знак_который_приходит_вовремя_иногда_именно_случай_отражает_то_что_мы_уже_чувствуем_но_не_осознаём") ?>
-</p>
+    </p>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.получить_ответ")
-,
+        'slot' => $hive->get("web.получить_ответ"),
         'attrs' => [
             'cmp-launch-game-btn' => true,
             'cmp-visible-at-start' => true
@@ -95,8 +92,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.попробовать_снова")
-,
+        'slot' => $hive->get("web.попробовать_снова"),
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -112,7 +108,7 @@ extract(component_props(
 <div>
     <p cmp-visible-at-start
         class='text-balance mx-auto max-w-xl'><?= $hive->get("web.вы_сами_выбираете_карту_которая_откликается_сердцем_этот_способ_помогает_довериться_интуиции_и_увидеть_собственный_внутренний_ответ") ?>
-</p>
+    </p>
 
     <?= component('web/layout/selected-items') ?>
 
@@ -131,8 +127,7 @@ extract(component_props(
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
-        'slot' => $hive->get("web.попробовать_снова")
-,
+        'slot' => $hive->get("web.попробовать_снова"),
         'attrs' => [
             'cmp-reset-game-btn' => true,
             'cmp-visible-at-end' => true
@@ -144,8 +139,9 @@ extract(component_props(
 </div>
 <?php $slot2 = ob_get_clean(); ?>
 
-<?php $labels = [$hive->get("web.выбор_лаванды")
-, $hive->get("web.выбор_гостя")
+<?php $labels = [
+    $hive->get("web.выбор_лаванды"),
+    $hive->get("web.выбор_гостя")
 ]; ?>
 
 <?= component('web/layout/game-stage', [
