@@ -36,7 +36,7 @@ class RegisteredUserController extends Controller
         $actual_code = $request->input('otp_code');
         $stored_code = $hive->get('SESSION.' . SessionKey::OTP_CODE->value);
 
-        if ($stored_code['expires_at'] < time()) {
+        if (isset($stored_code['expires_at']) && $stored_code['expires_at'] < time()) {
             $request->flash_errors(['email' => $hive->get('validation.your_otp_code_has_expired')]);
             $hive->reroute('@register');
         }
