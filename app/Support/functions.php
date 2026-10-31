@@ -667,3 +667,11 @@ function next_game_route()
         fn($_, $from) => $current_route === preg_replace('/[0-9]+/', '', $from)
     ) ?? '/';
 }
+
+function capitalize_name(string $name)
+{
+    return implode(' ', array_map(
+        fn($chunk) => mb_strtoupper(substr($chunk, 0, 1)) . mb_strtolower(substr($chunk, 1)),
+        preg_split('/\s+/', $name)
+    ));
+}

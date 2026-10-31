@@ -104,4 +104,14 @@ final class HelpersTest extends TestCase
 
         $this->assertEquals(expected: 4, actual: $rows[0]['number']);
     }
+
+    #[Test]
+    public function capitalizes_user_name(): void
+    {
+        $name = 'gregory';
+        $full_name = 'grEgoRy    sMiTh';
+
+        $this->assertEquals(expected: 'Gregory', actual: capitalize_name($name));
+        $this->assertEquals(expected: 'Gregory Smith', actual: capitalize_name($full_name));
+    }
 }

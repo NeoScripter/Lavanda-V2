@@ -10,7 +10,7 @@ class RegisterUserRequest extends Request
     {
         return [
             'name' => [
-                'filter' => 'trim',
+                'filter' => 'trim|capitalize',
                 'validate' => 'required|max_len:200',
             ],
             'email' => [

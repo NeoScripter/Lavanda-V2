@@ -48,6 +48,7 @@ class RegisteredUserController extends Controller
 
         if (!$user->dry()) {
             $user->is_deleted = false;
+            $user->name = $request->input('name');
             $user->password = $request->input('password');
         } else {
             $request->validate();

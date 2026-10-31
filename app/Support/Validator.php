@@ -123,17 +123,17 @@ class Validator
 
     protected function filter_capitalize(mixed $value): mixed
     {
-        return is_string($value) ? ucwords(strtolower($value)) : $value;
+        return is_string($value) ? mb_convert_case(mb_strtolower($value), MB_CASE_TITLE, "UTF-8") : $value;
     }
 
     protected function filter_uppercase(mixed $value): mixed
     {
-        return is_string($value) ? strtoupper($value) : $value;
+        return is_string($value) ? mb_strtoupper($value) : $value;
     }
 
     protected function filter_lowercase(mixed $value): mixed
     {
-        return is_string($value) ? strtolower($value) : $value;
+        return is_string($value) ? mb_strtolower($value) : $value;
     }
 
     protected function filter_boolean(mixed $value): bool
@@ -169,7 +169,7 @@ class Validator
     protected function filter_slug(mixed $value): mixed
     {
         return is_string($value)
-            ? strtolower(preg_replace('/[^a-z0-9]+/i', '-', trim($value)))
+            ? mb_strtolower(preg_replace('/[^a-z0-9]+/i', '-', trim($value)))
             : $value;
     }
 
