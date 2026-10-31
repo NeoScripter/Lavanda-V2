@@ -47,7 +47,7 @@ class SendEmailJob extends Job
 
         } catch (Exception $e) {
             if (! AppEnv::is(AppEnv::TESTING)) {
-                echo ("Failed sending email: {$e->getMessage()}");
+                $logger->write("Failed sending email: {$e->getMessage()}.");
             }
         }
 
