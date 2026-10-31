@@ -16,7 +16,7 @@ class SSEController extends Controller
         header("Content-Type: text/event-stream");
         // header("Cache-Control: no-cache");
 
-        $tick = 1;
+        $tick = 10;
         $user = Auth::user();
 
         if ($hive->exists('SESSION.ACTIVE_PLANS')) {
@@ -48,7 +48,7 @@ class SSEController extends Controller
                     $initial_active_plans = $updated_active_plans;
                     $hive->set('SESSION.ACTIVE_PLANS', $updated_active_plans);
                 }
-                $tick = 1;
+                $tick = 10;
             }
 
             while (ob_get_level() > 0) {
@@ -58,7 +58,7 @@ class SSEController extends Controller
 
             if (connection_aborted()) break;
 
-            sleep(5);
+            // sleep(5);
         }
     }
 }
