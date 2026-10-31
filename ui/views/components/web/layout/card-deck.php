@@ -10,7 +10,7 @@ extract(component_props(
     <ul
         cmp-visible-at-start
         cmp-visible-during
-        style="--card-w: <?= $width ?>rem; --gap: <?= $gap ?>rem; --count: <?= $count ?>;"
+        style="--card-w: <?= $width ?>rem; --gap: clamp(0.1rem,0.5vw,<?= $gap ?>rem); --count: <?= $count ?>;"
         class='grid [&>li]:w-(--card-w) max-w-[calc((var(--count)+1)*var(--gap)+var(--card-w))] grid-cols-[repeat(auto-fill,var(--gap))] pr-(--card-w) gap-y-1 mx-auto' <?= serialize_attrs($attrs) ?>>
         <?= $slot ?>
     </ul>
