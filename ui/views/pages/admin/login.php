@@ -9,6 +9,8 @@
 <form action="<?= $hive->alias("admin_login_store") ?>" method="post" class="max-w-160 flex flex-col gap-6">
     <?= csrf() ?>
 
+    <input type="hidden" name="redirect_to" value="@admin_login">
+
     <?= component('admin/form/form-input', [
         'name'        => 'email',
         'label'       => $hive->get('admin.email_address'),

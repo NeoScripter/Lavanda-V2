@@ -2,9 +2,7 @@
 
 namespace Http\Requests\Profile;
 
-use Enums\UserRole;
 use Http\Request;
-use Support\Auth;
 
 class LoginRequest extends Request
 {
@@ -33,9 +31,7 @@ class LoginRequest extends Request
             'email' => $this->hive->POST['email'] ?? '',
         ]);
 
-        $user = Auth::user();
-
-        $redirect_route = (!empty($user) && $user['role'] === UserRole::ADMIN->value) ? '@admin_login' : '@login';
+        $redirect_route = $this->hive->POST['redirect_to'] ?? '@login';
         $this->hive->reroute($redirect_route);
     }
 }
