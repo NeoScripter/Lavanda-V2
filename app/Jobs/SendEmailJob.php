@@ -41,7 +41,7 @@ class SendEmailJob extends Job
             $smtp->set('Reply-To', 'info@lavanda.kim');
             $smtp->set('To',       "$to");
             $smtp->set('Subject',  $subject);
-            $smtp->set('Content-type', 'text/html');
+            $smtp->set('Content-type', 'text/html;charset=utf-8');
 
             $smtp->send(View::instance()->render("layouts/email/layout.php", 'text/html', compact('html')));
 
