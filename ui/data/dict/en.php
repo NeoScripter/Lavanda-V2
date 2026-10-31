@@ -669,5 +669,6 @@ return [
         'дать_подписку_на_год' => 'Give access for a year',
         'подарить_персональную_консультацию' => 'Give a personal consultation',
         'подарить_три_игры' => 'Give access for three games',
+        'пользователей' => 'users',
     ]
 ];

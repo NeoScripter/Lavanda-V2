@@ -13,6 +13,8 @@ extract(component_props(
     'title' => $hive->get('admin.users')
 ]); ?>
 
+<p class='mb-2'><?= count($users) ?> <?= mb_strtolower($hive->get('admin.пользователей')) ?></p>
+
 <div class="space-y-8 w-[calc(100%-1rem)]">
     <?php if (! empty($users)) : ?>
         <ul class="grid gap-6 max-w-sm">
