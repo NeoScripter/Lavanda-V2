@@ -4,11 +4,6 @@
     'title' => $hive->get("web.регистрация"),
 ]); ?>
 
-<?php slot('components/web/layout/info-banner', ['class' => 'mb-2 -mt-4']) ?>
-<p class='mb-5'><?= $hive->get("web.пройдите_экспресс_регистрацию_за_минуту_и_получите_полный_доступ_ко_всем_разделам_на_часа") ?>
-</p>
-<?php end_slot(); ?>
-
 <form cmp-otp-form action="<?= $hive->alias("register_store") ?>" method="post" class="max-w-160 flex flex-col gap-6">
     <?= csrf() ?>
 
