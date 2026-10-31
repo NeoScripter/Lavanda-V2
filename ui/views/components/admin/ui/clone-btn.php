@@ -21,12 +21,14 @@ extract(component_props(
                 <input type="hidden" name="category" value="<?= $category ?>">
                 <?= csrf() ?>
 
-                <?= component('web/ui/button', [
+                <?= component('admin/ui/auth-button', [
                     'size' => 'sm',
-                    'variant' => 'danger',
+                    'variant' => 'destructive',
+                    'class' => 'min-w-35',
                     'slot' => $hive->get("admin.clone"),
                     'attrs' => ['type' => 'submit']
                 ]) ?>
+
             </form>
             <button popovertarget="clone-model-dialog" popovertargetaction="hide" class='cursor-pointer min-w-25 transition-colors hover:text-primary'>
                 <span class='block size-6'><?= $hive->get("admin.cancel") ?>

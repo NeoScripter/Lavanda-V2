@@ -96,7 +96,7 @@ final class AccessStatus extends \Prefab
 
             $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
             $date = new DateTime($rows[0]['ends_at'])->format('d/m/y');
-            $plans[] = "{$hive->get("web.тариф")} $label, {$hive->get("web.оплачен_до")}$date";
+            $plans[] = "{$hive->get("web.тариф")} $label, {$hive->get("web.оплачен_до")} $date";
         }
 
         if (self::instance()->has_purchased_games($user)) {
