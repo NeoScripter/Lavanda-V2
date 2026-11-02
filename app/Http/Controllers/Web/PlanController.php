@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Http\Controllers\Web;
 
 use Enums\PlanSlug;
+use Enums\SessionKey;
 use Http\Controller;
 use Http\Models\Plan;
 use Support\Auth;
@@ -38,10 +39,6 @@ class PlanController extends Controller
 
     public function show(\Base $hive)
     {
-        if (empty(Auth::user())) {
-            $hive->reroute('@login');
-        }
-
         $slug = $hive->PARAMS['slug'];
         $plan = new Plan();
         $plan->load(['is_active=? AND slug=?', true, $slug]);
@@ -56,6 +53,8 @@ class PlanController extends Controller
             $data[$plan['slug']],
             ['name' => PlanSlug::from($plan['slug'])->label(), 'price' => $plan['price'], 'slug' => $plan['slug']]
         );
+
+        $hive->set('SESSION.' . SessionKey::LAST_SELECTED_PLAN->value, $slug);
 
         view('pages/web/plan', compact('item'));
     }

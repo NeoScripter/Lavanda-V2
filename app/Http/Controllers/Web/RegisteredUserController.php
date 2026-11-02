@@ -58,6 +58,12 @@ class RegisteredUserController extends Controller
         $user->save();
         Auth::set_user($user->cast());
 
+        if ($hive->exists('SESSION.' . SessionKey::LAST_SELECTED_PLAN->value)) {
+            $slug = $hive->get('SESSION.' . SessionKey::LAST_SELECTED_PLAN->value);
+
+            $hive->reroute($hive->alias('plans_show', compact('slug')));
+        }
+
         notify("{$hive->get("web.добро_пожаловать")}, {$user->name}");
         $hive->reroute($hive->POST['referer'] ?? '@home');
     }

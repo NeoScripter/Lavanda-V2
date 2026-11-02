@@ -9,6 +9,7 @@ enum SessionKey: string
     case AFFIRMATION_TOPIC = 'affirmation_topic';
     case MATCHEABLE_TYPE = 'matcheable_type';
     case OTP_CODE = 'otp_code';
+    case LAST_SELECTED_PLAN = 'last_selected_plan';
 
     public static function values()
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Web;
 
+use Enums\SessionKey;
 use Http\Controller;
 use Http\Models\User;
 use Http\Requests\Profile\LoginRequest;
@@ -47,6 +48,12 @@ class AuthSessionController extends Controller
         }
 
         Auth::set_user($user->cast());
+
+        if ($hive->exists('SESSION.' . SessionKey::LAST_SELECTED_PLAN->value)) {
+            $slug = $hive->get('SESSION.' . SessionKey::LAST_SELECTED_PLAN->value);
+
+            $hive->reroute($hive->alias('plans_show', compact('slug')));
+        }
 
         notify("{$hive->get("web.добро_пожаловать")}, {$user->name}");
 

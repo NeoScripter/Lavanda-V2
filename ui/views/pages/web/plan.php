@@ -1,14 +1,16 @@
 <?php
 
 use Enums\LegalSlug;
+use Support\Auth;
 
 extract(component_props(
     required: ['item'],
     optional: ['class' => ''],
     props: get_defined_vars()
-)); 
+));
 
 $hive = \Base::instance();
+$user = Auth::user();
 ?>
 
 <?php slot('layouts/web/app-layout', [
@@ -18,17 +20,26 @@ $hive = \Base::instance();
 
 <?php ob_start(); ?>
 
-<form action="<?= $hive->alias('pay') ?>" method="post" class='w-fit mx-auto'>
-    <?= csrf() ?>
-    <input type="hidden" name="slug" value="<?= $item['slug'] ?>">
+<?php if (empty($user)) : ?>
 
     <?= component('web/ui/button', [
         'slot' => $hive->get("web.оплатить"),
         'class' => 'min-w-50',
         'size' => 'sm',
+        'href' => $hive->alias('login')
     ]); ?>
+<?php else : ?>
+    <form action="<?= $hive->alias('pay') ?>" method="post" class='w-fit mx-auto'>
+        <?= csrf() ?>
+        <input type="hidden" name="slug" value="<?= $item['slug'] ?>">
 
-</form>
+        <?= component('web/ui/button', [
+            'slot' => $hive->get("web.оплатить"),
+            'class' => 'min-w-50',
+            'size' => 'sm',
+        ]); ?>
+    </form>
+<?php endif; ?>
 <a href="<?= $hive->alias('plans') ?>" class='text-center text-sm mt-2 hover:underline underline-offset-4'><?= $hive->get("web.посмотреть_другие_форматы") ?>
 </a>
 <?php $button = ob_get_clean(); ?>

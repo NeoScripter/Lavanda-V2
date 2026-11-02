@@ -18,7 +18,6 @@ extract(component_props(
 ]); ?>
 
 <?php
-$user = Auth::user();
 
 $button_labels = [
     PlanSlug::YEARLY->value => $hive->get("web.остаться_на_год")
@@ -47,7 +46,7 @@ $button_labels = [
                     'variant' => $idx < 2 ? 'primary' : 'accent',
                     'slot' => $button_labels[$item['slug']],
                     'size' => 'md',
-                    'href' => empty($user) ? $hive->alias('login') : $hive->alias('plans_show', ['slug' => $item['slug']]),
+                    'href' => $hive->alias('plans_show', ['slug' => $item['slug']]),
                 ])
             ]) ?>
         <?php endforeach; ?>
