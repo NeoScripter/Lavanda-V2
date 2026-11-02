@@ -7,10 +7,12 @@ namespace Support;
 use DateInterval;
 use DateTime;
 use DB\SQL;
+use Enums\AppEnv;
 use Enums\ClockMode;
 use Enums\PlanSlug;
 use Enums\UserRole;
 use Http\Models\Access;
+use Http\Models\Notification;
 use Http\Models\User;
 use Jobs\SendEmailJob;
 use View;
@@ -166,14 +168,73 @@ final class AccessStatus extends \Prefab
 
     public static function notify_about_purchase(PlanSlug $slug, array $user): void
     {
-        if ($slug === PlanSlug::PERSONAL) {
+        $hive = \Base::instance();
 
-            $job = new SendEmailJob();
+        $buyer = new User();
+        $buyer->load(['id = ?', $user['id']]);
+        $notification = new Notification();
+        $content = [$hive->get('web.покупка_прошла_успешно'), $hive->get('web.доступ_к_платным_разделам_сайта_открыт')];
+        $access = $buyer->access;
+        $job = new SendEmailJob();
 
-            $html = View::instance()->render("pages/email/purchased-consultation.php", "text/html", ['name' => $user['name']]);
+        $subject = '';
+        $html = '';
+
+        switch ($slug) {
+            case PlanSlug::MONTHLY:
+                $label = '«' . $slug->label() . '»';
+                $date = new DateTime($access->subscription_ends_at)->format('d/m/y');
+                $json = "{$hive->get("web.приобретен_тариф")} $label, {$hive->get("web.оплачен_до")} $date";
+                $content[] = $json;
+
+                $subject = $hive->get('web.подтверждение_оплаты_тарифа_от_lavanda_kim');
+                $html = View::instance()->render("pages/email/purchased-plan.php", "text/html", [
+                    'name' => $user['name'],
+                    'html' => $json
+                ]);
+                break;
+            case PlanSlug::YEARLY:
+                $label = '«' . $slug->label() . '»';
+                $date = new DateTime($access->subscription_ends_at)->format('d/m/y');
+                $json = "{$hive->get("web.приобретен_тариф")} $label, {$hive->get("web.оплачен_до")} $date";
+                $content[] = $json;
+
+                $subject = $hive->get('web.подтверждение_оплаты_тарифа_от_lavanda_kim');
+                $html = View::instance()->render("pages/email/purchased-plan.php", "text/html", [
+                    'name' => $user['name'],
+                    'html' => $json
+                ]);
+                break;
+            case PlanSlug::ONE_TIME:
+                $label = '«' . $slug->label() . '»';
+                $json = "{$hive->get("web.приобретен_тариф")} $label, {$hive->get("web.в_наличии")} {$access->active_games} {$hive->get("web.ответа")}";
+                $content[] = $json;
+
+                $subject = $hive->get('web.подтверждение_оплаты_тарифа_от_lavanda_kim');
+                $html = View::instance()->render("pages/email/purchased-plan.php", "text/html", [
+                    'name' => $user['name'],
+                    'html' => $json
+                ]);
+                break;
+            case PlanSlug::PERSONAL:
+                $label = '«' . $slug->label() . '»';
+                $content[] = "{$hive->get("web.приобретен_тариф")} $label, {$hive->get("web.в_наличии")} {$access->active_consultations} {$hive->get("web.ответа")}";
+                $subject = $hive->get('web.персональный_разбор');
+                $html = View::instance()->render("pages/email/purchased-consultation.php", "text/html", [
+                    'name' => $user['name']
+                ]);
+
+                break;
+        }
+
+        $notification->content = $content;
+        $notification->user = $buyer;
+        $notification->save();
+
+        if (! AppEnv::is(AppEnv::TESTING)) {
 
             $payload = [
-                'subject' => \Base::instance()->get('web.персональный_разбор'),
+                'subject' => $subject,
                 'html' => $html,
                 'user_name' => $user['name'],
                 'user_email' => $user['email']

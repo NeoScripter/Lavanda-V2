@@ -1,22 +1,14 @@
 import { qs } from '../utils';
 
 export default function initSSE() {
-    return;
-    // const evtSource = new EventSource('/sse', { withCredentials: true });
     const evtSource = new EventSource('/sse', { withCredentials: true });
-    // const evtSource = new EventSource('sse.php', { withCredentials: true });
 
     evtSource.onopen = function () {
         console.log('Connection to server opened.');
     };
-    // evtSource.addEventListener('message', (e) => {
-    //     console.log(e.data);
-    // });
 
-    evtSource.addEventListener('subscribed', function (e) {
+    evtSource.addEventListener('notification', function (e) {
         const data = e.data as string;
-        console.log(data);
-        return;
         const sentences = data.split('|').filter((str) => str.trim() !== '');
 
         const notifications = qs<HTMLDivElement>(

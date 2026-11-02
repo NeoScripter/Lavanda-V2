@@ -12,11 +12,6 @@ class Notification extends Cortex
             'type' => self::DT_JSON,
             'nullable' => false,
         ],
-        'expires_at' => [
-            'type' => Schema::DT_DATE,
-            'nullable' => false,
-            'default' => Schema::DF_CURRENT_TIMESTAMP,
-        ],
         'user' => [
             'belongs-to-one' => "\Http\Models\User"
         ],
