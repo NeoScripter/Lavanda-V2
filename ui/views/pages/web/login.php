@@ -18,7 +18,6 @@
             'type'        => 'email',
             'placeholder' => 'email@example.com',
             'required'    => true,
-            'value'    => 'natali@gmail.com',
         ]
     ]) ?>
 
@@ -29,7 +28,6 @@
             'type'        => 'password',
             'placeholder' => $hive->get("web.введите_пароль"),
             'required'    => true,
-            'value'    => 'password',
         ]
     ]) ?>
 
