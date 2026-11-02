@@ -231,7 +231,7 @@ final class AccessStatus extends \Prefab
         $notification->user = $buyer;
         $notification->save();
 
-        if (! AppEnv::is(AppEnv::TESTING)) {
+        if (AppEnv::is(AppEnv::PRODUCTION)) {
 
             $payload = [
                 'subject' => $subject,

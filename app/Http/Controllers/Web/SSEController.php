@@ -25,7 +25,7 @@ class SSEController extends Controller
                     [$user['id']]
                 );
 
-                if (! empty($rows[0]['content'])) {
+                if (isset($rows[0])) {
                     $data = json_decode($rows[0]['content'], true);
 
                     $payload = 'data: ';
@@ -51,7 +51,7 @@ class SSEController extends Controller
             if (connection_aborted()) break;
 
             session_write_close();
-            sleep(8);
+            sleep(3);
         }
     }
 }
