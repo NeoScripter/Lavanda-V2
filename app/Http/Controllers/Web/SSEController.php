@@ -18,7 +18,7 @@ class SSEController extends Controller
             $user = $hive->get('SESSION.user') ?? null;
             $db = $hive->get('DB');
 
-            if (! empty($user['id'])) {
+            if (isset($user['id'])) {
 
                 $rows = $db->exec(
                     'SELECT id, content FROM notifications n WHERE n.user = ? LIMIT 1',
@@ -34,11 +34,11 @@ class SSEController extends Controller
                         $payload .= ($sentence . '|');
                     }
 
+                    $db->exec('DELETE FROM notifications WHERE id = ?', [$rows[0]['id']]);
+
                     echo "event: notification\n",
                     $payload,
                     "\n\n";
-
-                    $db->exec('DELETE FROM notifications WHERE id = ?', [$rows[0]['id']]);
                 }
             }
 

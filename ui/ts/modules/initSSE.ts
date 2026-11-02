@@ -39,11 +39,7 @@ export default function initSSE() {
         setTimeout(() => notifications.classList.remove('shown'), 5000);
     });
 
-    evtSource.addEventListener('error', (e) => {
-        if (e.readyState == EventSource.CLOSED) {
-            console.log('Connection was closed', e);
-        } else {
-            console.log('EventSource failed.', e);
-        }
+    evtSource.addEventListener('error', () => {
+        console.log('EventSource failed.');
     });
 }
