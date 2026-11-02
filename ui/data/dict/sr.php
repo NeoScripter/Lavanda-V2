@@ -655,5 +655,8 @@ return [
         "price" => "Цена",
         "active" => "Активирован",
         "there_are_no_added_items_yet_to_select_from" => "Пока не добавлено ни одного элемента для создания комбинации",
+        "items_successfully_cloned" => "Items successfully cloned!",
+        "error_cloning_the_items_there_are_no_russian_entires_to_copy_from" => "Error cloning the items: there are no Russian entires to copy from",
+        "error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first" => "Error cloning the items: you must delete all the newly created items in the currently selected locale first",
     ]
 ];

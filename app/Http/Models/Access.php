@@ -6,13 +6,13 @@ use DB\Cortex;
 use DB\SQL\Schema;
 use Log;
 
-class Subscription extends Cortex
+class Access extends Cortex
 {
     function __construct()
     {
         parent::__construct();
 
-        $this->beforesave(function ($self) {
+        $this->beforeinsert(function ($self) {
 
             if (empty($self->user)) {
                 return;
@@ -21,12 +21,12 @@ class Subscription extends Cortex
             $db = \Base::instance()->get('DB');
 
             $res = $db->exec(
-                "SELECT EXISTS ( SELECT 1 FROM subscriptions s WHERE s.user = ?) AS exists",
+                "SELECT EXISTS ( SELECT 1 FROM accesses s WHERE s.user = ?) AS exists",
                 [$self->user->id]
             );
 
             if ($res[0]['exists']) {
-                $error_msg = 'This user already has a subscription';
+                $error_msg = 'This user already has an access';
                 $logger = new Log('error.log');
                 $logger->write($error_msg . ' user id:' . $self->user->id, format: 'd-m-Y H:i:s');
                 throw new \InvalidArgumentException($error_msg);
@@ -35,11 +35,29 @@ class Subscription extends Cortex
     }
 
     protected $fieldConf = [
-        'plan_slug' => [
+        'game_slug' => [
             'type' => Schema::DT_VARCHAR512,
             'nullable' => false,
         ],
-        'ends_at' => [
+        'games_num' => [
+            'type' => Schema::DT_INT4,
+            'nullable' => false,
+            'default' => 0,
+        ],
+        'consultation_slug' => [
+            'type' => Schema::DT_VARCHAR512,
+            'nullable' => false,
+        ],
+        'consultation_num' => [
+            'type' => Schema::DT_INT4,
+            'nullable' => false,
+            'default' => 0,
+        ],
+        'subscription_slug' => [
+            'type' => Schema::DT_VARCHAR512,
+            'nullable' => false,
+        ],
+        'subscription_ends_at' => [
             'type' => Schema::DT_DATE,
             'nullable' => false,
             'default' => Schema::DF_CURRENT_TIMESTAMP,
@@ -47,12 +65,12 @@ class Subscription extends Cortex
         'user' => [
             'belongs-to-one' => "\Http\Models\User"
         ],
-        'starts_at' => [
+        'created_at' => [
             'type' => Schema::DT_DATE,
             'nullable' => false,
             'default' => Schema::DF_CURRENT_TIMESTAMP,
         ],
     ];
 
-    protected $db = 'DB', $table = 'subscriptions';
+    protected $db = 'DB', $table = 'accesses';
 }

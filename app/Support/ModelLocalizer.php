@@ -113,12 +113,13 @@ final class ModelLocalizer
 
     private function clone_affirmations()
     {
-        $db = \Base::instance()->get("DB");
+        $hive = \Base::instance();
+        $db = $hive->get("DB");
 
         $rows = $db->exec("SELECT count(id) FROM affirmations WHERE locale = ?", [$this->locale->value]);
 
         if (! empty($rows[0]['count']) && $rows[0]['count'] > 0) {
-            return \Base::instance()->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
+            return $hive->get("admin.error_cloning_the_items_you_must_delete_all_the_newly_created_items_in_the_currently_selected_locale_first");
         }
 
         $affirmations = new Affirmation();
@@ -127,7 +128,7 @@ final class ModelLocalizer
         $new_affirmation = new Affirmation();
 
         if (empty($affirmations)) {
-            return \Base::instance()->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
+            return $hive->get("admin.error_cloning_the_items_there_are_no_russian_entires_to_copy_from");
         }
 
         foreach ($affirmations as $affirmation) {
@@ -142,7 +143,7 @@ final class ModelLocalizer
             $new_affirmation->reset();
         }
 
-        return \Base::instance()->get("admin.items_successfully_cloned");
+        return $hive->get("admin.items_successfully_cloned");
     }
 
 

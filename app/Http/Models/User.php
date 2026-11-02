@@ -38,14 +38,11 @@ class User extends Cortex
             'unique' => true,
             'nullable' => true,
         ],
-        'subscription' => [
-            'has-one' => ["\Http\Models\Subscription", "user"]
+        'access' => [
+            'has-one' => ["\Http\Models\Access", "user"]
         ],
-        'consultation' => [
-            'has-one' => ["\Http\Models\Consultation", "user"]
-        ],
-        'game' => [
-            'has-one' => ["\Http\Models\Game", "user"]
+        'notifications' => [
+            'has-many' => ["\Http\Models\Notification", "user"]
         ],
         'role' => [
             'type' => Schema::DT_INT,

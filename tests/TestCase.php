@@ -71,10 +71,15 @@ abstract class TestCase extends BaseTestCase
         return $client->request($method, $uri);
     }
 
-    protected function assert_redirect(string $url, ResponseInterface $response): void
+    protected function assert_redirect(array $urls, ResponseInterface $response): void
     {
-        $absolute_path = rtrim(getenv('APP_URL'), '/') . $url;
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertEquals($absolute_path, $response->getHeaderLine('Location'));
+        $this->assertContains(
+            needle: $response->getHeaderLine('Location'),
+            haystack: array_map(
+                fn($url) => rtrim(getenv('APP_URL'), '/') . $url,
+                $urls
+            )
+        );
     }
 }

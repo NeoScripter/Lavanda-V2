@@ -6,24 +6,23 @@ use Enums\AppEnv;
 use Enums\DBView;
 use Enums\UserRole;
 use Exception;
+use Http\Models\Access;
 use Http\Models\Affirmation;
 use Http\Models\Article;
 use Http\Models\AudioMessage;
 use Http\Models\Card;
-use Http\Models\Consultation;
 use Http\Models\Dice;
 use Http\Models\FAQ;
-use Http\Models\Game;
 use Http\Models\Iching;
 use Http\Models\User;
 use Http\Models\Image;
 use Http\Models\Legal;
 use Http\Models\MatchSet;
+use Http\Models\Notification;
 use Http\Models\Plan;
 use Http\Models\PracticeItem;
 use Http\Models\Rune;
 use Http\Models\Stone;
-use Http\Models\Subscription;
 use Http\Models\Theme;
 use Seeders\AffirmationSeeder;
 use Seeders\ArticleSeeder;
@@ -39,7 +38,7 @@ use Seeders\StoneSeeder;
 
 class CliController
 {
-    private $db_models = [User::class, Theme::class, Card::class, Image::class, FAQ::class, Rune::class, Iching::class, PracticeItem::class, AudioMessage::class, Affirmation::class, Article::class, Stone::class, MatchSet::class, Legal::class, Dice::class, Plan::class, Subscription::class, Consultation::class, Game::class];
+    private $db_models = [User::class, Theme::class, Card::class, Image::class, FAQ::class, Rune::class, Iching::class, PracticeItem::class, AudioMessage::class, Affirmation::class, Article::class, Stone::class, MatchSet::class, Legal::class, Dice::class, Plan::class, Access::class, Notification::class];
 
     private $db_seeders = [CardSeeder::class, FAQSeeder::class, RuneSeeder::class, IchingSeeder::class, PracticeItemSeeder::class, AudioMessageSeeder::class, AffirmationSeeder::class, ArticleSeeder::class, StoneSeeder::class, LegalSeeder::class, PlanSeeder::class];
 
