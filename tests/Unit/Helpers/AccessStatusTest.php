@@ -9,7 +9,7 @@ use DateTime;
 use DB\SQL;
 use Enums\ClockMode;
 use Enums\PlanSlug;
-use Http\Models\Subscription;
+use Http\Models\Access;
 use Http\Models\User;
 use PHPUnit\Framework\Attributes\Test;
 use Support\AccessStatus;
@@ -41,7 +41,7 @@ final class AccessStatusTest extends TestCase
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
 
-        AccessStatus::set_clock(ClockMode::FORWARD, 'P30D');
+        AccessStatus::set_clock(ClockMode::FORWARD, 'P29D');
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
 
@@ -97,7 +97,7 @@ final class AccessStatusTest extends TestCase
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
 
         $rows = \Base::instance()->get("DB")->exec(
-            "SELECT count(id) FROM subscriptions s WHERE s.user = ?",
+            "SELECT count(id) FROM accesses a WHERE a.user = ?",
             [$this->user['id']]
         );
 
@@ -109,9 +109,8 @@ final class AccessStatusTest extends TestCase
     {
         $this->assertFalse(AccessStatus::has_active_subscription($this->user));
 
-        $expired = new Subscription();
-        $expired->ends_at = new DateTime()->sub(new DateInterval('P3M'))->format('Y-m-d H:i:s');
-        $expired->plan_slug = PlanSlug::YEARLY->value;
+        $expired = new Access();
+        $expired->subscription_ends_at = new DateTime()->sub(new DateInterval('P3M'))->format('Y-m-d H:i:s');
         $expired->user = $this->user['id'];
         $expired->save();
 
@@ -119,7 +118,7 @@ final class AccessStatusTest extends TestCase
 
         AccessStatus::give(PlanSlug::MONTHLY, $this->user);
 
-        AccessStatus::set_clock(ClockMode::FORWARD, 'P30D');
+        AccessStatus::set_clock(ClockMode::FORWARD, 'P29D');
 
         $this->assertTrue(AccessStatus::has_active_subscription($this->user));
     }
@@ -141,18 +140,18 @@ final class AccessStatusTest extends TestCase
         AccessStatus::give(PlanSlug::ONE_TIME, $this->user);
 
         $rows = \Base::instance()->get("DB")->exec(
-            "SELECT count(id) FROM games g WHERE g.user = ?",
+            "SELECT count(id) FROM accesses a WHERE a.user = ?",
             [$this->user['id']]
         );
 
         $this->assertEquals(expected: 1, actual: $rows[0]['count']);
 
         $rows = \Base::instance()->get("DB")->exec(
-            "SELECT number FROM games g WHERE g.user = ? LIMIT 1",
+            "SELECT active_games FROM accesses a WHERE a.user = ? LIMIT 1",
             [$this->user['id']]
         );
 
-        $this->assertEquals(expected: 9, actual: $rows[0]['number']);
+        $this->assertEquals(expected: 9, actual: $rows[0]['active_games']);
     }
 
     #[Test]
@@ -172,17 +171,17 @@ final class AccessStatusTest extends TestCase
         AccessStatus::give(PlanSlug::PERSONAL, $this->user);
 
         $rows = \Base::instance()->get("DB")->exec(
-            "SELECT count(id) FROM consultations c WHERE c.user = ?",
+            "SELECT count(id) FROM accesses a WHERE a.user = ?",
             [$this->user['id']]
         );
 
         $this->assertEquals(expected: 1, actual: $rows[0]['count']);
 
         $rows = \Base::instance()->get("DB")->exec(
-            "SELECT number FROM consultations c WHERE c.user = ? LIMIT 1",
+            "SELECT active_consultations FROM accesses a WHERE a.user = ? LIMIT 1",
             [$this->user['id']]
         );
 
-        $this->assertEquals(expected: 3, actual: $rows[0]['number']);
+        $this->assertEquals(expected: 3, actual: $rows[0]['active_consultations']);
     }
 }

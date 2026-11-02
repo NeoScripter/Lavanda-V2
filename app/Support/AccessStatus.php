@@ -10,6 +10,8 @@ use DB\SQL;
 use Enums\ClockMode;
 use Enums\PlanSlug;
 use Enums\UserRole;
+use Http\Models\Access;
+use Http\Models\User;
 use Jobs\SendEmailJob;
 use View;
 
@@ -37,7 +39,7 @@ final class AccessStatus extends \Prefab
         $date = self::instance()->clock;
 
         $rows = self::instance()->db->exec(
-            "SELECT EXISTS ( SELECT 1 FROM subscriptions s WHERE s.user = ? AND s.ends_at > ?) AS exists",
+            "SELECT EXISTS ( SELECT 1 FROM accesses a WHERE a.user = ? AND a.subscription_ends_at > ?) AS exists",
             [$user['id'], new DateTime($date)->format('Y-m-d H:i:s')]
         );
 
@@ -51,7 +53,7 @@ final class AccessStatus extends \Prefab
     public static function has_purchased_games(array $user): bool
     {
         $rows = self::instance()->db->exec(
-            "SELECT EXISTS ( SELECT 1 FROM games g WHERE g.user = ? AND g.number > 0) AS exists",
+            "SELECT EXISTS ( SELECT 1 FROM accesses a WHERE a.user = ? AND a.active_games > 0) AS exists",
             [$user['id']]
         );
 
@@ -65,7 +67,7 @@ final class AccessStatus extends \Prefab
     public static function has_purchased_consultations(array $user): bool
     {
         $rows = self::instance()->db->exec(
-            "SELECT EXISTS ( SELECT 1 FROM consultations c WHERE c.user = ? AND c.number > 0) AS exists",
+            "SELECT EXISTS ( SELECT 1 FROM accesses a WHERE a.user = ? AND a.active_consultations > 0) AS exists",
             [$user['id']]
         );
 
@@ -78,35 +80,13 @@ final class AccessStatus extends \Prefab
 
     public static function has_active_plans(array $user): bool
     {
-        return AccessStatus::get_accessed_plans_num($user) > 0;
-    }
-
-    public static function get_accessed_plans_num(array $user): int
-    {
-        $db = \Base::instance()->get('DB');
-
         $date = self::instance()->clock;
 
         $rows = self::instance()->db->exec(
-            "SELECT EXISTS ( SELECT 1 FROM subscriptions s WHERE s.user = ? AND s.ends_at > ?) AS exists",
+            "SELECT EXISTS ( SELECT 1 FROM accesses a WHERE s.user = ? AND (a.subscription_ends_at > ? OR a.active_games > 0 OR a.active_consultations > 0)) AS exists",
             [$user['id'], new DateTime($date)->format('Y-m-d H:i:s')]
         );
-
-        $rows = $db->exec(
-            'SELECT (
-            (SELECT max(number) FROM games WHERE games.user = ?) + 
-            (SELECT max(number) FROM consultations WHERE consultations.user = ?) + 
-            COALESCE((SELECT 1 FROM subscriptions s WHERE s.user = ? AND s.ends_at > ?), 0)
-            ) as sum',
-            [
-                $user['id'],
-                $user['id'],
-                $user['id'],
-                new DateTime($date)->format('Y-m-d H:i:s')
-            ]
-        );
-
-        return empty($rows[0]['sum']) ? 0 : $rows[0]['sum'];
+        return (! empty($rows[0]['exists']));
     }
 
     public static function list_plans(array $user): array
@@ -114,37 +94,26 @@ final class AccessStatus extends \Prefab
         $hive = \Base::instance();
         $plans = [];
 
-        if (self::instance()->has_active_subscription($user)) {
-            $rows = self::instance()->db->exec(
-                "SELECT plan_slug, ends_at FROM subscriptions s WHERE s.user = ?",
-                [$user['id']]
-            );
+        $access = new Access();
+        $access->load(['user = ?', [$user['id']]]);
+        $today = self::instance()->clock;
 
-            $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
-            $date = new DateTime($rows[0]['ends_at'])->format('d/m/y');
+        if (isset($access->subscription_ends_at) && (new DateTime($access->subscription_ends_at) > new DateTime($today))) {
+            $is_above_year = (new DateTime($access->subscription_ends_at)) > (new DateTime($today)->add(new DateInterval('P1Y')));
+
+            $label = '«' . ($is_above_year ? PlanSlug::YEARLY : PlanSlug::MONTHLY)->label() . '»';
+            $date = new DateTime($access->subscription_ends_at)->format('d/m/y');
             $plans[] = "{$hive->get("web.тариф")} $label, {$hive->get("web.оплачен_до")} $date";
         }
 
-        if (self::instance()->has_purchased_games($user)) {
-            $rows = self::instance()->db->exec(
-                "SELECT plan_slug, number FROM games g WHERE g.user = ?",
-                [$user['id']]
-            );
-
-            $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
-            $number = $rows[0]['number'];
-            $plans[] = "{$hive->get("web.тариф")} $label, {$hive->get("web.в_наличии")} $number {$hive->get("web.ответа")}";
+        if ($access->active_games > 0) {
+            $label = '«' . PlanSlug::ONE_TIME->label() . '»';
+            $plans[] = "{$hive->get("web.тариф")} $label, {$hive->get("web.в_наличии")} {$access->active_games} {$hive->get("web.ответа")}";
         }
 
-        if (self::instance()->has_purchased_consultations($user)) {
-            $rows = self::instance()->db->exec(
-                "SELECT plan_slug, number FROM consultations c WHERE c.user = ?",
-                [$user['id']]
-            );
-
-            $label = '«' . PlanSlug::from($rows[0]['plan_slug'])->label() . '»';
-            $number = $rows[0]['number'];
-            $plans[] = "{$hive->get("web.тариф")} $label, {$hive->get("web.в_наличии")} $number {$hive->get("web.консультации")}";
+        if ($access->active_consultations > 0) {
+            $label = '«' . PlanSlug::PERSONAL->label() . '»';
+            $plans[] = "{$hive->get("web.тариф")} $label, {$hive->get("web.в_наличии")} {$access->active_consultations} {$hive->get("web.консультации")}";
         }
 
         if (empty($plans)) {
@@ -153,6 +122,7 @@ final class AccessStatus extends \Prefab
 
         return $plans;
     }
+
     public static function is_admin(array $user): bool
     {
         return $user['role'] === UserRole::ADMIN->value;
@@ -160,7 +130,14 @@ final class AccessStatus extends \Prefab
 
     public static function can_play_game(array $user): bool
     {
-        return self::instance()->is_admin($user) || self::instance()->has_active_subscription($user) || self::instance()->has_purchased_games($user);
+        $date = self::instance()->clock;
+
+        $rows = self::instance()->db->exec(
+            "SELECT EXISTS ( SELECT 1 FROM accesses a WHERE s.user = ? AND (a.subscription_ends_at > ? OR a.active_games > 0)) AS exists",
+            [$user['id'], new DateTime($date)->format('Y-m-d H:i:s')]
+        );
+
+        return self::instance()->is_admin($user) || (! empty($rows[0]['exists']));
     }
 
     public static function subtract_consultation(array $user): void
@@ -170,7 +147,7 @@ final class AccessStatus extends \Prefab
         }
 
         self::instance()->db->exec(
-            "UPDATE consultations SET number = number - 1 WHERE consultations.user = ?",
+            "UPDATE accesses SET active_consultations = active_consultations - 1 WHERE a.user = ?",
             [$user['id']]
         );
     }
@@ -182,7 +159,7 @@ final class AccessStatus extends \Prefab
         }
 
         self::instance()->db->exec(
-            "UPDATE games SET number = number - 1 WHERE games.user = ?",
+            "UPDATE accesses a SET active_games = active_games - 1 WHERE a.user = ?",
             [$user['id']]
         );
     }
@@ -208,34 +185,27 @@ final class AccessStatus extends \Prefab
 
     public static function give(PlanSlug $slug, array $user): void
     {
+        $current_user = new User();
+        $current_user->load(['id = ?', $user['id']]);
+        $access = $current_user->access;
+
         switch ($slug) {
             case PlanSlug::MONTHLY:
             case PlanSlug::YEARLY: {
-                    self::instance()->db->exec(
-                        "DELETE FROM subscriptions WHERE subscriptions.ends_at != (
-                            SELECT max(ends_at) FROM subscriptions WHERE subscriptions.user = ?
-                        )",
-                        [$user['id']]
-                    );
                     $interval = ($slug === PlanSlug::MONTHLY) ? 'P1M' : 'P1Y';
-
-                    $rows = self::instance()->db->exec(
-                        "SELECT ends_at FROM subscriptions s WHERE s.user = ? LIMIT 1",
-                        [$user['id']]
-                    );
 
                     $date = self::instance()->clock;
                     $now = new DateTime($date);
 
-                    if (! isset($rows[0]['ends_at'])) {
+                    if (empty($access)) {
                         $new_date = $now->add(new DateInterval($interval))->format('Y-m-d H:i:s');
 
-                        self::instance()->db->exec(
-                            'INSERT INTO subscriptions ("plan_slug","ends_at","user") VALUES (?,?,?)',
-                            [$slug->value, $new_date, $user['id']]
-                        );
+                        $new_access = new Access();
+                        $new_access->subscription_ends_at = $new_date;
+                        $new_access->user = $current_user;
+                        $new_access->save();
                     } else {
-                        $ends_at = new DateTime($rows[0]['ends_at']);
+                        $ends_at = new DateTime($access->subscription_ends_at);
 
                         if ($ends_at < $now) {
                             $ends_at = $now;
@@ -243,61 +213,32 @@ final class AccessStatus extends \Prefab
 
                         $ends_at = $ends_at->add(new DateInterval($interval))->format('Y-m-d H:i:s');
 
-                        self::instance()->db->exec(
-                            "UPDATE subscriptions SET plan_slug = ?, ends_at = ? WHERE subscriptions.user = ?",
-                            [$slug->value, $ends_at, $user['id']]
-                        );
+                        $access->subscription_ends_at = $ends_at;
+                        $access->save();
                     }
                 };
                 break;
             case PlanSlug::ONE_TIME: {
-                    self::instance()->db->exec(
-                        "DELETE FROM games WHERE games.number != (
-                            SELECT max(number) FROM games WHERE games.user = ?
-                        )",
-                        [$user['id']]
-                    );
-
-                    $rows = self::instance()->db->exec(
-                        "SELECT number FROM games g WHERE g.user = ? LIMIT 1",
-                        [$user['id']]
-                    );
-
-                    if (! isset($rows[0]['number'])) {
-                        self::instance()->db->exec(
-                            'INSERT INTO games ("plan_slug","number","user") VALUES (?,?,?)',
-                            [$slug->value, 3, $user['id']]
-                        );
+                    if (empty($access)) {
+                        $new_access = new Access();
+                        $new_access->active_games = 3;
+                        $new_access->user = $current_user;
+                        $new_access->save();
                     } else {
-                        self::instance()->db->exec(
-                            "UPDATE games SET number = number + 3 WHERE games.user = ?",
-                            [$user['id']]
-                        );
+                        $access->active_games = $access->active_games + 3;
+                        $access->save();
                     }
                 };
                 break;
             case PlanSlug::PERSONAL: {
-                    self::instance()->db->exec(
-                        "DELETE FROM consultations WHERE consultations.number != (
-                            SELECT max(number) FROM consultations WHERE consultations.user = ?
-                        )",
-                        [$user['id']]
-                    );
-                    $rows = self::instance()->db->exec(
-                        "SELECT number FROM consultations c WHERE c.user = ? LIMIT 1",
-                        [$user['id']]
-                    );
-
-                    if (! isset($rows[0]['number'])) {
-                        self::instance()->db->exec(
-                            'INSERT INTO consultations ("plan_slug","number","user") VALUES (?,?,?)',
-                            [$slug->value, 1, $user['id']]
-                        );
+                    if (empty($access)) {
+                        $new_access = new Access();
+                        $new_access->active_consultations = 1;
+                        $new_access->user = $current_user;
+                        $new_access->save();
                     } else {
-                        self::instance()->db->exec(
-                            "UPDATE consultations SET number = number + 1 WHERE consultations.user = ?",
-                            [$user['id']]
-                        );
+                        $access->active_consultations = $access->active_consultations + 1;
+                        $access->save();
                     }
                 };
                 break;

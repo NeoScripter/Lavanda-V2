@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Helpers;
 
-use Enums\PlanSlug;
 use Enums\ThemeableType;
 use Factories\CardFactory;
 use Factories\ThemeFactory;
-use Http\Models\Game;
+use Http\Models\Access;
 use Http\Models\User;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -92,17 +91,16 @@ final class HelpersTest extends TestCase
         $user->copyFrom(['name' => 'John', 'email' => 'john@gmail.com', 'password' => 'password']);
         $user->save();
 
-        $game = new Game();
-        $game->plan_slug = PlanSlug::ONE_TIME->value;
-        $game->number = 5;
-        $game->user = $user;
-        $game->save();
+        $access = new Access();
+        $access->active_games = 5;
+        $access->user = $user;
+        $access->save();
 
         AccessStatus::subtract_game([...$user->cast(), 'id' => $user->id]);
 
-        $rows = \Base::instance()->get('DB')->exec("SELECT number FROM games WHERE games.user = ?", [$user->id]);
+        $rows = \Base::instance()->get('DB')->exec("SELECT active_games FROM accesses WHERE accesses.user = ?", [$user->id]);
 
-        $this->assertEquals(expected: 4, actual: $rows[0]['number']);
+        $this->assertEquals(expected: 4, actual: $rows[0]['active_games']);
     }
 
     #[Test]
@@ -113,24 +111,5 @@ final class HelpersTest extends TestCase
 
         $this->assertEquals(expected: 'Gregory', actual: capitalize_name($name));
         $this->assertEquals(expected: 'Gregory Smith', actual: capitalize_name($full_name));
-    }
-
-    #[Test]
-    public function gets_the_number_of_all_purchased_items(): void
-    {
-
-        $user = new User();
-        $user->copyFrom(['name' => 'John', 'email' => 'john@gmail.com', 'password' => 'password']);
-        $user->save();
-
-        $user_data = [...$user->cast(), 'id' => $user->id];
-
-        AccessStatus::give(PlanSlug::MONTHLY, $user_data);
-        AccessStatus::give(PlanSlug::YEARLY, $user_data);
-        AccessStatus::give(PlanSlug::ONE_TIME, $user_data);
-        AccessStatus::give(PlanSlug::PERSONAL, $user_data);
-        AccessStatus::give(PlanSlug::ONE_TIME, $user_data);
-
-        $this->assertEquals(expected: 8, actual: AccessStatus::get_accessed_plans_num($user_data));
     }
 }

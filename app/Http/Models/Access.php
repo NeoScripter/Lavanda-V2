@@ -21,7 +21,7 @@ class Access extends Cortex
             $db = \Base::instance()->get('DB');
 
             $res = $db->exec(
-                "SELECT EXISTS ( SELECT 1 FROM accesses s WHERE s.user = ?) AS exists",
+                "SELECT EXISTS ( SELECT 1 FROM accesses a WHERE a.user = ?) AS exists",
                 [$self->user->id]
             );
 
@@ -35,27 +35,15 @@ class Access extends Cortex
     }
 
     protected $fieldConf = [
-        'game_slug' => [
-            'type' => Schema::DT_VARCHAR512,
-            'nullable' => false,
-        ],
-        'games_num' => [
+        'active_games' => [
             'type' => Schema::DT_INT4,
             'nullable' => false,
             'default' => 0,
         ],
-        'consultation_slug' => [
-            'type' => Schema::DT_VARCHAR512,
-            'nullable' => false,
-        ],
-        'consultation_num' => [
+        'active_consultations' => [
             'type' => Schema::DT_INT4,
             'nullable' => false,
             'default' => 0,
-        ],
-        'subscription_slug' => [
-            'type' => Schema::DT_VARCHAR512,
-            'nullable' => false,
         ],
         'subscription_ends_at' => [
             'type' => Schema::DT_DATE,
