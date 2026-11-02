@@ -51,7 +51,7 @@ class SSEController extends Controller
             if (connection_aborted()) break;
 
             session_write_close();
-            sleep(5);
+            sleep(8);
         }
     }
 }
