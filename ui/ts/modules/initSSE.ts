@@ -1,21 +1,34 @@
-import { qs } from "../utils";
+import { qs } from '../utils';
 
 export default function initSSE() {
+    // const evtSource = new EventSource('/sse', { withCredentials: true });
     const evtSource = new EventSource('/sse', { withCredentials: true });
 
     evtSource.onopen = function () {
         console.log('Connection to server opened.');
     };
+    // evtSource.addEventListener('message', (e) => {
+    //     console.log(e.data);
+    // });
 
     evtSource.addEventListener('subscribed', function (e) {
         const data = e.data as string;
+        console.log(data);
+        return;
         const sentences = data.split('|').filter((str) => str.trim() !== '');
 
-        const notifications = qs<HTMLDivElement>('[cmp-notification]', 'silent');
+        const notifications = qs<HTMLDivElement>(
+            '[cmp-notification]',
+            'silent'
+        );
 
         if (!notifications) return;
 
-        const wrapper = qs<HTMLDivElement>('[cmp-notification-content]', 'error', notifications);
+        const wrapper = qs<HTMLDivElement>(
+            '[cmp-notification-content]',
+            'error',
+            notifications
+        );
 
         wrapper.innerHTML = '';
         const frag = document.createDocumentFragment();
@@ -32,7 +45,11 @@ export default function initSSE() {
         setTimeout(() => notifications.classList.remove('shown'), 5000);
     });
 
-    evtSource.onerror = function () {
-        console.log('EventSource failed.');
-    };
+    evtSource.addEventListener('error', (e) => {
+        if (e.readyState == EventSource.CLOSED) {
+            console.log('Connection was closed', e);
+        } else {
+            console.log('EventSource failed.', e);
+        }
+    });
 }

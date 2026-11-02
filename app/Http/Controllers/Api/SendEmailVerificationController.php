@@ -7,6 +7,7 @@ namespace Http\Controllers\Api;
 use Enums\SessionKey;
 use Http\Controller;
 use Jobs\SendEmailJob;
+use Session;
 use View;
 
 class SendEmailVerificationController extends Controller
