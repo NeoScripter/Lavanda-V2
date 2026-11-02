@@ -85,7 +85,7 @@ final class AccessStatus extends \Prefab
         $date = self::instance()->clock;
 
         $rows = self::instance()->db->exec(
-            "SELECT EXISTS ( SELECT 1 FROM accesses a WHERE s.user = ? AND (a.subscription_ends_at > ? OR a.active_games > 0 OR a.active_consultations > 0)) AS exists",
+            "SELECT EXISTS ( SELECT 1 FROM accesses a WHERE a.user = ? AND (a.subscription_ends_at > ? OR a.active_games > 0 OR a.active_consultations > 0)) AS exists",
             [$user['id'], new DateTime($date)->format('Y-m-d H:i:s')]
         );
         return (! empty($rows[0]['exists']));
@@ -148,7 +148,7 @@ final class AccessStatus extends \Prefab
         $date = self::instance()->clock;
 
         $rows = self::instance()->db->exec(
-            "SELECT EXISTS ( SELECT 1 FROM accesses a WHERE s.user = ? AND (a.subscription_ends_at > ? OR a.active_games > 0)) AS exists",
+            "SELECT EXISTS ( SELECT 1 FROM accesses a WHERE a.user = ? AND (a.subscription_ends_at > ? OR a.active_games > 0)) AS exists",
             [$user['id'], new DateTime($date)->format('Y-m-d H:i:s')]
         );
 
