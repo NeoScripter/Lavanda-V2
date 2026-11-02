@@ -8,6 +8,7 @@ extract(component_props(
 
 <?php $hive = \Base::instance(); ?>
 
+
 <?php slot('layouts/web/app-layout', [
     'title' => $hive->get("web.главная"),
     'class' => 'bg-white',
