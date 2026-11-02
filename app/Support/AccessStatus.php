@@ -130,8 +130,21 @@ final class AccessStatus extends \Prefab
         return $user['role'] === UserRole::ADMIN->value;
     }
 
-    public static function can_play_game(array $user): bool
+    public static function can_play_game(array|null $user, string $slug): bool
     {
+        $hive = \Base::instance();
+
+        if (empty($user)) {
+            $ip = $hive->IP;
+
+            $rows = $hive->DB->exec(
+                "SELECT EXISTS ( SELECT 1 FROM ip_games WHERE address = ? AND slug = ?) AS exists",
+                [$ip, $slug]
+            );
+
+            return empty($rows[0]['exists']);
+        }
+
         $date = self::instance()->clock;
 
         $rows = self::instance()->db->exec(
@@ -154,8 +167,21 @@ final class AccessStatus extends \Prefab
         );
     }
 
-    public static function subtract_game(array $user): void
+    public static function subtract_game(array|null $user, string $slug): void
     {
+        $hive = \Base::instance();
+
+        if (empty($user)) {
+            $ip = $hive->IP;
+
+            $hive->DB->exec(
+                "INSERT INTO ip_games (address, slug) VALUES (?, ?)",
+                [$ip, $slug]
+            );
+
+            return;
+        }
+
         if (self::instance()->is_admin($user) || self::instance()->has_active_subscription($user)) {
             return;
         }

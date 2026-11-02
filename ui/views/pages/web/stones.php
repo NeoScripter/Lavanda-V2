@@ -124,9 +124,10 @@ $winner = empty($stones) ? null : $stones[array_rand($stones)]; ?>
         'variant' => 'accent',
         'slot' => $hive->get("web.следующий_раздел"),
         'href' => next_game_route(),
-        'class' => 'mx-auto -mt-2 lg:-mt-5 w-fit hidden',
+        'class' => 'mx-auto -mt-2 lg:-mt-5 w-fit',
         'attrs' => [
-            'cmp-visible-at-end' => true
+            'cmp-visible-at-end' => true,
+            'cmp-visible-at-start' => true
         ],
     ]) ?>
 </div>
@@ -210,9 +211,10 @@ $winner = empty($stones) ? null : $stones[array_rand($stones)]; ?>
         'variant' => 'accent',
         'slot' => $hive->get("web.следующий_раздел"),
         'href' => next_game_route(),
-        'class' => 'mx-auto -mt-2 lg:-mt-5 w-fit hidden relative z-40',
+        'class' => 'mx-auto -mt-2 lg:-mt-5 w-fit relative z-40',
         'attrs' => [
-            'cmp-visible-at-end' => true
+            'cmp-visible-at-end' => true,
+            'cmp-visible-at-start' => true
         ],
     ]) ?>
 </div>

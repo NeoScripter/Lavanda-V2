@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Helpers;
 
+use Enums\GameType;
 use Enums\ThemeableType;
 use Factories\CardFactory;
 use Factories\ThemeFactory;
@@ -96,7 +97,7 @@ final class HelpersTest extends TestCase
         $access->user = $user;
         $access->save();
 
-        AccessStatus::subtract_game([...$user->cast(), 'id' => $user->id]);
+        AccessStatus::subtract_game([...$user->cast(), 'id' => $user->id], GameType::DICE->value);
 
         $rows = \Base::instance()->get('DB')->exec("SELECT active_games FROM accesses WHERE accesses.user = ?", [$user->id]);
 

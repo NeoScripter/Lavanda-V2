@@ -84,9 +84,10 @@ extract(component_props(
         'variant' => 'accent',
         'slot' => $hive->get("web.следующий_раздел"),
         'href' => next_game_route(),
-        'class' => 'mx-auto -mt-2 lg:-mt-5 mb-1 w-fit hidden',
+        'class' => 'mx-auto -mt-2 lg:-mt-5 mb-1 w-fit',
         'attrs' => [
-            'cmp-visible-at-end' => true
+            'cmp-visible-at-end' => true,
+            'cmp-visible-at-start' => true
         ],
     ]) ?>
 </div>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Api;
 
+use Enums\GameType;
 use Enums\ThemeableType;
 use Http\Controller;
 use Support\AccessStatus;
@@ -16,11 +17,11 @@ class DiceController extends Controller
     {
         $user = Auth::user();
 
-        if (empty($user) || ! AccessStatus::can_play_game($user)) {
+        if (! AccessStatus::can_play_game($user, GameType::DICE->value)) {
             send_json(['message' =>  "You don't have the access to this game"], 403);
         }
 
-        AccessStatus::subtract_game($user);
+        AccessStatus::subtract_game($user, GameType::DICE->value);
 
         $locale = Session::get_locale();
         $theme  = urldecode($hive->GET['theme']);

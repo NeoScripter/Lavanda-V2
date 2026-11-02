@@ -14,4 +14,5 @@ enum GameType: string
     case LENORMAND = 'lenormand';
     case RUNE = 'rune';
     case STONE = 'stone';
+    case DICE = 'dice';
 }

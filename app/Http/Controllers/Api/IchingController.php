@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Api;
 
+use Enums\GameType;
 use Http\Controller;
 use Http\Models\Iching;
 use Support\AccessStatus;
@@ -16,11 +17,11 @@ class IchingController extends Controller
     {
         $user = Auth::user();
 
-        if (empty($user) || ! AccessStatus::can_play_game($user)) {
+        if (! AccessStatus::can_play_game($user, GameType::ICHING->value)) {
             send_json(['message' =>  "You don't have the access to this game"], 403);
         }
 
-        AccessStatus::subtract_game($user);
+        AccessStatus::subtract_game($user, GameType::ICHING->value);
 
         $locale = Session::get_locale();
         $bitmask  = $hive->GET['bitmask'];

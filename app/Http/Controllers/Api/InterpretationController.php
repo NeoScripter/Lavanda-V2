@@ -31,11 +31,11 @@ class InterpretationController extends Controller
         if (! in_array($category, $free)) {
             $user = Auth::user();
 
-            if (empty($user) || ! AccessStatus::can_play_game($user)) {
+            if (! AccessStatus::can_play_game($user, $category)) {
                 send_json(['message' =>  "You don't have the access to this game"], 403);
             }
 
-            AccessStatus::subtract_game($user);
+            AccessStatus::subtract_game($user, $category);
         }
 
         $ids = explode(',', $ids);
