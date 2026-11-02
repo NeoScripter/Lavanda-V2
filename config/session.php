@@ -13,13 +13,10 @@ $rd_port = (int) getenv('REDIS_POST');
 $hive->set('JAR.expire', TTL);
 $hive->set('CACHE', "redis={$rd_host}:{$rd_port}");
 
-
-if (! $hive->exists('ACTIVE_SESSION')) {
-    $hive->set('ACTIVE_SESSION', new Session(fn() => true));
-}
+session_start();
 
 if (! $hive->exists('SESSION.csrf')) {
-    $hive->set('SESSION.csrf', $hive->get('ACTIVE_SESSION')->csrf());
+    $hive->set('SESSION.csrf', bin2hex(random_bytes(32)));
 }
 
 if (! $hive->exists('SESSION.' . SessionKey::RESOURCE_LOCALE->value)) {

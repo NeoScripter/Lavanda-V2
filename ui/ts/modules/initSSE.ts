@@ -1,8 +1,10 @@
 import { qs } from '../utils';
 
 export default function initSSE() {
+    return;
     // const evtSource = new EventSource('/sse', { withCredentials: true });
     const evtSource = new EventSource('/sse', { withCredentials: true });
+    // const evtSource = new EventSource('sse.php', { withCredentials: true });
 
     evtSource.onopen = function () {
         console.log('Connection to server opened.');

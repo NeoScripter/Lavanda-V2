@@ -1,24 +1,50 @@
 <?php
 header("X-Accel-Buffering: no");
-header('Content-Type: text/event-stream');
-header('Cache-Control: no-cache'); // recommended to prevent caching of event data.
+header("Content-Type: text/event-stream");
+header("Cache-Control: no-cache");
 
-/**
-* Constructs the SSE data format and flushes that data to the client.
-*
-* @param string $id Timestamp/id of this connection.
-* @param string $msg Line of text that should be transmitted.
-**/
+$last_run = time();
 
-function sendMsg($id, $msg) {
-  echo "id: $id" . PHP_EOL;
-  echo "data: $msg" . PHP_EOL;
-  echo PHP_EOL;
-  ob_flush();
-  flush();
+
+while (true) {
+
+    // if (time() < ($last_run + 2)) {
+    //     usleep(200_000);
+    //     continue;
+    // }
+
+    $last_run = time();
+    session_start();
+
+    $session = $_SESSION;
+    $user = $session['user'] ?? null;
+
+    if (! empty($user)) {
+        $user_name = ($user['name'] ?? 'unknown');
+
+        $data = ['Покупка прошла успешно!', 'Доступ к платным разделам сайта открыт.', 'Хорошего вам дня и настроения!'];
+
+        $payload = 'data: ';
+
+        foreach ($data as $sentence) {
+            $payload .= ($sentence . '|');
+        }
+
+        $payload .= ($user_name);
+
+        echo "event: subscribed\n",
+        $payload,
+        "\n\n";
+    }
+
+    while (ob_get_level() > 0) {
+        ob_end_flush();
+    }
+
+    flush();
+
+    if (connection_aborted()) break;
+
+    session_write_close();
+    sleep(3);
 }
-
-$serverTime = rand(0, 1);
-
-sendMsg($serverTime, 'server time: ' . date("h:i:s", time()));
-?>

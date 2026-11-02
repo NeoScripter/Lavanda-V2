@@ -16,36 +16,26 @@ class SSEController extends Controller
         header("Content-Type: text/event-stream");
         header("Cache-Control: no-cache");
 
-        function sendMsg($id, string  $msg)
-        {
-            echo "id: $id" . PHP_EOL;
-            echo "retry:" .  550000 . PHP_EOL;
-            echo "data: $msg" . PHP_EOL;
-            echo PHP_EOL;
-            ob_flush();
-            flush();
-        }
-
-
         while (true) {
-            if (connection_aborted()) break;
-            $user = Auth::user();
-            $user_name = ($user['name'] ?? 'unknown');
+            $user = $hive->get('SESSION.user') ?? null;
 
-            $data = ['Покупка прошла успешно!', 'Доступ к платным разделам сайта открыт.', 'Хорошего вам дня и настроения!'];
+            if (! empty($user)) {
+                $user_name = ($user['name'] ?? 'unknown');
 
-            $payload = 'data: ';
+                $data = ['Покупка прошла успешно!', 'Доступ к платным разделам сайта открыт.', 'Хорошего вам дня и настроения!'];
 
-            foreach ($data as $sentence) {
-                $payload .= ($sentence . '|');
+                $payload = 'data: ';
+
+                foreach ($data as $sentence) {
+                    $payload .= ($sentence . '|');
+                }
+
+                $payload .= ($user_name);
+
+                echo "event: subscribed\n",
+                $payload,
+                "\n\n";
             }
-
-            $payload .= ($user_name);
-
-            echo "event: subscribed\n",
-            $payload,
-            "\n\n";
-            // sendMsg($user_name, 'user name: ' . $user_name);
 
             while (ob_get_level() > 0) {
                 ob_end_flush();
@@ -55,12 +45,8 @@ class SSEController extends Controller
 
             if (connection_aborted()) break;
 
-            if ($hive->exists('ACTIVE_SESSION')) {
-                $session = $hive->get('ACTIVE_SESSION');
-                // $sid = $session->sid();
-                $session->close();
-            }
-            sleep(5);
+            session_write_close();
+            sleep(8);
         }
     }
 
