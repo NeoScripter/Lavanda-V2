@@ -31,7 +31,7 @@ jobs:
             composer install --no-dev --optimize-autoloader --classmap-authoritative
 
             echo "Installing frontend dependencies..."
-            pnpm run build
+            npm run build
 
             echo "Reloading PHP-FPM..."
             sudo service php8.5-fpm reload
