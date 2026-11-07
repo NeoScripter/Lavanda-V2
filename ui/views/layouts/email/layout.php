@@ -20,7 +20,7 @@
                     </tr>
                     <!-- Main Content -->
                     <tr>
-                        <td style="padding-inline:40px;padding-bottom:20px;padding-top:30px;">
+                        <td style="padding-left:40px;padding-right:40px;padding-bottom:20px;padding-top:30px;">
                             <?php if (isset($html)) : ?>
                                 <?= html_entity_decode($html) ?>
                             <?php endif; ?>
