@@ -1,26 +1,26 @@
-import { qs } from '../utils';
+import { qs, qsa } from '../utils';
 
 export default function initToasts() {
-    const toast = qs<HTMLButtonElement>('[component-toast]', 'silent');
+    const toasts = qsa<HTMLButtonElement>('[component-toast]');
 
-    if (!toast) return;
+    for (const toast of toasts) {
+        const hide = () => {
+            toast.classList.add('opacity-0');
+            toast.classList.add('translate-y-[-400%]');
+            setTimeout(() => toast.classList.add('hidden'), 1500);
+        };
 
-    const hide = () => {
-        toast.classList.add('opacity-0');
-        toast.classList.add('translate-y-[-400%]');
-        setTimeout(() => toast.classList.add('hidden'), 1500);
-    };
+        // const show = () => {
+        //     toast.classList.remove('opacity-0');
+        //     toast.classList.remove('translate-y-[-400%]');
+        //     toast.classList.remove('hidden');
+        // };
 
-    // const show = () => {
-    //     toast.classList.remove('opacity-0');
-    //     toast.classList.remove('translate-y-[-400%]');
-    //     toast.classList.remove('hidden');
-    // };
+        // setTimeout(() => show(), 10);
+        setTimeout(() => hide(), 4000);
 
-    // setTimeout(() => show(), 10);
-    setTimeout(() => hide(), 4000);
+        const closeBtn = qs('button', 'error', toast);
 
-    const closeBtn = qs('button', 'error', toast);
-
-    closeBtn.addEventListener('click', hide);
+        closeBtn.addEventListener('click', hide);
+    }
 }
