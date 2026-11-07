@@ -31,7 +31,6 @@ jobs:
             composer install --no-dev --optimize-autoloader --classmap-authoritative
 
             echo "Installing frontend dependencies..."
-            pnpm install
             pnpm run build
 
             echo "Reloading PHP-FPM..."
