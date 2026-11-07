@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v0.1.8
+        uses: appleboy/ssh-action@v1
         with:
-          host: 144.31.68.92
+          host: 89.111.162.226
           port: 22
           username: ilya
           key: ${{ secrets.PRIVATE_KEY }}
