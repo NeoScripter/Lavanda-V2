@@ -839,7 +839,7 @@ li[cmp-card].accent {
     transform: translateY(0%);
 }
 
-[cmp-rune-meaning] {
+[cmp-rune-meaning],[cmp-card-meaning] {
     display: none;
 }
 
@@ -852,3 +852,13 @@ main:has([data-num-rounds='3'][aria-selected='true']) [cmp-rune-meaning='3'] {
 main:has([data-num-rounds='5'][aria-selected='true']) [cmp-rune-meaning='5'] {
     display: block;
 }
+main:has([data-num-rounds='1'][aria-selected='true']) [cmp-card-meaning='1'] {
+    display: block;
+}
+main:has([data-num-rounds='3'][aria-selected='true']) [cmp-card-meaning='3'] {
+    display: block;
+}
+main:has([data-num-rounds='5'][aria-selected='true']) [cmp-card-meaning='5'] {
+    display: block;
+}
+

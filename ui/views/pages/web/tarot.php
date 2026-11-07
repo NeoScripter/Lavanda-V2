@@ -59,9 +59,7 @@ $img_class = '2xl:max-w-[min(40%,30rem)]';
 
 <?php ob_start(); ?>
 <div>
-    <p cmp-visible-at-start
-        class='text-balance mx-auto max-w-xl'><?= $hive->get("web.карта_открывается_сама_как_знак_который_приходит_вовремя_иногда_именно_случай_отражает_то_что_мы_уже_чувствуем_но_не_осознаём") ?>
-    </p>
+    <?= partial('web/shared/card-game-header') ?>
 
     <?= component('web/ui/button', [
         'variant' => 'primary',
