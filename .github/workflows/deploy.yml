@@ -22,7 +22,7 @@ jobs:
           script_stop: true
           script: |
             set -e
-            cd www/lab2 || exit 1
+            cd www/Lavanda || exit 1
 
             echo "Pulling latest code..."
             git pull origin main
