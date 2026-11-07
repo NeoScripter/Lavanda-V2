@@ -71,6 +71,19 @@ class CliController
         }
     }
 
+    function populate_users(\Base $hive)
+    {
+        $users = json_decode(remove_extra_slashes(file_get_contents(APP_DIR . "/storage/private/users.json")), true);
+
+        $db = $hive->get("DB");
+        foreach ($users as $u) {
+            $db->exec(
+                "INSERT INTO users (name,email,password,role,yandex_id,google_id) VALUES (?,?,?,?,?,?)",
+                [$u['name'], $u['email'], $u['password'], (int) $u['role'], $u['yandex_id'], $u['google_id']]
+            );
+        }
+    }
+
     function migrate(\Base $hive)
     {
         foreach ($this->db_models as $model) {
@@ -145,7 +158,7 @@ class CliController
         }
     }
 
-    function create_user(\Base $hive)
+    function create_admin(\Base $hive)
     {
         $name = query_user('User name:');
         $email = query_user('User email:');
