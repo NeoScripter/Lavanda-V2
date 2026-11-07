@@ -60,7 +60,7 @@ export default function ichingGame() {
 
     const coins = qsa<HTMLDivElement>('[cmp-flip-coin]', container);
 
-    const ichingInter = qs<HTMLParagraphElement>(
+    const ichingInter = qs<HTMLDivElement>(
         '[cmp-iching-interpretation]',
         'error',
         container
@@ -168,7 +168,7 @@ export default function ichingGame() {
 
         if (payload === null) return;
 
-        ichingInter.textContent = payload.description;
+        ichingInter.innerHTML = payload.description;
         ichingNum.textContent = payload.number.toString();
 
         ichingLines.forEach((line, idx) => {

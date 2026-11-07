@@ -34,6 +34,7 @@ class IchingController extends Controller
 
         $iching = new Iching();
         $iching->load(['bitmask = ? AND locale = ?', $bitmask, $locale]);
+        $markdown = \Markdown::instance();
 
         if ($iching->dry()) {
             send_json(['message' =>  "Iching with this bitmask was not found"], 400);
@@ -41,7 +42,7 @@ class IchingController extends Controller
 
         $payload = [
             'number' => $iching->number,
-            'description' => $iching->description,
+            'description' => $markdown->convert($iching->description),
         ];
 
         send_json($payload);

@@ -143,10 +143,10 @@ export default class InterpretationHTML {
 
             const w2 = document.createElement('div');
             w2.classList.add('theme');
-            const theme = document.createElement('p');
-            theme.textContent = item.themes[0]?.html ?? '';
-            const advice = document.createElement('p');
-            advice.textContent = item.advice;
+            const theme = document.createElement('div');
+            theme.innerHTML = item.themes[0]?.html ?? '';
+            const advice = document.createElement('div');
+            advice.innerHTML = item.advice;
             advice.classList.add('advice');
             w2.append(theme, advice);
 
@@ -174,10 +174,10 @@ export default class InterpretationHTML {
 
             const w2 = document.createElement('div');
             w2.classList.add('theme');
-            const theme = document.createElement('p');
-            theme.textContent = set.html ?? '';
-            const advice = document.createElement('p');
-            advice.textContent = set.advice;
+            const theme = document.createElement('div');
+            theme.innerHTML = set.html ?? '';
+            const advice = document.createElement('div');
+            advice.innerHTML = set.advice;
             advice.classList.add('advice');
             w2.append(theme, advice);
 
@@ -199,8 +199,8 @@ export default class InterpretationHTML {
         if (data.items.length === 0) return wrapper;
 
         const item = data.items[0];
-        const p = document.createElement('p');
-        p.textContent = item.themes[0]?.html;
+        const p = document.createElement('div');
+        p.innerHTML = item.themes[0]?.html;
         const img = createAdaptiveImg(item.img, item.alt);
         wrapper.appendChild(img);
         wrapper.appendChild(p);
