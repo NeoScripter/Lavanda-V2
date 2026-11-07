@@ -28,12 +28,7 @@ extract(component_props(
 <?php $html = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<?= component('web/ui/button', [
-    'variant' => 'primary',
-    'slot' => $hive->get("web.открыть_момент")
-,
-    'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
-]) ?>
+<?= partial('web/shared/game-hero-buttons', ['label' => $hive->get("web.открыть_момент")]) ?>
 <?php $slot = ob_get_clean(); ?>
 
 <?php $image = '/assets/images/pages/minori/hero-fg'; ?>

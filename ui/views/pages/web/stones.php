@@ -28,11 +28,7 @@ $winner = empty($stones) ? null : $stones[array_rand($stones)]; ?>
 <?php $html = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<?= component('web/ui/button', [
-    'variant' => 'primary',
-    'slot' => $hive->get("web.перейти_к_игре"),
-    'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
-]) ?>
+<?= partial('web/shared/game-hero-buttons') ?>
 <?php $slot = ob_get_clean(); ?>
 
 <?php $image = '/assets/images/pages/stones/hero-fg'; ?>

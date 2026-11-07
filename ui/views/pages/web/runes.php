@@ -46,8 +46,17 @@ extract(component_props(
     ],
 ]; ?>
 
+<?php ob_start(); ?>
+<?= component('web/ui/button', [
+    'variant' => 'accent',
+    'slot' => $hive->get("web.следующий_раздел"),
+    'href' => next_game_route(),
+    'class' => 'w-fit',
+]) ?>
+<?php $slot = ob_get_clean(); ?>
+
 <section class='full-bleed'>
-    <?= component('web/layout/hero-game', compact('heading', 'html', 'image')); ?>
+    <?= component('web/layout/hero-game', compact('heading', 'html', 'slot', 'image')); ?>
     <?= component('web/ui/set-num-items-btns', compact('items')); ?>
 </section>
 

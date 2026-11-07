@@ -22,8 +22,17 @@ extract(component_props(
 <?php ob_start(); ?>
 <p><?= $hive->get("web.не_все_вопросы_требуют_карт_или_символов_иногда_самый_короткий_путь_к_ответу_взять_лист_бумаги_посмотреть_на_ситуацию_с_другой_стороны_или_честно_ответить_самому_себе_на_несколько_вопросов_здесь_собраны_методики_которые_давно_используют_психологи_коучи_и_специалисты_по_принятию_решений_простые_понятные_и_удивительно_полезные") ?>
 </p>
+
 <?php $html = ob_get_clean(); ?>
 
+<?php ob_start(); ?>
+<?= component('web/ui/button', [
+    'variant' => 'accent',
+    'slot' => $hive->get("web.следующий_раздел"),
+    'href' => next_game_route(),
+    'class' => 'w-fit',
+]) ?>
+<?php $slot = ob_get_clean(); ?>
 
 <?php $image = '/assets/images/pages/metaphoric/hero-fg';
 
@@ -31,7 +40,7 @@ $img_class = '2xl:max-w-[min(40%,30rem)]';
 ?>
 
 <section class='full-bleed'>
-    <?= component('web/layout/hero-game', compact('heading', 'html', 'image', 'img_class')); ?>
+    <?= component('web/layout/hero-game', compact('heading', 'html', 'image', 'slot', 'img_class')); ?>
 </section>
 
 

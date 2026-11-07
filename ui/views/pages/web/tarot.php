@@ -51,8 +51,17 @@ $img_class = '2xl:max-w-[min(40%,30rem)]';
     ],
 ]; ?>
 
+<?php ob_start(); ?>
+<?= component('web/ui/button', [
+    'variant' => 'accent',
+    'slot' => $hive->get("web.следующий_раздел"),
+    'href' => next_game_route(),
+    'class' => 'w-fit',
+]) ?>
+<?php $slot = ob_get_clean(); ?>
+
 <section class='full-bleed'>
-    <?= component('web/layout/hero-game', compact('heading', 'html', 'image', 'img_class')); ?>
+    <?= component('web/layout/hero-game', compact('heading', 'html', 'image', 'slot',  'img_class')); ?>
     <?= component('web/ui/set-num-items-btns', compact('items')); ?>
 </section>
 

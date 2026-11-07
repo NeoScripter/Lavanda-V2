@@ -18,11 +18,7 @@ slot('layouts/web/app-layout', [
 <?php $html = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<?= component('web/ui/button', [
-    'variant' => 'primary',
-    'slot' => $hive->get("web.перейти_к_игре"),
-    'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
-]) ?>
+<?= partial('web/shared/game-hero-buttons', ['label' => $hive->get("web.перейти_к_игре")]) ?>
 <?php $slot = ob_get_clean(); ?>
 
 <?php $image = '/assets/images/pages/iching/hero-fg'; ?>
