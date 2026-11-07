@@ -54,7 +54,7 @@ extract(component_props(
 <?php ob_start(); ?>
 <div>
     <div cmp-visible-at-start
-        class='mx-auto max-w-md'>
+        class='mx-auto max-w-xl'>
 
         <div cmp-rune-meaning="1">
             <p><?= $hive->get("web.1_руна_руна_одина") ?></p>
