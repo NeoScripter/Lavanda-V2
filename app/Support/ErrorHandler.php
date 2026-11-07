@@ -34,7 +34,7 @@ final class ErrorHandler
             $lines .= "{$key}: {$value}";
         }
 
-        $logger = new Log('error.log');
+        $logger = new Log('storage/logs/error.log');
         $logger->write($lines, format: 'd-m-Y H:i:s');
 
         view('pages/shared/error', [

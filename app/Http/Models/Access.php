@@ -27,7 +27,7 @@ class Access extends Cortex
 
             if ($res[0]['exists']) {
                 $error_msg = 'This user already has an access';
-                $logger = new Log('error.log');
+                $logger = new Log('storage/logs/error.log');
                 $logger->write($error_msg . ' user id:' . $self->user->id, format: 'd-m-Y H:i:s');
                 throw new \InvalidArgumentException($error_msg);
             }

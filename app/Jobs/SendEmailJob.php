@@ -13,7 +13,7 @@ class SendEmailJob extends Job
 {
     public function handle(array $payload): void
     {
-        $logger = new Log('error.log');
+        $logger = new Log('storage/logs/error.log');
         $required_payload_keys  = ['subject', 'html', 'user_name', 'user_email'];
 
         foreach ($required_payload_keys as $key) {
