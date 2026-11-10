@@ -9,7 +9,7 @@ const TTL = 60 * 60 * 24;
 $hive = Base::instance();
 
 $rd_host = getenv('REDIS_HOST');
-$rd_port = (int) getenv('REDIS_POST');
+$rd_port = (int) getenv('REDIS_PORT');
 $hive->set('JAR.expire', TTL);
 $hive->set('CACHE', "redis={$rd_host}:{$rd_port}");
 
