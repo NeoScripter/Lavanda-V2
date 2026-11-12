@@ -36,7 +36,7 @@ require APP_DIR . '/config/session.php';
 $hive->config(APP_DIR . '/config/routes.ini');
 
 // $hive->set('DEBUG', $hive->get('app_debug') ? 3 : 0);
-$hive->set('DEBUG',  0);
+$hive->set('DEBUG',  (int) getenv('APP_DEBUG'));
 $hive->set('LOCALES', APP_DIR . '/ui/data/dict/');
 
 $queue = new n0nag0n\Job_Queue('pgsql');
