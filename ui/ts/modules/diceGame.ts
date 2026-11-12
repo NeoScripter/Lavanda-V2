@@ -63,7 +63,7 @@ export default function initDiceGame() {
         );
 
         setState('end');
-        await showOutcome(theme, winnerIds.toSorted().join('|'));
+        await showOutcome(theme, winnerIds.join('|'));
 
         enableBtns();
     }
@@ -145,7 +145,7 @@ export default function initDiceGame() {
                 if (response.status === 403) {
                     hideLoader();
                     inter.classList.add('hidden');
-                    displayPaywallBanner();
+                    displayPaywallBanner(inter);
                     return BLUR_PAYLOAD;
                 } else {
                     console.error('Response failed:', response);
