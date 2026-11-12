@@ -13,7 +13,7 @@ extract(component_props(
     <div class="relative w-full">
         <?= component('shared/ui/image', [
             'sizes'    => 'mb',
-            'path'     => $article['preview']['src'],
+            'path'     => $article['preview']['src'] ?? '/assets/images/shared/empty/empty',
             'prt_class' => 'w-full shrink-0 rounded-xl aspect-3/2',
         ]) ?>
     </div>
