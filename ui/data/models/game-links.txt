@@ -1,0 +1,13 @@
+
+/ -> /dices
+/bonus -> /dices
+/metaphoric -> /stones
+/stones -> /runes
+/runes -> /dices
+/dices -> /stones
+/lenormand -> /home
+/audios -> /minori
+/minori -> /iching
+/iching -> /stones
+/tarot -> /mind_games
+/mind_games -> /runes

@@ -1,6 +1,7 @@
 <?php
 
 use DB\Cortex;
+use Enums\CacheKey;
 use Enums\Locale;
 use Enums\ThemeableType;
 use Http\Models\Image;
@@ -654,17 +655,44 @@ function cc(string $base, string $merged = '')
     return trim(implode(' ', $base));
 }
 
+function parse_game_links()
+{
+    $content = file_get_contents(APP_DIR . '/ui/data/models/game-links.txt');
+
+    if (empty($content)) {
+        throw new Error("Error reading game-links.txt file");
+    }
+
+    $lines = array_filter(preg_split("/\n/", $content), fn($line) => ! empty(trim($line)));
+    $map = [];
+
+    foreach ($lines as $line) {
+        $parts = preg_split("/ -> /", $line);
+
+        if (count($parts) !== 2) {
+            throw new Error("Corrupted game-links.txt file");
+        }
+
+        $map[trim($parts[0])] = trim($parts[1]);
+    }
+
+    return $map;
+}
+
 function next_game_route()
 {
     $current_route = \Base::instance()->PATH;
-    $map = json_decode(
-        file_get_contents(APP_DIR . '/ui/data/models/game-links.json'),
-        true
-    );
+    $cache = Cache::instance();
+
+    if (! $cache->exists(CacheKey::GAME_LINKS->value)) {
+        $cache->set(CacheKey::GAME_LINKS->value, parse_game_links(), 60 * 60 * 60);
+    }
+
+    $map = $cache->get(CacheKey::GAME_LINKS->value);
 
     return array_find(
         $map,
-        fn($_, $from) => $current_route === preg_replace('/[0-9]+/', '', $from)
+        fn($_, $from) => $current_route === $from
     ) ?? '/';
 }
 

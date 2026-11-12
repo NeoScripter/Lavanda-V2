@@ -6,7 +6,7 @@
 
 <?php
 
-$map = json_decode(file_get_contents(APP_DIR . '/ui/data/models/game-links.json'), true);
+$map = parse_game_links();
 
 $items = [
     '/' =>   "Кошачий оракул (Главная)",
@@ -37,17 +37,14 @@ $items = [
         <ul class='grid gap-4'>
             <?php foreach ($map as $from => $to) : ?>
                 <li class='flex items-center justify-center gap-8'>
-                    <select name="<?= $from ?>" id="">
-                        <?php foreach ($items as $route => $label) : ?>
-                            <option <?= preg_replace('/[0-9]+/', '', $from) === $route ? 'selected' : '' ?> value="<?= $route ?>"><?= $label ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                    <input type="hidden" name="from:<?= $from ?>" id="from:<?= $from ?>" value="<?= $from ?>">
+                    <p class='text-left min-w-60'><?= $items[$from] ?></p>
 
                     <span>-></span>
 
-                    <select name="<?= $to ?>" id="">
+                    <select name="to:<?= $from ?>" id="to:<?= $from ?>">
                         <?php foreach ($items as $route => $label) : ?>
-                            <option <?= preg_replace('/[0-9]+/', '', $to) === $route ? 'selected' : '' ?> value="<?= $route ?>"><?= $label ?></option>
+                            <option <?= $to === $route ? 'selected' : '' ?> value="<?= $route ?>"><?= $label ?></option>
                         <?php endforeach; ?>
                     </select>
                 </li>

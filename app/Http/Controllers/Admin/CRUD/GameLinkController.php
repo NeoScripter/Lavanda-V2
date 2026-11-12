@@ -20,22 +20,20 @@ class GameLinkController extends Controller
 
         $request = array_slice($hive->POST, 2);
 
-        $json = [];
+        $map = "";
 
         $from = null;
-        $idx = 0;
         foreach ($request as $route) {
-            $idx++;
             if ($from === null) {
                 $from = $route;
             } else {
-                $json["$idx$from"] = "$idx$route";
+                $map .= (PHP_EOL . "$from -> $route");
                 $from = null;
             }
         }
 
-        $file = fopen(APP_DIR . '/ui/data/models/game-links.json', "w");
-        fwrite($file, json_encode($json));
+        $file = fopen(APP_DIR . '/ui/data/models/game-links.txt', "w");
+        fwrite($file, $map);
 
         notify($hive->get('admin.game_links_updated'));
 
