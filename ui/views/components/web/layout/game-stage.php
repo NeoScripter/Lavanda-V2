@@ -1,6 +1,7 @@
 <?php
 
 use Enums\PlanSlug;
+use Support\Auth;
 
 $hive = \Base::instance();
 
@@ -69,11 +70,25 @@ extract(component_props(
                     'prt_class' => 'bg-contain! w-40 mx-auto absolute! top-0 left-1/2 -translate-1/2',
                     'img_class' => 'size-full object-contain! object-center',
                 ]) ?>
+                <?php $is_logged_in = Auth::check(); ?>
 
                 <div class="flex flex-col text-center text-balance gap-4 lg:gap-8">
 
-                    <p class='font-semibold'><?= $hive->get("web.твой_ответ_уже_здесь") ?> </p>
-                    <p><?= $hive->get("web.первое_знакомство_с_позади_открой_ответ_на_свой_вопрос_или_выбери_формат_чтобы_возвращаться_когда_захочется") ?> </p>
+                    <p class='font-semibold'>
+                        <?php if ($is_logged_in) : ?>
+                            <?= $hive->get("web.твой_ответ_уже_здесь") ?>
+                        <?php else : ?>
+                            <?= $hive->get("web.знакомство_с_этой_практикой_позади") ?>
+                        <?php endif; ?>
+                    </p>
+                    <p>
+                        <?php if ($is_logged_in) : ?>
+                            <?= $hive->get("web.первое_знакомство_с_позади_открой_ответ_на_свой_вопрос_или_выбери_формат_чтобы_возвращаться_когда_захочется") ?>
+                        <?php else : ?>
+                            <?= $hive->get("web.загляни_к_другим_у_каждой_свой_язык_и_свой_способ_отвечать_или_выбери_формат_чтобы_возвращаться_сюда_снова") ?>
+                        <?php endif; ?>
+                    </p>
+
                     <div class='flex flex-col lg:flex-row items-center justify-center mt-2 gap-4 lg:gap-8'>
                         <?= component('web/ui/button', [
                             'variant' => 'accent',
@@ -82,14 +97,23 @@ extract(component_props(
                             'href' => $hive->alias('plans'),
                             'class' => 'w-fit lg:min-w-70',
                         ]) ?>
-
-                        <?= component('web/ui/button', [
-                            'variant' => 'muted',
-                            'slot' => $hive->get("web.продолжить_как_гость"),
-                            'size' => 'sm',
-                            'href' => $hive->alias('plans_show', ['slug' => PlanSlug::ONE_TIME->value]),
-                            'class' => 'w-fit lg:min-w-70',
-                        ]) ?>
+                        <?php if ($is_logged_in) : ?>
+                            <?= component('web/ui/button', [
+                                'variant' => 'muted',
+                                'slot' => $hive->get("web.продолжить_как_гость"),
+                                'size' => 'sm',
+                                'href' => $hive->alias('plans_show', ['slug' => PlanSlug::ONE_TIME->value]),
+                                'class' => 'w-fit lg:min-w-70',
+                            ]) ?>
+                        <?php else : ?>
+                            <?= component('web/ui/button', [
+                                'variant' => 'muted',
+                                'slot' => $hive->get("web.продолжить_знакомство_с_другими_практиками"),
+                                'size' => 'sm',
+                                'href' => next_game_route(),
+                                'class' => 'w-fit lg:min-w-70',
+                            ]) ?>
+                        <?php endif; ?>
                     </div>
                     <a href="<?= $hive->alias('plans_show', ['slug' => PlanSlug::PERSONAL->value]) ?>" class='underline underline-offset-4 text-sm hover:text-primary transition-colors'><?= $hive->get("web.заказать_персональный_разбор") ?>
                     </a>
