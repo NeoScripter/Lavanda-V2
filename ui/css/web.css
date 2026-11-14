@@ -553,6 +553,7 @@ li[cmp-card].accent {
     perspective: 1500px;
 }
 [cmp-planet-spinner] > ul {
+    will-change: transform;
     transition: transform 500ms linear;
     --count: 0;
     --offset: 0;
@@ -572,11 +573,13 @@ li[cmp-card].accent {
     transform-style: preserve-3d;
 }
 [cmp-planet-bg] {
+    will-change: transform;
     transition: transform 500ms linear;
     transform: rotateY(calc(var(--theta) * var(--offset)));
 }
 
 [cmp-planet-spinner] [cmp-item-list] > li {
+    will-change: transform;
     --tilt: 5%;
     width: var(--item-size);
     position: absolute;
