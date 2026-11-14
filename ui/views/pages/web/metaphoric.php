@@ -26,12 +26,7 @@ extract(component_props(
 <?php $html = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<?= component('web/ui/button', [
-    'variant' => 'muted',
-    'slot' => $hive->get("web.следующий_раздел"),
-    'href' => next_game_route(),
-    'class' => 'w-fit',
-]) ?>
+<?= partial('web/shared/game-hero-buttons', ['label' => $hive->get("web.перейти_к_игре")]) ?>
 <?php $slot = ob_get_clean(); ?>
 
 <?php $image = '/assets/images/pages/metaphoric/hero-fg';
@@ -100,6 +95,7 @@ $img_class = '2xl:max-w-[min(40%,30rem)]';
 
 <?= component('web/layout/game-stage', [
     'slots' => [$slot1],
+    'class' => "hidden",
 ]); ?>
 
 <?php end_slot(); ?>
