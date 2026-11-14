@@ -117,10 +117,10 @@ export default class InterpretationHTML {
 
                         const node = nodes[i];
                         qs<HTMLParagraphElement>(
-                            '*.theme>p',
+                            '*.theme>div',
                             'error',
                             node
-                        ).textContent = theme.html;
+                        ).innerHTML = theme.html;
                     }
                     qsa<HTMLButtonElement>('[cmp-theme-btn]', nav).forEach(
                         (button) => button.removeAttribute('selected-theme')
