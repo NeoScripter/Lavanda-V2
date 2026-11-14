@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Http\Controllers\Admin\CRUD;
 
+use Cache;
 use Enums\AppEnv;
+use Enums\CacheKey;
 use Http\Controller;
 use Traits\RequiresAdminRights;
 
@@ -35,6 +37,11 @@ class GameLinkController extends Controller
         $file = fopen(APP_DIR . '/ui/data/models/game-links.txt', "w");
         fwrite($file, $map);
 
+        $cache = Cache::instance();
+
+        if ($cache->exists(CacheKey::GAME_LINKS->value)) {
+            $cache->clear(CacheKey::GAME_LINKS->value);
+        }
         notify($hive->get('admin.game_links_updated'));
 
         $hive->reroute($hive->alias('dashboard'));
