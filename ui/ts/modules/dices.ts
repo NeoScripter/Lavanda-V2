@@ -53,12 +53,10 @@ export default function initDicePickers() {
 
             const selected = selectedRaw
                 .split('|')
-                .filter((chunk) => chunk !== '')
-                .toSorted();
+                .filter((chunk) => chunk !== '');
 
             input.value = selected
                 .filter((id) => id !== imgId)
-                .toSorted()
                 .join('|');
 
             updateSelectedList();
@@ -81,8 +79,7 @@ export default function initDicePickers() {
 
             const selected = selectedRaw
                 .split('|')
-                .filter((chunk) => chunk !== '')
-                .toSorted();
+                .filter((chunk) => chunk !== '');
 
             inputErrors.forEach((error) => {
                 error.innerHTML = '';
@@ -155,14 +152,13 @@ export default function initDicePickers() {
 
                 const selected = selectedRaw
                     .split('|')
-                    .filter((chunk) => chunk !== '')
-                    .toSorted();
+                    .filter((chunk) => chunk !== '');
 
                 if (selected.length >= 2) return;
 
                 selected.push(imgId);
 
-                input.value = selected.toSorted().join('|');
+                input.value = selected.join('|');
 
                 updateSelectedList();
             });
