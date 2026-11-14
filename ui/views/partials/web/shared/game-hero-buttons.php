@@ -14,7 +14,7 @@
         'attrs' => ['cmp-hide-on-click' => true, 'cmp-reveal-game-btn' => true],
     ]) ?>
     <?= component('web/ui/button', [
-        'variant' => 'accent',
+        'variant' => 'muted',
         'slot' => $hive->get("web.следующий_раздел"),
         'href' => next_game_route(),
         'class' => 'w-fit',

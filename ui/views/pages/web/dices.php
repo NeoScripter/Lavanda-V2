@@ -77,7 +77,7 @@ extract(component_props(
         'class' => 'mx-auto hidden'
     ]) ?>
     <?= component('web/ui/button', [
-        'variant' => 'accent',
+        'variant' => 'muted',
         'slot' => $hive->get("web.следующий_раздел"),
         'href' => next_game_route(),
         'class' => 'mx-auto -mt-2 lg:-mt-5 mb-1 w-fit',

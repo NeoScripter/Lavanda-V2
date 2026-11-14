@@ -117,7 +117,7 @@ $winner = empty($stones) ? null : $stones[array_rand($stones)]; ?>
         'class' => 'mx-auto hidden'
     ]) ?>
     <?= component('web/ui/button', [
-        'variant' => 'accent',
+        'variant' => 'muted',
         'slot' => $hive->get("web.следующий_раздел"),
         'href' => next_game_route(),
         'class' => 'mx-auto -mt-2 lg:-mt-5 w-fit',
@@ -204,7 +204,7 @@ $winner = empty($stones) ? null : $stones[array_rand($stones)]; ?>
         'class' => 'mx-auto hidden relative z-40'
     ]) ?>
     <?= component('web/ui/button', [
-        'variant' => 'accent',
+        'variant' => 'muted',
         'slot' => $hive->get("web.следующий_раздел"),
         'href' => next_game_route(),
         'class' => 'mx-auto -mt-2 lg:-mt-5 w-fit relative z-40',

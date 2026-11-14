@@ -39,7 +39,7 @@ $hive = \Base::instance(); ?>
         ]
     ]) ?>
     <?= component('web/ui/button', [
-        'variant' => 'accent',
+        'variant' => 'muted',
         'slot' => $hive->get("web.следующий_раздел"),
         'href' => next_game_route(),
         'class' => 'w-fit',
