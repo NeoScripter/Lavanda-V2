@@ -10,6 +10,18 @@
     <link rel="preload" href="/assets/fonts/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2" as="font" type="font/woff2" crossorigin />
 
+    <meta name="author" content="Tatiana Kim">
+
+    <!-- <meta name="description" -->
+    <!--     content="Capture ideas, organize your thoughts, and manage tasks effortlessly with Noteflow — a modern note-taking app designed for productivity and simplicity."> -->
+    <!---->
+    <!-- <!-- Keywords --> -->
+    <!-- <meta name="keywords" -->
+    <!--     content="note-taking app, digital notebook, productivity tool, task management, personal notes, organized writing, idea capture, markdown notes, fast note app, distraction-free writing"> -->
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
     <style>
         @font-face {
             font-family: 'Montserrat';
